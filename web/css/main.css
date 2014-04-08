@@ -1,0 +1,35 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 8, 2014, 1:49:19 PM
+    Author     : JenoVa
+*/
+
+.usepointer{
+    cursor: pointer;
+}
+
+.userbox{
+    background-color: #F8F8F8;
+    padding-top: 20px;
+    border: 1px solid transparent;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .5);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    border-radius: 4px;
+    border-color: #ddd;
+}
+.statusbox .col-md-4{
+    padding: 15px 0;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center; 
+}
+
+.a_button{
+    text-decoration: none !important;
+    cursor: pointer;
+    color: gray !important;
+}

@@ -14,7 +14,7 @@
                         </form>
                         <br><br>
                         <hr>
-                        <h3><b>Sign in to The Assignment</b></h3>
+                        <h3><b>Sign up now. It's free.</b></h3>
                         <a href="index.jsp?rg=st" class="btn btn-primary" style="width: 49%;">I'm Student</a>
                         <a href="index.jsp?rg=th" class="btn btn-primary" style="width: 49%;">I'm Teacher</a>
                     </div>

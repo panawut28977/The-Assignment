@@ -12,7 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="META-INF/page/include_css.jsp" %>
-        <title>Welcome</title>
+        <title>Course ...</title>
     </head>
     <body>
         <%@include file="META-INF/page/header_bar.jsp"%>
@@ -20,20 +20,19 @@
             <div class="row">
                 <%@include file="META-INF/page/side_bar.jsp"%>
                 <div class="col-md-9">
-                    <div><h3>All Course</h3></div>
+                    <div><h3>INT202 Software Development Process II</h3></div>
                     <ul class="nav nav-tabs">
-                        <li <c:if test="${param.tab eq null}">class="active"</c:if> ><a href="home.jsp">Annoucement</a></li>
-                        <li <c:if test="${param.tab eq 'AllAssignment'}">class="active"</c:if> ><a href="home.jsp?tab=AllAssignment">Assignment <span class="badge">5</span></a></li>
+                        <li <c:if test="${param.tab eq null}">class="active"</c:if> ><a href="course.jsp">Annoucement</a></li>
+                        <li <c:if test="${param.tab eq 'AllAssignment'}">class="active"</c:if> ><a href="course.jsp?tab=AllAssignment">Assignment <span class="badge">5</span></a></li>
                         </ul>
                     <c:choose>
                         <c:when test="${param.tab eq 'AllAssignment'}">
-                            <%@include file="META-INF/page/AllAssignment.jsp" %>
+                            <%@include file="META-INF/page/CourseAssignment.jsp" %>
                         </c:when>
                         <c:otherwise>
-                            <%@include file="META-INF/page/AllAnnouce.jsp" %>
+                            <%@include file="META-INF/page/CourseAnnouce.jsp" %>
                         </c:otherwise>
                     </c:choose>
-
                 </div>
             </div>
         </div>
