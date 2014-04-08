@@ -22,10 +22,22 @@
                 <div class="col-md-9">
                     <div><h3>INT202 Software Development Process II</h3></div>
                     <ul class="nav nav-tabs">
-                        <li <c:if test="${param.tab eq null}">class="active"</c:if> ><a href="course.jsp">Annoucement</a></li>
-                        <li <c:if test="${param.tab eq 'AllAssignment'}">class="active"</c:if> ><a href="course.jsp?tab=AllAssignment">Assignment <span class="badge">5</span></a></li>
-                        </ul>
-                        
+                        <li><a href="course.jsp">Annoucement</a></li>
+                        <li class="active"><a href="course.jsp?tab=AllAssignment">Assignment <span class="badge">3</span></a></li>
+                    </ul>
+                    <ol class="breadcrumb" style="margin-top: 15px" >
+                        <li><a href="course.jsp">Assignment</a></li>
+                        <li class="active"><a href="#">งานที่ 1...</a></li>
+                    </ol>
+                    <div style="text-align: center">
+                        <h4>Upload you assignment</h4>
+                        <form role="form" class="form-inline">
+                            <input type="file" class="form-control">
+                            <input type="submit" value="upload" class="form-control">
+                        </form>
+                        <hr>
+                        <h5>Previous Version</h5>
+                    </div>
                 </div>
             </div>
         </div>
