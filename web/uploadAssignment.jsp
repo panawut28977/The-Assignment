@@ -26,27 +26,51 @@
                         <li class="active"><a href="course.jsp?tab=AllAssignment">Assignment <span class="badge">3</span></a></li>
                     </ul>
                     <ol class="breadcrumb" style="margin-top: 15px" >
-                        <li><a href="course.jsp">Assignment</a></li>
+                        <li><a href="course.jsp?tab=AllAssignment">Assignment</a></li>
                         <li class="active"><a href="#">งานที่ 1...</a></li>
                     </ol>
-                    <div style="text-align: center">
-                        <h4>Upload you assignment</h4>
-                        <form role="form" class="form-inline">
+                    <div >
+                        <h4 style="text-align: center">Upload you assignment</h4>
+                        <form role="form" class="form-inline" style="text-align: center">
                             <input type="file" class="form-control">
-                            <input type="submit" value="upload" class="form-control">
+                            <input type="submit" value="upload" class="form-control btn btn-primary">
                         </form>
                         <hr>
-                        <h5>Previous Version</h5>
+                        <h5 style="text-align: center">Previous Version</h5>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Version</td>
+                                    <td>Send Date</td>
+                                    <td>Size(MB)</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                 <tr>
+                                     <td>54216952_lab1</td>
+                                     <td>1</td>
+                                     <td>13/03/55</td>
+                                     <td>33.22</td>  
+                                </tr>
+                                <tr>
+                                     <td>54216952_lab1</td>
+                                     <td>2</td>
+                                     <td>14/03/55</td>
+                                     <td>31.22</td>  
+                                </tr>
+                                <tr>
+                                     <td>54216952_lab1</td>
+                                     <td>3</td>
+                                     <td>14/03/55</td>
+                                     <td>36.22</td>  
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </body>
     <%@include file="META-INF/page/include_js.jsp" %>
-    <script type="text/javascript" >
-        $(document).ready(function() {
-            var aTable = $('#AllAssignemnt').dataTable();
-            aTable.fnFilter('${param.st}');
-        });
-    </script>
 </html>

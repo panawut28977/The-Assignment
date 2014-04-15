@@ -6,57 +6,52 @@
         </div>
         <div class="statusbox " style="clear: both;background-color: #F8F8F8;padding-top: 20px;" >
             <small>Assignment Status</small><br>
-            <div onclick="view_assignment_by_status('Late')" class="col-md-4" style="background-color: #e74c3c;cursor: pointer;"><span>20</span><br><span>Late</span></div>
-            <div onclick="view_assignment_by_status('Hurry up')" class="col-md-4" style="background-color: #f1c40f;cursor: pointer;"><span>5</span><br><span>hurry up</span></div>
-            <div onclick="view_assignment_by_status('on time')" class="col-md-4" style="background-color: #40d47e;cursor: pointer;"><span>1</span><br><span>on time</span></div>
+            <div onclick="view_assignment_by_status('Late')" class="col-md-4" style="background-color: #e74c3c;cursor: pointer;"><span>1</span><br><span>Late</span></div>
+            <div onclick="view_assignment_by_status('Hurry up')" class="col-md-4" style="background-color: #f1c40f;cursor: pointer;"><span>1</span><br><span>hurry up</span></div>
+            <div onclick="view_assignment_by_status('on time')" class="col-md-4" style="background-color: #40d47e;cursor: pointer;"><span>3</span><br><span>on time</span></div>
         </div>
     </div>
     <div class="row" style="margin-top: 30px">
-        <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" >
-                            Course <a class="glyphicon glyphicon-plus-sign pull-right a_button"  data-toggle="modal" data-target="#join_course" title="join course" ></a>
-                        </a>
-                    </h4>
-                </div>
-                <div  class="panel-collapse collapse in">
-                    <ul class="list-group" style="margin-bottom: 0;">
-                        <li class="list-group-item usepointer" onclick="load_course(1)"><span class="badge">4</span>INT103 Office</li>
-                        <li class="list-group-item usepointer" onclick="load_course(1)"><span class="badge">5</span>INT202 Software Development Process II</li>
-                        <li class="list-group-item usepointer" onclick="load_course(1)"><span class="badge">9</span>Morbi leo risus</li>
-                        <li class="list-group-item usepointer" onclick="load_course(1)"><span class="badge">10</span>Porta ac consectetur ac</li>
-                        <li class="list-group-item usepointer" onclick="load_course(1)"><span class="badge">13</span>Vestibulum at eros</li>
-                    </ul>
-                </div>
+        <div  class="list-group">
+            <a disabled="yes" class="list-group-item">Course <span class="glyphicon glyphicon-plus-sign pull-right a_button"  data-toggle="modal" data-target="#join_course" title="join course" ></span></a>
+            <a id="1" onclick="load_course(1)" class="list-group-item usepointer"><span class="badge">3</span>INT103 Office</a>
+            <a id="2" onclick="load_course(2)" class="list-group-item usepointer"><span class="badge">3</span>INT202 Software Development Process II</a>
+            <a id="3" onclick="load_course(3)" class="list-group-item usepointer">Morbi leo risus</a>
+            <a id="4" onclick="load_course(4)" class="list-group-item usepointer">Porta ac consectetur ac</a>
+            <a id="5" onclick="load_course(5)"  class="list-group-item usepointer">Vestibulum at eros</a>
+        </div> 
+    </div>
+</div>
+<div class="modal fade" id="join_course" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Put course code</h4>
+            </div>
+            <div class="modal-body">
+                <input type="text" name="course_code" class="form-control">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">join</button>
             </div>
         </div>
     </div>
 </div>
-<div class="modal fade" id="join_course" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel">Put course code</h4>
-                        </div>
-                        <div class="modal-body">
-                            <input type="text" name="course_code" class="form-control">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">join</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 <script>
-    function view_assignment_by_status(status){
-        location.href="home.jsp?tab=AllAssignment&st="+status;
-    }
+    $(function(){
+        var courseId = '${param.course_id}';
+        if(courseId != "" && courseId !=null){
+            $("#"+courseId).addClass("active");
+        }
+    });
     
-    function load_course(course_id){
-        location.href="course.jsp?course_id="+course_id;
+    function view_assignment_by_status(status) {
+        location.href = "home.jsp?tab=AllAssignment&st=" + status;
     }
+
+    function load_course(course_id) {
+        location.href = "course.jsp?course_id=" + course_id;
+    } 
 </script>

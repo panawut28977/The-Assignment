@@ -11,10 +11,10 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#"><span class="badge pull-right">2</span> Annoucement</a></li>
-                                    <li><a href="#"><span class="badge pull-right">5</span> Assignment</a></li>
-                                    <li><a href="#"><span class="badge pull-right">2</span> Alert</a></li>
-                                    <li><a href="#"><span class="badge pull-right">12</span> Score</a></li>
+                                    <li><a href="notification.jsp?nt=Announcement"><span class="badge pull-right">2</span> Annoucement</a></li>
+                                    <li><a href="notification.jsp?nt=Assignment"><span class="badge pull-right">5</span> Assignment</a></li>
+                                    <li><a href="notification.jsp?nt=Alert"><span class="badge pull-right">2</span> Alert</a></li>
+                                    <li><a href="notification.jsp?nt=Score"><span class="badge pull-right">12</span> Score</a></li>
                                 </ul>
                             </li>
                         </ul>

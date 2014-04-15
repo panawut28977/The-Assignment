@@ -12,6 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="META-INF/page/include_css.jsp" %>
+         <%@include file="META-INF/page/include_js.jsp" %>
         <title>Welcome</title>
     </head>
     <body>
@@ -20,10 +21,10 @@
             <div class="row">
                 <%@include file="META-INF/page/side_bar.jsp"%>
                 <div class="col-md-9">
-                    <div><h3>All Course</h3></div>
+                    <div><h3>All Course </h3></div>
                     <ul class="nav nav-tabs">
                         <li <c:if test="${param.tab eq null}">class="active"</c:if> ><a href="home.jsp">Annoucement</a></li>
-                        <li <c:if test="${param.tab eq 'AllAssignment'}">class="active"</c:if> ><a href="home.jsp?tab=AllAssignment">Assignment <span class="badge">5</span></a></li>
+                        <li <c:if test="${param.tab eq 'AllAssignment'}">class="active"</c:if> ><a href="home.jsp?tab=AllAssignment">Assignment <span class="badge">6</span></a></li>
                         </ul>
                     <c:choose>
                         <c:when test="${param.tab eq 'AllAssignment'}">
@@ -38,7 +39,6 @@
             </div>
         </div>
     </body>
-    <%@include file="META-INF/page/include_js.jsp" %>
     <script type="text/javascript" >
         $(document).ready(function() {
             var aTable = $('#AllAssignemnt').dataTable();
