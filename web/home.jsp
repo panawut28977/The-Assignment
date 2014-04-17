@@ -22,10 +22,7 @@
                 <%@include file="META-INF/page/side_bar.jsp"%>
                 <div class="col-md-9">
                     <div><h3>All Course </h3></div>
-                    <ul class="nav nav-tabs">
-                        <li <c:if test="${param.tab eq null}">class="active"</c:if> ><a href="home.jsp">Annoucement</a></li>
-                        <li <c:if test="${param.tab eq 'AllAssignment'}">class="active"</c:if> ><a href="home.jsp?tab=AllAssignment">Assignment <span class="badge">6</span></a></li>
-                        </ul>
+                    <%@include file="META-INF/page/allCourseTab.jsp" %>
                     <c:choose>
                         <c:when test="${param.tab eq 'AllAssignment'}">
                             <%@include file="META-INF/page/AllAssignment.jsp" %>
@@ -34,7 +31,6 @@
                             <%@include file="META-INF/page/AllAnnouce.jsp" %>
                         </c:otherwise>
                     </c:choose>
-
                 </div>
             </div>
         </div>

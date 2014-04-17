@@ -45,60 +45,41 @@
                             </ol>
                         </c:otherwise>
                     </c:choose>
-                    <div >
-                        <div style="text-align: center">
-                            <h4>Individual work</h4>
-                            <div class="media">
-                                <a href="#">
-                                    <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
-                                </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading">rrrr fff</h4>
-                                </div>
-                            </div>
-                            <hr>
-                            <h4 >Send your assignment <span class="text-danger">(Late)</span></h4>
-                            <form role="form" class="form-inline">
-                                <input type="file" class="form-control">
-                                <input type="submit" value="upload" class="form-control btn btn-primary">
-                            </form>
-                            <br>
-                            <h5 id="pvVs" class="usepointer">See your previous version.<span class="glyphicon glyphicon-chevron-right"></span></h5>
-                        </div>
-                        <div id="pvVersionTable">
-                            <table class="table" >
-                                <thead>
-                                    <tr>
-                                        <td>Name</td>
-                                        <td>Version</td>
-                                        <td>Send Date</td>
-                                        <td>Size(MB)</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>54216952_lab1</td>
-                                        <td>1</td>
-                                        <td>13/03/55</td>
-                                        <td>33.22</td>  
-                                    </tr>
-                                    <tr>
-                                        <td>54216952_lab1</td>
-                                        <td>2</td>
-                                        <td>14/03/55</td>
-                                        <td>31.22</td>  
-                                    </tr>
-                                    <tr>
-                                        <td>54216952_lab1</td>
-                                        <td>3</td>
-                                        <td>14/03/55</td>
-                                        <td>36.22</td>  
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <div>
+                        <h3 class="">งานที่ 1....</h3>
+                        <small class="text-muted">create date : 13/08/2556 23:55:00 </small><br>   
                     </div>
-                    <br><hr>  
+                    <div class="col-md-5 well">
+                        <c:choose>
+                            <c:when test="${param.wo eq 'f'}">
+                                <a href="file/chap 8.docx" style="text-align: center;text-decoration: none" class="center-block"><span class="glyphicon glyphicon-file center-block" style="font-size: 150px;margin: 40px auto;"></span><h4>Download</h4></a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a href="onwebAssignment.jsp?tab=AllAssignment<c:if test="${param.ct eq 'allAm'}">&&ct=allAm</c:if>" style="text-align: center;text-decoration: none" class="center-block"><span class="glyphicon glyphicon-upload center-block" style="font-size: 150px;margin: 40px auto;"></span><h4>Let's do it.</h4></a>
+                                </c:otherwise>
+                            </c:choose>
+                    </div>
+                    <div class="col-md-7">
+                        <table class="table">
+                            <tr>
+                                <td><b>Due date</b></td>
+                                <td>30/08/2556<span class="text-danger pull-right">Late</span></td>
+                            </tr>
+                            <tr>
+                                <td><b>Description</b></td>
+                                <td>quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad </td>
+                            </tr>
+                            <tr>
+                                <td><b>Work on</b></td>
+                                <td><span class="glyphicon glyphicon-file"></span> File</td>
+                            </tr>
+                            <tr>
+                                <td><b>Member</b></td>
+                                <td>Individual</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="clearfix"><hr></div>  
                     <h3>Comment</h3>
                     <div class="media">
                         <a class="pull-left" href="#">
