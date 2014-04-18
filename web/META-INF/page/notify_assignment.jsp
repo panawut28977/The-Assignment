@@ -1,17 +1,37 @@
-<%-- 
-    Document   : notify_assignment
-    Created on : Apr 8, 2014, 11:53:58 PM
-    Author     : JenoVa
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+<style>
+    a{
+        text-decoration: none;
+    }
+</style>
+<div><h3>${param.nt}<button class='btn btn-default pull-right'>clear all</button></h3></div>
+<div class="media">
+    <a class="pull-left" href="assignment.jsp">
+        <span class="glyphicon glyphicon-file" style="font-size: 64px"></span>
+    </a>
+    <div class="media-body">
+        <h4 class="media-heading">งานที่ 1 ( INT202 Software Development Process II )<small class="pull-right">16/01/57</small></h4>
+        <p>ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+        <small class="text-muted">Due date: 18/01/57</small>
+    </div>
+</div>
+<div class="media">
+    <a class="pull-left" href="assignment.jsp">
+        <span class="glyphicon glyphicon-file" style="font-size: 64px"></span>
+    </a>
+    <div class="media-body">
+        <h4 class="media-heading">งานที่ 2 ( INT202 Software Development Process II )<small class="pull-right">16/01/57</small></h4>
+        <p>ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+        <small class="text-muted">Due date: 18/01/57</small>
+    </div>
+</div>
+<div class="media">
+    <a class="pull-left" href="assignment.jsp">
+        <span class="glyphicon glyphicon-file" style="font-size: 64px"></span>
+    </a>
+    <div class="media-body">
+        <h4 class="media-heading">งานที่ 1 ( INT103 Office )<small class="pull-right">16/01/57</small></h4>
+        <p>ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+        <small class="text-muted">Due date: 18/01/57</small>
+    </div>
+</div>

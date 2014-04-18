@@ -12,7 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="META-INF/page/include_css.jsp" %>
-         <%@include file="META-INF/page/include_js.jsp" %>
+        <%@include file="META-INF/page/include_js.jsp" %>
         <title>Welcome</title>
     </head>
     <body>
@@ -34,11 +34,17 @@
                 </div>
             </div>
         </div>
+        <a onclick="setSession()"><span>teacher mode</span></a>
+        <a onclick="setStudentSession()"><span>student mode</span></a>
     </body>
-    <script type="text/javascript" >
-        $(document).ready(function() {
-            var aTable = $('#AllAssignemnt').dataTable();
-            aTable.fnFilter('${param.st}');
-        });
+    <script>
+        function setSession() {
+        <c:set var="accType" value="th" scope="session" />
+                location.href="home.jsp";
+        }
+        function setStudentSession() {
+        <c:set var="accType" value="st" scope="session" />
+                location.href="home.jsp";
+        }
     </script>
 </html>

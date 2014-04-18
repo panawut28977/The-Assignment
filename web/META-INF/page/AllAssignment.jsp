@@ -2,15 +2,15 @@
 <link rel="stylesheet" href="module/fullcalendar/fullcalendar.css">
 <link rel="stylesheet" href="module/fullcalendar/fullcalendar.print.css">
 <style>
-    #AllAssignemnt_wrapper{
+    #AllAssignment_wrapper{
         margin-top: 20px;
     }
-    
+
     span[class^=text]{
         font-weight: bold;
     }
 </style>
-<table class="table table-striped" id="AllAssignemnt">
+<table class="table table-striped" id="AllAssignment">
     <thead>
         <tr>
             <td>Name</td>
@@ -19,7 +19,6 @@
             <td>Work on</td>
             <td>Member</td>
             <td>Status</td>
-            <td>Score</td>
             <td></td>
         </tr>
     </thead>
@@ -33,7 +32,7 @@
             <td><span class="text-danger">Late</span></td>
             <td><a title="Send Assignment File" href="uploadAssignment.jsp?ct=allAm&&tab=AllAssignment"><span class="glyphicon glyphicon-upload"></span></a></td>
         </tr>
-         <tr>
+        <tr>
             <td>งานที่ 2 .....</td>
             <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment&&wo=f">INT202 Software Development Process II</a></td>
             <td>13/01/2554</td>
@@ -42,7 +41,7 @@
             <td><span class="text-success">on time</span></td>
             <td><a title="Send Assignment File" href="uploadAssignment.jsp?ct=allAm&&tab=AllAssignment"><span class="glyphicon glyphicon-upload"></span></a></td>
         </tr>
-         <tr>
+        <tr>
             <td>งานที่ 3 .....</td>
             <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment">INT202 Software Development Process II</a></td>
             <td>13/08/2556</td>
@@ -60,7 +59,7 @@
             <td><span class="text-warning">Hurry up</td>
             <td><a title="Send Assignment File" href="uploadAssignment.jsp?ct=allAm&&tab=AllAssignment"><span class="glyphicon glyphicon-upload"></span></a></td>
         </tr>
-         <tr>
+        <tr>
             <td>งานที่ 2 .....</td>
             <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment&&wo=f">INT103 Office</a></td>
             <td>13/01/2554</td>
@@ -69,7 +68,7 @@
             <td><span class="text-muted">Sent <span class="glyphicon glyphicon-check"></span></span></td>
             <td><a title="Send Assignment File" href="uploadAssignment.jsp?ct=allAm&&tab=AllAssignment"><span class="glyphicon glyphicon-upload"></span></a></td>
         </tr>
-         <tr>
+        <tr>
             <td>งานที่ 3 .....</td>
             <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment">INT103 Office</a></td>
             <td>13/08/2556</td>
@@ -85,68 +84,70 @@
 <script src="module/fullcalendar/fullcalendar.min.js"></script>
 <script>
 
-	$(document).ready(function() {
-	
-		var date = new Date();
-		var d = date.getDate();
-		var m = date.getMonth();
-		var y = date.getFullYear();
-		
-		$('#calendar').fullCalendar({
-			header: {
-				left: 'prev,next today',
-				center: 'title',
-				right: 'month,agendaWeek,agendaDay'
-			},
-			editable: true,
-			events: [
-				{
-					title: 'All Day Event',
-					start: new Date(y, m, 1)
-				},
-				{
-					title: 'Long Event',
-					start: new Date(y, m, d-5),
-					end: new Date(y, m, d-2)
-				},
-				{
-					id: 999,
-					title: 'Repeating Event',
-					start: new Date(y, m, d-3, 16, 0),
-					allDay: false
-				},
-				{
-					id: 999,
-					title: 'Repeating Event',
-					start: new Date(y, m, d+4, 16, 0),
-					allDay: false
-				},
-				{
-					title: 'Meeting',
-					start: new Date(y, m, d, 10, 30),
-					allDay: false
-				},
-				{
-					title: 'Lunch',
-					start: new Date(y, m, d, 12, 0),
-					end: new Date(y, m, d, 14, 0),
-					allDay: false
-				},
-				{
-					title: 'Birthday Party',
-					start: new Date(y, m, d+1, 19, 0),
-					end: new Date(y, m, d+1, 22, 30),
-					allDay: false
-				},
-				{
-					title: 'Click for Google',
-					start: new Date(y, m, 28),
-					end: new Date(y, m, 29),
-					url: 'http://google.com/'
-				}
-			]
-		});
-		
-	});
+    $(document).ready(function() {
+        var aTable = $('#AllAssignment').dataTable();
+        aTable.fnFilter('${param.st}');
+        
+        var date = new Date();
+        var d = date.getDate();
+        var m = date.getMonth();
+        var y = date.getFullYear();
+
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            editable: true,
+            events: [
+                {
+                    title: 'All Day Event',
+                    start: new Date(y, m, 1)
+                },
+                {
+                    title: 'Long Event',
+                    start: new Date(y, m, d - 5),
+                    end: new Date(y, m, d - 2)
+                },
+                {
+                    id: 999,
+                    title: 'Repeating Event',
+                    start: new Date(y, m, d - 3, 16, 0),
+                    allDay: false
+                },
+                {
+                    id: 999,
+                    title: 'Repeating Event',
+                    start: new Date(y, m, d + 4, 16, 0),
+                    allDay: false
+                },
+                {
+                    title: 'Meeting',
+                    start: new Date(y, m, d, 10, 30),
+                    allDay: false
+                },
+                {
+                    title: 'Lunch',
+                    start: new Date(y, m, d, 12, 0),
+                    end: new Date(y, m, d, 14, 0),
+                    allDay: false
+                },
+                {
+                    title: 'Birthday Party',
+                    start: new Date(y, m, d + 1, 19, 0),
+                    end: new Date(y, m, d + 1, 22, 30),
+                    allDay: false
+                },
+                {
+                    title: 'Click for Google',
+                    start: new Date(y, m, 28),
+                    end: new Date(y, m, 29),
+                    url: 'http://google.com/'
+                }
+            ]
+        });
+
+    });
 
 </script>

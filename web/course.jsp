@@ -6,7 +6,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -29,6 +29,9 @@
                         <c:when test="${param.tab eq 'member'}">
                             <%@include file="META-INF/page/Member.jsp" %>
                         </c:when>
+                        <c:when test="${param.tab eq 'score'}">
+                            <%@include file="META-INF/page/courseScore.jsp" %>
+                        </c:when>
                         <c:otherwise>
                             <%@include file="META-INF/page/CourseAnnouce.jsp" %>
                         </c:otherwise>
@@ -37,10 +40,4 @@
             </div>
         </div>
     </body>
-    <script type="text/javascript" >
-        $(document).ready(function() {
-            var aTable = $('#AllAssignemnt').dataTable();
-            aTable.fnFilter('${param.st}');
-        });
-    </script>
 </html>

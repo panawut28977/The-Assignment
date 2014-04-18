@@ -20,13 +20,37 @@
             }
             .th-message {
                 background-color: #40D47E;
-               border-radius: 10px
+                border-radius: 10px
             }
-            
+
             .st-message{
                 background-color: #ffffff;
-               border-radius: 10px
+                border-radius: 10px
             }
+
+            #teacherSelectionBox{
+                height: 400px;
+                overflow-y: scroll;
+                padding:  0;
+            }
+            
+            #teacherSelectionBox hr{
+                margin: 0;
+            }
+            
+            #teacherSelectionBox .media{
+                cursor: pointer;
+                margin-top: 0;
+            }
+            
+            #teacherSelectionBox .media:hover{
+                background-color:#DADCFF;
+            }
+            
+            #teacherSelectionBox .media h5{
+                padding-top: 8px;
+            }
+            
         </style>
         <title>Message</title>
     </head>
@@ -93,9 +117,68 @@
                             <input type="submit" class="btn btn-primary pull-right" value="Send">
                         </form>
                     </div>
-                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Select your teacher</h3>
+                            </div>
+                            <div class="panel-body" id="teacherSelectionBox">
+                                <div class="media">
+                                    <a class="pull-left" href="#">
+                                        <img width="32" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                                    </a>
+                                    <div class="media-body">
+                                        <h5 class="media-heading">AJ.AAA fsdf</h5>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="media">
+                                    <a class="pull-left" href="#">
+                                        <img width="32" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                                    </a>
+                                    <div class="media-body">
+                                        <h5 class="media-heading">AJ.cccc aaaaa</h5>
+                                    </div> 
+                                </div>
+                                <hr>
+                                <div class="media">
+                                    <a class="pull-left" href="#">
+                                        <img width="32" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                                    </a>
+                                    <div class="media-body">
+                                        <h5 class="media-heading">AJ.hhhhh jjjj</h5>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="media">
+                                    <a class="pull-left" href="#">
+                                        <img width="32" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                                    </a>
+                                    <div class="media-body">
+                                        <h5 class="media-heading">AJ.rrrrr eeee</h5>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="media">
+                                    <a class="pull-left" href="#">
+                                        <img width="32" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                                    </a>
+                                    <div class="media-body">
+                                        <h5 class="media-heading">AJ.gasg hhhhh</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        <script>
+            $(function(){
+               $("#teacherSelectionBox .media").click(function(){
+                   
+               });
+            });
+        </script>
     </body> 
 </html>

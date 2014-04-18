@@ -1,17 +1,16 @@
-<%-- 
-    Document   : notify_score
-    Created on : Apr 8, 2014, 11:54:26 PM
-    Author     : JenoVa
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+<div><h3>${param.nt}<button class='btn btn-default pull-right'>clear all</button></h3></div>
+<div class="media">
+    <span class="glyphicon glyphicon-stats pull-left" style="font-size: 64px"></span>
+    <div class="media-body">
+        <h4 class="media-heading">งานที่ 1 ( INT202 Software Development Process II )</h4>
+        <h4><b>9/10</b></h4>
+    </div>
+</div>
+<div class="media">
+     <span class="glyphicon glyphicon-stats pull-left" style="font-size: 64px"></span>
+    <div class="media-body">
+        <h4 class="media-heading">งานที่ 2 ( INT202 Software Development Process II )</h4>
+        <h4><b>5/10</b></h4>
+    </div>
+</div> 

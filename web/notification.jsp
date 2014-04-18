@@ -21,7 +21,6 @@
             <div class="row">
                 <%@include file="META-INF/page/side_bar.jsp"%>
                 <div class="col-md-9">
-                    <div><h3>${param.nt}</h3></div>
                     <c:choose>
                         <c:when test="${param.nt eq 'Announcement'}">
                             <%@include file="META-INF/page/notify_announcement.jsp" %>
