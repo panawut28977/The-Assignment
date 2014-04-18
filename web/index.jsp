@@ -12,6 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="META-INF/page/include_css.jsp" %>
+        <%@include file="META-INF/page/include_js.jsp" %>
         <style>
             body{
                 background-image: url('img/Education-knowledge-PowerPoint-PPT-hd-87622487.jpg');
@@ -45,9 +46,8 @@
                     <c:when test="${param.rg eq 'th'}"><%@include file="META-INF/page/register_teacher.jsp" %></c:when>
                     <c:otherwise> <%@include file="META-INF/page/login.jsp" %></c:otherwise>
                 </c:choose>
-               
+
             </div>
         </div>
     </body>
-    <%@include file="META-INF/page/include_js.jsp" %>
 </html>

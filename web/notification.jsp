@@ -12,7 +12,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="META-INF/page/include_css.jsp" %>
-        <title>Course ...</title>
+        <%@include file="META-INF/page/include_js.jsp" %>
+        <title>Notification ...</title>
     </head>
     <body>
         <%@include file="META-INF/page/header_bar.jsp"%>
@@ -39,5 +40,4 @@
             </div>
         </div>
     </body>
-    <%@include file="META-INF/page/include_js.jsp" %>
 </html>

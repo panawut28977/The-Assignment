@@ -12,6 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="META-INF/page/include_css.jsp" %>
+        <%@include file="META-INF/page/include_js.jsp" %>
         <title>Course ...</title>
         <style>
             #pvVs{
@@ -109,7 +110,6 @@
 
 
     </body>
-    <%@include file="META-INF/page/include_js.jsp" %>
     <script>
         $(function() {
             $("#pvVersionTable").hide();
