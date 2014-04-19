@@ -17,18 +17,18 @@
 <table class="table table-striped" id="AllAssignemnt">
     <thead>
         <tr>
-            <td>Name</td>
-            <td>Course</td>
-            <td>Due Date</td>
-            <td>Work on</td>
-            <td>Member</td>
-            <td>Status</td>
+            <th>Name</th>
+            <th>Course</th>
+            <th>Due Date</th>
+            <th>Work on</th>
+            <th>Member</th>
+            <th>Status</th>
             <c:choose>
                 <c:when test="${sessionScope.accType eq 'st'}">
-                    <td></td>
+                    <th></th>
                 </c:when>
                 <c:otherwise>
-                    <td>Sended</td>
+                    <th>Sended</th>
                 </c:otherwise>
             </c:choose>
 
@@ -87,7 +87,6 @@
                     </c:when>
                     <c:otherwise><a>0</a></c:otherwise>
                 </c:choose>
-
             </td>
         </tr>
     </tbody>

@@ -32,6 +32,9 @@
                         <c:when test="${param.tab eq 'score'}">
                             <%@include file="META-INF/page/CourseScore.jsp" %>
                         </c:when>
+                        <c:when test="${param.tab eq 'request'}">
+                            <%@include file="META-INF/page/RequestToJoin.jsp" %>
+                        </c:when>
                         <c:otherwise>
                             <%@include file="META-INF/page/CourseAnnouce.jsp" %>
                         </c:otherwise>
