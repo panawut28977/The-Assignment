@@ -23,7 +23,15 @@
             <td>Work on</td>
             <td>Member</td>
             <td>Status</td>
-            <td></td>
+            <c:choose>
+                <c:when test="${sessionScope.accType eq 'st'}">
+                    <td></td>
+                </c:when>
+                <c:otherwise>
+                    <td>Sended</td>
+                </c:otherwise>
+            </c:choose>
+
         </tr>
     </thead>
     <tbody>
@@ -41,7 +49,7 @@
                             <span class="glyphicon glyphicon-upload"></span>
                         </a>
                     </c:when>
-                    <c:otherwise> </c:otherwise>
+                    <c:otherwise><a>10</a></c:otherwise>
                 </c:choose> 
             </td>
         </tr>
@@ -59,7 +67,7 @@
                             <span class="glyphicon glyphicon-upload"></span>
                         </a>
                     </c:when>
-                    <c:otherwise> </c:otherwise>
+                    <c:otherwise><a>5</a></c:otherwise>
                 </c:choose>
             </td>
         </tr>
@@ -77,7 +85,7 @@
                             <span class="glyphicon glyphicon-upload"></span>
                         </a>
                     </c:when>
-                    <c:otherwise> </c:otherwise>
+                    <c:otherwise><a>0</a></c:otherwise>
                 </c:choose>
 
             </td>
