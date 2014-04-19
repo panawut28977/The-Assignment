@@ -14,7 +14,7 @@
         <%@include file="META-INF/page/include_js.jsp" %>
         <title>Course ...</title>
     </head>
-    <body>
+    <body> 
         <%@include file="META-INF/page/header_bar.jsp"%>
         <div class="container">
             <div class="row">
