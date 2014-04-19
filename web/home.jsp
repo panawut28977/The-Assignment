@@ -34,17 +34,12 @@
                 </div>
             </div>
         </div>
-        <a onclick="setSession()"><span>teacher mode</span></a>
-        <a onclick="setStudentSession()"><span>student mode</span></a>
+        <a href="setSession.jsp?acct=th"><span>teacher mode</span></a>
+         <a href="setSession.jsp?acct=st"><span>student mode</span></a>
     </body>
     <script>
-        function setSession() {
-        <c:set var="accType" value="th" scope="session" />
-                location.href="home.jsp";
-        }
-        function setStudentSession() {
-        <c:set var="accType" value="st" scope="session" />
-                location.href="home.jsp";
-        }
+        $(function() {
+            alert("change account type to:" + '${sessionScope.accType}');
+        });
     </script>
 </html>

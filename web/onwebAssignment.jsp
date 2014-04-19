@@ -43,7 +43,7 @@
                         </c:when>
                         <c:otherwise>
                             <div><h3>INT202 Software Development Process II</h3></div>
-                            <%@include file="META-INF/page/courseTab.jsp"%>
+                            <%@include file="META-INF/page/CourseTab.jsp"%>
                             <ol class="breadcrumb" style="margin-top: 15px" >
                                 <li><a href="course.jsp?tab=AllAssignment">Assignment</a></li>
                                 <li class="active"><a href="#">งานที่ 1...</a></li>

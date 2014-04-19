@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="module/fullcalendar/fullcalendar.css">
 <link rel="stylesheet" href="module/fullcalendar/fullcalendar.print.css">
@@ -10,6 +11,9 @@
         font-weight: bold;
     }
 </style>
+<c:if test="${sessionScope.accType eq 'th'}"> 
+    <button class="btn btn-primary" style="margin-top: 20px"><span class="glyphicon glyphicon-plus-sign"></span> Create Assignment</button>
+</c:if>
 <table class="table table-striped" id="AllAssignemnt">
     <thead>
         <tr>
@@ -30,7 +34,16 @@
             <td>File</td> 
             <td>Individual</td>
             <td><span class="text-danger">Late</span></td>
-            <td><a title="Send Assignment File" href="uploadAssignment.jsp?tab=AllAssignment"><span class="glyphicon glyphicon-upload"></span></a></td>
+            <td>
+                <c:choose>
+                    <c:when test="${sessionScope.accType eq 'st'}">
+                        <a title="Send Assignment File" href="uploadAssignment.jsp?tab=AllAssignment">
+                            <span class="glyphicon glyphicon-upload"></span>
+                        </a>
+                    </c:when>
+                    <c:otherwise> </c:otherwise>
+                </c:choose> 
+            </td>
         </tr>
         <tr>
             <td>งานที่ 2 .....</td>
@@ -39,7 +52,16 @@
             <td>File</td>
             <td>Group(2)</td>
             <td><span class="text-success">on time</span></td>
-            <td><a title="Send Assignment File" href="uploadAssignment.jsp?tab=AllAssignment"><span class="glyphicon glyphicon-upload"></span></a></td>
+            <td>
+                <c:choose>
+                    <c:when test="${sessionScope.accType eq 'st'}">
+                        <a title="Send Assignment File" href="uploadAssignment.jsp?tab=AllAssignment">
+                            <span class="glyphicon glyphicon-upload"></span>
+                        </a>
+                    </c:when>
+                    <c:otherwise> </c:otherwise>
+                </c:choose>
+            </td>
         </tr>
         <tr>
             <td>งานที่ 3 .....</td>
@@ -48,7 +70,17 @@
             <td>On Web</td>
             <td>Group(3)</td>
             <td><span class="text-success">on time</span></td>
-            <td><a   href="onwebAssignment.jsp?tab=AllAssignment" title="Do it on web"><span class="glyphicon glyphicon-upload"></span></a></td>
+            <td>
+                <c:choose>
+                    <c:when test="${sessionScope.accType eq 'st'}">
+                        <a href="onwebAssignment.jsp?tab=AllAssignment" title="Do it on web">
+                            <span class="glyphicon glyphicon-upload"></span>
+                        </a>
+                    </c:when>
+                    <c:otherwise> </c:otherwise>
+                </c:choose>
+
+            </td>
         </tr>
     </tbody>
 </table>
@@ -60,7 +92,7 @@
     $(document).ready(function() {
         var aTable = $('#AllAssignemnt').dataTable();
         aTable.fnFilter('${param.st}');
-        
+
         var date = new Date();
         var d = date.getDate();
         var m = date.getMonth();

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="col-md-3">
     <div class="row userbox">
         <img class="col-md-4" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
@@ -13,7 +14,23 @@
     </div>
     <div class="row" style="margin-top: 30px">
         <div  class="list-group">
-            <a disabled="yes" class="list-group-item">Course <span class="glyphicon glyphicon-plus-sign pull-right a_button"  data-toggle="modal" data-target="#join_course" title="join course" ></span></a>
+            <span disabled="yes" class="list-group-item">
+                Course 
+                <c:choose>
+                    <c:when test="${sessionScope.accType eq 'st'}">
+                        <span class="glyphicon glyphicon-plus-sign pull-right a_button"  data-toggle="modal" data-target="#join_course" title="join course" ></span>
+                    </c:when>
+                    <c:otherwise>
+                        <span class="dropdown pull-right"> 
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-plus-sign a_button"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a  data-toggle="modal" data-target="#create_course" title="create course">Create course</a></li>
+                                <li><a  data-toggle="modal" data-target="#join_course" title="join course">Join course</a></li>
+                            </ul>
+                        </span>
+                    </c:otherwise>
+                </c:choose>
+            </span>
             <a id="1" onclick="load_course(1)" class="list-group-item usepointer"><span class="badge">3</span>INT103 Office</a>
             <a id="2" onclick="load_course(2)" class="list-group-item usepointer"><span class="badge">3</span>INT202 Software Development Process II</a>
             <a id="3" onclick="load_course(3)" class="list-group-item usepointer">Morbi leo risus</a>
@@ -39,19 +56,49 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="create_course" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Create course</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                            <div class="col-md-6">
+                                <label>name</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="col-md-4">
+                                <label>Group size</label>
+                                <input type="number" class="form-control">
+                            </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
-    $(function(){
+    $(function() {
         var courseId = '${param.course_id}';
-        if(courseId != "" && courseId !=null){
-            $("#"+courseId).addClass("active");
+        if (courseId != "" && courseId != null) {
+            $("#" + courseId).addClass("active");
         }
     });
-    
+
     function view_assignment_by_status(status) {
         location.href = "home.jsp?tab=AllAssignment&st=" + status;
     }
 
     function load_course(course_id) {
         location.href = "course.jsp?course_id=" + course_id;
-    } 
+    }
 </script>

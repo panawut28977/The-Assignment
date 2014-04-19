@@ -20,8 +20,8 @@
             <div class="row">
                 <%@include file="META-INF/page/side_bar.jsp"%>
                 <div class="col-md-9">
-                    <div><h3>INT202 Software Development Process II </h3></div>
-                    <%@include file="META-INF/page/courseTab.jsp" %>
+                    <%@include file="META-INF/page/CourseHeader.jsp" %>
+                    <%@include file="META-INF/page/CourseTab.jsp" %>
                     <c:choose>
                         <c:when test="${param.tab eq 'AllAssignment'}">
                             <%@include file="META-INF/page/CourseAssignment.jsp" %>
@@ -30,7 +30,7 @@
                             <%@include file="META-INF/page/Member.jsp" %>
                         </c:when>
                         <c:when test="${param.tab eq 'score'}">
-                            <%@include file="META-INF/page/courseScore.jsp" %>
+                            <%@include file="META-INF/page/CourseScore.jsp" %>
                         </c:when>
                         <c:otherwise>
                             <%@include file="META-INF/page/CourseAnnouce.jsp" %>
