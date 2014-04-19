@@ -24,10 +24,10 @@
         <tr>
             <td>งานที่ 3</td>
             <td>9/10</td>
-        </tr>
+        </tr> 
         <tr>
             <td>งานที่ 4</td>
             <td>5/5</td>
         </tr>
     </tbody>
-</table>
+</table> 
