@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:if test="${param.cId != null && param.Cid != ''}"><c:set var="cId" value="${param.cId}" scope="session" /></c:if> 
 <div class="col-md-3">
     <div class="row userbox">
         <img class="col-md-4" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
@@ -88,7 +89,7 @@
 </div>
 <script>
     $(function() {
-        var courseId = '${param.course_id}';
+        var courseId = '${sessionScope.cId}';
         if (courseId != "" && courseId != null) {
             $("#" + courseId).addClass("active");
         }
@@ -99,6 +100,6 @@
     }
 
     function load_course(course_id) {
-        location.href = "course.jsp?course_id=" + course_id;
+         location.href = "course.jsp?cId="+course_id;
     }
 </script>

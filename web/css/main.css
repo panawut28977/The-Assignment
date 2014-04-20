@@ -33,3 +33,10 @@ and open the template in the editor.
     cursor: pointer;
     color: gray !important;
 }
+
+.assignmentBox{
+    text-align: left;
+    background-color: #F8F8F8;
+    border: #ddd thin solid;
+    padding-bottom: 20px;
+}

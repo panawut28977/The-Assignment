@@ -63,7 +63,7 @@
                                     <option value="onions">Onions</option>
                                 </select>
                                 <hr>
-                                <div style="text-align: left">
+                                <div class="assignmentBox col-md-12">
                                     <h4><u>Let's do it !</u></h4>
 
                                     <h5><b>Fill your answer in the blank.</b></h5><!--[Question Title]-->
@@ -141,13 +141,13 @@
                                         <textarea class="form-control"></textarea>
                                     </div>
                                     <br>
-                                    <input type="submit" value="Send !!" class="btn btn-primary center-block">
+                                    <input type="submit" value="Send !!" class="btn btn-primary">
                                 </div>
                                 <br>
                             </form>
                         </div>
                     </div>
-                    <br><hr>  
+                    <div style="clear: both;padding: 10px 0"></div> 
                     <h3>Comment</h3>
                     <div class="media">
                         <a class="pull-left" href="#">

@@ -49,7 +49,7 @@
                             <span class="glyphicon glyphicon-upload"></span>
                         </a>
                     </c:when>
-                    <c:otherwise><a>10</a></c:otherwise>
+                    <c:otherwise><a href="SendedAssignment.jsp?tab=AllAssignment&&wkt=file">10</a></c:otherwise>
                 </c:choose> 
             </td>
         </tr>
@@ -67,7 +67,7 @@
                             <span class="glyphicon glyphicon-upload"></span>
                         </a>
                     </c:when>
-                    <c:otherwise><a>5</a></c:otherwise>
+                    <c:otherwise><a href="SendedAssignment.jsp?tab=AllAssignment&&wkt=file">5</a></c:otherwise>
                 </c:choose>
             </td>
         </tr>
@@ -85,7 +85,7 @@
                             <span class="glyphicon glyphicon-upload"></span>
                         </a>
                     </c:when>
-                    <c:otherwise><a>0</a></c:otherwise>
+                    <c:otherwise><a href="SendedAssignment.jsp?tab=AllAssignment&&wkt=web">0</a></c:otherwise>
                 </c:choose>
             </td>
         </tr>

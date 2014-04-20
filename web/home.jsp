@@ -16,6 +16,7 @@
         <title>Welcome</title>
     </head>
     <body>
+        <c:set var="cId" value="" scope="session" />
         <%@include file="META-INF/page/header_bar.jsp"%>
         <div class="container">
             <div class="row">
