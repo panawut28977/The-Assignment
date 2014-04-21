@@ -6,7 +6,7 @@
             <li <c:if test="${param.tab eq 'score'}">class="active"</c:if>><a href="course.jsp?tab=score">Score</a></li>
             <li <c:if test="${param.tab eq 'member'}">class="active"</c:if>><a href="course.jsp?tab=member">Member</a></li>
         </ul>   
-    </c:when>
+    </c:when>   
     <c:otherwise>
         <ul class="nav nav-tabs">
             <li <c:if test="${param.tab eq null}">class="active"</c:if>><a href="course.jsp">Annoucement</a></li>
