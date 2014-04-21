@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <button class="btn btn-primary" style="margin-top: 20px" id="autoApprove"><span class="glyphicon glyphicon-ok"></span> Auto Approve</button>
+<button class="btn btn-default" style="margin-top: 20px" id="updateList">update list</button>
 <div id="uploadStList">
     <hr>
     <form role="form">
@@ -78,7 +79,7 @@
 <script>
     $(function() {
         $("#uploadStList").hide();
-        $("#autoApprove").click(function() {
+        $("#autoApprove,#updateList").click(function() {
             $("#uploadStList").slideToggle();
         });
     });
