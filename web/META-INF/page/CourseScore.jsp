@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <style> 
-    #AllStudentScore_wrapper{
+    #AllStudentScore_wrapper{ 
         margin-top: 20px;
     }
 </style>
