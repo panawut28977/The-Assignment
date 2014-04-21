@@ -1,5 +1,5 @@
 <c:choose>
-    <c:when test="${sessionScope.accType eq 'st'}"> 
+    <c:when test="${sessionScope.accType eq 'st'}">
         <div><h3>INT202 Software Development Process II </h3></div>
     </c:when>
     <c:otherwise>
