@@ -12,7 +12,7 @@
             <div class="col-md-4"><h4>1 <br> Leftovers</h4></div>
         </div>
         <hr style="clear:both">
-        <table class="table" style="text-align: center">
+        <table class="table" >
             <thead>
                 <tr>
                     <td><b>Assignment</b></td>
