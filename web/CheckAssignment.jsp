@@ -47,15 +47,15 @@
                     <%@include file="META-INF/page/CourseTab.jsp"%>
                     <ol class="breadcrumb" style="margin-top: 15px" >
                         <li><a href="course.jsp?tab=AllAssignment">Assignment</a></li>
-                        <li><a href="SendedAssignment.jsp?tab=AllAssignment"">งานที่ 1.....</a></li>
+                        <li><a href="SendedAssignment.jsp">งานที่ 1.....</a></li>
                         <li class="active"><a href="#">Check งานที่ 1.....</a></li>
                     </ol>
                     <c:choose>
                         <c:when test="${sessionScope.wkt eq 'file'}">
-                            <a href="Checkcopy.jsp?tab=AllAssignment" class="btn btn-primary" data-toggle="tooltip"  id="checkcopy" data-placement="bottom" title="It'll check with every student assignment who sended." type="button">
+                            <button class="btn btn-primary" data-toggle="tooltip"  id="checkcopy" data-placement="bottom" title="It'll check with every student assignment who sended." type="button">
                                 <span class="glyphicon glyphicon-copyright-mark"></span> 
                                 Check copy
-                            </a>
+                            </button>
                             <div style="text-align: center">
                                 <h4>Individual work</h4>
                                 <div class="media">
@@ -67,9 +67,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <iframe class="col-md-12" style="min-height: 600px;margin-top: 20px" src="https://crocodoc.com/view/-ib0cktkcFMjSi4R8o7WuJA5h1jmqs1pz2zwaHEXY8S52MtxgfaIQc6TE82tLEa9onv9XVtz7_-zOBsX_ENcDScbUuPN2d55N970XA
-"/></iframe> 
-                            <div style="text-align: center;background-color: gainsboro;clear: both;padding: 5px 0;"><a target="_blank" style="text-align: center" href="https://crocodoc.com/view/-ib0cktkcFMjSi4R8o7WuJA5h1jmqs1pz2zwaHEXY8S52MtxgfaIQc6TE82tLEa9onv9XVtz7_-zOBsX_ENcDScbUuPN2d55N970XA">see in new window.</a></div>
+                            <iframe class="col-md-12" style="min-height: 600px;margin-top: 20px" src="https://crocodoc.com/view/MGZdRQuMsH4PdwGZsfcie_sdZ07GBdnl0MEebWLV1ni8lF01YutWvvO_URujOzLV9vuu7GTThtqG_DQ4t0m3V28WeFabg6ko-1IVXQ
+                                    "/></iframe> 
                             <div class="row" style="padding-top: 20px;clear: both;">
                                 <form role="form" class="form-horizontal">
                                     <div class="form-group">
@@ -150,7 +149,7 @@
                                             <input disabled="yes" type="text" value="eeiudb"> amet nibh. Donec sodales sagittis magna. Sed consequat, leo 
                                             <input disabled="yes" type="text" value="epioan"> eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce 
                                             <input disabled="yes" type="text" value="eoirr"> vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia.
-                                            <input type="number" placeholder="Max 1 point" value="1">
+                                            <input type="number" placeholder="Max 1 point">
                                         </p>
 
                                         <h5><b>Matching a word.</b></h5><!--[Question Title]-->
@@ -162,7 +161,7 @@
                                                     <option value="mozarella">fggsdf</option>
                                                 </select> 
                                                 <span>2. asdffsadf</span> 
-                                                <input type="number" class="pull-right" placeholder="Max 1 point" value="0">
+                                                <input type="number" class="pull-right" placeholder="Max 1 point">
                                                 <span class="pull-right">fggsdf </span>
                                             </div>
                                             <br>
@@ -173,7 +172,7 @@
                                                     <option value="mozarella">fggsdf</option>
                                                 </select>  
                                                 <span>3. asdffsadf</span>
-                                                <input type="number" class="pull-right" placeholder="Max 1 point" value="1">
+                                                <input type="number" class="pull-right" placeholder="Max 1 point">
                                                 <span class="pull-right">fggsdf </span></div><br>
                                             <div>
                                                 <select disabled="yes" >
@@ -182,7 +181,7 @@
                                                     <option value="mozarella">fggsdf</option>
                                                 </select>  
                                                 <span>4. asdffsadf</span>
-                                                <input type="number" class="pull-right" placeholder="Max 1 point" value="1">
+                                                <input type="number" class="pull-right" placeholder="Max 1 point">
                                                 <span class="pull-right">fggsdf </span></div><br>
                                             <div>
                                                 <select disabled="yes" >
@@ -191,7 +190,7 @@
                                                     <option value="mozarella">fggsdf</option>
                                                 </select>  
                                                 <span>5. asdffsadf</span>
-                                                <input type="number" class="pull-right" placeholder="Max 1 point" value="1">
+                                                <input type="number" class="pull-right" placeholder="Max 1 point">
                                                 <span class="pull-right">fggsdf </span></div><br>
                                             <div>
                                                 <select disabled="yes" >
@@ -200,7 +199,7 @@
                                                     <option value="mozarella">fggsdf</option>
                                                 </select>  
                                                 <span>6. asdffsadf</span>
-                                                <input type="number" class="pull-right" placeholder="Max 1 point" value="0">
+                                                <input type="number" class="pull-right" placeholder="Max 1 point">
                                                 <span class="pull-right">fggsdf </span></div><br>
                                             <div>
                                                 <select disabled="yes">
@@ -209,7 +208,7 @@
                                                     <option value="mozarella">fggsdf</option>
                                                 </select>  
                                                 <span>7. asdffsadf</span>
-                                                <input type="number" class="pull-right" placeholder="Max 1 point" value="0">
+                                                <input type="number" class="pull-right" placeholder="Max 1 point">
                                                 <span class="pull-right">fggsdf </span></div><br>
                                         </div>
                                         <h5><b>Choose collect answer</b></h5>
@@ -219,7 +218,7 @@
                                             <input disabled="yes" type="radio"> B. aaaaa
                                             <input disabled="yes" type="radio" checked="yes"> C. aaaaa
                                             <input disabled="yes" type="radio"> D. aaaaa
-                                            <input type="number" placeholder="Max 1 point" value="1">
+                                            <input type="number" placeholder="Max 1 point">
                                         </div>
                                         <div>
                                             <h5>9. which one collect?</h5>
@@ -227,7 +226,7 @@
                                             <input disabled="yes" type="radio"> B. aaaaa
                                             <input disabled="yes" type="radio"> C. aaaaa
                                             <input disabled="yes" type="radio"> D. aaaaa
-                                            <input type="number" placeholder="Max 1 point" value="1">
+                                            <input type="number" placeholder="Max 1 point">
                                         </div>
                                         <div>
                                             <h5>10. which one collect(more than one answer)?</h5>
@@ -235,14 +234,14 @@
                                             <input disabled="yes" type="checkbox"> B. aaaaa
                                             <input disabled="yes" type="checkbox"> C. aaaaa
                                             <input disabled="yes" type="checkbox"> D. aaaaa
-                                            <input type="number" placeholder="Max 1 point" value="0">
+                                            <input type="number" placeholder="Max 1 point">
                                         </div>
                                         <h5><b>Explain answer</b></h5>
                                         <div>
                                             <h5>11. please explain concept briefly.</h5>
-                                            <p>tinctio. Nam libero <span class="hilight">tempore,</span> cum soluta nobis est eligendi <span class="hilight">optio</span>  cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. <span class="hilight">Temporibus autem quibusdam et</span>  aut officiis debitis aut rerum necessitatibus saepe eveniet ut et <span class="hilight">voluptates repudiandae sint</span>  et molestiae non recusandae. <span class="hilight">Itaque earum rerum</span> hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis dol</p>
+                                            <textarea class="form-control" disabled="yes"> tinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis dol</textarea>
                                             <br>
-                                            <input type="number" placeholder="Max 1 point" value="">
+                                            <input type="number" placeholder="Max 1 point">
                                         </div>
                                         <br>
                                         <input type="submit" value="save" class="btn btn-primary">
