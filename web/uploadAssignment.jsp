@@ -13,7 +13,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="META-INF/page/include_css.jsp" %>
         <%@include file="META-INF/page/include_js.jsp" %>
-        <title>Course ...</title>
+        <title>Upload Assignment</title>
         <style>
             #pvVs{
                 text-align: center;

@@ -13,29 +13,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="META-INF/page/include_css.jsp" %>
         <%@include file="META-INF/page/include_js.jsp" %>
-        <title>Course ...</title>
-        <style>
-            #pvVs{
-                text-align: center;
-                background-color: #F5F5F5;
-                padding: 10px 0;
-            }
-
-            .q_no{
-                font-size: 20px;
-                font-weight: bold;
-            }
-
-            #input_score .row{
-                padding-top: 5px;
-                padding-bottom: 5px;
-            }
-
-            .assignmentBox input[type="number"]{
-                margin-left: 10px;
-                margin-right: 10px;
-            } 
-        </style>
+        <title>Check Assignment</title>
     </head>
     <body>
         <%@include file="META-INF/page/header_bar.jsp"%>

@@ -7,7 +7,7 @@
             <h4>Panawut Ittitananun</h4>
         </div>
         <div class="statusbox " style="clear: both;background-color: #F8F8F8;padding-top: 20px;" >
-            <small>Assignment Status</small><br>
+            <small><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assignment Status</b></small><br>
             <div onclick="view_assignment_by_status('Late')" class="col-md-4" style="background-color: #e74c3c;cursor: pointer;"><span>1</span><br><span>Late</span></div>
             <div onclick="view_assignment_by_status('Hurry up')" class="col-md-4" style="background-color: #f1c40f;cursor: pointer;"><span>1</span><br><span>hurry up</span></div>
             <div onclick="view_assignment_by_status('on time')" class="col-md-4" style="background-color: #40d47e;cursor: pointer;"><span>3</span><br><span>on time</span></div>

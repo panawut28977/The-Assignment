@@ -24,7 +24,7 @@
     </thead>
     <tbody>
         <tr>
-            <td>งานที่ 1 .....</td>
+            <td>Assignment# 1 .....</td>
             <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment&&wo=f">INT202 Software Development Process II</a></td>
             <td>31/2/2554</td>
             <td>File</td> 
@@ -33,7 +33,7 @@
             <td><a title="Send Assignment File" href="uploadAssignment.jsp?ct=allAm&&tab=AllAssignment"><span class="glyphicon glyphicon-upload"></span></a></td>
         </tr>
         <tr>
-            <td>งานที่ 2 .....</td>
+            <td>Assignment# 2 .....</td>
             <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment&&wo=f">INT202 Software Development Process II</a></td>
             <td>13/01/2554</td>
             <td>File</td>
@@ -42,7 +42,7 @@
             <td><a title="Send Assignment File" href="uploadAssignment.jsp?ct=allAm&&tab=AllAssignment"><span class="glyphicon glyphicon-upload"></span></a></td>
         </tr>
         <tr>
-            <td>งานที่ 3 .....</td>
+            <td>Assignment# 3 .....</td>
             <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment">INT202 Software Development Process II</a></td>
             <td>13/08/2556</td>
             <td>On Web</td>
@@ -51,7 +51,7 @@
             <td><a href="onwebAssignment.jsp?ct=allAm&&tab=AllAssignment" title="Do it on web"><span class="glyphicon glyphicon-upload"></span></a></td>
         </tr>
         <tr>
-            <td>งานที่ 1 .....</td>
+            <td>Assignment# 1 .....</td>
             <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment&&wo=f">INT103 Office</a></td>
             <td>31/2/2554</td>
             <td>File</td>
@@ -60,7 +60,7 @@
             <td><a title="Send Assignment File" href="uploadAssignment.jsp?ct=allAm&&tab=AllAssignment"><span class="glyphicon glyphicon-upload"></span></a></td>
         </tr>
         <tr>
-            <td>งานที่ 2 .....</td>
+            <td>Assignment# 2 .....</td>
             <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment&&wo=f">INT103 Office</a></td>
             <td>13/01/2554</td>
             <td>File</td>
@@ -69,7 +69,7 @@
             <td><a title="Send Assignment File" href="uploadAssignment.jsp?ct=allAm&&tab=AllAssignment"><span class="glyphicon glyphicon-upload"></span></a></td>
         </tr>
         <tr>
-            <td>งานที่ 3 .....</td>
+            <td>Assignment# 3 .....</td>
             <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment">INT103 Office</a></td>
             <td>13/08/2556</td>
             <td>On Web</td>

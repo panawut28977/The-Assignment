@@ -47,7 +47,7 @@
                         </c:otherwise>
                     </c:choose>
                     <div>
-                        <h3 class="">งานที่ 1....</h3>
+                        <h3 class="">Assignment# 1....</h3>
                         <small class="text-muted">create date : 13/08/2556 23:55:00 </small><br>   
                     </div>
                     <div class="col-md-5 well">

@@ -12,7 +12,7 @@
     }
 </style>
 <c:if test="${sessionScope.accType eq 'th'}"> 
-    <button class="btn btn-primary" style="margin-top: 20px"><span class="glyphicon glyphicon-plus-sign"></span> Create Assignment</button>
+    <a class="btn btn-primary"  href="CreateAssignment.jsp?tab=AllAssignment" style="margin-top: 20px"><span class="glyphicon glyphicon-plus-sign"></span> Create Assignment</a>
 </c:if>
 <table class="table table-striped" id="AllAssignemnt">
     <thead>
@@ -31,12 +31,11 @@
                     <th>Sended</th>
                 </c:otherwise>
             </c:choose>
-
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>งานที่ 1 .....</td>
+            <td>Assignment# 1 .....</td>
             <td><a href="assignment.jsp?tab=AllAssignment&&wo=f">INT202 Software Development Process II</a></td>
             <td>31/2/2554</td>
             <td>File</td> 
@@ -54,7 +53,7 @@
             </td>
         </tr>
         <tr>
-            <td>งานที่ 2 .....</td>
+            <td>Assignment# 2 .....</td>
             <td><a href="assignment.jsp?tab=AllAssignment&&wo=f">INT202 Software Development Process II</a></td>
             <td>13/01/2554</td>
             <td>File</td>
@@ -72,7 +71,7 @@
             </td>
         </tr>
         <tr>
-            <td>งานที่ 3 .....</td>
+            <td>Assignment# 3 .....</td>
             <td><a href="assignment.jsp?tab=AllAssignment">INT202 Software Development Process II</a></td>
             <td>13/08/2556</td>
             <td>On Web</td>

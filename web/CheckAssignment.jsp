@@ -52,7 +52,7 @@
                     </ol>
                     <c:choose>
                         <c:when test="${sessionScope.wkt eq 'file'}">
-                            <a href="Checkcopy.jsp?tab=AllAssignment" class="btn btn-primary" data-toggle="tooltip"  id="checkcopy" data-placement="bottom" title="It'll check with every student assignment who sended." type="button">
+                            <a href="Checkcopy.jsp?tab=AllAssignment" class="btn btn-primary" data-toggle="tooltip"  id="checkcopy" data-placement="bottom" title="If you want to know this person copied or not? click it!" type="button">
                                 <span class="glyphicon glyphicon-copyright-mark"></span> 
                                 Check copy
                             </a>
@@ -67,8 +67,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <iframe class="col-md-12" style="min-height: 600px;margin-top: 20px" src="https://crocodoc.com/view/-ib0cktkcFMjSi4R8o7WuJA5h1jmqs1pz2zwaHEXY8S52MtxgfaIQc6TE82tLEa9onv9XVtz7_-zOBsX_ENcDScbUuPN2d55N970XA
-                                    "/></iframe> 
+                            <iframe class="col-md-12" style="min-height: 600px;margin-top: 20px" src="https://crocodoc.com/view/zdaFEGl3z1XP6niOvX03O9QJ6PZrtWYm8gocyx4-V7qBmfCm3UUgPzVFHwu_VbitQKj8atkxJstBd3WW3sEKm9BYbMxrHaBJI8A8ZQ"/></iframe> 
                             <div style="text-align: center;background-color: gainsboro;clear: both;padding: 5px 0;"><a target="_blank" style="text-align: center" href="https://crocodoc.com/view/-ib0cktkcFMjSi4R8o7WuJA5h1jmqs1pz2zwaHEXY8S52MtxgfaIQc6TE82tLEa9onv9XVtz7_-zOBsX_ENcDScbUuPN2d55N970XA">see in new window.</a></div>
                             <div class="row" style="padding-top: 20px;clear: both;">
                                 <form role="form" class="form-horizontal">
