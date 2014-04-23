@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <style> 
     #AllStudentScore_wrapper{  
-        margin-top: 20px;
+        margin-top: 20px; 
     }
 </style>
 <c:choose> 
@@ -21,19 +21,19 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>งานที่ 1</td>
+                    <td>Assignent# 1</td>
                     <td>5/10</td>
                 </tr>
                 <tr>
-                    <td>งานที่ 2</td>
+                    <td>Assignent# 2</td>
                     <td>7/10</td>
                 </tr>
                 <tr>
-                    <td>งานที่ 3</td>
+                    <td>Assignent# 3</td>
                     <td>9/10</td>
                 </tr> 
                 <tr>
-                    <td>งานที่ 4</td>
+                    <td>Assignent# 4</td>
                     <td>5/5</td>
                 </tr>
             </tbody>
