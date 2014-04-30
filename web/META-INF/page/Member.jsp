@@ -1,5 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="row">
+    <c:if test="${sessionScope.accType eq 'st'}">
+        <div class="col-md-12" style="margin-top: 12px;">
+            <button class="pull-right btn btn-default">leave course</button>
+        </div>
+    </c:if>
     <div class="media col-md-4">
         <a class="pull-left" href="#">
             <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">

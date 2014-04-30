@@ -56,83 +56,83 @@
                                 <td>10/10</td>
                                 <td><span class="text-success">on time</span></td>
                                 <td class="text-success"><span class="glyphicon glyphicon-ok"></span> Checked</td>
-                                <td><a href="CheckAssignment.jsp?tab=AllAssignment">See</a></td>
+                                <td><a href="CheckAssignment.jsp?tab=AllAssignment">View</a></td>
                             </tr>
                             <tr>
                                 <td>oluptatem accusantium</td>
                                 <td>0/10</td>
                                 <td><span class="text-success">on time</span></td>
                                 <td>Not check</td>
-                                <td><a href="CheckAssignment.jsp?tab=AllAssignment">See</a></td>
+                                <td><a href="CheckAssignment.jsp?tab=AllAssignment">View</a></td>
                             </tr>
                             <tr>
                                 <td>denouncing ple</td>
                                 <td>0/10</td>
                                 <td><span class="text-danger">Late</span></td>
                                 <td>Not check</td>
-                                <td><a href="CheckAssignment.jsp?tab=AllAssignment">See</a></td>
+                                <td><a href="CheckAssignment.jsp?tab=AllAssignment">View</a></td>
                             </tr> 
                             <tr>
                                 <td>great explorer</td>
                                 <td>7/10</td>
                                 <td><span class="text-success">on time</span></td>
                                 <td class="text-success"><span class="glyphicon glyphicon-ok"></span> checked</td>
-                                <td><a href="CheckAssignment.jsp?tab=AllAssignment">See</a></td>
+                                <td><a href="CheckAssignment.jsp?tab=AllAssignment">View</a></td>
                             </tr>
                             <tr>
                                 <td>natus error</td>
                                 <td>10/10</td>
                                 <td><span class="text-danger">Late</span></td>
                                 <td class="text-success"><span class="glyphicon glyphicon-ok"></span> Checked</td>
-                                <td><a href="CheckAssignment.jsp?tab=AllAssignment">See</a></td>
+                                <td><a href="CheckAssignment.jsp?tab=AllAssignment">View</a></td>
                             </tr>
                             <tr>
                                 <td>oluptatem accusantium</td>
                                 <td>0/10</td>
                                 <td><span class="text-danger">Late</span></td>
                                 <td>Not check</td>
-                                <td><a href="CheckAssignment.jsp?tab=AllAssignment">See</a></td>
+                                <td><a href="CheckAssignment.jsp?tab=AllAssignment">View</a></td>
                             </tr>
                             <tr>
                                 <td>denouncing ple</td>
                                 <td>0/10</td>
                                 <td><span class="text-danger">Late</span></td>
                                 <td>Not check</td>
-                                <td><a href="CheckAssignment.jsp?tab=AllAssignment">See</a></td>
+                                <td><a href="CheckAssignment.jsp?tab=AllAssignment">View</a></td>
                             </tr> 
                             <tr>
                                 <td>great explorer</td>
                                 <td>7/10</td>
                                 <td><span class="text-success">on time</span></td>
                                 <td class="text-success"><span class="glyphicon glyphicon-ok"></span> checked</td>
-                                <td><a href="CheckAssignment.jsp?tab=AllAssignment">See</a></td>
+                                <td><a href="CheckAssignment.jsp?tab=AllAssignment">View</a></td>
                             </tr><tr>
                                 <td>natus error</td>
                                 <td>10/10</td>
                                 <td><span class="text-danger">Late</span></td>
                                 <td class="text-success"><span class="glyphicon glyphicon-ok"></span> Checked</td>
-                                <td><a href="CheckAssignment.jsp?tab=AllAssignment">See</a></td>
+                                <td><a href="CheckAssignment.jsp?tab=AllAssignment">View</a></td>
                             </tr>
                             <tr>
                                 <td>oluptatem accusantium</td>
                                 <td>0/10</td>
                                 <td><span class="text-success">on time</span></td>
                                 <td>Not check</td>
-                                <td><a href="CheckAssignment.jsp?tab=AllAssignment">See</a></td>
+                                <td><a href="CheckAssignment.jsp?tab=AllAssignment">View</a></td>
                             </tr>
                             <tr>
                                 <td>denouncing ple</td>
                                 <td>0/10</td>
                                 <td><span class="text-danger">Late</span></td>
                                 <td>Not check</td>
-                                <td><a href="CheckAssignment.jsp?tab=AllAssignment">See</a></td>
+                                <td><a href="CheckAssignment.jsp?tab=AllAssignment">View</a></td>
                             </tr> 
                             <tr>
                                 <td>great explorer</td>
                                 <td>7/10</td>
                                 <td><span class="text-success">on time</span></td>
                                 <td class="text-success"><span class="glyphicon glyphicon-ok"></span> checked</td>
-                                <td><a href="CheckAssignment.jsp?tab=AllAssignment">See</a></td>
+                                <td><a href="CheckAssignment.jsp?tab=AllAssignment">View</a></td>
                             </tr>
                         </tbody>
                     </table> 

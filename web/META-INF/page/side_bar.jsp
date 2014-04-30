@@ -69,13 +69,9 @@
             <div class="modal-body">
                 <form>
                     <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <label>name</label>
                                 <input type="text" class="form-control">
-                            </div>
-                            <div class="col-md-4">
-                                <label>Group size</label>
-                                <input type="number" class="form-control">
                             </div>
                     </div>
                 </form>

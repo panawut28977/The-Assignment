@@ -1,0 +1,64 @@
+h1 {
+	color: #08c;
+	font-family: 'FuturaExtraBold';
+	font-size: 55px;
+	font-weight: bolder;
+	letter-spacing: 4px;
+	margin-bottom: 20px;
+	text-shadow: 2px 1px #2870F0;
+	text-align:center
+}
+
+h2 {margin-top:50px}
+
+header p {
+	text-align:center
+}
+
+
+
+#myWizard {zwidth:600px;border:1px solid #ccc}
+
+.easyWizardSteps {list-style:none;width:100%;overflow:hidden;margin:0;padding:0;border-bottom:1px solid #ccc;margin-bottom:20px}
+.easyWizardSteps li {font-size:18px;display:inline-block;padding:10px;color:#B0B1B3;margin-right:20px;}
+.easyWizardSteps li span {font-size:24px}
+.easyWizardSteps li.current {color:#000}
+
+.easyWizardButtons {overflow:hidden;padding:10px;}
+.easyWizardButtons button, .easyWizardButtons .submit {cursor:pointer}
+.easyWizardButtons .prev {float:left}
+.easyWizardButtons .next, .easyWizardButtons .submit {float:right}
+
+#myWizard3Pager {margin-top:-10px}
+
+form label {display:block}
+
+footer {
+	text-align:center;
+	background:#08c;
+	border-top:1px dashed #fff;
+	padding:15px 0;
+	margin-top:20px;
+	color:#fff;
+}
+
+footer a {
+	color:#fff;
+	padding:3px 5px;
+	text-decoration:underline;
+	-webkit-transition:all .5s;
+	-moz-transition:all .5s;
+	-o-transition:all .5s;
+	-ms-transition:all .5s;
+	transition:all .5s;
+}
+footer a:hover {
+	background:#fff;
+	color:#08c;
+	text-decoration:none;
+	transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+}
