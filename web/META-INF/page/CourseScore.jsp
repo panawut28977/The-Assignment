@@ -7,9 +7,9 @@
 <c:choose> 
     <c:when test="${sessionScope.accType eq 'st'}">
         <div style="text-align: center;margin-top:20px ">
-            <div class="col-md-4"><h4>5 <br> Sendeds</h4></div>
+            <div class="col-md-4"><h4>5 <br> Sent</h4></div>
             <div class="col-md-4"><h4>38/50 <br>Scores</h4></div>
-            <div class="col-md-4"><h4>1 <br> Leftovers</h4></div>
+            <div class="col-md-4"><h4>1 <br> Remaining</h4></div>
         </div>
         <hr style="clear:both">
         <table class="table" >
@@ -21,19 +21,19 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>Assignent# 1</td>
+                    <td>Assignment# 1</td>
                     <td>5/10</td>
                 </tr>
                 <tr>
-                    <td>Assignent# 2</td>
+                    <td>Assignment# 2</td>
                     <td>7/10</td>
                 </tr>
                 <tr>
-                    <td>Assignent# 3</td>
+                    <td>Assignment# 3</td>
                     <td>9/10</td>
                 </tr> 
                 <tr>
-                    <td>Assignent# 4</td>
+                    <td>Assignment# 4</td>
                     <td>5/5</td>
                 </tr>
             </tbody>
@@ -48,98 +48,98 @@
                     <th colspan="3" style="text-align: center"><b>Assignment score</b></th>
                 </tr>
                 <tr>
-                    <th>(10) <abbr title="งานที่ 1 เขียนโค้ดจาว่าซะ">งานที่ 1</abbr></th>
-                    <th>(10) <abbr title="งานที่ 2 เตรียมโปรเจคเว้ยย">งานที่ 2</abbr></th>
-                    <th>(5) <abbr title="งานที่ 3 งานนี้งานดีต้องทำ">งานที่ 3</abbr></th>
+                    <th>(10) <abbr title="งานที่ 1 เขียนโค้ดจาว่าซะ">Assignment# 1</abbr></th>
+                    <th>(10) <abbr title="งานที่ 2 เตรียมโปรเจคเว้ยย">Assignment# 2</abbr></th>
+                    <th>(5) <abbr title="งานที่ 3 งานนี้งานดีต้องทำ">Assignment# 3</abbr></th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>natus error</td>
+                    <td>Panawut Ittitananun</td>
                     <td>10</td>
                     <td>10</td>
                     <td>5</td>
                 </tr>
                 <tr>
-                    <td>oluptatem accusantium</td>
+                    <td>Thanakit Mahamutjinda</td>
                     <td>7</td>
                     <td>8</td>
                     <td>5</td>
                 </tr>
                 <tr>
-                    <td>denouncing ple</td>
+                    <td>Nitiwit Wungwiwatna</td>
                     <td>9</td>
                     <td>9</td>
                     <td>3</td>
                 </tr> 
                 <tr>
-                    <td>great explorer</td>
+                    <td>Thanapan Suwankanit</td>
                     <td>7</td>
                     <td>8</td>
                     <td>5</td>
                 </tr>
                 <tr>
-                    <td>produces no </td>
+                    <td>Panawut Ittitananun </td>
                     <td>7</td>
                     <td>10</td>
                     <td>5</td>
                 </tr>
                 <tr>
-                    <td>natus error</td>
+                    <td>Panawut Ittitananun</td>
                     <td>10</td>
                     <td>10</td>
                     <td>5</td>
                 </tr>
                 <tr>
-                    <td>oluptatem accusantium</td>
+                    <td>Thanapan Suwankanit</td>
                     <td>7</td>
                     <td>8</td>
                     <td>5</td>
                 </tr>
                 <tr>
-                    <td>denouncing ple</td>
+                    <td>Thanapan Suwankanit</td>
                     <td>9</td>
                     <td>9</td>
                     <td>3</td>
                 </tr> 
                 <tr>
-                    <td>great explorer</td>
+                    <td>Nitiwit Wungwiwatna</td>
                     <td>7</td>
                     <td>8</td>
                     <td>5</td>
                 </tr>
                 <tr>
-                    <td>produces no </td>
+                    <td>Nitiwit Wungwiwatna</td>
                     <td>7</td>
                     <td>10</td>
                     <td>5</td>
                 </tr>
                 <tr>
-                    <td>natus error</td>
+                    <td>Nitiwit Wungwiwatna</td>
                     <td>10</td>
                     <td>10</td>
                     <td>5</td>
                 </tr>
                 <tr>
-                    <td>oluptatem accusantium</td>
+                    <td>Thanakit Mahamutjinda</td>
                     <td>7</td>
                     <td>8</td>
                     <td>5</td>
                 </tr>
                 <tr>
-                    <td>denouncing ple</td>
+                    <td>Thanakit Mahamutjinda</td>
                     <td>9</td>
                     <td>9</td>
                     <td>3</td>
                 </tr> 
                 <tr>
-                    <td>great explorer</td>
+                    <td>Panawut Ittitananun</td>
                     <td>7</td>
                     <td>8</td>
                     <td>5</td>
                 </tr>
                 <tr>
-                    <td>produces no </td>
+                    <td>Thanakit Mahamutjinda</td>
                     <td>7</td>
                     <td>10</td>
                     <td>5</td>
