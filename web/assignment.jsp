@@ -34,7 +34,7 @@
                             <%@include file="META-INF/page/allCourseTab.jsp"%>
                             <ol class="breadcrumb" style="margin-top: 15px" >
                                 <li><a href="home.jsp?tab=AllAssignment">Assignment</a></li>
-                                <li class="active"><a href="#">งานที่ 1...</a></li>
+                                <li class="active"><a href="#">Assignment# 1...</a></li>
                             </ol>
                         </c:when>
                         <c:otherwise>
@@ -42,13 +42,13 @@
                             <%@include file="META-INF/page/CourseTab.jsp"%>
                             <ol class="breadcrumb" style="margin-top: 15px" >
                                 <li><a href="course.jsp?tab=AllAssignment">Assignment</a></li>
-                                <li class="active"><a href="#">งานที่ 1...</a></li>
+                                <li class="active"><a href="#">Assignment# 1...</a></li>
                             </ol>
                         </c:otherwise>
                     </c:choose>
                     <div>
                         <h3 class="">Assignment# 1....</h3>
-                        <small class="text-muted">create date : 13/08/2556 23:55:00 </small><br>   
+                        <small class="text-muted">Created date : 13/08/2556 23:55:00 </small><br>   
                     </div>
                     <div class="col-md-5 well">
                         <c:choose>
@@ -99,7 +99,7 @@
                             <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
                         </a>
                         <div class="media-body">
-                            <h4 class="media-heading">AJ.AAA SSSSS<small class="pull-right">16/01/57</small></h4>
+                            <h4 class="media-heading">AJ.Kittipong Warasup<small class="pull-right">16/01/57</small></h4>
                             <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
                         </div>
                     </div>
@@ -108,7 +108,7 @@
                             <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
                         </a>
                         <div class="media-body">
-                            <h4 class="media-heading">AJ.AAA SSSSS<small class="pull-right">16/01/57</small></h4>
+                            <h4 class="media-heading">AJ.Kittipong Warasup<small class="pull-right">16/01/57</small></h4>
                             <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
                         </div>
                     </div>

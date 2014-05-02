@@ -44,3 +44,6 @@ and open the template in the editor.
 .hilight{
     background-color: yellow;
 }
+
+::selection {color:white;background:#40D47E;}
+::-moz-selection {color:white;background:#40D47E;}

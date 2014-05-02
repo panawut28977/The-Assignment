@@ -33,10 +33,10 @@
                 </c:choose>
             </span>
             <a id="1" onclick="load_course(1)" class="list-group-item usepointer"><span class="badge">3</span>INT103 Office</a>
-            <a id="2" onclick="load_course(2)" class="list-group-item usepointer"><span class="badge">3</span>INT202 Software Development Process II</a>
-            <a id="3" onclick="load_course(3)" class="list-group-item usepointer">Morbi leo risus</a>
-            <a id="4" onclick="load_course(4)" class="list-group-item usepointer">Porta ac consectetur ac</a>
-            <a id="5" onclick="load_course(5)"  class="list-group-item usepointer">Vestibulum at eros</a>
+            <a id="2" onclick="load_course(2)" class="list-group-item usepointer"><span class="badge">3</span>INT206 Software Development Process II</a>
+            <a id="3" onclick="load_course(3)" class="list-group-item usepointer"><span class="badge">2</span>LNG103 Academic English</a>
+            <a id="4" onclick="load_course(4)" class="list-group-item usepointer"><span class="badge"></span>INT380 Operation Management</a>
+            <a id="5" onclick="load_course(5)"  class="list-group-item usepointer"><span class="badge">1</span>MTH111 Calculus I</a>
         </div> 
     </div>
 </div>

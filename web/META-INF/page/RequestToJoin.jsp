@@ -18,7 +18,7 @@
             <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
         </a>
         <div class="media-body">
-            <h4 class="media-heading" >rrrr fff</h4>
+            <h4 class="media-heading" >Steven Gerrard</h4>
             <br>
             <small class="text-muted">Request date: 16/01/57</small>
         </div>
@@ -34,7 +34,7 @@
             <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
         </a>
         <div class="media-body">
-            <h4 class="media-heading" >rrrr fff</h4>
+            <h4 class="media-heading" >Luis Suarez</h4>
             <br>
             <small class="text-muted">Request date: 16/01/57</small>
         </div>
@@ -50,7 +50,7 @@
             <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
         </a>
         <div class="media-body">
-            <h4 class="media-heading" >rrrr fff</h4>
+            <h4 class="media-heading" >Filipe Coutinho</h4>
             <br>
             <small class="text-muted">Request date: 16/01/57</small>
         </div>
@@ -66,7 +66,7 @@
             <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
         </a>
         <div class="media-body">
-            <h4 class="media-heading" >rrrr fff</h4>
+            <h4 class="media-heading" >Kolo Toure</h4>
             <br>
             <small class="text-muted">Request date: 16/01/57</small>
         </div>

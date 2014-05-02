@@ -34,7 +34,7 @@
                             <%@include file="META-INF/page/allCourseTab.jsp"%>
                             <ol class="breadcrumb" style="margin-top: 15px" >
                                 <li><a href="home.jsp?tab=AllAssignment">Assignment</a></li>
-                                <li class="active"><a href="#">งานที่ 1...</a></li>
+                                <li class="active"><a href="#">Assignment# 1...</a></li>
                             </ol>
                         </c:when>
                         <c:otherwise>
@@ -42,7 +42,7 @@
                             <%@include file="META-INF/page/CourseTab.jsp"%>
                             <ol class="breadcrumb" style="margin-top: 15px" >
                                 <li><a href="course.jsp?tab=AllAssignment">Assignment</a></li>
-                                <li class="active"><a href="#">งานที่ 1...</a></li>
+                                <li class="active"><a href="#">Assignment# 1...</a></li>
                             </ol>
                         </c:otherwise>
                     </c:choose>
@@ -54,14 +54,14 @@
                                     <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
                                 </a>
                                 <div class="media-body">
-                                    <h4 class="media-heading">rrrr fff</h4>
+                                    <h4 class="media-heading">Panawut Ittitananun</h4>
                                 </div>
                             </div>
                             <hr>
                             <h4 >Send your assignment <span class="text-danger">(Late)</span></h4>
                             <form role="form" class="form-inline">
                                 <input type="file" class="form-control">
-                                <input type="submit" value="upload" class="form-control btn btn-primary">
+                                <input type="submit" value="Upload" class="form-control btn btn-primary">
                             </form>
                             <br>
                             <h5 id="pvVs" class="usepointer">See your previous version.<span class="glyphicon glyphicon-chevron-right"></span></h5>
@@ -72,7 +72,7 @@
                                     <tr>
                                         <td>Name</td>
                                         <td>Version</td>
-                                        <td>Send Date</td>
+                                        <td>Sent date</td>
                                         <td>Size(MB)</td>
                                     </tr>
                                 </thead>

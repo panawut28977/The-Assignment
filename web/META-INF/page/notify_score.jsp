@@ -3,14 +3,14 @@
 <div class="media">
     <span class="glyphicon glyphicon-stats pull-left" style="font-size: 64px"></span>
     <div class="media-body">
-        <h4 class="media-heading">งานที่ 1 ( INT202 Software Development Process II )</h4>
+        <h4 class="media-heading">Assignment# 1 ( INT202 Software Development Process II )</h4>
         <h4><b>9/10</b></h4>
     </div>
 </div>
 <div class="media">
      <span class="glyphicon glyphicon-stats pull-left" style="font-size: 64px"></span>
     <div class="media-body">
-        <h4 class="media-heading">งานที่ 2 ( INT202 Software Development Process II )</h4>
+        <h4 class="media-heading">Assignment# 2 ( INT202 Software Development Process II )</h4>
         <h4><b>5/10</b></h4>
     </div>
 </div> 

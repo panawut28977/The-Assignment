@@ -13,13 +13,13 @@
 <table class="table table-striped" id="AllAssignment">
     <thead>
         <tr>
-            <td>Name</td>
-            <td>Course</td>
-            <td>Due Date</td>
-            <td>Work on</td>
-            <td>Member</td>
-            <td>Status</td>
-            <td></td>
+            <th>Name</th>
+            <th>Course</th>
+            <th>Due Date</th>
+            <th>Work on</th>
+            <th>Member(s)</th>
+            <th>Status</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>

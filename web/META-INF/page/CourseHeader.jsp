@@ -8,7 +8,7 @@
             <hr>
             <div class="row" style="text-align: center;" id="CourseDetail">
                 <div class="col-md-4"><h4>Course Code</h4><input type="text" readonly="yes" value="6zhjr8"></div>
-                <div class="col-md-4"><h4>Join link</h4><input type="text" readonly="yes" value="https://ta.do/j/6zhjr8"></div>
+                <div class="col-md-4"><h4>Course link</h4><input type="text" readonly="yes" value="https://ta.do/j/6zhjr8"></div>
                 <div class="col-md-4"><a href="#"><img width="108" src="http://chart.apis.google.com/chart?chs=200x200&amp;cht=qr&amp;chld=|1&amp;chl=6zhjr8" alt="QR Code" /></a></div>
             </div>
             <div id="openCodeBox"><span id="openCodeBtn">See your course code <span class="glyphicon glyphicon-chevron-down"></span></span></div>

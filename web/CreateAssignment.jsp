@@ -31,7 +31,7 @@
                 border-radius: 5.25em;
             }
 
-            .matchWord_q_list input{
+            .matchWord_q_list input,.ansList input{
                 margin-right: 10px;
                 margin-bottom: 10px; 
             }
@@ -168,11 +168,11 @@
                                 <span class="text-danger">.doc .pdf .xls available</span>
                             </div>
                             <div class="col-md-10 col-md-offset-1" id="CreateAmOnweb">
-                                <div>
-                                    <input type="text" class="form-control" placeholder="Assignment Title">
-                                    <br>
-                                    <p id="AmDescription">Assignment Description</p>
-                                    <div class="multipleChoice">
+                                <input type="text" class="form-control" placeholder="Assignment Title">
+                                <br>
+                                <p id="AmDescription">Assignment Description</p>
+                                <div class="amQuestion">
+                                    <!--<div class="multipleChoice">
                                         <hr>
                                         <div class="q_no">
                                             <span class="label label-default">1</span> 
@@ -211,8 +211,8 @@
                                         </div>
                                         <input type="hidden" value="multiple_choice" name="q_type">
 
-                                    </div>
-                                    <div class="explain">
+                                    </div>-->
+                                    <!--<div class="explain">
                                         <hr>
                                         <div class="q_no">
                                             <span class="label label-default">2</span> 
@@ -231,9 +231,9 @@
                                             </div>
                                         </div>
                                         <input type="hidden" value="explain" name="q_type">
-                                    </div>
+                                    </div>-->
 
-                                    <div class="tfQuestion">
+                                    <!--<div class="tfQuestion">
                                         <hr>
                                         <div class="q_no">
                                             <span class="label label-default">3</span> 
@@ -259,8 +259,8 @@
                                             </div>
                                         </div>
                                         <input type="hidden" value="tfQuestion" name="q_type">
-                                    </div>
-                                    <div class="matchWord">
+                                    </div>-->
+                                    <!--<div class="matchWord">
                                         <hr>
                                         <div class="q_no">
                                             <span class="label label-default">4</span> 
@@ -278,8 +278,8 @@
                                             </div>
                                         </div>
                                         <input type="hidden" value="matchWord" name="q_type">
-                                    </div>
-                                    <div class="fillBlank">
+                                    </div>-->
+                                    <!--<div class="fillBlank">
                                         <hr>
                                         <div class="q_no">
                                             <span class="label label-default">5</span> 
@@ -288,44 +288,35 @@
                                         <div class="form-group">
                                             <label  class="col-md-3 control-label">Question Text</label>
                                             <div class="col-md-9">
-                                                <textarea class="form-control fillBlankQuestion"   ></textarea>
-                                            <!--onkeyup="checkManualBlank(this, event)" onkeydown="setOldText(this)"-->
+                                                <textarea class="form-control"  ></textarea>
+                                                <br>
+                                                <a class=" btn btn-default" onclick="addAnswer(this)">Add Answer</a>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <div class="col-md-offset-3 col-md-3">
-                                                <a class=" btn btn-default" onclick="addBlank(this)">Add Blank _</a>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-offset-3 col-md-3 ansList">
+                                            <div class="col-md-offset-3 col-md-9 ansList">
 
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">Score</label>
-                                            <div class="col-md-2">
-                                                <input type="number" min="0" step="any" class="form-control" name="score" >
-                                            </div>
-                                        </div>
                                         <input type="hidden" value="fillBlank" name="q_type">
-                                    </div>
-                                    <div class="btn-group dropup center-block" >
-                                        <hr>
-                                        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus-sign"></span> Add Question</button>
-                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                            <span class="caret"></span>
-                                            <span class="sr-only">Toggle Dropdown</span>
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a><img src="img/icon/multiple.gif"> Multiple Choice</a></li>
-                                            <li><a><img src="img/icon/trueFalse.gif"> True/False</a></li>
-                                            <li><a><img src="img/icon/matching.png"> Match word</a></li>
-                                            <li><a><img src="img/icon/fill.gif"> Fill in Blank</a></li>
-                                            <li><a><img src="img/icon/explain.gif"> Explain</a></li>
-                                        </ul>
-                                    </div>
+                                    </div>-->
                                 </div>
+                                <div class="btn-group dropup center-block" >
+                                    <hr>
+                                    <button type="button" class="btn btn-default" onclick="addQuestion()"><span class="glyphicon glyphicon-plus-sign"></span> Add Question</button>
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a onclick="setType('multi')"><img src="img/icon/multiple.gif"> Multiple Choice</a></li>
+                                        <li><a onclick="setType('tf')"><img src="img/icon/trueFalse.gif"> True/False</a></li>
+                                        <li><a onclick="setType('match')"><img src="img/icon/matching.png"> Match word</a></li>
+                                        <li><a onclick="setType('fill')"><img src="img/icon/fill.gif"> Fill in Blank</a></li>
+                                        <li><a onclick="setType('ep')"><img src="img/icon/explain.gif"> Explain</a></li>
+                                    </ul>
+                                    <button type="button" class="btn btn-default" onclick="addTitle()" style="margin-left: 20px;"> Add Instruction</button>
+                                </div> 
                             </div>
                         </section>
                     </form>
@@ -337,151 +328,369 @@
         <script src="module/easyWizard/lib/jquery.easyWizard.js"></script>
         <script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
         <script>
-                                                    $(document).ready(function() {
-                                                        $('#myWizard').easyWizard({
-                                                            buttonsClass: 'btn btn-default',
-                                                            submitButtonClass: 'btn btn-primary'});
-                                                        tinymce.init({selector: '.explain .explain_q_text'});
-                                                        $('#compareBox').hide();
+                                            $(document).ready(function() {
+                                                $('#myWizard').easyWizard({
+                                                    buttonsClass: 'btn btn-default',
+                                                    submitButtonClass: 'btn btn-primary'});
+                                                tinymce.init({selector: '.explain .explain_q_text'});
+                                                $('#compareBox').hide();
+                                                $('#CreateAmOnweb').hide();
+
+                                                $('#groupwork').click(function() {
+                                                    $('#inputpepole').removeAttr("disabled");
+                                                });
+
+
+                                                $('#individual').click(function() {
+                                                    $('#inputpepole').attr("disabled", "yes");
+                                                });
+
+                                                $('.form_date').datetimepicker({
+                                                    language: 'pt-BR'
+                                                });
+
+                                                $("#AmType").change(function() {
+                                                    if ($(this).val() == "f") {
+                                                        $('#uploadAmFile').show();
                                                         $('#CreateAmOnweb').hide();
-//                $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
-
-                                                        $('#groupwork').click(function() {
-                                                            $('#inputpepole').removeAttr("disabled");
-                                                        });
-
-
-                                                        $('#individual').click(function() {
-                                                            $('#inputpepole').attr("disabled", "yes");
-                                                        });
-
-                                                        $('.form_date').datetimepicker({
-                                                            language: 'pt-BR'
-                                                        });
-
-                                                        $("#AmType").change(function() {
-                                                            if ($(this).val() == "f") {
-                                                                $('#uploadAmFile').show();
-                                                                $('#CreateAmOnweb').hide();
-                                                            } else {
-                                                                $('#CreateAmOnweb').show();
-                                                                $('#uploadAmFile').hide();
-                                                            }
-                                                        });
-
-                                                        $("#multiple_type").change(function() {
-                                                            var html = '';
-                                                            if ($(this).val() == "one") {
-                                                                html = '<div class="choice-group form-inline"><div><input type="radio" name="c"> <input type="text" class="form-control"></div></div><br><a onclick="appendChoice(this)">Add other</a>';
-                                                            } else {
-                                                                html = '<div class="choice-group form-inline"><div><input type="checkbox" name="c"> <input type="text" class="form-control"></div></div><br><a onclick="appendChoice(this)">Add other</a>';
-                                                            }
-                                                            $(this).parent().parent().parent(".multipleChoice").find(".c_list").html(html);
-                                                        });
-
-                                                        $("#total_pair").change(function() {
-                                                            var matchWord_box = '<div class="row"><div class="col-md-4"><b>Question Text<b></div><div class="col-md-4"><b>Answer</b></div><div class="col-md-2"><b>Score</b></div>';
-                                                            for (var i = 0; i < $(this).val(); i++) {
-                                                                matchWord_box += '<div class="row"><div class="col-md-4"><input type="text" class="form-control"></div><div class="col-md-4"><input type="text" class="form-control"></div><div class="col-md-2"><input type="number" min="0" step="any" class="form-control" name="score"></div></div>';
-                                                            }
-                                                            $(".matchWord_q_list").html(matchWord_box);
-                                                        });
-                                                    });
-                                                    function compareView() {
-                                                        $('#compareBox').show();
-                                                        $("html, body").animate({scrollTop: $('body').height()}, "slow");
+                                                    } else {
+                                                        $('#CreateAmOnweb').show();
+                                                        $('#uploadAmFile').hide();
                                                     }
+                                                });
 
-                                                    function appendChoice(t) {
-                                                        var type = $('#multiple_type').val();
-                                                        var inputC = '';
-                                                        if (type == "one") {
-                                                            inputC = '<div><br><input type="radio" name="c"> <input type="text" class="form-control"> <a onclick="removeC(this)"><span class="glyphicon glyphicon-remove"></span></a></div>';
-                                                        } else {
-                                                            inputC = '<div><br><input type="checkbox" name="c"> <input type="text" class="form-control"> <a onclick="removeC(this)"><span class="glyphicon glyphicon-remove"></span></a></div>';
-                                                        }
-                                                        $(t).parent().find('.choice-group').append(inputC);
+                                                 $(document).on("change","#multiple_type",function() {
+                                                    var html = '';
+                                                    if ($(this).val() == "one") {
+                                                        html = '<div class="choice-group form-inline"><div><input type="radio" name="c"> <input type="text" class="form-control"></div></div><br><a onclick="appendChoice(this)">Add other</a>';
+                                                    } else {
+                                                        html = '<div class="choice-group form-inline"><div><input type="checkbox" name="c"> <input type="text" class="form-control"></div></div><br><a onclick="appendChoice(this)">Add other</a>';
                                                     }
+                                                    $(this).parent().parent().parent(".multipleChoice").find(".c_list").html(html);
+                                                });
 
-                                                    function removeC(t) {
-                                                        $(t).parent().remove();
+                                                $(document).on("change","#total_pair",function() {
+                                                    var matchWord_box = '<div class="row"><div class="col-md-4"><b>Question Text</b></div><div class="col-md-4"><b>Answer</b></div><div class="col-md-2"><b>Score</b></div></div>';
+                                                    for (var i = 0; i < $(this).val(); i++) {
+                                                        matchWord_box += '<div class="row"><div class="col-md-4"><input type="text" class="form-control"></div><div class="col-md-4"><input type="text" class="form-control"></div><div class="col-md-2"><input type="number" min="0" step="any" class="form-control" name="score"></div></div>';
                                                     }
+                                                    $(this).parent().parent().parent(".matchWord").find(".matchWord_q_list").html(matchWord_box);
+                                                }); 
+                                            });
 
-                                                    function remove_q(t) {
-                                                        $(t).parent().parent().remove();
+                                            function compareView() {
+                                                $('#compareBox').show();
+                                                $("html, body").animate({scrollTop: $('body').height()}, "slow");
+                                            }
+
+                                            function appendChoice(t) {
+                                                var type = $('#multiple_type').val();
+                                                var inputC = '';
+                                                if (type == "one") {
+                                                    inputC = '<div><br><input type="radio" name="c"> <input type="text" class="form-control"> <a onclick="removeC(this)"><span class="glyphicon glyphicon-remove"></span></a></div>';
+                                                } else {
+                                                    inputC = '<div><br><input type="checkbox" name="c"> <input type="text" class="form-control"> <a onclick="removeC(this)"><span class="glyphicon glyphicon-remove"></span></a></div>';
+                                                }
+                                                $(t).parent().find('.choice-group').append(inputC);
+                                            }
+
+                                            function removeC(t) {
+                                                $(t).parent().remove();
+                                            }
+
+                                            function GetSelectedText(t) {
+                                                var selText = "";
+                                                if (window.getSelection) {  // all browsers, except IE before version 9
+                                                    if (document.activeElement &&
+                                                            (document.activeElement.tagName.toLowerCase() == "textarea"))
+                                                    {
+                                                        var text = document.activeElement.value;
+                                                        selText = text.substring(document.activeElement.selectionStart,
+                                                                document.activeElement.selectionEnd);
                                                     }
-
-                                                    function addBlank(t) {
-                                                        var q = $(t).parent().parent().parent(".fillBlank").find(".fillBlankQuestion");
-                                                        var newText = q.val() + " [:_____:] ";
-                                                        var numOfBlank = (newText.match(/[:_____:]/gi).length) / 7;
-                                                        q.val(newText);
-                                                        var ansbox = '<input type="text" class="form-control" placeholder="' + numOfBlank + '. answer"><br>';
-                                                        $(t).parent().parent().parent(".fillBlank").find(".ansList").append(ansbox);
+                                                    else {
+                                                        var selRange = window.getSelection();
+                                                        selText = selRange.toString();
                                                     }
-                                                    
-                                                    function s(el) {
-                                                        var sel, rng, r2, i = -1;
-
-
-                                                        if (typeof el.selectionStart == "number") {
-                                                            i = el.selectionStart;
-                                                            //alert(i);
-                                                        } else if (document.selection && el.createTextRange) {
-                                                            sel = document.selection;
-                                                            if (sel) {
-                                                                r2 = sel.createRange();
-                                                                rng = el.createTextRange();
-                                                                rng.setEndPoint("EndToStart", r2);
-                                                                i = rng.text.length;
-                                                            }
-                                                        } else {
-                                                            el.onkeyup = null;
-                                                            el.onclick = null;
-                                                        }
-
-
-
-
-                                                        return i;
+                                                }
+                                                else {
+                                                    if (document.selection.createRange) {       // Internet Explorer
+                                                        var range = document.selection.createRange();
+                                                        selText = range.text;
                                                     }
-                                                    
-                                                    /*var oldText = '';
-                                                    var checkText = '';
-                                                    
-                                                    function checkManualBlank(t, e) {
-                                                        var text = $(t).val();
-                                                        if (text.length != oldText.length) {
-                                                            var keyIndex = s(t);
-                                                            var lastChar = text.substr(keyIndex-1, 1);
-                                                            var pattern = '[:_]';
-                                                            if (text.length - oldText.length == 1 && pattern.indexOf(lastChar) >= 0) {
-                                                                checkText += lastChar;
-                                                                if (checkText.length == 9 && checkText == '[:_____:]') {
-                                                                    alert("can't enter this");
-                                                                    $(t).val(text.substr(0, text.length - 9));
-                                                                    checkText = '';
-                                                                }
-                                                            } else if (text.length - oldText.length > 1) {
-                                                                var pasteText = text.substr(oldText.length, text.length - 1);
-                                                                if (pasteText.indexOf('[:_____:]') >= 0) {
-                                                                    alert("can't enter this");
-                                                                    var newText = text.substr(0, oldText.length - 1);
-                                                                    pasteText = pasteText.replace('[:_____:]', ' ');
-                                                                    newText += pasteText;
-                                                                    $(t).val(newText);
-                                                                    checkText = '';
-                                                                }
-                                                            } else {
-                                                                checkText = '';
-                                                            }
-                                                            alert(checkText);
-                                                        }
+                                                }
+                                                if (selText !== "") {
+                                                    var startIndex = document.activeElement.selectionStart;
+                                                    var endIndex = document.activeElement.selectionEnd;
+                                                    if (checkConfilctIndex(t, startIndex, endIndex)) {
+                                                        appendAnswerBox(t, selText, startIndex, endIndex);
+                                                    } else {
+                                                        alert("Your answer are confilct");
                                                     }
+                                                    //alert(selText + " " + document.activeElement.selectionStart + "/ " + document.activeElement.selectionEnd);
+                                                }
+                                            }
 
-                                                    function setOldText(t) {
-                                                        oldText = $(t).val();
-                                                    }*/
+                                            function checkConfilctIndex(t, newStartIndex, newEndIndex) {
+                                                var startIndex = $(t).parent().parent().parent(".fillBlank").find(".ansList input[name='startIndex']").map(function() {
+                                                    return $(this).val();
+                                                }).get();
+                                                var endIndex = $(t).parent().parent().parent(".fillBlank").find(".ansList input[name='endIndex']").map(function() {
+                                                    return $(this).val();
+                                                }).get();
+                                                for (i = 0; i < startIndex.length; i++) {
+                                                    if ((newStartIndex > startIndex[i] && newStartIndex < endIndex[i]) || (newEndIndex > startIndex[i] && newEndIndex <= endIndex[i]) || (newStartIndex <= startIndex[i] && newEndIndex >= endIndex[i])) {
+                                                        return false;
+                                                    }
+                                                }
+                                                return true;
+                                            }
+
+                                            function appendAnswerBox(t, ans, startIndex, endIndex) {
+                                                var ansbox = '<div class="row a_group"><div class="col-md-4"><input type="text" class="form-control" value="' + ans + '" readonly="yes"></div><div class="col-md-3"><input type="number" class="form-control" placeholder="score"></div><input type="hidden" value="' + startIndex + '" name="startIndex"><input type="hidden" value="' + endIndex + '" name="endIndex"><a onclick="remove_ans_fillInBlank(this)"><span class="glyphicon glyphicon-trash"></span></a><div>';
+                                                $(t).parent().parent().parent(".fillBlank").find(".ansList").append(ansbox);
+                                            }
+
+                                            function remove_ans_fillInBlank(t) {
+                                                $(t).parent(".a_group").remove();
+                                            }
+
+                                            function addAnswer(t) {
+                                                $(t).parent().parent().parent(".fillBlank").find(".ansList").append('<span class="text-danger">Hilight text that is your answer for fill in</span>');
+                                                var textArea = $(t).siblings("textarea");
+                                                if (textArea.attr("readonly") == "readonly") {
+                                                    textArea.removeAttr("readonly");
+                                                    textArea.removeAttr("onmouseup");
+                                                    $(t).parent().parent().parent(".fillBlank").find(".ansList div,.ansList span").remove();
+                                                } else {
+                                                    textArea.attr("onmouseup", "GetSelectedText(this)").attr("readonly", "readonly");
+                                                }
+                                            }
+
+                                            var amCurrentType = 'multi';
+                                            function setType(type) {
+                                                amCurrentType = type;
+                                            }
+
+                                            var total_q = 1;
+                                            function addQuestion() {
+                                                var question = '<div class="multipleChoice">'
+                                                        + '          <hr>'
+                                                        + '          <div class="q_no">'
+                                                        + '              <span class="label label-default">'+total_q+'</span> '
+                                                        + '              <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>'
+                                                        + '          </div>'
+                                                        + '          <div class="form-group">'
+                                                        + '              <label  class="col-md-3 control-label">Question Text</label>'
+                                                        + '              <div class="col-md-9">'
+                                                        + '                  <input type="text" class="form-control" >'
+                                                        + '              </div>'
+                                                        + '          </div>'
+                                                        + '          <div class="form-group">'
+                                                        + '              <label class="col-md-3 control-label">One or multiple answers?</label>'
+                                                        + '              <div class="col-md-5">'
+                                                        + '                  <select class="form-control" id="multiple_type">'
+                                                        + '                      <option value="one">One answer only</option>'
+                                                        + '                      <option value="multiple">Multiple choice allowed</option>'
+                                                        + '                  </select>'
+                                                        + '              </div>'
+                                                        + '          </div>'
+                                                        + '          <div class="form-group">'
+                                                        + '              <label class="col-md-3 control-label">Choice <br><span class="text-danger">(Don\'t forget to select answer)</span></label>'
+                                                        + '              <div class="col-md-8 c_list">'
+                                                        + '                  <div class="choice-group form-inline">'
+                                                        + '                      <div><input type="radio" name="c_ans"> <input type="text" class="form-control"></div>'
+                                                        + '                  </div>'
+                                                        + '                  <br>'
+                                                        + '                  <a onclick="appendChoice(this)">Add other</a>'
+                                                        + '              </div>'
+                                                        + '          </div>'
+                                                        + '          <div class="form-group">'
+                                                        + '              <label class="col-md-3 control-label">Score</label>'
+                                                        + '              <div class="col-md-2">'
+                                                        + '                  <input type="number" min="0" step="any" class="form-control" name="score" >'
+                                                        + '              </div>'
+                                                        + '          </div>'
+                                                        + '          <input type="hidden" value="multiple_choice" name="q_type">'
+                                                        + '      </div>';
+                                                
+                                                if (amCurrentType == 'tf') {
+                                                    question = '<div class="tfQuestion">'
+                                                            + '    <hr>'
+                                                            + '    <div class="q_no">'
+                                                            + '        <span class="label label-default">'+total_q+'</span> '
+                                                            + '        <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>'
+                                                            + '    </div>'
+                                                            + '    <div class="form-group">'
+                                                            + '        <label  class="col-md-3 control-label">Question Text</label>'
+                                                            + '        <div class="col-md-9">'
+                                                            + '            <input type="text" class="form-control" >'
+                                                            + '        </div>'
+                                                            + '    </div>'
+                                                            + '    <div class="form-group">'
+                                                            + '        <label class="col-md-3 control-label">Choice <br><span class="text-danger">(Don\'t forget to select answer)</span></label>'
+                                                            + '        <div class="col-md-8">'
+                                                            + '            <input type="radio" name="c_ans"> Yes'
+                                                            + '            <input type="radio" name="c_ans"> No'
+                                                            + '        </div>'
+                                                            + '    </div>'
+                                                            + '    <div class="form-group">'
+                                                            + '        <label class="col-md-3 control-label">Score</label>'
+                                                            + '        <div class="col-md-2">'
+                                                            + '            <input type="number" min="0" step="any" class="form-control" name="score" >'
+                                                            + '        </div>'
+                                                            + '    </div>'
+                                                            + '    <input type="hidden" value="tfQuestion" name="q_type">'
+                                                            + '</div>';
+                                                } else if (amCurrentType == 'match') {
+                                                    question = '<div class="matchWord">'
+                                                            + '     <hr>'
+                                                            + '     <div class="q_no">'
+                                                            + '         <span class="label label-default">'+total_q+'</span> '
+                                                            + '         <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>'
+                                                            + '     </div>  '
+                                                            + '     <div class="form-group">'
+                                                            + '         <label  class="col-md-3 control-label">How Many Pair?</label>'
+                                                            + '         <div class="col-md-2">'
+                                                            + '             <input type="number" id="total_pair" min="1" class="form-control" >'
+                                                            + '         </div>'
+                                                            + '     </div>'
+                                                            + '     <div class="form-group">'
+                                                            + '         <div class="col-md-offset-3 col-md-9 matchWord_q_list">'
+                                                            + '             <span class="text-danger">Please tell me how many question before</span>'
+                                                            + '         </div>'
+                                                            + '     </div>'
+                                                            + '     <input type="hidden" value="matchWord" name="q_type">'
+                                                            + ' </div>';
+                                                } else if (amCurrentType == 'fill') {
+                                                    question = '<div class="fillBlank">'
+                                                            + '    <hr>'
+                                                            + '    <div class="q_no">'
+                                                            + '        <span class="label label-default">'+total_q+'</span> '
+                                                            + '        <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>'
+                                                            + '    </div>'
+                                                            + '    <div class="form-group">'
+                                                            + '        <label  class="col-md-3 control-label">Question Text</label>'
+                                                            + '        <div class="col-md-9">'
+                                                            + '            <textarea class="form-control"  ></textarea>'
+                                                            + '            <br>'
+                                                            + '            <a class=" btn btn-default" onclick="addAnswer(this)">Add Answer</a>'
+                                                            + '        </div>'
+                                                            + '    </div>'
+                                                            + '    <div class="form-group">'
+                                                            + '        <div class="col-md-offset-3 col-md-9 ansList">'
+                                                            + '        </div>'
+                                                            + '    </div>'
+                                                            + '    <input type="hidden" value="fillBlank" name="q_type">'
+                                                            + '</div>';
+                                                } else if (amCurrentType == 'ep') {
+                                                    question = '<div class="explain">'
+                                                            + '    <hr>'
+                                                            + '    <div class="q_no">'
+                                                            + '        <span class="label label-default">'+total_q+'</span> '
+                                                            + '        <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>'
+                                                            + '    </div>'
+                                                            + '    <div class="form-group">'
+                                                            + '        <label class="col-md-3 control-label">Question</label>'
+                                                            + '        <div class="col-md-9">'
+                                                            + '            <textarea class="form-control explain_q_text" name="explain_q_text" ></textarea>'
+                                                            + '        </div>'
+                                                            + '    </div>'
+                                                            + '    <div class="form-group">'
+                                                            + '        <label  class="col-md-3 control-label">Answer</label>'
+                                                            + '        <div class="col-md-9">'
+                                                            + '            <textarea class="form-control"></textarea>'
+                                                            + '        </div>'
+                                                            + '    </div>'
+                                                            + '    <input type="hidden" value="explain" name="q_type">'
+                                                            + '</div>';
+                                                }
+                                                total_q++;
+                                                $(".amQuestion").append(question);
+
+                                            }
+                                            
+                                            function addTitle(){
+                                                var titleBox = '<div class="row"><hr><div class="col-md-8"><input type="text" class="form-control" placeholder="Instruction" ></div><a onclick="remove_title(this)"  style="vertical-align: -webkit-baseline-middle"><span class="glyphicon glyphicon-trash"></span></a></div>';
+                                                $(".amQuestion").append(titleBox);
+                                            }
+                                            
+                                            function remove_q(t) {
+                                                total_q--;
+                                                var new_q_no=1;
+                                                $(t).parent().parent().remove();
+                                                $(".q_no").each(function(){
+                                                    $(this).find(".label").text(new_q_no);
+                                                    new_q_no++;
+                                                });
+                                            }
+                                            
+                                            function remove_title(t){
+                                                $(t).parent().remove();
+                                            }
+
+                                            /*function s(el) {
+                                             var sel, rng, r2, i = -1;
+                                             
+                                             
+                                             if (typeof el.selectionStart == "number") {
+                                             i = el.selectionStart;
+                                             //alert(i);
+                                             } else if (document.selection && el.createTextRange) {
+                                             sel = document.selection;
+                                             if (sel) {
+                                             r2 = sel.createRange();
+                                             rng = el.createTextRange();
+                                             rng.setEndPoint("EndToStart", r2);
+                                             i = rng.text.length;
+                                             }
+                                             } else {
+                                             el.onkeyup = null;
+                                             el.onclick = null;
+                                             }
+                                             
+                                             
+                                             
+                                             
+                                             return i;
+                                             }
+                                             
+                                             var oldText = '';
+                                             var checkText = '';
+                                             
+                                             function checkManualBlank(t, e) {
+                                             var text = $(t).val();
+                                             if (text.length != oldText.length) {
+                                             var keyIndex = s(t);
+                                             var lastChar = text.substr(keyIndex-1, 1);
+                                             var pattern = '[:_]';
+                                             if (text.length - oldText.length == 1 && pattern.indexOf(lastChar) >= 0) {
+                                             checkText += lastChar;
+                                             if (checkText.length == 9 && checkText == '[:_____:]') {
+                                             alert("can't enter this");
+                                             $(t).val(text.substr(0, text.length - 9));
+                                             checkText = '';
+                                             }
+                                             } else if (text.length - oldText.length > 1) {
+                                             var pasteText = text.substr(oldText.length, text.length - 1);
+                                             if (pasteText.indexOf('[:_____:]') >= 0) {
+                                             alert("can't enter this");
+                                             var newText = text.substr(0, oldText.length - 1);
+                                             pasteText = pasteText.replace('[:_____:]', ' ');
+                                             newText += pasteText;
+                                             $(t).val(newText);
+                                             checkText = '';
+                                             }
+                                             } else {
+                                             checkText = '';
+                                             }
+                                             alert(checkText);
+                                             }
+                                             }
+                                             
+                                             function setOldText(t) {
+                                             oldText = $(t).val();
+                                             }*/
         </script>
     </body>
 </html>

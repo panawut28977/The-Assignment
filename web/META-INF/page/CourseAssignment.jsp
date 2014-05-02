@@ -21,21 +21,21 @@
             <th>Course</th>
             <th>Due Date</th>
             <th>Work on</th>
-            <th>Member</th>
+            <th>Member(s)</th>
             <th>Status</th>
             <c:choose>
                 <c:when test="${sessionScope.accType eq 'st'}">
                     <th></th>
                 </c:when>
                 <c:otherwise>
-                    <th>Sended</th>
+                    <th>Sent</th>
                 </c:otherwise>
             </c:choose>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>Assignment# 1 .....</td>
+            <td>Assignment# 1</td>
             <td><a href="assignment.jsp?tab=AllAssignment&&wo=f">INT202 Software Development Process II</a></td>
             <td>31/2/2554</td>
             <td>File</td> 
@@ -57,7 +57,7 @@
             <td><a href="assignment.jsp?tab=AllAssignment&&wo=f">INT202 Software Development Process II</a></td>
             <td>13/01/2554</td>
             <td>File</td>
-            <td>Group(2)</td>
+            <td>2</td>
             <td><span class="text-success">on time</span></td>
             <td>
                 <c:choose>
@@ -75,7 +75,7 @@
             <td><a href="assignment.jsp?tab=AllAssignment">INT202 Software Development Process II</a></td>
             <td>13/08/2556</td>
             <td>On Web</td>
-            <td>Group(3)</td>
+            <td>3</td>
             <td><span class="text-success">on time</span></td>
             <td>
                 <c:choose>

@@ -61,9 +61,10 @@
                 <%@include file="META-INF/page/side_bar.jsp"%>
                 <div class="col-md-9" style="padding-bottom: 20px">
                     <div class="col-md-8">
+                        <h4>Private Message</h4>
                         <div class="well" style="height: 600px;overflow-y: scroll" id="messageBox" >
                             <div class="pull-left col-md-5 th-message">
-                                <h6><b>AJ.aaa fsdf </b></h6>
+                                <h6><b>AJ.Kittiphan Puapholthep </b></h6>
                                 ising pain was born and I will give you a complete account of the system, and expound the actual teac
                                 <br>
                                 <small class="pull-right text-muted">13/08/2556 23:55:00</small>
@@ -75,7 +76,7 @@
                                 <small class="pull-right text-muted">13/08/2556 23:55:00</small>
                             </div>
                             <div class="pull-left col-md-5 th-message">
-                                <h6><b>AJ.aaa fsdf </b> </h6>
+                                <h6><b>AJ.Kittiphan Puapholthep </b> </h6>
                                 ill give you a complete account of the system, and expound the actual teac
                                 <br>
                                 <small class="pull-left text-muted">13/08/2556 23:55:00</small>
@@ -86,7 +87,7 @@
                                 <small class="pull-right text-muted">13/08/2556 23:55:00</small>
                             </div>
                             <div class="pull-left col-md-5 th-message">
-                                <h6><b>AJ.aaa fsdf </b>  </h6>
+                                <h6><b>AJ.Kittiphan Puapholthep </b>  </h6>
                                 and praising pain was born and I will give you a complete account of the system, and expound the actual teac<br>
                                 <small class="pull-right text-muted">13/08/2556 23:55:00</small>
                             </div>
@@ -96,7 +97,7 @@
                                 <small class="pull-right text-muted">13/08/2556 23:55:00</small>
                             </div>
                             <div class="pull-left col-md-5 th-message">
-                                <h6><b>AJ.aaa fsdf </b> </h6>
+                                <h6><b>AJ.Kittiphan Puapholthep </b> </h6>
                                 born and I will give you a complete account of the system, and expound the actual teac<br>
                                 <small class="pull-right text-muted">13/08/2556 23:55:00</small>
                             </div>
@@ -128,7 +129,7 @@
                                         <img width="32" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
                                     </a>
                                     <div class="media-body">
-                                        <h5 class="media-heading">AJ.AAA fsdf</h5>
+                                        <h5 class="media-heading">AJ.Kittiphan Puapholthep</h5>
                                     </div>
                                 </div>
                                 <hr>
@@ -137,7 +138,7 @@
                                         <img width="32" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
                                     </a>
                                     <div class="media-body">
-                                        <h5 class="media-heading">AJ.cccc aaaaa</h5>
+                                        <h5 class="media-heading">AJ.Unhawa Ninrutsirikun</h5>
                                     </div> 
                                 </div>
                                 <hr>
@@ -146,7 +147,7 @@
                                         <img width="32" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
                                     </a>
                                     <div class="media-body">
-                                        <h5 class="media-heading">AJ.hhhhh jjjj</h5>
+                                        <h5 class="media-heading">AJ.Ekapong Jungcharoensukying</h5>
                                     </div>
                                 </div>
                                 <hr>
@@ -155,16 +156,7 @@
                                         <img width="32" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
                                     </a>
                                     <div class="media-body">
-                                        <h5 class="media-heading">AJ.rrrrr eeee</h5>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="media">
-                                    <a class="pull-left" href="#">
-                                        <img width="32" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
-                                    </a>
-                                    <div class="media-body">
-                                        <h5 class="media-heading">AJ.gasg hhhhh</h5>
+                                        <h5 class="media-heading">AJ.Kittipong Warasup</h5>
                                     </div>
                                 </div>
                             </div>
