@@ -40,7 +40,7 @@
     </body>
     <script>
         $(function() {
-            alert("change account type to:" + '${sessionScope.accType}');
+           // alert("change account type to:" + '${sessionScope.accType}');
         });
     </script>
 </html>

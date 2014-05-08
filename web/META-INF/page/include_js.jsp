@@ -3,4 +3,5 @@
 <script src="js/jquery.dataTables.min.js"></script>
 <script src="js/DT_bootstrap.js"></script>
 <script src="js/bootstrap-multiselect.js"></script>
+<script src="js/main.js"></script>
     

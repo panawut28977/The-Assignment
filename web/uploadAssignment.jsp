@@ -47,17 +47,15 @@
                         </c:otherwise>
                     </c:choose>
                     <div >
-                        <div style="text-align: center">
+                        <div  class="pull-left">
                             <h4>Individual work</h4>
-                            <div class="media">
-                                <a href="#">
-                                    <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
-                                </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading">Panawut Ittitananun</h4>
-                                </div>
+                            <div class="member">
+                                <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                                <h4>Panawut</h4>
                             </div>
-                            <hr>
+                        </div>
+                        <hr style="clear: both">
+                        <div style="text-align: center"> 
                             <h4 >Send your assignment <span class="text-danger">(Late)</span></h4>
                             <form role="form" class="form-inline">
                                 <input type="file" class="form-control">

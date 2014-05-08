@@ -57,7 +57,7 @@
             <td><a href="assignment.jsp?tab=AllAssignment&&wo=f">INT202 Software Development Process II</a></td>
             <td>13/01/2554</td>
             <td>File</td>
-            <td>2</td>
+            <td><a href="groupWork.jsp?tab=AllAssignment">2</a></td>
             <td><span class="text-success">on time</span></td>
             <td>
                 <c:choose>
@@ -75,7 +75,7 @@
             <td><a href="assignment.jsp?tab=AllAssignment">INT202 Software Development Process II</a></td>
             <td>13/08/2556</td>
             <td>On Web</td>
-            <td>3</td>
+            <td><a href="groupWork.jsp?tab=AllAssignment">3</a></td>
             <td><span class="text-success">on time</span></td>
             <td>
                 <c:choose>

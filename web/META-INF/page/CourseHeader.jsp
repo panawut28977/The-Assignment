@@ -4,7 +4,15 @@
     </c:when>
     <c:otherwise>
         <div class="well well-sm">
-            <h3 >INT202 Software Development Process II <a class="pull-right"><span class="glyphicon glyphicon-cog"></span></a></h3>
+            <h3 >INT202 Software Development Process II 
+                <div class="dropdown pull-right">
+                    <a data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-cog"></span></a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <li><a>Edit name</a></li>
+                        <li><a>Delete course</a></li>
+                    </ul>
+                </div>
+            </h3>
             <hr>
             <div class="row" style="text-align: center;" id="CourseDetail">
                 <div class="col-md-4"><h4>Course Code</h4><input type="text" readonly="yes" value="6zhjr8"></div>

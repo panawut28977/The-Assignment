@@ -11,7 +11,7 @@
     </a> 
     <div class="media-body">
         <h4 class="media-heading">Your request to join <a href="course.jsp"><b>INT202 Software Development Process II</b></a> is <b>approved</b></h4>
-    </div>
+    </div> 
 </div>
 <div class="media">
     <a href="message.jsp"> 

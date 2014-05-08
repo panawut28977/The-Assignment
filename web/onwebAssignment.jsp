@@ -51,18 +51,24 @@
                         </c:otherwise>
                     </c:choose>
                     <div >
-                        <div style="text-align: center">
+                        <div >
                             <form role="form" id="questionList">
-                                <h4>Group No.1 <small class="text-muted">(Require 1-3 members in group)</small></h4>
-                                <select class="multiselect" multiple="multiple">
-                                    <option value="cheese">Cheese</option>
-                                    <option value="tomatoes">Tomatoes</option>
-                                    <option value="mozarella">Mozzarella</option>
-                                    <option value="mushrooms">Mushrooms</option>
-                                    <option value="pepperoni">Pepperoni</option>
-                                    <option value="onions">Onions</option>
-                                </select>
-                                <hr>
+                                <div class="pull-left">
+                                    <h4>Group No.1 <small class="text-muted">(Require 1-3 members in group)</small></h4>
+                                    <div class="member">
+                                        <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                                        <h4>Panawut</h4>
+                                    </div>
+                                    <div class="member">
+                                        <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                                        <h4>Thanakit</h4>
+                                    </div>
+                                    <div class="member">
+                                        <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                                        <h4 class="">Nitiwit</h4>
+                                    </div>
+                                </div>
+                                <hr style="clear: both">
                                 <div class="assignmentBox col-md-12">
                                     <h4><u>Let's do it !</u></h4>
 

@@ -37,7 +37,7 @@
             <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment&&wo=f">INT202 Software Development Process II</a></td>
             <td>13/01/2554</td>
             <td>File</td>
-            <td>Group(2)</td>
+            <td><a href="groupWork.jsp?ct=allAm&&tab=AllAssignment">2</a></td>
             <td><span class="text-success">on time</span></td>
             <td><a title="Send Assignment File" href="uploadAssignment.jsp?ct=allAm&&tab=AllAssignment"><span class="glyphicon glyphicon-upload"></span></a></td>
         </tr>
@@ -46,7 +46,7 @@
             <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment">INT202 Software Development Process II</a></td>
             <td>13/08/2556</td>
             <td>On Web</td>
-            <td>Group(3)</td>
+            <td><a href="groupWork.jsp?ct=allAm&&tab=AllAssignment">3</a></td>
             <td><span class="text-success">on time</span></td>
             <td><a href="onwebAssignment.jsp?ct=allAm&&tab=AllAssignment" title="Do it on web"><span class="glyphicon glyphicon-upload"></span></a></td>
         </tr>
@@ -73,7 +73,7 @@
             <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment">INT103 Office</a></td>
             <td>13/08/2556</td>
             <td>On Web</td>
-            <td>Group(5)</td> 
+            <td><a href="groupWork.jsp?ct=allAm&&tab=AllAssignment">5</a></td> 
             <td><span class="text-success">on time</span></td>
             <td><a  href="onwebAssignment.jsp?ct=allAm&&tab=AllAssignment" title="Do it on web"><span class="glyphicon glyphicon-upload" ></span></a></td>
         </tr>
