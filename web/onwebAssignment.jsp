@@ -255,22 +255,22 @@
                         if (err) {
                             throw err;
                         }
-                        var name = '';
-                        var user = '';
-                        for (i = 0; i < 4; i++) {
-                            name = 'name' + i;
-                            user = '<li class="gi-user" data-goinstant-id="1234">'
-                                    + '    <div class="gi-color">'
-                                    + '        <div class="gi-avatar">'
-                                    + '            <img class="gi-avatar-img">'
-                                    + '        </div>'
-                                    + '    </div>'
-                                    + '    <div class="gi-name">'
-                                    + '        <span>' + name + '</span>'
-                                    + '    </div>'
-                                    + '</li>';
-                            $(".gi-inner").append(user);
-                        }
+//                        var name = '';
+//                        var user = '';
+//                        for (i = 0; i < 4; i++) {
+//                            name = 'name' + i;
+//                            user = '<li class="gi-user" data-goinstant-id="1234">'
+//                                    + '    <div class="gi-color">'
+//                                    + '        <div class="gi-avatar">'
+//                                    + '            <img class="gi-avatar-img">'
+//                                    + '        </div>'
+//                                    + '    </div>'
+//                                    + '    <div class="gi-name">'
+//                                    + '        <span>' + name + '</span>'
+//                                    + '    </div>'
+//                                    + '</li>';
+//                            $(".gi-inner").append(user);
+//                        }
                     });
 
                     // Create a key to store the form data
