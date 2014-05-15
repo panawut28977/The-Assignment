@@ -13,6 +13,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="META-INF/page/include_css.jsp" %>
         <%@include file="META-INF/page/include_js.jsp" %>
+        <script type="text/javascript" src="https://cdn.goinstant.net/v1/platform.min.js"></script>
+        <script type="text/javascript" src="https://cdn.goinstant.net/widgets/user-list/latest/user-list.min.js"></script>
+        <script type="text/javascript" src="https://cdn.goinstant.net/widgets/form/latest/form.min.js"></script>
+        <!-- CSS is optional -->
+        <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/user-list/latest/user-list.css" />
+        <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/form/latest/form.css" />
         <title>On web Assignment ...</title>
         <style>
             #pvVs{
@@ -72,79 +78,79 @@
                                 <div class="assignmentBox col-md-12">
                                     <h4><u>Let's do it !</u></h4>
 
-                                    <h5><b>( 1.) Fill your answer in the blank.</b></h5><!--[Question Title]-->
-                                    <p>Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, <input type="text"> sem <input type="text"> quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et <input type="text"> ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit <input type="text"> amet nibh. Donec sodales sagittis magna. Sed consequat, leo <input type="text"> eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce <input type="text"> vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia.</p>
-                                    <h5><b>( 2.) Matching a word.</b></h5><!--[Question Title]-->
+                                    <h5><b>Fill your answer in the blank.</b></h5><!--[Question Title]-->
+                                    <p>1. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, <input type="text"name="a1"> sem <input type="text" name="a1"> quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et <input type="text" name="a1"> ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit <input type="text" name="a1"> amet nibh. Donec sodales sagittis magna. Sed consequat, leo <input type="text" name="a1"> eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce <input type="text" name="a1"> vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia.</p>
+                                    <h5><b>Matching a word.</b></h5><!--[Question Title]-->
                                     <div>
                                         <div>
-                                            <select >
+                                            <select name="a2" >
                                                 <option value="cheese">fggsdf</option>
                                                 <option value="tomatoes">fggsdf</option>
                                                 <option value="mozarella">fggsdf</option>
                                             </select> 
-                                            <span>1. asdffsadf</span><span class="pull-right">fggsdf</span></div><br>
-                                        <div>
-                                            <select >
-                                                <option value="cheese">fggsdf</option>
-                                                <option value="tomatoes">fggsdf</option>
-                                                <option value="mozarella">fggsdf</option>
-                                            </select>  
                                             <span>2. asdffsadf</span><span class="pull-right">fggsdf</span></div><br>
                                         <div>
-                                            <select >
+                                            <select name="a2">
                                                 <option value="cheese">fggsdf</option>
                                                 <option value="tomatoes">fggsdf</option>
                                                 <option value="mozarella">fggsdf</option>
                                             </select>  
                                             <span>3. asdffsadf</span><span class="pull-right">fggsdf</span></div><br>
                                         <div>
-                                            <select >
+                                            <select name="a2">
                                                 <option value="cheese">fggsdf</option>
                                                 <option value="tomatoes">fggsdf</option>
                                                 <option value="mozarella">fggsdf</option>
                                             </select>  
                                             <span>4. asdffsadf</span><span class="pull-right">fggsdf</span></div><br>
                                         <div>
-                                            <select >
+                                            <select name="a2" >
                                                 <option value="cheese">fggsdf</option>
                                                 <option value="tomatoes">fggsdf</option>
                                                 <option value="mozarella">fggsdf</option>
                                             </select>  
                                             <span>5. asdffsadf</span><span class="pull-right">fggsdf</span></div><br>
                                         <div>
-                                            <select>
+                                            <select name="a2">
                                                 <option value="cheese">fggsdf</option>
                                                 <option value="tomatoes">fggsdf</option>
                                                 <option value="mozarella">fggsdf</option>
                                             </select>  
                                             <span>6. asdffsadf</span><span class="pull-right">fggsdf</span></div><br>
+                                        <div>
+                                            <select name="a2">
+                                                <option value="cheese">fggsdf</option>
+                                                <option value="tomatoes">fggsdf</option>
+                                                <option value="mozarella">fggsdf</option>
+                                            </select>  
+                                            <span>7. asdffsadf</span><span class="pull-right">fggsdf</span></div><br>
                                     </div>
-                                    <h5><b>( 3.) Choose the most correct answer</b></h5>
+                                    <h5><b>Choose the most correct answer</b></h5>
                                     <div>
-                                        <h5>1. which one collect?</h5>
-                                        <input type="radio"> A. aaaaa
-                                        <input type="radio"> B. aaaaa
-                                        <input type="radio"> C. aaaaa
-                                        <input type="radio"> D. aaaaa
+                                        <h5>8. which one collect?</h5>
+                                        <input type="radio" name="a3"> A. aaaaa
+                                        <input type="radio" name="a3"> B. aaaaa
+                                        <input type="radio" name="a3"> C. aaaaa
+                                        <input type="radio" name="a3"> D. aaaaa
+                                    </div>
+                                    <div> 
+                                        <h5>9. which one collect?</h5>
+                                        <input type="radio" name="a4"> A. aaaaa
+                                        <input type="radio" name="a4"> B. aaaaa
+                                        <input type="radio" name="a4"> C. aaaaa
+                                        <input type="radio" name="a4"> D. aaaaa
                                     </div>
                                     <div>
-                                        <h5>2. which one collect?</h5>
-                                        <input type="radio"> A. aaaaa
-                                        <input type="radio"> B. aaaaa
-                                        <input type="radio"> C. aaaaa
-                                        <input type="radio"> D. aaaaa
+                                        <h5>10. which one collect(more than one answer)?</h5>
+                                        <input type="checkbox" name="a5"> A. aaaaa
+                                        <input type="checkbox" name="a5"> B. aaaaa
+                                        <input type="checkbox" name="a5"> C. aaaaa
+                                        <input type="checkbox" name="a5"> D. aaaaa
                                     </div>
+                                    <h5><b>Explain answer</b></h5>
                                     <div>
-                                        <h5>3. which one collect(more than one answer)?</h5>
-                                        <input type="checkbox"> A. aaaaa
-                                        <input type="checkbox"> B. aaaaa
-                                        <input type="checkbox"> C. aaaaa
-                                        <input type="checkbox"> D. aaaaa
-                                    </div>
-                                    <h5><b>( 4.) Explain answer</b></h5>
-                                    <div>
-                                        <h5>1. please brief explain concept.</h5>
-                                        <textarea class="form-control"></textarea>
+                                        <h5>11. please brief explain concept.</h5>
+                                        <textarea class="form-control" name="a6"></textarea>
                                     </div>
                                     <br>
                                     <input type="submit" value="Send !!" class="btn btn-primary">
@@ -171,7 +177,7 @@
                         <div class="media-body">
                             <h4 class="media-heading">AJ.Kittipong Warasup<small class="pull-right">16/01/57</small></h4>
                             <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-                        </div>
+                        </div> 
                     </div>
                     <form>
                         <textarea class="form-control" placeholder="Tell your teacher here."></textarea><br>
@@ -180,8 +186,31 @@
                 </div>
             </div>
         </div>
-
-
+        <div class="gi-override gi-userlist">
+            <div class="gi-options"></div>
+            <ul class="gi-inner">
+                <li class="gi-user" data-goinstant-id="1234">
+                    <div class="gi-color">
+                        <div class="gi-avatar">
+                            <img class="gi-avatar-img">
+                        </div>
+                    </div>
+                    <div class="gi-name">
+                        <span>Guest</span>
+                    </div>
+                </li>
+            </ul>
+            <div class="gi-collapse"></div>
+        </div>
+        <div class="gi-override gi-form">
+            <div class="gi-indicator">
+                <div class="gi-user">
+                    <!-- The displayname of the user interacting with this input -->
+                </div>
+                <div class="gi-bar">
+                </div>
+            </div>
+        </div>
     </body>
     <script>
         $(function() {
@@ -191,6 +220,96 @@
                 $(this).find("span").toggleClass("glyphicon-chevron-down");
             });
             $('.multiselect').multiselect();
+            // Connect URL
+
+
+
+            var url = 'https://goinstant.net/701ad7c04624/CollaborateAssignment';
+
+            var connection = new goinstant.Connection(url);
+            connection.connect(function(err) {
+                if (err) {
+                    // there was an error connecting OR the token was invalid.
+                    return;
+                }
+
+                var room = connection.room('lobby');
+                room.join({displayName: 'Custom'}, function(err, yourRoom, userData) {
+                    if (err) {
+                        console.log("Error joining room:", err);
+                        // Failed to join room; clean up or retry.
+                        return;
+                    }
+
+                    // Joined the room. Start getting and manipulating keys.
+
+                    // Create a new instance of the UserList widget
+                    var userList = new goinstant.widgets.UserList({
+                        room: yourRoom,
+                        collapsed: false,
+                        position: 'right'
+                    });
+
+                    // Initialize the UserList widget
+                    userList.initialize(function(err) {
+                        if (err) {
+                            throw err;
+                        }
+                        var name = '';
+                        var user = '';
+                        for (i = 0; i < 4; i++) {
+                            name = 'name' + i;
+                            user = '<li class="gi-user" data-goinstant-id="1234">'
+                                    + '    <div class="gi-color">'
+                                    + '        <div class="gi-avatar">'
+                                    + '            <img class="gi-avatar-img">'
+                                    + '        </div>'
+                                    + '    </div>'
+                                    + '    <div class="gi-name">'
+                                    + '        <span>' + name + '</span>'
+                                    + '    </div>'
+                                    + '</li>';
+                            $(".gi-inner").append(user);
+                        }
+                    });
+
+                    // Create a key to store the form data
+                    var formKey = yourRoom.key('example-form-key');
+
+                    // Create a new instance of the widget
+                    var form = new goinstant.widgets.Form({
+                        el: document.getElementById('questionList'),
+                        key: formKey,
+                        room: yourRoom
+                    });
+
+                    form.initialize(function(err) {
+                        if (err) {
+                            throw err;
+                        }
+                        // Your form should now be initialized!
+                    });
+
+
+
+
+
+                    console.log("Your name is " + userData.displayName); // "Your name is Custom"
+                });
+
+                // The listener will fire everytime a user leaves the Room
+                room.on('leave', function(userData) {
+                    alert('user'+ userData.displayName+ 'left the lobby!');
+                });
+
+                // The listener will fire every time another user joins the room
+                room.on('join', function(userData) {
+                    alert('user'+ userData.displayName+ 'join the lobby!');
+                });
+
+            });
+
+
         });
     </script>
-</html>
+</html> 
