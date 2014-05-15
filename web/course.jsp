@@ -30,7 +30,7 @@
                             <%@include file="META-INF/page/Member.jsp" %>
                         </c:when>
                         <c:when test="${param.tab eq 'score'}">
-                            <%@include file="META-INF/page/CourseScore.jsp" %>
+                            <%@include file="META-INF/page/userScore.jsp" %>
                         </c:when>
                         <c:when test="${param.tab eq 'request'}">
                             <%@include file="META-INF/page/RequestToJoin.jsp" %>
