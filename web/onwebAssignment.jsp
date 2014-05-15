@@ -72,9 +72,9 @@
                                 <div class="assignmentBox col-md-12">
                                     <h4><u>Let's do it !</u></h4>
 
-                                    <h5><b>Fill your answer in the blank.</b></h5><!--[Question Title]-->
-                                    <p>1. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, <input type="text"> sem <input type="text"> quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et <input type="text"> ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit <input type="text"> amet nibh. Donec sodales sagittis magna. Sed consequat, leo <input type="text"> eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce <input type="text"> vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia.</p>
-                                    <h5><b>Matching a word.</b></h5><!--[Question Title]-->
+                                    <h5><b>( 1.) Fill your answer in the blank.</b></h5><!--[Question Title]-->
+                                    <p>Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, <input type="text"> sem <input type="text"> quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et <input type="text"> ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit <input type="text"> amet nibh. Donec sodales sagittis magna. Sed consequat, leo <input type="text"> eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce <input type="text"> vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia.</p>
+                                    <h5><b>( 2.) Matching a word.</b></h5><!--[Question Title]-->
                                     <div>
                                         <div>
                                             <select >
@@ -82,6 +82,13 @@
                                                 <option value="tomatoes">fggsdf</option>
                                                 <option value="mozarella">fggsdf</option>
                                             </select> 
+                                            <span>1. asdffsadf</span><span class="pull-right">fggsdf</span></div><br>
+                                        <div>
+                                            <select >
+                                                <option value="cheese">fggsdf</option>
+                                                <option value="tomatoes">fggsdf</option>
+                                                <option value="mozarella">fggsdf</option>
+                                            </select>  
                                             <span>2. asdffsadf</span><span class="pull-right">fggsdf</span></div><br>
                                         <div>
                                             <select >
@@ -105,45 +112,38 @@
                                             </select>  
                                             <span>5. asdffsadf</span><span class="pull-right">fggsdf</span></div><br>
                                         <div>
-                                            <select >
-                                                <option value="cheese">fggsdf</option>
-                                                <option value="tomatoes">fggsdf</option>
-                                                <option value="mozarella">fggsdf</option>
-                                            </select>  
-                                            <span>6. asdffsadf</span><span class="pull-right">fggsdf</span></div><br>
-                                        <div>
                                             <select>
                                                 <option value="cheese">fggsdf</option>
                                                 <option value="tomatoes">fggsdf</option>
                                                 <option value="mozarella">fggsdf</option>
                                             </select>  
-                                            <span>7. asdffsadf</span><span class="pull-right">fggsdf</span></div><br>
+                                            <span>6. asdffsadf</span><span class="pull-right">fggsdf</span></div><br>
                                     </div>
-                                    <h5><b>Choose the most correct answer</b></h5>
+                                    <h5><b>( 3.) Choose the most correct answer</b></h5>
                                     <div>
-                                        <h5>8. which one collect?</h5>
+                                        <h5>1. which one collect?</h5>
                                         <input type="radio"> A. aaaaa
                                         <input type="radio"> B. aaaaa
                                         <input type="radio"> C. aaaaa
                                         <input type="radio"> D. aaaaa
                                     </div>
                                     <div>
-                                        <h5>9. which one collect?</h5>
+                                        <h5>2. which one collect?</h5>
                                         <input type="radio"> A. aaaaa
                                         <input type="radio"> B. aaaaa
                                         <input type="radio"> C. aaaaa
                                         <input type="radio"> D. aaaaa
                                     </div>
                                     <div>
-                                        <h5>10. which one collect(more than one answer)?</h5>
+                                        <h5>3. which one collect(more than one answer)?</h5>
                                         <input type="checkbox"> A. aaaaa
                                         <input type="checkbox"> B. aaaaa
                                         <input type="checkbox"> C. aaaaa
                                         <input type="checkbox"> D. aaaaa
                                     </div>
-                                    <h5><b>Explain answer</b></h5>
+                                    <h5><b>( 4.) Explain answer</b></h5>
                                     <div>
-                                        <h5>11. please brief explain concept.</h5>
+                                        <h5>1. please brief explain concept.</h5>
                                         <textarea class="form-control"></textarea>
                                     </div>
                                     <br>
