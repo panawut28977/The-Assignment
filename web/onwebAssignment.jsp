@@ -78,78 +78,78 @@
                                 <div class="assignmentBox col-md-12">
                                     <h4><u>Let's do it !</u></h4>
 
-                                    <h5><b>Fill your answer in the blank.</b></h5><!--[Question Title]-->
+                                    <h5><b>ส่วนที่ 1 ทั้งหมด 10 คะแนน มีทั้งหมด 1 ข้อ</b></h5><!--[Question Title]-->
                                     <p>1. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, <input type="text"name="a1"> sem <input type="text" name="a1"> quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et <input type="text" name="a1"> ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit <input type="text" name="a1"> amet nibh. Donec sodales sagittis magna. Sed consequat, leo <input type="text" name="a1"> eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce <input type="text" name="a1"> vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia.</p>
-                                    <h5><b>Matching a word.</b></h5><!--[Question Title]-->
+                                    <h5><b>ส่วนที่ 2 ทั้งหมด 5 คะแนน มีทั้งหมด 1 ข้อ</b></h5><!--[Question Title]-->
                                     <div>
+                                        <h5>2. จงจับคำต่อไปนี้ที่มีความหมายตรงข้ามกัน</h5>
                                         <div>
                                             <select name="a2" >
                                                 <option value="cheese">fggsdf</option>
                                                 <option value="tomatoes">fggsdf</option>
                                                 <option value="mozarella">fggsdf</option>
                                             </select> 
-                                            <span>2. asdffsadf</span><span class="pull-right">fggsdf</span></div><br>
+                                            <span>asdffsadf</span><span class="pull-right">fggsdf</span></div><br>
                                         <div>
                                             <select name="a2">
                                                 <option value="cheese">fggsdf</option>
                                                 <option value="tomatoes">fggsdf</option>
                                                 <option value="mozarella">fggsdf</option>
                                             </select>  
-                                            <span>3. asdffsadf</span><span class="pull-right">fggsdf</span></div><br>
+                                            <span>asdffsadf</span><span class="pull-right">fggsdf</span></div><br>
                                         <div>
                                             <select name="a2">
                                                 <option value="cheese">fggsdf</option>
                                                 <option value="tomatoes">fggsdf</option>
                                                 <option value="mozarella">fggsdf</option>
                                             </select>  
-                                            <span>4. asdffsadf</span><span class="pull-right">fggsdf</span></div><br>
+                                            <span>asdffsadf</span><span class="pull-right">fggsdf</span></div><br>
                                         <div>
                                             <select name="a2" >
                                                 <option value="cheese">fggsdf</option>
                                                 <option value="tomatoes">fggsdf</option>
                                                 <option value="mozarella">fggsdf</option>
                                             </select>  
-                                            <span>5. asdffsadf</span><span class="pull-right">fggsdf</span></div><br>
+                                            <span>asdffsadf</span><span class="pull-right">fggsdf</span></div><br>
                                         <div>
                                             <select name="a2">
                                                 <option value="cheese">fggsdf</option>
                                                 <option value="tomatoes">fggsdf</option>
                                                 <option value="mozarella">fggsdf</option>
                                             </select>  
-                                            <span>6. asdffsadf</span><span class="pull-right">fggsdf</span></div><br>
+                                            <span>asdffsadf</span><span class="pull-right">fggsdf</span></div><br>
                                         <div>
                                             <select name="a2">
                                                 <option value="cheese">fggsdf</option>
                                                 <option value="tomatoes">fggsdf</option>
                                                 <option value="mozarella">fggsdf</option>
                                             </select>  
-                                            <span>7. asdffsadf</span><span class="pull-right">fggsdf</span></div><br>
+                                            <span>asdffsadf</span><span class="pull-right">fggsdf</span></div><br>
                                     </div>
-                                    <h5><b>Choose the most correct answer</b></h5>
+                                    <h5><b>ส่วนที่ 3 ทั้งหมด 30 คะแนน มีทั้งหมด 3 ข้อ</b></h5>
                                     <div>
-                                        <h5>8. which one collect?</h5>
+                                        <h5>3. which one collect?</h5>
                                         <input type="radio" name="a3"> A. aaaaa
                                         <input type="radio" name="a3"> B. aaaaa
                                         <input type="radio" name="a3"> C. aaaaa
                                         <input type="radio" name="a3"> D. aaaaa
                                     </div>
                                     <div> 
-                                        <h5>9. which one collect?</h5>
+                                        <h5>4. which one collect?</h5>
                                         <input type="radio" name="a4"> A. aaaaa
                                         <input type="radio" name="a4"> B. aaaaa
                                         <input type="radio" name="a4"> C. aaaaa
                                         <input type="radio" name="a4"> D. aaaaa
                                     </div>
                                     <div>
-                                        <h5>10. which one collect(more than one answer)?</h5>
+                                        <h5>5. which one collect(more than one answer)?</h5>
                                         <input type="checkbox" name="a5"> A. aaaaa
                                         <input type="checkbox" name="a5"> B. aaaaa
                                         <input type="checkbox" name="a5"> C. aaaaa
                                         <input type="checkbox" name="a5"> D. aaaaa
                                     </div>
-                                    <h5><b>Explain answer</b></h5>
                                     <div>
-                                        <h5>11. please brief explain concept.</h5>
+                                        <h5>6. please brief explain concept.</h5>
                                         <textarea class="form-control" name="a6"></textarea>
                                     </div>
                                     <br>
@@ -299,12 +299,12 @@
 
                 // The listener will fire everytime a user leaves the Room
                 room.on('leave', function(userData) {
-                    alert('user'+ userData.displayName+ 'left the lobby!');
+                    alert('user' + userData.displayName + 'left the lobby!');
                 });
 
                 // The listener will fire every time another user joins the room
                 room.on('join', function(userData) {
-                    alert('user'+ userData.displayName+ 'join the lobby!');
+                    alert('user' + userData.displayName + 'join the lobby!');
                 });
 
             });
