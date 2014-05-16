@@ -7,7 +7,7 @@
 <c:choose> 
     <c:when test="${sessionScope.accType eq 'st'}">
         <div style="text-align: center;margin-top:20px ">
-            <div class="col-md-4"><h4>5 <br> Sendeds</h4></div>
+            <div class="col-md-4"><h4>5 <br> Sent</h4></div>
             <div class="col-md-4"><h4>38/50 <br>Scores</h4></div>
             <div class="col-md-4"><h4>1 <br> Leftovers</h4></div>
         </div>

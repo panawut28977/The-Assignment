@@ -6,7 +6,7 @@
         </div>
     </c:if>
     <div class="media col-md-4">
-        <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+        <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" class="pull-left">
         <div class="media-body">
             <h4 class="media-heading" >Panawut Ittitananun</h4>
             <c:if test="${sessionScope.accType eq 'th'}">
@@ -23,7 +23,7 @@
         </div>
     </div>
     <div class="media col-md-4">
-        <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+        <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" class="pull-left">
         <div class="media-body">
             <h4 class="media-heading">Thanakit Mahamutjinda</h4>
             <c:if test="${sessionScope.accType eq 'th'}">
@@ -40,7 +40,7 @@
         </div>
     </div>
     <div class="media col-md-4">
-        <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+        <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" class="pull-left">
         <div class="media-body">
             <h4 class="media-heading">Nitiwit Wungwiwatna</h4>
             <c:if test="${sessionScope.accType eq 'th'}">
@@ -59,7 +59,7 @@
 </div>
 <div class="row">
     <div class="media col-md-4">
-        <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+        <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" class="pull-left">
         <div class="media-body">
             <h4 class="media-heading">Thanapan Suwankanit</h4>
             <c:if test="${sessionScope.accType eq 'th'}">
