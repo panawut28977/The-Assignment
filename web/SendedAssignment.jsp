@@ -35,7 +35,7 @@
                         <li class="active"><a href="#">งานที่ 1....</a></li>
                     </ol>
                     <div style="text-align: center;margin-top:20px ">
-                        <div class="col-md-4"><h4>12 <br> Who sended</h4></div>
+                        <div class="col-md-4"><h4>12 <br> Who sent</h4></div>
                         <div class="col-md-4"><h4>6/12 <br>Checked</h4></div>
                         <div class="col-md-4"><h4>30 <br> Leftovers</h4></div>
                     </div>
@@ -52,83 +52,83 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>natus error</td>
+                                <td>Panawut Ittitananun</td>
                                 <td>10/10</td>
                                 <td><span class="text-success">on time</span></td>
                                 <td class="text-success"><span class="glyphicon glyphicon-ok"></span> Checked</td>
                                 <td><a href="CheckAssignment.jsp?tab=AllAssignment">View</a></td>
                             </tr>
                             <tr>
-                                <td>oluptatem accusantium</td>
+                                <td>Thanakit Mahamutjinda</td>
                                 <td>0/10</td>
                                 <td><span class="text-success">on time</span></td>
                                 <td>Not check</td>
                                 <td><a href="CheckAssignment.jsp?tab=AllAssignment">View</a></td>
                             </tr>
                             <tr>
-                                <td>denouncing ple</td>
+                                <td>Nitiwit Wungwiwatna</td>
                                 <td>0/10</td>
                                 <td><span class="text-danger">Late</span></td>
                                 <td>Not check</td>
                                 <td><a href="CheckAssignment.jsp?tab=AllAssignment">View</a></td>
                             </tr> 
                             <tr>
-                                <td>great explorer</td>
+                                <td>Thanapan Suwankanit</td>
                                 <td>7/10</td>
                                 <td><span class="text-success">on time</span></td>
                                 <td class="text-success"><span class="glyphicon glyphicon-ok"></span> checked</td>
                                 <td><a href="CheckAssignment.jsp?tab=AllAssignment">View</a></td>
                             </tr>
                             <tr>
-                                <td>natus error</td>
+                                <td>Panawut Ittitananun</td>
                                 <td>10/10</td>
                                 <td><span class="text-danger">Late</span></td>
                                 <td class="text-success"><span class="glyphicon glyphicon-ok"></span> Checked</td>
                                 <td><a href="CheckAssignment.jsp?tab=AllAssignment">View</a></td>
                             </tr>
                             <tr>
-                                <td>oluptatem accusantium</td>
+                                <td>Steven Gerrard</td>
                                 <td>0/10</td>
                                 <td><span class="text-danger">Late</span></td>
                                 <td>Not check</td>
                                 <td><a href="CheckAssignment.jsp?tab=AllAssignment">View</a></td>
                             </tr>
                             <tr>
-                                <td>denouncing ple</td>
+                                <td>Luis Suarez</td>
                                 <td>0/10</td>
                                 <td><span class="text-danger">Late</span></td>
                                 <td>Not check</td>
                                 <td><a href="CheckAssignment.jsp?tab=AllAssignment">View</a></td>
                             </tr> 
                             <tr>
-                                <td>great explorer</td>
+                                <td>Filipe Coutinho</td>
                                 <td>7/10</td>
                                 <td><span class="text-success">on time</span></td>
                                 <td class="text-success"><span class="glyphicon glyphicon-ok"></span> checked</td>
                                 <td><a href="CheckAssignment.jsp?tab=AllAssignment">View</a></td>
                             </tr><tr>
-                                <td>natus error</td>
+                                <td>Kolo Toure</td>
                                 <td>10/10</td>
                                 <td><span class="text-danger">Late</span></td>
                                 <td class="text-success"><span class="glyphicon glyphicon-ok"></span> Checked</td>
                                 <td><a href="CheckAssignment.jsp?tab=AllAssignment">View</a></td>
                             </tr>
                             <tr>
-                                <td>oluptatem accusantium</td>
+                                <td>Charlette Lemon</td>
                                 <td>0/10</td>
                                 <td><span class="text-success">on time</span></td>
                                 <td>Not check</td>
                                 <td><a href="CheckAssignment.jsp?tab=AllAssignment">View</a></td>
                             </tr>
                             <tr>
-                                <td>denouncing ple</td>
+                                <td>Marcy Mathis</td>
                                 <td>0/10</td>
                                 <td><span class="text-danger">Late</span></td>
                                 <td>Not check</td>
                                 <td><a href="CheckAssignment.jsp?tab=AllAssignment">View</a></td>
                             </tr> 
                             <tr>
-                                <td>great explorer</td>
+                                <td>Rheba Leto</td>
                                 <td>7/10</td>
                                 <td><span class="text-success">on time</span></td>
                                 <td class="text-success"><span class="glyphicon glyphicon-ok"></span> checked</td>

@@ -54,7 +54,7 @@
                             <%@include file="META-INF/page/allCourseTab.jsp"%>
                             <ol class="breadcrumb" style="margin-top: 15px" >
                                 <li><a href="home.jsp?tab=AllAssignment">Assignment</a></li>
-                                <li class="active"><a href="#">select member</a></li>
+                                <li class="active"><a href="#">Member</a></li>
                             </ol>
                         </c:when>
                         <c:otherwise>
@@ -62,68 +62,76 @@
                             <%@include file="META-INF/page/CourseTab.jsp"%>
                             <ol class="breadcrumb" style="margin-top: 15px" >
                                 <li><a href="course.jsp?tab=AllAssignment">Assignment</a></li>
-                                <li class="active"><a href="#">select member</a></li>
+                                <li class="active"><a href="#">Member</a></li>
                             </ol>
                         </c:otherwise>
                     </c:choose>
-                    <div style="text-align: center">
-                        <span class="text-danger"><h3>Select your group member</h3></span>
-                        <hr>
-                        <div class="media col-md-4">
-                            <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
-                            <div class="media-body">
-                                <h4 class="media-heading" >Panawut Ittitananun</h4>
+                    <c:choose>
+                        <c:when test="${param.acct eq 'th'}">
+
+                        </c:when>
+                        <c:when test="${param.acct eq 'st'}">
+                            <div style="text-align: center">
+                                <span class="text-danger"><h3>Select your group member</h3></span>
+                                <hr>
+                                <div class="media col-md-4">
+                                    <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                                    <div class="media-body">
+                                        <h4 class="media-heading" >Panawut Ittitananun</h4>
+                                    </div>
+                                </div>
+                                <div class="media col-md-4">
+                                    <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                                    <div class="media-body">
+                                        <h4 class="media-heading">Thanakit Mahamutjinda</h4>
+                                    </div>
+                                </div>
+                                <div class="media col-md-4">
+                                    <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                                    <div class="media-body">
+                                        <h4 class="media-heading">Nitiwit Wungwiwatna</h4>
+                                    </div>
+                                </div>
+                                <div class="media col-md-4">
+                                    <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                                    <div class="media-body">
+                                        <h4 class="media-heading">Thanapan Suwankanit</h4>
+                                    </div>
+                                </div>
+                                <div class="media col-md-4">
+                                    <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                                    <div class="media-body">
+                                        <h4 class="media-heading" >Panawut Ittitananun</h4>
+                                    </div>
+                                </div>
+                                <div class="media col-md-4">
+                                    <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                                    <div class="media-body">
+                                        <h4 class="media-heading">Thanakit Mahamutjinda</h4>
+                                    </div>
+                                </div>
+                                <div class="media col-md-4">
+                                    <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                                    <div class="media-body">
+                                        <h4 class="media-heading" >Panawut Ittitananun</h4>
+                                    </div>
+                                </div>
+                                <div class="media col-md-4">
+                                    <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                                    <div class="media-body">
+                                        <h4 class="media-heading">Thanakit Mahamutjinda</h4>
+                                    </div>
+                                </div>
+                                <div style="clear: both;padding-top: 20px;">
+                                    <form action="" id="groupmember">
+                                        <label><h4><span id="count"></span> seleted</h4> </label><br>
+                                        <input type="submit" value="Submit !" class="btn btn-primary">
+                                    </form>
+                                </div>
                             </div>
-                        </div>
-                        <div class="media col-md-4">
-                            <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
-                            <div class="media-body">
-                                <h4 class="media-heading">Thanakit Mahamutjinda</h4>
-                            </div>
-                        </div>
-                        <div class="media col-md-4">
-                            <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
-                            <div class="media-body">
-                                <h4 class="media-heading">Nitiwit Wungwiwatna</h4>
-                            </div>
-                        </div>
-                        <div class="media col-md-4">
-                            <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
-                            <div class="media-body">
-                                <h4 class="media-heading">Thanapan Suwankanit</h4>
-                            </div>
-                        </div>
-                        <div class="media col-md-4">
-                            <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
-                            <div class="media-body">
-                                <h4 class="media-heading" >Panawut Ittitananun</h4>
-                            </div>
-                        </div>
-                        <div class="media col-md-4">
-                            <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
-                            <div class="media-body">
-                                <h4 class="media-heading">Thanakit Mahamutjinda</h4>
-                            </div>
-                        </div>
-                        <div class="media col-md-4">
-                            <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
-                            <div class="media-body">
-                                <h4 class="media-heading" >Panawut Ittitananun</h4>
-                            </div>
-                        </div>
-                        <div class="media col-md-4">
-                            <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
-                            <div class="media-body">
-                                <h4 class="media-heading">Thanakit Mahamutjinda</h4>
-                            </div>
-                        </div>
-                        <div style="clear: both;padding-top: 20px;">
-                            <form action="" id="groupmember">
-                                <label><h4><span id="count"></span> seleted</h4> </label><br>
-                                <input type="submit" value="Submit !" class="btn btn-primary">
-                            </form>
-                        </div>
-                    </div>
+                        </c:when>
+                    </c:choose>
+
                 </div>
             </div>
         </div>
@@ -132,13 +140,13 @@
                 var count = 0;
                 $(".media").click(function() {
                     var iconok = ' <span class="text-success"><i class="member-selected glyphicon glyphicon-ok-circle"></i></span>';
-                    var hiddenVar ='<input type="hidden" name="member" value="1">'
+                    var hiddenVar = '<input type="hidden" name="member" value="1">'
                     if ($(this).find("div .member-selected").length == 0) {
                         $(this).find("div").prepend(iconok);
                         $("#groupmember").append(hiddenVar);
                         count++;
-                    }else{
-                         $(this).find("div .member-selected").remove();
+                    } else {
+                        $(this).find("div .member-selected").remove();
                         $("#groupmember").find("input[value='1']").remove();
                         count--;
                     }
