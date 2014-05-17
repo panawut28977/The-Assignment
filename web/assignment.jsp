@@ -52,6 +52,19 @@
                     </div>
                     <div class="col-md-5 well"> 
                         <c:choose>
+                            <c:when test="${sessionScope.accType eq 'th'}">
+                                <c:choose>
+                                    <c:when  test="${param.wo eq 'f'}">
+                                        <c:set value="file" var="wkt" />
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:set value="web" var="wkt" />
+                                    </c:otherwise>
+                                </c:choose> s
+                                <a href="http://localhost:8084/TheAssignment/SendedAssignment.jsp?tab=AllAssignment&&wkt=${wkt}" style="text-align: center;text-decoration: none" class="center-block">
+                                    <span class="glyphicon glyphicon-check center-block" style="font-size: 150px;margin: 40px auto;"></span><h4>Go to check : ) !</h4>
+                                </a>
+                            </c:when>
                             <c:when test="${param.wo eq 'f'}">
                                 <a href="file/chap 8.docx" style="text-align: center;text-decoration: none" class="center-block">
                                     <span class="glyphicon glyphicon-file center-block" style="font-size: 150px;margin: 40px auto;"></span><h4>Download</h4>

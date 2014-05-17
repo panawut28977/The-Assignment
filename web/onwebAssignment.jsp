@@ -278,7 +278,7 @@
                     return;
                 }
 
-                var room = connection.room('lobby');
+                var room = connection.room('lobby1');
 
                 // Create a new instance of the Notifications widget
                 var notifications = new goinstant.widgets.Notifications();
