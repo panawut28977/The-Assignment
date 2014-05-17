@@ -6,5 +6,5 @@
 
 
 $(function(){
-   $("img").addClass("img-circle"); 
+   $("img[class!='qrcode']").addClass("img-circle");
 });
