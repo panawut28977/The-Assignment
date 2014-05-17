@@ -14,82 +14,84 @@
 <c:if test="${sessionScope.accType eq 'th'}"> 
     <a class="btn btn-primary"  href="CreateAssignment.jsp?tab=AllAssignment" style="margin-top: 20px"><span class="glyphicon glyphicon-plus-sign"></span> Create Assignment</a>
 </c:if>
-<table class="table table-striped" id="AllAssignemnt">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Course</th>
-            <th>Due Date</th>
-            <th>Work on</th>
-            <th>Member(s)</th>
-            <th>Status</th>
-            <c:choose>
-                <c:when test="${sessionScope.accType eq 'st'}">
-                    <th></th>
-                </c:when>
-                <c:otherwise>
-                    <th>Sent</th>
-                </c:otherwise>
-            </c:choose>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Assignment# 1</td>
-            <td><a href="assignment.jsp?tab=AllAssignment&&wo=f">INT202 Software Development Process II</a></td>
-            <td>31/2/2554</td>
-            <td>File</td> 
-            <td>Individual</td>
-            <td><span class="text-danger">Late</span></td>
-            <td>
-                <c:choose>
-                    <c:when test="${sessionScope.accType eq 'st'}">
-                        <a title="Send Assignment File" href="uploadAssignment.jsp?tab=AllAssignment">
-                            <span class="glyphicon glyphicon-upload"></span>
-                        </a>
-                    </c:when>
-                    <c:otherwise><a href="SendedAssignment.jsp?tab=AllAssignment&&wkt=file">10</a></c:otherwise>
-                </c:choose> 
-            </td>
-        </tr>
-        <tr>
-            <td>Assignment# 2 .....</td>
-            <td><a href="assignment.jsp?tab=AllAssignment&&wo=f">INT202 Software Development Process II</a></td>
-            <td>13/01/2554</td>
-            <td>File</td>
-            <td><a href="groupWork.jsp?tab=AllAssignment">2</a></td>
-            <td><span class="text-success">on time</span></td>
-            <td>
-                <c:choose>
-                    <c:when test="${sessionScope.accType eq 'st'}">
-                        <a title="Send Assignment File" href="uploadAssignment.jsp?tab=AllAssignment">
-                            <span class="glyphicon glyphicon-upload"></span>
-                        </a>
-                    </c:when>
-                    <c:otherwise><a href="SendedAssignment.jsp?tab=AllAssignment&&wkt=file">5</a></c:otherwise>
-                </c:choose>
-            </td>
-        </tr>
-        <tr>
-            <td>Assignment# 3 .....</td>
-            <td><a href="assignment.jsp?tab=AllAssignment">INT202 Software Development Process II</a></td>
-            <td>13/08/2556</td>
-            <td>On Web</td>
-            <td><a href="groupWork.jsp?tab=AllAssignment">3</a></td>
-            <td><span class="text-success">on time</span></td>
-            <td>
-                <c:choose>
-                    <c:when test="${sessionScope.accType eq 'st'}">
-                        <a href="onwebAssignment.jsp?tab=AllAssignment" title="Do it on web">
-                            <span class="glyphicon glyphicon-upload"></span>
-                        </a>
-                    </c:when>
-                    <c:otherwise><a href="SendedAssignment.jsp?tab=AllAssignment&&wkt=web">0</a></c:otherwise>
-                </c:choose>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<div class="table-responsive">
+    <table class="table table-striped" id="AllAssignemnt">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Course</th>
+                <th>Due Date</th>
+                <th>Work on</th>
+                <th>Member(s)</th>
+                <th>Status</th>
+                    <c:choose>
+                        <c:when test="${sessionScope.accType eq 'st'}">
+                        <th></th>
+                        </c:when>
+                        <c:otherwise>
+                        <th>Sent</th>
+                        </c:otherwise>
+                    </c:choose>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Assignment# 1</td>
+                <td><a href="assignment.jsp?tab=AllAssignment&&wo=f">INT202 Software Development Process II</a></td>
+                <td>31/2/2554</td>
+                <td><i class="glyphicon glyphicon-file"></i> File</td> 
+                <td>Individual</td>
+                <td><span class="text-danger">Late</span></td>
+                <td>
+                    <c:choose>
+                        <c:when test="${sessionScope.accType eq 'st'}">
+                            <a title="Send Assignment File" href="uploadAssignment.jsp?tab=AllAssignment">
+                                <span class="glyphicon glyphicon-upload"></span>
+                            </a>
+                        </c:when>
+                        <c:otherwise><a href="SendedAssignment.jsp?tab=AllAssignment&&wkt=file">10</a></c:otherwise>
+                    </c:choose> 
+                </td>
+            </tr>
+            <tr>
+                <td>Assignment# 2 .....</td>
+                <td><a href="assignment.jsp?tab=AllAssignment&&wo=f">INT202 Software Development Process II</a></td>
+                <td>13/01/2554</td>
+                <td><i class="glyphicon glyphicon-file"></i> File</td>
+                <td><a href="groupWork.jsp?tab=AllAssignment">2</a></td>
+                <td><span class="text-success">on time</span></td>
+                <td>
+                    <c:choose>
+                        <c:when test="${sessionScope.accType eq 'st'}">
+                            <a title="Send Assignment File" href="uploadAssignment.jsp?tab=AllAssignment">
+                                <span class="glyphicon glyphicon-upload"></span>
+                            </a>
+                        </c:when>
+                        <c:otherwise><a href="SendedAssignment.jsp?tab=AllAssignment&&wkt=file">5</a></c:otherwise>
+                    </c:choose>
+                </td>
+            </tr>
+            <tr>
+                <td>Assignment# 3 .....</td>
+                <td><a href="assignment.jsp?tab=AllAssignment">INT202 Software Development Process II</a></td>
+                <td>13/08/2556</td>
+                <td><i class="glyphicon glyphicon-list-alt"></i> Web</td>
+                <td><a href="groupWork.jsp?tab=AllAssignment">3</a></td>
+                <td><span class="text-success">on time</span></td>
+                <td>
+                    <c:choose>
+                        <c:when test="${sessionScope.accType eq 'st'}">
+                            <a href="onwebAssignment.jsp?tab=AllAssignment" title="Do it on web">
+                                <span class="glyphicon glyphicon-upload"></span>
+                            </a>
+                        </c:when>
+                        <c:otherwise><a href="SendedAssignment.jsp?tab=AllAssignment&&wkt=web">0</a></c:otherwise>
+                    </c:choose>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 <hr>
 <div id='calendar' style="margin-bottom: 20px"></div>
 <script src="module/fullcalendar/fullcalendar.min.js"></script>

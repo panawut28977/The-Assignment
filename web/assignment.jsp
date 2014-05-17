@@ -76,7 +76,17 @@
                             </tr>
                             <tr>
                                 <td><b>Work on</b></td>
-                                <td><span class="glyphicon glyphicon-file"></span> File</td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${param.wo eq 'f'}">
+                                            <span class="glyphicon glyphicon-file"></span> File
+                                        </c:when>
+                                        <c:otherwise>
+                                            <span class="glyphicon glyphicon-list-alt"></span> Web
+                                        </c:otherwise>
+                                    </c:choose>
+                                    
+                                </td>
                             </tr>
                             <tr>
                                 <td><b>Member</b></td>
