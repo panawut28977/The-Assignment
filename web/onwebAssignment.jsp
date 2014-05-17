@@ -16,9 +16,13 @@
         <script type="text/javascript" src="https://cdn.goinstant.net/v1/platform.min.js"></script>
         <script type="text/javascript" src="https://cdn.goinstant.net/widgets/user-list/latest/user-list.min.js"></script>
         <script type="text/javascript" src="https://cdn.goinstant.net/widgets/form/latest/form.min.js"></script>
+        <script type="text/javascript" src="https://cdn.goinstant.net/widgets/click-indicator/latest/click-indicator.min.js"></script>
+        <script type="text/javascript" src="https://cdn.goinstant.net/widgets/notifications/latest/notifications.min.js"></script>
         <!-- CSS is optional -->
         <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/user-list/latest/user-list.css" />
         <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/form/latest/form.css" />
+        <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/click-indicator/latest/click-indicator.css" />
+        <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/notifications/latest/notifications.css" />
         <title>On web Assignment ...</title>
         <style>
             #pvVs{
@@ -211,6 +215,19 @@
                 </div>
             </div>
         </div>
+        <div class="gi-override gi-click-container">
+            <div class="gi-click">
+                <div class="gi-cursor">
+                    <!-- Cursor image background -->
+                </div>
+                <div class="gi-animation">
+                    <!-- Click animation image background-->
+                </div>
+                <div class="gi-name">
+                    <!-- User's display name -->
+                </div>
+            </div>
+        </div>
     </body>
     <script>
         $(function() {
@@ -234,6 +251,18 @@
                 }
 
                 var room = connection.room('lobby');
+
+                // Create a new instance of the Notifications widget
+                var notifications = new goinstant.widgets.Notifications();
+
+                // Get all notifications
+                notifications.subscribe(room, function(err) {
+                    if (err) {
+                        throw err;
+                    }
+                    // We're now receiving notifications
+                });
+                
                 room.join({displayName: 'Custom'}, function(err, yourRoom, userData) {
                     if (err) {
                         console.log("Error joining room:", err);
@@ -290,21 +319,56 @@
                         // Your form should now be initialized!
                     });
 
+                    // Create a new instance of the Click Indicator widget
+                    var clickIndicator = new goinstant.widgets.ClickIndicator({room: yourRoom});
 
-
-
+                    // Initialize the Click Indicator widget
+                    clickIndicator.initialize(function(err) {
+                        if (err) {
+                            throw err;
+                        }
+                        // Click Indicator widget ready to use
+                    });
 
                     console.log("Your name is " + userData.displayName); // "Your name is Custom"
                 });
 
                 // The listener will fire everytime a user leaves the Room
                 room.on('leave', function(userData) {
-                    alert('user' + userData.displayName + 'left the lobby!');
+                    // Set options for the notification we're about to publish
+                    var options = {
+                        room: room,
+                        type: 'success',
+                        message: 'user'+ userData.displayName + ' left the lobby!',
+                        displayToSelf: true
+                    };
+
+                    // Send a single notification
+                    notifications.publish(options, function(err) {
+                        if (err) {
+                            throw err;
+                        }
+                        // Notification has been sent
+                    });
                 });
 
                 // The listener will fire every time another user joins the room
                 room.on('join', function(userData) {
-                    alert('user' + userData.displayName + 'join the lobby!');
+                     // Set options for the notification we're about to publish
+                    var options = {
+                        room: room,
+                        type: 'success',
+                        message: 'user ' + userData.displayName + ' join the lobby!',
+                        displayToSelf: true
+                    };
+
+                    // Send a single notification
+                    notifications.publish(options, function(err) {
+                        if (err) {
+                            throw err;
+                        }
+                        // Notification has been sent
+                    });
                 });
 
             });

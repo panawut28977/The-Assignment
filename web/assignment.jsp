@@ -50,15 +50,19 @@
                         <h3 class="">Assignment# 1....</h3>
                         <small class="text-muted">Created date : 13/08/2556 23:55:00 </small><br>   
                     </div>
-                    <div class="col-md-5 well">
+                    <div class="col-md-5 well"> 
                         <c:choose>
                             <c:when test="${param.wo eq 'f'}">
-                                <a href="file/chap 8.docx" style="text-align: center;text-decoration: none" class="center-block"><span class="glyphicon glyphicon-file center-block" style="font-size: 150px;margin: 40px auto;"></span><h4>Download</h4></a>
-                                    </c:when>
-                                    <c:otherwise>
-                                <a href="onwebAssignment.jsp?tab=AllAssignment<c:if test="${param.ct eq 'allAm'}">&&ct=allAm</c:if>" style="text-align: center;text-decoration: none" class="center-block"><span class="glyphicon glyphicon-upload center-block" style="font-size: 150px;margin: 40px auto;"></span><h4>Let's do it.</h4></a>
-                                    </c:otherwise>
-                                </c:choose>
+                                <a href="file/chap 8.docx" style="text-align: center;text-decoration: none" class="center-block">
+                                    <span class="glyphicon glyphicon-file center-block" style="font-size: 150px;margin: 40px auto;"></span><h4>Download</h4>
+                                </a>
+                            </c:when>
+                            <c:otherwise>
+                                <a href="onwebAssignment.jsp?tab=AllAssignment<c:if test="${param.ct eq 'allAm'}">&&ct=allAm</c:if>" style="text-align: center;text-decoration: none" class="center-block">
+                                        <span class="glyphicon glyphicon-upload center-block" style="font-size: 150px;margin: 40px auto;"></span><h4>Let's do it.</h4>
+                                    </a>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                     <div class="col-md-7">
                         <table class="table">
