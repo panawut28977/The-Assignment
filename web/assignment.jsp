@@ -60,7 +60,7 @@
                                     <c:otherwise>
                                         <c:set value="web" var="wkt" />
                                     </c:otherwise>
-                                </c:choose> s
+                                </c:choose>
                                 <a href="http://localhost:8084/TheAssignment/SendedAssignment.jsp?tab=AllAssignment&&wkt=${wkt}" style="text-align: center;text-decoration: none" class="center-block">
                                     <span class="glyphicon glyphicon-check center-block" style="font-size: 150px;margin: 40px auto;"></span><h4>Go to check : ) !</h4>
                                 </a>
