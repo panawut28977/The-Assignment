@@ -2,8 +2,8 @@
 <c:if test="${param.cId != null && param.Cid != ''}"><c:set var="cId" value="${param.cId}" scope="session" /></c:if> 
 <div class="col-md-3">
     <div class="row userbox">
-        <img class="col-md-4" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
-        <div class="col-md-8">
+        <img class="col-md-4 center-block" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+        <div class="col-md-8 " style="text-align: center">
             <h4>Panawut Ittitananun</h4>
         </div>
         <div class="statusbox " style="clear: both;background-color: #F8F8F8;padding-top: 20px;" >

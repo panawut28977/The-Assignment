@@ -18,11 +18,13 @@
         <script type="text/javascript" src="https://cdn.goinstant.net/widgets/form/latest/form.min.js"></script>
         <script type="text/javascript" src="https://cdn.goinstant.net/widgets/click-indicator/latest/click-indicator.min.js"></script>
         <script type="text/javascript" src="https://cdn.goinstant.net/widgets/notifications/latest/notifications.min.js"></script>
+        <script type="text/javascript" src="https://cdn.goinstant.net/widgets/chat/latest/chat.min.js"></script>
         <!-- CSS is optional -->
         <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/user-list/latest/user-list.css" />
         <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/form/latest/form.css" />
         <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/click-indicator/latest/click-indicator.css" />
         <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/notifications/latest/notifications.css" />
+        <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/chat/latest/chat.css" />
         <title>On web Assignment ...</title>
         <style>
             #pvVs{
@@ -164,7 +166,7 @@
                         </div>
                     </div>
                     <div style="clear: both;padding: 10px 0"></div> 
-                    <h3>Comment</h3>
+                    <h3>Teacher Comment</h3>
                     <div class="media">
                         <a class="pull-left" href="#">
                             <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
@@ -215,6 +217,31 @@
                 </div>
             </div>
         </div>
+
+        <div class="gi-chat gi-override">
+            <div class="gi-collapse-wrapper">
+                <div class="gi-collapse">
+                    <span class="gi-icon"></span>
+                </div>
+            </div>
+            <div class="gi-chat-wrapper">
+                <ul class="gi-message-list">
+                    <li class="gi-message">
+                        <div class="gi-color"></div>
+                        <div class="gi-avatar">
+                            <img class="gi-avatar-img" src="http://YOURDOMAIN.com/YOURAVATAR.png">
+                        </div>
+                        <div class="gi-name">Guest</div>
+                        <div class="gi-text">Hi</div>
+                        <span class="gi-time">Monday, 1:10 pm</span>
+                    </li>
+                </ul>
+                <div class="gi-message-form">
+                    <input class="gi-message-input" type="text">
+                    <button class="gi-message-btn">Send</button>
+                </div>
+            </div>
+        </div>
         <div class="gi-override gi-click-container">
             <div class="gi-click">
                 <div class="gi-cursor">
@@ -229,6 +256,7 @@
             </div>
         </div>
     </body>
+
     <script>
         $(function() {
             $("#pvVersionTable").hide();
@@ -237,10 +265,10 @@
                 $(this).find("span").toggleClass("glyphicon-chevron-down");
             });
             $('.multiselect').multiselect();
+            $(".gi-chat ").hide();
+            $(".gi-click-container ").hide();
+
             // Connect URL
-
-
-
             var url = 'https://goinstant.net/701ad7c04624/CollaborateAssignment';
 
             var connection = new goinstant.Connection(url);
@@ -262,7 +290,7 @@
                     }
                     // We're now receiving notifications
                 });
-                
+
                 room.join({displayName: 'Custom'}, function(err, yourRoom, userData) {
                     if (err) {
                         console.log("Error joining room:", err);
@@ -284,22 +312,19 @@
                         if (err) {
                             throw err;
                         }
-//                        var name = '';
-//                        var user = '';
-//                        for (i = 0; i < 4; i++) {
-//                            name = 'name' + i;
-//                            user = '<li class="gi-user" data-goinstant-id="1234">'
-//                                    + '    <div class="gi-color">'
-//                                    + '        <div class="gi-avatar">'
-//                                    + '            <img class="gi-avatar-img">'
-//                                    + '        </div>'
-//                                    + '    </div>'
-//                                    + '    <div class="gi-name">'
-//                                    + '        <span>' + name + '</span>'
-//                                    + '    </div>'
-//                                    + '</li>';
-//                            $(".gi-inner").append(user);
-//                        }
+                    });
+
+                    // Create a new instance of the Chat widget
+                    var chat = new goinstant.widgets.Chat({
+                        room: yourRoom
+                    });
+
+                    // Initialize the Chat widget
+                    chat.initialize(function(err) {
+                        if (err) {
+                            throw err;
+                        }
+                        // Now it should render on the page
                     });
 
                     // Create a key to store the form data
@@ -338,8 +363,8 @@
                     // Set options for the notification we're about to publish
                     var options = {
                         room: room,
-                        type: 'success',
-                        message: 'user'+ userData.displayName + ' left the lobby!',
+                        type: 'warning',
+                        message: 'user' + userData.displayName + ' left the lobby!',
                         displayToSelf: true
                     };
 
@@ -354,7 +379,7 @@
 
                 // The listener will fire every time another user joins the room
                 room.on('join', function(userData) {
-                     // Set options for the notification we're about to publish
+                    // Set options for the notification we're about to publish
                     var options = {
                         room: room,
                         type: 'success',
