@@ -101,7 +101,6 @@
             .row .col-md-4{
                 height: 64px;
                 text-align: center;
-                padding-top: 16px;
             }
         </style>
     </c:otherwise>

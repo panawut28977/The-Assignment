@@ -36,8 +36,8 @@
         </thead>
         <tbody>
             <tr>
-                <td>Assignment# 1</td>
-                <td><a href="assignment.jsp?tab=AllAssignment&&wo=f">INT202 Software Development Process II</a></td>
+                <td><a href="assignment.jsp?tab=AllAssignment&&wo=f">Assignment# 1</a></td>
+                <td>INT202 Software Development Process II</td>
                 <td>31/2/2554</td>
                 <td><i class="glyphicon glyphicon-file"></i> File</td> 
                 <td>Individual</td>
@@ -54,8 +54,8 @@
                 </td>
             </tr>
             <tr>
-                <td>Assignment# 2 .....</td>
-                <td><a href="assignment.jsp?tab=AllAssignment&&wo=f">INT202 Software Development Process II</a></td>
+                <td><a href="assignment.jsp?tab=AllAssignment&&wo=f">Assignment# 2 .....</a></td>
+                <td>INT202 Software Development Process II</td>
                 <td>13/01/2554</td>
                 <td><i class="glyphicon glyphicon-file"></i> File</td>
                 <td><a href="groupWork.jsp?tab=AllAssignment">2</a></td>
@@ -72,8 +72,8 @@
                 </td>
             </tr>
             <tr>
-                <td>Assignment# 3 .....</td>
-                <td><a href="assignment.jsp?tab=AllAssignment">INT202 Software Development Process II</a></td>
+                <td><a href="assignment.jsp?tab=AllAssignment">Assignment# 3 .....</a></td>
+                <td>INT202 Software Development Process II</td>
                 <td>13/08/2556</td>
                 <td><i class="glyphicon glyphicon-list-alt"></i> Web</td>
                 <td><a href="groupWork.jsp?tab=AllAssignment">3</a></td>
@@ -85,7 +85,7 @@
                                 <span class="glyphicon glyphicon-upload"></span>
                             </a>
                         </c:when>
-                        <c:otherwise><a href="SendedAssignment.jsp?tab=AllAssignment&&wkt=web">0</a></c:otherwise>
+                        <c:otherwise><a href="SendedAssignment.jsp?tab=AllAssignment&&wkt=web">10</a></c:otherwise>
                     </c:choose>
                 </td>
             </tr>
@@ -114,49 +114,17 @@
             },
             editable: true,
             events: [
-                {
-                    title: 'All Day Event',
-                    start: new Date(y, m, 1)
+               {
+                    title: 'Assignment# 1 ..... - INT202 Software Development Process II',
+                    start: date
                 },
                 {
-                    title: 'Long Event',
+                    title: 'Assignment# 2 ..... - INT202 Software Development Process II',
                     start: new Date(y, m, d - 5),
-                    end: new Date(y, m, d - 2)
                 },
                 {
-                    id: 999,
-                    title: 'Repeating Event',
+                    title: 'Assignment# 3 ..... - INT202 Software Development Process II',
                     start: new Date(y, m, d - 3, 16, 0),
-                    allDay: false
-                },
-                {
-                    id: 999,
-                    title: 'Repeating Event',
-                    start: new Date(y, m, d + 4, 16, 0),
-                    allDay: false
-                },
-                {
-                    title: 'Meeting',
-                    start: new Date(y, m, d, 10, 30),
-                    allDay: false
-                },
-                {
-                    title: 'Lunch',
-                    start: new Date(y, m, d, 12, 0),
-                    end: new Date(y, m, d, 14, 0),
-                    allDay: false
-                },
-                {
-                    title: 'Birthday Party',
-                    start: new Date(y, m, d + 1, 19, 0),
-                    end: new Date(y, m, d + 1, 22, 30),
-                    allDay: false
-                },
-                {
-                    title: 'Click for Google',
-                    start: new Date(y, m, 28),
-                    end: new Date(y, m, 29),
-                    url: 'http://google.com/'
                 }
             ]
         });

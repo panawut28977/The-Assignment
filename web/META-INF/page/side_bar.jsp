@@ -1,4 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<style>
+    .statusbox div{
+        color: white;
+    }
+</style>
 <c:if test="${param.cId != null && param.Cid != ''}"><c:set var="cId" value="${param.cId}" scope="session" /></c:if> 
 <div class="col-md-3">
     <div class="row userbox">

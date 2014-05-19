@@ -98,7 +98,7 @@
                                             <span class="glyphicon glyphicon-list-alt"></span> Web
                                         </c:otherwise>
                                     </c:choose>
-                                    
+
                                 </td>
                             </tr>
                             <tr>
@@ -106,16 +106,18 @@
                                 <td>Individual</td>
                             </tr>
                             <tr>
-                                <c:choose>
-                                    <c:when test="${param.wo eq 'f'}">
-                                        <td><button class="btn btn-primary"><span class="glyphicon glyphicon-upload"></span> Update</button></td>
-                                        <td><button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <td><button class="btn btn-primary"><span class="glyphicon glyphicon-upload"></span> Edit</button></td>
-                                        <td><button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
-                                    </c:otherwise>
-                                </c:choose>
+                                <c:if test="${sessionScope.accType eq 'th'}">
+                                    <c:choose>
+                                        <c:when test="${param.wo eq 'f'}">
+                                            <td><button class="btn btn-primary"><span class="glyphicon glyphicon-upload"></span> Update</button></td>
+                                            <td><button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <td><button class="btn btn-primary"><span class="glyphicon glyphicon-upload"></span> Edit</button></td>
+                                            <td><button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:if>
                             </tr>
                         </table>
                     </div>

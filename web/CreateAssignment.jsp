@@ -35,6 +35,10 @@
                 margin-right: 10px;
                 margin-bottom: 10px; 
             }
+            
+            .fillInBlankBox:hover{
+                cursor: pointer;
+            }
         </style>
 
         <%@include file="META-INF/page/include_js.jsp" %>
@@ -170,7 +174,7 @@
                             <div class="col-md-10 col-md-offset-1" id="CreateAmOnweb">
                                 <input type="text" class="form-control" placeholder="Assignment Title">
                                 <br>
-                                <p id="AmDescription">Assignment Description</p>
+                                <p id="AmDescription"></p>
                                 <div class="amQuestion">
                                     <!--<div class="multipleChoice">
                                         <hr>
@@ -303,7 +307,7 @@
                                 </div>
                                 <div class="btn-group dropup center-block" >
                                     <hr>
-                                    <button type="button" class="btn btn-default" onclick="addQuestion()"><span class="glyphicon glyphicon-plus-sign"></span> Add Question</button>
+                                    <button type="button" class="btn btn-default" onclick="addQuestion()" id="addq" ><span class="glyphicon glyphicon-plus-sign"></span> Add Question</button>
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                         <span class="caret"></span>
                                         <span class="sr-only">Toggle Dropdown</span>
@@ -317,6 +321,11 @@
                                     </ul>
                                     <button type="button" class="btn btn-default" onclick="addTitle()" style="margin-left: 20px;"> Add Instruction</button>
                                 </div> 
+                            </div>
+                        </section>
+                        <section class="step" data-step-title="Complete and preview">
+                            <div class="col-md-8 col-md-offset-2">
+                                <h1 class="text-muted">Preview Comming soon !!</h1>
                             </div>
                         </section>
                     </form>
@@ -357,6 +366,10 @@
                                                     $('#CreateAmOnweb').show();
                                                     $('#uploadAmFile').hide();
                                                 }
+                                            });
+
+                                            $("#description").change(function() {
+                                                $("#AmDescription").text($(this).val());
                                             });
 
                                             $(document).on("change", "#multiple_type", function() {
@@ -468,12 +481,25 @@
                                         }
 
                                         var amCurrentType = 'multi';
+                                        var button_text = '';
                                         function setType(type) {
                                             amCurrentType = type;
+                                            if (amCurrentType == 'multi') {
+                                                button_text = '<img src="img/icon/multiple.gif"> Multiple Choice';
+                                            } else if (amCurrentType == 'tf') {
+                                                button_text = '<img src="img/icon/trueFalse.gif"> True/False';
+                                            } else if (amCurrentType == 'match') {
+                                                button_text = ' <img src="img/icon/matching.png"> Match word';
+                                            } else if (amCurrentType == 'fill') {
+                                                button_text = '<img src="img/icon/fill.gif"> Fill in Blank';
+                                            } else if (amCurrentType == 'ep') {
+                                                button_text = '<img src="img/icon/explain.gif"> Explain'
+                                            }
+                                            $("#addq").html(button_text);
                                         }
 
                                         var total_q = 1;
-                                        function addQuestion() {
+                                        function addQuestion(t) {
                                             var question = '<div class="multipleChoice">'
                                                     + '          <hr>'
                                                     + '          <div class="q_no">'
@@ -530,8 +556,8 @@
                                                         + '    <div class="form-group">'
                                                         + '        <label class="col-md-3 control-label">Choice <br><span class="text-danger">(Don\'t forget to select answer)</span></label>'
                                                         + '        <div class="col-md-8">'
-                                                        + '            <input type="radio" name="c_ans"> Yes'
-                                                        + '            <input type="radio" name="c_ans"> No'
+                                                        + '            <input type="radio" name="c_ans"> True'
+                                                        + '            <input type="radio" name="c_ans"> False'
                                                         + '        </div>'
                                                         + '    </div>'
                                                         + '    <div class="form-group">'
@@ -579,7 +605,7 @@
                                                         + '    <div class="form-group">'
                                                         + '        <label  class="col-md-3 control-label">Question Text</label>'
                                                         + '        <div class="col-md-9">'
-                                                        + '            <textarea class="form-control"  ></textarea>'
+                                                        + '            <textarea class="form-control fillInBlankBox"  ></textarea>'
                                                         + '            <br>'
                                                         + '            <a class=" btn btn-default" onclick="addAnswer(this)">Add Answer</a>'
                                                         + '        </div>'

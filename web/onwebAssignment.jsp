@@ -269,7 +269,7 @@
             $(".gi-click-container ").hide();
 
             // Connect URL
-            var url = 'https://goinstant.net/701ad7c04624/CollaborateAssignment';
+            /*var url = 'https://goinstant.net/701ad7c04624/CollaborateAssignment';
 
             var connection = new goinstant.Connection(url);
             connection.connect(function(err) {
@@ -395,10 +395,7 @@
                         // Notification has been sent
                     });
                 });
-
-            });
-
-
+            });*/
         });
     </script>
 </html> 

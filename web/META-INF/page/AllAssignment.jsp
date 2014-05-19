@@ -25,54 +25,54 @@
         </thead>
         <tbody>
             <tr>
-                <td>Assignment# 1 .....</td>
-                <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment&&wo=f">INT202 Software Development Process II</a></td>
-                <td>31/2/2554</td>
+                <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment&&wo=f">Assignment# 1 .....</a></td>
+                <td>INT202 Software Development Process II</td>
+                <td>11/05/2557</td>
                 <td><i class="glyphicon glyphicon-file"></i> File</td> 
                 <td>Individual</td>
                 <td><span class="text-danger">Late</span></td>
                 <td><a title="Send Assignment File" href="uploadAssignment.jsp?ct=allAm&&tab=AllAssignment"><span class="glyphicon glyphicon-upload"></span></a></td>
             </tr>
             <tr>
-                <td>Assignment# 2 .....</td>
-                <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment&&wo=f">INT202 Software Development Process II</a></td>
-                <td>13/01/2554</td>
+                <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment&&wo=f">Assignment# 2 .....</a></td>
+                <td>INT202 Software Development Process II</td>
+                <td>18/05/2557</td>
                 <td><i class="glyphicon glyphicon-file"></i> File</td>
                 <td><a href="groupWork.jsp?ct=allAm&&tab=AllAssignment">2</a></td>
                 <td><span class="text-success">on time</span></td>
                 <td><a title="Send Assignment File" href="uploadAssignment.jsp?ct=allAm&&tab=AllAssignment"><span class="glyphicon glyphicon-upload"></span></a></td>
             </tr>
             <tr>
-                <td>Assignment# 3 .....</td>
-                <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment">INT202 Software Development Process II</a></td>
-                <td>13/08/2556</td>
+                <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment">Assignment# 3 .....</a></td>
+                <td>INT202 Software Development Process II</td>
+                <td>22/05/2557</td>
                 <td><i class="glyphicon glyphicon-list-alt"></i> Web</td>
                 <td><a href="groupWork.jsp?ct=allAm&&tab=AllAssignment">3</a></td>
                 <td><span class="text-success">on time</span></td>
                 <td><a href="onwebAssignment.jsp?ct=allAm&&tab=AllAssignment" title="Do it on web"><span class="glyphicon glyphicon-upload"></span></a></td>
             </tr>
             <tr>
-                <td>Assignment# 1 .....</td>
-                <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment&&wo=f">INT103 Office</a></td>
-                <td>31/2/2554</td>
+                <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment&&wo=f">Assignment# 1 .....</a></td>
+                <td>INT103 Office</td>
+                <td>25/05/2557</td>
                 <td><i class="glyphicon glyphicon-file"></i> File</td>
                 <td>Individual</td>
                 <td><span class="text-warning">Hurry up</td>
                 <td><a title="Send Assignment File" href="uploadAssignment.jsp?ct=allAm&&tab=AllAssignment"><span class="glyphicon glyphicon-upload"></span></a></td>
             </tr>
             <tr>
-                <td>Assignment# 2 .....</td>
-                <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment&&wo=f">INT103 Office</a></td>
-                <td>13/01/2554</td>
+                <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment&&wo=f">Assignment# 2 .....</a></td>
+                <td>INT103 Office</td>
+                <td>7/05/2557</td>
                 <td><i class="glyphicon glyphicon-file"></i> File</td>
                 <td>Individual</td>
                 <td><span class="text-muted">Sent <span class="glyphicon glyphicon-check"></span></span></td>
                 <td><a title="Send Assignment File" href="uploadAssignment.jsp?ct=allAm&&tab=AllAssignment"><span class="glyphicon glyphicon-upload"></span></a></td>
             </tr>
             <tr>
-                <td>Assignment# 3 .....</td>
-                <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment">INT103 Office</a></td>
-                <td>13/08/2556</td>
+                <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment">Assignment# 3 .....</a></td>
+                <td>INT103 Office</td>
+                <td>2/05/2557</td>
                 <td><i class="glyphicon glyphicon-list-alt"></i> Web</td>
                 <td><a href="groupWork.jsp?ct=allAm&&tab=AllAssignment">5</a></td> 
                 <td><span class="text-success">on time</span></td>
@@ -94,7 +94,7 @@
         var d = date.getDate();
         var m = date.getMonth();
         var y = date.getFullYear();
-
+        
         $('#calendar').fullCalendar({
             header: {
                 left: 'prev,next today',
@@ -104,48 +104,28 @@
             editable: true,
             events: [
                 {
-                    title: 'All Day Event',
-                    start: new Date(y, m, 1)
+                    title: 'Assignment# 1 ..... - INT202 Software Development Process II',
+                    start: date
                 },
                 {
-                    title: 'Long Event',
+                    title: 'Assignment# 2 ..... - INT202 Software Development Process II',
                     start: new Date(y, m, d - 5),
-                    end: new Date(y, m, d - 2)
                 },
                 {
-                    id: 999,
-                    title: 'Repeating Event',
+                    title: 'Assignment# 3 ..... - INT202 Software Development Process II',
                     start: new Date(y, m, d - 3, 16, 0),
-                    allDay: false
                 },
                 {
-                    id: 999,
-                    title: 'Repeating Event',
+                    title: 'Assignment# 2 ..... - INT103 Office',
                     start: new Date(y, m, d + 4, 16, 0),
-                    allDay: false
                 },
                 {
-                    title: 'Meeting',
+                    title: 'Assignment# 1 .... - INT103 Office',
                     start: new Date(y, m, d, 10, 30),
-                    allDay: false
                 },
                 {
-                    title: 'Lunch',
+                    title: 'Assignment# 3 .... - INT103 Office',
                     start: new Date(y, m, d, 12, 0),
-                    end: new Date(y, m, d, 14, 0),
-                    allDay: false
-                },
-                {
-                    title: 'Birthday Party',
-                    start: new Date(y, m, d + 1, 19, 0),
-                    end: new Date(y, m, d + 1, 22, 30),
-                    allDay: false
-                },
-                {
-                    title: 'Click for Google',
-                    start: new Date(y, m, 28),
-                    end: new Date(y, m, 29),
-                    url: 'http://google.com/'
                 }
             ]
         });
