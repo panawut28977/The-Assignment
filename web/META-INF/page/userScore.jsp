@@ -21,19 +21,19 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>งานที่ 1</td>
+                    <td>Assignment# 1</td>
                     <td>5/10</td>
                 </tr>
                 <tr>
-                    <td>งานที่ 2</td>
+                    <td>Assignment# 2</td>
                     <td>7/10</td>
                 </tr>
                 <tr>
-                    <td>งานที่ 3</td>
+                    <td>Assignment# 3</td>
                     <td>9/10</td>
                 </tr> 
                 <tr>
-                    <td>งานที่ 4</td>
+                    <td>Assignment# 4</td>
                     <td>5/5</td>
                 </tr>
             </tbody>
@@ -48,9 +48,9 @@
                     <th colspan="3" style="text-align: center"><b>Assignment score</b></th>
                 </tr>
                 <tr>
-                    <th>(10) <abbr title="งานที่ 1 เขียนโค้ดจาว่าซะ">งานที่ 1</abbr></th>
-                    <th>(10) <abbr title="งานที่ 2 เตรียมโปรเจคเว้ยย">งานที่ 2</abbr></th>
-                    <th>(5) <abbr title="งานที่ 3 งานนี้งานดีต้องทำ">งานที่ 3</abbr></th>
+                    <th>(10) <abbr title="งานที่ 1 เขียนโค้ดจาว่าซะ">Assignment# 1</abbr></th>
+                    <th>(10) <abbr title="งานที่ 2 เตรียมโปรเจคเว้ยย">Assignment# 2</abbr></th>
+                    <th>(5) <abbr title="งานที่ 3 งานนี้งานดีต้องทำ">Assignment# 3</abbr></th>
                 </tr>
             </thead>
             <tbody>

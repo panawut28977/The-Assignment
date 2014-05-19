@@ -50,7 +50,7 @@
                             <%@include file="META-INF/page/allCourseTab.jsp"%>
                             <ol class="breadcrumb" style="margin-top: 15px" >
                                 <li><a href="home.jsp?tab=AllAssignment">Assignment</a></li>
-                                <li class="active"><a href="#">งานที่ 1...</a></li>
+                                <li class="active"><a href="#">Assignment# 1...</a></li>
                             </ol>
                         </c:when>
                         <c:otherwise>

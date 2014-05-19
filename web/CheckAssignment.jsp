@@ -53,8 +53,8 @@
                     <%@include file="META-INF/page/CourseTab.jsp"%>
                     <ol class="breadcrumb" style="margin-top: 15px" >
                         <li><a href="course.jsp?tab=AllAssignment">Assignment</a></li>
-                        <li><a href="SendedAssignment.jsp?tab=AllAssignment"">งานที่ 1.....</a></li>
-                        <li class="active"><a href="#">Check งานที่ 1.....</a></li>
+                        <li><a href="SendedAssignment.jsp?tab=AllAssignment"">Assignment# 1.....</a></li>
+                        <li class="active"><a href="#">Check Assignment# 1.....</a></li>
                     </ol>
                     <c:choose>
                         <c:when test="${sessionScope.wkt eq 'file'}">
@@ -69,7 +69,7 @@
                                         <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
                                     </a>
                                     <div class="media-body">
-                                        <h4 class="media-heading">rrrr fff</h4>
+                                        <h4 class="media-heading">Charlette Lemon</h4>
                                     </div>
                                 </div>
                             </div>

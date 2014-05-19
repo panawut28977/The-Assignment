@@ -2,7 +2,7 @@
 <div class="row">
     <c:if test="${sessionScope.accType eq 'st'}">
         <div class="col-md-12" style="margin-top: 12px;">
-            <button class="pull-right btn btn-default">leave course</button>
+            <button class="pull-right btn btn-default">Leave course</button>
         </div>
     </c:if>
     <div class="media col-md-4">

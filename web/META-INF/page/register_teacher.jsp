@@ -3,11 +3,11 @@
         <form role="form">
             <h3>I'm teacher</h3><hr>
             <div class="form-group">
-                <label>Firstname</label>
+                <label>First Name</label>
                 <input type="text" class="form-control" id="firstname" name="firstname" placeholder="E-mail">
             </div>
             <div class="form-group">
-                <label>Lastname</label>
+                <label>Last Name</label>
                 <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Password">
             </div>            
             <div class="form-group">

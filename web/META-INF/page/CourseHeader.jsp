@@ -1,15 +1,15 @@
 <c:choose>
     <c:when test="${sessionScope.accType eq 'st'}">
-        <div><h3>INT202 Software Development Process II </h3></div>
+        <div><h3>INT206 Software Development Process II </h3></div>
     </c:when>
     <c:otherwise>
         <div class="well well-sm">
-            <h3 >INT202 Software Development Process II 
+            <h3 >INT206 Software Development Process II 
                 <div class="dropdown pull-right">
                     <a data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-cog"></span></a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                        <li><a>Edit name</a></li>
-                        <li><a>Delete course</a></li>
+                        <li><a>Edit course name</a></li>
+                        <li><a>Delete this course</a></li>
                     </ul>
                 </div>
             </h3>

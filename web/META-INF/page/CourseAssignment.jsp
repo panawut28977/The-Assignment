@@ -37,7 +37,7 @@
         <tbody>
             <tr>
                 <td><a href="assignment.jsp?tab=AllAssignment&&wo=f">Assignment# 1</a></td>
-                <td>INT202 Software Development Process II</td>
+                <td>INT206 Software Development Process II</td>
                 <td>31/2/2554</td>
                 <td><i class="glyphicon glyphicon-file"></i> File</td> 
                 <td>Individual</td>
@@ -55,7 +55,7 @@
             </tr>
             <tr>
                 <td><a href="assignment.jsp?tab=AllAssignment&&wo=f">Assignment# 2 .....</a></td>
-                <td>INT202 Software Development Process II</td>
+                <td>INT206 Software Development Process II</td>
                 <td>13/01/2554</td>
                 <td><i class="glyphicon glyphicon-file"></i> File</td>
                 <td><a href="groupWork.jsp?tab=AllAssignment">2</a></td>
@@ -73,7 +73,7 @@
             </tr>
             <tr>
                 <td><a href="assignment.jsp?tab=AllAssignment">Assignment# 3 .....</a></td>
-                <td>INT202 Software Development Process II</td>
+                <td>INT206 Software Development Process II</td>
                 <td>13/08/2556</td>
                 <td><i class="glyphicon glyphicon-list-alt"></i> Web</td>
                 <td><a href="groupWork.jsp?tab=AllAssignment">3</a></td>
@@ -115,15 +115,15 @@
             editable: true,
             events: [
                {
-                    title: 'Assignment# 1 ..... - INT202 Software Development Process II',
+                    title: 'Assignment# 1 ..... - INT206 Software Development Process II',
                     start: date
                 },
                 {
-                    title: 'Assignment# 2 ..... - INT202 Software Development Process II',
+                    title: 'Assignment# 2 ..... - INT206 Software Development Process II',
                     start: new Date(y, m, d - 5),
                 },
                 {
-                    title: 'Assignment# 3 ..... - INT202 Software Development Process II',
+                    title: 'Assignment# 3 ..... - INT206 Software Development Process II',
                     start: new Date(y, m, d - 3, 16, 0),
                 }
             ]

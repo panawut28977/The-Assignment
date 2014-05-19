@@ -22,7 +22,7 @@
                     <li class="dropdown"> 
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span><span class="badge">10</span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="notification.jsp?nt=Announcement"><span class="badge pull-right">3</span> Annoucement</a></li>
+                            <li><a href="notification.jsp?nt=Announcement"><span class="badge pull-right">3</span> Announcement</a></li>
                             <li><a href="notification.jsp?nt=Assignment"><span class="badge pull-right">3</span> Assignment</a></li>
                             <li><a href="notification.jsp?nt=Alert"><span class="badge pull-right">2</span> Alert</a></li>
                             <li><a href="notification.jsp?nt=Score"><span class="badge pull-right">2</span> Score</a></li>

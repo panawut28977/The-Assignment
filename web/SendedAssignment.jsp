@@ -32,10 +32,10 @@
                     <%@include file="META-INF/page/CourseTab.jsp"%>
                     <ol class="breadcrumb" style="margin-top: 15px" >
                         <li><a href="course.jsp?tab=AllAssignment">Assignment</a></li>
-                        <li class="active"><a href="#">งานที่ 1....</a></li>
+                        <li class="active"><a href="#">Assignment# 1....</a></li>
                     </ol>
                     <div style="text-align: center;margin-top:20px ">
-                        <div class="col-md-4"><h4>12 <br> Who sent</h4></div>
+                        <div class="col-md-4"><h4>12 <br> Sent</h4></div>
                         <div class="col-md-4"><h4>6/12 <br>Checked</h4></div>
                         <div class="col-md-4"><h4>30 <br> Leftovers</h4></div>
                     </div>

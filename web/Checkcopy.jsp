@@ -25,9 +25,9 @@
                     <%@include file="META-INF/page/CourseTab.jsp"%>
                     <ol class="breadcrumb" style="margin-top: 15px" >
                         <li><a href="course.jsp?tab=AllAssignment">Assignment</a></li>
-                        <li><a href="SendedAssignment.jsp?tab=AllAssignment">งานที่ 1.....</a></li>
-                        <li><a href="CheckAssignment.jsp?tab=AllAssignment">Check งานที่ 1.....</a></li>
-                        <li class="active"><a href="#">Check copy งานที่ 1.....</a></li>
+                        <li><a href="SendedAssignment.jsp?tab=AllAssignment">Assignment# 1.....</a></li>
+                        <li><a href="CheckAssignment.jsp?tab=AllAssignment">Check Assignment# 1.....</a></li>
+                        <li class="active"><a href="#">Check copy Assignment# 1.....</a></li>
                     </ol>
                     <table class="table table-striped">
                         <thead>
