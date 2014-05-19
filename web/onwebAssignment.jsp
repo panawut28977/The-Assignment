@@ -58,7 +58,7 @@
                             <%@include file="META-INF/page/CourseTab.jsp"%>
                             <ol class="breadcrumb" style="margin-top: 15px" >
                                 <li><a href="course.jsp?tab=AllAssignment">Assignment</a></li>
-                                <li class="active"><a href="#">งานที่ 1...</a></li>
+                                <li class="active"><a href="#">Assignment# 1...</a></li>
                             </ol>
                         </c:otherwise>
                     </c:choose>
@@ -85,10 +85,10 @@
                                     <h4><u>Let's do it !</u></h4>
 
                                     <h5><b><u>Instruction:</u> Fill in the blank</b></h5><!--[Question Title]-->
-                                    <p>1. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, <input type="text"name="a1"> sem <input type="text" name="a1"> quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et <input type="text" name="a1"> ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit <input type="text" name="a1"> amet nibh. Donec sodales sagittis magna. Sed consequat, leo <input type="text" name="a1"> eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce <input type="text" name="a1"> vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia.</p>
+                                    <p>1.) Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, <input type="text"name="a1"> sem <input type="text" name="a1"> quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et <input type="text" name="a1"> ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit <input type="text" name="a1"> amet nibh. Donec sodales sagittis magna. Sed consequat, leo <input type="text" name="a1"> eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce <input type="text" name="a1"> vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia.</p>
                                     <h5><b><u>Instruction:</u> Match the words</b></h5><!--[Question Title]-->
                                     <div>
-                                        <h5>2.) Please match the sutable words form below</h5>
+                                        <h5>2.) Please match the suitable words form below</h5>
                                         <div>
                                             <select name="a2" >
                                                 <option value="cheese">fggsdf</option>
@@ -154,6 +154,7 @@
                                         <input type="checkbox" name="a5"> C. aaaaa
                                         <input type="checkbox" name="a5"> D. aaaaa
                                     </div>
+                                    <h5><b><u>Instruction:</u> Explain answer</b></h5>
                                     <div>
                                         <h5>6.) please brief explain concept.</h5>
                                         <textarea class="form-control" name="a6"></textarea>

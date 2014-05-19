@@ -45,7 +45,7 @@
                             <tr>
                                 <th><b>Name</b></th>
                                 <th><b>Score</b></th>
-                                <th><b>Send</b></th>
+                                <th><b>Sent</b></th>
                                 <th><b>Status</b></th>
                                 <th></th>
                             </tr>
