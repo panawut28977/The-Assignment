@@ -158,7 +158,7 @@ public class Account {
 
     public static int register(Account a) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "insert into account(firstname,lastname,email,password,profile_pic,account_type,register_date) values(?,?,?,?,?,?,current_date)";
+        String sql = "insert into account(firstname,lastname,email,password,profile_pic,account_type,register_date) values(?,?,?,?,?,?,current_timestamp)";
         PreparedStatement pstm;
         int result = 0;
         try {
@@ -212,7 +212,7 @@ public class Account {
 
     public static String getNameByID(int acc_id) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select firstname || ' ' || lastname from account where acc_id = ? ";
+        String sql = "select concat(`firstname`,' ',`lastname`) as fullname from account where acc_id = ? ";
         PreparedStatement pstm;
         int result = 0;
         String fullname = "";
