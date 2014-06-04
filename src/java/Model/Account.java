@@ -139,7 +139,7 @@ public class Account {
             pstm.setString(1, email);
             pstm.setString(2, pass);
             ResultSet rs = pstm.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 acc.setAcc_id(rs.getInt("acc_id"));
                 acc.setFirstname(rs.getString("firstname"));
                 acc.setLastname(rs.getString("lastname"));
@@ -154,6 +154,79 @@ public class Account {
         }
         return acc;
 
+    }
+
+    public static int register(Account a) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "insert into account(firstname,lastname,email,password,profile_pic,account_type,register_date) values(?,?,?,?,?,?,current_date)";
+        PreparedStatement pstm;
+        int result = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, a.getFirstname());
+            pstm.setString(2, a.getLastname());
+            pstm.setString(3, a.getEmail());
+            pstm.setString(4, a.getPassword());
+            pstm.setString(5, a.getProfile_pic());
+            pstm.setString(6, a.getAccount_type());
+            result = pstm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
+    public static int edit(Account a) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "update account set firstname=?,lastname=?,profile_pic=? where acc_id=?";
+        PreparedStatement pstm;
+        int result = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, a.getFirstname());
+            pstm.setString(2, a.getLastname());
+            pstm.setString(3, a.getProfile_pic());
+            pstm.setInt(4, a.getAcc_id());
+            result = pstm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
+    public static boolean changePassword(Account a) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "update account set password=? where acc_id=?";
+        PreparedStatement pstm;
+        int result = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, a.getPassword());
+            pstm.setInt(2, a.getAcc_id());
+            result = pstm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result > 0;
+    }
+
+    public static String getNameByID(int acc_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select firstname || ' ' || lastname from account where acc_id = ? ";
+        PreparedStatement pstm;
+        int result = 0;
+        String fullname = "";
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, acc_id);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                fullname = rs.getString(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return fullname;
     }
 
     @Override

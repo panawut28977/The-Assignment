@@ -12,6 +12,15 @@ package Model;
  */
 public class TestDriver {
     public static void main(String[] args) {
-        System.out.println(Account.login("aa", "aa"));
+        Account a = new Account();
+        a.setAccount_type("TH");
+        a.setEmail("orarmor@dd");
+        a.setFirstname("orarmor");
+        a.setLastname("arm");
+        a.setPassword("arm");
+        a.setProfile_pic("test");
+        
+        Account.register(a);
+        System.out.println(2);
     }
 }
