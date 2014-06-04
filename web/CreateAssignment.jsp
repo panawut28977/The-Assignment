@@ -325,7 +325,7 @@
                         </section>
                         <section class="step" data-step-title="Complete and preview">
                             <div class="col-md-8 col-md-offset-2">
-                                <h1 class="text-muted">Preview Comming soon !!</h1>
+                                <h1 class="text-muted">Preview Coming soon !!</h1>
                             </div>
                         </section>
                     </form>

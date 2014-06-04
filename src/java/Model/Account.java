@@ -3,16 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Model;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author JenoVa
  */
 public class Account {
+
     private int acc_id;
     private String firstname;
     private String lastname;
@@ -20,6 +27,7 @@ public class Account {
     private String password;
     private String profile_pic;
     private String account_type;
+    private Date register_date;
     private List<Announcement> announcement;
     private List<AccountCourse> CourseList;
     private List<Assignment> assignment;
@@ -112,6 +120,45 @@ public class Account {
     public void setListStudentScore(List<UserScore> listStudentScore) {
         this.listStudentScore = listStudentScore;
     }
-    
-    
+
+    public Date getRegister_date() {
+        return register_date;
+    }
+
+    public void setRegister_date(Date register_date) {
+        this.register_date = register_date;
+    }
+
+    public static Account login(String email, String pass) {
+        Account acc = new Account();
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select * from account where email = ? and password = ?";
+        PreparedStatement pstm;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, email);
+            pstm.setString(2, pass);
+            ResultSet rs = pstm.executeQuery();
+            while(rs.next()){
+                acc.setAcc_id(rs.getInt("acc_id"));
+                acc.setFirstname(rs.getString("firstname"));
+                acc.setLastname(rs.getString("lastname"));
+                acc.setEmail(rs.getString("email"));
+                acc.setPassword(rs.getString("password"));
+                acc.setAccount_type(rs.getString("account_type"));
+                acc.setProfile_pic(rs.getString("profile_pic"));
+                acc.setRegister_date(rs.getDate("register_date"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return acc;
+
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" + "acc_id=" + acc_id + ", firstname=" + firstname + ", lastname=" + lastname + ", email=" + email + ", password=" + password + ", profile_pic=" + profile_pic + ", account_type=" + account_type + ", register_date=" + register_date + ", announcement=" + announcement + ", CourseList=" + CourseList + ", assignment=" + assignment + ", listStudentScore=" + listStudentScore + '}';
+    }
+
 }

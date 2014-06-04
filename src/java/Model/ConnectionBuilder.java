@@ -17,22 +17,19 @@ import java.util.logging.Logger;
  */
 public class ConnectionBuilder {
 
-    private static final String DRIVER = "org.apache.derby.jdbc.ClientDriver";
-    private static final String URL = "jdbc:derby://localhost:1527/sample";
-    private static final String USER = "app";
-    private static final String PASS = "app";
+    private static final String DRIVER = "com.mysql.jdbc.Driver";
+    private static final String URL = "jdbc:mysql://localhost:3306/orarmorint_ta?user=root&password=";
 
     public static Connection getConnection() {
         Connection conn = null;
         try {
             Class.forName(DRIVER);
-            conn = DriverManager.getConnection(URL, USER, PASS);
+            conn = DriverManager.getConnection(URL);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ConnectionBuilder.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(ConnectionBuilder.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return conn;
     }
     

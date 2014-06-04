@@ -160,7 +160,7 @@
                                         <textarea class="form-control" name="a6"></textarea>
                                     </div>
                                     <br>
-                                    <input type="submit" value="Send !!" class="btn btn-primary">
+                                    <a href="course.jsp?tab=AllAssignment" class="btn btn-primary">Send !!</a>
                                 </div>
                                 <br>
                             </form>
