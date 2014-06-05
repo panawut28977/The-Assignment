@@ -39,4 +39,13 @@ public class AccountCourse {
         this.role = role;
     }
     
+    public static void joinCourse(String code){
+        
+    }
+
+    @Override
+    public String toString() {
+        return "AccountCourse{" + "couse=" + couse + ", status=" + status + ", role=" + role + '}';
+    }
+    
 }
