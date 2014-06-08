@@ -148,6 +148,10 @@ public class Account {
                 acc.setAccount_type(rs.getString("account_type"));
                 acc.setProfile_pic(rs.getString("profile_pic"));
                 acc.setRegister_date(rs.getDate("register_date"));
+                acc.setAnnouncement(null);
+                acc.setAssignment(null);
+                acc.setCourseList(null);
+                acc.setListStudentScore(null);
             }
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);

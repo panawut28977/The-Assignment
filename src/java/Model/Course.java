@@ -6,8 +6,14 @@
 
 package Model;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -85,6 +91,68 @@ public class Course {
 
     public void setAssignment(List<Assignment> assignment) {
         this.assignment = assignment;
+    }
+    
+    public static String getCodeByID(int course_id){
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select course_code from course where course_id = ? ";
+        PreparedStatement pstm;
+        int result = 0;
+        String code = "";
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, course_id);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                code = rs.getString(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return code;
+    }
+    
+    public static Course getCourseByID(int course_id){
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select * from course where course_id = ? ";
+        PreparedStatement pstm;
+        int result = 0;
+        Course c = new Course();
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, course_id);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                c.setCourse_id(rs.getInt("course_id"));
+                c.setName(rs.getString("name"));
+                c.setCourse_code(rs.getString("course_code"));
+                c.setCourse_link(rs.getString("course_link"));
+                c.setCreate_date(rs.getDate("create_date"));
+                c.setAnnouncement(null);
+                c.setAssignment(null);
+                c.setListStudnet(null);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return c;
+    }
+    
+    public static boolean createCourse(Course c) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "insert into course(name,course_code,course_link,create_date) values(?,?,?,current_timestamp)";
+        PreparedStatement pstm;
+        int result = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, c.getName());
+            pstm.setString(2, c.getCourse_code());
+            pstm.setString(3,  c.getCourse_link());
+            result = pstm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result > 0;
     }
     
     
