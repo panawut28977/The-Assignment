@@ -140,7 +140,7 @@ public class Course {
     
     public static boolean createCourse(Course c) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "insert into course(name,course_code,course_link,create_date) values(?,?,?,current_timestamp)";
+        String sql = "insert into course(name,course_code,course_link) values(?,?,?)";
         PreparedStatement pstm;
         int result = 0;
         try {

@@ -66,15 +66,16 @@ public class AccountCourse {
         return result;
     }
 
-    public static boolean approve(int acc_id) {
+    public static boolean approve(int acc_id, int course_id) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "update account_course set status=? where acc_id=?";
+        String sql = "update account_course set status=? where acc_id=? and course_id=?";
         PreparedStatement pstm;
         int result = 0;
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, "approved");
             pstm.setInt(2, acc_id);
+            pstm.setInt(3, course_id);
             result = pstm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
@@ -82,15 +83,16 @@ public class AccountCourse {
         return result > 0;
     }
 
-    public static boolean disapprove(int acc_id) {
+    public static boolean disapprove(int acc_id, int course_id) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "update account_course set status=? where acc_id=?";
+        String sql = "update account_course set status=? where acc_id=? and course_id=?";
         PreparedStatement pstm;
         int result = 0;
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, "disapproved");
             pstm.setInt(2, acc_id);
+            pstm.setInt(3, course_id);
             result = pstm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
@@ -98,14 +100,16 @@ public class AccountCourse {
         return result > 0;
     }
 
-    public static boolean leaveCourse(int acc_id) {
+    //removeMember ก็ใช้ method leaveCourse ได้เลย(บังคับให้ leave)
+    public static boolean leaveCourse(int acc_id, int course_id) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "delete account_course where acc_id=?";
+        String sql = "delete from account_course where acc_id=? and course_id=?";
         PreparedStatement pstm;
         int result = 0;
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, acc_id);
+            pstm.setInt(2, course_id);
             result = pstm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
@@ -113,22 +117,23 @@ public class AccountCourse {
         return result > 0;
     }
 
-    public static boolean removeCourse(int acc_id) {
-        Connection conn = ConnectionBuilder.getConnection();
-        String sql = "delete account_course where acc_id=?";
-        PreparedStatement pstm;
-        int result = 0;
-        try {
-            pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, acc_id);
-            result = pstm.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result > 0;
-    }
+//    public static boolean removeMember(int acc_id, int course_id) {
+//        Connection conn = ConnectionBuilder.getConnection();
+//        String sql = "delete from account_course where acc_id=? and course_id=?";
+//        PreparedStatement pstm;
+//        int result = 0;
+//        try {
+//            pstm = conn.prepareStatement(sql);
+//            pstm.setInt(1, acc_id);
+//            pstm.setInt(2, course_id);
+//            result = pstm.executeUpdate();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return result > 0;
+//    }
 
-    public static boolean changeRole(int acc_id, int role) {
+    public static boolean changeRole(int acc_id, int course_id, int role) {
         Connection conn = ConnectionBuilder.getConnection();
         String roleVal = "";
         switch (role) {
@@ -139,13 +144,14 @@ public class AccountCourse {
                 roleVal = "Student";
                 break;
         }
-        String sql = "update account_course set role=? where acc_id=?";
+        String sql = "update account_course set role=? where acc_id=? and course_id=?";
         PreparedStatement pstm;
         int result = 0;
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, roleVal);
             pstm.setInt(2, acc_id);
+            pstm.setInt(3, course_id);
             result = pstm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
@@ -153,9 +159,9 @@ public class AccountCourse {
         return result > 0;
     }
 
-    public static boolean checkOwner(int acc_id,int course_id) {
+    public static boolean checkOwner(int acc_id, int course_id) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select role  from account_course where acc_id = ? and course = ?";
+        String sql = "select role  from account_course where acc_id = ? and course_id = ?";
         PreparedStatement pstm;
         int result = 0;
         String role = "";
@@ -170,11 +176,11 @@ public class AccountCourse {
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return role.equalsIgnoreCase("Teacher")?true:false;
+        return role.equalsIgnoreCase("Teacher") ? true : false;
     }
 
-     public static List<AccountCourse> getCourseByAccID(int acc_id) {
-        List<AccountCourse> courseList = new ArrayList<AccountCourse>() ;
+    public static List<AccountCourse> getCourseByAccID(int acc_id) {
+        List<AccountCourse> courseList = new ArrayList<AccountCourse>();
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select * from account_course where acc_id=?";
         PreparedStatement pstm;
@@ -195,7 +201,7 @@ public class AccountCourse {
         }
         return courseList;
     }
-     
+
     @Override
     public String toString() {
         return "AccountCourse{" + "couse=" + couse + ", status=" + status + ", role=" + role + '}';
