@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Model;
 
 import java.sql.Connection;
@@ -20,6 +19,7 @@ import java.util.logging.Logger;
  * @author JenoVa
  */
 public class Course {
+
     private int course_id;
     private String name;
     private String course_link;
@@ -92,8 +92,9 @@ public class Course {
     public void setAssignment(List<Assignment> assignment) {
         this.assignment = assignment;
     }
-    
-    public static String getCodeByID(int course_id){
+
+    //ดึง code ตาม course_id
+    public static String getCodeByID(int course_id) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select course_code from course where course_id = ? ";
         PreparedStatement pstm;
@@ -111,8 +112,9 @@ public class Course {
         }
         return code;
     }
-    
-    public static Course getCourseByID(int course_id){
+
+    //ดึง course ตาม course_id
+    public static Course getCourseByID(int course_id) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select * from course where course_id = ? ";
         PreparedStatement pstm;
@@ -137,7 +139,8 @@ public class Course {
         }
         return c;
     }
-    
+
+    //สร้าง course
     public static boolean createCourse(Course c) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "insert into course(name,course_code,course_link) values(?,?,?)";
@@ -147,14 +150,15 @@ public class Course {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, c.getName());
             pstm.setString(2, c.getCourse_code());
-            pstm.setString(3,  c.getCourse_link());
+            pstm.setString(3, c.getCourse_link());
             result = pstm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result > 0;
     }
-    
+
+    //ใช้ update information จริงๆมันก็มีแค่ name ที่อัพเดตได้
     public static int updateInfo(Course c) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "update course set name=? where course_id=?";
@@ -169,6 +173,65 @@ public class Course {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
+    }
+
+    //ใช้ลบ course
+    public static boolean deleteCourse(int course_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "delete from course where course_id=?";
+        PreparedStatement pstm;
+        int result = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, course_id);
+            result = pstm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result > 0;
+    }
+
+    //ใช้ gen code
+    public static String generateCode() {
+        String code = "";
+        String listCharacter = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+        int random_math;
+        boolean exist = true;
+        while (exist) {
+            for (int i = 0; i < 5; i++) {
+                random_math = (int) (Math.random() * (61 - 0 + 1));
+                code += listCharacter.charAt(random_math);
+            }
+
+            Connection conn = ConnectionBuilder.getConnection();
+            String sql = "select course_code,count(*) from course";
+            PreparedStatement pstm;
+            try {
+                pstm = conn.prepareStatement(sql);
+                ResultSet rs = pstm.executeQuery();
+                int count = rs.getInt(2);
+                while (rs.next()) {
+                    count--;
+                    if(code.equals(rs.getString(1))){
+                        exist = true;
+                        break;
+                    }else{
+                        exist = false;
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Course.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return code;
+    }
+    
+    //getScoreSheet อาจไม่ต้องมีตอนทำฟังชั่นนี้ เดียวดึงเอาข้อมูลที่มีอยู่แล้วมาใช้
+    //exportScoreSheet รอทำจริงค่อยทำ
+    //getAllCourseMember ใช้ getListStudnet เลย
+    @Override
+    public String toString() {
+        return "Course{" + "course_id=" + course_id + ", name=" + name + ", course_link=" + course_link + ", course_code=" + course_code + ", create_date=" + create_date + ", listStudnet=" + listStudnet + ", announcement=" + announcement + ", assignment=" + assignment + '}';
     }
     
     

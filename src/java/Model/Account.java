@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -27,7 +28,7 @@ public class Account {
     private String password;
     private String profile_pic;
     private String account_type;
-    private Date register_date;
+    private Timestamp register_date;
     private List<Announcement> announcement;
     private List<AccountCourse> CourseList;
     private List<Assignment> assignment;
@@ -125,7 +126,7 @@ public class Account {
         return register_date;
     }
 
-    public void setRegister_date(Date register_date) {
+    public void setRegister_date(Timestamp register_date) {
         this.register_date = register_date;
     }
 
@@ -147,7 +148,7 @@ public class Account {
                 acc.setPassword(rs.getString("password"));
                 acc.setAccount_type(rs.getString("account_type"));
                 acc.setProfile_pic(rs.getString("profile_pic"));
-                acc.setRegister_date(rs.getDate("register_date"));
+                acc.setRegister_date(rs.getTimestamp("register_date"));
                 acc.setAnnouncement(null);
                 acc.setAssignment(null);
                 acc.setCourseList(null);
@@ -162,7 +163,7 @@ public class Account {
 
     public static int register(Account a) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "insert into account(firstname,lastname,email,password,profile_pic,account_type,register_date) values(?,?,?,?,?,?,current_timestamp)";
+        String sql = "insert into account(firstname,lastname,email,password,profile_pic,account_type) values(?,?,?,?,?,?)";
         PreparedStatement pstm;
         int result = 0;
         try {
@@ -251,7 +252,7 @@ public class Account {
                 acc.setPassword(rs.getString("password"));
                 acc.setAccount_type(rs.getString("account_type"));
                 acc.setProfile_pic(rs.getString("profile_pic"));
-                acc.setRegister_date(rs.getDate("register_date"));
+                acc.setRegister_date(rs.getTimestamp("register_date"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);

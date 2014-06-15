@@ -49,6 +49,6 @@ public class TestDriver {
 //        AccountCourse.changeRole(5, 1,1);
         
         //---- Test check owner
-        System.out.println(AccountCourse.checkOwner(4, 1));
+        Course.generateCode();
     }
 }
