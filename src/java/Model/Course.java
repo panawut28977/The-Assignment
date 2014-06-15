@@ -155,6 +155,21 @@ public class Course {
         return result > 0;
     }
     
+    public static int updateInfo(Course c) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "update course set name=? where course_id=?";
+        PreparedStatement pstm;
+        int result = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, c.getName());
+            pstm.setInt(2, c.getCourse_id());
+            result = pstm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
     
     
 }
