@@ -16,7 +16,6 @@ import java.util.logging.Logger;
  * @author JenoVa
  */
 public class ConnectionBuilder {
-
     private static final String DRIVER = "com.mysql.jdbc.Driver";
 //    private static final String URL = "jdbc:mysql://orarmor.in.th:3306/orarmorint_ta?useUnicode=yes&characterEncoding=UTF-8";
 //      public static final String USER = "orarmorint_ta2";

@@ -141,7 +141,8 @@ public class Account {
             pstm.setString(2, pass);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                acc.setAcc_id(rs.getInt("acc_id"));
+                int acc_id = rs.getInt("acc_id");
+                acc.setAcc_id(acc_id);
                 acc.setFirstname(rs.getString("firstname"));
                 acc.setLastname(rs.getString("lastname"));
                 acc.setEmail(rs.getString("email"));
@@ -149,10 +150,10 @@ public class Account {
                 acc.setAccount_type(rs.getString("account_type"));
                 acc.setProfile_pic(rs.getString("profile_pic"));
                 acc.setRegister_date(rs.getTimestamp("register_date"));
-                acc.setAnnouncement(null);
-                acc.setAssignment(null);
-                acc.setCourseList(null);
-                acc.setListStudentScore(null);
+                acc.setAnnouncement(Announcement.viewAnnByAccID(acc_id));
+                acc.setAssignment(Assignment.getAmByAccID(acc_id));
+                acc.setCourseList(AccountCourse.getCourseByAccID(acc_id));
+                acc.setListStudentScore(UserScore.getUserScore(acc_id));
             }
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);

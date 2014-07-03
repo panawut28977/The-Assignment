@@ -6,6 +6,12 @@
 
 package Model;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import sun.java2d.pipe.SpanShapeRenderer;
+
 /**
  *
  * @author Orarmor
@@ -79,5 +85,45 @@ public class TestDriver {
 //        a.setContent("update content");
 //        a.setTitle("Test header");
 //        System.out.println(Announcement.update(a));
+        
+        //-- craete assignment info
+//        Assignment am = new Assignment();
+//        am.setAss_extension("docx");
+//        am.setAss_type("file");
+//        am.setCourse_id(3);
+//        Date d = new Date();
+//        am.setDescription(" nsnddda  asdfsfasdfsaf ");
+//        am.setDue_date(d);
+//        am.setName("orarmor work 4");
+//        am.setTotal_member(1);
+//        Assignment.createAmInfo(am);
+//        
+        //getAmByAccID
+//        System.out.println(Assignment.getAmByAccID(1));
+        //-- delete am
+//        Assignment.deleteAm(4);
+        
+        //getAmByCourseID
+//        System.out.println(Assignment.getAmByCourseID(1));
+        
+        //getAmByAmID
+//        System.out.println(Assignment.getAmByAmID(1));
+        
+        //getAmByAccID
+//        System.out.println(Assignment.getAmByAccID(4));
+        
+        //isSend
+        //System.out.println(Assignment.isSend(1,2));
+        
+        
+        //Message send
+//        Message m =  new Message();
+//        m.setSource_acc_id(Account.getAccountByID(1));
+//        m.setDest_acc_id(Account.getAccountByID(2));
+//        m.setMessage("eeeerererer");
+//        Message.send(m);
+        
+        //Get Message 
+//        System.out.println(Message.getMessageBetweenSourceAndDest(1, 2));
     }
 }
