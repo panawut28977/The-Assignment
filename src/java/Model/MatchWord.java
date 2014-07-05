@@ -10,7 +10,7 @@ package Model;
  *
  * @author JenoVa
  */
-public class MatchWord {
+public class MatchWord extends Question{
     private String q_text;
     private String q_answer;
     private int q_score;
@@ -37,6 +37,11 @@ public class MatchWord {
 
     public void setQ_score(int q_score) {
         this.q_score = q_score;
+    }
+
+    @Override
+    public String toString() {
+        return "MatchWord{" + "q_text=" + q_text + ", q_answer=" + q_answer + ", q_score=" + q_score + '}';
     }
     
     

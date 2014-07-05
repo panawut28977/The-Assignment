@@ -119,5 +119,4 @@ public class Message {
         return "Message{" + "ms_id=" + ms_id + ", source_acc_id=" + source_acc_id + ", dest_acc_id=" + dest_acc_id + ", message=" + message + ", send_date=" + send_date + '}';
     }
     
-    
 }

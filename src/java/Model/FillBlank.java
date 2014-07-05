@@ -56,6 +56,11 @@ public class FillBlank extends Question{
     public void setQ_end_index(int q_end_index) {
         this.q_end_index = q_end_index;
     }
+
+    @Override
+    public String toString() {
+        return "FillBlank{" + "q_text=" + q_text + ", score=" + score + ", answer=" + answer + ", q_start_index=" + q_start_index + ", q_end_index=" + q_end_index + '}';
+    }
     
     
 }

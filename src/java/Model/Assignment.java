@@ -134,7 +134,7 @@ public class Assignment {
 
     //viewAssignmentSchedule(int acc_id) อาจไม่ต้องมีเพราะดึง Am ออกมามันก็มีค่าวันที่ติดมาอยู่แล้ว
     //getAmQuestionByAmID(int am_id)
-        //checkAmStatus(int am_id) เดียวใช้ get ass_type ออกไปเช็คเอาเอง
+    //checkAmStatus(int am_id) เดียวใช้ get ass_type ออกไปเช็คเอาเอง
     
     //createAmInfo(Assignment ass)
     public static int createAmInfo(Assignment ass) {

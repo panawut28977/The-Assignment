@@ -125,5 +125,11 @@ public class TestDriver {
         
         //Get Message 
 //        System.out.println(Message.getMessageBetweenSourceAndDest(1, 2));
+       
+        //Test get data of unknow question type
+//        Object o = new Explain("qestionnnn?");
+//       Explain ex = (Explain)o;
+//       System.out.println(ex.getQ_text());
     }
+    
 }

@@ -39,6 +39,11 @@ public class MultipleChoice extends Question{
     public void setQ_score(int q_score) {
         this.q_score = q_score;
     }
+
+    @Override
+    public String toString() {
+        return "MultipleChoice{" + "q_type=" + q_type + ", q_choice_list=" + q_choice_list + ", q_answer_list=" + q_answer_list + ", q_score=" + q_score + '}';
+    }
     
     
 }

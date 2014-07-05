@@ -10,10 +10,10 @@ package Model;
  *
  * @author JenoVa
  */
-public class Explain {
+public class Explain extends Question{
     private String q_text;
     private String q_keyword_check;
-
+    
     public String getQ_text() {
         return q_text;
     }
@@ -28,6 +28,11 @@ public class Explain {
 
     public void setQ_keyword_check(String q_keyword_check) {
         this.q_keyword_check = q_keyword_check;
+    }
+
+    @Override
+    public String toString() {
+        return "Explain{" + "q_text=" + q_text + ", q_keyword_check=" + q_keyword_check + '}';
     }
     
 }
