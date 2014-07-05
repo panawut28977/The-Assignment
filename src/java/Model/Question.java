@@ -121,6 +121,24 @@ public abstract class Question {
             pstm.setString(2, q.getInstruction());
             pstm.setInt(3, q.getQ_no());
             pstm.setString(4, q.getQ_type());
+            String q_type = q.getQ_type();
+            FillBlank fb = null;
+            MatchWord mw = null;
+            MultipleChoice mc = null;
+            Explain exp = null;
+            if (q_type.equalsIgnoreCase("fillBlank")) {
+                fb = (FillBlank) q;
+                fb.add();
+            } else if (q_type.equalsIgnoreCase("matchWord")) {
+                mw = (MatchWord) q;
+                mw.add();
+            } else if (q_type.equalsIgnoreCase("tfQuestion") || q_type.equalsIgnoreCase("multiple_choice")) {
+                mc = (MultipleChoice) q;
+                mc.add();
+            } else if (q_type.equalsIgnoreCase("explain")) {
+                exp = (Explain) q;
+                exp.add();
+            }
             result = pstm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
