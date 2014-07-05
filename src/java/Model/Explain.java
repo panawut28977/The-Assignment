@@ -14,6 +14,9 @@ public class Explain extends Question{
     private String q_text;
     private String q_keyword_check;
     
+//    public Explain(String q_text){  
+//        this.q_text = q_text;
+//    }
     public String getQ_text() {
         return q_text;
     }

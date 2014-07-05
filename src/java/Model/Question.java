@@ -105,7 +105,8 @@ public class Question {
     }
       
        //getQuestion(q_id)
-       public static Question getQuestion(int q_id) {
+       public static Object getQuestion(int q_id) {
+        Object o = null;
         Question q = null;
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select * from quesion q join fill_blank_list f on q.q_id = f.q_id "
@@ -120,28 +121,34 @@ public class Question {
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {
                 String q_type = rs.getString("q_type");
+                FillBlank fb = null;
+                MatchWord mw = null;
+                MultipleChoice mc = null;
+                Explain ex = null;
                 if(q_type.equalsIgnoreCase("fillBlank")){
-                    q = new FillBlank();
-                    
+                    fb = new FillBlank();
+                    q = fb;
                 }else if(q_type.equalsIgnoreCase("matchWord") ){
-                    q = new MatchWord();
+                    mw = new MatchWord();
+                    q = mw;
                 }else if(q_type.equalsIgnoreCase("tfQuestion")|| q_type.equalsIgnoreCase("multiple_choice")){
-                    q = new MultipleChoice();
+                    mc = new MultipleChoice();
+                    q = mc;
                 }else if(q_type.equalsIgnoreCase("explain")){
-                    q = new Explain(); 
+                    ex = new Explain();
+                    q = ex;
                 }
-                
                 q.setAss_id(rs.getInt("ass_id"));
                 q.setInstruction(rs.getString("instruction"));
                 q.setQ_id(rs.getInt("q_id"));
                 q.setQ_no(rs.getInt("q_no"));
                 q.setQ_type(rs.getString("q_type"));
-                
+                o = q;
             }
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return q;
+        return o;
     }
     
     //addList(List<Question>) 
