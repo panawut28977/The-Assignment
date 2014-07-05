@@ -128,8 +128,12 @@ public class TestDriver {
        
         //Test get data of unknow question type
 //        Question o = new Explain("qestionnnn?");
-//       Explain ex = (Explain)o;
-//       System.out.println(ex.getQ_text());
+//        Explain ex = (Explain)o;
+//        System.out.println(ex.getQ_text());
+//        Question f = new Explain();
+//        System.out.println(f.getQ_end_index());
+        
+        
     }
     
 }

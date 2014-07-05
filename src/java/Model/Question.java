@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Model;
 
 import java.sql.Connection;
@@ -18,16 +17,56 @@ import java.util.logging.Logger;
  *
  * @author JenoVa
  */
-public class Question {
+public abstract class Question {
+
     private int q_id;
     private int ass_id;
     private String instruction;
     private int q_no;
     private String q_type;
-    
-    public int g(){
-        return 1;
-    };
+
+    abstract public int add();
+
+    abstract public String getQ_text();
+
+    abstract public void setQ_text(String q_text);
+
+    abstract public String getQ_keyword_check();
+
+    abstract public void setQ_keyword_check(String q_keyword_check);
+
+    abstract public double getScore();
+
+    abstract public void setScore(double score);
+
+    abstract public String getAnswer();
+
+    abstract public void setAnswer(String answer);
+
+    abstract public int getQ_start_index();
+
+    abstract public void setQ_start_index(int q_start_index);
+
+    abstract public int getQ_end_index();
+
+    abstract public void setQ_end_index(int q_end_index);
+
+    abstract public String getQ_answer();
+
+    abstract public void setQ_answer(String q_answer);
+
+    abstract public double getQ_score();
+
+    abstract public void setQ_score(double q_score);
+
+    abstract public String getQ_choice_list();
+
+    abstract public void setQ_choice_list(String q_choice_list);
+
+    abstract public String getQ_answer_list();
+
+    abstract public void setQ_answer_list(String q_answer_list);
+
     public int getQ_id() {
         return q_id;
     }
@@ -71,7 +110,7 @@ public class Question {
 //    public String getQ_text(){};
 
     //add(Question)
-    public static void add(Question q){
+    public static void add(Question q) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "insert into question(ass_id,instruction,q_no,q_type) values(?,?,?,?)";
         PreparedStatement pstm = null;
@@ -87,9 +126,9 @@ public class Question {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-      //delete(q_id)
-      public static boolean delete(int q_id) {
+
+    //delete(q_id)
+    public static boolean delete(int q_id) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "delete from question where q_id=?";
         PreparedStatement pstm;
@@ -103,10 +142,9 @@ public class Question {
         }
         return result > 0;
     }
-      
-       //getQuestion(q_id)
-       public static Object getQuestion(int q_id) {
-        Object o = null;
+
+    //getQuestion(q_id)
+    public static Question getQuestion(int q_id) {
         Question q = null;
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select * from quesion q join fill_blank_list f on q.q_id = f.q_id "
@@ -125,17 +163,32 @@ public class Question {
                 MatchWord mw = null;
                 MultipleChoice mc = null;
                 Explain ex = null;
-                if(q_type.equalsIgnoreCase("fillBlank")){
+                if (q_type.equalsIgnoreCase("fillBlank")) {
                     fb = new FillBlank();
+                    fb.setQ_text(rs.getString("q_text"));
+                    fb.setScore(rs.getDouble("score"));
+                    fb.setAnswer(rs.getString("answer"));
+                    fb.setQ_start_index(rs.getInt("q_start_index"));
+                    fb.setQ_end_index(rs.getInt("q_end_index"));
                     q = fb;
-                }else if(q_type.equalsIgnoreCase("matchWord") ){
+                } else if (q_type.equalsIgnoreCase("matchWord")) {
                     mw = new MatchWord();
+                    mw.setQ_text(rs.getString("q_text"));
+                    mw.setQ_type(rs.getString("q_type"));
+                    mw.setQ_choice_list(rs.getString("q_choice_list"));
+                    mw.setQ_answer_list(rs.getString("q_answer_list"));
+                    mw.setQ_score(rs.getDouble("q_score"));
                     q = mw;
-                }else if(q_type.equalsIgnoreCase("tfQuestion")|| q_type.equalsIgnoreCase("multiple_choice")){
+                } else if (q_type.equalsIgnoreCase("tfQuestion") || q_type.equalsIgnoreCase("multiple_choice")) {
                     mc = new MultipleChoice();
+                    mc.setQ_text(rs.getString("q_text"));
+                    mc.setQ_answer(rs.getString("q_answer"));
+                    mc.setQ_score(rs.getDouble("q_score"));
                     q = mc;
-                }else if(q_type.equalsIgnoreCase("explain")){
+                } else if (q_type.equalsIgnoreCase("explain")) {
                     ex = new Explain();
+                    ex.setQ_text(rs.getString("q_text"));
+                    ex.setQ_keyword_check(rs.getString("q_keyword_check"));
                     q = ex;
                 }
                 q.setAss_id(rs.getInt("ass_id"));
@@ -143,23 +196,41 @@ public class Question {
                 q.setQ_id(rs.getInt("q_id"));
                 q.setQ_no(rs.getInt("q_no"));
                 q.setQ_type(rs.getString("q_type"));
-                o = q;
             }
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return o;
+        return q;
     }
-    
+
     //addList(List<Question>) 
-    public static void addList(List<Question> qList){
+    public static void addList(List<Question> qList) {
         Connection conn = ConnectionBuilder.getConnection();
         String data = "";
+        String q_type = null;
+        FillBlank fb = null;
+        MatchWord mw = null;
+        MultipleChoice mc = null;
+        Explain exp = null;
         for (Question q : qList) {
-            data += "(" + q.getAss_id() + "," + q.getInstruction() + "," + q.getQ_no() + "," + q.getQ_type() + "),";
+            q_type = q.getQ_type();
+            data += "(" + q.getAss_id() + "," + q.getInstruction() + "," + q.getQ_no() + "," + q_type + "),";
+            if (q_type.equalsIgnoreCase("fillBlank")) {
+                fb = (FillBlank) q;
+                fb.add();
+            } else if (q_type.equalsIgnoreCase("matchWord")) {
+                mw = (MatchWord) q;
+                mw.add();
+            } else if (q_type.equalsIgnoreCase("tfQuestion") || q_type.equalsIgnoreCase("multiple_choice")) {
+                mc = (MultipleChoice) q;
+                mc.add();
+            } else if (q_type.equalsIgnoreCase("explain")) {
+                exp = (Explain) q;
+                exp.add();
+            }
         }
         data = data.substring(data.length() - 2, data.length() - 1);
-        String sql = "insert into question(ass_id,instruction,q_no,q_type) values"+data;
+        String sql = "insert into question(ass_id,instruction,q_no,q_type) values" + data;
         PreparedStatement pstm = null;
         int result = 0;
         try {
@@ -169,13 +240,10 @@ public class Question {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
+
     @Override
     public String toString() {
         return "Question{" + "q_id=" + q_id + ", ass_id=" + ass_id + ", instruction=" + instruction + ", q_no=" + q_no + ", q_type=" + q_type + '}';
     }
-    
-    
-    
+
 }
