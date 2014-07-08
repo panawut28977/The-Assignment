@@ -19,7 +19,7 @@
                 background-repeat: repeat-x;
                 background-size: 100%;
             }
-
+ 
             hr{
                 clear: both;
                 border:1px solid #808080 !important;

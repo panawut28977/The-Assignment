@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.eclipse.jdt.internal.compiler.ast.ExplicitConstructorCall;
 
 /**
  *
@@ -17,9 +18,29 @@ import java.util.logging.Logger;
  */
 public class MatchWord extends Question {
 
+    private int q_order;
+    private String q_title;
     private String q_text;
     private String q_answer;
     private double q_score;
+
+    @Override
+    public int getQ_order() {
+        return q_order;
+    }
+
+    @Override
+    public void setQ_order(int q_order) {
+        this.q_order = q_order;
+    }
+
+    public String getQ_title() {
+        return q_title;
+    }
+
+    public void setQ_title(String q_title) {
+        this.q_title = q_title;
+    }
 
     public String getQ_text() {
         return q_text;
@@ -47,14 +68,17 @@ public class MatchWord extends Question {
 
     public int add() {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "insert into match_word_list(q_text,q_answer,q_score) values(?,?,?)";
+        String sql = "insert into match_word_list(q_id,q_order,q_title,q_text,q_answer,q_score) values(?,?,?,?,?,?)";
         PreparedStatement pstm = null;
         int result = 0;
         try {
             pstm = conn.prepareStatement(sql);
-            pstm.setString(1, this.q_text);
-            pstm.setString(2, this.q_answer);
-            pstm.setDouble(3, this.q_score);
+            pstm.setInt(1, super.getQ_id());
+            pstm.setInt(2, this.q_order);
+            pstm.setString(3, this.q_title);
+            pstm.setString(4, this.q_text);
+            pstm.setString(5, this.q_answer);
+            pstm.setDouble(6, this.q_score);
             result = pstm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
@@ -62,9 +86,31 @@ public class MatchWord extends Question {
         return result;
     }
 
+    public int update() {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "update match_word_list set q_order=?,q_title=?,q_text=?,q_answer=?,q_score=? where q_id=? and q_order=?";
+        PreparedStatement pstm;
+        int result = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, this.q_order);
+            pstm.setString(2, this.q_title);
+            pstm.setString(3, this.q_text);
+            pstm.setString(4, this.q_answer);
+            pstm.setDouble(5, this.q_score);
+            pstm.setInt(6, super.getQ_id());
+            pstm.setInt(7, this.q_order);
+            result = pstm.executeUpdate();
+//            System.out.println(pstm.toString());
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+    
     @Override
     public String toString() {
-        return "MatchWord{" + "q_text=" + q_text + ", q_answer=" + q_answer + ", q_score=" + q_score + '}';
+        return "MatchWord{" + "q_order=" + q_order + ", q_title=" + q_title + ", q_text=" + q_text + ", q_answer=" + q_answer + ", q_score=" + q_score + '}';
     }
 
     // <editor-fold defaultstate="collapsed" desc=" Method that is not support in this class ">
@@ -135,6 +181,16 @@ public class MatchWord extends Question {
 
     @Override
     public void setQ_answer_list(String q_answer_list) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getQ_category() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setQ_category(String q_category) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

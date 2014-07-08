@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -67,6 +68,18 @@ public abstract class Question {
 
     abstract public void setQ_answer_list(String q_answer_list);
 
+    abstract public String getQ_title();
+
+    abstract public void setQ_title(String q_title);
+
+    abstract public String getQ_category();
+
+    abstract public void setQ_category(String q_category);
+
+    abstract public int getQ_order();
+
+    abstract public void setQ_order(int q_order);
+
     public int getQ_id() {
         return q_id;
     }
@@ -112,15 +125,19 @@ public abstract class Question {
     //add(Question)
     public static void add(Question q) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "insert into question(ass_id,instruction,q_no,q_type) values(?,?,?,?)";
+        String sql = "insert into question(q_id,ass_id,instruction,q_no,q_type) values(?,?,?,?,?) ON DUPLICATE KEY UPDATE q_id = ?";
         PreparedStatement pstm = null;
         int result = 0;
         try {
             pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, q.getAss_id());
-            pstm.setString(2, q.getInstruction());
-            pstm.setInt(3, q.getQ_no());
-            pstm.setString(4, q.getQ_type());
+            pstm.setInt(1, q.getQ_id());
+            pstm.setInt(2, q.getAss_id());
+            pstm.setString(3, q.getInstruction());
+            pstm.setInt(4, q.getQ_no());
+            pstm.setString(5, q.getQ_type());
+            pstm.setInt(6, q.getQ_id());
+            result = pstm.executeUpdate();
+
             String q_type = q.getQ_type();
             FillBlank fb = null;
             MatchWord mw = null;
@@ -132,16 +149,55 @@ public abstract class Question {
             } else if (q_type.equalsIgnoreCase("matchWord")) {
                 mw = (MatchWord) q;
                 mw.add();
-            } else if (q_type.equalsIgnoreCase("tfQuestion") || q_type.equalsIgnoreCase("multiple_choice")) {
+            } else if (q_type.equalsIgnoreCase("tfQuestion") || q_type.equalsIgnoreCase("multipleChoice")) {
+                mc = (MultipleChoice) q;
+                mc.add();
+            } else if (q_type.equalsIgnoreCase("explain")) {
+                exp = (Explain) q;
+                exp.add();
+            } 
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    //addList(List<Question>) 
+    public static void addList(List<Question> qList) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String data = "";
+        String q_type = null;
+        FillBlank fb = null;
+        MatchWord mw = null;
+        MultipleChoice mc = null;
+        Explain exp = null;
+        for (Question q : qList) {
+            q_type = q.getQ_type();
+            data += "(" + q.getAss_id() + ",'" + q.getInstruction() + "'," + q.getQ_no() + ",'" + q_type + "'),";
+        }
+        data = data.substring(0, data.length() - 1);
+        String sql = "insert into question(ass_id,instruction,q_no,q_type) values" + data;
+        PreparedStatement pstm = null;
+        int result = 0;
+        try {
+            pstm = conn.prepareCall(sql);
+            result = pstm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for (Question q : qList) {
+            if (q_type.equalsIgnoreCase("fillBlank")) {
+                fb = (FillBlank) q;
+                fb.add();
+            } else if (q_type.equalsIgnoreCase("matchWord")) {
+                mw = (MatchWord) q;
+                mw.add();
+            } else if (q_type.equalsIgnoreCase("tfQuestion") || q_type.equalsIgnoreCase("multipleChoice")) {
                 mc = (MultipleChoice) q;
                 mc.add();
             } else if (q_type.equalsIgnoreCase("explain")) {
                 exp = (Explain) q;
                 exp.add();
             }
-            result = pstm.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -162,101 +218,128 @@ public abstract class Question {
     }
 
     //getQuestion(q_id)
-    public static Question getQuestion(int q_id) {
+    public static List<Question> getListQuestion(List<Integer> q_id) {
+        List<Question> qList = new ArrayList<Question>();
         Question q = null;
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select * from quesion q join fill_blank_list f on q.q_id = f.q_id "
-                + "join explain_list e on q.q_id = e.q_id "
-                + "join match_word_list m on q.q_id = m.q_id "
-                + "join multiple_choice_list mul on q.q_id = mul.q_id "
-                + "where q.q_id = ?";
+        String sql = "select * from question q "
+                + "left join explain_list e on q.q_id = e.q_id "
+                + "left join fill_blank_list f on  q.q_id=f.q_id "
+                + "left join match_word_list m on q.q_id=m.q_id "
+                + "left join multiple_choice_list mul on  q.q_id = mul.q_id "
+                + "where q.q_id in ";
+        StringBuilder qIdList = new StringBuilder("(");
+        for (int id : q_id) {
+            qIdList.append(id + ",");
+        }
+        qIdList.deleteCharAt(qIdList.length() - 1).append(")");
+        sql += qIdList.toString();
         PreparedStatement pstm;
         try {
             pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, q_id);
             ResultSet rs = pstm.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 String q_type = rs.getString("q_type");
                 FillBlank fb = null;
                 MatchWord mw = null;
                 MultipleChoice mc = null;
                 Explain ex = null;
-                if (q_type.equalsIgnoreCase("fillBlank")) {
+                if (q_type.equalsIgnoreCase("explain")) {
+                    ex = new Explain();
+                    ex.setQ_text(rs.getString(7));
+                    ex.setQ_keyword_check(rs.getString(8));
+                    q = ex;
+                } else if (q_type.equalsIgnoreCase("fillBlank")) {
                     fb = new FillBlank();
-                    fb.setQ_text(rs.getString("q_text"));
-                    fb.setScore(rs.getDouble("score"));
-                    fb.setAnswer(rs.getString("answer"));
-                    fb.setQ_start_index(rs.getInt("q_start_index"));
-                    fb.setQ_end_index(rs.getInt("q_end_index"));
+                    fb.setQ_order(rs.getInt(10));
+                    fb.setQ_text(rs.getString(11));
+                    fb.setScore(rs.getDouble(12));
+                    fb.setAnswer(rs.getString(13));
+                    fb.setQ_start_index(rs.getInt(14));
+                    fb.setQ_end_index(rs.getInt(15));
                     q = fb;
                 } else if (q_type.equalsIgnoreCase("matchWord")) {
                     mw = new MatchWord();
-                    mw.setQ_text(rs.getString("q_text"));
-                    mw.setQ_type(rs.getString("q_type"));
-                    mw.setQ_choice_list(rs.getString("q_choice_list"));
-                    mw.setQ_answer_list(rs.getString("q_answer_list"));
-                    mw.setQ_score(rs.getDouble("q_score"));
+                    mw.setQ_order(rs.getInt(17));
+                    mw.setQ_title(rs.getString(18));
+                    mw.setQ_text(rs.getString(19));
+                    mw.setQ_answer(rs.getString(20));
+                    mw.setQ_score(rs.getDouble(21));
                     q = mw;
-                } else if (q_type.equalsIgnoreCase("tfQuestion") || q_type.equalsIgnoreCase("multiple_choice")) {
+                } else if (q_type.equalsIgnoreCase("tfQuestion") || q_type.equalsIgnoreCase("multipleChoice")) {
                     mc = new MultipleChoice();
-                    mc.setQ_text(rs.getString("q_text"));
-                    mc.setQ_answer(rs.getString("q_answer"));
-                    mc.setQ_score(rs.getDouble("q_score"));
+                    mc.setQ_text(rs.getString(23));
+                    mc.setQ_type(rs.getString(24));
+                    mc.setQ_choice_list(rs.getString(25));
+                    mc.setQ_answer_list(rs.getString(26));
+                    mc.setQ_score(rs.getDouble(27));
                     q = mc;
-                } else if (q_type.equalsIgnoreCase("explain")) {
-                    ex = new Explain();
-                    ex.setQ_text(rs.getString("q_text"));
-                    ex.setQ_keyword_check(rs.getString("q_keyword_check"));
-                    q = ex;
                 }
-                q.setAss_id(rs.getInt("ass_id"));
-                q.setInstruction(rs.getString("instruction"));
-                q.setQ_id(rs.getInt("q_id"));
-                q.setQ_no(rs.getInt("q_no"));
-                q.setQ_type(rs.getString("q_type"));
+                q.setQ_id(rs.getInt(1));
+                q.setAss_id(rs.getInt(2));
+                q.setInstruction(rs.getString(3));
+                q.setQ_no(rs.getInt(4));
+                q.setQ_type(rs.getString(5));
+                qList.add(q);
             }
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return q;
+        return qList;
     }
 
-    //addList(List<Question>) 
-    public static void addList(List<Question> qList) {
+    public static int getLastId() {
+        int lastId = 0;
         Connection conn = ConnectionBuilder.getConnection();
-        String data = "";
-        String q_type = null;
-        FillBlank fb = null;
-        MatchWord mw = null;
-        MultipleChoice mc = null;
-        Explain exp = null;
-        for (Question q : qList) {
-            q_type = q.getQ_type();
-            data += "(" + q.getAss_id() + "," + q.getInstruction() + "," + q.getQ_no() + "," + q_type + "),";
+        String sql = "select max(q_id) from question";
+        PreparedStatement pstm = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                lastId = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lastId;
+    }
+
+    public static int update(Question q) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "update question set instruction=?,q_no=? where q_id=?";
+        PreparedStatement pstm;
+        int result = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, q.getInstruction());
+            pstm.setInt(2, q.getQ_no());
+            pstm.setInt(3, q.getQ_id());
+            result = pstm.executeUpdate();
+            
+            String q_type = q.getQ_type();
+            FillBlank fb = null;
+            MatchWord mw = null;
+            MultipleChoice mc = null;
+            Explain exp = null;
             if (q_type.equalsIgnoreCase("fillBlank")) {
                 fb = (FillBlank) q;
+                fb.delete();
                 fb.add();
             } else if (q_type.equalsIgnoreCase("matchWord")) {
                 mw = (MatchWord) q;
-                mw.add();
-            } else if (q_type.equalsIgnoreCase("tfQuestion") || q_type.equalsIgnoreCase("multiple_choice")) {
+                mw.update();
+            } else if (q_type.equalsIgnoreCase("tfQuestion") || q_type.equalsIgnoreCase("multipleChoice")) {
                 mc = (MultipleChoice) q;
-                mc.add();
+                mc.update();
             } else if (q_type.equalsIgnoreCase("explain")) {
                 exp = (Explain) q;
-                exp.add();
+                exp.update(); 
             }
-        }
-        data = data.substring(data.length() - 2, data.length() - 1);
-        String sql = "insert into question(ass_id,instruction,q_no,q_type) values" + data;
-        PreparedStatement pstm = null;
-        int result = 0;
-        try {
-            pstm = conn.prepareCall(sql);
-            result = pstm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return result;
     }
 
     @Override
