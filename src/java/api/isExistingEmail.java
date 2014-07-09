@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlet;
+
+package api;
 
 import Model.Account;
 import java.io.IOException;
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Orarmor
  */
-public class Register extends HttpServlet {
+public class isExistingEmail extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,19 +31,9 @@ public class Register extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String firstname = request.getParameter("firstname");
-        String lastname = request.getParameter("lastname");
+        PrintWriter out = response.getWriter();
         String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String accType = request.getParameter("type");
-        Account a = new Account();
-        a.setAccount_type(accType);
-        a.setEmail(email);
-        a.setFirstname(firstname);
-        a.setLastname(lastname);
-        a.setPassword(password);
-        a.setProfile_pic("https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa");
-        Account.register(a);
+        out.write(Account.isExistingEmail(email)+"");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

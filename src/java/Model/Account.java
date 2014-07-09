@@ -181,6 +181,25 @@ public class Account {
         }
         return result;
     }
+    
+    public static boolean isExistingEmail(String email){
+        String e = null;
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select email from account where email = ?";
+        boolean result = false;
+        PreparedStatement pstm;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, email);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                e = rs.getString("email");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return e==null?false:true;
+    }
 
     public static int edit(Account a) {
         Connection conn = ConnectionBuilder.getConnection();
