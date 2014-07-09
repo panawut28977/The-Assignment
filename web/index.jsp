@@ -12,14 +12,17 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="META-INF/page/include_css.jsp" %>
+        <link rel="stylesheet" type="text/css" href="module/ButtonComponentMorph/css/component.css" />
         <%@include file="META-INF/page/include_js.jsp" %>
+        <script src="module/ButtonComponentMorph/js/modernizr.custom.js"></script>
+
         <style>
             body{
                 background-image: url('img/Education-knowledge-PowerPoint-PPT-hd-87622487.jpg');
                 background-repeat: repeat-x;
                 background-size: 100%;
             }
- 
+
             hr{
                 clear: both;
                 border:1px solid #808080 !important;
@@ -41,6 +44,22 @@
         <div class="container-fluid" style="margin-top: 10%">
             <div class="row">
                 <div class="col-md-7"></div> 
+<!--                <div class="morph-button morph-button-modal morph-button-modal-2 morph-button-fixed">
+                    <button type="button">Login</button>
+                    <div class="morph-content">
+                        <div>
+                            <div class="content-style-form content-style-form-1">
+                                <span class="icon icon-close">Close the dialog</span>
+                                <h2>Login</h2>
+                                <form>
+                                    <p><label>Email</label><input type="text" /></p>
+                                    <p><label>Password</label><input type="password" /></p>
+                                    <p><button>Login</button></p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div> morph-button -->
                 <c:choose>
                     <c:when test="${param.rg eq 'st'}"><%@include file="META-INF/page/register_student.jsp" %></c:when>
                     <c:when test="${param.rg eq 'th'}"><%@include file="META-INF/page/register_teacher.jsp" %></c:when>
@@ -49,5 +68,6 @@
 
             </div>
         </div>
+       
     </body>
 </html>
