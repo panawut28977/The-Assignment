@@ -3,15 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package servlet;
 
+import Model.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.jms.Session;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -30,7 +32,22 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        Account a = Account.login(email, password);
+        String url = "";
+        HttpSession ss = request.getSession();
+        if (a.getAcc_id() != 0) {
+            url = "home.jsp";
+            ss.setAttribute("ac", a);
+            response.sendRedirect(url);
+        } else {
+             request.setAttribute("msg", "email / password ผิดพลาดกรุณาลองใหม่อีกครั้ง");
+             request.setAttribute("email", email);
+             url = "/index.jsp";
+             getServletContext().getRequestDispatcher(url).forward(request, response);
+        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

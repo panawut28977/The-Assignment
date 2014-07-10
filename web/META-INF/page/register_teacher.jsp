@@ -1,6 +1,6 @@
 <div class="col-md-4">
     <div class="well well-lg">
-        <form role="form">
+        <form role="form" method="post">
             <h3>I'm teacher</h3><hr>
             <div class="form-group">
                 <label>First Name</label>

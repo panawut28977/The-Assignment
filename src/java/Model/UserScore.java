@@ -45,7 +45,7 @@ public class UserScore {
     public static List<UserScore> getUserScore(int acc_id){
         List<UserScore> uScoreList = new ArrayList<UserScore>();
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select  ass_id,score from student_assignment_file,student_assignment_on_web where acc_id = ?";
+        String sql = "select  ass_id,score from student_assignment_file f,student_assignment_on_web where acc_id = ?";
         PreparedStatement pstm;
         UserScore uScore = null;
         try {

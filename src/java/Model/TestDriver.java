@@ -42,12 +42,11 @@ public class TestDriver {
 //        ac.setRole("TH");
 //        ac.setStatus("waiting");
 //        
-//        AccountCourse.joinCourse(ac, 4);
-//        
+//        AccountCourse.joinCourse(ac, 4);        
 //        AccountCourse.joinCourse(ac, 2);
 //        AccountCourse.joinCourse(ac, 1);
         //---- Test approve method
-        //AccountCourse.approve(1, 1);
+//          AccountCourse.approve(1, 1);
         //---- Test disapprove method
 //        AccountCourse.disapprove(1,1);
         //---- Test change role 
@@ -74,7 +73,7 @@ public class TestDriver {
 //        Account acc = Account.getAccountByID(1);
 //        Announcement a = new Announcement();
 //        a.setAn_id(1);
-//        a.setAn_acc(acc);
+//        a.setAn_acc(acc);setLastname
 //        a.setCourse(c);
 //        a.setContent("update content");
 //        a.setTitle("Test header");

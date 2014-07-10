@@ -12,6 +12,10 @@
         <servlet-name>isExistingEmail</servlet-name>
         <servlet-class>api.isExistingEmail</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>signout</servlet-name>
+        <servlet-class>servlet.signout</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -24,17 +28,13 @@
         <servlet-name>isExistingEmail</servlet-name>
         <url-pattern>/isExistingEmail</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>signout</servlet-name>
+        <url-pattern>/signout</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-    <filter>
-        <filter-name>LoginFilter</filter-name>
-        <filter-class>filter.LoginFilter</filter-class>
-        <init-param>
-            <param-name>msg</param-name>
-            <param-value>This is duration</param-value>
-        </init-param>
-    </filter>
 </web-app>

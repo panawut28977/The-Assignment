@@ -148,7 +148,7 @@ public class Account {
                 acc.setEmail(rs.getString("email"));
                 acc.setPassword(rs.getString("password"));
                 acc.setAccount_type(rs.getString("account_type"));
-                acc.setProfile_pic(rs.getString("profile_pic"));
+                    acc.setProfile_pic(rs.getString("profile_pic"));
                 acc.setRegister_date(rs.getTimestamp("register_date"));
                 acc.setAnnouncement(Announcement.viewAnnByAccID(acc_id));
                 acc.setAssignment(Assignment.getAmByAccID(acc_id));

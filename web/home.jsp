@@ -37,12 +37,7 @@
                 </div>
             </div>
         </div>
-        <a href="setSession.jsp?acct=th"><span>teacher mode</span></a>
-         <a href="setSession.jsp?acct=st"><span>student mode</span></a>
+<!--        <a href="setSession.jsp?acct=th"><span>teacher mode</span></a>
+         <a href="setSession.jsp?acct=st"><span>student mode</span></a>-->
     </body>
-    <script>
-        $(function() {
-           // alert("change account type to:" + '${sessionScope.accType}');
-        });
-    </script>
 </html>

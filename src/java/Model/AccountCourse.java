@@ -20,16 +20,16 @@ import java.util.logging.Logger;
  */
 public class AccountCourse {
 
-    private Course couse;
+    private Course course;
     private String status;
     private String role;
 
-    public Course getCouse() {
-        return couse;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setCouse(Course couse) {
-        this.couse = couse;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     public String getStatus() {
@@ -56,7 +56,7 @@ public class AccountCourse {
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, acc_id);
-            pstm.setInt(2, detail.getCouse().getCourse_id());
+            pstm.setInt(2, detail.getCourse().getCourse_id());
             pstm.setString(3, detail.getStatus());
             pstm.setString(4, detail.getRole());
             result = pstm.executeUpdate();
@@ -194,7 +194,8 @@ public class AccountCourse {
                 acc.setRole(rs.getString("role"));
                 acc.setStatus(rs.getString("status"));
                 Course c = Course.getCourseByID(rs.getInt("course_id"));
-                acc.setCouse(c);
+                acc.setCourse(c);
+                courseList.add(acc);
             }
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
@@ -204,7 +205,7 @@ public class AccountCourse {
 
     @Override
     public String toString() {
-        return "AccountCourse{" + "couse=" + couse + ", status=" + status + ", role=" + role + '}';
+        return "AccountCourse{" + "course=" + course + ", status=" + status + ", role=" + role + '}';
     }
 
 }

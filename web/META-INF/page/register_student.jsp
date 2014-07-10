@@ -19,7 +19,7 @@
                 <input type="password" class="form-control" id="password" name="password" placeholder="Password">
             </div>
             <input type="hidden" value="ST" name="type">
-            <input type="submit" class="btn btn-primary" style="width: 49%;" value="Sign up">
+            <input type="submit" id="submit" class="btn btn-primary" style="width: 49%;" value="Sign up">
             <a href="index.jsp" class="btn btn-default" style="width: 49%;">Cancel</a>
         </form>
     </div>
@@ -46,11 +46,13 @@
             if (msg == 'true') {
                 $("#email").parent().removeClass("has-success   has-feedback").find("span").remove("span");
                 $("#email").parent().addClass("has-error  has-feedback").append('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
+                $("#submit").attr("disabled", "disabled");
             } else {
                 $("#email").parent().removeClass("has-error  has-feedback").find("span").remove("span");
                 $("#email").parent().addClass("has-success   has-feedback").append('<span class="glyphicon glyphicon-ok form-control-feedback"></span>');
+                $("#submit").removeAttr("disabled");
             }
-        }
+        }   
     });
 
 </script>

@@ -42,9 +42,16 @@ public class Register extends HttpServlet {
         a.setLastname(lastname);
         a.setPassword(password);
         a.setProfile_pic("https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa");
-        if(Account.register(a)>0){
-            getServletContext().getRequestDispatcher("/RegisterSuccess.jsp").forward(request, response);
+        int result = Account.register(a);
+        String url = "";
+        String msg = "";
+        if(result>0){
+            url = "/META-INF/page/registerStatus.jsp";
+        }else{
+            url = "/register.jsp?rg="+accType;
+            request.setAttribute("msg", "มีบางอย่างผิดพลาด กรุณาตรวจสอบข้อมูลอีกครั้ง");
         }
+        getServletContext().getRequestDispatcher(url).forward(request, response);
         
     }
 
