@@ -9,7 +9,6 @@
         text-align: center;
     }
 </style>
-<c:if test="${param.cId != null && param.Cid != ''}"><c:set var="cId" value="${param.cId}" scope="session" /></c:if> 
     <div class="col-md-3">
         <div class="row userbox">
             <img class="col-md-4 center-block" src="${ac.profile_pic}">
@@ -29,7 +28,7 @@
             <span disabled="yes" class="list-group-item">
                 Course 
                 <c:choose>
-                    <c:when test="${sessionScope.accType eq 'st'}">
+                    <c:when test="${sessionScope.accType eq 'ST'}">
                         <span class="glyphicon glyphicon-plus-sign pull-right a_button"  data-toggle="modal" data-target="#join_course" title="join course" ></span>
                     </c:when>
                     <c:otherwise>

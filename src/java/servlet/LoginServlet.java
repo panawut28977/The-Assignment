@@ -42,6 +42,7 @@ public class LoginServlet extends HttpServlet {
         if (a.getAcc_id() != 0) {
             url = "home.jsp";
             ss.setAttribute("ac", a);
+            ss.setAttribute("accType", a.getAccount_type());
             List<Assignment> amList = a.getAssignment();
             Integer late=0,hurry=0,ontime=0,sent=0;
             for (Assignment assignment : amList) {

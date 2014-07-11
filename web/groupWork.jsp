@@ -71,7 +71,7 @@
                         </c:otherwise>
                     </c:choose>
                     <c:choose>
-                        <c:when test="${sessionScope.accType eq 'th'}">
+                        <c:when test="${sessionScope.accType eq 'TH'}">
                             <div class="col-md-7 bg-success" style="padding-top: 10px;padding-bottom: 10px;">
                                 <h4><b>People who joined group</b></h4>
                                 <div class="table-responsive">
@@ -150,7 +150,7 @@
                                 </div>
                             </div>
                         </c:when>
-                        <c:when test="${sessionScope.accType eq 'st'}">
+                        <c:when test="${sessionScope.accType eq 'ST'}">
                             <div style="text-align: center">
                                 <span class="text-danger"><h3>Select your group member</h3></span>
                                 <hr>

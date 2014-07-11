@@ -182,7 +182,7 @@ public class AccountCourse {
     public static List<AccountCourse> getCourseByAccID(int acc_id) {
         List<AccountCourse> courseList = new ArrayList<AccountCourse>();
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select * from account_course where acc_id=?";
+        String sql = "select * from account_course where acc_id=? AND status =  \"approved\"";
         PreparedStatement pstm;
         AccountCourse acc = null;
         try {

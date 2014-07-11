@@ -25,71 +25,85 @@
             </tr>
         </thead>
         <tbody>
-            <c:forEach items="${assignment}" var="a">
+            <c:forEach items="${ac.assignment}" var="a">
                 <tr>
                     <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment&&wo=f">${a.name}</a></td>
                     <td>${a.course.name}</td>
-                    <td>11/05/2557</td>
-                    <td><i class="glyphicon glyphicon-file"></i> File</td> 
-                    <td>Individual</td>
+                    <td>${a.due_date}</td>
+                    <c:choose>
+                        <c:when test="${a.ass_type eq 'file'}">
+                            <td><i class="glyphicon glyphicon-file"></i> File</td> 
+                        </c:when>
+                        <c:otherwise>
+                            <td><i class="glyphicon glyphicon-list-alt"></i> Web</td>
+                        </c:otherwise>
+                    </c:choose>
+                    <c:choose>
+                        <c:when test="${a.total_member == 1}">
+                            <td>Individual</td>
+                        </c:when>
+                        <c:otherwise>
+                            <td><a href="groupWork.jsp?ct=allAm&&tab=AllAssignment">${a.total_member}</a></td>
+                        </c:otherwise>
+                    </c:choose>
                     <td><span class="text-danger">Late</span></td>
                     <td><a title="Send Assignment File" href="uploadAssignment.jsp?ct=allAm&&tab=AllAssignment"><span class="glyphicon glyphicon-upload"></span></a></td>
                 </tr>
             </c:forEach>
-<!--            <tr>
-                <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment&&wo=f">Assignment# 1 .....</a></td>
-                <td>INT206 Software Development Process II</td>
-                <td>11/05/2557</td>
-                <td><i class="glyphicon glyphicon-file"></i> File</td> 
-                <td>Individual</td>
-                <td><span class="text-danger">Late</span></td>
-                <td><a title="Send Assignment File" href="uploadAssignment.jsp?ct=allAm&&tab=AllAssignment"><span class="glyphicon glyphicon-upload"></span></a></td>
-            </tr>
-            <tr>
-                <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment&&wo=f">Assignment# 2 .....</a></td>
-                <td>INT206 Software Development Process II</td>
-                <td>18/05/2557</td>
-                <td><i class="glyphicon glyphicon-file"></i> File</td>
-                <td><a href="groupWork.jsp?ct=allAm&&tab=AllAssignment">2</a></td>
-                <td><span class="text-success">on time</span></td>
-                <td><a title="Send Assignment File" href="uploadAssignment.jsp?ct=allAm&&tab=AllAssignment"><span class="glyphicon glyphicon-upload"></span></a></td>
-            </tr>
-            <tr>
-                <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment">Assignment# 3 .....</a></td>
-                <td>INT206 Software Development Process II</td>
-                <td>22/05/2557</td>
-                <td><i class="glyphicon glyphicon-list-alt"></i> Web</td>
-                <td><a href="groupWork.jsp?ct=allAm&&tab=AllAssignment">3</a></td>
-                <td><span class="text-success">on time</span></td>
-                <td><a href="onwebAssignment.jsp?ct=allAm&&tab=AllAssignment" title="Do it on web"><span class="glyphicon glyphicon-upload"></span></a></td>
-            </tr>
-            <tr>
-                <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment&&wo=f">Assignment# 1 .....</a></td>
-                <td>INT103 Office</td>
-                <td>25/05/2557</td>
-                <td><i class="glyphicon glyphicon-file"></i> File</td>
-                <td>Individual</td>
-                <td><span class="text-warning">Hurry up</td>
-                <td><a title="Send Assignment File" href="uploadAssignment.jsp?ct=allAm&&tab=AllAssignment"><span class="glyphicon glyphicon-upload"></span></a></td>
-            </tr>
-            <tr>
-                <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment&&wo=f">Assignment# 2 .....</a></td>
-                <td>INT103 Office</td>
-                <td>7/05/2557</td>
-                <td><i class="glyphicon glyphicon-file"></i> File</td>
-                <td>Individual</td>
-                <td><span class="text-muted">Sent <span class="glyphicon glyphicon-check"></span></span></td>
-                <td><a title="Send Assignment File" href="uploadAssignment.jsp?ct=allAm&&tab=AllAssignment"><span class="glyphicon glyphicon-upload"></span></a></td>
-            </tr>
-            <tr>
-                <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment">Assignment# 3 .....</a></td>
-                <td>INT103 Office</td>
-                <td>2/05/2557</td>
-                <td><i class="glyphicon glyphicon-list-alt"></i> Web</td>
-                <td><a href="groupWork.jsp?ct=allAm&&tab=AllAssignment">5</a></td> 
-                <td><span class="text-success">on time</span></td>
-                <td><a  href="onwebAssignment.jsp?ct=allAm&&tab=AllAssignment" title="Do it on web"><span class="glyphicon glyphicon-upload" ></span></a></td>
-            </tr>-->
+            <!--            <tr>
+                            <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment&&wo=f">Assignment# 1 .....</a></td>
+                            <td>INT206 Software Development Process II</td>
+                            <td>11/05/2557</td>
+                            <td><i class="glyphicon glyphicon-file"></i> File</td> 
+                            <td>Individual</td>
+                            <td><span class="text-danger">Late</span></td>
+                            <td><a title="Send Assignment File" href="uploadAssignment.jsp?ct=allAm&&tab=AllAssignment"><span class="glyphicon glyphicon-upload"></span></a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment&&wo=f">Assignment# 2 .....</a></td>
+                            <td>INT206 Software Development Process II</td>
+                            <td>18/05/2557</td>
+                            <td><i class="glyphicon glyphicon-file"></i> File</td>
+                            <td><a href="groupWork.jsp?ct=allAm&&tab=AllAssignment">2</a></td>
+                            <td><span class="text-success">on time</span></td>
+                            <td><a title="Send Assignment File" href="uploadAssignment.jsp?ct=allAm&&tab=AllAssignment"><span class="glyphicon glyphicon-upload"></span></a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment">Assignment# 3 .....</a></td>
+                            <td>INT206 Software Development Process II</td>
+                            <td>22/05/2557</td>
+                            <td><i class="glyphicon glyphicon-list-alt"></i> Web</td>
+                            <td><a href="groupWork.jsp?ct=allAm&&tab=AllAssignment">3</a></td>
+                            <td><span class="text-success">on time</span></td>
+                            <td><a href="onwebAssignment.jsp?ct=allAm&&tab=AllAssignment" title="Do it on web"><span class="glyphicon glyphicon-upload"></span></a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment&&wo=f">Assignment# 1 .....</a></td>
+                            <td>INT103 Office</td>
+                            <td>25/05/2557</td>
+                            <td><i class="glyphicon glyphicon-file"></i> File</td>
+                            <td>Individual</td>
+                            <td><span class="text-warning">Hurry up</td>
+                            <td><a title="Send Assignment File" href="uploadAssignment.jsp?ct=allAm&&tab=AllAssignment"><span class="glyphicon glyphicon-upload"></span></a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment&&wo=f">Assignment# 2 .....</a></td>
+                            <td>INT103 Office</td>
+                            <td>7/05/2557</td>
+                            <td><i class="glyphicon glyphicon-file"></i> File</td>
+                            <td>Individual</td>
+                            <td><span class="text-muted">Sent <span class="glyphicon glyphicon-check"></span></span></td>
+                            <td><a title="Send Assignment File" href="uploadAssignment.jsp?ct=allAm&&tab=AllAssignment"><span class="glyphicon glyphicon-upload"></span></a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment">Assignment# 3 .....</a></td>
+                            <td>INT103 Office</td>
+                            <td>2/05/2557</td>
+                            <td><i class="glyphicon glyphicon-list-alt"></i> Web</td>
+                            <td><a href="groupWork.jsp?ct=allAm&&tab=AllAssignment">5</a></td> 
+                            <td><span class="text-success">on time</span></td>
+                            <td><a  href="onwebAssignment.jsp?ct=allAm&&tab=AllAssignment" title="Do it on web"><span class="glyphicon glyphicon-upload" ></span></a></td>
+                        </tr>-->
         </tbody>
     </table>
 </div>
