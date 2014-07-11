@@ -6,9 +6,10 @@
 package servlet;
 
 import Model.Account;
+import Model.Assignment;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.jms.Session;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -35,11 +36,30 @@ public class LoginServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         Account a = Account.login(email, password);
-        String url = "";
         HttpSession ss = request.getSession();
+        String url = "";
+        String st="";
         if (a.getAcc_id() != 0) {
             url = "home.jsp";
             ss.setAttribute("ac", a);
+            List<Assignment> amList = a.getAssignment();
+            Integer late=0,hurry=0,ontime=0,sent=0;
+            for (Assignment assignment : amList) {
+                st = Assignment.remainingTimeforSend(assignment,a.getAcc_id());
+                if(st.equalsIgnoreCase("sent") ){
+                    sent++;
+                }else if(st.equalsIgnoreCase("ontime")){
+                    ontime++;
+                }else if(st.equalsIgnoreCase("hurryup")){
+                    sent++;
+                }else{
+                    late++;
+                } 
+            }
+            ss.setAttribute("late", late);
+            ss.setAttribute("hurry", hurry);
+            ss.setAttribute("ontime", ontime);
+            ss.setAttribute("sent", sent);
             response.sendRedirect(url);
         } else {
              request.setAttribute("msg", "email / password ผิดพลาดกรุณาลองใหม่อีกครั้ง");

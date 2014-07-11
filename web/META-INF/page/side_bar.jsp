@@ -18,10 +18,10 @@
         </div>
         <div class="statusbox " style="clear: both;background-color: #F8F8F8;padding-top: 20px; " >
             <small><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assignment Status</b></small><br>
-            <div onclick="view_assignment_by_status('Late')" class="col-md-3" style="background-color: #e74c3c;cursor: pointer;"><span>1</span><br><span>Late</span></div>
-            <div onclick="view_assignment_by_status('Hurry up')" class="col-md-3" style="background-color: #f1c40f;cursor: pointer;"><span>1</span><br><span>Hurry up</span></div>
-            <div onclick="view_assignment_by_status('on time')" class="col-md-3" style="background-color: #40d47e;cursor: pointer;"><span>3</span><br><span>On time</span></div>
-            <div onclick="view_assignment_by_status('sent')" class="col-md-3" style="background-color: #999;cursor: pointer;"><span>3</span><br><span>Sent</span></div>
+            <div onclick="view_assignment_by_status('Late')" class="col-md-3" style="background-color: #e74c3c;cursor: pointer;"><span>${late}</span><br><span>Late</span></div>
+            <div onclick="view_assignment_by_status('Hurry up')" class="col-md-3" style="background-color: #f1c40f;cursor: pointer;"><span>${hurry}</span><br><span>Hurry up</span></div>
+            <div onclick="view_assignment_by_status('on time')" class="col-md-3" style="background-color: #40d47e;cursor: pointer;"><span>${ontime}</span><br><span>On time</span></div>
+            <div onclick="view_assignment_by_status('sent')" class="col-md-3" style="background-color: #999;cursor: pointer;"><span>${sent}</span><br><span>Sent</span></div>
         </div>
     </div>
     <div class="row" style="margin-top: 30px">

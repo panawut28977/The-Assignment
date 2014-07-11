@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ import java.util.logging.Logger;
 public class Assignment {
 
     private int am_id;
-    private int course_id;
+    private Course course;
     private String name;
     private String description;
     private String ass_type;
@@ -44,13 +45,14 @@ public class Assignment {
         this.am_id = am_id;
     }
 
-    public int getCourse_id() {
-        return course_id;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setCourse_id(int course_id) {
-        this.course_id = course_id;
+    public void setCourse(Course course) {
+        this.course = course;
     }
+
 
     public String getName() {
         return name;
@@ -134,8 +136,6 @@ public class Assignment {
 
     //viewAssignmentSchedule(int acc_id) อาจไม่ต้องมีเพราะดึง Am ออกมามันก็มีค่าวันที่ติดมาอยู่แล้ว
     //getAmQuestionByAmID(int am_id)
-    //checkAmStatus(int am_id) เดียวใช้ get ass_type ออกไปเช็คเอาเอง
-    
     //createAmInfo(Assignment ass)
     public static int createAmInfo(Assignment ass) {
         Connection conn = ConnectionBuilder.getConnection();
@@ -144,7 +144,7 @@ public class Assignment {
         int result = 0;
         try {
             pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, ass.getCourse_id());
+            pstm.setInt(1, ass.getCourse().getCourse_id());
             pstm.setString(2, ass.getName());
             pstm.setString(3, ass.getDescription());
             pstm.setString(4, ass.getAss_type());
@@ -189,7 +189,7 @@ public class Assignment {
             while (rs.next()) {
                 am = new Assignment();
                 am.setAm_id(rs.getInt("ass_id"));
-                am.setCourse_id(rs.getInt("course_id"));
+                am.setCourse(Course.getCourseByID(rs.getInt("course_id")));
                 am.setName(rs.getString("name"));
                 am.setDescription(rs.getString("description"));
                 am.setAss_type(rs.getString("ass_type"));
@@ -222,7 +222,7 @@ public class Assignment {
             if (rs.next()) {
                 am = new Assignment();
                 am.setAm_id(rs.getInt("ass_id"));
-                am.setCourse_id(rs.getInt("course_id"));
+                am.setCourse(Course.getCourseByID(rs.getInt("course_id")));
                 am.setName(rs.getString("name"));
                 am.setDescription(rs.getString("description"));
                 am.setAss_type(rs.getString("ass_type"));
@@ -258,7 +258,7 @@ public class Assignment {
             while (rs.next()) {
                 am = new Assignment();
                 am.setAm_id(rs.getInt("ass_id"));
-                am.setCourse_id(rs.getInt("course_id"));
+                am.setCourse(Course.getCourseByID(rs.getInt("course_id")));
                 am.setName(rs.getString("name"));
                 am.setDescription(rs.getString("description"));
                 am.setAss_type(rs.getString("ass_type"));
@@ -277,15 +277,16 @@ public class Assignment {
         }
         return assList;
     }
+
     //isSend(int acc_id,int st_am_id)
-    public static boolean isSend(int acc_id,int am_id){
+    public static boolean isSend(int acc_id, int am_id) {
         boolean result = false;
         Date send_date = null;
         Connection conn = ConnectionBuilder.getConnection();
-        String sql1 = "select send_date from student_assignment_file saf join assignment a on saf.ass_id = a.ass_id where saf.acc_id = ? and saf.ass_id = ? union"+
-                       " select send_date from student_assignment_on_web saow join assignment a on saow.ass_id = a.ass_id where saow.acc_id = ? and saow.ass_id = ?";
+        String sql1 = "select send_date from student_assignment_file saf join assignment a on saf.ass_id = a.ass_id where saf.acc_id = ? and saf.ass_id = ? union"
+                + " select send_date from student_assignment_on_web saow join assignment a on saow.ass_id = a.ass_id where saow.acc_id = ? and saow.ass_id = ?";
         PreparedStatement pstm;
-         try {
+        try {
             pstm = conn.prepareStatement(sql1);
             pstm.setInt(1, acc_id);
             pstm.setInt(2, am_id);
@@ -298,12 +299,11 @@ public class Assignment {
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return (send_date==null?false:true);
+        return (send_date == null ? false : true);
     }
-    
-    
+
     //uploadAmFile(String path_file,int am_id)
-     public static int uploadAmFile(String path_file,int am_id) {
+    public static int uploadAmFile(String path_file, int am_id) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "update assignment set path_file=? where ass_id=?";
         PreparedStatement pstm;
@@ -319,9 +319,49 @@ public class Assignment {
         return result;
     }
 
+    //checkAmStatus(int am_id) 
+    public static String remainingTimeforSend(Assignment a, int acc_id) {
+        String status = "";
+        String sql = "";
+        Connection conn = ConnectionBuilder.getConnection();
+        if (a.getAss_type().equalsIgnoreCase("file")) {
+            sql = "select send_date from student_assignment_file where ass_id=? and acc_id=?";
+        } else {
+            sql = "select send_date from student_assignment_on_web where ass_id=? and acc_id=? ";
+        }
+        System.out.println(sql);
+        PreparedStatement pstm;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, a.getAm_id());
+            pstm.setInt(2, acc_id);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                Date t = rs.getDate(1);
+                Date today = new Date();
+                Double remaining_day  = (double)((today.getTime()-t.getTime())/1000/60/60/24);
+                if(t != null){
+                    status = "sent";
+                }else if(t == null){
+                    if(remaining_day >3){
+                        status = "ontime";
+                    }else if(remaining_day <=3 && remaining_day>0){
+                        status = "hurryup";
+                    }else{
+                        status = "late";
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return status;
+    }
+
     @Override
     public String toString() {
-        return "Assignment{" + "am_id=" + am_id + ", course_id=" + course_id + ", name=" + name + ", description=" + description + ", ass_type=" + ass_type + ", total_member=" + total_member + ", due_date=" + due_date + ", ass_extension=" + ass_extension + ", create_date=" + create_date + ", path_file=" + path_file + ", comment=" + comment + ", questionList=" + questionList + '}';
+        return "Assignment{" + "am_id=" + am_id + ", course=" + course + ", name=" + name + ", description=" + description + ", ass_type=" + ass_type + ", total_member=" + total_member + ", due_date=" + due_date + ", ass_extension=" + ass_extension + ", create_date=" + create_date + ", path_file=" + path_file + ", comment=" + comment + ", questionList=" + questionList + '}';
     }
-    
+
+
 }
