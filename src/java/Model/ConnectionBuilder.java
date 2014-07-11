@@ -20,9 +20,9 @@ public class ConnectionBuilder {
 //    private static final String URL = "jdbc:mysql://orarmor.in.th:3306/orarmorint_ta?useUnicode=yes&characterEncoding=UTF-8";
 //      public static final String USER = "orarmorint_ta2";
 //    public static final String PASSWORD = "!Projit17";
-     private static final String URL = "jdbc:mysql://localhost:3306/orarmorint_ta?useUnicode=yes&characterEncoding=UTF-8";
-      public static final String USER = "root";
-    public static final String PASSWORD = "";
+     private static final String URL = "jdbc:mysql://server.chaninz.com/chanin_tasm?useUnicode=yes&characterEncoding=UTF-8";
+      public static final String USER = "chanin_tasm";
+    public static final String PASSWORD = "7WnO2KeDfiYVcTb";
 
     public static Connection getConnection() {
         Connection conn = null;
@@ -37,22 +37,6 @@ public class ConnectionBuilder {
         return conn;
     }
     
-//public static final String DRIVER = "com.mysql.jdbc.Driver";
-//    public static final String URL = "jdbc:mysql://server.chaninz.com:3306/chanin_scb?useUnicode=yes&characterEncoding=UTF-8";
-//    public static final String USER = "chanin_scb";
-//    public static final String PASSWORD = "54216950";
-//
-//    public static Connection getConnection() {
-//        try {
-//            Class.forName(DRIVER);
-//            return DriverManager.getConnection(URL, USER, PASSWORD);
-//        } catch (ClassNotFoundException ex) {
-//            Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (SQLException ex) {
-//            Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return null;
-//    }
     public static void main(String[] args) {
         System.out.println(getConnection());
     }

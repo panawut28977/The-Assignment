@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="module/fullcalendar/fullcalendar.css">
 <link rel="stylesheet" href="module/fullcalendar/fullcalendar.print.css">
@@ -24,7 +25,18 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
+            <c:forEach items="${assignment}" var="a">
+                <tr>
+                    <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment&&wo=f">${a.name}</a></td>
+                    <td>${a.course.name}</td>
+                    <td>11/05/2557</td>
+                    <td><i class="glyphicon glyphicon-file"></i> File</td> 
+                    <td>Individual</td>
+                    <td><span class="text-danger">Late</span></td>
+                    <td><a title="Send Assignment File" href="uploadAssignment.jsp?ct=allAm&&tab=AllAssignment"><span class="glyphicon glyphicon-upload"></span></a></td>
+                </tr>
+            </c:forEach>
+<!--            <tr>
                 <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment&&wo=f">Assignment# 1 .....</a></td>
                 <td>INT206 Software Development Process II</td>
                 <td>11/05/2557</td>
@@ -77,7 +89,7 @@
                 <td><a href="groupWork.jsp?ct=allAm&&tab=AllAssignment">5</a></td> 
                 <td><span class="text-success">on time</span></td>
                 <td><a  href="onwebAssignment.jsp?ct=allAm&&tab=AllAssignment" title="Do it on web"><span class="glyphicon glyphicon-upload" ></span></a></td>
-            </tr>
+            </tr>-->
         </tbody>
     </table>
 </div>
@@ -94,7 +106,7 @@
         var d = date.getDate();
         var m = date.getMonth();
         var y = date.getFullYear();
-        
+
         $('#calendar').fullCalendar({
             header: {
                 left: 'prev,next today',

@@ -109,6 +109,11 @@ public class TestDriver {
         //isSend
         //System.out.println(Assignment.isSend(1,2));
         //
+        Assignment a = new Assignment();
+        a.setAm_id(1);
+        a.setAss_type("file");
+        System.out.println(Assignment.remainingTimeforSend(a, 1));
+        //
         //Message send
 //        Message m =  new Message();
 //        m.setSource_acc_id(Account.getAccountByID(1));
