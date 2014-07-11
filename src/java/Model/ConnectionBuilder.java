@@ -16,12 +16,13 @@ import java.util.logging.Logger;
  * @author JenoVa
  */
 public class ConnectionBuilder {
+
     private static final String DRIVER = "com.mysql.jdbc.Driver";
 //    private static final String URL = "jdbc:mysql://orarmor.in.th:3306/orarmorint_ta?useUnicode=yes&characterEncoding=UTF-8";
 //      public static final String USER = "orarmorint_ta2";
 //    public static final String PASSWORD = "!Projit17";
-     private static final String URL = "jdbc:mysql://server.chaninz.com/chanin_tasm?useUnicode=yes&characterEncoding=UTF-8";
-      public static final String USER = "chanin_tasm";
+    private static final String URL = "jdbc:mysql://server.chaninz.com/chanin_tasm?useUnicode=yes&characterEncoding=UTF-8";
+    public static final String USER = "chanin_tasm";
     public static final String PASSWORD = "7WnO2KeDfiYVcTb";
 
     public static Connection getConnection() {
@@ -36,7 +37,7 @@ public class ConnectionBuilder {
         }
         return conn;
     }
-    
+
     public static void main(String[] args) {
         System.out.println(getConnection());
     }
