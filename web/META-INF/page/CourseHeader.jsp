@@ -15,9 +15,9 @@
             </h3>
             <hr>
             <div class="row" style="text-align: center;" id="CourseDetail">
-                <div class="col-md-4"><h4>Course Code</h4><input type="text" readonly="yes" value="6zhjr8"></div>
-                <div class="col-md-4"><h4>Course link</h4><input type="text" readonly="yes" value="https://ta.do/j/6zhjr8"></div>
-                <div class="col-md-4"><a href="#"><img width="108" src="http://chart.apis.google.com/chart?chs=200x200&amp;cht=qr&amp;chld=|1&amp;chl=6zhjr8" alt="QR Code" class="qrcode" /></a></div>
+                <div class="col-md-4"><h4>Course Code</h4><input type="text" readonly="yes" value="${ac.courseList.get(cId).course.course_code}"></div>
+                <div class="col-md-4"><h4>Course link</h4><input type="text" readonly="yes" value="${ac.courseList.get(cId).course.course_link}"></div>
+                <div class="col-md-4"><a href="#"><div class="qrcode" ></div></div>
             </div>
             <div id="openCodeBox"><span id="openCodeBtn">See your course code <span class="glyphicon glyphicon-chevron-down"></span></span></div>
         </div>
@@ -37,6 +37,7 @@
         font-weight:  bold;
     }
 </style>
+<script type="text/javascript" src="../../js/jquery.qrcode-0.8.0.min.js"></script>
 <script>
     $(function() {
         $("#CourseDetail").hide();
@@ -48,6 +49,12 @@
             } else {
                 $(this).find("span").removeClass(" glyphicon-chevron-up").addClass("glyphicon-chevron-down");
             }
+        });
+        $(".qrcode").qrcode({
+            width: 180,
+            height: 180,
+            color: '#3a3',
+            text: 'http://larsjung.de/qrcode'
         });
     });
 </script>
