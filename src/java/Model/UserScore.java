@@ -45,12 +45,13 @@ public class UserScore {
     public static List<UserScore> getUserScore(int acc_id){
         List<UserScore> uScoreList = new ArrayList<UserScore>();
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select  ass_id,score from student_assignment_file f,student_assignment_on_web where acc_id = ?";
+        String sql = "select  f.ass_id,f.score,w.ass_id,w.score from student_assignment_file f,student_assignment_on_web w where f.acc_id = ? and w.acc_id=?";
         PreparedStatement pstm;
         UserScore uScore = null;
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, acc_id);
+            pstm.setInt(2, acc_id);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
                 uScore = new UserScore();

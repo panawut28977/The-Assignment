@@ -52,6 +52,8 @@ body{
     float:left;
     margin-left: 10px;
 }
-
+.clearboth{
+    clear: both;
+}
 ::selection {color:white;background:#40D47E;}
 ::-moz-selection {color:white;background:#40D47E;}

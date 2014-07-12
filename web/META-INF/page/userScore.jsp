@@ -5,7 +5,7 @@
     }
 </style>
 <c:choose> 
-    <c:when test="${sessionScope.accType eq 'st'}">
+    <c:when test="${ac.courseList.get(cId).role eq 'ST'}">
         <div style="text-align: center;margin-top:20px ">
             <div class="col-md-4"><h4>5 <br> Sent</h4></div>
             <div class="col-md-4"><h4>38/50 <br>Scores</h4></div>

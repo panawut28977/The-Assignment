@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="row">
-    <c:if test="${sessionScope.accType eq 'st'}">
+    <c:if test="${sac.courseList.get(cId).role eq 'ST'}">
         <div class="col-md-12" style="margin-top: 12px;">
             <button class="pull-right btn btn-default">Leave course</button>
         </div>
@@ -9,7 +9,7 @@
         <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" class="pull-left">
         <div class="media-body">
             <h4 class="media-heading" >Panawut Ittitananun</h4>
-            <c:if test="${sessionScope.accType eq 'th'}">
+            <c:if test="${ac.courseList.get(cId).role eq 'TH'}">
                 <span class="dropdown pull-right">
                     <a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></a>
                     <ul class="dropdown-menu">
@@ -26,7 +26,7 @@
         <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" class="pull-left">
         <div class="media-body">
             <h4 class="media-heading">Thanakit Mahamutjinda</h4>
-            <c:if test="${sessionScope.accType eq 'th'}">
+            <c:if test="${ac.courseList.get(cId).role eq 'TH'}">
                 <span class="dropdown pull-right">
                     <a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></a>
                     <ul class="dropdown-menu">
@@ -43,7 +43,7 @@
         <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" class="pull-left">
         <div class="media-body">
             <h4 class="media-heading">Nitiwit Wungwiwatna</h4>
-            <c:if test="${sessionScope.accType eq 'th'}">
+            <c:if test="${ac.courseList.get(cId).role eq 'TH'}">
                 <span class="dropdown pull-right">
                     <a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></a>
                     <ul class="dropdown-menu">
@@ -62,7 +62,7 @@
         <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" class="pull-left">
         <div class="media-body">
             <h4 class="media-heading">Thanapan Suwankanit</h4>
-            <c:if test="${sessionScope.accType eq 'th'}">
+            <c:if test="${ac.courseList.get(cId).role eq 'TH'}">
                 <span class="dropdown pull-right">
                     <a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></a>
                     <ul class="dropdown-menu">

@@ -32,7 +32,7 @@ public class Assignment {
     private int total_member;
     private Date due_date;
     private String ass_extension;
-    private String create_date;
+    private Timestamp create_date;
     private String path_file;
     private List<Comment> comment;
     private List<Question> questionList;
@@ -102,11 +102,11 @@ public class Assignment {
         this.ass_extension = ass_extension;
     }
 
-    public String getCreate_date() {
+    public Timestamp getCreate_date() {
         return create_date;
     }
 
-    public void setCreate_date(String create_date) {
+    public void setCreate_date(Timestamp create_date) {
         this.create_date = create_date;
     }
 
@@ -195,8 +195,10 @@ public class Assignment {
                 am.setAss_type(rs.getString("ass_type"));
                 am.setTotal_member(rs.getInt("total_member"));
                 am.setAss_extension(rs.getString("ass_extension"));
+                am.setCreate_date(rs.getTimestamp("create_date"));
+                am.setDue_date(rs.getDate("due_date"));
                 am.setComment(null);
-                if (am.getAss_type() == "File") {
+                if (am.getAss_type() == "file") {
                     am.setPath_file(rs.getString("path_file"));
                 } else {
                     am.setQuestionList(null);
@@ -228,8 +230,10 @@ public class Assignment {
                 am.setAss_type(rs.getString("ass_type"));
                 am.setTotal_member(rs.getInt("total_member"));
                 am.setAss_extension(rs.getString("ass_extension"));
+                am.setCreate_date(rs.getTimestamp("create_date"));
+                am.setDue_date(rs.getDate("due_date"));
                 am.setComment(null);
-                if (am.getAss_type() == "File") {
+                if (am.getAss_type() == "file") {
                     am.setPath_file(rs.getString("path_file"));
                 } else {
                     am.setQuestionList(null);
@@ -240,6 +244,9 @@ public class Assignment {
         }
         return am;
     }
+     public static Assignment getAmByAmID(String am_id) {
+         return getAmByAmID(Integer.parseInt(am_id));
+     }
 
     //getAmByAccID(int acc_id)
     public static List<Assignment> getAmByAccID(int acc_id) {
@@ -248,7 +255,7 @@ public class Assignment {
         String sql = "select ass.ass_id,ass.course_id,ass.name,ass.description,ass.ass_type,ass.total_member,ass.due_date,ass.ass_extension,ass.path_file,ass.create_date from account a "
                 + "join account_course ac on a.acc_id = ac.acc_id "
                 + "join assignment ass on ac.course_id = ass.course_id "
-                + "where a.acc_id = ? AND ac.status =  \"approved\"";
+                + "where a.acc_id = ? AND ac.status =  \"approved\" AND ac.role = 'ST'";
         PreparedStatement pstm;
         Assignment am = null;
         try {
@@ -264,8 +271,10 @@ public class Assignment {
                 am.setAss_type(rs.getString("ass_type"));
                 am.setTotal_member(rs.getInt("total_member"));
                 am.setAss_extension(rs.getString("ass_extension"));
+                am.setCreate_date(rs.getTimestamp("create_date"));
+                am.setDue_date(rs.getDate("due_date"));
                 am.setComment(null);
-                if (am.getAss_type() == "File") {
+                if (am.getAss_type() == "file") {
                     am.setPath_file(rs.getString("path_file"));
                 } else {
                     am.setQuestionList(null);
@@ -329,7 +338,6 @@ public class Assignment {
         } else {
             sql = "select send_date from student_assignment_on_web where ass_id=? and acc_id=? ";
         }
-        System.out.println(sql);
         PreparedStatement pstm;
         try {
             pstm = conn.prepareStatement(sql);

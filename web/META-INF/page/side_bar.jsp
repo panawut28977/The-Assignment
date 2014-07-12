@@ -43,8 +43,7 @@
                 </c:choose>
             </span>
             <c:forEach items="${ac.getCourseList()}" var="c">
-                <a id="${c.course.course_id}" onclick="load_course(${c.course.course_id})" class="list-group-item usepointer"><span class="badge">3</span>${c.course.name}</a>
-            
+                <a id="${c.key}" onclick="load_course(${c.key})" class="list-group-item usepointer">${c.value.course.name}</a>
             </c:forEach>
 <!--            <a id="1" onclick="load_course(1)" class="list-group-item usepointer"><span class="badge">3</span>INT103 Office</a>
             <a id="2" onclick="load_course(2)" class="list-group-item usepointer"><span class="badge">3</span>INT206 Software Development Process II</a>
@@ -110,6 +109,6 @@
     }
 
     function load_course(course_id) {
-        location.href = "course.jsp?cId=" + course_id;
+        location.href = "setCourseSession?cId=" + course_id;
     }
 </script>

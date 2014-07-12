@@ -10,7 +10,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import sun.java2d.pipe.SpanShapeRenderer;
 
 /**
@@ -109,10 +111,10 @@ public class TestDriver {
         //isSend
         //System.out.println(Assignment.isSend(1,2));
         //
-        Assignment a = new Assignment();
-        a.setAm_id(1);
-        a.setAss_type("file");
-        System.out.println(Assignment.remainingTimeforSend(a, 1));
+//        Assignment a = new Assignment();
+//        a.setAm_id(1);
+//        a.setAss_type("file");
+//        System.out.println(Assignment.remainingTimeforSend(a, 1));
         //
         //Message send
 //        Message m =  new Message();
@@ -252,7 +254,7 @@ public class TestDriver {
 //        fb.setQ_id(1);
 //        fb.setQ_order(2);
 //        fb.delete();
-        
+
 //        
 //        MatchWord
 //        MatchWord mw = new MatchWord();
@@ -292,7 +294,8 @@ public class TestDriver {
 //        exp.setQ_text("จงอธิบายว่าอะไรไม่เกี่ยวกับข้อ ต่อไปนี้");
 //        exp.setQ_keyword_check("I dont know what question means?");
 //        Question.update(exp);
-
+            Account ac = Account.login("orarmor@dd", "arm");
+            System.out.println(((AccountCourse)ac.getCourseList().get(1)).getCourse().getName());
     }
 
 }

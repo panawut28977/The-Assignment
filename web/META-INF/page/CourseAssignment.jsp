@@ -11,7 +11,7 @@
         font-weight: bold;
     }
 </style>
-<c:if test="${sessionScope.accType eq 'th'}"> 
+<c:if test="${ac.courseList.get(cId).role eq 'TH'}"> 
     <a class="btn btn-primary"  href="CreateAssignment.jsp?tab=AllAssignment" style="margin-top: 20px"><span class="glyphicon glyphicon-plus-sign"></span> Create Assignment</a>
 </c:if>
 <div class="table-responsive">

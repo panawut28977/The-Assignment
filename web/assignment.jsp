@@ -7,13 +7,15 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
+<%@taglib uri="/WEB-INF/tlds/functions.tld" prefix="cf"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="META-INF/page/include_css.jsp" %>
         <%@include file="META-INF/page/include_js.jsp" %>
-        <title>Course ...</title>
+        <c:set var="am" value="${cf:getAmByAmID(param.amId)}" target="Model.Assignment"/>
+        <title>${am.name}</title>
         <style>
             #pvVs{
                 text-align: center;
@@ -25,7 +27,7 @@
     <body>
         <%@include file="META-INF/page/header_bar.jsp"%>
         <div class="container">
-            <div class="row">
+            <div class="row"> 
                 <%@include file="META-INF/page/side_bar.jsp"%>
                 <div class="col-md-9" style="padding-bottom: 20px">
                     <c:choose>
@@ -34,7 +36,7 @@
                             <%@include file="META-INF/page/allCourseTab.jsp"%>
                             <ol class="breadcrumb" style="margin-top: 15px" >
                                 <li><a href="home.jsp?tab=AllAssignment">Assignment</a></li>
-                                <li class="active"><a href="#">Assignment# 1...</a></li>
+                                <li class="active"><a href="#">${am.name}</a></li>
                             </ol>
                         </c:when>
                         <c:otherwise>
@@ -42,19 +44,19 @@
                             <%@include file="META-INF/page/CourseTab.jsp"%>
                             <ol class="breadcrumb" style="margin-top: 15px" >
                                 <li><a href="course.jsp?tab=AllAssignment">Assignment</a></li>
-                                <li class="active"><a href="#">Assignment# 1...</a></li>
+                                <li class="active"><a href="#">${am.name}</a></li>
                             </ol>
                         </c:otherwise>
                     </c:choose>
                     <div>
-                        <h3 class="">Assignment# 1....</h3>
-                        <small class="text-muted">Created date : 13/08/2556 23:55:00 </small><br>   
+                        <h3 class="">${am.name}</h3>
+                        <small class="text-muted">Created date : ${am.create_date} </small><br>   
                     </div>
                     <div class="col-md-5 well"> 
                         <c:choose>
-                            <c:when test="${sessionScope.accType eq 'th'}">
+                            <c:when test="${ac.courseList.get(cId).role eq 'TH'}">
                                 <c:choose>
-                                    <c:when  test="${param.wo eq 'f'}">
+                                    <c:when  test="${am.ass_type eq 'file'}">
                                         <c:set value="file" var="wkt" />
                                     </c:when>
                                     <c:otherwise>
@@ -65,8 +67,8 @@
                                     <span class="glyphicon glyphicon-check center-block" style="font-size: 150px;margin: 40px auto;"></span><h4>Go to check : ) !</h4>
                                 </a>
                             </c:when>
-                            <c:when test="${param.wo eq 'f'}">
-                                <a href="file/chap 8.docx" style="text-align: center;text-decoration: none" class="center-block">
+                            <c:when test="${am.ass_type eq 'file'}">
+                                <a href="file/${am.path_file}" style="text-align: center;text-decoration: none" class="center-block">
                                     <span class="glyphicon glyphicon-file center-block" style="font-size: 150px;margin: 40px auto;"></span><h4>Download</h4>
                                 </a>
                             </c:when>
@@ -81,17 +83,17 @@
                         <table class="table">
                             <tr>
                                 <td><b>Due date</b></td>
-                                <td>30/08/2556<span class="text-danger pull-right">Late</span></td>
+                                <td>${am.due_date}<span class="text-danger pull-right"><b>Late</b></span></td>
                             </tr>
                             <tr>
                                 <td><b>Description</b></td>
-                                <td>quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad </td>
+                                <td>${am.description} </td>
                             </tr>
                             <tr>
                                 <td><b>Work on</b></td>
                                 <td>
                                     <c:choose>
-                                        <c:when test="${param.wo eq 'f'}">
+                                        <c:when test="${am.ass_type eq 'file'}">
                                             <span class="glyphicon glyphicon-file"></span> File
                                         </c:when>
                                         <c:otherwise>
@@ -103,12 +105,21 @@
                             </tr>
                             <tr>
                                 <td><b>Member</b></td>
-                                <td>Individual</td>
+                                <td> 
+                                    <c:choose>
+                                        <c:when test="${am.total_member == 1}">
+                                            Individual
+                                        </c:when>
+                                        <c:otherwise>
+                                            ${am.total_member}
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
                             </tr>
                             <tr>
-                                <c:if test="${sessionScope.accType eq 'th'}">
+                                <c:if test="${ac.courseList.get(cId).role eq 'TH'}">
                                     <c:choose>
-                                        <c:when test="${param.wo eq 'f'}">
+                                        <c:when test="${am.ass_type eq 'file'}">
                                             <td><button class="btn btn-primary"><span class="glyphicon glyphicon-upload"></span> Update</button></td>
                                             <td><button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
                                         </c:when>
@@ -121,7 +132,7 @@
                             </tr>
                         </table>
                     </div>
-                    <div class="clearfix"><hr></div>  
+                    <div class="clearboth"><hr></div>  
                     <h3>Comment</h3>
                     <div class="media">
                         <a class="pull-left" href="#">

@@ -1,10 +1,10 @@
-<c:choose>
-    <c:when test="${sessionScope.accType eq 'st'}">
-        <div><h3>INT206 Software Development Process II </h3></div>
+<c:choose> 
+    <c:when test="${ac.courseList.get(cId).role eq 'ST'}">
+        <div><h3>${ac.courseList.get(cId).course.name}</h3></div>
     </c:when>
     <c:otherwise>
         <div class="well well-sm">
-            <h3 >INT206 Software Development Process II 
+            <h3 >${ac.courseList.get(cId).course.name} 
                 <div class="dropdown pull-right">
                     <a data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-cog"></span></a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">

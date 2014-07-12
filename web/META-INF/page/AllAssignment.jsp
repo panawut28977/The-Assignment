@@ -27,7 +27,7 @@
         <tbody>
             <c:forEach items="${ac.assignment}" var="a">
                 <tr>
-                    <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment&&wo=f">${a.name}</a></td>
+                    <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment&&amId=${a.am_id}">${a.name}</a></td>
                     <td>${a.course.name}</td>
                     <td>${a.due_date}</td>
                     <c:choose>

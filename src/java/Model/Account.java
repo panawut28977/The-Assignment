@@ -11,7 +11,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,7 +32,8 @@ public class Account {
     private String account_type;
     private Timestamp register_date;
     private List<Announcement> announcement;
-    private List<AccountCourse> CourseList;
+//    private List<AccountCourse> CourseList;
+    private Map<Long, AccountCourse> CourseList = new HashMap<>();
     private List<Assignment> assignment;
     private List<UserScore> listStudentScore;
 
@@ -98,11 +101,19 @@ public class Account {
         this.announcement = announcement;
     }
 
-    public List<AccountCourse> getCourseList() {
+//    public List<AccountCourse> getCourseList() {
+//        return CourseList;
+//    }
+//
+//    public void setCourseList(List<AccountCourse> CourseList) {
+//        this.CourseList = CourseList;
+//    }
+
+    public Map getCourseList() {
         return CourseList;
     }
 
-    public void setCourseList(List<AccountCourse> CourseList) {
+    public void setCourseList(Map CourseList) {
         this.CourseList = CourseList;
     }
 
@@ -152,7 +163,11 @@ public class Account {
                 acc.setRegister_date(rs.getTimestamp("register_date"));
                 acc.setAnnouncement(Announcement.viewAnnByAccID(acc_id));
                 acc.setAssignment(Assignment.getAmByAccID(acc_id));
-                acc.setCourseList(AccountCourse.getCourseByAccID(acc_id));
+//                acc.setCourseList(AccountCourse.getCourseByAccID(acc_id));
+                List<AccountCourse> CL = AccountCourse.getCourseByAccID(acc_id);
+                for (AccountCourse accountCourse : CL) {
+                    acc.CourseList.put((long)accountCourse.getCourse().getCourse_id(), accountCourse);
+                }
                 acc.setListStudentScore(UserScore.getUserScore(acc_id));
             }
         } catch (SQLException ex) {
@@ -181,8 +196,8 @@ public class Account {
         }
         return result;
     }
-    
-    public static boolean isExistingEmail(String email){
+
+    public static boolean isExistingEmail(String email) {
         String e = null;
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select email from account where email = ?";
@@ -198,7 +213,7 @@ public class Account {
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return e==null?false:true;
+        return e == null ? false : true;
     }
 
     public static int edit(Account a) {
@@ -253,8 +268,8 @@ public class Account {
         }
         return fullname;
     }
-    
-      public static Account getAccountByID(int acc_id) {
+
+    public static Account getAccountByID(int acc_id) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select * from account where acc_id = ? ";
         PreparedStatement pstm;
@@ -279,10 +294,13 @@ public class Account {
         }
         return acc;
     }
-    
+
     @Override
     public String toString() {
         return "Account{" + "acc_id=" + acc_id + ", firstname=" + firstname + ", lastname=" + lastname + ", email=" + email + ", password=" + password + ", profile_pic=" + profile_pic + ", account_type=" + account_type + ", register_date=" + register_date + ", announcement=" + announcement + ", CourseList=" + CourseList + ", assignment=" + assignment + ", listStudentScore=" + listStudentScore + '}';
     }
-
+    
+//    public AccountCourse getAc(String k){
+//        return (AccountCourse)(getCourseList().get(Long.parseLong(k)));
+//    }
 }

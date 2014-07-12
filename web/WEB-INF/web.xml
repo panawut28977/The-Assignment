@@ -20,6 +20,10 @@
         <servlet-name>signout</servlet-name>
         <servlet-class>servlet.signout</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>setCourseSession</servlet-name>
+        <servlet-class>servlet.setCourseSession</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -35,6 +39,10 @@
     <servlet-mapping>
         <servlet-name>signout</servlet-name>
         <url-pattern>/signout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>setCourseSession</servlet-name>
+        <url-pattern>/setCourseSession</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
