@@ -18,9 +18,9 @@
             <tr>
                 <th>Name</th>
                 <th>Course</th>
-                <th>Due Date</th>
                 <th>Work on</th>
                 <th>Member(s)</th>
+                <th>Due Date</th>
                 <th>Status</th>
                 <th></th>
             </tr>
@@ -30,7 +30,6 @@
                 <tr>
                     <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment&&amId=${a.am_id}">${a.name}</a></td>
                     <td>${a.course.name}</td>
-                    <td>${a.due_date}</td>
                     <c:choose>
                         <c:when test="${a.ass_type eq 'file'}">
                             <td><i class="glyphicon glyphicon-file"></i> File</td> 
@@ -47,6 +46,7 @@
                             <td><a href="groupWork.jsp?ct=allAm&&tab=AllAssignment">${a.total_member}</a></td>
                             </c:otherwise>
                         </c:choose>
+                    <td>${a.due_date}</td>
                     <td>
                         <c:set value="${cf:remainingTimeforSend(a,ac.acc_id)}" var="status"/>
                         <c:choose>

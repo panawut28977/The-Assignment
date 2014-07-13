@@ -21,12 +21,12 @@
             <tr>
                 <th>Name</th>
                 <th>Course</th>
-                <th>Due Date</th>
                 <th>Work on</th>
                 <th>Member(s)</th>
-                <th>Status</th>
+                <th>Due Date</th>
                     <c:choose>
                         <c:when test="${ac.courseList.get(cId).role eq 'ST'}">
+                        <th>Status</th>
                         <th></th>
                         </c:when>
                         <c:otherwise>
@@ -39,8 +39,7 @@
             <c:forEach items="${ac.courseList.get(cId).course.assignment}" var="a">
                 <tr>
                     <td><a href="assignment.jsp?tab=AllAssignment&&amId=${a.am_id}">${a.name}</a></td>
-                    <td></td>
-                    <td>${a.due_date}</td>
+                    <td>${ac.courseList.get(cId).course.name}</td>
                     <c:choose>
                         <c:when test="${a.ass_type eq 'file'}">
                             <td><i class="glyphicon glyphicon-file"></i> File</td> 
@@ -57,33 +56,36 @@
                             <td><a href="groupWork.jsp?ct=allAm&&tab=AllAssignment">${a.total_member}</a></td>
                             </c:otherwise>
                         </c:choose>
-                    <td>
-                        <c:set value="${cf:remainingTimeforSend(a,ac.acc_id)}" var="status"/>
-                        <c:choose>
-                            <c:when test="${status eq 'late'}">
-                                <span class="text-danger">Late</span>
-                            </c:when>
-                            <c:when test="${status eq 'ontime'}">
-                                <span class="text-success">On time</span>
-                            </c:when>
-                            <c:when test="${status eq 'hurryup'}">
-                                <span class="text-warning">Hurry up!</span>
-                            </c:when>
-                            <c:otherwise>
-                                <span class="text-muted">Sent <span class="glyphicon glyphicon-check"></span></span>
-                            </c:otherwise>
-                        </c:choose>
-                    </td>
-                    <td>
-                        <c:choose>
-                            <c:when test="${ac.courseList.get(cId).role eq 'ST'}">
+                    <td>${a.due_date}</td>
+                    <c:choose>
+                        <c:when test="${ac.courseList.get(cId).role eq 'ST'}">
+                            <td>
+                                <c:set value="${cf:remainingTimeforSend(a,ac.acc_id)}" var="status"/>
+                                <c:choose>
+                                    <c:when test="${status eq 'late'}">
+                                        <span class="text-danger">Late</span>
+                                    </c:when>
+                                    <c:when test="${status eq 'ontime'}">
+                                        <span class="text-success">On time</span>
+                                    </c:when>
+                                    <c:when test="${status eq 'hurryup'}">
+                                        <span class="text-warning">Hurry up!</span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span class="text-muted">Sent <span class="glyphicon glyphicon-check"></span></span>
+                                        </c:otherwise>
+                                    </c:choose>
+                            </td>
+                            <td>
                                 <a title="Send Assignment File" href="uploadAssignment.jsp?tab=AllAssignment">
                                     <span class="glyphicon glyphicon-upload"></span>
                                 </a>
-                            </c:when>
-                            <c:otherwise><a href="SendedAssignment.jsp?tab=AllAssignment&&wkt=file">10</a></c:otherwise>
-                        </c:choose> 
-                    </td>
+                            </td>
+                        </c:when>
+                        <c:otherwise> 
+                            <td><a href="SendedAssignment.jsp?tab=AllAssignment&&wkt=file">10</a></td>
+                        </c:otherwise>
+                    </c:choose>
                 </tr>
             </c:forEach>
             <!--            <tr>
