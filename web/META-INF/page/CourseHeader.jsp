@@ -17,7 +17,7 @@
             <div class="row" style="text-align: center;" id="CourseDetail">
                 <div class="col-md-4"><h4>Course Code</h4><input type="text" readonly="yes" value="${ac.courseList.get(cId).course.course_code}"></div>
                 <div class="col-md-4"><h4>Course link</h4><input type="text" readonly="yes" value="${ac.courseList.get(cId).course.course_link}"></div>
-                <div class="col-md-4"><a href="#"><div class="qrcode" ></div></div>
+                <div class="col-md-4 qrcode" ></div>
             </div>
             <div id="openCodeBox"><span id="openCodeBtn">See your course code <span class="glyphicon glyphicon-chevron-down"></span></span></div>
         </div>
@@ -37,7 +37,7 @@
         font-weight:  bold;
     }
 </style>
-<script type="text/javascript" src="../../js/jquery.qrcode-0.8.0.min.js"></script>
+<script type="text/javascript" src="js/jquery.qrcode-0.8.0.min.js"></script>
 <script>
     $(function() {
         $("#CourseDetail").hide();
@@ -51,10 +51,9 @@
             }
         });
         $(".qrcode").qrcode({
-            width: 180,
-            height: 180,
-            color: '#3a3',
-            text: 'http://larsjung.de/qrcode'
+            size: 100,
+            background: 'white',
+            text: '${ac.courseList.get(cId).course.course_link}'
         });
     });
 </script>

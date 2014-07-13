@@ -24,7 +24,8 @@ import java.util.logging.Logger;
 public class Announcement {
     private int an_id;
     private Account an_acc;
-    private Course course;
+//    private Course course;
+    private int course;
     private String title;
     private String content;
     private Timestamp announce_date;
@@ -45,11 +46,11 @@ public class Announcement {
         this.an_acc = an_acc;
     }
 
-    public Course getCourse() {
+    public int getCourse() {
         return course;
     }
 
-    public void setCourse(Course course) {
+    public void setCourse(int course) {
         this.course = course;
     }
 
@@ -90,7 +91,7 @@ public class Announcement {
             while (rs.next()) {
                 a = new Announcement();
                 a.setAn_acc(Account.getAccountByID(rs.getInt("acc_id")));
-                a.setCourse(Course.getCourseByID(rs.getInt("course_id")));
+                a.setCourse(rs.getInt("course_id"));
                 a.setAn_id(rs.getInt("an_id"));
                 a.setAnnounce_date(rs.getTimestamp("announce_date"));
                 a.setContent(rs.getString("content"));
@@ -111,7 +112,7 @@ public class Announcement {
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, a.getAn_acc().getAcc_id());
-            pstm.setInt(2, a.getCourse().getCourse_id());
+            pstm.setInt(2, a.getCourse());
             pstm.setString(3, a.getTitle());
             pstm.setString(4, a.getContent());
             result = pstm.executeUpdate();
@@ -168,7 +169,7 @@ public class Announcement {
             while (rs.next()) {
                 a = new Announcement();
                 a.setAn_acc(Account.getAccountByID(rs.getInt("acc_id")));
-                a.setCourse(Course.getCourseByID(rs.getInt("course_id")));
+                a.setCourse(rs.getInt("course_id"));
                 a.setAn_id(rs.getInt("an_id"));
                 a.setAnnounce_date(rs.getTimestamp("announce_date"));
                 a.setContent(rs.getString("content"));

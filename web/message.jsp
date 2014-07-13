@@ -118,7 +118,7 @@
                             <input type="submit" class="btn btn-primary pull-right" value="Send">
                         </form>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4" style="margin-top: 36px;">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h3 class="panel-title">Select your teacher</h3>

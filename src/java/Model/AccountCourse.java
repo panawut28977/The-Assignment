@@ -192,7 +192,7 @@ public class AccountCourse {
             while (rs.next()) {
                 acc = new AccountCourse();
                 acc.setRole(rs.getString("role"));
-                acc.setStatus(rs.getString("status"));
+                acc.setStatus(rs.getString("status"));  
                 Course c = Course.getCourseByID(rs.getInt("course_id"));
                 acc.setCourse(c);
                 courseList.add(acc);

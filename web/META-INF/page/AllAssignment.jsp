@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib  prefix="cf" uri="/WEB-INF/tlds/functions.tld" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="module/fullcalendar/fullcalendar.css">
 <link rel="stylesheet" href="module/fullcalendar/fullcalendar.print.css">
@@ -44,9 +45,25 @@
                         </c:when>
                         <c:otherwise>
                             <td><a href="groupWork.jsp?ct=allAm&&tab=AllAssignment">${a.total_member}</a></td>
-                        </c:otherwise>
-                    </c:choose>
-                    <td><span class="text-danger">Late</span></td>
+                            </c:otherwise>
+                        </c:choose>
+                    <td>
+                        <c:set value="${cf:remainingTimeforSend(a,ac.acc_id)}" var="status"/>
+                        <c:choose>
+                            <c:when test="${status eq 'late'}">
+                                <span class="text-danger">Late</span>
+                            </c:when>
+                            <c:when test="${status eq 'ontime'}">
+                                <span class="text-success">On time</span>
+                            </c:when>
+                            <c:when test="${status eq 'hurryup'}">
+                                <span class="text-warning">Hurry up!</span>
+                            </c:when>
+                            <c:otherwise>
+                                <span class="text-muted">Sent <span class="glyphicon glyphicon-check"></span></span>
+                                </c:otherwise>
+                            </c:choose>
+                    </td>
                     <td><a title="Send Assignment File" href="uploadAssignment.jsp?ct=allAm&&tab=AllAssignment"><span class="glyphicon glyphicon-upload"></span></a></td>
                 </tr>
             </c:forEach>

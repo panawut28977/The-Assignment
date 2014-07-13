@@ -53,7 +53,6 @@ public class Assignment {
         this.course = course;
     }
 
-
     public String getName() {
         return name;
     }
@@ -176,7 +175,7 @@ public class Assignment {
     }
 
     //getAmByCourseID(int course_id)
-    public static List<Assignment> getAmByCourseID(int course_id) {
+    public static List<Assignment> getAmByCourseID(int course_id, boolean setCourse) {
         List<Assignment> AmList = new ArrayList<Assignment>();
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select * from assignment where course_id=?";
@@ -189,7 +188,11 @@ public class Assignment {
             while (rs.next()) {
                 am = new Assignment();
                 am.setAm_id(rs.getInt("ass_id"));
-                am.setCourse(Course.getCourseByID(rs.getInt("course_id")));
+                if (setCourse) {
+                    am.setCourse(Course.getCourseByID(rs.getInt("course_id")));
+                } else {
+                    am.setCourse(null);
+                }
                 am.setName(rs.getString("name"));
                 am.setDescription(rs.getString("description"));
                 am.setAss_type(rs.getString("ass_type"));
@@ -209,6 +212,10 @@ public class Assignment {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
         return AmList;
+    }
+
+    public static List<Assignment> getAmByCourseIDNoSetCourse(int course_id) {
+        return getAmByCourseID(course_id, false);
     }
 
     //getAmByAmID(int am_id) 
@@ -244,9 +251,10 @@ public class Assignment {
         }
         return am;
     }
-     public static Assignment getAmByAmID(String am_id) {
-         return getAmByAmID(Integer.parseInt(am_id));
-     }
+
+    public static Assignment getAmByAmID(String am_id) {
+        return getAmByAmID(Integer.parseInt(am_id));
+    }
 
     //getAmByAccID(int acc_id)
     public static List<Assignment> getAmByAccID(int acc_id) {
@@ -346,18 +354,20 @@ public class Assignment {
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {
                 Date t = rs.getDate(1);
-                Date today = new Date();
-                Double remaining_day  = (double)((today.getTime()-t.getTime())/1000/60/60/24);
-                if(t != null){
+                if (t != null) {
                     status = "sent";
-                }else if(t == null){
-                    if(remaining_day >3){
-                        status = "ontime";
-                    }else if(remaining_day <=3 && remaining_day>0){
-                        status = "hurryup";
-                    }else{
-                        status = "late";
-                    }
+                }
+            } else {
+                Date due_date = a.getDue_date();
+                Date today = new Date();
+                Double remaining_day = (double) ((due_date.getTime()-today.getTime()) / 1000 / 60 / 60 / 24);
+                System.out.println(remaining_day);
+                if (remaining_day > 3) {
+                    status = "ontime";
+                } else if (remaining_day <= 3 && remaining_day > 0) {
+                    status = "hurryup";
+                } else {
+                    status = "late";
                 }
             }
         } catch (SQLException ex) {
@@ -370,6 +380,5 @@ public class Assignment {
     public String toString() {
         return "Assignment{" + "am_id=" + am_id + ", course=" + course + ", name=" + name + ", description=" + description + ", ass_type=" + ass_type + ", total_member=" + total_member + ", due_date=" + due_date + ", ass_extension=" + ass_extension + ", create_date=" + create_date + ", path_file=" + path_file + ", comment=" + comment + ", questionList=" + questionList + '}';
     }
-
 
 }

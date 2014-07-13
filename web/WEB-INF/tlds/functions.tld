@@ -25,10 +25,10 @@
         <function-class>Model.Assignment</function-class>
         <function-signature>Assignment getAmByAmID(int)</function-signature>
     </function>
-     <function>
+    <function>
         <name>remainingTimeforSend</name>
         <function-class>Model.Assignment</function-class>
-        <function-signature>String remainingTimeforSend(Assignment,int)</function-signature>
+        <function-signature>String remainingTimeforSend(Model.Assignment,int)</function-signature>
     </function>
     
 </taglib>

@@ -294,8 +294,16 @@ public class TestDriver {
 //        exp.setQ_text("จงอธิบายว่าอะไรไม่เกี่ยวกับข้อ ต่อไปนี้");
 //        exp.setQ_keyword_check("I dont know what question means?");
 //        Question.update(exp);
-            Account ac = Account.login("orarmor@dd", "arm");
-            System.out.println(((AccountCourse)ac.getCourseList().get(1)).getCourse().getName());
+        
+//            Account ac = Account.login("orarmor@dd", "arm");
+//            System.out.println(((AccountCourse)ac.getCourseList().get(1)).getCourse().getName());
+    
+//        System.out.println(Announcement.viewAnnByCourse(1));
+        Assignment a = new Assignment();
+        a.setAm_id(2);
+        a.setAss_type("file");
+        a.setDue_date(new Date());
+        System.out.println(Assignment.remainingTimeforSend(a, 2));
     }
 
 }

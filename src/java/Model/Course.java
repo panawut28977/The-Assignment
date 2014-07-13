@@ -125,13 +125,14 @@ public class Course {
             pstm.setInt(1, course_id);
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {
-                c.setCourse_id(rs.getInt("course_id"));
+                int courseId = rs.getInt("course_id");
+                c.setCourse_id(courseId);
                 c.setName(rs.getString("name"));
                 c.setCourse_code(rs.getString("course_code"));
                 c.setCourse_link(rs.getString("course_link"));
                 c.setCreate_date(rs.getDate("create_date"));
-                c.setAnnouncement(null);
-                c.setAssignment(null);
+                c.setAnnouncement(Announcement.viewAnnByCourse(course_id));
+                c.setAssignment(Assignment.getAmByCourseIDNoSetCourse(course_id));
                 c.setListStudnet(null);
             }
         } catch (SQLException ex) {
