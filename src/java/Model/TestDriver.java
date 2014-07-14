@@ -254,7 +254,6 @@ public class TestDriver {
 //        fb.setQ_id(1);
 //        fb.setQ_order(2);
 //        fb.delete();
-
 //        
 //        MatchWord
 //        MatchWord mw = new MatchWord();
@@ -294,16 +293,47 @@ public class TestDriver {
 //        exp.setQ_text("จงอธิบายว่าอะไรไม่เกี่ยวกับข้อ ต่อไปนี้");
 //        exp.setQ_keyword_check("I dont know what question means?");
 //        Question.update(exp);
-        
 //            Account ac = Account.login("orarmor@dd", "arm");
 //            System.out.println(((AccountCourse)ac.getCourseList().get(1)).getCourse().getName());
-    
 //        System.out.println(Announcement.viewAnnByCourse(1));
-        Assignment a = new Assignment();
-        a.setAm_id(2);
-        a.setAss_type("file");
-        a.setDue_date(new Date());
-        System.out.println(Assignment.remainingTimeforSend(a, 2));
+//        Assignment a = new Assignment();
+//        a.setAm_id(2);
+//        a.setAss_type("file");
+//        a.setDue_date(new Date());
+//        System.out.println(Assignment.remainingTimeforSend(a, 2));
+        //
+        //Test comment object
+//        Comment c = new Comment();
+//        c.setAcc_id(1);
+//        c.setText("หิวข้าวจังเลยยยย");
+//        Comment.add(c, 1);
+//        c.setAcc_id(2);
+//        c.setText("แอบหลงรักเธออยู่แต่เธอคงดูไม่ออก");
+//        Comment.add(c, 1);
+//         c.setAcc_id(1);
+//        c.setText("เก็บความรักไม่กล้าบอก....");
+//        Comment.add(c, 1);
+        //
+//        Comment c = new Comment();
+//        c.setAcc_id(1);
+//        c.setText("ก็ฉันไม่มีใคร ...");
+//        Comment.addToStComment(c, 1, "file");
+//        c.setAcc_id(2);
+//        c.setText("กลัววันนั้นฉันจะกลายเป็นปัญหา ...");
+////        Comment.addToStComment(c, 1, "file");
+//        System.out.println(Comment.getCommentByAmID(1));
+//        System.out.println(Comment.getCommentByStAmIDFile(1));
+        //
+        List<Group_member> l = new ArrayList<>();
+        Group_member g = new Group_member();
+        g.setAcc_id(1);
+        g.setG_no(1);
+        g.setSt_am_id(3);
+        g.setAm_type("file");
+        l.add(g);
+        g.setAcc_id(2);
+        l.add(g);
+        Group_member.addMember(l);
     }
 
 }
