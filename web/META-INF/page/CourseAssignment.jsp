@@ -2,7 +2,6 @@
 <%@taglib uri="/WEB-INF/tlds/functions" prefix="cf" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="module/fullcalendar/fullcalendar.css">
-<link rel="stylesheet" href="module/fullcalendar/fullcalendar.print.css">
 <style>
     #AllAssignemnt_wrapper{
         margin-top: 20px;
@@ -88,60 +87,6 @@
                     </c:choose>
                 </tr>
             </c:forEach>
-            <!--            <tr>
-                            <td><a href="assignment.jsp?tab=AllAssignment&&wo=f">Assignment# 1</a></td>
-                            <td>INT206 Software Development Process II</td>
-                            <td>31/2/2554</td>
-                            <td><i class="glyphicon glyphicon-file"></i> File</td> 
-                            <td>Individual</td>
-                            <td><span class="text-danger">Late</span></td>
-                            <td>
-            <c:choose>
-                <c:when test="${ac.courseList.get(cId).role eq 'ST'}">
-                    <a title="Send Assignment File" href="uploadAssignment.jsp?tab=AllAssignment">
-                        <span class="glyphicon glyphicon-upload"></span>
-                    </a>
-                </c:when>
-                <c:otherwise><a href="SendedAssignment.jsp?tab=AllAssignment&&wkt=file">10</a></c:otherwise>
-            </c:choose> 
-        </td>
-    </tr>
-    <tr>
-        <td><a href="assignment.jsp?tab=AllAssignment&&wo=f">Assignment# 2 .....</a></td>
-        <td>INT206 Software Development Process II</td>
-        <td>13/01/2554</td>
-        <td><i class="glyphicon glyphicon-file"></i> File</td>
-        <td><a href="groupWork.jsp?tab=AllAssignment">2</a></td>
-        <td><span class="text-success">on time</span></td>
-        <td>
-            <c:choose>
-                <c:when test="${sessionScope.accType eq 'st'}">
-                    <a title="Send Assignment File" href="uploadAssignment.jsp?tab=AllAssignment">
-                        <span class="glyphicon glyphicon-upload"></span>
-                    </a>
-                </c:when>
-                <c:otherwise><a href="SendedAssignment.jsp?tab=AllAssignment&&wkt=file">5</a></c:otherwise>
-            </c:choose>
-        </td>
-    </tr>
-    <tr>
-        <td><a href="assignment.jsp?tab=AllAssignment">Assignment# 3 .....</a></td>
-        <td>INT206 Software Development Process II</td>
-        <td>13/08/2556</td>
-        <td><i class="glyphicon glyphicon-list-alt"></i> Web</td>
-        <td><a href="groupWork.jsp?tab=AllAssignment">3</a></td>
-        <td><span class="text-success">on time</span></td>
-        <td>
-            <c:choose>
-                <c:when test="${sessionScope.accType eq 'st'}">
-                    <a href="onwebAssignment.jsp?tab=AllAssignment" title="Do it on web">
-                        <span class="glyphicon glyphicon-upload"></span>
-                    </a>
-                </c:when>
-                <c:otherwise><a href="SendedAssignment.jsp?tab=AllAssignment&&wkt=web">10</a></c:otherwise>
-            </c:choose>
-        </td>
-    </tr>-->
         </tbody>
     </table>
 </div>
@@ -153,7 +98,31 @@
     $(document).ready(function() {
         var aTable = $('#AllAssignemnt').dataTable();
         aTable.fnFilter('${param.st}');
-
+        var color = '';
+        var jsonArr = [];
+    <c:forEach items="${ac.courseList.get(cId).course.assignment}" var="a">
+         <c:set value="${cf:remainingTimeforSend(a,ac.acc_id)}" var="status"/>
+    <c:choose>
+        <c:when test="${status eq 'late'}">
+        color = '#a94442';
+        </c:when>
+        <c:when test="${status eq 'ontime'}">
+        color = '#3c763d';
+        </c:when>
+        <c:when test="${status eq 'hurryup'}">
+        color = '#8a6d3b';
+        </c:when>
+        <c:otherwise>
+        color = '#777';
+        </c:otherwise>
+    </c:choose>
+        jsonArr.push({
+            title: '${a.name}',
+            start: '${a.due_date}',
+            borderColor: color,
+            backgroundColor: color
+        });
+    </c:forEach>
         var date = new Date();
         var d = date.getDate();
         var m = date.getMonth();
@@ -166,20 +135,7 @@
                 right: 'month,agendaWeek,agendaDay'
             },
             editable: true,
-            events: [
-                {
-                    title: 'Assignment# 1 ..... - INT206 Software Development Process II',
-                    start: date
-                },
-                {
-                    title: 'Assignment# 2 ..... - INT206 Software Development Process II',
-                    start: new Date(y, m, d - 5),
-                },
-                {
-                    title: 'Assignment# 3 ..... - INT206 Software Development Process II',
-                    start: new Date(y, m, d - 3, 16, 0),
-                }
-            ]
+            events: jsonArr
         });
 
     });

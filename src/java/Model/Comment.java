@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 public class Comment {
 
     private int comment_id;
-    private int acc_id;
+    private Account acc;
     private String text;
     private Date comment_date;
 
@@ -34,12 +34,12 @@ public class Comment {
         this.comment_id = comment_id;
     }
 
-    public int getAcc_id() {
-        return acc_id;
+    public Account getAcc() {
+        return acc;
     }
 
-    public void setAcc_id(int acc_id) {
-        this.acc_id = acc_id;
+    public void setAcc_id(Account acc) {
+        this.acc = acc;
     }
 
     public String getText() {
@@ -67,7 +67,7 @@ public class Comment {
         int result = 0;
         try {
             pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, c.getAcc_id());
+            pstm.setInt(1, c.getAcc().getAcc_id());
             pstm.setInt(2, am_id);
             pstm.setString(3, c.getText());
             result = pstm.executeUpdate();
@@ -86,7 +86,7 @@ public class Comment {
         int result = 0;
         try {
             pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, c.getAcc_id());
+            pstm.setInt(1, c.getAcc().getAcc_id());
             pstm.setInt(2, st_ass_id);
             pstm.setString(3, c.getText());
             pstm.setString(4, am_type);
@@ -166,7 +166,7 @@ public class Comment {
             while (rs.next()) {
               c = new Comment();
               c.setComment_id(rs.getInt("comment_id"));
-              c.setAcc_id(rs.getInt("acc_id"));
+              c.setAcc_id(Account.getAccountByID(rs.getInt("acc_id")));
               c.setText(rs.getString("text"));
               c.setComment_date(rs.getDate("comment_date"));
               cList.add(c);
@@ -180,7 +180,7 @@ public class Comment {
     
     @Override
     public String toString() {
-        return "Comment{" + "comment_id=" + comment_id + ", acc_id=" + acc_id + ", text=" + text + ", comment_date=" + comment_date + '}';
+        return "Comment{" + "comment_id=" + comment_id + ", acc_id=" + acc + ", text=" + text + ", comment_date=" + comment_date + '}';
     }
 
 }

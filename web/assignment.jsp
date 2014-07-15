@@ -120,38 +120,54 @@
                                 <c:if test="${ac.courseList.get(cId).role eq 'TH'}">
                                     <c:choose>
                                         <c:when test="${am.ass_type eq 'file'}">
-                                            <td><button class="btn btn-primary"><span class="glyphicon glyphicon-upload"></span> Update</button></td>
-                                            <td><button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
+                                            <td>
+                                                <button class="btn btn-primary"><span class="glyphicon glyphicon-upload"></span> Update</button>
+                                                <button class="btn btn-danger" style="margin-left: 10px"><span class="glyphicon glyphicon-remove"></span> Delete</button>
+                                            </td>
                                         </c:when>
                                         <c:otherwise>
-                                            <td><button class="btn btn-primary"><span class="glyphicon glyphicon-upload"></span> Edit</button></td>
-                                            <td><button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
+                                            <td>
+                                                <button class="btn btn-primary"><span class="glyphicon glyphicon-upload"></span> Edit</button>
+                                                <button class="btn btn-danger" style="margin-left: 10px"><span class="glyphicon glyphicon-remove"></span> Delete</button>
+                                            </td>
                                         </c:otherwise>
                                     </c:choose>
                                 </c:if>
+                                <td></td>
                             </tr>
                         </table>
                     </div>
                     <div class="clearboth"><hr></div>  
                     <h3>Comment</h3>
-                    <div class="media">
-                        <a class="pull-left" href="#">
-                            <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
-                        </a>
-                        <div class="media-body">
-                            <h4 class="media-heading">AJ.Kittipong Warasup<small class="pull-right">16/01/57</small></h4>
-                            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+                    <c:forEach items="${am.comment}" var="c">
+                        <div class="media">
+                            <a class="pull-left" href="#">
+                                <img width="64" src="${c.acc.profile_pic}">
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading">${c.acc.firstname} ${c.acc.lastname}<small class="pull-right">${c.comment_date}</small></h4>
+                                <p>${c.text}<p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="media">
-                        <a class="pull-left" href="#">
-                            <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
-                        </a>
-                        <div class="media-body">
-                            <h4 class="media-heading">AJ.Kittipong Warasup<small class="pull-right">16/01/57</small></h4>
-                            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-                        </div>
-                    </div>
+                    </c:forEach>
+                    <!--                    <div class="media">
+                                            <a class="pull-left" href="#">
+                                                <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                                            </a>
+                                            <div class="media-body">
+                                                <h4 class="media-heading">AJ.Kittipong Warasup<small class="pull-right">16/01/57</small></h4>
+                                                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+                                            </div>
+                                        </div>
+                                        <div class="media">
+                                            <a class="pull-left" href="#">
+                                                <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                                            </a>
+                                            <div class="media-body">
+                                                <h4 class="media-heading">AJ.Kittipong Warasup<small class="pull-right">16/01/57</small></h4>
+                                                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+                                            </div>
+                                        </div>-->
                     <form>
                         <textarea class="form-control" placeholder="Tell your teacher here."></textarea><br>
                         <input  type="submit" value="comment" class="btn btn-primary col-md-3 pull-right">
