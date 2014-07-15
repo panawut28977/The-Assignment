@@ -40,27 +40,9 @@ public class LoginServlet extends HttpServlet {
         String url = "";
         String st="";
         if (a.getAcc_id() != 0) {
-            url = "home.jsp";
             ss.setAttribute("ac", a);
             ss.setAttribute("accType", a.getAccount_type());
-            List<Assignment> amList = a.getAssignment();
-            Integer late=0,hurry=0,ontime=0,sent=0;
-            for (Assignment assignment : amList) {
-                st = Assignment.remainingTimeforSend(assignment,a.getAcc_id());
-                if(st.equalsIgnoreCase("sent") ){
-                    sent++;
-                }else if(st.equalsIgnoreCase("ontime")){
-                    ontime++;
-                }else if(st.equalsIgnoreCase("hurryup")){
-                    sent++;
-                }else{
-                    late++;
-                } 
-            }
-            ss.setAttribute("late", late);
-            ss.setAttribute("hurry", hurry);
-            ss.setAttribute("ontime", ontime);
-            ss.setAttribute("sent", sent);
+            url = "myhome";
             response.sendRedirect(url);
         } else {
              request.setAttribute("msg", "email / password ผิดพลาดกรุณาลองใหม่อีกครั้ง");
