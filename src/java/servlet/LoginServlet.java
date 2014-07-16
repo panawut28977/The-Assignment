@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
         if (a.getAcc_id() != 0) {
             ss.setAttribute("ac", a);
             ss.setAttribute("accType", a.getAccount_type());
-            url = "myhome";
+            url = "home.jsp?tab=AllAnnouce";
             response.sendRedirect(url);
         } else {
              request.setAttribute("msg", "email / password ผิดพลาดกรุณาลองใหม่อีกครั้ง");

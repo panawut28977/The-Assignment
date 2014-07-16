@@ -1,7 +1,7 @@
 <%-- 
-    Document   : home
-    Created on : Apr 6, 2014, 5:08:52 PM
-    Author     : JenoVa
+Document   : home
+Created on : Apr 6, 2014, 5:08:52 PM
+Author     : JenoVa
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -83,7 +83,27 @@
                         <table class="table">
                             <tr>
                                 <td><b>Due date</b></td>
-                                <td>${am.due_date}<span class="text-danger pull-right"><b>Late</b></span></td>
+                                <td>${am.due_date}
+                                    <span class="text-danger pull-right">
+                                        <b>
+                                            <c:set value="${cf:remainingTimeforSend(am,ac.acc_id)}" var="status"/>
+                                            <c:choose>
+                                                <c:when test="${status eq 'late'}">
+                                                    <span class="text-danger">Late</span>
+                                                </c:when>
+                                                <c:when test="${status eq 'ontime'}">
+                                                    <span class="text-success">On time</span>
+                                                </c:when>
+                                                <c:when test="${status eq 'hurryup'}">
+                                                    <span class="text-warning">Hurry up!</span>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <span class="text-muted">Sent <span class="glyphicon glyphicon-check"></span></span>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                        </b>
+                                    </span>
+                                </td>
                             </tr>
                             <tr>
                                 <td><b>Description</b></td>
@@ -117,22 +137,27 @@
                                 </td>
                             </tr>
                             <tr>
-                                <c:if test="${ac.courseList.get(cId).role eq 'TH'}">
-                                    <c:choose>
-                                        <c:when test="${am.ass_type eq 'file'}">
-                                            <td>
-                                                <button class="btn btn-primary"><span class="glyphicon glyphicon-upload"></span> Update</button>
-                                                <button class="btn btn-danger" style="margin-left: 10px"><span class="glyphicon glyphicon-remove"></span> Delete</button>
-                                            </td>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <td>
-                                                <button class="btn btn-primary"><span class="glyphicon glyphicon-upload"></span> Edit</button>
-                                                <button class="btn btn-danger" style="margin-left: 10px"><span class="glyphicon glyphicon-remove"></span> Delete</button>
-                                            </td>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </c:if>
+                                <c:choose >
+                                    <c:when test="${ac.courseList.get(cId).role eq 'TH'}">
+                                        <c:choose>
+                                            <c:when test="${am.ass_type eq 'file'}">
+                                                <td>
+                                                    <button class="btn btn-primary"><span class="glyphicon glyphicon-upload"></span> Update</button>
+                                                    <button class="btn btn-danger" style="margin-left: 10px"><span class="glyphicon glyphicon-remove"></span> Delete</button>
+                                                </td>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <td>
+                                                    <button class="btn btn-primary"><span class="glyphicon glyphicon-upload"></span> Edit</button>
+                                                    <button class="btn btn-danger" style="margin-left: 10px"><span class="glyphicon glyphicon-remove"></span> Delete</button>
+                                                </td>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td></td>
+                                    </c:otherwise>
+                                </c:choose>
                                 <td></td>
                             </tr>
                         </table>

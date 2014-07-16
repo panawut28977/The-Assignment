@@ -361,10 +361,9 @@ public class Assignment {
                 Date due_date = a.getDue_date();
                 Date today = new Date();
                 Double remaining_day = (double) ((due_date.getTime()-today.getTime()) / 1000 / 60 / 60 / 24);
-                System.out.println(remaining_day);
                 if (remaining_day > 3) {
                     status = "ontime";
-                } else if (remaining_day <= 3 && remaining_day > 0) {
+                } else if (remaining_day <= 3 && remaining_day >= 0) {
                     status = "hurryup";
                 } else {
                     status = "late";

@@ -42,7 +42,7 @@
                             <td>Individual</td>
                         </c:when>
                         <c:otherwise>
-                            <td><a href="groupWork.jsp?ct=allAm&&tab=AllAssignment">${a.total_member}</a></td>
+                            <td>${a.total_member} <a href="groupWork.jsp?ct=allAm&&tab=AllAssignment&&cId=${a.course.course_id}">join group</a></td>
                             </c:otherwise>
                         </c:choose>
                     <td>${a.due_date}</td>

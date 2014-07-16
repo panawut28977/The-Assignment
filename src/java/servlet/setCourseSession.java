@@ -34,7 +34,6 @@ public class setCourseSession extends HttpServlet {
         Long cId = Long.parseLong(request.getParameter("cId"));
         HttpSession ss = request.getSession();
         ss.setAttribute("cId", cId);
-        PrintWriter out = response.getWriter();
         response.sendRedirect("course.jsp");
     }
 

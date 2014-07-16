@@ -17,7 +17,7 @@
         <div class="row">
             <div class="collapse navbar-collapse" style="padding-left: 0;">
                 <ul class="nav navbar-nav">
-                    <li><a href="home.jsp"><span class="glyphicon glyphicon-home"></span></a></li>
+                    <li><a href="home.jsp?tab=AllAnnouce"><span class="glyphicon glyphicon-home"></span></a></li>
                     <li><a href="message.jsp"><span class="glyphicon glyphicon-envelope"></span></a></li>
                     <li class="dropdown"> 
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span><span class="badge">10</span></a>

@@ -4,6 +4,17 @@
         <filter-name>authenFilter</filter-name>
         <filter-class>filter.authenFilter</filter-class>
     </filter>
+    <filter>
+        <filter-name>refreshAccount</filter-name>
+        <filter-class>filter.refreshAccount</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>refreshAccount</filter-name>
+        <url-pattern>/home.jsp</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+    </filter-mapping>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>servlet.LoginServlet</servlet-class>

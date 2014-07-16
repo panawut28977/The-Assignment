@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
+<%@taglib uri="/WEB-INF/tlds/functions.tld" prefix="cf" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -51,6 +52,9 @@
         <div class="container">
             <div class="row">
                 <%@include file="META-INF/page/side_bar.jsp"%>
+                <c:if test="${param.cId.length()>0}"> 
+                    <c:set value="${cf:stringToLong(param.cId)}" var="cId" target="java.lang.Long" />
+                </c:if> 
                 <div class="col-md-9" style="padding-bottom: 20px">
                     <c:choose>
                         <c:when test="${param.ct eq 'allAm'}">
@@ -62,7 +66,7 @@
                             </ol>
                         </c:when>
                         <c:otherwise>
-                            <div><h3>INT202 Software Development Process II</h3></div>
+                            <%@include file="META-INF/page/CourseHeader.jsp"%>
                             <%@include file="META-INF/page/CourseTab.jsp"%>
                             <ol class="breadcrumb" style="margin-top: 15px" >
                                 <li><a href="course.jsp?tab=AllAssignment">Assignment</a></li>
@@ -71,7 +75,7 @@
                         </c:otherwise>
                     </c:choose>
                     <c:choose>
-                        <c:when test="${sessionScope.accType eq 'TH'}">
+                        <c:when test="${ac.courseList.get(cId).role eq 'TH'}">
                             <div class="col-md-7 bg-success" style="padding-top: 10px;padding-bottom: 10px;">
                                 <h4><b>People who joined group</b></h4>
                                 <div class="table-responsive">
@@ -150,7 +154,7 @@
                                 </div>
                             </div>
                         </c:when>
-                        <c:when test="${sessionScope.accType eq 'ST'}">
+                        <c:when test="${ac.courseList.get(cId).role eq 'ST'}">
                             <div style="text-align: center">
                                 <span class="text-danger"><h3>Select your group member</h3></span>
                                 <hr>

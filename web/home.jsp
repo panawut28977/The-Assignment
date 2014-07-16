@@ -18,6 +18,14 @@
         <title>Welcome</title>
     </head>
     <body>
+        <c:choose>
+            <c:when test="${rf==1}">
+                <c:set var="rf" value="0" scope="session"/>
+            </c:when>
+            <c:otherwise>
+                <jsp:forward page="myhome" />
+            </c:otherwise>
+        </c:choose>
         <c:set var="cId" value="" scope="session" />
         <%@include file="META-INF/page/header_bar.jsp"%>
         <div class="container">
@@ -30,9 +38,9 @@
                         <c:when test="${param.tab eq 'AllAssignment'}">
                             <%@include file="META-INF/page/AllAssignment.jsp" %>
                         </c:when>
-                        <c:otherwise>
+                        <c:when test="${param.tab eq 'AllAnnouce'}">
                             <%@include file="META-INF/page/AllAnnouce.jsp" %>
-                        </c:otherwise>
+                        </c:when>
                     </c:choose>
                 </div>
             </div>
