@@ -34,6 +34,7 @@ public class Assignment {
     private String ass_extension;
     private Timestamp create_date;
     private String path_file;
+    private double fully_mark_file;
     private List<Comment> comment;
     private List<Question> questionList;
 
@@ -115,6 +116,14 @@ public class Assignment {
 
     public void setPath_file(String path_file) {
         this.path_file = path_file;
+    }
+
+    public double getFully_mark_file() {
+        return fully_mark_file;
+    }
+
+    public void setFully_mark_file(double fully_mark_file) {
+        this.fully_mark_file = fully_mark_file;
     }
 
     public List<Comment> getComment() {
@@ -203,6 +212,7 @@ public class Assignment {
                 am.setComment(null);
                 if (am.getAss_type() == "file") {
                     am.setPath_file(rs.getString("path_file"));
+                    am.setFully_mark_file(rs.getDouble("fully_mark_file"));
                 } else {
                     am.setQuestionList(null);
                 }
@@ -242,6 +252,7 @@ public class Assignment {
                 am.setComment(Comment.getCommentByAmID(am_id));
                 if (am.getAss_type() == "file") {
                     am.setPath_file(rs.getString("path_file"));
+                    am.setFully_mark_file(rs.getDouble("fully_mark_file"));
                 } else {
                     am.setQuestionList(null);
                 }
@@ -284,6 +295,7 @@ public class Assignment {
                 am.setComment(null);
                 if (am.getAss_type() == "file") {
                     am.setPath_file(rs.getString("path_file"));
+                    am.setFully_mark_file(rs.getDouble("fully_mark_file"));
                 } else {
                     am.setQuestionList(null);
                 }
@@ -320,15 +332,16 @@ public class Assignment {
     }
 
     //uploadAmFile(String path_file,int am_id)
-    public static int uploadAmFile(String path_file, int am_id) {
+    public static int uploadAmFile(String path_file, double mark, int am_id) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "update assignment set path_file=? where ass_id=?";
+        String sql = "update assignment set path_file=?,full_mark_file where ass_id=?";
         PreparedStatement pstm;
         int result = 0;
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, path_file);
-            pstm.setInt(2, am_id);
+            pstm.setDouble(2, mark);
+            pstm.setInt(3, am_id);
             result = pstm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
@@ -360,7 +373,7 @@ public class Assignment {
             } else {
                 Date due_date = a.getDue_date();
                 Date today = new Date();
-                Double remaining_day = (double) ((due_date.getTime()-today.getTime()) / 1000 / 60 / 60 / 24);
+                Double remaining_day = (double) ((due_date.getTime() - today.getTime()) / 1000 / 60 / 60 / 24);
                 if (remaining_day > 3) {
                     status = "ontime";
                 } else if (remaining_day <= 3 && remaining_day >= 0) {
@@ -377,7 +390,7 @@ public class Assignment {
 
     @Override
     public String toString() {
-        return "Assignment{" + "am_id=" + am_id + ", course=" + course + ", name=" + name + ", description=" + description + ", ass_type=" + ass_type + ", total_member=" + total_member + ", due_date=" + due_date + ", ass_extension=" + ass_extension + ", create_date=" + create_date + ", path_file=" + path_file + ", comment=" + comment + ", questionList=" + questionList + '}';
+        return "Assignment{" + "am_id=" + am_id + ", course=" + course + ", name=" + name + ", description=" + description + ", ass_type=" + ass_type + ", total_member=" + total_member + ", due_date=" + due_date + ", ass_extension=" + ass_extension + ", create_date=" + create_date + ", path_file=" + path_file + ", fully_mark_file=" + fully_mark_file + ", comment=" + comment + ", questionList=" + questionList + '}';
     }
 
 }

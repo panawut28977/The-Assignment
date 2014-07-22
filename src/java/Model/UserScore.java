@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 public class UserScore {
     private Assignment assignment;
     private double score;
+    private double full_mark;
 
     public Assignment getAssignment() {
         return assignment;

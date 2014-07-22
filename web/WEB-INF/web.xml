@@ -39,6 +39,10 @@
         <servlet-name>myhome</servlet-name>
         <servlet-class>servlet.myhome</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>userscore</servlet-name>
+        <servlet-class>servlet.userscore</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -62,6 +66,10 @@
     <servlet-mapping>
         <servlet-name>myhome</servlet-name>
         <url-pattern>/myhome</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>userscore</servlet-name>
+        <url-pattern>/userscore</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
