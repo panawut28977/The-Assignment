@@ -133,7 +133,7 @@ public class Course {
                 c.setCreate_date(rs.getDate("create_date"));
                 c.setAnnouncement(Announcement.viewAnnByCourse(course_id));
                 c.setAssignment(Assignment.getAmByCourseIDNoSetCourse(course_id));
-                c.setListStudnet(null);
+                c.setListStudnet(AccountCourse.getMemberInCourse(course_id));
             }
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);

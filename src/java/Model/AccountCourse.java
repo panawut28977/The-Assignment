@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -23,6 +24,7 @@ public class AccountCourse {
     private Course course;
     private String status;
     private String role;
+    private Timestamp approved_date;
 
     public Course getCourse() {
         return course;
@@ -48,6 +50,16 @@ public class AccountCourse {
         this.role = role;
     }
 
+    public Timestamp getApproved_date() {
+        return approved_date;
+    }
+
+    public void setApproved_date(Timestamp approved_date) {
+        this.approved_date = approved_date;
+    }
+    
+    
+
     public static int joinCourse(AccountCourse detail, int acc_id) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "insert into account_course values(?,?,?,?)";
@@ -68,7 +80,7 @@ public class AccountCourse {
 
     public static boolean approve(int acc_id, int course_id) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "update account_course set status=? where acc_id=? and course_id=?";
+        String sql = "update account_course set status=?,approved_date=current_timestamp where acc_id=? and course_id=?";
         PreparedStatement pstm;
         int result = 0;
         try {
@@ -132,7 +144,6 @@ public class AccountCourse {
 //        }
 //        return result > 0;
 //    }
-
     public static boolean changeRole(int acc_id, int course_id, int role) {
         Connection conn = ConnectionBuilder.getConnection();
         String roleVal = "";
@@ -191,8 +202,9 @@ public class AccountCourse {
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
                 acc = new AccountCourse();
+                acc.setApproved_date(rs.getTimestamp("approved_date"));
                 acc.setRole(rs.getString("role"));
-                acc.setStatus(rs.getString("status"));  
+                acc.setStatus(rs.getString("status"));
                 Course c = Course.getCourseByID(rs.getInt("course_id"));
                 acc.setCourse(c);
                 courseList.add(acc);
@@ -203,9 +215,30 @@ public class AccountCourse {
         return courseList;
     }
 
-    @Override
-    public String toString() {
-        return "AccountCourse{" + "course=" + course + ", status=" + status + ", role=" + role + '}';
+    public static List<Account> getMemberInCourse(int course_id) {
+        List<Account> listAccount = new ArrayList<>();
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select * from account_course where course_id=? AND status =  \"approved\"";
+        PreparedStatement pstm;
+        Account acc = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, course_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                acc = Account.getAccountByID(rs.getInt("acc_id"));
+                listAccount.add(acc);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listAccount;
     }
 
+    @Override
+    public String toString() {
+        return "AccountCourse{" + "course=" + course + ", status=" + status + ", role=" + role + ", approved_date=" + approved_date + '}';
+    }
+
+  
 }

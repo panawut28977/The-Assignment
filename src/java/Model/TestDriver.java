@@ -48,7 +48,7 @@ public class TestDriver {
 //        AccountCourse.joinCourse(ac, 2);
 //        AccountCourse.joinCourse(ac, 1);
         //---- Test approve method
-//          AccountCourse.approve(1, 1);
+          AccountCourse.approve(5, 1);
         //---- Test disapprove method
 //        AccountCourse.disapprove(1,1);
         //---- Test change role 

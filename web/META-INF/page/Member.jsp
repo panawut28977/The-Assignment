@@ -5,77 +5,25 @@
             <button class="pull-right btn btn-default">Leave course</button>
         </div>
     </c:if>
-    <div class="media col-md-4">
-        <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" class="pull-left">
-        <div class="media-body">
-            <h4 class="media-heading" >Panawut Ittitananun</h4>
-            <c:if test="${ac.courseList.get(cId).role eq 'TH'}">
-                <span class="dropdown pull-right">
-                    <a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a  data-toggle="modal" data-target="#create_course" title="create course">Make Teacher</a></li>
-                        <li><a  data-toggle="modal" data-target="#join_course" title="join course">Remove form course</a></li>
-                    </ul>
-                </span>
-            </c:if>
-            <br>
-            <small class="pull-right text-muted">Join date: 16/01/57</small>
+    <c:forEach items="${ac.courseList.get(cId).course.listStudnet}" var="st">
+        <div class="media col-md-4">
+            <img width="64" src="${st.profile_pic}" class="pull-left">
+            <div class="media-body">
+                <h4 class="media-heading" >${st.firstname} ${st.lastname}</h4>
+                <c:if test="${ac.courseList.get(cId).role eq 'TH'}">
+                    <span class="dropdown pull-right">
+                        <a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a  data-toggle="modal" data-target="#create_course" title="create course">Make Teacher</a></li>
+                            <li><a  data-toggle="modal" data-target="#join_course" title="join course">Remove form course</a></li>
+                        </ul>
+                    </span>
+                </c:if>
+                <br>
+                <small class="pull-right text-muted">Join date : ${ac.courseList.get(cId).approved_date}</small>
+            </div>
         </div>
-    </div>
-    <div class="media col-md-4">
-        <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" class="pull-left">
-        <div class="media-body">
-            <h4 class="media-heading">Thanakit Mahamutjinda</h4>
-            <c:if test="${ac.courseList.get(cId).role eq 'TH'}">
-                <span class="dropdown pull-right">
-                    <a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a  data-toggle="modal" data-target="#create_course" title="create course">Make Teacher</a></li>
-                        <li><a  data-toggle="modal" data-target="#join_course" title="join course">Remove form course</a></li>
-                    </ul>
-                </span>
-            </c:if>
-            <br>
-            <small class="pull-right text-muted">Join date: 16/01/57</small>
-        </div>
-    </div>
-    <div class="media col-md-4">
-        <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" class="pull-left">
-        <div class="media-body">
-            <h4 class="media-heading">Nitiwit Wungwiwatna</h4>
-            <c:if test="${ac.courseList.get(cId).role eq 'TH'}">
-                <span class="dropdown pull-right">
-                    <a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a  data-toggle="modal" data-target="#create_course" title="create course">Make Teacher</a></li>
-                        <li><a  data-toggle="modal" data-target="#join_course" title="join course">Remove form course</a></li>
-                    </ul>
-                </span>
-            </c:if>
-            <br>
-            <small class="pull-right text-muted">Join date: 16/01/57</small>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="media col-md-4">
-        <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" class="pull-left">
-        <div class="media-body">
-            <h4 class="media-heading">Thanapan Suwankanit</h4>
-            <c:if test="${ac.courseList.get(cId).role eq 'TH'}">
-                <span class="dropdown pull-right">
-                    <a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a  data-toggle="modal" data-target="#create_course" title="create course">Make Teacher</a></li>
-                        <li><a  data-toggle="modal" data-target="#join_course" title="join course">Remove form course</a></li>
-                    </ul>
-                </span>
-            </c:if>
-            <br>
-            <small class="pull-right text-muted">Join date: 16/01/57</small>
-        </div>
-    </div>
-</div>
+    </c:forEach>
 <style>
     .media:first-child{
         margin-top: 15px;

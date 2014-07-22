@@ -11,6 +11,7 @@
     <filter-mapping>
         <filter-name>refreshAccount</filter-name>
         <url-pattern>/home.jsp</url-pattern>
+        <url-pattern>/course.jsp</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>
