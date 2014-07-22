@@ -35,5 +35,10 @@
         <function-class>util.Parse</function-class>
         <function-signature>Long stringToLong(java.lang.String)</function-signature>
     </function>
+    <function>
+        <name>getWaitForApproveMemberInCourse</name>
+        <function-class>Model.AccountCourse</function-class>
+        <function-signature>Integer getWaitForApproveMemberInCourse(int)</function-signature>
+    </function>
     
 </taglib>

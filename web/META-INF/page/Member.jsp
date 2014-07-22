@@ -5,7 +5,7 @@
             <button class="pull-right btn btn-default">Leave course</button>
         </div>
     </c:if>
-    <c:forEach items="${ac.courseList.get(cId).course.listStudnet}" var="st">
+    <c:forEach items="${ac.courseList.get(cId).course.listStudent}" var="st">
         <div class="media col-md-4">
             <img width="64" src="${st.profile_pic}" class="pull-left">
             <div class="media-body">

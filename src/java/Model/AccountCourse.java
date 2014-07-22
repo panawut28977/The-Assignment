@@ -234,6 +234,26 @@ public class AccountCourse {
         }
         return listAccount;
     }
+    
+    public static List<Account> getWaitForApproveMemberInCourse(int course_id) {
+        List<Account> listAccount = new ArrayList<>();
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select * from account_course where course_id=? AND status =  \"waiting\"";
+        PreparedStatement pstm;
+        Account acc = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, course_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                acc = Account.getAccountByID(rs.getInt("acc_id"));
+                listAccount.add(acc);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listAccount;
+    }
 
     @Override
     public String toString() {

@@ -25,7 +25,7 @@ public class Course {
     private String course_link;
     private String course_code;
     private Date create_date;
-    private List<Account> listStudnet;
+    private List<Account> listStudent;
     private List<Announcement> announcement;
     private List<Assignment> assignment;
 
@@ -69,12 +69,12 @@ public class Course {
         this.create_date = create_date;
     }
 
-    public List<Account> getListStudnet() {
-        return listStudnet;
+    public List<Account> getListStudent() {
+        return listStudent;
     }
 
-    public void setListStudnet(List<Account> listStudnet) {
-        this.listStudnet = listStudnet;
+    public void setListStudent(List<Account> listStudent) {
+        this.listStudent = listStudent;
     }
 
     public List<Announcement> getAnnouncement() {
@@ -133,7 +133,7 @@ public class Course {
                 c.setCreate_date(rs.getDate("create_date"));
                 c.setAnnouncement(Announcement.viewAnnByCourse(course_id));
                 c.setAssignment(Assignment.getAmByCourseIDNoSetCourse(course_id));
-                c.setListStudnet(AccountCourse.getMemberInCourse(course_id));
+                c.setListStudent(AccountCourse.getMemberInCourse(course_id));
             }
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
@@ -229,10 +229,10 @@ public class Course {
     
     //getScoreSheet อาจไม่ต้องมีตอนทำฟังชั่นนี้ เดียวดึงเอาข้อมูลที่มีอยู่แล้วมาใช้
     //exportScoreSheet รอทำจริงค่อยทำ
-    //getAllCourseMember ใช้ getListStudnet เลย
+    //getAllCourseMember ใช้ getListStudent เลย
     @Override
     public String toString() {
-        return "Course{" + "course_id=" + course_id + ", name=" + name + ", course_link=" + course_link + ", course_code=" + course_code + ", create_date=" + create_date + ", listStudnet=" + listStudnet + ", announcement=" + announcement + ", assignment=" + assignment + '}';
+        return "Course{" + "course_id=" + course_id + ", name=" + name + ", course_link=" + course_link + ", course_code=" + course_code + ", create_date=" + create_date + ", listStudent=" + listStudent + ", announcement=" + announcement + ", assignment=" + assignment + '}';
     }
     
     

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="cf" uri="/WEB-INF/tlds/functions.tld" %>
 <c:choose>
     <c:when test="${param.upload eq 'success'}">
         <%@include file="selectColumn.jsp" %>
@@ -29,7 +30,7 @@
                     <small class="text-muted">Request date: 16/01/57</small>
                 </div>
             </div>
-            <div class="media col-md-4">
+            <div class="media col-md-4 approve_box">
                 <button class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span>  Approve</button>
                 <button class="btn btn-default">Not now</button>
             </div>
@@ -45,7 +46,7 @@
                     <small class="text-muted">Request date: 16/01/57</small>
                 </div>
             </div>
-            <div class="media col-md-4">
+            <div class="media col-md-4 approve_box">
                 <button class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> Approve</button>
                 <button class="btn btn-default">Not now</button>
             </div>
@@ -61,7 +62,7 @@
                     <small class="text-muted">Request date: 16/01/57</small>
                 </div>
             </div>
-            <div class="media col-md-4">
+            <div class="media col-md-4 approve_box">
                 <button class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span>  Approve</button>
                 <button class="btn btn-default">Not now</button>
             </div>
@@ -77,7 +78,7 @@
                     <small class="text-muted">Request date: 16/01/57</small>
                 </div>
             </div>
-            <div class="media col-md-4">
+            <div class="media col-md-4 approve_box">
                 <button class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span>  Approve</button>
                 <button class="btn btn-default">Not now</button>
             </div>
@@ -98,7 +99,7 @@
                 overflow: visible !important;
             }
 
-            .row .col-md-4{
+            .row .approve_box{
                 height: 64px;
                 text-align: center;
             }
