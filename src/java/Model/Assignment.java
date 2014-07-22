@@ -34,7 +34,7 @@ public class Assignment {
     private String ass_extension;
     private Timestamp create_date;
     private String path_file;
-    private double fully_mark_file;
+    private double fully_mark;
     private List<Comment> comment;
     private List<Question> questionList;
 
@@ -118,12 +118,12 @@ public class Assignment {
         this.path_file = path_file;
     }
 
-    public double getFully_mark_file() {
-        return fully_mark_file;
+    public double getFully_mark() {
+        return fully_mark;
     }
 
-    public void setFully_mark_file(double fully_mark_file) {
-        this.fully_mark_file = fully_mark_file;
+    public void setFully_mark(double fully_mark) {
+        this.fully_mark = fully_mark;
     }
 
     public List<Comment> getComment() {
@@ -209,11 +209,11 @@ public class Assignment {
                 am.setAss_extension(rs.getString("ass_extension"));
                 am.setCreate_date(rs.getTimestamp("create_date"));
                 am.setDue_date(rs.getDate("due_date"));
-                am.setComment(null);
-                if (am.getAss_type() == "file") {
+                am.setFully_mark(rs.getDouble("fully_mark"));
+                am.setComment(Comment.getCommentByAmID(am.getAm_id()));
+                if (am.getAss_type().equalsIgnoreCase("file")) {
                     am.setPath_file(rs.getString("path_file"));
-                    am.setFully_mark_file(rs.getDouble("fully_mark_file"));
-                } else {
+                } else { 
                     am.setQuestionList(null);
                 }
                 AmList.add(am);
@@ -250,9 +250,9 @@ public class Assignment {
                 am.setCreate_date(rs.getTimestamp("create_date"));
                 am.setDue_date(rs.getDate("due_date"));
                 am.setComment(Comment.getCommentByAmID(am_id));
-                if (am.getAss_type() == "file") {
+                am.setFully_mark(rs.getDouble("fully_mark"));
+                if (am.getAss_type().equalsIgnoreCase("file")) {
                     am.setPath_file(rs.getString("path_file"));
-                    am.setFully_mark_file(rs.getDouble("fully_mark_file"));
                 } else {
                     am.setQuestionList(null);
                 }
@@ -271,7 +271,7 @@ public class Assignment {
     public static List<Assignment> getAmByAccID(int acc_id) {
         List<Assignment> assList = new ArrayList<Assignment>();
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select ass.ass_id,ass.course_id,ass.name,ass.description,ass.ass_type,ass.total_member,ass.due_date,ass.ass_extension,ass.path_file,ass.create_date from account a "
+        String sql = "select ass.ass_id,ass.course_id,ass.name,ass.description,ass.ass_type,ass.total_member,ass.due_date,ass.ass_extension,ass.path_file,ass.create_date,ass.fully_mark from account a "
                 + "join account_course ac on a.acc_id = ac.acc_id "
                 + "join assignment ass on ac.course_id = ass.course_id "
                 + "where a.acc_id = ? AND ac.status =  \"approved\" AND ac.role = 'ST'";
@@ -292,10 +292,10 @@ public class Assignment {
                 am.setAss_extension(rs.getString("ass_extension"));
                 am.setCreate_date(rs.getTimestamp("create_date"));
                 am.setDue_date(rs.getDate("due_date"));
-                am.setComment(null);
+                am.setFully_mark(rs.getDouble("fully_mark"));
+                am.setComment(Comment.getCommentByAmID(am.getAm_id()));
                 if (am.getAss_type() == "file") {
                     am.setPath_file(rs.getString("path_file"));
-                    am.setFully_mark_file(rs.getDouble("fully_mark_file"));
                 } else {
                     am.setQuestionList(null);
                 }
@@ -390,7 +390,7 @@ public class Assignment {
 
     @Override
     public String toString() {
-        return "Assignment{" + "am_id=" + am_id + ", course=" + course + ", name=" + name + ", description=" + description + ", ass_type=" + ass_type + ", total_member=" + total_member + ", due_date=" + due_date + ", ass_extension=" + ass_extension + ", create_date=" + create_date + ", path_file=" + path_file + ", fully_mark_file=" + fully_mark_file + ", comment=" + comment + ", questionList=" + questionList + '}';
+        return "Assignment{" + "am_id=" + am_id + ", course=" + course + ", name=" + name + ", description=" + description + ", ass_type=" + ass_type + ", total_member=" + total_member + ", due_date=" + due_date + ", ass_extension=" + ass_extension + ", create_date=" + create_date + ", path_file=" + path_file + ", fully_mark=" + fully_mark + ", comment=" + comment + ", questionList=" + questionList + '}';
     }
 
 }

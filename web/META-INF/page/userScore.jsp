@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <style> 
     #AllStudentScore_wrapper{
@@ -7,12 +8,12 @@
 <c:choose> 
     <c:when test="${ac.courseList.get(cId).role eq 'ST'}">
         <div style="text-align: center;margin-top:20px ">
-            <div class="col-md-4"><h4>5 <br> Sent</h4></div>
-            <div class="col-md-4"><h4>38/50 <br>Scores</h4></div>
-            <div class="col-md-4"><h4>1 <br> Leftovers</h4></div>
+            <div class="col-md-4"><h4>${total_sent_am}<br> Sent</h4></div>
+            <div class="col-md-4"><h4>38/${fully_mark} <br>Scores</h4></div>
+            <div class="col-md-4"><h4>${leftover_am} <br> Leftovers</h4></div>
         </div>
         <hr style="clear:both">
-        <table class="table" style="text-align: center">
+        <table class="table" >
             <thead>
                 <tr>
                     <td><b>Assignment</b></td>
@@ -20,22 +21,28 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Assignment# 1</td>
-                    <td>5/10</td>
-                </tr>
-                <tr>
-                    <td>Assignment# 2</td>
-                    <td>7/10</td>
-                </tr>
-                <tr>
-                    <td>Assignment# 3</td>
-                    <td>9/10</td>
-                </tr> 
-                <tr>
-                    <td>Assignment# 4</td>
-                    <td>5/5</td>
-                </tr>
+                <c:forEach  items="${ac.courseList.get(cId).course.assignment}" var="a">
+                    <tr>
+                        <td>${a.name}</td>
+                        <td>0/${a.fully_mark}</td>
+                    </tr>
+                </c:forEach>
+                <!--                <tr>
+                                    <td>Assignment# 1</td>
+                                    <td>5/10</td>
+                                </tr>
+                                <tr>
+                                    <td>Assignment# 2</td>
+                                    <td>7/10</td>
+                                </tr>
+                                <tr>
+                                    <td>Assignment# 3</td>
+                                    <td>9/10</td>
+                                </tr> 
+                                <tr>
+                                    <td>Assignment# 4</td>
+                                    <td>5/5</td>
+                                </tr>-->
             </tbody>
         </table> 
     </c:when>

@@ -4,7 +4,7 @@
         <form role="form" action="LoginServlet" method="post">
             
             <div class="form-group">
-                <input type="email" class="form-control" id="email" name="email" value="${email}" placeholder="E-mail">
+                <input type="email" class="form-control" id="email" name="email" value="${email}" placeholder="E-mail" >
             </div>
             <div class="form-group">
                 <input type="password" class="form-control" id="password" name="password" placeholder="Password">

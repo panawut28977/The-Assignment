@@ -40,14 +40,25 @@ public class userscore extends HttpServlet {
         Account ac = (Account)ss.getAttribute("ac");
         Long cId = (Long)ss.getAttribute("cId");
         int sent = 0,leftover =0;
+        String remaintTimeSt="";
         double  fully_mark=0,mark=0;
         AccountCourse yourCourse = (AccountCourse)(ac.getCourseList().get(cId));
         List<Assignment> courseAssignment = yourCourse.getCourse().getAssignment();
-        if(yourCourse.getRole()=="ST"){
+        if(yourCourse.getRole().equalsIgnoreCase("ST")){
             for (Assignment assignment : courseAssignment) {
-                
+                fully_mark +=assignment.getFully_mark();
+                remaintTimeSt = Assignment.remainingTimeforSend(assignment,ac.getAcc_id());
+                if(remaintTimeSt=="sent"){
+                    sent++;
+                }else{
+                    leftover++;
+                }
             }
         }
+        ss.setAttribute("total_sent_am", sent);
+        ss.setAttribute("leftover_am", leftover);
+        ss.setAttribute("fully_mark", fully_mark);
+        response.sendRedirect("course.jsp?tab=score");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
