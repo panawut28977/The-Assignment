@@ -98,6 +98,7 @@ public class Announcement {
                 a.setTitle(rs.getString("title"));
                 ann.add(a);
             }
+             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -116,6 +117,7 @@ public class Announcement {
             pstm.setString(3, a.getTitle());
             pstm.setString(4, a.getContent());
             result = pstm.executeUpdate();
+             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -131,6 +133,7 @@ public class Announcement {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1,an_id);
             result = pstm.executeUpdate();
+             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -149,6 +152,7 @@ public class Announcement {
             pstm.setString(2, a.getContent());
             pstm.setInt(3, a.getAn_id());
             result = pstm.executeUpdate();
+             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -176,6 +180,7 @@ public class Announcement {
                 a.setTitle(rs.getString("title"));
                 ann.add(a);
             }
+             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }

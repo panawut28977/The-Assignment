@@ -71,6 +71,7 @@ public class Comment {
             pstm.setInt(2, am_id);
             pstm.setString(3, c.getText());
             result = pstm.executeUpdate();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -91,6 +92,7 @@ public class Comment {
             pstm.setString(3, c.getText());
             pstm.setString(4, am_type);
             result = pstm.executeUpdate();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -107,6 +109,7 @@ public class Comment {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, comment_id);
             result = pstm.executeUpdate();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -123,6 +126,7 @@ public class Comment {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, comment_id);
             result = pstm.executeUpdate();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -131,28 +135,28 @@ public class Comment {
 
     //getCommentByAmID(Assignment a)
     public static List<Comment> getCommentByAmID(int am_id) {
-        return getComment(am_id,0);
+        return getComment(am_id, 0);
     }
-    
+
     //getCommentByStAmIDWeb(StAssignmentOnWeb stweb)
     public static List<Comment> getCommentByStAmIDWeb(int st_am_id) {
-        return getComment(st_am_id,1);
+        return getComment(st_am_id, 1);
     }
-    
+
     //getCommentByStAmIDFile(StAssignmentFile stfile)
     public static List<Comment> getCommentByStAmIDFile(int st_am_id) {
-        return getComment(st_am_id,2);
+        return getComment(st_am_id, 2);
     }
-    
-     //getCommentByAmID(Assignment a)
-    public static List<Comment> getComment(int am_id,int dbIndex) {
+
+    //getCommentByAmID(Assignment a)
+    public static List<Comment> getComment(int am_id, int dbIndex) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "";
-        if(dbIndex == 1){
+        if (dbIndex == 1) {
             sql = "select * from comment_student_assignment where st_ass_id = ? and am_type = 'web'";
-        }else if(dbIndex ==2){
+        } else if (dbIndex == 2) {
             sql = "select * from comment_student_assignment where st_ass_id = ? and am_type = 'file'";
-        }else{
+        } else {
             sql = "select * from comment where ass_id = ? ";
         }
         PreparedStatement pstm;
@@ -164,20 +168,20 @@ public class Comment {
             pstm.setInt(1, am_id);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-              c = new Comment();
-              c.setComment_id(rs.getInt("comment_id"));
-              c.setAcc_id(Account.getAccountByID(rs.getInt("acc_id")));
-              c.setText(rs.getString("text"));
-              c.setComment_date(rs.getDate("comment_date"));
-              cList.add(c);
+                c = new Comment();
+                c.setComment_id(rs.getInt("comment_id"));
+                c.setAcc_id(Account.getAccountByID(rs.getInt("acc_id")));
+                c.setText(rs.getString("text"));
+                c.setComment_date(rs.getDate("comment_date"));
+                cList.add(c);
             }
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
         return cList;
     }
-    
-    
+
     @Override
     public String toString() {
         return "Comment{" + "comment_id=" + comment_id + ", acc_id=" + acc + ", text=" + text + ", comment_date=" + comment_date + '}';

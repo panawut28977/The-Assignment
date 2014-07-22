@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Model;
 
 import java.sql.Connection;
@@ -20,6 +19,7 @@ import java.util.logging.Logger;
  * @author JenoVa
  */
 public class UserScore {
+
     private Assignment assignment;
     private double score;
     private double full_mark;
@@ -39,11 +39,10 @@ public class UserScore {
     public void setScore(double score) {
         this.score = score;
     }
-    
+
     //setUserScore(UserScore) เอาไว้ทำไรจำไม่ได้ละ แต่ไม่น่าจำเป็นละ
-    
     //getUserScore(List<int> acc_id)
-    public static List<UserScore> getUserScore(int acc_id){
+    public static List<UserScore> getUserScore(int acc_id) {
         List<UserScore> uScoreList = new ArrayList<UserScore>();
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select  f.ass_id,f.score,w.ass_id,w.score from student_assignment_file f,student_assignment_on_web w where f.acc_id = ? and w.acc_id=?";
@@ -60,10 +59,11 @@ public class UserScore {
                 uScore.setScore(rs.getDouble("score"));
                 uScoreList.add(uScore);
             }
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
         return uScoreList;
     }
-    
+
 }

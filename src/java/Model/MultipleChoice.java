@@ -16,13 +16,14 @@ import java.util.logging.Logger;
  * @author JenoVa
  */
 public class MultipleChoice extends Question {
+
     private String q_text;
     private String q_category;
     private String q_choice_list;
     private String q_answer_list;
     private double q_score;
-    
-     @Override
+
+    @Override
     public String getQ_text() {
         return q_text;
     }
@@ -31,7 +32,7 @@ public class MultipleChoice extends Question {
     public void setQ_text(String q_text) {
         this.q_text = q_text;
     }
-    
+
     @Override
     public String getQ_category() {
         return q_category;
@@ -41,7 +42,7 @@ public class MultipleChoice extends Question {
     public void setQ_category(String q_category) {
         this.q_category = q_category;
     }
-    
+
     @Override
     public String getQ_choice_list() {
         return q_choice_list;
@@ -87,6 +88,7 @@ public class MultipleChoice extends Question {
             pstm.setString(5, this.q_answer_list);
             pstm.setDouble(6, this.q_score);
             result = pstm.executeUpdate();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -107,19 +109,19 @@ public class MultipleChoice extends Question {
             pstm.setDouble(5, this.q_score);
             pstm.setInt(6, super.getQ_id());
             result = pstm.executeUpdate();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
     }
-    
+
     @Override
     public String toString() {
         return "MultipleChoice{" + "q_type=" + q_category + ", q_choice_list=" + q_choice_list + ", q_answer_list=" + q_answer_list + ", q_score=" + q_score + '}';
     }
 
     // <editor-fold defaultstate="collapsed" desc=" Method that is not support in this class ">
-    
     @Override
     public String getQ_keyword_check() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -189,6 +191,7 @@ public class MultipleChoice extends Question {
     public void setQ_title(String q_title) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
     @Override
     public int getQ_order() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -200,7 +203,4 @@ public class MultipleChoice extends Question {
     }
 
 // </editor-fold>
-
-    
-
 }

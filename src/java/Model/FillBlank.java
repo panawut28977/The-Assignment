@@ -12,10 +12,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * 
+ *
  * @author JenoVa
  */
 public class FillBlank extends Question {
+
     private int q_order;
     private String q_text;
     private double score;
@@ -97,13 +98,14 @@ public class FillBlank extends Question {
             pstm.setInt(6, this.q_start_index);
             pstm.setInt(7, this.q_end_index);
             result = pstm.executeUpdate();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
     }
-    
-     //delete(q_id)
+
+    //delete(q_id)
     public boolean delete() {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "delete from fill_blank_list where q_id=? and q_order=?";
@@ -114,12 +116,13 @@ public class FillBlank extends Question {
             pstm.setInt(1, super.getQ_id());
             pstm.setInt(2, this.q_order);
             result = pstm.executeUpdate();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result > 0;
     }
-    
+
     //คำถามแบบ fill blank ไม่มี update เพราะว่าการจะอัพเดตคำถามคำตอบมันต้อง delete แล้ว add ใหม่
 //    public int update() {
 //        Connection conn = ConnectionBuilder.getConnection();
@@ -135,12 +138,10 @@ public class FillBlank extends Question {
 //        }
 //        return result;
 //    }
-    
     @Override
     public String toString() {
         return "FillBlank{" + "q_order=" + q_order + ", q_text=" + q_text + ", score=" + score + ", answer=" + answer + ", q_start_index=" + q_start_index + ", q_end_index=" + q_end_index + '}';
     }
-
 
     //<editor-fold defaultstate="collapsed" desc="Method that is not support in this class">
     @Override
@@ -192,7 +193,7 @@ public class FillBlank extends Question {
     public void setQ_answer_list(String q_answer_list) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public String getQ_title() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -203,7 +204,6 @@ public class FillBlank extends Question {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
     @Override
     public String getQ_category() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -215,5 +215,4 @@ public class FillBlank extends Question {
     }
 
     //</editor-fold>
-
 }

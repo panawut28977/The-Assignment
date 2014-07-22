@@ -1,5 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="cf" uri="/WEB-INF/tlds/functions.tld" %>
 <c:choose>
     <c:when test="${param.upload eq 'success'}">
         <%@include file="selectColumn.jsp" %>
@@ -19,7 +18,7 @@
             </form>
             <hr>
         </div>
-        <div class="row">
+        <div class="row"> 
             <div class="media col-md-8">
                 <a class="pull-left" href="#">
                     <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">

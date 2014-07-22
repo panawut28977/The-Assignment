@@ -161,6 +161,7 @@ public class Assignment {
             pstm.setString(6, df.format(ass.getDue_date()));
             pstm.setString(7, ass.getAss_extension());
             result = pstm.executeUpdate();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -177,6 +178,7 @@ public class Assignment {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, am_id);
             result = pstm.executeUpdate();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -213,11 +215,12 @@ public class Assignment {
                 am.setComment(Comment.getCommentByAmID(am.getAm_id()));
                 if (am.getAss_type().equalsIgnoreCase("file")) {
                     am.setPath_file(rs.getString("path_file"));
-                } else { 
+                } else {
                     am.setQuestionList(null);
                 }
                 AmList.add(am);
             }
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -257,6 +260,7 @@ public class Assignment {
                     am.setQuestionList(null);
                 }
             }
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -301,6 +305,7 @@ public class Assignment {
                 }
                 assList.add(am);
             }
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -325,6 +330,7 @@ public class Assignment {
             if (rs.next()) {
                 send_date = rs.getDate(1);
             }
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -343,6 +349,7 @@ public class Assignment {
             pstm.setDouble(2, mark);
             pstm.setInt(3, am_id);
             result = pstm.executeUpdate();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -382,6 +389,7 @@ public class Assignment {
                     status = "late";
                 }
             }
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }

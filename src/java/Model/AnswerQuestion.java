@@ -80,6 +80,7 @@ public class AnswerQuestion {
                 a.setScore(rs.getDouble("score"));
                 ans.add(a);
             }
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -100,6 +101,7 @@ public class AnswerQuestion {
         try {
             pstm = conn.prepareStatement(sql);
             result = pstm.executeUpdate();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -118,6 +120,7 @@ public class AnswerQuestion {
             pstm.setInt(2, st_ass_id);
             pstm.setInt(3, a.getQ_id());
             result = pstm.executeUpdate();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }

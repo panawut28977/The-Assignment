@@ -155,7 +155,8 @@ public abstract class Question {
             } else if (q_type.equalsIgnoreCase("explain")) {
                 exp = (Explain) q;
                 exp.add();
-            } 
+            }
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -181,6 +182,7 @@ public abstract class Question {
         try {
             pstm = conn.prepareCall(sql);
             result = pstm.executeUpdate();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -211,6 +213,7 @@ public abstract class Question {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, q_id);
             result = pstm.executeUpdate();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -282,6 +285,7 @@ public abstract class Question {
                 q.setQ_type(rs.getString(5));
                 qList.add(q);
             }
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -299,6 +303,7 @@ public abstract class Question {
             if (rs.next()) {
                 lastId = rs.getInt(1);
             }
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -316,7 +321,7 @@ public abstract class Question {
             pstm.setInt(2, q.getQ_no());
             pstm.setInt(3, q.getQ_id());
             result = pstm.executeUpdate();
-            
+
             String q_type = q.getQ_type();
             FillBlank fb = null;
             MatchWord mw = null;
@@ -334,8 +339,9 @@ public abstract class Question {
                 mc.update();
             } else if (q_type.equalsIgnoreCase("explain")) {
                 exp = (Explain) q;
-                exp.update(); 
+                exp.update();
             }
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }

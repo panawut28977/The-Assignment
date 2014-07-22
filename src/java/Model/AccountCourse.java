@@ -57,8 +57,6 @@ public class AccountCourse {
     public void setApproved_date(Timestamp approved_date) {
         this.approved_date = approved_date;
     }
-    
-    
 
     public static int joinCourse(AccountCourse detail, int acc_id) {
         Connection conn = ConnectionBuilder.getConnection();
@@ -72,6 +70,7 @@ public class AccountCourse {
             pstm.setString(3, detail.getStatus());
             pstm.setString(4, detail.getRole());
             result = pstm.executeUpdate();
+             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -89,6 +88,7 @@ public class AccountCourse {
             pstm.setInt(2, acc_id);
             pstm.setInt(3, course_id);
             result = pstm.executeUpdate();
+             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -106,6 +106,7 @@ public class AccountCourse {
             pstm.setInt(2, acc_id);
             pstm.setInt(3, course_id);
             result = pstm.executeUpdate();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -123,6 +124,7 @@ public class AccountCourse {
             pstm.setInt(1, acc_id);
             pstm.setInt(2, course_id);
             result = pstm.executeUpdate();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -164,6 +166,7 @@ public class AccountCourse {
             pstm.setInt(2, acc_id);
             pstm.setInt(3, course_id);
             result = pstm.executeUpdate();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -184,6 +187,7 @@ public class AccountCourse {
             if (rs.next()) {
                 role = rs.getString(1);
             }
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -209,6 +213,7 @@ public class AccountCourse {
                 acc.setCourse(c);
                 courseList.add(acc);
             }
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -229,36 +234,36 @@ public class AccountCourse {
                 acc = Account.getAccountByID(rs.getInt("acc_id"));
                 listAccount.add(acc);
             }
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return listAccount;
-    }
-    
-    public static List<Account> getWaitForApproveMemberInCourse(int course_id) {
-        List<Account> listAccount = new ArrayList<>();
-        Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select * from account_course where course_id=? AND status =  \"waiting\"";
-        PreparedStatement pstm;
-        Account acc = null;
-        try {
-            pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, course_id);
-            ResultSet rs = pstm.executeQuery();
-            while (rs.next()) {
-                acc = Account.getAccountByID(rs.getInt("acc_id"));
-                listAccount.add(acc);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
         return listAccount;
     }
 
+//    public static List<Account> getWaitForApproveMemberInCourse(int course_id) {
+//        List<Account> listAccount = new ArrayList<>();
+//        Connection conn = ConnectionBuilder.getConnection();
+//        String sql = "select * from account_course where course_id=? AND status =  \"waiting\"";
+//        PreparedStatement pstm;
+//        Account acc = null;
+//        try {
+//            pstm = conn.prepareStatement(sql);
+//            pstm.setInt(1, course_id);
+//            ResultSet rs = pstm.executeQuery();
+//            while (rs.next()) {
+//                acc = Account.getAccountByID(rs.getInt("acc_id"));
+//                listAccount.add(acc);
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return listAccount;
+//    }
     @Override
     public String toString() {
         return "AccountCourse{" + "course=" + course + ", status=" + status + ", role=" + role + ", approved_date=" + approved_date + '}';
     }
 
-  
 }

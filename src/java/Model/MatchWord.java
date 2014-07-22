@@ -80,6 +80,7 @@ public class MatchWord extends Question {
             pstm.setString(5, this.q_answer);
             pstm.setDouble(6, this.q_score);
             result = pstm.executeUpdate();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -101,13 +102,14 @@ public class MatchWord extends Question {
             pstm.setInt(6, super.getQ_id());
             pstm.setInt(7, this.q_order);
             result = pstm.executeUpdate();
+            conn.close();
 //            System.out.println(pstm.toString());
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
     }
-    
+
     @Override
     public String toString() {
         return "MatchWord{" + "q_order=" + q_order + ", q_title=" + q_title + ", q_text=" + q_text + ", q_answer=" + q_answer + ", q_score=" + q_score + '}';

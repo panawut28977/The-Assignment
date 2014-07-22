@@ -54,13 +54,14 @@ public class Explain extends Question {
             pstm.setString(2, this.q_text);
             pstm.setString(3, this.q_keyword_check);
             result = pstm.executeUpdate();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
     }
-    
-     public int update() {
+
+    public int update() {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "update explain_list set q_text=?,q_keyword_check=? where q_id=?";
         PreparedStatement pstm;
@@ -71,6 +72,7 @@ public class Explain extends Question {
             pstm.setString(2, this.q_keyword_check);
             pstm.setInt(3, super.getQ_id());
             result = pstm.executeUpdate();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -108,7 +108,6 @@ public class Account {
 //    public void setCourseList(List<AccountCourse> CourseList) {
 //        this.CourseList = CourseList;
 //    }
-
     public Map getCourseList() {
         return CourseList;
     }
@@ -166,10 +165,11 @@ public class Account {
 //                acc.setCourseList(AccountCourse.getCourseByAccID(acc_id));
                 List<AccountCourse> CL = AccountCourse.getCourseByAccID(acc_id);
                 for (AccountCourse accountCourse : CL) {
-                    acc.CourseList.put((long)accountCourse.getCourse().getCourse_id(), accountCourse);
+                    acc.CourseList.put((long) accountCourse.getCourse().getCourse_id(), accountCourse);
                 }
                 acc.setListStudentScore(UserScore.getUserScore(acc_id));
             }
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -191,6 +191,7 @@ public class Account {
             pstm.setString(5, a.getProfile_pic());
             pstm.setString(6, a.getAccount_type());
             result = pstm.executeUpdate();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -210,6 +211,7 @@ public class Account {
             if (rs.next()) {
                 e = rs.getString("email");
             }
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -228,6 +230,7 @@ public class Account {
             pstm.setString(3, a.getProfile_pic());
             pstm.setInt(4, a.getAcc_id());
             result = pstm.executeUpdate();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -244,6 +247,7 @@ public class Account {
             pstm.setString(1, a.getPassword());
             pstm.setInt(2, a.getAcc_id());
             result = pstm.executeUpdate();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -289,6 +293,7 @@ public class Account {
                 acc.setProfile_pic(rs.getString("profile_pic"));
                 acc.setRegister_date(rs.getTimestamp("register_date"));
             }
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -299,7 +304,7 @@ public class Account {
     public String toString() {
         return "Account{" + "acc_id=" + acc_id + ", firstname=" + firstname + ", lastname=" + lastname + ", email=" + email + ", password=" + password + ", profile_pic=" + profile_pic + ", account_type=" + account_type + ", register_date=" + register_date + ", announcement=" + announcement + ", CourseList=" + CourseList + ", assignment=" + assignment + ", listStudentScore=" + listStudentScore + '}';
     }
-    
+
 //    public AccountCourse getAc(String k){
 //        return (AccountCourse)(getCourseList().get(Long.parseLong(k)));
 //    }

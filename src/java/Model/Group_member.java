@@ -82,6 +82,7 @@ public class Group_member {
         try {
             pstm = conn.prepareStatement(sql);
             result = pstm.executeUpdate();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -100,6 +101,7 @@ public class Group_member {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, st_am_id);
             result = pstm.executeUpdate();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -108,7 +110,7 @@ public class Group_member {
 
     //getMemberByAmId(int am_id)
     //isFullMember(int st_am_id) change to remainingMember(int st_am_id,int g_no,Assignment a)
-     public static int remainingMember(int st_am_id,int g_no,Assignment a) {
+    public static int remainingMember(int st_am_id, int g_no, Assignment a) {
         Connection conn = ConnectionBuilder.getConnection();
         int remaining = 0;
         PreparedStatement pstm;
@@ -120,15 +122,16 @@ public class Group_member {
             pstm.setInt(1, st_am_id);
             pstm.setInt(2, g_no);
             ResultSet rs = pstm.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 remaining = a.getTotal_member() - rs.getInt("member_in_group");
             }
-     
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
         return remaining;
     }
+
     @Override
     public String toString() {
         return "Group_member{" + "g_id=" + g_id + ", acc_id=" + acc_id + ", g_no=" + g_no + ", st_am_id=" + st_am_id + ", am_type=" + am_type + '}';

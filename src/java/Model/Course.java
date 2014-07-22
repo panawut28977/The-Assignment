@@ -107,6 +107,7 @@ public class Course {
             if (rs.next()) {
                 code = rs.getString(1);
             }
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -135,6 +136,7 @@ public class Course {
                 c.setAssignment(Assignment.getAmByCourseIDNoSetCourse(course_id));
                 c.setListStudent(AccountCourse.getMemberInCourse(course_id));
             }
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -153,6 +155,7 @@ public class Course {
             pstm.setString(2, c.getCourse_code());
             pstm.setString(3, c.getCourse_link());
             result = pstm.executeUpdate();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -170,6 +173,7 @@ public class Course {
             pstm.setString(1, c.getName());
             pstm.setInt(2, c.getCourse_id());
             result = pstm.executeUpdate();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -186,6 +190,7 @@ public class Course {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, course_id);
             result = pstm.executeUpdate();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -213,20 +218,21 @@ public class Course {
                 int count = rs.getInt(2);
                 while (rs.next()) {
                     count--;
-                    if(code.equals(rs.getString(1))){
+                    if (code.equals(rs.getString(1))) {
                         exist = true;
                         break;
-                    }else{
+                    } else {
                         exist = false;
                     }
                 }
+                conn.close();
             } catch (SQLException ex) {
                 Logger.getLogger(Course.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return code;
     }
-    
+
     //getScoreSheet อาจไม่ต้องมีตอนทำฟังชั่นนี้ เดียวดึงเอาข้อมูลที่มีอยู่แล้วมาใช้
     //exportScoreSheet รอทำจริงค่อยทำ
     //getAllCourseMember ใช้ getListStudent เลย
@@ -234,6 +240,5 @@ public class Course {
     public String toString() {
         return "Course{" + "course_id=" + course_id + ", name=" + name + ", course_link=" + course_link + ", course_code=" + course_code + ", create_date=" + create_date + ", listStudent=" + listStudent + ", announcement=" + announcement + ", assignment=" + assignment + '}';
     }
-    
-    
+
 }

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Model;
 
 import java.sql.Connection;
@@ -23,6 +22,7 @@ import java.util.logging.Logger;
  * @author JenoVa
  */
 public class Message {
+
     private int ms_id;
     private Account source_acc_id;
     private Account dest_acc_id;
@@ -68,9 +68,9 @@ public class Message {
     public void setSend_date(Date send_date) {
         this.send_date = send_date;
     }
-    
+
     //send(int send_acc_id,int to_acc_id,String message)
-    public static void send(Message m){
+    public static void send(Message m) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "insert into contact_message(send_acc_id,to_acc_id,message) values(?,?,?)";
         PreparedStatement pstm = null;
@@ -81,14 +81,14 @@ public class Message {
             pstm.setInt(2, m.getDest_acc_id().getAcc_id());
             pstm.setString(3, m.getMessage());
             result = pstm.executeUpdate();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-
     //getMessageBetweenSourceAndDest(int source_acc_id,int dest_acc_id)
-    public static List<Message> getMessageBetweenSourceAndDest(int source_acc_id,int dest_acc_id) {
+    public static List<Message> getMessageBetweenSourceAndDest(int source_acc_id, int dest_acc_id) {
         List<Message> msList = new ArrayList<Message>();
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select * from contact_message where send_acc_id=? and to_acc_id=?";
@@ -108,6 +108,7 @@ public class Message {
                 ms.setSend_date(rs.getTimestamp("send_date"));
                 msList.add(ms);
             }
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -118,5 +119,5 @@ public class Message {
     public String toString() {
         return "Message{" + "ms_id=" + ms_id + ", source_acc_id=" + source_acc_id + ", dest_acc_id=" + dest_acc_id + ", message=" + message + ", send_date=" + send_date + '}';
     }
-    
+
 }
