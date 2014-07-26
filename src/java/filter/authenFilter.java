@@ -36,9 +36,14 @@ public class authenFilter implements Filter {
          HttpServletRequest req = (HttpServletRequest)request;
          HttpSession ss = req.getSession();
          if(ss.getAttribute("ac")==null){
-             String pageReq = req.getRequestURI().substring(req.getContextPath().length());
-             req.setAttribute("req_url", pageReq);
-             System.out.println(pageReq);
+//             StringBuilder pageReq = new StringBuilder(req.getRequestURI().substring(req.getContextPath().length()));
+//             String querySt = req.getQueryString();
+//             if(querySt==null){
+//                 querySt="";
+//             } 
+//             pageReq.deleteCharAt(0);
+//             pageReq.append("?"+querySt);
+//             ss.setAttribute("req_url", pageReq);
              filterConfig.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
          }else{
              chain.doFilter(request, response);

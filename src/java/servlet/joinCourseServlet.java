@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package servlet;
 
+import Model.Account;
+import Model.AccountCourse;
+import Model.Course;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -16,9 +18,9 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author longd29
+ * @author Orarmor
  */
-public class signout extends HttpServlet {
+public class joinCourseServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,12 +33,24 @@ public class signout extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         HttpSession s = request.getSession(false);
-        
-       if(s!=null){
-           s.invalidate();
-       }
-       response.sendRedirect("index.jsp");
+        String code = request.getParameter("course_code");
+        HttpSession ss = request.getSession();
+        Account ac = (Account)ss.getAttribute("ac");
+        Course c = Course.getCourseByCode(code);
+        String url = "";
+        if (!code.equals("")) {
+            AccountCourse member = new AccountCourse();
+            member.setCourse(c);
+            member.setRole("ST");
+            member.setStatus("waiting");
+            int result = AccountCourse.joinCourse(member, ac.getAcc_id());
+            if (result > 0)  {
+                request.setAttribute("msg","1");
+            }else{               
+                request.setAttribute("msg","2");
+            }
+           getServletContext().getRequestDispatcher("/informpage.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

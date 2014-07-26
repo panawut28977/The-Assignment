@@ -18,15 +18,6 @@
         <title>Welcome</title>
     </head>
     <body>
-        <c:choose>
-            <c:when test="${rf==1}">
-                <c:set var="rf" value="0" scope="session"/>
-            </c:when>
-            <c:otherwise>
-                <jsp:forward page="myhome" />
-            </c:otherwise>
-        </c:choose>
-        <c:set var="cId" value="" scope="session" />
         <%@include file="META-INF/page/header_bar.jsp"%>
         <div class="container">
             <div class="row">

@@ -143,6 +143,35 @@ public class Course {
         return c;
     }
 
+    //ดึง course ตาม code
+    public static Course getCourseByCode(String code) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select * from course where course_code like ? ";
+        PreparedStatement pstm;
+        int result = 0;
+        Course c = new Course();
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, code);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                int courseId = rs.getInt("course_id");
+                c.setCourse_id(courseId);
+                c.setName(rs.getString("name"));
+                c.setCourse_code(rs.getString("course_code"));
+                c.setCourse_link(rs.getString("course_link"));
+                c.setCreate_date(rs.getDate("create_date"));
+                c.setAnnouncement(Announcement.viewAnnByCourse(courseId));
+                c.setAssignment(Assignment.getAmByCourseIDNoSetCourse(courseId));
+                c.setListStudent(AccountCourse.getMemberInCourse(courseId));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return c;
+    }
+    
     //สร้าง course
     public static boolean createCourse(Course c) {
         Connection conn = ConnectionBuilder.getConnection();

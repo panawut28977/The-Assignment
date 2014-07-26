@@ -9,9 +9,9 @@
         text-align: center;
     }
 </style>
-    <div class="col-md-3">
-        <div class="row userbox">
-            <img class="col-md-4 center-block" src="${ac.profile_pic}">
+<div class="col-md-3">
+    <div class="row userbox">
+        <img class="col-md-4 center-block" src="${ac.profile_pic}">
         <div class="col-md-8 " style="text-align: center">
             <h4>${ac.firstname} ${ac.lastname}</h4>
         </div>
@@ -45,28 +45,30 @@
             <c:forEach items="${ac.getCourseList()}" var="c">
                 <a id="${c.key}" onclick="load_course(${c.key})" class="list-group-item usepointer">${c.value.course.name}</a>
             </c:forEach>
-<!--            <a id="1" onclick="load_course(1)" class="list-group-item usepointer"><span class="badge">3</span>INT103 Office</a>
-            <a id="2" onclick="load_course(2)" class="list-group-item usepointer"><span class="badge">3</span>INT206 Software Development Process II</a>
-            <a id="3" onclick="load_course(3)" class="list-group-item usepointer"><span class="badge">2</span>LNG103 Academic English</a>
-            <a id="4" onclick="load_course(4)" class="list-group-item usepointer"><span class="badge"></span>INT380 Operation Management</a>
-            <a id="5" onclick="load_course(5)"  class="list-group-item usepointer"><span class="badge">1</span>MTH111 Calculus I</a>-->
+            <!--            <a id="1" onclick="load_course(1)" class="list-group-item usepointer"><span class="badge">3</span>INT103 Office</a>
+                        <a id="2" onclick="load_course(2)" class="list-group-item usepointer"><span class="badge">3</span>INT206 Software Development Process II</a>
+                        <a id="3" onclick="load_course(3)" class="list-group-item usepointer"><span class="badge">2</span>LNG103 Academic English</a>
+                        <a id="4" onclick="load_course(4)" class="list-group-item usepointer"><span class="badge"></span>INT380 Operation Management</a>
+                        <a id="5" onclick="load_course(5)"  class="list-group-item usepointer"><span class="badge">1</span>MTH111 Calculus I</a>-->
         </div> 
     </div>
 </div>
 <div class="modal fade" id="join_course" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Put course code</h4>
-            </div>
-            <div class="modal-body">
-                <input type="text" name="course_code" class="form-control">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">join</button>
-            </div>
+            <form action="joinCourseServlet" method="post">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Put course code</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="text" name="course_code" class="form-control">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" value="join"/>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -111,4 +113,5 @@
     function load_course(course_id) {
         location.href = "setCourseSession?cId=" + course_id;
     }
+    
 </script>

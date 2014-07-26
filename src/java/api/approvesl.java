@@ -4,21 +4,21 @@
  * and open the template in the editor.
  */
 
-package servlet;
+package api;
 
+import Model.AccountCourse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author longd29
+ * @author Orarmor
  */
-public class signout extends HttpServlet {
+public class approvesl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,12 +31,11 @@ public class signout extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         HttpSession s = request.getSession(false);
-        
-       if(s!=null){
-           s.invalidate();
-       }
-       response.sendRedirect("index.jsp");
+         PrintWriter out = response.getWriter();
+       int acc_id = Integer.parseInt(request.getParameter("acc_id"));
+       int course_id = Integer.parseInt(request.getParameter("course_id"));
+        System.out.println(acc_id+course_id);
+       out.write(AccountCourse.approve(acc_id, course_id)==true?1:0);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

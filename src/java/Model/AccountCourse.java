@@ -60,19 +60,21 @@ public class AccountCourse {
 
     public static int joinCourse(AccountCourse detail, int acc_id) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "insert into account_course values(?,?,?,?)";
-        PreparedStatement pstm;
         int result = 0;
-        try {
-            pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, acc_id);
-            pstm.setInt(2, detail.getCourse().getCourse_id());
-            pstm.setString(3, detail.getStatus());
-            pstm.setString(4, detail.getRole());
-            result = pstm.executeUpdate();
-             conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        if (!isExist(acc_id, detail.getCourse().getCourse_id())) {
+            String sql = "insert into account_course(acc_id,course_id,status,role) values(?,?,?,?)";
+            PreparedStatement pstm;
+            try {
+                pstm = conn.prepareStatement(sql);
+                pstm.setInt(1, acc_id);
+                pstm.setInt(2, detail.getCourse().getCourse_id());
+                pstm.setString(3, detail.getStatus());
+                pstm.setString(4, detail.getRole());
+                result = pstm.executeUpdate();
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return result;
     }
@@ -88,7 +90,7 @@ public class AccountCourse {
             pstm.setInt(2, acc_id);
             pstm.setInt(3, course_id);
             result = pstm.executeUpdate();
-             conn.close();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -242,25 +244,47 @@ public class AccountCourse {
         return listAccount;
     }
 
-//    public static List<Account> getWaitForApproveMemberInCourse(int course_id) {
-//        List<Account> listAccount = new ArrayList<>();
-//        Connection conn = ConnectionBuilder.getConnection();
-//        String sql = "select * from account_course where course_id=? AND status =  \"waiting\"";
-//        PreparedStatement pstm;
-//        Account acc = null;
-//        try {
-//            pstm = conn.prepareStatement(sql);
-//            pstm.setInt(1, course_id);
-//            ResultSet rs = pstm.executeQuery();
-//            while (rs.next()) {
-//                acc = Account.getAccountByID(rs.getInt("acc_id"));
-//                listAccount.add(acc);
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return listAccount;
-//    }
+    public static List<Account> getWaitForApproveMemberInCourse(int course_id) {
+        List<Account> listAccount = new ArrayList<>();
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select * from account_course where course_id=? AND status =  \"waiting\"";
+        PreparedStatement pstm;
+        Account acc = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, course_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                acc = Account.getAccountByID(rs.getInt("acc_id"));
+                listAccount.add(acc);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listAccount;
+    }
+
+    public static boolean isExist(int acc_id, int course_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select acc_id from account_course where course_id=? and acc_id=?";
+        boolean result = false;
+        PreparedStatement pstm;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, course_id);
+            pstm.setInt(2, acc_id);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                result = true;
+            } else {
+                result = false;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
     @Override
     public String toString() {
         return "AccountCourse{" + "course=" + course + ", status=" + status + ", role=" + role + ", approved_date=" + approved_date + '}';

@@ -9,6 +9,14 @@
         <filter-class>filter.refreshAccount</filter-class>
     </filter>
     <filter-mapping>
+        <filter-name>authenFilter</filter-name>
+        <url-pattern>/home.jsp</url-pattern>
+        <url-pattern>/course.jsp</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
         <filter-name>refreshAccount</filter-name>
         <url-pattern>/home.jsp</url-pattern>
         <url-pattern>/course.jsp</url-pattern>
@@ -44,6 +52,14 @@
         <servlet-name>userscore</servlet-name>
         <servlet-class>servlet.userscore</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>joinCourseServlet</servlet-name>
+        <servlet-class>servlet.joinCourseServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>approvesl</servlet-name>
+        <servlet-class>api.approvesl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -71,6 +87,14 @@
     <servlet-mapping>
         <servlet-name>userscore</servlet-name>
         <url-pattern>/userscore</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>joinCourseServlet</servlet-name>
+        <url-pattern>/joinCourseServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>approvesl</servlet-name>
+        <url-pattern>/approvesl</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

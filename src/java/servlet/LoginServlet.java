@@ -35,22 +35,27 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        Account a = Account.login(email, password);
         HttpSession ss = request.getSession();
+        Account a = Account.login(email, password);
         String url = "";
-        String st="";
+        String st = "";
+//        if (ss.getAttribute("req_url")==null) {
+            url = "home.jsp?tab=AllAnnouce";
+//        } else {
+//            url = ((StringBuilder)ss.getAttribute("req_url")).toString();
+//        }
         if (a.getAcc_id() != 0) {
+            ss.removeAttribute("cId");
             ss.setAttribute("ac", a);
             ss.setAttribute("accType", a.getAccount_type());
-            url = "home.jsp?tab=AllAnnouce";
             response.sendRedirect(url);
         } else {
-             request.setAttribute("msg", "email / password ผิดพลาดกรุณาลองใหม่อีกครั้ง");
-             request.setAttribute("email", email);
-             url = "/index.jsp";
-             getServletContext().getRequestDispatcher(url).forward(request, response);
+            request.setAttribute("msg", "email / password ผิดพลาดกรุณาลองใหม่อีกครั้ง");
+            request.setAttribute("email", email);
+            url = "/index.jsp";
+            getServletContext().getRequestDispatcher(url).forward(request, response);
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
