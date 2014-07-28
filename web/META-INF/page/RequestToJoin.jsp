@@ -20,7 +20,7 @@
             <hr>
         </div>
         <c:forEach items="${waitAcc}" var="a">
-            <div class="row"> 
+            <div class="row" style="margin-top: 20px"> 
                 <div class="media col-md-8">
                     <a class="pull-left" href="#">
                         <img width="64" src="${a.profile_pic}">
@@ -32,9 +32,8 @@
                     </div>
                 </div>
                 <div class="media col-md-4 approve_box">
-                    <c:set value="${a.acc_id},${cId}" var="setforApprove" />
-                    <button class="btn btn-primary approve" acc_id="${a.acc_id}" cId="${cId}"><span class="glyphicon glyphicon-ok"></span>  Approve</button>
-                    <button class="btn btn-default">Not now</button>
+                    <button class="btn btn-primary approve" acc_id="${a.acc_id}" cId="${cId}"><span class="glyphicon glyphicon-ok"></span>  Approve now</button>
+                    <button class="btn btn-default disapprove" acc_id="${a.acc_id}" cId="${cId}">Not now</button>
                 </div>
             </div>
         </c:forEach>
@@ -109,12 +108,38 @@
                     $("#uploadStList").slideToggle();
                 });
                 $(".approve").click(function() {
+                    var pos = $(this).parent().parent();
                     $.ajax({
                         type: "POST",
                         url: "approvesl",
                         data: {acc_id: $(this).attr("acc_id"), course_id: $(this).attr("cId")}
                     }).done(function(msg) {
-                        alert(msg);
+                        if(msg == 1){
+                            pos.slideUp("slow",function(){
+                                pos.html('<div class="col-md-12"><div class="alert alert-success" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Approved !!</strong></div></div>');
+                                pos.slideDown("slow");
+                            });  
+                        }else{
+                            alert("Error occur");
+                        }
+                    });
+                });
+                
+                $(".disapprove").click(function() {
+                    var pos = $(this).parent().parent();
+                    $.ajax({
+                        type: "POST",
+                        url: "disapprovesl",
+                        data: {acc_id: $(this).attr("acc_id"), course_id: $(this).attr("cId")}
+                    }).done(function(msg) {
+                        if(msg == 1){
+                            pos.slideUp("slow",function(){
+                                pos.html('<div class="col-md-12"><div class="alert alert-warning" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Dispproved !!</strong></div></div>');
+                                pos.slideDown("slow");
+                            });  
+                        }else{
+                            alert("Error occur");
+                        }
                     });
                 });
             });

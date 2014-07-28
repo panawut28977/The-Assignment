@@ -245,6 +245,9 @@ public class Course {
                 pstm = conn.prepareStatement(sql);
                 ResultSet rs = pstm.executeQuery();
                 int count = rs.getInt(2);
+                if(count==0){
+                    count=0;
+                }
                 while (rs.next()) {
                     count--;
                     if (code.equals(rs.getString(1))) {

@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package api;
 
 import Model.AccountCourse;
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Orarmor
  */
-public class approvesl extends HttpServlet {
+public class disapprovesl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,7 +34,7 @@ public class approvesl extends HttpServlet {
         PrintWriter out = response.getWriter();
         int acc_id = Integer.parseInt(request.getParameter("acc_id"));
         int course_id = Integer.parseInt(request.getParameter("course_id"));
-        out.write(AccountCourse.approve(acc_id, course_id) == true ? "1" : "0");
+        out.write(AccountCourse.disapprove(acc_id, course_id) == true ? "1" : "0");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

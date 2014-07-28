@@ -60,6 +60,18 @@
         <servlet-name>approvesl</servlet-name>
         <servlet-class>api.approvesl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>disapprovesl</servlet-name>
+        <servlet-class>api.disapprovesl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>createCourse</servlet-name>
+        <servlet-class>servlet.createCourse</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateCourseSl</servlet-name>
+        <servlet-class>servlet.CreateCourseSl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -95,6 +107,18 @@
     <servlet-mapping>
         <servlet-name>approvesl</servlet-name>
         <url-pattern>/approvesl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>disapprovesl</servlet-name>
+        <url-pattern>/disapprovesl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>createCourse</servlet-name>
+        <url-pattern>/createCourse</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateCourseSl</servlet-name>
+        <url-pattern>/CreateCourseSl</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

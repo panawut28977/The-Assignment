@@ -82,11 +82,11 @@
                 <h4 class="modal-title" id="myModalLabel">Create course</h4>
             </div>
             <div class="modal-body">
-                <form>
+                <form method="post" action="CreateCourseSl">
                     <div class="row">
                         <div class="col-md-12">
                             <label>name</label>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" name="name">
                         </div>
                     </div>
                 </form>

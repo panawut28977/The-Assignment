@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package api;
+package servlet;
 
-import Model.AccountCourse;
+import Model.Course;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Orarmor
  */
-public class approvesl extends HttpServlet {
+public class CreateCourseSl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,10 +30,13 @@ public class approvesl extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        int acc_id = Integer.parseInt(request.getParameter("acc_id"));
-        int course_id = Integer.parseInt(request.getParameter("course_id"));
-        out.write(AccountCourse.approve(acc_id, course_id) == true ? "1" : "0");
+        String name = request.getParameter("name");
+        Course c = new Course();
+        c.setName(name);
+        c.setCourse_code(Course.generateCode());
+        System.out.println(request.getContextPath());
+        c.setCourse_link("");
+        Course.createCourse(null);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
