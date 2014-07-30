@@ -34,9 +34,9 @@ public class CreateCourseSl extends HttpServlet {
         Course c = new Course();
         c.setName(name);
         c.setCourse_code(Course.generateCode());
-        System.out.println(request.getContextPath());
+        System.out.println(c.getCourse_code());
         c.setCourse_link("");
-        Course.createCourse(null);
+//        Course.createCourse(null);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
