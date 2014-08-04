@@ -81,20 +81,21 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel">Create course</h4>
             </div>
-            <div class="modal-body">
-                <form method="post" action="CreateCourseSl">
+            <form method="post" action="CreateCourseSl">
+                <div class="modal-body">
+
                     <div class="row">
                         <div class="col-md-12">
                             <label>name</label>
                             <input type="text" class="form-control" name="name">
                         </div>
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Create</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" value="Create">
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -113,5 +114,5 @@
     function load_course(course_id) {
         location.href = "setCourseSession?cId=" + course_id;
     }
-    
+
 </script>
