@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -29,6 +30,13 @@ public class Course {
     private List<Announcement> announcement;
     private List<Assignment> assignment;
 
+    public Course() {
+    }
+
+    public Course(int course_id){
+        this.course_id = course_id;
+    }
+    
     public int getCourse_id() {
         return course_id;
     }
@@ -171,24 +179,28 @@ public class Course {
         }
         return c;
     }
-    
+
     //สร้าง course
-    public static boolean createCourse(Course c) {
+    public static int createCourse(Course c) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "insert into course(name,course_code,course_link) values(?,?,?)";
         PreparedStatement pstm;
         int result = 0;
         try {
-            pstm = conn.prepareStatement(sql);
+            pstm = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pstm.setString(1, c.getName());
             pstm.setString(2, c.getCourse_code());
             pstm.setString(3, c.getCourse_link());
-            result = pstm.executeUpdate();
+            pstm.executeUpdate();
+            ResultSet generatedKeys = pstm.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                result = generatedKeys.getInt(1);
+            }
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return result > 0;
+        return result;
     }
 
     //ใช้ update information จริงๆมันก็มีแค่ name ที่อัพเดตได้

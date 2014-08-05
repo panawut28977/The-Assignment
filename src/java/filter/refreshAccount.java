@@ -56,6 +56,7 @@ public class refreshAccount implements Filter {
                 late++;
             }
         }
+        System.out.println("refreshaccount");
         ss.setAttribute("late", late);
         ss.setAttribute("hurry", hurry);
         ss.setAttribute("ontime", ontime);

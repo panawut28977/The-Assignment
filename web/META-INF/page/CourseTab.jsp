@@ -1,3 +1,4 @@
+<%@taglib prefix="ct_cf" uri="/WEB-INF/tlds/functions.tld" %>
 <c:choose>
     <c:when test="${ac.courseList.get(cId).role eq 'ST'}">
         <ul class="nav nav-tabs">
@@ -8,7 +9,7 @@
         </ul>   
     </c:when>   
     <c:otherwise>
-        <c:set var="waitAcc" value="${cf:getWaitForApproveMemberInCourse(cId)}"/>
+        <c:set var="waitAcc" value="${ct_cf:getWaitForApproveMemberInCourse(cId)}"/>
         <ul class="nav nav-tabs">
             <li <c:if test="${param.tab eq null}">class="active"</c:if>><a href="course.jsp">Announcement</a></li>
             <li <c:if test="${param.tab eq 'AllAssignment'}">class="active"</c:if>><a href="course.jsp?tab=AllAssignment">Assignment <span class="badge">${ac.courseList.get(cId).course.assignment.size()}</span></a></li>

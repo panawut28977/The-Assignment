@@ -5,6 +5,8 @@
  */
 package servlet;
 
+import Model.Account;
+import Model.AccountCourse;
 import Model.Course;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -30,13 +33,21 @@ public class CreateCourseSl extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession ss = request.getSession();
+        Account acc = (Account) ss.getAttribute("ac");
         String name = request.getParameter("name");
         Course c = new Course();
         c.setName(name);
         c.setCourse_code(Course.generateCode());
-        System.out.println(c.getCourse_code());
-        c.setCourse_link("");
-//        Course.createCourse(null);
+        c.setCourse_link("dontknowlink/" + c.getCourse_code());
+        int insert_id = Course.createCourse(c);
+        Course course = new Course(insert_id);
+        AccountCourse accCourse = new AccountCourse();
+        accCourse.setCourse(course);
+        accCourse.setRole("TH");
+        accCourse.setStatus("approved");
+        AccountCourse.joinCourse(accCourse, acc.getAcc_id());
+        getServletContext().getRequestDispatcher("/setCourseSession?cId=" + insert_id).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

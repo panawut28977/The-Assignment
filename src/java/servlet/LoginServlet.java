@@ -38,7 +38,7 @@ public class LoginServlet extends HttpServlet {
         HttpSession ss = request.getSession();
         Account a = Account.login(email, password);
         String url = "";
-        String st = "";
+        String st = "";     
 //        if (ss.getAttribute("req_url")==null) {
             url = "home.jsp?tab=AllAnnouce";
 //        } else {
