@@ -148,14 +148,17 @@
                                 </div>
                                 <div class="form-group">
                                     <label  class="col-md-3 control-label">Due date</label>
-                                    <div class="input-group date col-md-9" style="padding-right: 15px;  padding-left: 15px;" data-date="" data-date-format="dd MM yyyy hh:mm" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd hh:mm">
-                                        <div class="form_date">
-                                            <input class="form-control" size="16" type="text" name="due_date" value="" readonly="yes">
-                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                        </div>
+                                    <div class='input-group date col-md-9' style="padding-right: 15px;  padding-left: 15px;" id='form_date'>
+                                        <input type='text' class="form-control" name="due_date" readonly="yes" />
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
                                     </div>
-                                    <input type="hidden" id="dtp_input2" value="" /><br/>
+                                    <!--                                    <div class="input-group date  col-md-9" style="padding-right: 15px;  padding-left: 15px;" data-date="" data-date-format="dd MM yyyy hh:mm" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd hh:mm">
+                                                                            <input class="form-control" size="16" type="text" name="due_date" value="" readonly="yes">
+                                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                                                        </div>
+                                                                        <input type="hidden" id="dtp_input2" value="" /><br/>-->
                                 </div>
                                 <div class="form-group">
                                     <label for="AmType" class="col-md-3 control-label">Assignment Type</label>
@@ -356,9 +359,7 @@
                                                 $('#inputpepole').attr("disabled", "yes");
                                             });
 
-                                            $('.form_date').datetimepicker({
-                                                language: 'pt-BR'
-                                            });
+                                            $('#form_date').datetimepicker();
 
                                             $("#AmType").change(function() {
                                                 if ($(this).val() == "f") {
