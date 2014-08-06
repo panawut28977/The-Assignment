@@ -134,8 +134,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="description" class="col-md-3 control-label">Description</label>
-                                    <div class="col-md-9" name="description">
-                                        <textarea  rows="3"  id="description" class="form-control"></textarea>
+                                    <div class="col-md-9" >
+                                        <textarea  rows="3"  id="description" name="description" class="form-control"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -338,6 +338,7 @@
             </div>
         </div>
 
+        <script src="js/moment-with-locales.js"></script>
         <script src="js/bootstrap-datetimepicker.min.js"></script>
         <script src="module/easyWizard/lib/jquery.easyWizard.js"></script>
         <script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
@@ -357,6 +358,10 @@
 
                                             $('#individual').click(function() {
                                                 $('#inputpepole').attr("disabled", "yes");
+                                            });
+                                            
+                                            $('#inputpepole').change(function(){
+                                                 $('#groupwork').val($(this).val());
                                             });
 
                                             $('#form_date').datetimepicker();
