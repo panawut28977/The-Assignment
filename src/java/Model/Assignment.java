@@ -30,7 +30,7 @@ public class Assignment {
     private String description;
     private String ass_type;
     private int total_member;
-    private Date due_date;
+    private Timestamp due_date;
     private String ass_extension;
     private Timestamp create_date;
     private String path_file;
@@ -86,11 +86,11 @@ public class Assignment {
         this.total_member = total_member;
     }
 
-    public Date getDue_date() {
+    public Timestamp getDue_date() {
         return due_date;
     }
 
-    public void setDue_date(Date due_date) {
+    public void setDue_date(Timestamp due_date) {
         this.due_date = due_date;
     }
 
@@ -149,16 +149,17 @@ public class Assignment {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "insert into assignment(course_id,name,description,ass_type,total_member,due_date,ass_extension) values(?,?,?,?,?,?,?)";
         PreparedStatement pstm = null;
-        int result = 0;
-        try {
+        int result = 0; 
+        try { 
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, ass.getCourse().getCourse_id());
             pstm.setString(2, ass.getName());
             pstm.setString(3, ass.getDescription());
             pstm.setString(4, ass.getAss_type());
             pstm.setInt(5, ass.getTotal_member());
-            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-            pstm.setString(6, df.format(ass.getDue_date()));
+//            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+//            pstm.setString(6, df.format(ass.getDue_date()));
+            pstm.setTimestamp(6, ass.getDue_date());
             pstm.setString(7, ass.getAss_extension());
             result = pstm.executeUpdate();
             conn.close();
@@ -210,7 +211,7 @@ public class Assignment {
                 am.setTotal_member(rs.getInt("total_member"));
                 am.setAss_extension(rs.getString("ass_extension"));
                 am.setCreate_date(rs.getTimestamp("create_date"));
-                am.setDue_date(rs.getDate("due_date"));
+                am.setDue_date(rs.getTimestamp("due_date"));
                 am.setFully_mark(rs.getDouble("fully_mark"));
                 am.setComment(Comment.getCommentByAmID(am.getAm_id()));
                 if (am.getAss_type().equalsIgnoreCase("file")) {
@@ -251,7 +252,7 @@ public class Assignment {
                 am.setTotal_member(rs.getInt("total_member"));
                 am.setAss_extension(rs.getString("ass_extension"));
                 am.setCreate_date(rs.getTimestamp("create_date"));
-                am.setDue_date(rs.getDate("due_date"));
+                am.setDue_date(rs.getTimestamp("due_date"));
                 am.setComment(Comment.getCommentByAmID(am_id));
                 am.setFully_mark(rs.getDouble("fully_mark"));
                 if (am.getAss_type().equalsIgnoreCase("file")) {
@@ -295,7 +296,7 @@ public class Assignment {
                 am.setTotal_member(rs.getInt("total_member"));
                 am.setAss_extension(rs.getString("ass_extension"));
                 am.setCreate_date(rs.getTimestamp("create_date"));
-                am.setDue_date(rs.getDate("due_date"));
+                am.setDue_date(rs.getTimestamp("due_date"));
                 am.setFully_mark(rs.getDouble("fully_mark"));
                 am.setComment(Comment.getCommentByAmID(am.getAm_id()));
                 if (am.getAss_type() == "file") {

@@ -34,7 +34,7 @@ public class authenFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
          HttpServletRequest req = (HttpServletRequest)request;
-         HttpSession ss = req.getSession();
+         HttpSession ss = req.getSession(); 
          if(ss.getAttribute("ac")==null){
 //             StringBuilder pageReq = new StringBuilder(req.getRequestURI().substring(req.getContextPath().length()));
 //             String querySt = req.getQueryString();
@@ -44,7 +44,7 @@ public class authenFilter implements Filter {
 //             pageReq.deleteCharAt(0);
 //             pageReq.append("?"+querySt);
 //             ss.setAttribute("req_url", pageReq);
-             filterConfig.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+             req.getRequestDispatcher("/index.jsp").forward(request, response);
          }else{
              chain.doFilter(request, response);
          }

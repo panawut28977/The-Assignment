@@ -35,7 +35,7 @@
                 margin-right: 10px;
                 margin-bottom: 10px; 
             }
-            
+
             .fillInBlankBox:hover{
                 cursor: pointer;
             }
@@ -123,18 +123,18 @@
                                                 </ul>
                                             </div>	
                                         </div>-->
-                    <form id="myWizard" type="get" action="" class="form-horizontal">
+                    <form id="myWizard" method="post" action="createAssignment" class="form-horizontal">
                         <section class="step" data-step-title="Enter Information">
                             <div class="col-md-8 col-md-offset-2">
                                 <div class="form-group">
                                     <label for="name" class="col-md-3 control-label">Name</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" id="name" >
+                                        <input type="text" class="form-control" id="name" name="amName" >
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="description" class="col-md-3 control-label">Description</label>
-                                    <div class="col-md-9">
+                                    <div class="col-md-9" name="description">
                                         <textarea  rows="3"  id="description" class="form-control"></textarea>
                                     </div>
                                 </div>
@@ -148,18 +148,20 @@
                                 </div>
                                 <div class="form-group">
                                     <label  class="col-md-3 control-label">Due date</label>
-                                    <div class="input-group date form_date col-md-9" style="padding-right: 15px;  padding-left: 15px;" data-date="" data-date-format="dd MM yyyy hh:mm" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd hh:mm">
-                                        <input class="form-control" size="16" type="text" value="" readonly="yes">
-                                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    <div class="input-group date col-md-9" style="padding-right: 15px;  padding-left: 15px;" data-date="" data-date-format="dd MM yyyy hh:mm" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd hh:mm">
+                                        <div class="form_date">
+                                            <input class="form-control" size="16" type="text" name="due_date" value="" readonly="yes">
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
                                     </div>
                                     <input type="hidden" id="dtp_input2" value="" /><br/>
                                 </div>
                                 <div class="form-group">
                                     <label for="AmType" class="col-md-3 control-label">Assignment Type</label>
                                     <div class="col-md-4">
-                                        <select class="form-control" id="AmType">
-                                            <option value="f">File</option>
+                                        <select class="form-control" id="AmType" name="AmType">
+                                            <option value="f" >File</option>
                                             <option value="w">Doing on web</option>
                                         </select>
                                     </div>

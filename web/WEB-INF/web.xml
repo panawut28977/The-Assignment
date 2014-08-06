@@ -12,6 +12,7 @@
         <filter-name>authenFilter</filter-name>
         <url-pattern>/home.jsp</url-pattern>
         <url-pattern>/course.jsp</url-pattern>
+        <url-pattern>/CreateAssignment.jsp</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>
@@ -72,6 +73,10 @@
         <servlet-name>CreateCourseSl</servlet-name>
         <servlet-class>servlet.CreateCourseSl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>createAssignment</servlet-name>
+        <servlet-class>servlet.createAssignment</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -119,6 +124,10 @@
     <servlet-mapping>
         <servlet-name>CreateCourseSl</servlet-name>
         <url-pattern>/CreateCourseSl</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>createAssignment</servlet-name>
+        <url-pattern>/createAssignment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
