@@ -40,7 +40,7 @@
                         <div class="col-md-4"><h4>30 <br> Leftovers</h4></div>
                     </div>
                     <hr style="clear:both">
-                    <table class="table table-striped" ID="SendedAssignment">
+                    <table class="table table-striped" ID="SentAssignment">
                         <thead>
                             <tr>
                                 <th><b>Name</b></th>
@@ -142,7 +142,7 @@
         <c:set var="wkt" value="${param.wkt}" scope="session" />
         <script>
             $(document).ready(function() {
-                var aTable = $('#SendedAssignment').dataTable();
+                var aTable = $('#SentAssignment').dataTable();
             });
         </script>
     </body>

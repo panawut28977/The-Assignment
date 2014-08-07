@@ -82,7 +82,7 @@
                             </td>
                         </c:when>
                         <c:otherwise> 
-                            <td><a href="SendedAssignment.jsp?tab=AllAssignment&&wkt=file">10</a></td>
+                            <td><a href="SentAssignment.jsp?tab=AllAssignment&&wkt=file">10</a></td>
                         </c:otherwise>
                     </c:choose>
                 </tr>

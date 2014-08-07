@@ -4,7 +4,7 @@
     Author     : JenoVa
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+ <%@page contentType="text/html; charset=UTF-8" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
 <!DOCTYPE html>
@@ -123,7 +123,7 @@
                                                 </ul>
                                             </div>	
                                         </div>-->
-                    <form id="myWizard" method="post" action="createAssignment" class="form-horizontal">
+                    <form id="myWizard" method="post" action="createAssignment" class="form-horizontal" enctype="multipart/form-data">
                         <section class="step" data-step-title="Enter Information">
                             <div class="col-md-8 col-md-offset-2">
                                 <div class="form-group">
@@ -148,24 +148,19 @@
                                 </div>
                                 <div class="form-group">
                                     <label  class="col-md-3 control-label">Due date</label>
-                                    <div class='input-group date col-md-9' style="padding-right: 15px;  padding-left: 15px;" id='form_date'>
-                                        <input type='text' class="form-control" name="due_date" readonly="yes" />
-                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
-                                        </span>
+                                    <div class="input-group date form_datetime col-md-9" style="padding-right: 15px;  padding-left: 15px;"  data-link-field="dtp_input1">
+                                        <input class="form-control" size="16" type="text" value="" readonly>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                     </div>
-                                    <!--                                    <div class="input-group date  col-md-9" style="padding-right: 15px;  padding-left: 15px;" data-date="" data-date-format="dd MM yyyy hh:mm" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd hh:mm">
-                                                                            <input class="form-control" size="16" type="text" name="due_date" value="" readonly="yes">
-                                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                                                        </div>
-                                                                        <input type="hidden" id="dtp_input2" value="" /><br/>-->
+                                    <input type="hidden" id="dtp_input1" name="due_date" value="" /><br/>
                                 </div>
                                 <div class="form-group">
                                     <label for="AmType" class="col-md-3 control-label">Assignment Type</label>
                                     <div class="col-md-4">
                                         <select class="form-control" id="AmType" name="AmType">
-                                            <option value="f" >File</option>
-                                            <option value="w">Doing on web</option>
+                                            <option value="file" >File</option>
+                                            <option value="web">Doing on web</option>
                                         </select>
                                     </div>
                                 </div>
@@ -173,11 +168,11 @@
                         </section>
                         <section class="step" data-step-title="Create Assignment">
                             <div class="col-md-8 col-md-offset-2" id="uploadAmFile">
-                                <input type="file" class="form-control">
+                                <input type="file" name="file" class="form-control">
                                 <span class="text-danger">.doc .pdf .xls available</span>
                             </div>
                             <div class="col-md-10 col-md-offset-1" id="CreateAmOnweb">
-                                <input type="text" class="form-control" placeholder="Assignment Title">
+                                <input type="text" name="" class="form-control" placeholder="Assignment Title">
                                 <br>
                                 <p id="AmDescription"></p>
                                 <div class="amQuestion">
@@ -337,8 +332,6 @@
                 </div>
             </div>
         </div>
-
-        <script src="js/moment-with-locales.js"></script>
         <script src="js/bootstrap-datetimepicker.min.js"></script>
         <script src="module/easyWizard/lib/jquery.easyWizard.js"></script>
         <script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
@@ -351,6 +344,18 @@
                                             $('#compareBox').hide();
                                             $('#CreateAmOnweb').hide();
 
+                                            $('.form_datetime').datetimepicker({
+                                                format: 'yyyy-MM-dd',
+                                                weekStart: 1,
+                                                todayBtn: 1,
+                                                autoclose: 1,
+                                                todayHighlight: 1,
+                                                startView: 2,
+                                                forceParse: 0,
+                                                startDate: new Date(),
+                                                minView:2
+                                            });
+
                                             $('#groupwork').click(function() {
                                                 $('#inputpepole').removeAttr("disabled");
                                             });
@@ -359,12 +364,10 @@
                                             $('#individual').click(function() {
                                                 $('#inputpepole').attr("disabled", "yes");
                                             });
-                                            
-                                            $('#inputpepole').change(function(){
-                                                 $('#groupwork').val($(this).val());
-                                            });
 
-                                            $('#form_date').datetimepicker();
+                                            $('#inputpepole').change(function() {
+                                                $('#groupwork').val($(this).val());
+                                            });
 
                                             $("#AmType").change(function() {
                                                 if ($(this).val() == "f") {

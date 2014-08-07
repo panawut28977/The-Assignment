@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     <filter>
+        <filter-name>UTF8Filter</filter-name>
+        <filter-class>filter.UTF8Filter</filter-class>
+    </filter>
+    <filter>
         <filter-name>authenFilter</filter-name>
         <filter-class>filter.authenFilter</filter-class>
     </filter>
@@ -13,6 +17,9 @@
         <url-pattern>/home.jsp</url-pattern>
         <url-pattern>/course.jsp</url-pattern>
         <url-pattern>/CreateAssignment.jsp</url-pattern>
+        <url-pattern>/assignment.jsp</url-pattern>
+        <url-pattern>/CheckAssignment.jsp</url-pattern>
+        <url-pattern>/SentAssignment.jsp</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>
@@ -21,6 +28,14 @@
         <filter-name>refreshAccount</filter-name>
         <url-pattern>/home.jsp</url-pattern>
         <url-pattern>/course.jsp</url-pattern>
+        <url-pattern>/CreateAssignment.jsp</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>UTF8Filter</filter-name>
+        <url-pattern>/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>
@@ -77,6 +92,10 @@
         <servlet-name>createAssignment</servlet-name>
         <servlet-class>servlet.createAssignment</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>removeAssignment</servlet-name>
+        <servlet-class>servlet.removeAssignment</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -125,9 +144,13 @@
         <servlet-name>CreateCourseSl</servlet-name>
         <url-pattern>/CreateCourseSl</url-pattern>
     </servlet-mapping>
-     <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>createAssignment</servlet-name>
         <url-pattern>/createAssignment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>removeAssignment</servlet-name>
+        <url-pattern>/removeAssignment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

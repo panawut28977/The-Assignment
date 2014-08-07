@@ -25,7 +25,7 @@
                     <%@include file="META-INF/page/CourseTab.jsp"%>
                     <ol class="breadcrumb" style="margin-top: 15px" >
                         <li><a href="course.jsp?tab=AllAssignment">Assignment</a></li>
-                        <li><a href="SendedAssignment.jsp?tab=AllAssignment">Assignment# 1.....</a></li>
+                        <li><a href="SentAssignment.jsp?tab=AllAssignment">Assignment# 1.....</a></li>
                         <li><a href="CheckAssignment.jsp?tab=AllAssignment">Check Assignment# 1.....</a></li>
                         <li class="active"><a href="#">Check copy Assignment# 1.....</a></li>
                     </ol>
@@ -91,7 +91,7 @@
         </div>
         <script>
             $(document).ready(function() {
-                var aTable = $('#SendedAssignment').dataTable();
+                var aTable = $('#SentAssignment').dataTable();
                 $('#checkcopy').tooltip("hide");
                 $('#compareBox').hide();
             });

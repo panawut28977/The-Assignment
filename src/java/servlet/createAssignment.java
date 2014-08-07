@@ -5,17 +5,22 @@
  */
 package servlet;
 
+import Model.Assignment;
+import Model.Course;
+import com.oreilly.servlet.MultipartRequest;
+import java.io.File;
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -34,25 +39,50 @@ public class createAssignment extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String name = request.getParameter("amName");
-        String description = request.getParameter("description");
-        String ass_type = request.getParameter("AmType");
-        int total_member = Integer.parseInt(request.getParameter("total_member"));
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
-        Date parsedDate;
-        Timestamp due_date =null;
+        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        HttpSession ss = request.getSession();
+        File f = new File(getServletContext().getRealPath("/") + "\\file\\assignment_file");
+//        System.out.println("check dir " +f.exists());
+        MultipartRequest m = new MultipartRequest(request, f.getPath(),"UTF-8");
+        Integer cId = (int) ((long) ss.getAttribute("cId"));
+        String name = m.getParameter("amName");
+        String description = m.getParameter("description");
+        String ass_type = m.getParameter("AmType");
+        Date due_date = null;
         try {
-            parsedDate = dateFormat.parse(request.getParameter("due_date"));
-            due_date = new Timestamp(parsedDate.getTime());
-
+            due_date = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(m.getParameter("due_date"));
         } catch (ParseException ex) {
             Logger.getLogger(createAssignment.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println(name);
-        System.out.println(description);
-        System.out.println(ass_type);
-        System.out.println(total_member);
-        System.out.println(due_date);
+        int total_member = Integer.parseInt(m.getParameter("total_member"));
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+//        Date parsedDate;
+//        Timestamp due_date = null;
+//        try {
+//            parsedDate = dateFormat.parse(m.getParameter("due_date"));
+//            due_date = new Timestamp(parsedDate.getTime());
+//
+//        } catch (ParseException ex) {
+//            Logger.getLogger(createAssignment.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        Assignment a = new Assignment();
+        a.setName(name);
+        a.setDescription(description);
+        a.setTotal_member(total_member);
+        a.setAss_type(ass_type);
+        a.setCourse(new Course(cId));
+        a.setDue_date(due_date);
+        String url = "";
+        if (ass_type.equalsIgnoreCase("file")) {
+            a.setPath_file(m.getFilesystemName("file"));
+            int key = Assignment.createAmInfo(a);
+            url = "/assignment.jsp?tab=AllAssignment&&amId="+key;
+        } else {
+//            Map m = request.getParameterMap();
+        }
+       getServletContext().getRequestDispatcher(url).forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
