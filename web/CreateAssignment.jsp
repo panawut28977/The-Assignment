@@ -4,7 +4,7 @@
     Author     : JenoVa
 --%>
 
- <%@page contentType="text/html; charset=UTF-8" %>
+<%@page contentType="text/html; charset=UTF-8" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
 <!DOCTYPE html>
@@ -129,7 +129,7 @@
                                 <div class="form-group">
                                     <label for="name" class="col-md-3 control-label">Name</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" id="name" name="amName" >
+                                        <input type="text" class="form-control" id="name" name="amName" required="yes" >
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -141,12 +141,12 @@
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">Work with</label>
                                     <div class="col-md-9">
-                                        <input type="radio" name="total_member" value="1" id="individual" > Individual
+                                        <input type="radio" name="total_member" value="1" id="individual" checked="yes" > Individual
                                         <br>
                                         <input type="radio" name="total_member" id="groupwork" value=""> Group of <input type="number" min="2" id="inputpepole" disabled="yes"> People
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" id="due_date">
                                     <label  class="col-md-3 control-label">Due date</label>
                                     <div class="input-group date form_datetime col-md-9" style="padding-right: 15px;  padding-left: 15px;"  data-link-field="dtp_input1">
                                         <input class="form-control" size="16" type="text" value="" readonly>
@@ -159,7 +159,7 @@
                                     <label for="AmType" class="col-md-3 control-label">Assignment Type</label>
                                     <div class="col-md-4">
                                         <select class="form-control" id="AmType" name="AmType">
-                                            <option value="file" >File</option>
+                                            <option value="file" selected="yes" >File</option>
                                             <option value="web">Doing on web</option>
                                         </select>
                                     </div>
@@ -340,10 +340,16 @@
                                             $('#myWizard').easyWizard({
                                                 buttonsClass: 'btn btn-default',
                                                 submitButtonClass: 'btn btn-primary'});
+
                                             tinymce.init({selector: '.explain .explain_q_text'});
+
                                             $('#compareBox').hide();
                                             $('#CreateAmOnweb').hide();
-
+                                            var monthNames = ["January", "February", "March", "April", "May", "June",
+                                                "July", "August", "September", "October", "November", "December"];
+                                            var d = new Date();
+                                            $('#due_date input').val(d.getFullYear() + "-" + monthNames[d.getMonth()] + "-" + ('0' + d.getDate()).slice(-2));
+                                            $('#due_date input[name="due_date"]').val(d.getFullYear() + "-" + ('0' + (d.getMonth() + 1)).slice(-2) + "-" + ('0' + d.getDate()).slice(-2));
                                             $('.form_datetime').datetimepicker({
                                                 format: 'yyyy-MM-dd',
                                                 weekStart: 1,
@@ -353,7 +359,19 @@
                                                 startView: 2,
                                                 forceParse: 0,
                                                 startDate: new Date(),
-                                                minView:2
+                                                minView: 2
+                                            });
+
+                                            $("#myWizard").submit(function() {
+                                                var type = $("#AmType").val();
+                                                if (type == "file") {
+                                                    if ($("#uploadAmFile input").val() == "") {
+                                                        alert("please select your assignment file");
+                                                        $(".prev").trigger("click");
+                                                        $("#uploadAmFile input").focus();
+                                                        return false;
+                                                    }
+                                                }
                                             });
 
                                             $('#groupwork').click(function() {
@@ -370,7 +388,7 @@
                                             });
 
                                             $("#AmType").change(function() {
-                                                if ($(this).val() == "f") {
+                                                if ($(this).val() == "file") {
                                                     $('#uploadAmFile').show();
                                                     $('#CreateAmOnweb').hide();
                                                 } else {
@@ -381,16 +399,6 @@
 
                                             $("#description").change(function() {
                                                 $("#AmDescription").text($(this).val());
-                                            });
-
-                                            $(document).on("change", "#multiple_type", function() {
-                                                var html = '';
-                                                if ($(this).val() == "one") {
-                                                    html = '<div class="choice-group form-inline"><div><input type="radio" name="c"> <input type="text" class="form-control"></div></div><br><a onclick="appendChoice(this)">Add other</a>';
-                                                } else {
-                                                    html = '<div class="choice-group form-inline"><div><input type="checkbox" name="c"> <input type="text" class="form-control"></div></div><br><a onclick="appendChoice(this)">Add other</a>';
-                                                }
-                                                $(this).parent().parent().parent(".multipleChoice").find(".c_list").html(html);
                                             });
 
                                             $(document).on("change", "#total_pair", function() {
@@ -405,17 +413,6 @@
                                         function compareView() {
                                             $('#compareBox').show();
                                             $("html, body").animate({scrollTop: $('body').height()}, "slow");
-                                        }
-
-                                        function appendChoice(t) {
-                                            var type = $('#multiple_type').val();
-                                            var inputC = '';
-                                            if (type == "one") {
-                                                inputC = '<div><br><input type="radio" name="c"> <input type="text" class="form-control"> <a onclick="removeC(this)"><span class="glyphicon glyphicon-remove"></span></a></div>';
-                                            } else {
-                                                inputC = '<div><br><input type="checkbox" name="c"> <input type="text" class="form-control"> <a onclick="removeC(this)"><span class="glyphicon glyphicon-remove"></span></a></div>';
-                                            }
-                                            $(t).parent().find('.choice-group').append(inputC);
                                         }
 
                                         function removeC(t) {
@@ -510,23 +507,26 @@
                                         }
 
                                         var total_q = 1;
+                                        var seqno = 1;
                                         function addQuestion(t) {
                                             var question = '<div class="multipleChoice">'
                                                     + '          <hr>'
+                                                    + '          <input type="hidden" name="seqno" value="' + seqno + '"/>'
                                                     + '          <div class="q_no">'
                                                     + '              <span class="label label-default">' + total_q + '</span> '
+                                                    + '              <input type="hidden" name="' + seqno + 'q_no" value="' + total_q + '"/>'
                                                     + '              <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>'
                                                     + '          </div>'
                                                     + '          <div class="form-group">'
                                                     + '              <label  class="col-md-3 control-label">Question Text</label>'
                                                     + '              <div class="col-md-9">'
-                                                    + '                  <input type="text" class="form-control" >'
+                                                    + '                  <input type="text" class="form-control" name="' + seqno + 'qtext" >'
                                                     + '              </div>'
                                                     + '          </div>'
                                                     + '          <div class="form-group">'
                                                     + '              <label class="col-md-3 control-label">One or multiple answers?</label>'
                                                     + '              <div class="col-md-5">'
-                                                    + '                  <select class="form-control" id="multiple_type">'
+                                                    + '                  <select class="form-control" id="multiple_type" name="' + seqno + 'qcategory">'
                                                     + '                      <option value="one">One answer only</option>'
                                                     + '                      <option value="multiple">Multiple choice allowed</option>'
                                                     + '                  </select>'
@@ -536,7 +536,7 @@
                                                     + '              <label class="col-md-3 control-label">Choice <br><span class="text-danger">(Don\'t forget to select answer)</span></label>'
                                                     + '              <div class="col-md-8 c_list">'
                                                     + '                  <div class="choice-group form-inline">'
-                                                    + '                      <div><input type="radio" name="c_ans"> <input type="text" class="form-control"></div>'
+                                                    + '                      <div><input type="radio" onClick="mark(this)" name="' + seqno + 'c" value=""> <input type="text" name="' + seqno + 'ctext" class="form-control" onkeyup="addToC(this)"></div>'
                                                     + '                  </div>'
                                                     + '                  <br>'
                                                     + '                  <a onclick="appendChoice(this)">Add other</a>'
@@ -545,15 +545,16 @@
                                                     + '          <div class="form-group">'
                                                     + '              <label class="col-md-3 control-label">Score</label>'
                                                     + '              <div class="col-md-2">'
-                                                    + '                  <input type="number" min="0" step="any" class="form-control" name="score" >'
+                                                    + '                  <input type="number" min="0" step="any" class="form-control" name="' + seqno + 'score" >'
                                                     + '              </div>'
                                                     + '          </div>'
-                                                    + '          <input type="hidden" value="multiple_choice" name="q_type">'
+                                                    + '          <input type="hidden" value="multiple_choice" name="' + seqno + 'q_type">'
                                                     + '      </div>';
-
                                             if (amCurrentType == 'tf') {
                                                 question = '<div class="tfQuestion">'
                                                         + '    <hr>'
+                                                        + '          <input type="hidden" name="seqno" value="' + seqno + '"/>'
+                                                        + '          <input type="hidden" name="' + seqno + 'q_no" value="' + seqno + '"/>'
                                                         + '    <div class="q_no">'
                                                         + '        <span class="label label-default">' + total_q + '</span> '
                                                         + '        <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>'
@@ -561,27 +562,29 @@
                                                         + '    <div class="form-group">'
                                                         + '        <label  class="col-md-3 control-label">Question Text</label>'
                                                         + '        <div class="col-md-9">'
-                                                        + '            <input type="text" class="form-control" >'
+                                                        + '            <input type="text" class="form-control" name="' + seqno + 'qtext">'
                                                         + '        </div>'
                                                         + '    </div>'
                                                         + '    <div class="form-group">'
                                                         + '        <label class="col-md-3 control-label">Choice <br><span class="text-danger">(Don\'t forget to select answer)</span></label>'
                                                         + '        <div class="col-md-8">'
-                                                        + '            <input type="radio" name="c_ans"> True'
-                                                        + '            <input type="radio" name="c_ans"> False'
+                                                        + '            <input type="radio" name="' + seqno + 'c_ans" value="true"> True'
+                                                        + '            <input type="radio" name="' + seqno + 'c_ans" value="false"> False'
                                                         + '        </div>'
                                                         + '    </div>'
                                                         + '    <div class="form-group">'
                                                         + '        <label class="col-md-3 control-label">Score</label>'
                                                         + '        <div class="col-md-2">'
-                                                        + '            <input type="number" min="0" step="any" class="form-control" name="score" >'
+                                                        + '            <input type="number" min="0" step="any" class="form-control" name="' + seqno + 'score" >'
                                                         + '        </div>'
                                                         + '    </div>'
-                                                        + '    <input type="hidden" value="tfQuestion" name="q_type">'
+                                                        + '    <input type="hidden" value="tf" name="' + seqno + 'qcategory">'
+                                                        + '    <input type="hidden" value="tfQuestion" name="' + seqno + 'q_type">'
                                                         + '</div>';
                                             } else if (amCurrentType == 'match') {
                                                 question = '<div class="matchWord">'
                                                         + '     <hr>'
+                                                        + '          <input type="hidden" name="q_no" value="' + seqno + '"/>'
                                                         + '     <div class="q_no">'
                                                         + '         <span class="label label-default">' + total_q + '</span> '
                                                         + '         <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>'
@@ -609,6 +612,7 @@
                                             } else if (amCurrentType == 'fill') {
                                                 question = '<div class="fillBlank">'
                                                         + '    <hr>'
+                                                        + '          <input type="hidden" name="q_no" value="' + seqno + '"/>'
                                                         + '    <div class="q_no">'
                                                         + '        <span class="label label-default">' + total_q + '</span> '
                                                         + '        <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>'
@@ -630,6 +634,7 @@
                                             } else if (amCurrentType == 'ep') {
                                                 question = '<div class="explain">'
                                                         + '    <hr>'
+                                                        + '          <input type="hidden" name="q_no" value="' + seqno + '"/>'
                                                         + '    <div class="q_no">'
                                                         + '        <span class="label label-default">' + total_q + '</span> '
                                                         + '        <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>'
@@ -650,26 +655,63 @@
                                                         + '</div>';
                                             }
                                             total_q++;
+                                            seqno++;
                                             $(".amQuestion").append(question);
 
                                         }
 
+                                        function appendChoice(t) {
+                                            var type = $(t).parent().parent().parent().find('#multiple_type').val();
+                                            var seq_of_choice = $(t).parent().parent().parent().find("[name='seqno']").val();
+                                            var inputC = '';
+                                            if (type == "one") {
+                                                inputC = '<div><br><input type="radio" name="' + seq_of_choice + 'c" onClick="mark(this)" value=""> <input type="text" name="' + seq_of_choice + 'ctext" class="form-control" onkeyup="addToC(this)"> <a onclick="removeC(this)"><span class="glyphicon glyphicon-remove"></span></a></div>';
+                                            } else {
+                                                inputC = '<div><br><input type="checkbox" name="' + seq_of_choice + 'c" onClick="mark(this)" value=""> <input type="text" name="' + seq_of_choice + 'ctext" class="form-control" onkeyup="addToC(this)"> <a onclick="removeC(this)"><span class="glyphicon glyphicon-remove"></span></a></div>';
+                                            }
+                                            $(t).parent().find('.choice-group').append(inputC);
+                                        }
+
+                                        $(document).on("change", "#multiple_type", function() {
+                                            var seq_of_choice = $(this).parent().parent().parent().find("[name='seqno']").val();
+                                            var html = '';
+                                            if ($(this).val() == "one") {
+                                                html = '<div class="choice-group form-inline"><div><input type="radio" name="' + seq_of_choice + 'c"> <input type="text" class="form-control" name="' + seq_of_choice + 'ctext"></div></div><br><a onclick="appendChoice(this)">Add other</a>';
+                                            } else {
+                                                html = '<div class="choice-group form-inline"><div><input type="checkbox" name="' + seq_of_choice + 'c"> <input type="text" class="form-control" name="' + seq_of_choice + 'ctext"></div></div><br><a onclick="appendChoice(this)">Add other</a>';
+                                            }
+                                            $(this).parent().parent().parent(".multipleChoice").find(".c_list").html(html);
+                                        });
+
+
                                         function addTitle() {
-                                            var titleBox = '<div class="row"><hr><div class="col-md-8"><input type="text" class="form-control" placeholder="Instruction" ></div><a onclick="remove_title(this)"  style="vertical-align: -webkit-baseline-middle"><span class="glyphicon glyphicon-trash"></span></a></div>';
+                                            var titleBox = '<div class="row"><hr><input type="hidden" name="q_no" value="' + seqno + '"/><div class="col-md-8"><input type="text" class="form-control" placeholder="Instruction" ></div><a onclick="remove_title(this)"  style="vertical-align: -webkit-baseline-middle"><span class="glyphicon glyphicon-trash"></span></a></div>';
                                             $(".amQuestion").append(titleBox);
+                                        }
+
+                                        function addToC(t) {
+                                            $(t).siblings("[name$='c']").val($(t).val());
+                                        }
+
+                                        function mark(t) {
+                                            var ans = $(t).siblings('[type="text"]').val();
+                                            $(t).val(ans);
                                         }
 
                                         function remove_q(t) {
                                             total_q--;
+                                            seqno--;
                                             var new_q_no = 1;
                                             $(t).parent().parent().remove();
                                             $(".q_no").each(function() {
                                                 $(this).find(".label").text(new_q_no);
+                                                $(this).find("input").val(new_q_no);
                                                 new_q_no++;
                                             });
                                         }
 
                                         function remove_title(t) {
+                                            seqno--;
                                             $(t).parent().remove();
                                         }
 

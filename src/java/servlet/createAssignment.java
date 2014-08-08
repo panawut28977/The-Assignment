@@ -7,12 +7,17 @@ package servlet;
 
 import Model.Assignment;
 import Model.Course;
+import Model.MultipleChoice;
+import Model.Question;
 import com.oreilly.servlet.MultipartRequest;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,7 +49,7 @@ public class createAssignment extends HttpServlet {
         HttpSession ss = request.getSession();
         File f = new File(getServletContext().getRealPath("/") + "\\file\\assignment_file");
 //        System.out.println("check dir " +f.exists());
-        MultipartRequest m = new MultipartRequest(request, f.getPath(),"UTF-8");
+        MultipartRequest m = new MultipartRequest(request, f.getPath(), "UTF-8");
         Integer cId = (int) ((long) ss.getAttribute("cId"));
         String name = m.getParameter("amName");
         String description = m.getParameter("description");
@@ -74,14 +79,60 @@ public class createAssignment extends HttpServlet {
         a.setCourse(new Course(cId));
         a.setDue_date(due_date);
         String url = "";
+        int key = Assignment.createAmInfo(a);
         if (ass_type.equalsIgnoreCase("file")) {
             a.setPath_file(m.getFilesystemName("file"));
-            int key = Assignment.createAmInfo(a);
-            url = "/assignment.jsp?tab=AllAssignment&&amId="+key;
+//            url = "/assignment.jsp?tab=AllAssignment&&amId=" + key;
         } else {
-//            Map m = request.getParameterMap();
+            String[] seqno = m.getParameterValues("seqno");
+            String q_type = null;
+            List<Question> qlist = new ArrayList<Question>();
+            for (int i = 0; i < seqno.length; i++) {
+                q_type = m.getParameter(seqno[i] + "q_type");
+                if (q_type.equalsIgnoreCase("multiple_choice")) {
+                    String q_no = m.getParameter(seqno[i] + "q_no");
+                    String qtext = m.getParameter(seqno[i] + "qtext");
+                    String qcategory = m.getParameter(seqno[i] + "qcategory");
+                    String[] ans = m.getParameterValues(seqno[i] + "c");
+                    String[] ctext = m.getParameterValues(seqno[i] + "ctext");
+                    String score = m.getParameter(seqno[i] + "score");
+                    MultipleChoice mul = new MultipleChoice();
+                    //set question info
+                    mul.setAss_id(key);
+                    mul.setInstruction(null);
+                    mul.setQ_no(Integer.parseInt(q_no));
+                    mul.setQ_type(q_type);
+                    //set multiple choice info
+                    mul.setQ_text(qtext);
+                    mul.setQ_category(qcategory);
+                    mul.setQ_choice_list(Arrays.toString(ctext));
+                    mul.setQ_answer_list(Arrays.toString(ans));
+                    mul.setQ_score(Double.parseDouble(score));
+                    qlist.add(mul);
+                } else if (q_type.equalsIgnoreCase("tfQuestion")) {
+                    String q_no = m.getParameter(seqno[i] + "q_no");
+                    String qtext = m.getParameter(seqno[i] + "qtext");
+                    String ans = m.getParameter(seqno[i] + "c_ans");
+                    String qcategory = m.getParameter(seqno[i] + "qcategory");
+                    String score = m.getParameter(seqno[i] + "score");
+                    MultipleChoice mul = new MultipleChoice();
+                    //set question info
+                    mul.setAss_id(key);
+                    mul.setInstruction(null);
+                    mul.setQ_no(Integer.parseInt(q_no));
+                    mul.setQ_type(q_type);
+                    //set tf choice info
+                    mul.setQ_text(qtext);
+                    mul.setQ_category(qcategory);
+                    mul.setQ_choice_list("[true,false]");
+                    mul.setQ_answer_list(ans);
+                    mul.setQ_score(Double.parseDouble(score));
+                    qlist.add(mul);
+                }
+            }
+//                System.out.println(qlist);
         }
-       getServletContext().getRequestDispatcher(url).forward(request, response);
+//        getServletContext().getRequestDispatcher(url).forward(request, response);
 
     }
 
