@@ -595,7 +595,7 @@
                                                         + ' <div class="form-group">'
                                                         + ' <label  class = "col-md-3 control-label" > Question Text </label>'
                                                         + ' <div class = "col-md-9">'
-                                                        + ' <input type = "text" class = "form-control" name="' + seqno + 'q_text">'
+                                                        + ' <input type = "text" class = "form-control" name="' + seqno + 'qtext">'
                                                         + ' </div>'
                                                         + ' </div>'
 

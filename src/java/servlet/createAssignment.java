@@ -138,6 +138,7 @@ public class createAssignment extends HttpServlet {
                 } else if (q_type.equalsIgnoreCase("matchWord")) {
                     String q_no = m.getParameter(seqno[i] + "q_no");
                     String qtext = m.getParameter(seqno[i] + "qtext");
+                    System.out.println("q_text"+qtext);
                     String[] m_score = m.getParameterValues(seqno[i] + "m_score");
                     String[] match_text = m.getParameterValues(seqno[i] + "match_text");
                     String[] match_ans = m.getParameterValues(seqno[i] + "match_ans");
@@ -199,7 +200,7 @@ public class createAssignment extends HttpServlet {
                     instruction = m.getParameter(seqno[i] + "instruction");
                 }
             }
-//            System.out.println(qlist);
+            System.out.println(qlist);
             Question.addList(qlist);
         }
 //        getServletContext().getRequestDispatcher(url).forward(request, response);

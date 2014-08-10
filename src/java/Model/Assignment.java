@@ -159,7 +159,7 @@ public class Assignment {
     //createAmInfo(Assignment ass)
     public static int createAmInfo(Assignment ass) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "insert into assignment(course_id,name,description,ass_type,total_member,due_date) values(?,?,?,?,?,?)";
+        String sql = "insert into assignment(course_id,name,description,ass_type,total_member,due_date,title_assignment_onweb) values(?,?,?,?,?,?,?)";
         if (ass.getAss_type().equalsIgnoreCase("file")) {
             sql = "insert into assignment(course_id,name,description,ass_type,total_member,due_date,path_file) values(?,?,?,?,?,?,?)";
         }
@@ -178,6 +178,8 @@ public class Assignment {
 //            pstm.setString(7, ass.getAss_extension());
             if (ass.getAss_type().equalsIgnoreCase("file")) {
                 pstm.setString(7, ass.getPath_file());
+            }else{
+                pstm.setString(7, ass.getTitle_assignment_onweb());
             }
             pstm.executeUpdate();
             ResultSet key = pstm.getGeneratedKeys();

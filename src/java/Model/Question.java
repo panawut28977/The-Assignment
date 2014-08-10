@@ -171,9 +171,13 @@ public abstract class Question {
         MatchWord mw = null;
         MultipleChoice mc = null;
         Explain exp = null;
+        int q_no = -1;
         for (Question q : qList) {
             q_type = q.getQ_type();
-            data += "(" + q.getAss_id() + ",'" + q.getInstruction() + "'," + q.getQ_no() + ",'" + q_type + "'),";
+            if (q_no != q.getQ_no()) {
+                q_no = q.getQ_no();
+                data += "(" + q.getAss_id() + ",'" + q.getInstruction() + "'," + q.getQ_no() + ",'" + q_type + "'),";
+            }
         }
         data = data.substring(0, data.length() - 1);
         String sql = "insert into question(ass_id,instruction,q_no,q_type) values" + data;
@@ -189,9 +193,11 @@ public abstract class Question {
         for (Question q : qList) {
             if (q.getQ_type().equalsIgnoreCase("fillBlank")) {
                 fb = (FillBlank) q;
+                fb.setQ_id(getQIdbyAmIdAndQNo(fb.getAss_id(), fb.getQ_no()));
                 fb.add();
             } else if (q.getQ_type().equalsIgnoreCase("matchWord")) {
                 mw = (MatchWord) q;
+                mw.setQ_id(getQIdbyAmIdAndQNo(mw.getAss_id(), mw.getQ_no()));
                 mw.add();
             } else if (q.getQ_type().equalsIgnoreCase("tfQuestion") || q.getQ_type().equalsIgnoreCase("multiple_choice")) {
                 mc = (MultipleChoice) q;
