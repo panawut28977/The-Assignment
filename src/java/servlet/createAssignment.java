@@ -7,6 +7,8 @@ package servlet;
 
 import Model.Assignment;
 import Model.Course;
+import Model.Explain;
+import Model.FillBlank;
 import Model.MatchWord;
 import Model.MultipleChoice;
 import Model.Question;
@@ -80,13 +82,17 @@ public class createAssignment extends HttpServlet {
         a.setCourse(new Course(cId));
         a.setDue_date(due_date);
         String url = "";
-        int key = Assignment.createAmInfo(a);
+        int key =0;
         if (ass_type.equalsIgnoreCase("file")) {
             a.setPath_file(m.getFilesystemName("file"));
+            key = Assignment.createAmInfo(a);
 //            url = "/assignment.jsp?tab=AllAssignment&&amId=" + key;
         } else {
+            a.setTitle_assignment_onweb(m.getParameter("title_assignment_onweb"));
             String[] seqno = m.getParameterValues("seqno");
             String q_type = null;
+            String instruction = null;
+            key = Assignment.createAmInfo(a);
             List<Question> qlist = new ArrayList<Question>();
             for (int i = 0; i < seqno.length; i++) {
                 q_type = m.getParameter(seqno[i] + "q_type");
@@ -100,7 +106,7 @@ public class createAssignment extends HttpServlet {
                     MultipleChoice mul = new MultipleChoice();
                     //set question info
                     mul.setAss_id(key);
-                    mul.setInstruction(null);
+                    mul.setInstruction(instruction);
                     mul.setQ_no(Integer.parseInt(q_no));
                     mul.setQ_type(q_type);
                     //set multiple choice info
@@ -119,7 +125,7 @@ public class createAssignment extends HttpServlet {
                     MultipleChoice mul = new MultipleChoice();
                     //set question info
                     mul.setAss_id(key);
-                    mul.setInstruction(null);
+                    mul.setInstruction(instruction);
                     mul.setQ_no(Integer.parseInt(q_no));
                     mul.setQ_type(q_type);
                     //set tf choice info
@@ -140,7 +146,7 @@ public class createAssignment extends HttpServlet {
                         mw = new MatchWord();
                         //set question info
                         mw.setAss_id(key);
-                        mw.setInstruction(null);
+                        mw.setInstruction(instruction);
                         mw.setQ_no(Integer.parseInt(q_no));
                         mw.setQ_type(q_type);
                         //set mw choice info
@@ -151,9 +157,50 @@ public class createAssignment extends HttpServlet {
                         mw.setQ_score(Double.parseDouble(m_score[j]));
                         qlist.add(mw);
                     }
+                } else if (q_type.equalsIgnoreCase("explain")) {
+                    String q_no = m.getParameter(seqno[i] + "q_no");
+                    String qtext = m.getParameter(seqno[i] + "qtext");
+                    String qanswer = m.getParameter(seqno[i] + "qanswer");
+                    Explain ep = new Explain();
+                    //set question info
+                    ep.setAss_id(key);
+                    ep.setInstruction(instruction);
+                    ep.setQ_no(Integer.parseInt(q_no));
+                    ep.setQ_type(q_type);
+                    //set explain choice info
+                    ep.setQ_text(qtext);
+                    ep.setQ_keyword_check(qanswer);
+                    qlist.add(ep);
+                } else if (q_type.equalsIgnoreCase("fillBlank")) {
+                    String q_no = m.getParameter(seqno[i] + "q_no");
+                    String qtext = m.getParameter(seqno[i] + "qtext");
+                    String[] qanswer = m.getParameterValues(seqno[i] + "qanswer");
+                    String[] score = m.getParameterValues(seqno[i] + "score");
+                    String[] startIndex = m.getParameterValues(seqno[i] + "startIndex");
+                    String[] endIndex = m.getParameterValues(seqno[i] + "endIndex");
+                    FillBlank fill = null;
+                    for (int k = 0; k < qanswer.length; k++) {
+                        fill = new FillBlank();
+                        //set question info
+                        fill.setAss_id(key);
+                        fill.setInstruction(instruction);
+                        fill.setQ_no(Integer.parseInt(q_no));
+                        fill.setQ_type(q_type);
+                        //set explain choice info
+                        fill.setQ_order(k + 1);
+                        fill.setQ_text(qtext);
+                        fill.setScore(Double.parseDouble(score[k]));
+                        fill.setAnswer(qanswer[k]);
+                        fill.setQ_start_index(Integer.parseInt(startIndex[k]));
+                        fill.setQ_end_index(Integer.parseInt(endIndex[k]));
+                        qlist.add(fill);
+                    }
+                } else if (q_type.equalsIgnoreCase("instruction")) {
+                    instruction = m.getParameter(seqno[i] + "instruction");
                 }
             }
-            System.out.println(qlist);
+//            System.out.println(qlist);
+            Question.addList(qlist);
         }
 //        getServletContext().getRequestDispatcher(url).forward(request, response);
 

@@ -172,7 +172,7 @@
                                 <span class="text-danger">.doc .pdf .xls available</span>
                             </div>
                             <div class="col-md-10 col-md-offset-1" id="CreateAmOnweb">
-                                <input type="text" name="" class="form-control" placeholder="Assignment Title">
+                                <input type="text" name="title_assignment_onweb" class="form-control" placeholder="Assignment Title" >
                                 <br>
                                 <p id="AmDescription"></p>
                                 <div class="amQuestion">
@@ -402,10 +402,10 @@
                                             });
 
                                             $(document).on("change", "#total_pair", function() {
-                                                 var seq_of_choice = $(this).parent().parent().parent().find("[name='seqno']").val();
+                                                var seq_of_choice = $(this).parent().parent().parent().find("[name='seqno']").val();
                                                 var matchWord_box = '<div class="row"><div class="col-md-4"><b>Question Text</b></div><div class="col-md-4"><b>Answer</b></div><div class="col-md-2"><b>Score</b></div></div>';
                                                 for (var i = 0; i < $(this).val(); i++) {
-                                                    matchWord_box += '<div class="row"><div class="col-md-4"><input type="text" class="form-control" name="'+seq_of_choice+'match_text"></div><div class="col-md-4"><input type="text" class="form-control" name="'+seq_of_choice+'match_ans"></div><div class="col-md-2"><input type="number" min="0" step="any" class="form-control" name="'+seq_of_choice+'m_score"></div></div>';
+                                                    matchWord_box += '<div class="row"><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_text"></div><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_ans"></div><div class="col-md-2"><input type="number" min="0" step="any" class="form-control" name="' + seq_of_choice + 'm_score"></div></div>';
                                                 }
                                                 $(this).parent().parent().parent(".matchWord").find(".matchWord_q_list").html(matchWord_box);
                                             });
@@ -469,7 +469,8 @@
                                         }
 
                                         function appendAnswerBox(t, ans, startIndex, endIndex) {
-                                            var ansbox = '<div class="row a_group"><div class="col-md-4"><input type="text" class="form-control" value="' + ans + '" readonly="yes"></div><div class="col-md-3"><input type="number" class="form-control" placeholder="score"></div><input type="hidden" value="' + startIndex + '" name="startIndex"><input type="hidden" value="' + endIndex + '" name="endIndex"><a onclick="remove_ans_fillInBlank(this)"><span class="glyphicon glyphicon-trash"></span></a><div>';
+                                            var seq_of_choice = $(t).parent().parent().parent().find("[name='seqno']").val();
+                                            var ansbox = '<div class="row a_group"><div class="col-md-4"><input type="text" class="form-control" value="' + ans + '" readonly="yes" name="' + seq_of_choice + 'qanswer"></div><div class="col-md-3"><input type="number" class="form-control" placeholder="score" name="' + seq_of_choice + 'score"></div><input type="hidden" value="' + startIndex + '" name="' + seq_of_choice + 'startIndex"><input type="hidden" value="' + endIndex + '" name="' + seq_of_choice + 'endIndex"><a onclick="remove_ans_fillInBlank(this)"><span class="glyphicon glyphicon-trash"></span></a><div>';
                                             $(t).parent().parent().parent(".fillBlank").find(".ansList").append(ansbox);
                                         }
 
@@ -555,7 +556,7 @@
                                                 question = '<div class="tfQuestion">'
                                                         + '    <hr>'
                                                         + '          <input type="hidden" name="seqno" value="' + seqno + '"/>'
-                                                        + '          <input type="hidden" name="' + seqno + 'q_no" value="' + seqno + '"/>'
+                                                        + '          <input type="hidden" name="' + seqno + 'q_no" value="' + total_q + '"/>'
                                                         + '    <div class="q_no">'
                                                         + '        <span class="label label-default">' + total_q + '</span> '
                                                         + '        <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>'
@@ -586,7 +587,7 @@
                                                 question = '<div class="matchWord">'
                                                         + '     <hr>'
                                                         + '          <input type="hidden" name="seqno" value="' + seqno + '"/>'
-                                                        + '          <input type="hidden" name="' + seqno + 'q_no" value="' + seqno + '"/>'
+                                                        + '          <input type="hidden" name="' + seqno + 'q_no" value="' + total_q + '"/>'
                                                         + '     <div class="q_no">'
                                                         + '         <span class="label label-default">' + total_q + '</span> '
                                                         + '         <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>'
@@ -615,7 +616,7 @@
                                                 question = '<div class="fillBlank">'
                                                         + '    <hr>'
                                                         + '          <input type="hidden" name="seqno" value="' + seqno + '"/>'
-                                                        + '          <input type="hidden" name="q_no" value="' + seqno + '"/>'
+                                                        + '          <input type="hidden" name="' + seqno + 'q_no" value="' + total_q + '"/>'
                                                         + '    <div class="q_no">'
                                                         + '        <span class="label label-default">' + total_q + '</span> '
                                                         + '        <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>'
@@ -623,7 +624,7 @@
                                                         + '    <div class="form-group">'
                                                         + '        <label  class="col-md-3 control-label">Question Text</label>'
                                                         + '        <div class="col-md-9">'
-                                                        + '            <textarea class="form-control fillInBlankBox"  ></textarea>'
+                                                        + '            <textarea class="form-control fillInBlankBox" name="' + seqno + 'qtext"  ></textarea>'
                                                         + '            <br>'
                                                         + '            <a class=" btn btn-default" onclick="addAnswer(this)">Add Answer</a>'
                                                         + '        </div>'
@@ -632,13 +633,13 @@
                                                         + '        <div class="col-md-offset-3 col-md-9 ansList">'
                                                         + '        </div>'
                                                         + '    </div>'
-                                                        + '    <input type="hidden" value="fillBlank" name="q_type">'
+                                                        + '    <input type="hidden" value="fillBlank" name="' + seqno + 'q_type">'
                                                         + '</div>';
                                             } else if (amCurrentType == 'ep') {
                                                 question = '<div class="explain">'
                                                         + '    <hr>'
                                                         + '          <input type="hidden" name="seqno" value="' + seqno + '"/>'
-                                                        + '          <input type="hidden" name="q_no" value="' + seqno + '"/>'
+                                                        + '          <input type="hidden" name="' + seqno + 'q_no" value="' + total_q + '"/>'
                                                         + '    <div class="q_no">'
                                                         + '        <span class="label label-default">' + total_q + '</span> '
                                                         + '        <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>'
@@ -646,16 +647,16 @@
                                                         + '    <div class="form-group">'
                                                         + '        <label class="col-md-3 control-label">Question</label>'
                                                         + '        <div class="col-md-9">'
-                                                        + '            <textarea class="form-control explain_q_text" name="explain_q_text" ></textarea>'
+                                                        + '            <textarea class="form-control explain_q_text" name="' + seqno + 'qtext" ></textarea>'
                                                         + '        </div>'
                                                         + '    </div>'
                                                         + '    <div class="form-group">'
                                                         + '        <label  class="col-md-3 control-label">Answer</label>'
                                                         + '        <div class="col-md-9">'
-                                                        + '            <textarea class="form-control"></textarea>'
+                                                        + '            <textarea class="form-control" name="' + seqno + 'qanswer"></textarea>'
                                                         + '        </div>'
                                                         + '    </div>'
-                                                        + '    <input type="hidden" value="explain" name="q_type">'
+                                                        + '    <input type="hidden" value="explain" name="' + seqno + 'q_type">'
                                                         + '</div>';
                                             }
                                             total_q++;
@@ -689,8 +690,9 @@
 
 
                                         function addTitle() {
-                                            var titleBox = '<div class="row"><hr><input type="hidden" name="q_no" value="' + seqno + '"/><div class="col-md-8"><input type="text" class="form-control" placeholder="Instruction" ></div><a onclick="remove_title(this)"  style="vertical-align: -webkit-baseline-middle"><span class="glyphicon glyphicon-trash"></span></a></div>';
+                                            var titleBox = '<div class="row"><hr><input type="hidden" name="seqno" value="' + seqno + '"/><div class="col-md-8"><input type="text" class="form-control" placeholder="Instruction" name="' + seqno + 'instruction" ></div><a onclick="remove_title(this)"  style="vertical-align: -webkit-baseline-middle"><span class="glyphicon glyphicon-trash"></span></a><input type="hidden" value="instruction" name="' + seqno + 'q_type"></div>';
                                             $(".amQuestion").append(titleBox);
+                                            seqno++;
                                         }
 
                                         function addToC(t) {

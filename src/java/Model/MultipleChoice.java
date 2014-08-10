@@ -118,8 +118,10 @@ public class MultipleChoice extends Question {
 
     @Override
     public String toString() {
-        return "MultipleChoice{" + "q_type=" + q_category + ", q_choice_list=" + q_choice_list + ", q_answer_list=" + q_answer_list + ", q_score=" + q_score + '}';
+        return "MultipleChoice{" + "q_text=" + q_text + ", q_category=" + q_category + ", q_choice_list=" + q_choice_list + ", q_answer_list=" + q_answer_list + ", q_score=" + q_score + '}';
     }
+
+  
 
     // <editor-fold defaultstate="collapsed" desc=" Method that is not support in this class ">
     @Override

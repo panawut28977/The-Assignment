@@ -35,6 +35,7 @@ public class Assignment {
     private String ass_extension;
     private Timestamp create_date;
     private String path_file;
+    private String title_assignment_onweb;
     private double fully_mark;
     private List<Comment> comment;
     private List<Question> questionList;
@@ -118,6 +119,16 @@ public class Assignment {
     public void setPath_file(String path_file) {
         this.path_file = path_file;
     }
+
+    public String getTitle_assignment_onweb() {
+        return title_assignment_onweb;
+    }
+
+    public void setTitle_assignment_onweb(String title_assignment_onweb) {
+        this.title_assignment_onweb = title_assignment_onweb;
+    }
+    
+    
 
     public double getFully_mark() {
         return fully_mark;
@@ -410,7 +421,9 @@ public class Assignment {
 
     @Override
     public String toString() {
-        return "Assignment{" + "am_id=" + am_id + ", course=" + course + ", name=" + name + ", description=" + description + ", ass_type=" + ass_type + ", total_member=" + total_member + ", due_date=" + due_date + ", ass_extension=" + ass_extension + ", create_date=" + create_date + ", path_file=" + path_file + ", fully_mark=" + fully_mark + ", comment=" + comment + ", questionList=" + questionList + '}';
+        return "Assignment{" + "am_id=" + am_id + ", course=" + course + ", name=" + name + ", description=" + description + ", ass_type=" + ass_type + ", total_member=" + total_member + ", due_date=" + due_date + ", ass_extension=" + ass_extension + ", create_date=" + create_date + ", path_file=" + path_file + ", title_assignment_onweb=" + title_assignment_onweb + ", fully_mark=" + fully_mark + ", comment=" + comment + ", questionList=" + questionList + '}';
     }
+
+    
 
 }

@@ -180,24 +180,28 @@ public abstract class Question {
         PreparedStatement pstm = null;
         int result = 0;
         try {
-            pstm = conn.prepareCall(sql);
+            pstm = conn.prepareStatement(sql);
             result = pstm.executeUpdate();
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
         for (Question q : qList) {
-            if (q_type.equalsIgnoreCase("fillBlank")) {
+            if (q.getQ_type().equalsIgnoreCase("fillBlank")) {
                 fb = (FillBlank) q;
                 fb.add();
-            } else if (q_type.equalsIgnoreCase("matchWord")) {
+            } else if (q.getQ_type().equalsIgnoreCase("matchWord")) {
                 mw = (MatchWord) q;
                 mw.add();
-            } else if (q_type.equalsIgnoreCase("tfQuestion") || q_type.equalsIgnoreCase("multipleChoice")) {
+            } else if (q.getQ_type().equalsIgnoreCase("tfQuestion") || q.getQ_type().equalsIgnoreCase("multiple_choice")) {
                 mc = (MultipleChoice) q;
+                mc.setQ_id(getQIdbyAmIdAndQNo(mc.getAss_id(), mc.getQ_no()));
+//                System.out.println(mc);
                 mc.add();
-            } else if (q_type.equalsIgnoreCase("explain")) {
+            } else if (q.getQ_type().equalsIgnoreCase("explain")) {
                 exp = (Explain) q;
+                exp.setQ_id(getQIdbyAmIdAndQNo(exp.getAss_id(), exp.getQ_no()));
+//                System.out.println(exp);
                 exp.add();
             }
         }
@@ -346,6 +350,26 @@ public abstract class Question {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
+    }
+
+    public static int getQIdbyAmIdAndQNo(int am_id, int q_no) {
+        int QId = 0;
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select q_id from question where ass_id = ? and q_no = ?";
+        PreparedStatement pstm = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, am_id);
+            pstm.setInt(2, q_no);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                QId = rs.getInt(1);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return QId;
     }
 
     @Override
