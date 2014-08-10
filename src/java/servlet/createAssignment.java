@@ -7,6 +7,7 @@ package servlet;
 
 import Model.Assignment;
 import Model.Course;
+import Model.MatchWord;
 import Model.MultipleChoice;
 import Model.Question;
 import com.oreilly.servlet.MultipartRequest;
@@ -128,9 +129,31 @@ public class createAssignment extends HttpServlet {
                     mul.setQ_answer_list(ans);
                     mul.setQ_score(Double.parseDouble(score));
                     qlist.add(mul);
+                } else if (q_type.equalsIgnoreCase("matchWord")) {
+                    String q_no = m.getParameter(seqno[i] + "q_no");
+                    String qtext = m.getParameter(seqno[i] + "qtext");
+                    String[] m_score = m.getParameterValues(seqno[i] + "m_score");
+                    String[] match_text = m.getParameterValues(seqno[i] + "match_text");
+                    String[] match_ans = m.getParameterValues(seqno[i] + "match_ans");
+                    MatchWord mw = null;
+                    for (int j = 0; j < match_text.length; j++) {
+                        mw = new MatchWord();
+                        //set question info
+                        mw.setAss_id(key);
+                        mw.setInstruction(null);
+                        mw.setQ_no(Integer.parseInt(q_no));
+                        mw.setQ_type(q_type);
+                        //set mw choice info
+                        mw.setQ_order(j + 1);
+                        mw.setQ_title(qtext);
+                        mw.setQ_text(match_text[j]);
+                        mw.setQ_answer(match_ans[j]);
+                        mw.setQ_score(Double.parseDouble(m_score[j]));
+                        qlist.add(mw);
+                    }
                 }
             }
-//                System.out.println(qlist);
+            System.out.println(qlist);
         }
 //        getServletContext().getRequestDispatcher(url).forward(request, response);
 

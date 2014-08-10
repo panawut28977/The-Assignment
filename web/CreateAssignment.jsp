@@ -402,9 +402,10 @@
                                             });
 
                                             $(document).on("change", "#total_pair", function() {
+                                                 var seq_of_choice = $(this).parent().parent().parent().find("[name='seqno']").val();
                                                 var matchWord_box = '<div class="row"><div class="col-md-4"><b>Question Text</b></div><div class="col-md-4"><b>Answer</b></div><div class="col-md-2"><b>Score</b></div></div>';
                                                 for (var i = 0; i < $(this).val(); i++) {
-                                                    matchWord_box += '<div class="row"><div class="col-md-4"><input type="text" class="form-control"></div><div class="col-md-4"><input type="text" class="form-control"></div><div class="col-md-2"><input type="number" min="0" step="any" class="form-control" name="score"></div></div>';
+                                                    matchWord_box += '<div class="row"><div class="col-md-4"><input type="text" class="form-control" name="'+seq_of_choice+'match_text"></div><div class="col-md-4"><input type="text" class="form-control" name="'+seq_of_choice+'match_ans"></div><div class="col-md-2"><input type="number" min="0" step="any" class="form-control" name="'+seq_of_choice+'m_score"></div></div>';
                                                 }
                                                 $(this).parent().parent().parent(".matchWord").find(".matchWord_q_list").html(matchWord_box);
                                             });
@@ -584,7 +585,8 @@
                                             } else if (amCurrentType == 'match') {
                                                 question = '<div class="matchWord">'
                                                         + '     <hr>'
-                                                        + '          <input type="hidden" name="q_no" value="' + seqno + '"/>'
+                                                        + '          <input type="hidden" name="seqno" value="' + seqno + '"/>'
+                                                        + '          <input type="hidden" name="' + seqno + 'q_no" value="' + seqno + '"/>'
                                                         + '     <div class="q_no">'
                                                         + '         <span class="label label-default">' + total_q + '</span> '
                                                         + '         <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>'
@@ -592,7 +594,7 @@
                                                         + ' <div class="form-group">'
                                                         + ' <label  class = "col-md-3 control-label" > Question Text </label>'
                                                         + ' <div class = "col-md-9">'
-                                                        + ' <input type = "text" class = "form-control">'
+                                                        + ' <input type = "text" class = "form-control" name="' + seqno + 'q_text">'
                                                         + ' </div>'
                                                         + ' </div>'
 
@@ -607,11 +609,12 @@
                                                         + '             <span class="text-danger">Please tell me how many question before</span>'
                                                         + '         </div>'
                                                         + '     </div>'
-                                                        + '     <input type="hidden" value="matchWord" name="q_type">'
+                                                        + '     <input type="hidden" value="matchWord"  name="' + seqno + 'q_type">'
                                                         + ' </div>';
                                             } else if (amCurrentType == 'fill') {
                                                 question = '<div class="fillBlank">'
                                                         + '    <hr>'
+                                                        + '          <input type="hidden" name="seqno" value="' + seqno + '"/>'
                                                         + '          <input type="hidden" name="q_no" value="' + seqno + '"/>'
                                                         + '    <div class="q_no">'
                                                         + '        <span class="label label-default">' + total_q + '</span> '
@@ -634,6 +637,7 @@
                                             } else if (amCurrentType == 'ep') {
                                                 question = '<div class="explain">'
                                                         + '    <hr>'
+                                                        + '          <input type="hidden" name="seqno" value="' + seqno + '"/>'
                                                         + '          <input type="hidden" name="q_no" value="' + seqno + '"/>'
                                                         + '    <div class="q_no">'
                                                         + '        <span class="label label-default">' + total_q + '</span> '
@@ -714,69 +718,6 @@
                                             seqno--;
                                             $(t).parent().remove();
                                         }
-
-                                        /*function s(el) {
-                                         var sel, rng, r2, i = -1;
-                                         
-                                         
-                                         if (typeof el.selectionStart == "number") {
-                                         i = el.selectionStart;
-                                         //alert(i);
-                                         } else if (document.selection && el.createTextRange) {
-                                         sel = document.selection;
-                                         if (sel) {
-                                         r2 = sel.createRange();
-                                         rng = el.createTextRange();
-                                         rng.setEndPoint("EndToStart", r2);
-                                         i = rng.text.length;
-                                         }
-                                         } else {
-                                         el.onkeyup = null;
-                                         el.onclick = null;
-                                         }
-                                         
-                                         
-                                         
-                                         
-                                         return i;
-                                         }
-                                         
-                                         var oldText = '';
-                                         var checkText = '';
-                                         
-                                         function checkManualBlank(t, e) {
-                                         var text = $(t).val();
-                                         if (text.length != oldText.length) {
-                                         var keyIndex = s(t);
-                                         var lastChar = text.substr(keyIndex-1, 1);
-                                         var pattern = '[:_]';
-                                         if (text.length - oldText.length == 1 && pattern.indexOf(lastChar) >= 0) {
-                                         checkText += lastChar;
-                                         if (checkText.length == 9 && checkText == '[:_____:]') {
-                                         alert("can't enter this");
-                                         $(t).val(text.substr(0, text.length - 9));
-                                         checkText = '';
-                                         }
-                                         } else if (text.length - oldText.length > 1) {
-                                         var pasteText = text.substr(oldText.length, text.length - 1);
-                                         if (pasteText.indexOf('[:_____:]') >= 0) {
-                                         alert("can't enter this");
-                                         var newText = text.substr(0, oldText.length - 1);
-                                         pasteText = pasteText.replace('[:_____:]', ' ');
-                                         newText += pasteText;
-                                         $(t).val(newText);
-                                         checkText = '';
-                                         }
-                                         } else {
-                                         checkText = '';
-                                         }
-                                         alert(checkText);
-                                         }
-                                         }
-                                         
-                                         function setOldText(t) {
-                                         oldText = $(t).val();
-                                         }*/
         </script>
     </body>
 </html>
