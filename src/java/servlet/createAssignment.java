@@ -86,7 +86,7 @@ public class createAssignment extends HttpServlet {
         if (ass_type.equalsIgnoreCase("file")) {
             a.setPath_file(m.getFilesystemName("file"));
             key = Assignment.createAmInfo(a);
-//            url = "/assignment.jsp?tab=AllAssignment&&amId=" + key;
+            url = "/assignment.jsp?tab=AllAssignment&&amId=" + key;
         } else {
             a.setTitle_assignment_onweb(m.getParameter("title_assignment_onweb"));
             String[] seqno = m.getParameterValues("seqno");
@@ -200,10 +200,10 @@ public class createAssignment extends HttpServlet {
                     instruction = m.getParameter(seqno[i] + "instruction");
                 }
             }
-            System.out.println(qlist);
             Question.addList(qlist);
+            url = "/assignment.jsp?tab=AllAssignment&&amId=" + key;
         }
-//        getServletContext().getRequestDispatcher(url).forward(request, response);
+        getServletContext().getRequestDispatcher(url).forward(request, response);
 
     }
 

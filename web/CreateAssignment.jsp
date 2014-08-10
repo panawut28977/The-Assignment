@@ -308,7 +308,7 @@
                                 <div class="btn-group dropup center-block" >
                                     <hr>
                                     <button type="button" class="btn btn-default" onclick="addQuestion()" id="addq" ><span class="glyphicon glyphicon-plus-sign"></span> Add Question</button>
-                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" >
                                         <span class="caret"></span>
                                         <span class="sr-only">Toggle Dropdown</span>
                                     </button>
@@ -470,7 +470,7 @@
 
                                         function appendAnswerBox(t, ans, startIndex, endIndex) {
                                             var seq_of_choice = $(t).parent().parent().parent().find("[name='seqno']").val();
-                                            var ansbox = '<div class="row a_group"><div class="col-md-4"><input type="text" class="form-control" value="' + ans + '" readonly="yes" name="' + seq_of_choice + 'qanswer"></div><div class="col-md-3"><input type="number" class="form-control" placeholder="score" name="' + seq_of_choice + 'score"></div><input type="hidden" value="' + startIndex + '" name="' + seq_of_choice + 'startIndex"><input type="hidden" value="' + endIndex + '" name="' + seq_of_choice + 'endIndex"><a onclick="remove_ans_fillInBlank(this)"><span class="glyphicon glyphicon-trash"></span></a><div>';
+                                            var ansbox = '<div class="row a_group"><div class="col-md-4"><input type="text" class="form-control" value="' + ans + '" readonly="yes" name="' + seq_of_choice + 'qanswer"></div><div class="col-md-3"><input type="number" class="form-control" placeholder="score" name="' + seq_of_choice + 'score" required="yes"></div><input type="hidden" value="' + startIndex + '" name="' + seq_of_choice + 'startIndex"><input type="hidden" value="' + endIndex + '" name="' + seq_of_choice + 'endIndex"><a onclick="remove_ans_fillInBlank(this)"><span class="glyphicon glyphicon-trash"></span></a><div>';
                                             $(t).parent().parent().parent(".fillBlank").find(".ansList").append(ansbox);
                                         }
 
@@ -522,14 +522,14 @@
                                                     + '          <div class="form-group">'
                                                     + '              <label  class="col-md-3 control-label">Question Text</label>'
                                                     + '              <div class="col-md-9">'
-                                                    + '                  <input type="text" class="form-control" name="' + seqno + 'qtext" >'
+                                                    + '                  <input type="text" class="form-control" name="' + seqno + 'qtext" required="yes" >'
                                                     + '              </div>'
                                                     + '          </div>'
                                                     + '          <div class="form-group">'
                                                     + '              <label class="col-md-3 control-label">One or multiple answers?</label>'
                                                     + '              <div class="col-md-5">'
                                                     + '                  <select class="form-control" id="multiple_type" name="' + seqno + 'qcategory">'
-                                                    + '                      <option value="one">One answer only</option>'
+                                                    + '                      <option value="one" selected="yes">One answer only</option>'
                                                     + '                      <option value="multiple">Multiple choice allowed</option>'
                                                     + '                  </select>'
                                                     + '              </div>'
@@ -547,7 +547,7 @@
                                                     + '          <div class="form-group">'
                                                     + '              <label class="col-md-3 control-label">Score</label>'
                                                     + '              <div class="col-md-2">'
-                                                    + '                  <input type="number" min="0" step="any" class="form-control" name="' + seqno + 'score" >'
+                                                    + '                  <input type="number" min="0" step="any" class="form-control" name="' + seqno + 'score" required="yes" >'
                                                     + '              </div>'
                                                     + '          </div>'
                                                     + '          <input type="hidden" value="multiple_choice" name="' + seqno + 'q_type">'
@@ -564,20 +564,20 @@
                                                         + '    <div class="form-group">'
                                                         + '        <label  class="col-md-3 control-label">Question Text</label>'
                                                         + '        <div class="col-md-9">'
-                                                        + '            <input type="text" class="form-control" name="' + seqno + 'qtext">'
+                                                        + '            <input type="text" class="form-control" name="' + seqno + 'qtext" required="yes">'
                                                         + '        </div>'
                                                         + '    </div>'
                                                         + '    <div class="form-group">'
                                                         + '        <label class="col-md-3 control-label">Choice <br><span class="text-danger">(Don\'t forget to select answer)</span></label>'
                                                         + '        <div class="col-md-8">'
-                                                        + '            <input type="radio" name="' + seqno + 'c_ans" value="true"> True'
+                                                        + '            <input type="radio" name="' + seqno + 'c_ans" value="true" selected="yes"> True'
                                                         + '            <input type="radio" name="' + seqno + 'c_ans" value="false"> False'
                                                         + '        </div>'
                                                         + '    </div>'
                                                         + '    <div class="form-group">'
                                                         + '        <label class="col-md-3 control-label">Score</label>'
                                                         + '        <div class="col-md-2">'
-                                                        + '            <input type="number" min="0" step="any" class="form-control" name="' + seqno + 'score" >'
+                                                        + '            <input type="number" min="0" step="any" class="form-control" name="' + seqno + 'score" required="yes" >'
                                                         + '        </div>'
                                                         + '    </div>'
                                                         + '    <input type="hidden" value="tf" name="' + seqno + 'qcategory">'
@@ -595,7 +595,7 @@
                                                         + ' <div class="form-group">'
                                                         + ' <label  class = "col-md-3 control-label" > Question Text </label>'
                                                         + ' <div class = "col-md-9">'
-                                                        + ' <input type = "text" class = "form-control" name="' + seqno + 'qtext">'
+                                                        + ' <input type = "text" class = "form-control" name="' + seqno + 'qtext" required="yes">'
                                                         + ' </div>'
                                                         + ' </div>'
 
@@ -624,7 +624,7 @@
                                                         + '    <div class="form-group">'
                                                         + '        <label  class="col-md-3 control-label">Question Text</label>'
                                                         + '        <div class="col-md-9">'
-                                                        + '            <textarea class="form-control fillInBlankBox" name="' + seqno + 'qtext"  ></textarea>'
+                                                        + '            <textarea class="form-control fillInBlankBox" name="' + seqno + 'qtext" required="yes"  ></textarea>'
                                                         + '            <br>'
                                                         + '            <a class=" btn btn-default" onclick="addAnswer(this)">Add Answer</a>'
                                                         + '        </div>'
@@ -647,7 +647,7 @@
                                                         + '    <div class="form-group">'
                                                         + '        <label class="col-md-3 control-label">Question</label>'
                                                         + '        <div class="col-md-9">'
-                                                        + '            <textarea class="form-control explain_q_text" name="' + seqno + 'qtext" ></textarea>'
+                                                        + '            <textarea class="form-control explain_q_text" name="' + seqno + 'qtext" required="yes"></textarea>'
                                                         + '        </div>'
                                                         + '    </div>'
                                                         + '    <div class="form-group">'
@@ -670,9 +670,9 @@
                                             var seq_of_choice = $(t).parent().parent().parent().find("[name='seqno']").val();
                                             var inputC = '';
                                             if (type == "one") {
-                                                inputC = '<div><br><input type="radio" name="' + seq_of_choice + 'c" onClick="mark(this)" value=""> <input type="text" name="' + seq_of_choice + 'ctext" class="form-control" onkeyup="addToC(this)"> <a onclick="removeC(this)"><span class="glyphicon glyphicon-remove"></span></a></div>';
+                                                inputC = '<div><br><input type="radio" name="' + seq_of_choice + 'c" onClick="mark(this)" value=""> <input type="text" name="' + seq_of_choice + 'ctext" class="form-control" onkeyup="addToC(this)" required="yes"> <a onclick="removeC(this)"><span class="glyphicon glyphicon-remove"></span></a></div>';
                                             } else {
-                                                inputC = '<div><br><input type="checkbox" name="' + seq_of_choice + 'c" onClick="mark(this)" value=""> <input type="text" name="' + seq_of_choice + 'ctext" class="form-control" onkeyup="addToC(this)"> <a onclick="removeC(this)"><span class="glyphicon glyphicon-remove"></span></a></div>';
+                                                inputC = '<div><br><input type="checkbox" name="' + seq_of_choice + 'c" onClick="mark(this)" value=""> <input type="text" name="' + seq_of_choice + 'ctext" class="form-control" onkeyup="addToC(this)" required="yes"> <a onclick="removeC(this)"><span class="glyphicon glyphicon-remove"></span></a></div>';
                                             }
                                             $(t).parent().find('.choice-group').append(inputC);
                                         }
@@ -690,7 +690,7 @@
 
 
                                         function addTitle() {
-                                            var titleBox = '<div class="row"><hr><input type="hidden" name="seqno" value="' + seqno + '"/><div class="col-md-8"><input type="text" class="form-control" placeholder="Instruction" name="' + seqno + 'instruction" ></div><a onclick="remove_title(this)"  style="vertical-align: -webkit-baseline-middle"><span class="glyphicon glyphicon-trash"></span></a><input type="hidden" value="instruction" name="' + seqno + 'q_type"></div>';
+                                            var titleBox = '<div class="row"><hr><input type="hidden" name="seqno" value="' + seqno + '"/><div class="col-md-8"><input type="text" class="form-control" placeholder="Instruction" name="' + seqno + 'instruction" required="yes" ></div><a onclick="remove_title(this)"  style="vertical-align: -webkit-baseline-middle"><span class="glyphicon glyphicon-trash"></span></a><input type="hidden" value="instruction" name="' + seqno + 'q_type"></div>';
                                             $(".amQuestion").append(titleBox);
                                             seqno++;
                                         }

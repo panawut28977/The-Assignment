@@ -29,6 +29,9 @@
         <url-pattern>/home.jsp</url-pattern>
         <url-pattern>/course.jsp</url-pattern>
         <url-pattern>/CreateAssignment.jsp</url-pattern>
+        <url-pattern>/assignment.jsp</url-pattern>
+        <url-pattern>/CheckAssignment.jsp</url-pattern>
+        <url-pattern>/SentAssignment.jsp</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>
