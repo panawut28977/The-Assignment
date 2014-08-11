@@ -57,3 +57,7 @@ and open the template in the editor.
 }
 ::selection {color:white;background:#40D47E;}
 ::-moz-selection {color:white;background:#40D47E;}
+
+#listAnnounce{
+    margin-top: 20px;
+}
