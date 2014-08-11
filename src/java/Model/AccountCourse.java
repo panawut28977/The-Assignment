@@ -62,7 +62,7 @@ public class AccountCourse {
         Connection conn = ConnectionBuilder.getConnection();
         int result = 0;
         if (!isExist(acc_id, detail.getCourse().getCourse_id())) {
-            String sql = "insert into account_course(acc_id,course_id,status,role) values(?,?,?,?)";
+            String sql = "insert into account_course(acc_id,course_id,status,role,approved_date) values(?,?,?,?,?)";
             PreparedStatement pstm;
             try {
                 pstm = conn.prepareStatement(sql);
@@ -70,6 +70,7 @@ public class AccountCourse {
                 pstm.setInt(2, detail.getCourse().getCourse_id());
                 pstm.setString(3, detail.getStatus());
                 pstm.setString(4, detail.getRole());
+                pstm.setTimestamp(5, detail.getApproved_date());
                 result = pstm.executeUpdate();
                 conn.close();
             } catch (SQLException ex) {
@@ -153,10 +154,10 @@ public class AccountCourse {
         String roleVal = "";
         switch (role) {
             case 1:
-                roleVal = "Teacher";
+                roleVal = "TH";
                 break;
             default:
-                roleVal = "Student";
+                roleVal = "ST";
                 break;
         }
         String sql = "update account_course set role=? where acc_id=? and course_id=?";
@@ -283,6 +284,25 @@ public class AccountCourse {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
+    }
+
+    public static Timestamp getApprovedTime(int acc_id, int course_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select approved_date from account_course where course_id=? and acc_id=?";
+        Timestamp time = null;
+        PreparedStatement pstm;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, course_id);
+            pstm.setInt(2, acc_id);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                time = rs.getTimestamp(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return time;
     }
 
     @Override

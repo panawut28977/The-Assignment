@@ -40,5 +40,9 @@
         <function-class>Model.AccountCourse</function-class>
         <function-signature>Integer getWaitForApproveMemberInCourse(int)</function-signature>
     </function>
-    
+    <function>
+        <name>getApprovedTime</name>
+        <function-class>Model.AccountCourse</function-class>
+        <function-signature>Timestamp getApprovedTime(int,int)</function-signature>
+    </function>
 </taglib>

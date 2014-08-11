@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="row">
     <c:if test="${sac.courseList.get(cId).role eq 'ST'}">
         <div class="col-md-12" style="margin-top: 12px;">
@@ -14,16 +13,17 @@
                     <span class="dropdown pull-right">
                         <a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a  data-toggle="modal" data-target="#create_course" title="create course">Make Teacher</a></li>
-                            <li><a  data-toggle="modal" data-target="#join_course" title="join course">Remove form course</a></li>
+                            <li><a class="makeTH" data-id="${st.acc_id}">Make Teacher</a></li>
+                            <li><a class="kick" data-id="${st.acc_id}">Remove form course</a></li>
                         </ul>
                     </span>
                 </c:if>
                 <br>
-                <small class="pull-right text-muted">Join date : ${ac.courseList.get(cId).approved_date}</small>
+                <small class="pull-right text-muted">Join date : ${cf:getApprovedTime(st.acc_id, cId)}</small>
             </div>
         </div>
     </c:forEach>
+</div>
 <style>
     .media:first-child{
         margin-top: 15px;
@@ -32,3 +32,13 @@
         overflow: visible !important;
     }
 </style>
+<script>
+    $(function() {
+        $(".makeTH").click(function() {
+            var acc_id = $(this).attr("data-id");
+            if (confirm('As a Teacher, They will be able to edit course settings, remove members and give other members teacher status.?')) {
+                location.href = "makeTeacher?acc_id=" + acc_id;
+            }
+        });
+    });
+</script>

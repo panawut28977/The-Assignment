@@ -5,13 +5,8 @@
  */
 package servlet;
 
-import Model.Account;
 import Model.AccountCourse;
-import Model.Course;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Timestamp;
-import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +17,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Orarmor
  */
-public class CreateCourseSl extends HttpServlet {
+public class makeTeacher extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,23 +31,11 @@ public class CreateCourseSl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession ss = request.getSession();
-        Account acc = (Account) ss.getAttribute("ac");
-        String name = request.getParameter("name");
-        Course c = new Course();
-        c.setName(name);
-        c.setCourse_code(Course.generateCode());
-        c.setCourse_link("dontknowlink/" + c.getCourse_code());
-        int insert_id = Course.createCourse(c);
-        Course course = new Course(insert_id);
-        AccountCourse accCourse = new AccountCourse();
-        accCourse.setCourse(course);
-        accCourse.setRole("TH");
-        accCourse.setStatus("approved");
-        Date d = new Date();
-        Timestamp t = new Timestamp(d.getTime());
-        accCourse.setApproved_date(t);
-        AccountCourse.joinCourse(accCourse, acc.getAcc_id());
-        getServletContext().getRequestDispatcher("/setCourseSession?cId=" + insert_id).forward(request, response);
+        String acc_id = request.getParameter("acc_id");
+        boolean result = AccountCourse.changeRole(Integer.parseInt(acc_id), Integer.parseInt(ss.getAttribute("cId") + ""), 1);
+        if (result) {
+            response.sendRedirect("course.jsp?tab=member");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
