@@ -259,6 +259,7 @@ public class AccountCourse {
                 acc = Account.getAccountByID(rs.getInt("acc_id"));
                 listAccount.add(acc);
             }
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -280,6 +281,7 @@ public class AccountCourse {
             } else {
                 result = false;
             }
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -299,10 +301,31 @@ public class AccountCourse {
             if (rs.next()) {
                 time = rs.getTimestamp(1);
             }
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
         return time;
+    }
+    
+    public static String getAccountRole(int acc_id, int course_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select role from account_course where course_id=? and acc_id=?";
+        String r = null;
+        PreparedStatement pstm;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, course_id);
+            pstm.setInt(2, acc_id);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                r = rs.getString(1);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return r;
     }
 
     @Override

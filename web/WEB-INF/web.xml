@@ -119,6 +119,10 @@
         <servlet-name>makeTeacher</servlet-name>
         <servlet-class>servlet.makeTeacher</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>removeTeacher</servlet-name>
+        <servlet-class>servlet.removeTeacher</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -194,6 +198,10 @@
     <servlet-mapping>
         <servlet-name>makeTeacher</servlet-name>
         <url-pattern>/makeTeacher</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>removeTeacher</servlet-name>
+        <url-pattern>/removeTeacher</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

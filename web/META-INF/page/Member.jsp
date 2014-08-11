@@ -1,5 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="row">
-    <c:if test="${sac.courseList.get(cId).role eq 'ST'}">
+    <c:if test="${ac.courseList.get(cId).role eq 'ST'}">
         <div class="col-md-12" style="margin-top: 12px;">
             <button class="pull-right btn btn-default">Leave course</button>
         </div>
@@ -13,7 +14,14 @@
                     <span class="dropdown pull-right">
                         <a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a class="makeTH" data-id="${st.acc_id}">Make Teacher</a></li>
+                            <c:choose >
+                                <c:when test="${cf:getAccountRole(st.acc_id, cId) eq 'TH'}">
+                                    <li><a class="removeTH" data-id="${st.acc_id}">Remove as Teacher</a></li>
+                                    </c:when>
+                                    <c:otherwise>
+                                    <li><a class="makeTH" data-id="${st.acc_id}">Make as Teacher</a></li>
+                                    </c:otherwise>
+                                </c:choose>
                             <li><a class="kick" data-id="${st.acc_id}">Remove form course</a></li>
                         </ul>
                     </span>
@@ -38,6 +46,12 @@
             var acc_id = $(this).attr("data-id");
             if (confirm('As a Teacher, They will be able to edit course settings, remove members and give other members teacher status.?')) {
                 location.href = "makeTeacher?acc_id=" + acc_id;
+            }
+        });
+         $(".removeTH").click(function() {
+            var acc_id = $(this).attr("data-id");
+            if (confirm('You will remove as a teacher.?')) {
+                location.href = "removeTeacher?acc_id=" + acc_id;
             }
         });
     });

@@ -45,4 +45,9 @@
         <function-class>Model.AccountCourse</function-class>
         <function-signature>Timestamp getApprovedTime(int,int)</function-signature>
     </function>
+     <function>
+        <name>getAccountRole</name>
+        <function-class>Model.AccountCourse</function-class>
+        <function-signature>String getAccountRole(int,int)</function-signature>
+    </function>
 </taglib>
