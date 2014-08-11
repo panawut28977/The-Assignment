@@ -107,6 +107,14 @@
         <servlet-name>deleteAssignment</servlet-name>
         <servlet-class>servlet.deleteAssignment</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>renameCourse</servlet-name>
+        <servlet-class>servlet.renameCourse</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>deleteCourse</servlet-name>
+        <servlet-class>servlet.deleteCourse</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -170,6 +178,14 @@
     <servlet-mapping>
         <servlet-name>deleteAssignment</servlet-name>
         <url-pattern>/deleteAssignment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>renameCourse</servlet-name>
+        <url-pattern>/renameCourse</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteCourse</servlet-name>
+        <url-pattern>/deleteCourse</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

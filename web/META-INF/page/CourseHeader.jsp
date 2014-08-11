@@ -4,15 +4,18 @@
     </c:when>
     <c:otherwise>
         <div class="well well-sm">
-            <h3 >${ac.courseList.get(cId).course.name} 
-                <div class="dropdown pull-right">
+            <div class="row" style="font-size:24px; " >
+                <div id="coursename" class="col-md-11">
+                    ${ac.courseList.get(cId).course.name}
+                </div> 
+                <div class="dropdown pull-right col-md-1">
                     <a data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-cog"></span></a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                        <li><a>Edit course name</a></li>
-                        <li><a>Delete this course</a></li>
+                        <li><a id="editcourse">Edit course name</a></li>
+                        <li><a id="deletecourse">Delete this course</a></li>
                     </ul>
                 </div>
-            </h3>
+            </div>
             <hr>
             <div class="row" style="text-align: center;" id="CourseDetail">
                 <div class="col-md-4"><h4>Course Code</h4><input type="text" readonly="yes" value="${ac.courseList.get(cId).course.course_code}"></div>
@@ -48,6 +51,18 @@
                 $(this).find("span").removeClass(" glyphicon-chevron-down").addClass("glyphicon-chevron-up");
             } else {
                 $(this).find("span").removeClass(" glyphicon-chevron-up").addClass("glyphicon-chevron-down");
+            }
+        });
+        $("#editcourse").click(function() {
+            var coursenameEl = $("#coursename");
+            var name = $.trim(coursenameEl.text());
+            var html = '<form action="renameCourse" method="post"><input type="text" value="' + name + '" name="name"/></form>';
+            coursenameEl.html(html);
+        });
+
+        $("#deletecourse").click(function() {
+            if (confirm('All data relate this course will be delete, are you sure?')) {
+                location.href = "deleteCourse";
             }
         });
         $(".qrcode").qrcode({
