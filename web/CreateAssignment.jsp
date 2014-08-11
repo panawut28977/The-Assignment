@@ -56,73 +56,73 @@
                         <li><a href="course.jsp?tab=AllAssignment">Assignment</a></li>
                         <li class="active"><a href="#">Create Assignment</a></li>
                     </ol>
-                    <!--                    <div id="rootwizard" >
-                                            <ul class="pull-right">
-                                                <li><a href="#tab1" data-toggle="tab"><span class="label">1</span> Enter Info</a></li>
-                                                <li><a href="#tab2" data-toggle="tab"><span class="label">2</span> Create Assignment</a></li>
-                                            </ul>
-                                            <div class="tab-content" style="clear: both" >
-                                                <div class="tab-pane" id="tab1">
-                                                    <div class="col-md-8 col-md-offset-2">
-                                                        <form class="form-horizontal" role="form">
-                                                            <div class="form-group">
-                                                                <label for="name" class="col-md-3 control-label">Name</label>
-                                                                <div class="col-md-9">
-                                                                    <input type="text" class="form-control" id="name" >
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="description" class="col-md-3 control-label">Description</label>
-                                                                <div class="col-md-9">
-                                                                    <textarea  rows="3"  id="description" class="form-control"></textarea>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label  class="col-md-3 control-label">Work with</label>
-                                                                <div class="col-md-9">
-                                                                    <input type="radio" name="total_member" value="1" id="individual" > Individual
-                                                                    <br>
-                                                                    <input type="radio" name="total_member" id="groupwork" value=""> Group of <input type="number" id="inputpepole" disabled="yes"> People
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="col-md-3 control-label">Due date</label>
-                                                                <div class="input-group date form_date col-md-9" style="padding-right: 15px;  padding-left: 15px;" data-date="" data-date-format="dd MM yyyy hh:mm" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd hh:mm">
-                                                                    <input class="form-control" size="16" type="text" value="" readonly="yes">
-                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                                                </div>
-                                                                <input type="hidden" id="dtp_input2" value="" /><br/>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="AmType" class="col-md-3 control-label">Assignment Type</label>
-                                                                <div class="col-md-4">
-                                                                    <select class="form-control" id="AmType">
-                                                                        <option value="f">File</option>
-                                                                        <option value="w">Doing on web</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                                <div class="tab-pane" id="tab2">
-                                                    <div class="col-md-8 col-md-offset-2" id="uploadAmFile">
-                                                        <form role="form" class="form-inline">
-                                                            <input type="file" class="form-control">
-                                                            <input type="submit" value="upload" class="form-control btn btn-primary">
-                                                        </form>
-                                                    </div>
-                                                    <div class="col-md-8 col-md-offset-2" id="CreateAmOnweb">web</div>
-                                                </div>
-                                                <ul class="pager wizard" style="clear: both" >
-                                                    <li class="previous first" style="display:none;"><a href="#">First</a></li>
-                                                    <li class="previous"><a href="#">Previous</a></li>
-                                                    <li class="next last" style="display:none;"><a href="#">Last</a></li>
-                                                    <li class="next"><a href="#">Next</a></li>
-                                                </ul>
-                                            </div>	
-                                        </div>-->
+                    <!--                                        <div id="rootwizard" >
+                                                                <ul class="pull-right">
+                                                                    <li><a href="#tab1" data-toggle="tab"><span class="label">1</span> Enter Info</a></li>
+                                                                    <li><a href="#tab2" data-toggle="tab"><span class="label">2</span> Create Assignment</a></li>
+                                                                </ul>
+                                                                <div class="tab-content" style="clear: both" >
+                                                                    <div class="tab-pane" id="tab1">
+                                                                        <div class="col-md-8 col-md-offset-2">
+                                                                            <form class="form-horizontal" role="form">
+                                                                                <div class="form-group">
+                                                                                    <label for="name" class="col-md-3 control-label">Name</label>
+                                                                                    <div class="col-md-9">
+                                                                                        <input type="text" class="form-control" id="name" >
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="description" class="col-md-3 control-label">Description</label>
+                                                                                    <div class="col-md-9">
+                                                                                        <textarea  rows="3"  id="description" class="form-control"></textarea>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label  class="col-md-3 control-label">Work with</label>
+                                                                                    <div class="col-md-9">
+                                                                                        <input type="radio" name="total_member" value="1" id="individual" > Individual
+                                                                                        <br>
+                                                                                        <input type="radio" name="total_member" id="groupwork" value=""> Group of <input type="number" id="inputpepole" disabled="yes"> People
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label class="col-md-3 control-label">Due date</label>
+                                                                                    <div class="input-group date form_date col-md-9" style="padding-right: 15px;  padding-left: 15px;" data-date="" data-date-format="dd MM yyyy hh:mm" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd hh:mm">
+                                                                                        <input class="form-control" size="16" type="text" value="" readonly="yes">
+                                                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                                                                    </div>
+                                                                                    <input type="hidden" id="dtp_input2" value="" /><br/>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="AmType" class="col-md-3 control-label">Assignment Type</label>
+                                                                                    <div class="col-md-4">
+                                                                                        <select class="form-control" id="AmType">
+                                                                                            <option value="f">File</option>
+                                                                                            <option value="w">Doing on web</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="tab-pane" id="tab2">
+                                                                        <div class="col-md-8 col-md-offset-2" id="uploadAmFile">
+                                                                            <form role="form" class="form-inline">
+                                                                                <input type="file" class="form-control">
+                                                                                <input type="submit" value="upload" class="form-control btn btn-primary">
+                                                                            </form>
+                                                                        </div>
+                                                                        <div class="col-md-8 col-md-offset-2" id="CreateAmOnweb">web</div>
+                                                                    </div>
+                                                                    <ul class="pager wizard" style="clear: both" >
+                                                                        <li class="previous first" style="display:none;"><a href="#">First</a></li>
+                                                                        <li class="previous"><a href="#">Previous</a></li>
+                                                                        <li class="next last" style="display:none;"><a href="#">Last</a></li>
+                                                                        <li class="next"><a href="#">Next</a></li>
+                                                                    </ul>
+                                                                </div>	
+                                                            </div>-->
                     <form id="myWizard" method="post" action="createAssignment" class="form-horizontal" enctype="multipart/form-data">
                         <section class="step" data-step-title="Enter Information">
                             <div class="col-md-8 col-md-offset-2">
@@ -175,135 +175,135 @@
                                 <input type="text" name="title_assignment_onweb" class="form-control" placeholder="Assignment Title" >
                                 <br>
                                 <p id="AmDescription"></p>
-                                <div class="amQuestion">
-                                    <!--<div class="multipleChoice">
-                                        <hr>
-                                        <div class="q_no">
-                                            <span class="label label-default">1</span> 
-                                            <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>
-                                        </div>
-                                        <div class="form-group">
-                                            <label  class="col-md-3 control-label">Question Text</label>
-                                            <div class="col-md-9">
-                                                <input type="text" class="form-control" >
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">One or multiple answers?</label>
-                                            <div class="col-md-5">
-                                                <select class="form-control" id="multiple_type">
-                                                    <option value="one">One answer only</option>
-                                                    <option value="multiple">Multiple choide allowed</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">Choice <br><span class='text-danger'>(Don't forget to select answer)</span></label>
-                                            <div class="col-md-8 c_list">
-                                                <div class="choice-group form-inline">
-                                                    <div><input type="radio" name="c_ans"> <input type="text" class="form-control"></div>
-                                                </div>
-                                                <br>
-                                                <a onclick="appendChoice(this)">Add other</a>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">Score</label>
-                                            <div class="col-md-2">
-                                                <input type="number" min="0" step="any" class="form-control" name="score" >
-                                            </div>
-                                        </div>
-                                        <input type="hidden" value="multiple_choice" name="q_type">
-
-                                    </div>-->
-                                    <!--<div class="explain">
-                                        <hr>
-                                        <div class="q_no">
-                                            <span class="label label-default">2</span> 
-                                            <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">Question</label>
-                                            <div class="col-md-9">
-                                                <textarea class="form-control explain_q_text" name="explain_q_text" ></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label  class="col-md-3 control-label">Answer</label>
-                                            <div class="col-md-9">
-                                                <textarea class="form-control"></textarea>
-                                            </div>
-                                        </div>
-                                        <input type="hidden" value="explain" name="q_type">
-                                    </div>-->
-
-                                    <!--<div class="tfQuestion">
-                                        <hr>
-                                        <div class="q_no">
-                                            <span class="label label-default">3</span> 
-                                            <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>
-                                        </div>
-                                        <div class="form-group">
-                                            <label  class="col-md-3 control-label">Question Text</label>
-                                            <div class="col-md-9">
-                                                <input type="text" class="form-control" >
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">Choice <br><span class='text-danger'>(Don't forget to select answer)</span></label>
-                                            <div class="col-md-8">
-                                                <input type="radio" name="c_ans"> Yes
-                                                <input type="radio" name="c_ans"> No
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">Score</label>
-                                            <div class="col-md-2">
-                                                <input type="number" min="0" step="any" class="form-control" name="score" >
-                                            </div>
-                                        </div>
-                                        <input type="hidden" value="tfQuestion" name="q_type">
-                                    </div>-->
-                                    <!--<div class="matchWord">
-                                        <hr>
-                                        <div class="q_no">
-                                            <span class="label label-default">4</span> 
-                                            <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>
-                                        </div>  
-                                        <div class="form-group">
-                                            <label  class="col-md-3 control-label">How Many Pair?</label>
-                                            <div class="col-md-2">
-                                                <input type="number" id="total_pair" min="1" class="form-control" >
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-offset-3 col-md-9 matchWord_q_list">
-                                                <span class="text-danger">Please tell me how many question before</span>
-                                            </div>
-                                        </div>
-                                        <input type="hidden" value="matchWord" name="q_type">
-                                    </div>-->
-                                    <!--<div class="fillBlank">
-                                        <hr>
-                                        <div class="q_no">
-                                            <span class="label label-default">5</span> 
-                                            <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>
-                                        </div>
-                                        <div class="form-group">
-                                            <label  class="col-md-3 control-label">Question Text</label>
-                                            <div class="col-md-9">
-                                                <textarea class="form-control"  ></textarea>
-                                                <br>
-                                                <a class=" btn btn-default" onclick="addAnswer(this)">Add Answer</a>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-offset-3 col-md-9 ansList">
-
-                                            </div>
-                                        </div>
-                                        <input type="hidden" value="fillBlank" name="q_type">
-                                    </div>-->
+                                <div class="amQuestion" id="sortable">
+                                    <!--                                    <div class="multipleChoice">
+                                                                            <hr>
+                                                                            <div class="q_no">
+                                                                                <span class="label label-default">1</span> 
+                                                                                <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label  class="col-md-3 control-label">Question Text</label>
+                                                                                <div class="col-md-9">
+                                                                                    <input type="text" class="form-control" >
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label class="col-md-3 control-label">One or multiple answers?</label>
+                                                                                <div class="col-md-5">
+                                                                                    <select class="form-control" id="multiple_type">
+                                                                                        <option value="one">One answer only</option>
+                                                                                        <option value="multiple">Multiple choide allowed</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label class="col-md-3 control-label">Choice <br><span class='text-danger'>(Don't forget to select answer)</span></label>
+                                                                                <div class="col-md-8 c_list">
+                                                                                    <div class="choice-group form-inline">
+                                                                                        <div><input type="radio" name="c_ans"> <input type="text" class="form-control"></div>
+                                                                                    </div>
+                                                                                    <br>
+                                                                                    <a onclick="appendChoice(this)">Add other</a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label class="col-md-3 control-label">Score</label>
+                                                                                <div class="col-md-2">
+                                                                                    <input type="number" min="0" step="any" class="form-control" name="score" >
+                                                                                </div>
+                                                                            </div>
+                                                                            <input type="hidden" value="multiple_choice" name="q_type">
+                                    
+                                                                        </div>
+                                                                        <div class="explain">
+                                                                            <hr>
+                                                                            <div class="q_no">
+                                                                                <span class="label label-default">2</span> 
+                                                                                <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label class="col-md-3 control-label">Question</label>
+                                                                                <div class="col-md-9">
+                                                                                    <textarea class="form-control explain_q_text" name="explain_q_text" ></textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label  class="col-md-3 control-label">Answer</label>
+                                                                                <div class="col-md-9">
+                                                                                    <textarea class="form-control"></textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                            <input type="hidden" value="explain" name="q_type">
+                                                                        </div>
+                                    
+                                                                        <div class="tfQuestion">
+                                                                            <hr>
+                                                                            <div class="q_no">
+                                                                                <span class="label label-default">3</span> 
+                                                                                <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label  class="col-md-3 control-label">Question Text</label>
+                                                                                <div class="col-md-9">
+                                                                                    <input type="text" class="form-control" >
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label class="col-md-3 control-label">Choice <br><span class='text-danger'>(Don't forget to select answer)</span></label>
+                                                                                <div class="col-md-8">
+                                                                                    <input type="radio" name="c_ans"> Yes
+                                                                                    <input type="radio" name="c_ans"> No
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label class="col-md-3 control-label">Score</label>
+                                                                                <div class="col-md-2">
+                                                                                    <input type="number" min="0" step="any" class="form-control" name="score" >
+                                                                                </div>
+                                                                            </div>
+                                                                            <input type="hidden" value="tfQuestion" name="q_type">
+                                                                        </div>
+                                                                        <div class="matchWord">
+                                                                            <hr>
+                                                                            <div class="q_no">
+                                                                                <span class="label label-default">4</span> 
+                                                                                <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>
+                                                                            </div>  
+                                                                            <div class="form-group">
+                                                                                <label  class="col-md-3 control-label">How Many Pair?</label>
+                                                                                <div class="col-md-2">
+                                                                                    <input type="number" id="total_pair" min="1" class="form-control" >
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <div class="col-md-offset-3 col-md-9 matchWord_q_list">
+                                                                                    <span class="text-danger">Please tell me how many question before</span>
+                                                                                </div>
+                                                                            </div>
+                                                                            <input type="hidden" value="matchWord" name="q_type">
+                                                                        </div>
+                                                                        <div class="fillBlank">
+                                                                            <hr>
+                                                                            <div class="q_no">
+                                                                                <span class="label label-default">5</span> 
+                                                                                <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label  class="col-md-3 control-label">Question Text</label>
+                                                                                <div class="col-md-9">
+                                                                                    <textarea class="form-control"  ></textarea>
+                                                                                    <br>
+                                                                                    <a class=" btn btn-default" onclick="addAnswer(this)">Add Answer</a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <div class="col-md-offset-3 col-md-9 ansList">
+                                    
+                                                                                </div>
+                                                                            </div>
+                                                                            <input type="hidden" value="fillBlank" name="q_type">
+                                                                        </div>-->
                                 </div>
                                 <div class="btn-group dropup center-block" >
                                     <hr>
@@ -320,7 +320,7 @@
                                         <li><a onclick="setType('ep')"><img src="img/icon/explain.gif"> Explain</a></li>
                                     </ul>
                                     <button type="button" class="btn btn-default" onclick="addTitle()" style="margin-left: 20px;"> Add Instruction</button>
-                                </div> 
+                                </div>
                             </div>
                         </section>
                         <section class="step" data-step-title="Complete and preview">
@@ -335,14 +335,41 @@
         <script src="js/bootstrap-datetimepicker.min.js"></script>
         <script src="module/easyWizard/lib/jquery.easyWizard.js"></script>
         <script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+        <script src="js/jquery-ui.js"></script>
         <script>
                                         $(document).ready(function() {
                                             $('#myWizard').easyWizard({
                                                 buttonsClass: 'btn btn-default',
                                                 submitButtonClass: 'btn btn-primary'});
+//                                            tinymce.init({selector: '.explain .explain_q_text'});
 
-                                            tinymce.init({selector: '.explain .explain_q_text'});
-
+                                            $("#sortable").sortable({
+                                                revert: true,
+                                                update: function() {
+                                                    var new_seq = 1;
+                                                    var new_Qno = 1;
+                                                    var old_seq = 0;
+                                                    var old_name = 0;
+                                                    var new_name = 0;
+                                                    $("#sortable >div").each(function() {
+                                                        old_seq = $(this).find("input[name='seqno']").val();
+                                                        $(this).find("input[name='seqno']").val(new_seq);
+                                                        $(this).find("[name^='" + old_seq + "']").each(function() {
+                                                            old_name = $(this).attr("name");
+                                                            new_name = old_name.replace(old_seq, new_seq);
+                                                            console.log(new_name);
+                                                            $(this).attr("name", new_name);
+                                                        });
+                                                        new_seq++;
+                                                    });
+                                                    $("#sortable .q_no").each(function() {
+                                                        $(this).find(".label").text(new_Qno);
+                                                        $(this).find("input[name$='q_no']").val(new_Qno);
+                                                        new_Qno++;
+                                                    });
+                                                }
+                                            });
+                                            $("#CreateAmOnweb div").disableSelection();
                                             $('#compareBox').hide();
                                             $('#CreateAmOnweb').hide();
                                             var monthNames = ["January", "February", "March", "April", "May", "June",
@@ -361,7 +388,6 @@
                                                 startDate: new Date(),
                                                 minView: 2
                                             });
-
                                             $("#myWizard").submit(function() {
                                                 var type = $("#AmType").val();
                                                 if (type == "file") {
@@ -373,20 +399,15 @@
                                                     }
                                                 }
                                             });
-
                                             $('#groupwork').click(function() {
                                                 $('#inputpepole').removeAttr("disabled");
                                             });
-
-
                                             $('#individual').click(function() {
                                                 $('#inputpepole').attr("disabled", "yes");
                                             });
-
                                             $('#inputpepole').change(function() {
                                                 $('#groupwork').val($(this).val());
                                             });
-
                                             $("#AmType").change(function() {
                                                 if ($(this).val() == "file") {
                                                     $('#uploadAmFile').show();
@@ -396,11 +417,9 @@
                                                     $('#uploadAmFile').hide();
                                                 }
                                             });
-
                                             $("#description").change(function() {
                                                 $("#AmDescription").text($(this).val());
                                             });
-
                                             $(document).on("change", "#total_pair", function() {
                                                 var seq_of_choice = $(this).parent().parent().parent().find("[name='seqno']").val();
                                                 var matchWord_box = '<div class="row"><div class="col-md-4"><b>Question Text</b></div><div class="col-md-4"><b>Answer</b></div><div class="col-md-2"><b>Score</b></div></div>';
@@ -410,7 +429,6 @@
                                                 $(this).parent().parent().parent(".matchWord").find(".matchWord_q_list").html(matchWord_box);
                                             });
                                         });
-
                                         function compareView() {
                                             $('#compareBox').show();
                                             $("html, body").animate({scrollTop: $('body').height()}, "slow");
@@ -556,9 +574,9 @@
                                                 question = '<div class="tfQuestion">'
                                                         + '    <hr>'
                                                         + '          <input type="hidden" name="seqno" value="' + seqno + '"/>'
-                                                        + '          <input type="hidden" name="' + seqno + 'q_no" value="' + total_q + '"/>'
                                                         + '    <div class="q_no">'
                                                         + '        <span class="label label-default">' + total_q + '</span> '
+                                                        + '          <input type="hidden" name="' + seqno + 'q_no" value="' + total_q + '"/>'
                                                         + '        <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>'
                                                         + '    </div>'
                                                         + '    <div class="form-group">'
@@ -587,9 +605,9 @@
                                                 question = '<div class="matchWord">'
                                                         + '     <hr>'
                                                         + '          <input type="hidden" name="seqno" value="' + seqno + '"/>'
-                                                        + '          <input type="hidden" name="' + seqno + 'q_no" value="' + total_q + '"/>'
                                                         + '     <div class="q_no">'
                                                         + '         <span class="label label-default">' + total_q + '</span> '
+                                                        + '          <input type="hidden" name="' + seqno + 'q_no" value="' + total_q + '"/>'
                                                         + '         <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>'
                                                         + '     </div>  '
                                                         + ' <div class="form-group">'
@@ -616,9 +634,9 @@
                                                 question = '<div class="fillBlank">'
                                                         + '    <hr>'
                                                         + '          <input type="hidden" name="seqno" value="' + seqno + '"/>'
-                                                        + '          <input type="hidden" name="' + seqno + 'q_no" value="' + total_q + '"/>'
                                                         + '    <div class="q_no">'
                                                         + '        <span class="label label-default">' + total_q + '</span> '
+                                                        + '          <input type="hidden" name="' + seqno + 'q_no" value="' + total_q + '"/>'
                                                         + '        <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>'
                                                         + '    </div>'
                                                         + '    <div class="form-group">'
@@ -639,9 +657,9 @@
                                                 question = '<div class="explain">'
                                                         + '    <hr>'
                                                         + '          <input type="hidden" name="seqno" value="' + seqno + '"/>'
-                                                        + '          <input type="hidden" name="' + seqno + 'q_no" value="' + total_q + '"/>'
                                                         + '    <div class="q_no">'
                                                         + '        <span class="label label-default">' + total_q + '</span> '
+                                                        + '          <input type="hidden" name="' + seqno + 'q_no" value="' + total_q + '"/>'
                                                         + '        <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>'
                                                         + '    </div>'
                                                         + '    <div class="form-group">'
@@ -662,7 +680,6 @@
                                             total_q++;
                                             seqno++;
                                             $(".amQuestion").append(question);
-
                                         }
 
                                         function appendChoice(t) {
@@ -687,8 +704,6 @@
                                             }
                                             $(this).parent().parent().parent(".multipleChoice").find(".c_list").html(html);
                                         });
-
-
                                         function addTitle() {
                                             var titleBox = '<div class="row"><hr><input type="hidden" name="seqno" value="' + seqno + '"/><div class="col-md-8"><input type="text" class="form-control" placeholder="Instruction" name="' + seqno + 'instruction" required="yes" ></div><a onclick="remove_title(this)"  style="vertical-align: -webkit-baseline-middle"><span class="glyphicon glyphicon-trash"></span></a><input type="hidden" value="instruction" name="' + seqno + 'q_type"></div>';
                                             $(".amQuestion").append(titleBox);

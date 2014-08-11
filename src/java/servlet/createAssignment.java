@@ -200,6 +200,7 @@ public class createAssignment extends HttpServlet {
                     instruction = m.getParameter(seqno[i] + "instruction");
                 }
             }
+            System.out.println(qlist);
             Question.addList(qlist);
             url = "/assignment.jsp?tab=AllAssignment&&amId=" + key;
         }
