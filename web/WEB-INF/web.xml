@@ -99,6 +99,10 @@
         <servlet-name>removeAssignment</servlet-name>
         <servlet-class>servlet.removeAssignment</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddAnnounce</servlet-name>
+        <servlet-class>servlet.AddAnnounce</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -154,6 +158,10 @@
     <servlet-mapping>
         <servlet-name>removeAssignment</servlet-name>
         <url-pattern>/removeAssignment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddAnnounce</servlet-name>
+        <url-pattern>/AddAnnounce</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
