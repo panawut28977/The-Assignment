@@ -118,7 +118,7 @@ public class StAssignmentFile {
             }
             conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StAssignmentFile.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
     }
@@ -144,7 +144,7 @@ public class StAssignmentFile {
             }
             conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StAssignmentFile.class.getName()).log(Level.SEVERE, null, ex);
         }
         return s;
     }
@@ -171,7 +171,7 @@ public class StAssignmentFile {
             }
             conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StAssignmentFile.class.getName()).log(Level.SEVERE, null, ex);
         }
         return StAssList;
     }
@@ -201,7 +201,7 @@ public class StAssignmentFile {
             }
             conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StAssignmentFile.class.getName()).log(Level.SEVERE, null, ex);
         }
         return StAssList;
     }
@@ -222,7 +222,7 @@ public class StAssignmentFile {
             }
             conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StAssignmentFile.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
     }
