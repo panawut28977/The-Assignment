@@ -269,7 +269,7 @@ public class Assignment {
             if (rs.next()) {
                 am = new Assignment();
                 am.setAm_id(rs.getInt("ass_id"));
-                am.setCourse(Course.getCourseByID(rs.getInt("course_id")));
+//                am.setCourse(Course.getCourseByID(rs.getInt("course_id")));
                 am.setName(rs.getString("name"));
                 am.setDescription(rs.getString("description"));
                 am.setAss_type(rs.getString("ass_type"));
@@ -282,7 +282,9 @@ public class Assignment {
                 if (am.getAss_type().equalsIgnoreCase("file")) {
                     am.setPath_file(rs.getString("path_file"));
                 } else {
-                    am.setQuestionList(null);
+                    am.setTitle_assignment_onweb(rs.getString("title_assignment_onweb"));
+//                    System.out.println(Question.getListQuestion(Question.getListQId(am.getAm_id())));
+//                    am.setQuestionList(Question.getListQuestion(Question.getListQId(am.getAm_id())));
                 }
             }
             conn.close();

@@ -146,13 +146,13 @@ Author     : JenoVa
                                             <c:choose>
                                                 <c:when test="${am.ass_type eq 'file'}">
                                                     <td>
-                                                        <button class="btn btn-primary"><span class="glyphicon glyphicon-upload"></span> Update</button>
+                                                        <a class="btn btn-primary" href="editAssignment?am_id=${param.amId}"><span class="glyphicon glyphicon-upload"></span> Update</a>
                                                         <button class="btn btn-danger delete" style="margin-left: 10px" data-id="${am.am_id}"><span class="glyphicon glyphicon-remove"></span> Delete</button>
                                                     </td>
                                                 </c:when>
                                                 <c:otherwise>
                                                     <td>
-                                                        <button class="btn btn-primary"><span class="glyphicon glyphicon-upload"></span> Edit</button>
+                                                        <a class="btn btn-primary" href="editAssignment?am_id=${param.amId}"><span class="glyphicon glyphicon-upload"></span> Edit</a>
                                                         <button class="btn btn-danger delete" style="margin-left: 10px" data-id="${am.am_id}"><span class="glyphicon glyphicon-remove"></span> Delete</button>
                                                     </td>
                                                 </c:otherwise>

@@ -127,6 +127,10 @@
         <servlet-name>comment</servlet-name>
         <servlet-class>servlet.comment</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>editAssignment</servlet-name>
+        <servlet-class>servlet.editAssignment</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -210,6 +214,10 @@
     <servlet-mapping>
         <servlet-name>comment</servlet-name>
         <url-pattern>/comment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>editAssignment</servlet-name>
+        <url-pattern>/editAssignment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

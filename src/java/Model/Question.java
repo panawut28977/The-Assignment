@@ -230,6 +230,24 @@ public abstract class Question {
         return result > 0;
     }
 
+    public static List<Integer> getListQId(int am_id) {
+        List<Integer> idList = new ArrayList<Integer>();
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select q_id from Question where ass_id = ?";
+        PreparedStatement pstm = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, am_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                idList.add(rs.getInt(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Question.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return idList;
+    }
+
     //getQuestion(q_id)
     public static List<Question> getListQuestion(List<Integer> q_id) {
         List<Question> qList = new ArrayList<Question>();
