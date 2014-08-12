@@ -27,8 +27,7 @@
                     </span>
                 </c:if>
                 <br>
-                <c:set var="jd" value="${cf:getApprovedTime(st.acc_id, cId)}"/>
-                <small class="pull-right text-muted">Join date : ${jd}</small>
+                <small class="pull-right text-muted">Join date : ${cf:getApprovedTime(st.acc_id, cId)}</small>
             </div>
         </div>
     </c:forEach>
@@ -49,7 +48,7 @@
                 location.href = "makeTeacher?acc_id=" + acc_id;
             }
         });
-         $(".removeTH").click(function() {
+        $(".removeTH").click(function() {
             var acc_id = $(this).attr("data-id");
             if (confirm('You will remove as a teacher.?')) {
                 location.href = "removeTeacher?acc_id=" + acc_id;

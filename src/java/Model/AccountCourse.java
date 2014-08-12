@@ -306,7 +306,11 @@ public class AccountCourse {
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return Util.formatTime(time+"");
+        String timest="";
+        if(time != null){
+            timest = Util.formatTime(time+"");
+        }
+        return timest;
     }
     
     public static String getAccountRole(int acc_id, int course_id) {
