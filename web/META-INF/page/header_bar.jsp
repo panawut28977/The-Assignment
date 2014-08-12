@@ -9,9 +9,9 @@
         padding: 3px 3px;
     }
     
-    .navbar-nav{
+/*    .navbar-nav{
         text-align: center;
-    }
+    }*/
 </style>
 <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">

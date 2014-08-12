@@ -153,11 +153,11 @@ public class Comment {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "";
         if (dbIndex == 1) {
-            sql = "select * from comment_student_assignment where st_ass_id = ? and am_type = 'web'";
+            sql = "select * from comment_student_assignment where st_ass_id = ? and am_type = 'web' order by comment_date desc";
         } else if (dbIndex == 2) {
-            sql = "select * from comment_student_assignment where st_ass_id = ? and am_type = 'file'";
+            sql = "select * from comment_student_assignment where st_ass_id = ? and am_type = 'file' order by comment_date desc";
         } else {
-            sql = "select * from comment where ass_id = ? ";
+            sql = "select * from comment where ass_id = ? order by comment_date desc";
         }
         PreparedStatement pstm;
         int result = 0;
