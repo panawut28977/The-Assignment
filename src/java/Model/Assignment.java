@@ -283,8 +283,7 @@ public class Assignment {
                     am.setPath_file(rs.getString("path_file"));
                 } else {
                     am.setTitle_assignment_onweb(rs.getString("title_assignment_onweb"));
-//                    System.out.println(Question.getListQuestion(Question.getListQId(am.getAm_id())));
-//                    am.setQuestionList(Question.getListQuestion(Question.getListQId(am.getAm_id())));
+                    am.setQuestionList(Question.getListQuestion(Question.getListQId(am.getAm_id())));
                 }
             }
             conn.close();

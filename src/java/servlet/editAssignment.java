@@ -36,8 +36,8 @@ public class editAssignment extends HttpServlet {
         String am_id = request.getParameter("am_id");
         Assignment a = Assignment.getAmByAmID(am_id);
         request.setAttribute("a", a);
-//        String url ="/editAssignment.jsp";
-//        getServletContext().getRequestDispatcher(url).forward(request, response);
+        String url ="/editAssignment.jsp";
+        getServletContext().getRequestDispatcher(url).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

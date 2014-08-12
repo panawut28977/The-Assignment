@@ -263,8 +263,10 @@ public abstract class Question {
         for (int id : q_id) {
             qIdList.append(id + ",");
         }
+        
         qIdList.deleteCharAt(qIdList.length() - 1).append(")");
-        sql += qIdList.toString();
+        sql += qIdList.toString() +  " order by q.q_no";
+        System.out.println(sql);
         PreparedStatement pstm;
         try {
             pstm = conn.prepareStatement(sql);
@@ -297,7 +299,7 @@ public abstract class Question {
                     mw.setQ_answer(rs.getString(20));
                     mw.setQ_score(rs.getDouble(21));
                     q = mw;
-                } else if (q_type.equalsIgnoreCase("tfQuestion") || q_type.equalsIgnoreCase("multipleChoice")) {
+                } else if (q_type.equalsIgnoreCase("tfQuestion") || q_type.equalsIgnoreCase("multiple_choice")) {
                     mc = new MultipleChoice();
                     mc.setQ_text(rs.getString(23));
                     mc.setQ_type(rs.getString(24));

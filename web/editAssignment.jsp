@@ -52,11 +52,50 @@
                         <p id="AmDescription"></p>
                         <div class="amQuestion" id="sortable">
                             <c:set value="1" var="seqno" />
-                            ${a}
                             <c:forEach  items="${a.questionList}" var="q">
                                 <c:choose>
-                                    <c:when test="${q.q_type eq 'multipleChoice'}">
-
+                                    <c:when test="${q.q_type eq 'multiple_choice'}">
+                                        <div class="multipleChoice">
+                                            <hr>
+                                            <input type="hidden" name="seqno" value="${seqno}"/>
+                                            <div class="q_no">
+                                                <span class="label label-default">${q.q_no}</span> 
+                                                <input type="hidden" name="${seqno}q_no" value="${q.q_no}"/>
+                                                <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>
+                                            </div>
+                                            <div class="form-group">
+                                                <label  class="col-md-3 control-label">Question Text</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control" name="${seqno}qtext" required="yes" >
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">One or multiple answers?</label>
+                                                <div class="col-md-5">
+                                                    <select class="form-control" id="multiple_type" name="${seqno}qcategory">
+                                                        <option value="one" selected="yes">One answer only</option>
+                                                        <option value="multiple">Multiple choice allowed</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Choice <br><span class="text-danger">(Don\'t forget to select answer)</span></label>
+                                                <div class="col-md-8 c_list">
+                                                    <div class="choice-group form-inline">
+                                                        <div><input type="radio" onClick="mark(this)" name="${seqno}c" value=""> <input type="text" name="${seqno}ctext" class="form-control" onkeyup="addToC(this)"></div>
+                                                    </div>
+                                                    <br>
+                                                    <a onclick="appendChoice(this)">Add other</a>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Score</label>
+                                                <div class="col-md-2">
+                                                    <input type="number" min="0" step="any" class="form-control" name="${seqno}score" required="yes" >
+                                                </div>
+                                            </div>
+                                            <input type="hidden" value="multiple_choice" name="${seqno}q_type">
+                                        </div>
                                     </c:when>
                                     <c:when test="${q.q_type eq 'explain'}">
                                         <div class="explain">
