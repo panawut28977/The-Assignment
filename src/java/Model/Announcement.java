@@ -80,7 +80,7 @@ public class Announcement {
     
     public static List<Announcement> viewAnnByAccID(int acc_id) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select *  from announcement where acc_id = ?";
+        String sql = "select *  from announcement where acc_id = ? order by announce_date desc";
         PreparedStatement pstm;
         List<Announcement> ann = new ArrayList<Announcement>();
         Announcement a = null;
@@ -162,7 +162,7 @@ public class Announcement {
     //viewAnnouncementByCourse
     public static List<Announcement> viewAnnByCourse(int course_id) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select *  from announcement where course_id = ?";
+        String sql = "select *  from announcement where course_id = ? order by announce_date desc";
         PreparedStatement pstm;
         List<Announcement> ann = new ArrayList<Announcement>();
         Announcement a = null;
