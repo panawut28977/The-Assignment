@@ -31,7 +31,7 @@ public class UTF8Filter implements Filter {
             FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         httpRequest.setCharacterEncoding("UTF-8");
-        System.out.println("encode");
+//        System.out.println("encode");
         if(chain!=null)
                 chain.doFilter(request,response);
     }

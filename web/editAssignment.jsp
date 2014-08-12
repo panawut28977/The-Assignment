@@ -5,6 +5,8 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="/WEB-INF/tlds/functions.tld" prefix="cf" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -52,6 +54,7 @@
                         <p id="AmDescription"></p>
                         <div class="amQuestion" id="sortable">
                             <c:set value="1" var="seqno" />
+                            ${a.questionList}
                             <c:forEach  items="${a.questionList}" var="q">
                                 <c:choose>
                                     <c:when test="${q.q_type eq 'multiple_choice'}">
@@ -66,23 +69,36 @@
                                             <div class="form-group">
                                                 <label  class="col-md-3 control-label">Question Text</label>
                                                 <div class="col-md-9">
-                                                    <input type="text" class="form-control" name="${seqno}qtext" required="yes" >
+                                                    <input type="text" class="form-control" name="${seqno}qtext" required="yes" value="${q.q_text}" >
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label">One or multiple answers?</label>
                                                 <div class="col-md-5">
                                                     <select class="form-control" id="multiple_type" name="${seqno}qcategory">
-                                                        <option value="one" selected="yes">One answer only</option>
-                                                        <option value="multiple">Multiple choice allowed</option>
-                                                    </select>
+                                                        <option value="one" <c:if test="${q.q_category eq 'one'}">selected="yes"</c:if> >One answer only</option>
+                                                        <option value="multiple"  <c:if test="${q.q_category eq 'multiple'}">selected="yes"</c:if>>Multiple choice allowed</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-md-3 control-label">Choice <br><span class="text-danger">(Don\'t forget to select answer)</span></label>
-                                                <div class="col-md-8 c_list">
-                                                    <div class="choice-group form-inline">
-                                                        <div><input type="radio" onClick="mark(this)" name="${seqno}c" value=""> <input type="text" name="${seqno}ctext" class="form-control" onkeyup="addToC(this)"></div>
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Choice <br><span class="text-danger">(Don\'t forget to select answer)</span></label>
+                                                    <div class="col-md-8 c_list">
+                                                        <div class="choice-group form-inline">
+                                                        <c:set var="clist" value="${fn:substring(q.q_choice_list, 1, q.q_choice_list.length()-1)}"/>
+                                                        <c:set var="anslist" value="${fn:substring(q.q_answer_list, 1, q.q_answer_list.length()-1)}"/>
+                                                        <c:set var="choicesp" value="${fn:split(clist, ', ')}" />
+                                                        <c:forEach items="${choicesp}" var="choice">
+                                                            <c:choose>
+                                                                <c:when test="${q.q_category eq 'one'}">
+                                                                    <div><br/><input <c:if test="${cf:containsAns(anslist,choice)}">selected="yes"</c:if> type="radio" onClick="mark(this)" name="${seqno}c" value="${choice}"> <input type="text" name="${seqno}ctext" class="form-control" onkeyup="addToC(this)" value="${choice}"></div>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                    <div><br/><input <c:if test="${cf:containsAns(anslist,choice)}">checked="yes"</c:if> type="checkbox" onClick="mark(this)" name="${seqno}c" value="${choice}"> <input type="text" name="${seqno}ctext" class="form-control" onkeyup="addToC(this)" value="${choice}"></div>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                        </c:forEach>
+<!--                                                        <div><input type="radio" onClick="mark(this)" name="${seqno}c" value=""> <input type="text" name="${seqno}ctext" class="form-control" onkeyup="addToC(this)"></div>-->
                                                     </div>
                                                     <br>
                                                     <a onclick="appendChoice(this)">Add other</a>

@@ -55,4 +55,10 @@
         <function-class>util.Util</function-class>
         <function-signature>String formatTime(java.lang.String)</function-signature>
     </function>
+    <function>
+        <name>containsAns</name>
+        <function-class>util.Util</function-class>
+        <function-signature>Boolean containsAns(java.lang.String,java.lang.String)</function-signature>
+    </function>
+    
 </taglib>

@@ -302,8 +302,8 @@ public abstract class Question {
                 } else if (q_type.equalsIgnoreCase("tfQuestion") || q_type.equalsIgnoreCase("multiple_choice")) {
                     mc = new MultipleChoice();
                     mc.setQ_text(rs.getString(23));
-                    mc.setQ_type(rs.getString(24));
-                    mc.setQ_choice_list(rs.getString(25));
+                    mc.setQ_category(rs.getString(24));
+                    mc.setQ_choice_list(rs.getString(25)); 
                     mc.setQ_answer_list(rs.getString(26));
                     mc.setQ_score(rs.getDouble(27));
                     q = mc;

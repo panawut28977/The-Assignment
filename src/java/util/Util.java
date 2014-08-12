@@ -8,6 +8,7 @@ package util;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -76,5 +77,14 @@ public class Util {
     
     public static String addZero(int time) {
         return time < 10 ? "0" + time : "" + time;
+    }
+    
+    public static boolean containsAns(String answer,String search){
+        String [] ansList = answer.split(", ");
+        ArrayList a = new ArrayList();
+        for (String ans : ansList) {
+            a.add(ans);
+        }
+        return a.contains(search);
     }
 }
