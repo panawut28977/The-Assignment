@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import util.Util;
 
 /**
  *
@@ -288,7 +289,7 @@ public class AccountCourse {
         return result;
     }
 
-    public static Timestamp getApprovedTime(int acc_id, int course_id) {
+    public static String getApprovedTime(int acc_id, int course_id) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select approved_date from account_course where course_id=? and acc_id=?";
         Timestamp time = null;
@@ -305,7 +306,7 @@ public class AccountCourse {
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return time;
+        return Util.formatTime(time+"");
     }
     
     public static String getAccountRole(int acc_id, int course_id) {

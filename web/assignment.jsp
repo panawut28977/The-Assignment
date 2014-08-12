@@ -175,7 +175,7 @@ Author     : JenoVa
                                         <img width="64" src="${c.acc.profile_pic}">
                                     </a>
                                     <div class="media-body">
-                                        <h4 class="media-heading">${c.acc.firstname} ${c.acc.lastname}<small class="pull-right">${c.comment_date}</small></h4>
+                                        <h4 class="media-heading">${c.acc.firstname} ${c.acc.lastname}<small class="pull-right">${cf:formatTime(c.comment_date)}</small></h4>
                                         <p>${c.text}<p>
                                     </div>
                                 </div>

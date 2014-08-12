@@ -4,7 +4,7 @@
             <img width="64" src="${ann.an_acc.profile_pic}">
         </a>
         <div class="media-body">
-            <h4 class="media-heading">${ann.title} - <small>${ann.an_acc.firstname} ${ann.an_acc.lastname}</small><small class="pull-right">${ann.announce_date}</small></h4>
+            <h4 class="media-heading">${ann.title} - <small>${ann.an_acc.firstname} ${ann.an_acc.lastname}</small><small class="pull-right">${cf:formatTime(ann.announce_date)}</small></h4>
             <p>${ann.content}</p>
         </div>
     </div>

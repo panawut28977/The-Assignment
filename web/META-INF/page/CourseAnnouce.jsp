@@ -29,7 +29,7 @@
                 <img width="64" src="${a.an_acc.profile_pic}">
             </a>
             <div class="media-body">
-                <h4 class="media-heading">${a.title} - <small class="text-muted">${a.an_acc.firstname} ${a.an_acc.lastname}</small><small class="pull-right">${a.announce_date}</small></h4>
+                <h4 class="media-heading">${a.title} - <small class="text-muted">${a.an_acc.firstname} ${a.an_acc.lastname}</small><small class="pull-right">${cf:formatTime(a.announce_date)}</small></h4>
                 <p>${a.content}</p>
             </div>
         </div>

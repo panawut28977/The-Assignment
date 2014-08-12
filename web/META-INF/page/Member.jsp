@@ -27,7 +27,8 @@
                     </span>
                 </c:if>
                 <br>
-                <small class="pull-right text-muted">Join date : ${cf:getApprovedTime(st.acc_id, cId)}</small>
+                <c:set var="jd" value="${cf:getApprovedTime(st.acc_id, cId)}"/>
+                <small class="pull-right text-muted">Join date : ${jd}</small>
             </div>
         </div>
     </c:forEach>

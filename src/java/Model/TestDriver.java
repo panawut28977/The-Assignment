@@ -5,15 +5,9 @@
  */
 package Model;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
+import java.sql.Timestamp;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import sun.java2d.pipe.SpanShapeRenderer;
+import util.Util;
 
 /**
  *
@@ -324,16 +318,21 @@ public class TestDriver {
 //        System.out.println(Comment.getCommentByAmID(1));
 //        System.out.println(Comment.getCommentByStAmIDFile(1));
         //
-        List<Group_member> l = new ArrayList<>();
-        Group_member g = new Group_member();
-        g.setAcc_id(1);
-        g.setG_no(1);
-        g.setSt_am_id(3);
-        g.setAm_type("file");
-        l.add(g);
-        g.setAcc_id(2);
-        l.add(g);
-        Group_member.addMember(l);
+//        List<Group_member> l = new ArrayList<>();
+//        Group_member g = new Group_member();
+//        g.setAcc_id(1);
+//        g.setG_no(1);
+//        g.setSt_am_id(3);
+//        g.setAm_type("file");
+//        l.add(g);
+//        g.setAcc_id(2);
+//        l.add(g);
+//        Group_member.addMember(l);
+          
+          //test util
+          Date d = new Date();
+          Timestamp t = new Timestamp(d.getTime());
+          System.out.println(Util.formatTime(t));
     }
 
 }

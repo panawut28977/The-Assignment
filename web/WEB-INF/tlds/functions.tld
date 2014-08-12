@@ -50,4 +50,9 @@
         <function-class>Model.AccountCourse</function-class>
         <function-signature>String getAccountRole(int,int)</function-signature>
     </function>
+      <function>
+        <name>formatTime</name>
+        <function-class>util.Util</function-class>
+        <function-signature>String formatTime(java.lang.String)</function-signature>
+    </function>
 </taglib>
