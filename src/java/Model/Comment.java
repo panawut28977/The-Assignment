@@ -172,7 +172,7 @@ public class Comment {
                 c.setComment_id(rs.getInt("comment_id"));
                 c.setAcc_id(Account.getAccountByID(rs.getInt("acc_id")));
                 c.setText(rs.getString("text"));
-                c.setComment_date(rs.getDate("comment_date"));
+                c.setComment_date(rs.getTimestamp("comment_date"));
                 cList.add(c);
             }
             conn.close();

@@ -40,7 +40,7 @@
         var pic = '${ac.profile_pic}';
         var fullname = '${ac.firstname}' + '${ac.lastname}';
         var d = new Date();
-        var dateSt = d.getFullYear() + "-" + ('0' + d.getMonth()).slice(-2) + "-" + ('0' + d.getDate()).slice(-2)+" "+d.getHours()+":"+d.getMinutes()+":"+d.getMilliseconds();
+        var dateSt = d.getFullYear() + "-" + ('0' + (d.getMonth()+1)).slice(-2) + "-" + ('0' + d.getDate()).slice(-2)+" "+d.getHours()+":"+d.getMinutes()+":"+d.getMilliseconds();
         $("#addAnnouce").click(function() {
             $.ajax({
                 type: "POST",

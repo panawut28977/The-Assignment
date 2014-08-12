@@ -14,13 +14,16 @@ Author     : JenoVa
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="META-INF/page/include_css.jsp" %>
         <%@include file="META-INF/page/include_js.jsp" %>
-        <c:set var="am" value="${cf:getAmByAmID(param.amId)}" target="Model.Assignment"/>
+        <c:set var="am" value="${cf:getAmByAmID(param.amId)}" scope="session" target="Model.Assignment"/>
         <title>${am.name}</title>
         <style>
             #pvVs{
                 text-align: center;
                 background-color: #F5F5F5;
                 padding: 10px 0;
+            }
+            #newComment{
+                display: none;
             }
         </style>
     </head>
@@ -163,23 +166,26 @@ Author     : JenoVa
                                 </tr>
                             </table>
                         </div>
-                        <div class="clearboth"><hr></div>  
+                        <div class="clearboth"><hr></div> 
                         <h3>Comment</h3>
-                        <c:forEach items="${am.comment}" var="c">
-                            <div class="media">
-                                <a class="pull-left" href="#">
-                                    <img width="64" src="${c.acc.profile_pic}">
-                                </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading">${c.acc.firstname} ${c.acc.lastname}<small class="pull-right">${c.comment_date}</small></h4>
-                                    <p>${c.text}<p>
+                        <div id="listComment">
+                            <c:forEach items="${am.comment}" var="c">
+                                <div class="media">
+                                    <a class="pull-left" href="#">
+                                        <img width="64" src="${c.acc.profile_pic}">
+                                    </a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">${c.acc.firstname} ${c.acc.lastname}<small class="pull-right">${c.comment_date}</small></h4>
+                                        <p>${c.text}<p>
+                                    </div>
                                 </div>
-                            </div>
-                        </c:forEach>
-                        <form>
-                            <textarea class="form-control" placeholder="Tell your teacher here."></textarea><br>
-                            <input  type="submit" value="comment" class="btn btn-primary col-md-3 pull-right">
-                        </form>
+                            </c:forEach>
+                            <br/>
+                            <form>
+                                <textarea class="form-control" placeholder="Tell your teacher here." name="text" id="text"></textarea><br>
+                                <input  type="button" class="btn btn-primary col-md-3 pull-right" id="addComment" value="Comment">
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -210,7 +216,24 @@ Author     : JenoVa
                         }
                     });
                 }
-            })
+            });
+
+            var pic = '${ac.profile_pic}';
+            var fullname = '${ac.firstname}' + '${ac.lastname}';
+            var d = new Date();
+            var dateSt = d.getFullYear() + "-" + ('0' + (d.getMonth()+1)).slice(-2) + "-" + ('0' + d.getDate()).slice(-2) + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getMilliseconds();
+            $("#addComment").click(function() {
+                $.ajax({
+                    type: "POST",
+                    url: "comment",
+                    data: {text: $("#text").val()}
+                }).done(function(msg) {
+                    var html = '<div class="media" id="newComment"><a class="pull-left" href="#"><img class="img-circle" width="64" src="' + pic + '"></a><div class="media-body"><h4 class="media-heading"><small class="text-muted">' + fullname + '</small><small class="pull-right">' + dateSt + '</small></h4><p>' + $("#text").val() + '</p></div></div>';
+                    $("#listComment").prepend(html);
+                    $("#newComment").slideDown().removeAttr("id");
+                    $("#text").val("");
+                });
+            });
         });
     </script>
 </html>
