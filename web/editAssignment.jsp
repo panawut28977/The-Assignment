@@ -49,11 +49,12 @@
             <div class="row">
                 <form method="post" action="" class="form-horizontal" enctype="multipart/form-data">
                     <div class="col-md-10 col-md-offset-1" id="CreateAmOnweb">
-                        <input type="text" name="title_assignment_onweb" class="form-control" placeholder="Assignment Title" >
+                        <input type="text" name="title_assignment_onweb" class="form-control" placeholder="Assignment Title" value="${a.title_assignment_onweb}">
                         <br>
                         <p id="AmDescription"></p>
                         <div class="amQuestion" id="sortable">
                             <c:set value="1" var="seqno" />
+                            <c:set value="0" var="used_id" />
                             ${a.questionList}
                             <c:forEach  items="${a.questionList}" var="q">
                                 <c:choose>
@@ -97,8 +98,8 @@
                                                                     <div><br/><input <c:if test="${cf:containsAns(anslist,choice)}">checked="yes"</c:if> type="checkbox" onClick="mark(this)" name="${seqno}c" value="${choice}"> <input type="text" name="${seqno}ctext" class="form-control" onkeyup="addToC(this)" value="${choice}"></div>
                                                                     </c:otherwise>
                                                                 </c:choose>
-                                                        </c:forEach>
-<!--                                                        <div><input type="radio" onClick="mark(this)" name="${seqno}c" value=""> <input type="text" name="${seqno}ctext" class="form-control" onkeyup="addToC(this)"></div>-->
+                                                            </c:forEach>
+    <!--                                                        <div><input type="radio" onClick="mark(this)" name="${seqno}c" value=""> <input type="text" name="${seqno}ctext" class="form-control" onkeyup="addToC(this)"></div>-->
                                                     </div>
                                                     <br>
                                                     <a onclick="appendChoice(this)">Add other</a>
@@ -107,11 +108,12 @@
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label">Score</label>
                                                 <div class="col-md-2">
-                                                    <input type="number" min="0" step="any" class="form-control" name="${seqno}score" required="yes" >
+                                                    <input type="number" min="0" step="any" class="form-control" name="${seqno}score" required="yes" value="${q.q_score}" >
                                                 </div>
                                             </div>
                                             <input type="hidden" value="multiple_choice" name="${seqno}q_type">
                                         </div>
+                                        <c:set value="${seqno+1}" var="seqno" />
                                     </c:when>
                                     <c:when test="${q.q_type eq 'explain'}">
                                         <div class="explain">
@@ -136,12 +138,119 @@
                                             </div>
                                             <input type="hidden" value="explain" name="${seqno}q_type">
                                         </div>
+                                        <c:set value="${seqno+1}" var="seqno" />
                                     </c:when>
                                     <c:when test="${q.q_type eq 'matchWord'}">
-
+                                        <c:if test="${q.q_id != used_id}">
+                                            <div class="matchWord">
+                                                <hr>
+                                                <input type="hidden" name="seqno" value="${seqno}"/>
+                                                <div class="q_no">
+                                                    <span class="label label-default">${q.q_no}</span>
+                                                    <input type="hidden" name="${seqno}q_no" value="${q.q_no}"/>
+                                                    <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label  class = "col-md-3 control-label" > Question Text </label>
+                                                    <div class = "col-md-9">
+                                                        <input type = "text" class = "form-control" name="${seqno}qtext" required="yes" value="${q.q_title}">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label  class="col-md-3 control-label">How Many Pair?</label>
+                                                    <div class="col-md-2">
+                                                        <c:set value="0" var="total_pair" />
+                                                        <c:forEach items="${a.questionList}" var="b">
+                                                            <c:if test="${q.q_id == b.q_id}">
+                                                                <c:set value="${total_pair+1}" var="total_pair" />
+                                                            </c:if>
+                                                        </c:forEach>
+                                                        <input type="number" id="total_pair" min="1" class="form-control" value="${total_pair}" >
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-offset-3 col-md-9 matchWord_q_list">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <b>Question Text</b>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <b>Answer</b>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <b>Score</b>
+                                                            </div>
+                                                        </div>
+                                                        <c:set value="3" var="total_pair" />
+                                                        <c:forEach items="${a.questionList}" var="blank">
+                                                            <c:if test="${q.q_id == blank.q_id}">
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <input type="text" class="form-control" name="${seqno}match_text" value="${blank.q_text}">
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <input type="text" class="form-control" name="${seqno}match_ans" value="${blank.q_answer}">
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <input type="number" min="0" step="any" class="form-control" name="${seqno}m_score" value="${blank.q_score}">
+                                                                    </div>
+                                                                </div>
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" value="matchWord"  name="${seqno}q_type">
+                                            </div>
+                                            <c:set value="${q.q_id}" var="used_id" />
+                                            <c:set value="${seqno+1}" var="seqno" />
+                                        </c:if>
                                     </c:when>
                                     <c:when test="${q.q_type eq 'fillBlank'}">
-
+                                        <c:if test="${q.q_id != used_id}">
+                                            <div class="fillBlank">
+                                                <hr>
+                                                <input type="hidden" name="seqno" value="${seqno}"/>
+                                                <div class="q_no">
+                                                    <span class="label label-default">${q.q_no}</span>
+                                                    <input type="hidden" name="${seqno}q_no" value="${q.q_no}"/>
+                                                    <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label  class="col-md-3 control-label">Question Text</label>
+                                                    <div class="col-md-9">
+                                                        <textarea class="form-control fillInBlankBox" name="${seqno}qtext" required="yes" readonly="yes">${q.q_text}</textarea>
+                                                        <br>
+                                                        <a class=" btn btn-default" onclick="addAnswer(this)">Add Answer</a>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-offset-3 col-md-9 ansList">
+                                                        <c:forEach  items="${a.questionList}" var="fill">
+                                                            <c:if test="${q.q_id == fill.q_id}">
+                                                                <div class="row a_group">
+                                                                    <div class="col-md-4">
+                                                                        <input type="text" class="form-control" value="${fill.answer}" readonly="yes" name="${seqno}qanswer">
+                                                                    </div>
+                                                                    <div class="col-md-3">
+                                                                        <input type="number" class="form-control" placeholder="score" name="${seqno}score" required="yes" value="${fill.score}">
+                                                                    </div>
+                                                                    <input type="hidden" value="${fill.q_start_index}" name="${seqno}startIndex">
+                                                                    <input type="hidden" value="${fill.q_end_index}" name="${seqno}endIndex">
+                                                                    <a onclick="remove_ans_fillInBlank(this)">
+                                                                        <span class="glyphicon glyphicon-trash"></span>
+                                                                    </a>
+                                                                    <div>
+                                                                    </div>
+                                                                </div>
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" value="fillBlank" name="${seqno}q_type">
+                                            </div>
+                                            <c:set value="${q.q_id}" var="used_id" />
+                                            <c:set value="${seqno+1}" var="seqno" />
+                                        </c:if>
                                     </c:when>
                                     <c:when test="${q.q_type eq 'tfQuestion'}">
                                         <div class="tfQuestion">
@@ -155,155 +264,29 @@
                                             <div class="form-group">
                                                 <label  class="col-md-3 control-label">Question Text</label>
                                                 <div class="col-md-9">
-                                                    <input type="text" class="form-control" name="${seqno}qtext" required="yes">'
+                                                    <input type="text" class="form-control" name="${seqno}qtext" required="yes" value="${q.q_text}">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label">Choice <br><span class="text-danger">(Don\'t forget to select answer)</span></label>
                                                 <div class="col-md-8">
-                                                    <input type="radio" name="${seqno}c_ans" value="true" selected="yes"> True'
-                                                    <input type="radio" name="${seqno}c_ans" value="false"> False'
+                                                    <input type="radio" name="${seqno}c_ans" value="true" <c:if test="${q.q_answer_list eq 'true'}">checked="yes"</c:if>> True
+                                                    <input type="radio" name="${seqno}c_ans" value="false" <c:if test="${q.q_answer_list eq 'false'}">checked="yes"</c:if>> False
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Score</label>
+                                                    <div class="col-md-2">
+                                                        <input type="number" min="0" step="any" class="form-control" name="${seqno}score" required="yes" value="${q.q_score}">
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label class="col-md-3 control-label">Score</label>
-                                                <div class="col-md-2">
-                                                    <input type="number" min="0" step="any" class="form-control" name="${seqno}score" required="yes" >
-                                                </div>
-                                            </div>
-                                            <input type="hidden" value="tf" name="${seqno}qcategory">
-                                            <input type="hidden" value="tfQuestion" name="${seqno}q_type">
+                                            <input type="hidden" value="tf" name="${seqno}qcategory" />
+                                            <input type="hidden" value="tfQuestion" name="${seqno}q_type" />
                                         </div>
+                                        <c:set value="${seqno+1}" var="seqno" />
                                     </c:when>
                                 </c:choose>
-                                <c:set value="${seqno+1}" var="seqno" />
                             </c:forEach>
-                            <!--                            <div class="multipleChoice">
-                                                            <hr>
-                                                            <div class="q_no">
-                                                                <span class="label label-default">1</span> 
-                                                                <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label  class="col-md-3 control-label">Question Text</label>
-                                                                <div class="col-md-9">
-                                                                    <input type="text" class="form-control" >
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="col-md-3 control-label">One or multiple answers?</label>
-                                                                <div class="col-md-5">
-                                                                    <select class="form-control" id="multiple_type">
-                                                                        <option value="one">One answer only</option>
-                                                                        <option value="multiple">Multiple choide allowed</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="col-md-3 control-label">Choice <br><span class='text-danger'>(Don't forget to select answer)</span></label>
-                                                                <div class="col-md-8 c_list">
-                                                                    <div class="choice-group form-inline">
-                                                                        <div><input type="radio" name="c_ans"> <input type="text" class="form-control"></div>
-                                                                    </div>
-                                                                    <br>
-                                                                    <a onclick="appendChoice(this)">Add other</a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="col-md-3 control-label">Score</label>
-                                                                <div class="col-md-2">
-                                                                    <input type="number" min="0" step="any" class="form-control" name="score" >
-                                                                </div>
-                                                            </div>
-                                                            <input type="hidden" value="multiple_choice" name="q_type">
-                                                        </div>
-                                                        <div class="explain">
-                                                            <hr>
-                                                            <div class="q_no">
-                                                                <span class="label label-default">2</span> 
-                                                                <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="col-md-3 control-label">Question</label>
-                                                                <div class="col-md-9">
-                                                                    <textarea class="form-control explain_q_text" name="explain_q_text" ></textarea>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label  class="col-md-3 control-label">Answer</label>
-                                                                <div class="col-md-9">
-                                                                    <textarea class="form-control"></textarea>
-                                                                </div>
-                                                            </div>
-                                                            <input type="hidden" value="explain" name="q_type">
-                                                        </div>
-                                                        <div class="tfQuestion">
-                                                            <hr>
-                                                            <div class="q_no">
-                                                                <span class="label label-default">3</span> 
-                                                                <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label  class="col-md-3 control-label">Question Text</label>
-                                                                <div class="col-md-9">
-                                                                    <input type="text" class="form-control" >
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="col-md-3 control-label">Choice <br><span class='text-danger'>(Don't forget to select answer)</span></label>
-                                                                <div class="col-md-8">
-                                                                    <input type="radio" name="c_ans"> Yes
-                                                                    <input type="radio" name="c_ans"> No
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="col-md-3 control-label">Score</label>
-                                                                <div class="col-md-2">
-                                                                    <input type="number" min="0" step="any" class="form-control" name="score" >
-                                                                </div>
-                                                            </div>
-                                                            <input type="hidden" value="tfQuestion" name="q_type">
-                                                        </div>
-                                                        <div class="matchWord">
-                                                            <hr>
-                                                            <div class="q_no">
-                                                                <span class="label label-default">4</span> 
-                                                                <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>
-                                                            </div>  
-                                                            <div class="form-group">
-                                                                <label  class="col-md-3 control-label">How Many Pair?</label>
-                                                                <div class="col-md-2">
-                                                                    <input type="number" id="total_pair" min="1" class="form-control" >
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="col-md-offset-3 col-md-9 matchWord_q_list">
-                                                                    <span class="text-danger">Please tell me how many question before</span>
-                                                                </div>
-                                                            </div>
-                                                            <input type="hidden" value="matchWord" name="q_type">
-                                                        </div>
-                                                        <div class="fillBlank">
-                                                            <hr>
-                                                            <div class="q_no">
-                                                                <span class="label label-default">5</span> 
-                                                                <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label  class="col-md-3 control-label">Question Text</label>
-                                                                <div class="col-md-9">
-                                                                    <textarea class="form-control"  ></textarea>
-                                                                    <br>
-                                                                    <a class=" btn btn-default" onclick="addAnswer(this)">Add Answer</a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="col-md-offset-3 col-md-9 ansList">
-                            
-                                                                </div>
-                                                            </div>
-                                                            <input type="hidden" value="fillBlank" name="q_type">
-                                                        </div>-->
                         </div>
                         <div class="btn-group dropup center-block" >
                             <hr>
@@ -357,7 +340,6 @@
                                     });
                                     $("#CreateAmOnweb div").disableSelection();
                                     $('#compareBox').hide();
-//                                    $('#CreateAmOnweb').hide();
                                     var monthNames = ["January", "February", "March", "April", "May", "June",
                                         "July", "August", "September", "October", "November", "December"];
                                     var d = new Date();

@@ -266,7 +266,7 @@ public abstract class Question {
         
         qIdList.deleteCharAt(qIdList.length() - 1).append(")");
         sql += qIdList.toString() +  " order by q.q_no";
-        System.out.println(sql);
+//        System.out.println(sql);
         PreparedStatement pstm;
         try {
             pstm = conn.prepareStatement(sql);
