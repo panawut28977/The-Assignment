@@ -39,4 +39,10 @@
             </div>
         </div>
     </body>
+    <script>
+        $(function() {
+            $("#notification_menu").addClass("active");
+            $("#home_menu").removeClass("active");
+        });
+    </script>
 </html>

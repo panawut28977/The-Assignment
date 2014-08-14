@@ -27,9 +27,9 @@
 
         <div class="collapse navbar-collapse" style="padding-left: 0;" id="collapse-menu">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="home.jsp?tab=AllAnnouce"><span class="glyphicon glyphicon-home"></span></a></li>
-                <li><a href="message.jsp"><span class="glyphicon glyphicon-envelope"></span></a></li>
-                <li class="dropdown"> 
+                <li id="home_menu" class="active"><a href="home.jsp?tab=AllAnnouce"><span class="glyphicon glyphicon-home"></span></a></li>
+                <li id="message_menu"><a href="message.jsp"><span class="glyphicon glyphicon-envelope"></span></a></li>
+                <li class="dropdown" id="notification_menu"> 
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span><span class="badge">10</span></a>
                     <ul class="dropdown-menu">
                         <li><a href="notification.jsp?nt=Announcement"><span class="badge pull-right">3</span> Announcement</a></li>
@@ -52,12 +52,12 @@
 
     </div>
 </nav>
-<script>
+<!--<script>
     $(function() {
         $(".navbar-nav li").mouseover(function() {
-            $(this).addClass("active");
+            $(this).css("backgroud-color","e7e7e7");
         }).mouseout(function() {
-            $(this).removeClass("active");
+            $(this).css("backgroud-color","none");
         });
     });
-</script>
+</script>-->

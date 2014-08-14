@@ -43,8 +43,8 @@
                         </c:when>
                         <c:otherwise>
                             <td>${a.total_member} <a href="groupWork.jsp?ct=allAm&&tab=AllAssignment&&cId=${a.course.course_id}">join group</a></td>
-                            </c:otherwise>
-                        </c:choose>
+                        </c:otherwise>
+                    </c:choose>
                     <td>${a.due_date}</td>
                     <td>
                         <c:set value="${cf:remainingTimeforSend(a,ac.acc_id)}" var="status"/>
@@ -75,7 +75,10 @@
 <script>
 
     $(document).ready(function() {
-        var aTable = $('#AllAssignment').dataTable();
+        var aTable = $('#AllAssignment').dataTable({
+            /* Disable initial sort */
+            "aaSorting": []
+        });
         aTable.fnFilter('${param.st}');
         var jsonArr = [];
     <c:forEach items="${ac.assignment}" var="a">

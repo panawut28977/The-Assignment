@@ -53,8 +53,8 @@
                         </c:when>
                         <c:otherwise>
                             <td>${a.total_member} <a href="groupWork.jsp?tab=AllAssignment">join group</a></td>
-                            </c:otherwise>
-                        </c:choose>
+                        </c:otherwise>
+                    </c:choose>
                     <td>${a.due_date}</td>
                     <c:choose>
                         <c:when test="${ac.courseList.get(cId).role eq 'ST'}">
@@ -96,26 +96,29 @@
 <script>
 
     $(document).ready(function() {
-        var aTable = $('#AllAssignemnt').dataTable();
+        var aTable = $('#AllAssignemnt').dataTable({
+            /* Disable initial sort */
+            "aaSorting": []
+        });
         aTable.fnFilter('${param.st}');
         var color = '';
         var jsonArr = [];
     <c:forEach items="${ac.courseList.get(cId).course.assignment}" var="a">
-         <c:set value="${cf:remainingTimeforSend(a,ac.acc_id)}" var="status"/>
-    <c:choose>
-        <c:when test="${status eq 'late'}">
+        <c:set value="${cf:remainingTimeforSend(a,ac.acc_id)}" var="status"/>
+        <c:choose>
+            <c:when test="${status eq 'late'}">
         color = '#a94442';
-        </c:when>
-        <c:when test="${status eq 'ontime'}">
+            </c:when>
+            <c:when test="${status eq 'ontime'}">
         color = '#3c763d';
-        </c:when>
-        <c:when test="${status eq 'hurryup'}">
+            </c:when>
+            <c:when test="${status eq 'hurryup'}">
         color = '#8a6d3b';
-        </c:when>
-        <c:otherwise>
+            </c:when>
+            <c:otherwise>
         color = '#777';
-        </c:otherwise>
-    </c:choose>
+            </c:otherwise>
+        </c:choose>
         jsonArr.push({
             title: '${a.name}',
             start: '${a.due_date}',

@@ -33,24 +33,24 @@
                 overflow-y: scroll;
                 padding:  0;
             }
-            
+
             #teacherSelectionBox hr{
                 margin: 0;
             }
-            
+
             #teacherSelectionBox .media{
                 cursor: pointer;
                 margin-top: 0;
             }
-            
+
             #teacherSelectionBox .media:hover{
                 background-color:#DADCFF;
             }
-            
+
             #teacherSelectionBox .media h5{
                 padding-top: 8px;
             }
-            
+
         </style>
         <title>Message</title>
     </head>
@@ -166,10 +166,9 @@
             </div>
         </div>
         <script>
-            $(function(){
-               $("#teacherSelectionBox .media").click(function(){
-                   
-               });
+            $(function() {
+                $("#message_menu").addClass("active");
+                $("#home_menu").removeClass("active");
             });
         </script>
     </body> 
