@@ -214,14 +214,37 @@ public abstract class Question {
     }
 
     //delete(q_id)
-    public static boolean delete(int q_id) {
+    public static boolean delete(int[] q_id) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "delete from question where q_id=?";
+        StringBuilder sql = new StringBuilder("delete from question where q_id in(");
+        for (int i = 0; i < q_id.length; i++) {
+            sql.append(q_id[i] + ",");
+        }
+        sql.replace(sql.length()-1, sql.length()-1, ")");
+        System.out.println(sql);
         PreparedStatement pstm;
         int result = 0;
         try {
-            pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, q_id);
+            pstm = conn.prepareStatement(sql.toString());
+            result = pstm.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result > 0;
+    }
+    public static boolean delete(String[] q_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        StringBuilder sql = new StringBuilder("delete from question where q_id in(");
+        for (int i = 0; i < q_id.length; i++) {
+            sql.append(q_id[i] + ",");
+        }
+        sql.deleteCharAt(sql.length()-1);
+        sql.append(")");
+        PreparedStatement pstm;
+        int result = 0;
+        try {
+            pstm = conn.prepareStatement(sql.toString());
             result = pstm.executeUpdate();
             conn.close();
         } catch (SQLException ex) {
@@ -263,9 +286,9 @@ public abstract class Question {
         for (int id : q_id) {
             qIdList.append(id + ",");
         }
-        
+
         qIdList.deleteCharAt(qIdList.length() - 1).append(")");
-        sql += qIdList.toString() +  " order by q.q_no";
+        sql += qIdList.toString() + " order by q.q_no";
 //        System.out.println(sql);
         PreparedStatement pstm;
         try {
@@ -303,7 +326,7 @@ public abstract class Question {
                     mc = new MultipleChoice();
                     mc.setQ_text(rs.getString(23));
                     mc.setQ_category(rs.getString(24));
-                    mc.setQ_choice_list(rs.getString(25)); 
+                    mc.setQ_choice_list(rs.getString(25));
                     mc.setQ_answer_list(rs.getString(26));
                     mc.setQ_score(rs.getDouble(27));
                     q = mc;

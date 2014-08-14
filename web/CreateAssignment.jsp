@@ -56,73 +56,6 @@
                         <li><a href="course.jsp?tab=AllAssignment">Assignment</a></li>
                         <li class="active"><a href="#">Create Assignment</a></li>
                     </ol>
-                    <!--                                        <div id="rootwizard" >
-                                                                <ul class="pull-right">
-                                                                    <li><a href="#tab1" data-toggle="tab"><span class="label">1</span> Enter Info</a></li>
-                                                                    <li><a href="#tab2" data-toggle="tab"><span class="label">2</span> Create Assignment</a></li>
-                                                                </ul>
-                                                                <div class="tab-content" style="clear: both" >
-                                                                    <div class="tab-pane" id="tab1">
-                                                                        <div class="col-md-8 col-md-offset-2">
-                                                                            <form class="form-horizontal" role="form">
-                                                                                <div class="form-group">
-                                                                                    <label for="name" class="col-md-3 control-label">Name</label>
-                                                                                    <div class="col-md-9">
-                                                                                        <input type="text" class="form-control" id="name" >
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="form-group">
-                                                                                    <label for="description" class="col-md-3 control-label">Description</label>
-                                                                                    <div class="col-md-9">
-                                                                                        <textarea  rows="3"  id="description" class="form-control"></textarea>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="form-group">
-                                                                                    <label  class="col-md-3 control-label">Work with</label>
-                                                                                    <div class="col-md-9">
-                                                                                        <input type="radio" name="total_member" value="1" id="individual" > Individual
-                                                                                        <br>
-                                                                                        <input type="radio" name="total_member" id="groupwork" value=""> Group of <input type="number" id="inputpepole" disabled="yes"> People
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="form-group">
-                                                                                    <label class="col-md-3 control-label">Due date</label>
-                                                                                    <div class="input-group date form_date col-md-9" style="padding-right: 15px;  padding-left: 15px;" data-date="" data-date-format="dd MM yyyy hh:mm" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd hh:mm">
-                                                                                        <input class="form-control" size="16" type="text" value="" readonly="yes">
-                                                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                                                                    </div>
-                                                                                    <input type="hidden" id="dtp_input2" value="" /><br/>
-                                                                                </div>
-                                                                                <div class="form-group">
-                                                                                    <label for="AmType" class="col-md-3 control-label">Assignment Type</label>
-                                                                                    <div class="col-md-4">
-                                                                                        <select class="form-control" id="AmType">
-                                                                                            <option value="f">File</option>
-                                                                                            <option value="w">Doing on web</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </form>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="tab-pane" id="tab2">
-                                                                        <div class="col-md-8 col-md-offset-2" id="uploadAmFile">
-                                                                            <form role="form" class="form-inline">
-                                                                                <input type="file" class="form-control">
-                                                                                <input type="submit" value="upload" class="form-control btn btn-primary">
-                                                                            </form>
-                                                                        </div>
-                                                                        <div class="col-md-8 col-md-offset-2" id="CreateAmOnweb">web</div>
-                                                                    </div>
-                                                                    <ul class="pager wizard" style="clear: both" >
-                                                                        <li class="previous first" style="display:none;"><a href="#">First</a></li>
-                                                                        <li class="previous"><a href="#">Previous</a></li>
-                                                                        <li class="next last" style="display:none;"><a href="#">Last</a></li>
-                                                                        <li class="next"><a href="#">Next</a></li>
-                                                                    </ul>
-                                                                </div>	
-                                                            </div>-->
                     <form id="myWizard" method="post" action="createAssignment" class="form-horizontal" enctype="multipart/form-data">
                         <section class="step" data-step-title="Enter Information">
                             <div class="col-md-8 col-md-offset-2">
@@ -705,7 +638,7 @@
                                             $(this).parent().parent().parent(".multipleChoice").find(".c_list").html(html);
                                         });
                                         function addTitle() {
-                                            var titleBox = '<div class="row"><hr><input type="hidden" name="seqno" value="' + seqno + '"/><div class="col-md-8"><input type="text" class="form-control" placeholder="Instruction" name="' + seqno + 'instruction" required="yes" ></div><a onclick="remove_title(this)"  style="vertical-align: -webkit-baseline-middle"><span class="glyphicon glyphicon-trash"></span></a><input type="hidden" value="instruction" name="' + seqno + 'q_type"></div>';
+                                            var titleBox = '<div class="row instruction"><hr><input type="hidden" name="seqno" value="' + seqno + '"/><label class="col-md-3 control-label">Instruction </label><div class="col-md-8"><input type="text" class="form-control" placeholder="Instruction" name="' + seqno + 'instruction" required="yes" ></div><a onclick="remove_title(this)"  style="vertical-align: -webkit-baseline-middle"><span class="glyphicon glyphicon-trash"></span></a><input type="hidden" value="instruction" name="' + seqno + 'q_type"></div>';
                                             $(".amQuestion").append(titleBox);
                                             seqno++;
                                         }
@@ -718,7 +651,7 @@
                                             var ans = $(t).siblings('[type="text"]').val();
                                             $(t).val(ans);
                                         }
-
+                                        var newTotal_q = 1;
                                         function remove_q(t) {
                                             total_q--;
                                             seqno--;
@@ -729,6 +662,20 @@
                                                 $(this).find("input").val(new_q_no);
                                                 new_q_no++;
                                             });
+                                            $(".amQuestion > div").each(function() {
+                                                $(this).find("[name='seqno']").val(newTotal_q);
+                                                $(this).find("[name]").each(function() {
+                                                    var namevl = $(this).attr("name").match(/\d+/);
+                                                    var newvl = "";
+                                                    if ($.isNumeric(namevl)) {
+                                                        newvl = $(this).attr("name").replace(namevl, newTotal_q);
+                                                        $(this).attr("name", newvl);
+                                                    }
+                                                });
+                                                newTotal_q++;
+                                            });
+                                            //reset value
+                                            newTotal_q = 1
                                         }
 
                                         function remove_title(t) {

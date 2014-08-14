@@ -61,3 +61,7 @@ and open the template in the editor.
 #listAnnounce{
     margin-top: 20px;
 }
+
+.multipleChoice,.explain,.tfQuestion,.matchWord,.instruction{
+    cursor: move;
+}

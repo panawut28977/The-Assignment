@@ -131,6 +131,10 @@
         <servlet-name>editAssignment</servlet-name>
         <servlet-class>servlet.editAssignment</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>updateAssignment</servlet-name>
+        <servlet-class>servlet.updateAssignment</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -218,6 +222,10 @@
     <servlet-mapping>
         <servlet-name>editAssignment</servlet-name>
         <url-pattern>/editAssignment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateAssignment</servlet-name>
+        <url-pattern>/updateAssignment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

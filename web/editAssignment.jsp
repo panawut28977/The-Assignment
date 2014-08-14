@@ -47,20 +47,86 @@
         <%@include file="META-INF/page/header_bar.jsp"%>
         <div class="container well">
             <div class="row">
-                <form method="post" action="" class="form-horizontal" enctype="multipart/form-data">
+                <form method="post" action="updateAssignment" class="form-horizontal" enctype="multipart/form-data">
                     <div class="col-md-10 col-md-offset-1" id="CreateAmOnweb">
+                        <h3>Assignment Information</h3>
+                        <hr/>
+                        <input type="hidden" value="${a.am_id}" name="am_id"/>
+                        <div class="form-group">
+                            <label for="name" class="col-md-3 control-label">Name</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="name" name="amName" required="yes" value="${a.name}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="description" class="col-md-3 control-label">Description</label>
+                            <div class="col-md-9" >
+                                <textarea  rows="3"  id="description" name="description" class="form-control">${a.description}</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Work with</label>
+                            <div class="col-md-9">
+                                <input type="radio" name="total_member" value="1" id="individual" checked="yes" <c:if test="${a.total_member eq 1}">checked="yes"</c:if> > Individual
+                                    <br>
+                                    <input type="radio" name="total_member" id="groupwork" value="${a.total_member}" <c:if test="${a.total_member > 1}">checked="yes"</c:if>> Group of <input type="number" min="2" id="inputpepole" <c:if test="${a.total_member eq 1}">disabled="yes"</c:if> value="${a.total_member}"> People
+                                </div>
+                            </div>
+                            <div class="form-group" id="due_date">
+                                <label  class="col-md-3 control-label">Due date</label>
+                                <div class="input-group date form_datetime col-md-9" style="padding-right: 15px;  padding-left: 15px;"  data-link-field="dtp_input1">
+                                        <input class="form-control" size="16" type="text" value=${a.due_date}"" readonly>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                            </div>
+                            <input type="hidden" id="dtp_input1" name="due_date" value="" /><br/>
+                        </div>
+                        <!--                        <div class="form-group">
+                                                    <label for="AmType" class="col-md-3 control-label">Assignment Type</label>
+                                                    <div class="col-md-4">
+                                                        <select class="form-control" id="AmType" name="AmType">
+                                                            <option value="file" <c:if test="${a.ass_type eq 'file'}">selected="yes"</c:if> >File</option>
+                                                            <option value="web" <c:if test="${a.ass_type eq 'web'}">selected="yes"</c:if>>Doing on web</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>-->
+                            <input type="hidden" value="${a.ass_type}" name="AmType"/>
+                        <h3>Questions</h3>
+                        <hr/>
                         <input type="text" name="title_assignment_onweb" class="form-control" placeholder="Assignment Title" value="${a.title_assignment_onweb}">
                         <br>
                         <p id="AmDescription"></p>
                         <div class="amQuestion" id="sortable">
                             <c:set value="1" var="seqno" />
                             <c:set value="0" var="used_id" />
-                            ${a.questionList}
+                            <c:set value="0" var="no_seq" />
+                            <c:set value="" var="inst"/>
+                            <!--${a.questionList}-->
                             <c:forEach  items="${a.questionList}" var="q">
+                                <c:if test="${inst ne q.instruction && q.instruction ne null}">
+                                    <div class="row instruction">
+                                        <hr>
+                                        <input type="hidden" name="seqno" value="${seqno}">
+                                        <div class="form-group">
+                                            <label  class="col-md-3 control-label">Instruction </label>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" placeholder="Instruction" name="${seqno}instruction" required="yes" value="${q.instruction}">
+                                            </div>
+                                            <a onclick="remove_title(this)" style="vertical-align: -webkit-baseline-middle">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </a>
+                                        </div>
+                                        <input type="hidden" value="instruction" name="${seqno}q_type">
+                                    </div>
+                                    <c:set value="${q.instruction}" var="inst"/>
+                                    <c:set value="${seqno+1}" var="seqno" />
+                                    <c:set value="${no_seq+1}" var="no_seq" />
+                                </c:if>
                                 <c:choose>
                                     <c:when test="${q.q_type eq 'multiple_choice'}">
                                         <div class="multipleChoice">
                                             <hr>
+                                            <input type="hidden" name="q_id" value="${q.q_id}"/>
                                             <input type="hidden" name="seqno" value="${seqno}"/>
                                             <div class="q_no">
                                                 <span class="label label-default">${q.q_no}</span> 
@@ -119,6 +185,7 @@
                                         <div class="explain">
                                             <hr>
                                             <input type="hidden" name="seqno" value="${seqno}"/>
+                                            <input type="hidden" name="q_id" value="${q.q_id}"/>
                                             <div class="q_no">
                                                 <span class="label label-default">${q.q_no}</span> 
                                                 <input type="hidden" name="${seqno}q_no" value="${q.q_no}"/>
@@ -145,6 +212,7 @@
                                             <div class="matchWord">
                                                 <hr>
                                                 <input type="hidden" name="seqno" value="${seqno}"/>
+                                                <input type="hidden" name="q_id" value="${q.q_id}"/>
                                                 <div class="q_no">
                                                     <span class="label label-default">${q.q_no}</span>
                                                     <input type="hidden" name="${seqno}q_no" value="${q.q_no}"/>
@@ -210,6 +278,7 @@
                                             <div class="fillBlank">
                                                 <hr>
                                                 <input type="hidden" name="seqno" value="${seqno}"/>
+                                                <input type="hidden" name="q_id" value="${q.q_id}"/>
                                                 <div class="q_no">
                                                     <span class="label label-default">${q.q_no}</span>
                                                     <input type="hidden" name="${seqno}q_no" value="${q.q_no}"/>
@@ -256,6 +325,7 @@
                                         <div class="tfQuestion">
                                             <hr>
                                             <input type="hidden" name="seqno" value="${seqno}"/>
+                                            <input type="hidden" name="q_id" value="${q.q_id}"/>
                                             <div class="q_no">
                                                 <span class="label label-default">${q.q_no}</span> 
                                                 <input type="hidden" name="${seqno}q_no" value="${q.q_no}"/>
@@ -303,10 +373,21 @@
                                 <li><a onclick="setType('ep')"><img src="img/icon/explain.gif"> Explain</a></li>
                             </ul>
                             <button type="button" class="btn btn-default" onclick="addTitle()" style="margin-left: 20px;"> Add Instruction</button>
+                            <input type="submit" class="btn btn-primary pull-right" style="margin-left: 20px;" value="Saved">
                         </div>
                     </div>
                 </form>
             </div>
+            <c:set value="0" var="total_q"/>
+            <c:set value="0" var="q_id"/>
+            <c:forEach  items="${a.questionList}" var="ql">
+                <c:if test="${ql.q_id ne q_id}">
+                    <c:set value="${total_q+1}" var="total_q"/>
+                    <c:set value="${total_seq+1}" var="total_seq"/>
+                    <c:set value="${ql.q_id}" var="q_id"/>
+                </c:if>
+            </c:forEach>
+            <c:set value="${total_q+no_seq}" var="total_seq"/>
         </div>
         <script src="js/bootstrap-datetimepicker.min.js"></script>
         <script src="js/jquery-ui.js"></script>
@@ -342,7 +423,7 @@
                                     $('#compareBox').hide();
                                     var monthNames = ["January", "February", "March", "April", "May", "June",
                                         "July", "August", "September", "October", "November", "December"];
-                                    var d = new Date();
+                                    var d = new Date('${a.due_date}');
                                     $('#due_date input').val(d.getFullYear() + "-" + monthNames[d.getMonth()] + "-" + ('0' + d.getDate()).slice(-2));
                                     $('#due_date input[name="due_date"]').val(d.getFullYear() + "-" + ('0' + (d.getMonth() + 1)).slice(-2) + "-" + ('0' + d.getDate()).slice(-2));
                                     $('.form_datetime').datetimepicker({
@@ -494,8 +575,8 @@
                                     $("#addq").html(button_text);
                                 }
 
-                                var total_q = 1;
-                                var seqno = 1;
+                                var total_q = '${total_q+1}';
+                                var seqno = '${total_seq+1}';
                                 function addQuestion(t) {
                                     var question = '<div class="multipleChoice">'
                                             + '          <hr>'
@@ -673,7 +754,7 @@
                                     $(this).parent().parent().parent(".multipleChoice").find(".c_list").html(html);
                                 });
                                 function addTitle() {
-                                    var titleBox = '<div class="row"><hr><input type="hidden" name="seqno" value="' + seqno + '"/><div class="col-md-8"><input type="text" class="form-control" placeholder="Instruction" name="' + seqno + 'instruction" required="yes" ></div><a onclick="remove_title(this)"  style="vertical-align: -webkit-baseline-middle"><span class="glyphicon glyphicon-trash"></span></a><input type="hidden" value="instruction" name="' + seqno + 'q_type"></div>';
+                                    var titleBox = '<div class="row instruction"><hr><input type="hidden" name="seqno" value="' + seqno + '"/><label class="col-md-3 control-label">Instruction </label><div class="col-md-8"><input type="text" class="form-control" placeholder="Instruction" name="' + seqno + 'instruction" required="yes" ></div><a onclick="remove_title(this)"  style="vertical-align: -webkit-baseline-middle"><span class="glyphicon glyphicon-trash"></span></a><input type="hidden" value="instruction" name="' + seqno + 'q_type"></div>';
                                     $(".amQuestion").append(titleBox);
                                     seqno++;
                                 }
@@ -686,7 +767,8 @@
                                     var ans = $(t).siblings('[type="text"]').val();
                                     $(t).val(ans);
                                 }
-
+                                
+                                var newTotal_q = 1;
                                 function remove_q(t) {
                                     total_q--;
                                     seqno--;
@@ -697,6 +779,20 @@
                                         $(this).find("input").val(new_q_no);
                                         new_q_no++;
                                     });
+                                    $(".amQuestion > div").each(function() {
+                                        $(this).find("[name='seqno']").val(newTotal_q);
+                                        $(this).find("[name]").each(function() {
+                                            var namevl = $(this).attr("name").match(/\d+/);
+                                            var newvl = "";
+                                            if ($.isNumeric(namevl)) {
+                                                newvl = $(this).attr("name").replace(namevl, newTotal_q);
+                                                $(this).attr("name", newvl);
+                                            }
+                                        });
+                                        newTotal_q++;
+                                    });
+                                    //reset value
+                                    newTotal_q = 1
                                 }
 
                                 function remove_title(t) {

@@ -127,8 +127,6 @@ public class Assignment {
     public void setTitle_assignment_onweb(String title_assignment_onweb) {
         this.title_assignment_onweb = title_assignment_onweb;
     }
-    
-    
 
     public double getFully_mark() {
         return fully_mark;
@@ -178,13 +176,13 @@ public class Assignment {
 //            pstm.setString(7, ass.getAss_extension());
             if (ass.getAss_type().equalsIgnoreCase("file")) {
                 pstm.setString(7, ass.getPath_file());
-            }else{
+            } else {
                 pstm.setString(7, ass.getTitle_assignment_onweb());
             }
             pstm.executeUpdate();
             ResultSet key = pstm.getGeneratedKeys();
-            if(key.next()){
-             result  = key.getInt(1);   
+            if (key.next()) {
+                result = key.getInt(1);
             }
             conn.close();
         } catch (SQLException ex) {
@@ -214,7 +212,7 @@ public class Assignment {
     public static List<Assignment> getAmByCourseID(int course_id, boolean setCourse) {
         List<Assignment> AmList = new ArrayList<Assignment>();
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select * from assignment where course_id=?";
+        String sql = "select * from assignment where course_id=? order by create_date desc";
         PreparedStatement pstm;
         Assignment am = null;
         try {
@@ -382,6 +380,40 @@ public class Assignment {
         return result;
     }
 
+    //updateAmInfo(Assignment ass)
+    public static int updateAmInfo(Assignment ass) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "update assignment set name=?,description=?,ass_type=?,total_member=?,due_date=?,title_assignment_onweb=? where ass_id=?";
+        if (ass.getAss_type().equalsIgnoreCase("file")) {
+            sql = "update assignment set name=?,description=?,ass_type=?,total_member=?,due_date=?,path_file=? where ass_id=?";
+        }
+        PreparedStatement pstm;
+        int result = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, ass.getName());
+            pstm.setString(2, ass.getDescription());
+            pstm.setString(3, ass.getAss_type());
+            pstm.setInt(4, ass.getTotal_member());
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            pstm.setString(5, df.format(ass.getDue_date()));
+//            pstm.setTimestamp(6, ass.getDue_date());
+//            pstm.setString(7, ass.getAss_extension());
+            if (ass.getAss_type().equalsIgnoreCase("file")) {
+                pstm.setString(6, ass.getPath_file());
+            } else {
+                pstm.setString(6, ass.getTitle_assignment_onweb());
+            }
+            pstm.setInt(7, ass.getAm_id());
+            result = pstm.executeUpdate();
+            
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
     //checkAmStatus(int am_id) 
     public static String remainingTimeforSend(Assignment a, int acc_id) {
         String status = "";
@@ -426,7 +458,4 @@ public class Assignment {
     public String toString() {
         return "Assignment{" + "am_id=" + am_id + ", course=" + course + ", name=" + name + ", description=" + description + ", ass_type=" + ass_type + ", total_member=" + total_member + ", due_date=" + due_date + ", ass_extension=" + ass_extension + ", create_date=" + create_date + ", path_file=" + path_file + ", title_assignment_onweb=" + title_assignment_onweb + ", fully_mark=" + fully_mark + ", comment=" + comment + ", questionList=" + questionList + '}';
     }
-
-    
-
 }
