@@ -32,7 +32,8 @@ public class deleteCourse extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession ss = request.getSession();
-        Course.deleteCourse(Integer.parseInt(ss.getAttribute("cId") + ""));
+        System.out.println(Integer.parseInt(ss.getAttribute("cId") + ""));
+        System.out.println(Course.deleteCourse(Integer.parseInt(ss.getAttribute("cId") + "")));
         response.sendRedirect("home.jsp?tab=AllAnnouce");
     }
 

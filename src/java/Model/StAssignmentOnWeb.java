@@ -26,7 +26,7 @@ public class StAssignmentOnWeb {
     private int acc_id;
     private double score;
     private Date send_date;
-    private List<Group_member> member;
+    private String member;
     private List<Comment> comment;
     private List<AnswerQuestion> anwerQuestion;
 
@@ -70,11 +70,11 @@ public class StAssignmentOnWeb {
         this.send_date = send_date;
     }
 
-    public List<Group_member> getMember() {
+    public String getMember() {
         return member;
     }
 
-    public void setMember(List<Group_member> member) {
+    public void setMember(String member) {
         this.member = member;
     }
 

@@ -44,7 +44,7 @@
             <div class="row">
                 <%@include file="META-INF/page/side_bar.jsp"%>
                 <div class="col-md-9" style="padding-bottom: 20px">
-                    <c:choose>
+                    <!--<c:choose>
                         <c:when test="${param.ct eq 'allAm'}">
                             <div><h3>All Course</h3></div>
                             <%@include file="META-INF/page/allCourseTab.jsp"%>
@@ -61,7 +61,13 @@
                                 <li class="active"><a href="#">Assignment# 1...</a></li>
                             </ol>
                         </c:otherwise>
-                    </c:choose>
+                    </c:choose>-->
+                    <div><h3>INT202 Software Development Process II</h3></div>
+                    <%@include file="META-INF/page/CourseTab.jsp"%>
+                    <ol class="breadcrumb" style="margin-top: 15px" >
+                        <li><a href="course.jsp?tab=AllAssignment">Assignment</a></li>
+                        <li class="active"><a href="#">Assignment# 1...</a></li>
+                    </ol>
                     <div >
                         <div >
                             <form role="form" id="questionList">
@@ -271,132 +277,132 @@
 
             // Connect URL
             /*var url = 'https://goinstant.net/701ad7c04624/CollaborateAssignment';
-
-            var connection = new goinstant.Connection(url);
-            connection.connect(function(err) {
-                if (err) {
-                    // there was an error connecting OR the token was invalid.
-                    return;
-                }
-
-                var room = connection.room('lobby1');
-
-                // Create a new instance of the Notifications widget
-                var notifications = new goinstant.widgets.Notifications();
-
-                // Get all notifications
-                notifications.subscribe(room, function(err) {
-                    if (err) {
-                        throw err;
-                    }
-                    // We're now receiving notifications
-                });
-
-                room.join({displayName: 'Custom'}, function(err, yourRoom, userData) {
-                    if (err) {
-                        console.log("Error joining room:", err);
-                        // Failed to join room; clean up or retry.
-                        return;
-                    }
-
-                    // Joined the room. Start getting and manipulating keys.
-
-                    // Create a new instance of the UserList widget
-                    var userList = new goinstant.widgets.UserList({
-                        room: yourRoom,
-                        collapsed: false,
-                        position: 'right'
-                    });
-
-                    // Initialize the UserList widget
-                    userList.initialize(function(err) {
-                        if (err) {
-                            throw err;
-                        }
-                    });
-
-                    // Create a new instance of the Chat widget
-                    var chat = new goinstant.widgets.Chat({
-                        room: yourRoom
-                    });
-
-                    // Initialize the Chat widget
-                    chat.initialize(function(err) {
-                        if (err) {
-                            throw err;
-                        }
-                        // Now it should render on the page
-                    });
-
-                    // Create a key to store the form data
-                    var formKey = yourRoom.key('example-form-key');
-
-                    // Create a new instance of the widget
-                    var form = new goinstant.widgets.Form({
-                        el: document.getElementById('questionList'),
-                        key: formKey,
-                        room: yourRoom
-                    });
-
-                    form.initialize(function(err) {
-                        if (err) {
-                            throw err;
-                        }
-                        // Your form should now be initialized!
-                    });
-
-                    // Create a new instance of the Click Indicator widget
-                    var clickIndicator = new goinstant.widgets.ClickIndicator({room: yourRoom});
-
-                    // Initialize the Click Indicator widget
-                    clickIndicator.initialize(function(err) {
-                        if (err) {
-                            throw err;
-                        }
-                        // Click Indicator widget ready to use
-                    });
-
-                    console.log("Your name is " + userData.displayName); // "Your name is Custom"
-                });
-
-                // The listener will fire everytime a user leaves the Room
-                room.on('leave', function(userData) {
-                    // Set options for the notification we're about to publish
-                    var options = {
-                        room: room,
-                        type: 'warning',
-                        message: 'user' + userData.displayName + ' left the lobby!',
-                        displayToSelf: true
-                    };
-
-                    // Send a single notification
-                    notifications.publish(options, function(err) {
-                        if (err) {
-                            throw err;
-                        }
-                        // Notification has been sent
-                    });
-                });
-
-                // The listener will fire every time another user joins the room
-                room.on('join', function(userData) {
-                    // Set options for the notification we're about to publish
-                    var options = {
-                        room: room,
-                        type: 'success',
-                        message: 'user ' + userData.displayName + ' join the lobby!',
-                        displayToSelf: true
-                    };
-
-                    // Send a single notification
-                    notifications.publish(options, function(err) {
-                        if (err) {
-                            throw err;
-                        }
-                        // Notification has been sent
-                    });
-                });
-            });*/
+             
+             var connection = new goinstant.Connection(url);
+             connection.connect(function(err) {
+             if (err) {
+             // there was an error connecting OR the token was invalid.
+             return;
+             }
+             
+             var room = connection.room('lobby1');
+             
+             // Create a new instance of the Notifications widget
+             var notifications = new goinstant.widgets.Notifications();
+             
+             // Get all notifications
+             notifications.subscribe(room, function(err) {
+             if (err) {
+             throw err;
+             }
+             // We're now receiving notifications
+             });
+             
+             room.join({displayName: 'Custom'}, function(err, yourRoom, userData) {
+             if (err) {
+             console.log("Error joining room:", err);
+             // Failed to join room; clean up or retry.
+             return;
+             }
+             
+             // Joined the room. Start getting and manipulating keys.
+             
+             // Create a new instance of the UserList widget
+             var userList = new goinstant.widgets.UserList({
+             room: yourRoom,
+             collapsed: false,
+             position: 'right'
+             });
+             
+             // Initialize the UserList widget
+             userList.initialize(function(err) {
+             if (err) {
+             throw err;
+             }
+             });
+             
+             // Create a new instance of the Chat widget
+             var chat = new goinstant.widgets.Chat({
+             room: yourRoom
+             });
+             
+             // Initialize the Chat widget
+             chat.initialize(function(err) {
+             if (err) {
+             throw err;
+             }
+             // Now it should render on the page
+             });
+             
+             // Create a key to store the form data
+             var formKey = yourRoom.key('example-form-key');
+             
+             // Create a new instance of the widget
+             var form = new goinstant.widgets.Form({
+             el: document.getElementById('questionList'),
+             key: formKey,
+             room: yourRoom
+             });
+             
+             form.initialize(function(err) {
+             if (err) {
+             throw err;
+             }
+             // Your form should now be initialized!
+             });
+             
+             // Create a new instance of the Click Indicator widget
+             var clickIndicator = new goinstant.widgets.ClickIndicator({room: yourRoom});
+             
+             // Initialize the Click Indicator widget
+             clickIndicator.initialize(function(err) {
+             if (err) {
+             throw err;
+             }
+             // Click Indicator widget ready to use
+             });
+             
+             console.log("Your name is " + userData.displayName); // "Your name is Custom"
+             });
+             
+             // The listener will fire everytime a user leaves the Room
+             room.on('leave', function(userData) {
+             // Set options for the notification we're about to publish
+             var options = {
+             room: room,
+             type: 'warning',
+             message: 'user' + userData.displayName + ' left the lobby!',
+             displayToSelf: true
+             };
+             
+             // Send a single notification
+             notifications.publish(options, function(err) {
+             if (err) {
+             throw err;
+             }
+             // Notification has been sent
+             });
+             });
+             
+             // The listener will fire every time another user joins the room
+             room.on('join', function(userData) {
+             // Set options for the notification we're about to publish
+             var options = {
+             room: room,
+             type: 'success',
+             message: 'user ' + userData.displayName + ' join the lobby!',
+             displayToSelf: true
+             };
+             
+             // Send a single notification
+             notifications.publish(options, function(err) {
+             if (err) {
+             throw err;
+             }
+             // Notification has been sent
+             });
+             });
+             });*/
         });
     </script>
 </html> 

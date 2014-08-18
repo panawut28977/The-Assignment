@@ -24,7 +24,14 @@
             <div class="row">
                 <%@include file="META-INF/page/side_bar.jsp"%>
                 <div class="col-md-9">
-                    <div><h3>All Course </h3></div>
+                    <c:choose>
+                        <c:when test="${param.tab eq 'AllAssignment'}">
+                            <div><h3>All Course Assignment </h3></div>
+                        </c:when>
+                        <c:when test="${param.tab eq 'AllAnnouce'}">
+                            <div><h3>All Course Announce</h3></div>
+                        </c:when>
+                    </c:choose>
                     <%@include file="META-INF/page/allCourseTab.jsp" %>
                     <c:choose>
                         <c:when test="${param.tab eq 'AllAssignment'}">
@@ -37,7 +44,7 @@
                 </div>
             </div>
         </div>
-<!--        <a href="setSession.jsp?acct=th"><span>teacher mode</span></a>
-         <a href="setSession.jsp?acct=st"><span>student mode</span></a>-->
+        <!--        <a href="setSession.jsp?acct=th"><span>teacher mode</span></a>
+                 <a href="setSession.jsp?acct=st"><span>student mode</span></a>-->
     </body>
 </html>

@@ -167,7 +167,7 @@ public class Account {
                 for (AccountCourse accountCourse : CL) {
                     acc.CourseList.put((long) accountCourse.getCourse().getCourse_id(), accountCourse);
                 }
-                acc.setListStudentScore(UserScore.getUserScore(acc_id));
+//                acc.setListStudentScore(UserScore.getUserScore(acc_id));
             }
             conn.close();
         } catch (SQLException ex) {
@@ -254,23 +254,23 @@ public class Account {
         return result > 0;
     }
 
-    public static String getNameByID(int acc_id) {
+    public static Account getNameByID(int acc_id) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select concat(`firstname`,' ',`lastname`) as fullname from account where acc_id = ? ";
+        String sql = "select concat(`firstname`,' ',`lastname`) as fullname,profile_pic from account where acc_id = ? ";
         PreparedStatement pstm;
-        int result = 0;
-        String fullname = "";
+        Account ac = new Account();
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, acc_id);
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {
-                fullname = rs.getString(1);
+                ac.setFirstname(rs.getString(1));
+                ac.setProfile_pic(rs.getString(2));
             }
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return fullname;
+        return ac;
     }
 
     public static Account getAccountByID(int acc_id) {
@@ -299,6 +299,8 @@ public class Account {
         }
         return acc;
     }
+    
+    
 
     @Override
     public String toString() {

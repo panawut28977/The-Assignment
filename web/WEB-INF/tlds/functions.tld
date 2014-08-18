@@ -60,5 +60,10 @@
         <function-class>util.Util</function-class>
         <function-signature>Boolean containsAns(java.lang.String,java.lang.String)</function-signature>
     </function>
+     <function>
+        <name>getNameByID</name>
+        <function-class>Model.Account</function-class>
+        <function-signature>String getNameByID(int)</function-signature>
+    </function>
     
 </taglib>

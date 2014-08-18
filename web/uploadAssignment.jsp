@@ -28,7 +28,7 @@
             <div class="row">
                 <%@include file="META-INF/page/side_bar.jsp"%>
                 <div class="col-md-9" style="padding-bottom: 20px">
-                    <c:choose>
+                    <!--<c:choose>
                         <c:when test="${param.ct eq 'allAm'}">
                             <div><h3>All Course</h3></div>
                             <%@include file="META-INF/page/allCourseTab.jsp"%>
@@ -45,7 +45,13 @@
                                 <li class="active"><a href="#">Assignment# 1...</a></li>
                             </ol>
                         </c:otherwise>
-                    </c:choose>
+                    </c:choose>-->
+                    <div><h3>${ac.courseList.get(cId).course.name}</h3></div>
+                    <%@include file="META-INF/page/CourseTab.jsp"%>
+                    <ol class="breadcrumb" style="margin-top: 15px" >
+                        <li><a href="course.jsp?tab=AllAssignment">Assignment</a></li>
+                        <li class="active"><a href="#">Assignment# 1...</a></li>
+                    </ol>
                     <div >
                         <div  class="pull-left">
                             <h4>Individual work</h4>

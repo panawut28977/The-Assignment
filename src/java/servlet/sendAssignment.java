@@ -7,9 +7,8 @@ package servlet;
 
 import Model.Account;
 import Model.Assignment;
+import Model.Group_member;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +19,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Orarmor
  */
-public class LoginServlet extends HttpServlet {
+public class sendAssignment extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,26 +32,23 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
         HttpSession ss = request.getSession();
-        Account a = Account.login(email, password);
+        Account ac = (Account) ss.getAttribute("ac");
+        int am_id = Integer.parseInt(ss.getAttribute("am_id") + "");
+        String cId = ss.getAttribute("cId") + "";
+        Assignment a = Assignment.getAmByAmID(am_id);
         String url = "";
-        String st = "";     
-        if (a.getAcc_id() != 0) {
-            ss.removeAttribute("cId");
-            ss.setAttribute("ac", a);
-            ss.setAttribute("accType", a.getAccount_type());
-            url = "home.jsp?tab=AllAnnouce";
-            ss.setAttribute("objStatus", "updated");
-            response.sendRedirect(url);
+        if (Group_member.isInGroup(ac.getAcc_id(), am_id) < 1 && a.getTotal_member() != 1) {
+            response.sendRedirect("selectPeople?am_id=" + am_id + "&&cId=" + cId);
         } else {
-            request.setAttribute("msg", "email / password ผิดพลาดกรุณาลองใหม่อีกครั้ง");
-            request.setAttribute("email", email);
-            url = "/index.jsp";
-            getServletContext().getRequestDispatcher(url).forward(request, response);
+            if (a.getAss_type().equalsIgnoreCase("file")) {
+                url = "/uploadAssignment.jsp?tab=AllAssignment";
+                getServletContext().getRequestDispatcher(url).forward(request, response);
+            } else {
+                url = "/onwebAssignment.jsp?tab=AllAssignment";
+                getServletContext().getRequestDispatcher(url).forward(request, response);
+            }
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -67,6 +63,12 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession ss = request.getSession();
+        ss.setAttribute("am_id", request.getParameter("am_id"));
+        if (request.getParameter("cId") != null) {
+            Long cId = Long.parseLong(request.getParameter("cId"));
+            ss.setAttribute("cId", cId);
+        }
         processRequest(request, response);
     }
 

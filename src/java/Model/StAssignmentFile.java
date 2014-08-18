@@ -28,7 +28,7 @@ public class StAssignmentFile {
     private double score;
     private Date send_date;
     private double similar_score;
-    private List<Group_member> member;
+    private String member;
     private List<Comment> comment;
 
     public int getSt_am_id() {
@@ -87,11 +87,11 @@ public class StAssignmentFile {
         this.similar_score = similar_score;
     }
 
-    public List<Group_member> getMember() {
+    public String getMember() {
         return member;
     }
 
-    public void setMember(List<Group_member> member) {
+    public void setMember(String member) {
         this.member = member;
     }
 

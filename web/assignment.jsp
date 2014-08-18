@@ -228,7 +228,7 @@ Author     : JenoVa
                     url: "comment",
                     data: {text: $("#text").val()}
                 }).done(function(msg) {
-                    var html = '<div class="media" id="newComment"><a class="pull-left" href="#"><img class="img-circle" width="64" src="' + pic + '"></a><div class="media-body"><h4 class="media-heading"><small class="text-muted">' + fullname + '</small><small class="pull-right">' + dateSt + '</small></h4><p>' + $("#text").val() + '</p></div></div>';
+                    var html = '<div class="media" id="newComment"><a class="pull-left" href="#"><img class="img-circle" width="64" src="' + pic + '"></a><div class="media-body"><h4 class="media-heading">' + fullname + '<small class="pull-right">' + dateSt + '</small></h4><p>' + $("#text").val() + '</p></div></div>';
                     $("#listComment").prepend(html);
                     $("#newComment").slideDown().removeAttr("id");
                     $("#text").val("");

@@ -38,30 +38,33 @@ public class refreshAccount implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpSession ss = req.getSession();
-        Account a = (Account) ss.getAttribute("ac");
-        a = Account.login(a.getEmail(), a.getPassword());
-        ss.setAttribute("ac", a);
-        List<Assignment> amList = a.getAssignment();
-        String st = "";
-        Integer late = 0, hurry = 0, ontime = 0, sent = 0;
-        for (Assignment assignment : amList) {
-            st = Assignment.remainingTimeforSend(assignment, a.getAcc_id());
-            if (st.equalsIgnoreCase("sent")) {
-                sent++;
-            } else if (st.equalsIgnoreCase("ontime")) {
-                ontime++;
-            } else if (st.equalsIgnoreCase("hurryup")) {
-                hurry++;
-            } else {
-                late++;
+        if (!(ss.getAttribute("objStatus")+"").equalsIgnoreCase("updated")) {
+            ss.setAttribute("objStatus", "noupdated");
+            Account a = (Account) ss.getAttribute("ac");
+            a = Account.login(a.getEmail(), a.getPassword());
+            ss.setAttribute("ac", a);
+            List<Assignment> amList = a.getAssignment();
+            String st = "";
+            Integer late = 0, hurry = 0, ontime = 0, sent = 0;
+            for (Assignment assignment : amList) {
+                st = Assignment.remainingTimeforSend(assignment, a.getAcc_id());
+                if (st.equalsIgnoreCase("sent")) {
+                    sent++;
+                } else if (st.equalsIgnoreCase("ontime")) {
+                    ontime++;
+                } else if (st.equalsIgnoreCase("hurryup")) {
+                    hurry++;
+                } else {
+                    late++;
+                }
             }
+            System.out.println("refreshaccount");
+            ss.setAttribute("late", late);
+            ss.setAttribute("hurry", hurry);
+            ss.setAttribute("ontime", ontime);
+            ss.setAttribute("sent", sent);
+            ss.setAttribute("rf", 1);
         }
-        System.out.println("refreshaccount");
-        ss.setAttribute("late", late);
-        ss.setAttribute("hurry", hurry);
-        ss.setAttribute("ontime", ontime);
-        ss.setAttribute("sent", sent);
-        ss.setAttribute("rf", 1);
         chain.doFilter(request, response);
 
     }

@@ -20,6 +20,8 @@
         <url-pattern>/assignment.jsp</url-pattern>
         <url-pattern>/CheckAssignment.jsp</url-pattern>
         <url-pattern>/SentAssignment.jsp</url-pattern>
+        <url-pattern>/groupWork.jsp</url-pattern>
+        <url-pattern>/selectPeople</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>
@@ -135,6 +137,18 @@
         <servlet-name>updateAssignment</servlet-name>
         <servlet-class>servlet.updateAssignment</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>selectPeople</servlet-name>
+        <servlet-class>servlet.selectPeople</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>addMember</servlet-name>
+        <servlet-class>servlet.addMember</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>sendAssignment</servlet-name>
+        <servlet-class>servlet.sendAssignment</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -226,6 +240,18 @@
     <servlet-mapping>
         <servlet-name>updateAssignment</servlet-name>
         <url-pattern>/updateAssignment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>selectPeople</servlet-name>
+        <url-pattern>/selectPeople</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addMember</servlet-name>
+        <url-pattern>/addMember</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sendAssignment</servlet-name>
+        <url-pattern>/sendAssignment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

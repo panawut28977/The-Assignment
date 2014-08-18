@@ -42,7 +42,7 @@
                             <td>Individual</td>
                         </c:when>
                         <c:otherwise>
-                            <td>${a.total_member} <a href="groupWork.jsp?ct=allAm&&tab=AllAssignment&&cId=${a.course.course_id}">join group</a></td>
+                            <td>${a.total_member} <a href="selectPeople?am_id=${a.am_id}&&cId=${a.course.course_id}">join group</a></td>
                         </c:otherwise>
                     </c:choose>
                     <td>${a.due_date}</td>
@@ -63,7 +63,14 @@
                                 </c:otherwise>
                             </c:choose>
                     </td>
-                    <td><a title="Send Assignment File" href="uploadAssignment.jsp?ct=allAm&&tab=AllAssignment"><span class="glyphicon glyphicon-upload"></span></a></td>
+                    <td>
+                        <!--                        <a title="Send Assignment File" href="uploadAssignment.jsp?ct=allAm&&tab=AllAssignment">
+                                                    <span class="glyphicon glyphicon-upload"></span>
+                                                </a>-->
+                        <a title="Send Assignment" href="sendAssignment?am_id=${a.am_id}&&cId=${a.course.course_id}">
+                            <span class="glyphicon glyphicon-upload"></span>
+                        </a>
+                    </td>
                 </tr>
             </c:forEach>
         </tbody>

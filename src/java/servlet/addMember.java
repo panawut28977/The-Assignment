@@ -5,11 +5,10 @@
  */
 package servlet;
 
-import Model.Account;
 import Model.Assignment;
+import Model.Group_member;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +19,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Orarmor
  */
-public class LoginServlet extends HttpServlet {
+public class addMember extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,26 +32,23 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
         HttpSession ss = request.getSession();
-        Account a = Account.login(email, password);
+        String am_id = ""+ss.getAttribute("am_id");
+        String acc_id = request.getParameter("acc_id");
+        Group_member g = new Group_member();
+        g.setAcc_id(acc_id);
+        g.setAm_id(Integer.parseInt(am_id));
+        g.setG_no(Group_member.getlastedGNo(Integer.parseInt(am_id))+1);
+        Group_member.addMember(g);
+        Assignment a = Assignment.getAmByAmID(am_id);
         String url = "";
-        String st = "";     
-        if (a.getAcc_id() != 0) {
-            ss.removeAttribute("cId");
-            ss.setAttribute("ac", a);
-            ss.setAttribute("accType", a.getAccount_type());
-            url = "home.jsp?tab=AllAnnouce";
-            ss.setAttribute("objStatus", "updated");
-            response.sendRedirect(url);
-        } else {
-            request.setAttribute("msg", "email / password ผิดพลาดกรุณาลองใหม่อีกครั้ง");
-            request.setAttribute("email", email);
-            url = "/index.jsp";
-            getServletContext().getRequestDispatcher(url).forward(request, response);
+        if(a.getAss_type().equalsIgnoreCase("file")){
+            url = "uploadAssignment.jsp?tab=AllAssignment";
+        }else{
+            url = "onwebAssignment.jsp?tab=AllAssignment";
         }
-
+        System.out.println(url);
+        response.sendRedirect(url);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

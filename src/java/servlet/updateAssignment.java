@@ -81,9 +81,13 @@ public class updateAssignment extends HttpServlet {
         String url = "";
         int key = 0;
         if (ass_type.equalsIgnoreCase("file")) {
-            a.setPath_file(m.getFilesystemName("file"));
+            if (m.getFilesystemName("newfile") == null) {
+                a.setPath_file(m.getParameter("file"));
+            } else {
+                a.setPath_file(m.getFilesystemName("newfile"));
+            }
             Assignment.updateAmInfo(a);
-            url = "/assignment.jsp?tab=AllAssignment&&amId=" + am_id;
+            url = "assignment.jsp?tab=AllAssignment&&amId=" + am_id;
         } else {
             a.setTitle_assignment_onweb(m.getParameter("title_assignment_onweb"));
             String[] seqno = m.getParameterValues("seqno");
