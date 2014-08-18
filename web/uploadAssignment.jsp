@@ -54,11 +54,24 @@
                     </ol>
                     <div >
                         <div  class="pull-left">
-                            <h4>Individual work</h4>
-                            <div class="member">
-                                <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
-                                <h4>Panawut</h4>
-                            </div>
+                            <c:choose>
+                                <c:when test="${curAm.total_member==1}">
+                                    <h4>Individual work</h4>
+                                    <div class="member">
+                                        <img width="64" src="${ac.profile_pic}">
+                                        <h4>${ac.firstname} ${ac.lastname}</h4>
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <h4>Group work</h4>
+                                    <c:forEach items="${gAm}" var="m">
+                                        <div class="member">
+                                        <img width="64" src="${m.profile_pic}">
+                                        <h4>${m.firstname} ${m.lastname}</h4>
+                                    </div>
+                                    </c:forEach>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                         <hr style="clear: both">
                         <div style="text-align: center"> 

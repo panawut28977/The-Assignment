@@ -47,7 +47,7 @@ public class selectPeople extends HttpServlet {
         }
         
         List<Group_member> gList = Group_member.getAllGroup(a.getAm_id());
-        StringBuilder temp = new StringBuilder();
+        StringBuilder temp = new StringBuilder(" ");
         for (Group_member group_member : gList) {
             temp.append("," + group_member.getAcc_id());
         }

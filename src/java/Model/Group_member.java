@@ -224,6 +224,29 @@ public class Group_member {
         return gList;
     }
 
+    public static Group_member getGroupByMember(int acc_id,int am_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        PreparedStatement pstm;
+        String sql = "";
+        sql = "select * from group_member where ass_id = ? and acc_id like '%"+acc_id+"%'";
+        Group_member g = new Group_member();
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, am_id);
+            ResultSet rs = pstm.executeQuery();
+            while(rs.next()) {
+                g = new Group_member();
+                g.setG_id(rs.getInt("g_id"));
+                g.setAcc_id(rs.getString("acc_id"));
+                g.setG_no(rs.getInt("g_no"));
+                g.setAm_id(rs.getInt("ass_id"));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return g;
+    }
     @Override
     public String toString() {
         return "Group_member{" + "g_id=" + g_id + ", acc_id=" + acc_id + ", g_no=" + g_no + ", am_id=" + am_id + '}';

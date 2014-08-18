@@ -9,6 +9,8 @@ import Model.Account;
 import Model.Assignment;
 import Model.Group_member;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -38,9 +40,22 @@ public class sendAssignment extends HttpServlet {
         String cId = ss.getAttribute("cId") + "";
         Assignment a = Assignment.getAmByAmID(am_id);
         String url = "";
+        ss.setAttribute("curAm", a);
         if (Group_member.isInGroup(ac.getAcc_id(), am_id) < 1 && a.getTotal_member() != 1) {
             response.sendRedirect("selectPeople?am_id=" + am_id + "&&cId=" + cId);
         } else {
+            if (a.getTotal_member() == 1) {
+                System.out.println("individual work");
+            } else {
+                Group_member g = Group_member.getGroupByMember(ac.getAcc_id(), am_id);
+                String accIdList[] = g.getAcc_id().split(",");
+                List<Account> gAm = new ArrayList<>();
+                for (String accId : accIdList) {
+                    gAm.add(Account.getNameByID(Integer.parseInt(accId)));
+                }
+                ss.setAttribute("gAm", gAm);
+            }
+            
             if (a.getAss_type().equalsIgnoreCase("file")) {
                 url = "/uploadAssignment.jsp?tab=AllAssignment";
                 getServletContext().getRequestDispatcher(url).forward(request, response);

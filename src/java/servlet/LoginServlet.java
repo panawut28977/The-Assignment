@@ -38,7 +38,7 @@ public class LoginServlet extends HttpServlet {
         HttpSession ss = request.getSession();
         Account a = Account.login(email, password);
         String url = "";
-        String st = "";     
+        String st = "";
         if (a.getAcc_id() != 0) {
             ss.removeAttribute("cId");
             ss.setAttribute("ac", a);
