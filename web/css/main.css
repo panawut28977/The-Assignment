@@ -51,6 +51,7 @@ and open the template in the editor.
 .member{
     float:left;
     margin-left: 10px;
+    text-align: center;
 }
 .clearboth{
     clear: both;

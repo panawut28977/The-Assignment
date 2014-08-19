@@ -8,6 +8,7 @@ package servlet;
 import Model.Account;
 import Model.Assignment;
 import Model.Group_member;
+import Model.StAssignmentFile;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,22 +42,26 @@ public class sendAssignment extends HttpServlet {
         Assignment a = Assignment.getAmByAmID(am_id);
         String url = "";
         ss.setAttribute("curAm", a);
+         Group_member g = null;
         if (Group_member.isInGroup(ac.getAcc_id(), am_id) < 1 && a.getTotal_member() != 1) {
             response.sendRedirect("selectPeople?am_id=" + am_id + "&&cId=" + cId);
         } else {
             if (a.getTotal_member() == 1) {
                 System.out.println("individual work");
             } else {
-                Group_member g = Group_member.getGroupByMember(ac.getAcc_id(), am_id);
+                g = Group_member.getGroupByMember(ac.getAcc_id(), am_id);
                 String accIdList[] = g.getAcc_id().split(",");
                 List<Account> gAm = new ArrayList<>();
                 for (String accId : accIdList) {
                     gAm.add(Account.getNameByID(Integer.parseInt(accId)));
                 }
                 ss.setAttribute("gAm", gAm);
+                
             }
             
             if (a.getAss_type().equalsIgnoreCase("file")) {
+                StAssignmentFile sa = StAssignmentFile.getStAmBbyAmIDAndGID(am_id,g.getG_id());
+                ss.setAttribute("sa", sa);
                 url = "/uploadAssignment.jsp?tab=AllAssignment";
                 getServletContext().getRequestDispatcher(url).forward(request, response);
             } else {

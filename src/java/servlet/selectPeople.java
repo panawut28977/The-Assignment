@@ -61,7 +61,6 @@ public class selectPeople extends HttpServlet {
                 noGMember.add(m);
             }
         }
-        System.out.println(noGMember);
         request.setAttribute("noGMember", noGMember);
         request.setAttribute("am", a);
         request.setAttribute("gList", gList);
@@ -70,6 +69,8 @@ public class selectPeople extends HttpServlet {
         if (Group_member.isInGroup(ac.getAcc_id(), a.getAm_id()) >= 1) {
             request.setAttribute("msg", "joined");
         }
+        
+        
         url = "/groupWork.jsp?tab=AllAssignment";
         getServletContext().getRequestDispatcher(url).forward(request, response);
     }

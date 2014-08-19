@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package servlet;
 
 import Model.Account;
 import Model.Assignment;
-import Model.Group_member;
+import Model.Comment;
 import Model.StAssignmentFile;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Orarmor
  */
-public class addMember extends HttpServlet {
+public class commentStAm extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,27 +35,21 @@ public class addMember extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
         HttpSession ss = request.getSession();
-        Account ac = (Account) ss.getAttribute("ac");
-        String am_id = "" + ss.getAttribute("am_id");
-        String acc_id = request.getParameter("acc_id");
-        Group_member g = new Group_member();
-        g.setAcc_id(acc_id);
-        g.setAm_id(Integer.parseInt(am_id));
-        g.setG_no(Group_member.getlastedGNo(Integer.parseInt(am_id)) + 1);
-        int g_id = Group_member.addMember(g);
-        Assignment a = Assignment.getAmByAmID(am_id);
-        String url = "";
-        if (a.getAss_type().equalsIgnoreCase("file")) {
-            StAssignmentFile stF = new StAssignmentFile();
-            stF.setAcc_id(ac.getAcc_id());
-            stF.setAm_id(Integer.parseInt(am_id));
-            stF.setG_id(g_id);
-            StAssignmentFile.setAm(stF);
-        } else {
+        String text = request.getParameter("text");
+        Assignment am = (Assignment)ss.getAttribute("curAm");
+        Comment c = new Comment();
+        c.setAcc_id((Account) ss.getAttribute("ac"));
+        c.setText(text);
+        int st_ass_id = 0;
+        if(am.getAss_type().equalsIgnoreCase("file")){
+            StAssignmentFile saf = (StAssignmentFile)ss.getAttribute("sa");
+            st_ass_id = saf.getSt_am_id();
+        }else{
+            // st ass on web
         }
-        url ="sendAssignment?am_id="+am_id;
-        response.sendRedirect(url);
+        Comment.addToStComment(c, st_ass_id, am.getAss_type());
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

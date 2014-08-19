@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -66,23 +67,26 @@ public class Group_member {
 //        this.am_type = am_type;
 //    }
     //addMember(List<Group_member> g)
-    public static boolean addMember(Group_member m) {
+    public static int addMember(Group_member m) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "";
         PreparedStatement pstm;
         sql = "insert into group_member(acc_id,ass_id,g_no) values(?,?,?)";
         int result = 0;
         try {
-            pstm = conn.prepareStatement(sql);
+            pstm = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pstm.setString(1, m.getAcc_id());
             pstm.setInt(2, m.getAm_id());
             pstm.setInt(3, m.getG_no());
-            result = pstm.executeUpdate();
-            conn.close();
+            pstm.executeUpdate();
+            ResultSet generatedKeys = pstm.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                result = generatedKeys.getInt(1);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return result > 0;
+        return result;
     }
 
 //    public static boolean addMember(List<Group_member> mList) {
@@ -209,7 +213,7 @@ public class Group_member {
             pstm.setInt(1, am_id);
             ResultSet rs = pstm.executeQuery();
             Group_member g = null;
-            while(rs.next()) {
+            while (rs.next()) {
                 g = new Group_member();
                 g.setG_id(rs.getInt("g_id"));
                 g.setAcc_id(rs.getString("acc_id"));
@@ -224,17 +228,17 @@ public class Group_member {
         return gList;
     }
 
-    public static Group_member getGroupByMember(int acc_id,int am_id) {
+    public static Group_member getGroupByMember(int acc_id, int am_id) {
         Connection conn = ConnectionBuilder.getConnection();
         PreparedStatement pstm;
         String sql = "";
-        sql = "select * from group_member where ass_id = ? and acc_id like '%"+acc_id+"%'";
+        sql = "select * from group_member where ass_id = ? and acc_id like '%" + acc_id + "%'";
         Group_member g = new Group_member();
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, am_id);
             ResultSet rs = pstm.executeQuery();
-            while(rs.next()) {
+            while (rs.next()) {
                 g = new Group_member();
                 g.setG_id(rs.getInt("g_id"));
                 g.setAcc_id(rs.getString("acc_id"));
@@ -247,6 +251,7 @@ public class Group_member {
         }
         return g;
     }
+
     @Override
     public String toString() {
         return "Group_member{" + "g_id=" + g_id + ", acc_id=" + acc_id + ", g_no=" + g_no + ", am_id=" + am_id + '}';

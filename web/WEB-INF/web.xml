@@ -150,6 +150,10 @@
         <servlet-name>sendAssignment</servlet-name>
         <servlet-class>servlet.sendAssignment</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>commentStAm</servlet-name>
+        <servlet-class>servlet.commentStAm</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -253,6 +257,10 @@
     <servlet-mapping>
         <servlet-name>sendAssignment</servlet-name>
         <url-pattern>/sendAssignment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>commentStAm</servlet-name>
+        <url-pattern>/commentStAm</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

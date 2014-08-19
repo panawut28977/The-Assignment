@@ -168,6 +168,11 @@ Author     : JenoVa
                         </div>
                         <div class="clearboth"><hr></div> 
                         <h3>Comment</h3>
+                        <form>
+                                <textarea class="form-control" placeholder="Tell your teacher here." name="text" id="text"></textarea><br>
+                                <input  type="button" class="btn btn-primary col-md-3 pull-right" id="addComment" value="Comment">
+                            </form>
+                        <br/><br/><br/>
                         <div id="listComment">
                             <c:forEach items="${am.comment}" var="c">
                                 <div class="media">
@@ -180,11 +185,6 @@ Author     : JenoVa
                                     </div>
                                 </div>
                             </c:forEach>
-                            <br/>
-                            <form>
-                                <textarea class="form-control" placeholder="Tell your teacher here." name="text" id="text"></textarea><br>
-                                <input  type="button" class="btn btn-primary col-md-3 pull-right" id="addComment" value="Comment">
-                            </form>
                         </div>
                     </div>
                 </div>

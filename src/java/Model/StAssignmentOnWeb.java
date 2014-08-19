@@ -161,26 +161,33 @@ public class StAssignmentOnWeb {
         return result;
     }
     
-    public void sendAm(List<StAssignmentOnWeb> StAssWeb){
-        Connection conn = ConnectionBuilder.getConnection();
-        String sql = "insert into Student_assignment_on_web(st_ass_id,ass_id,acc_id,score,send_date) values(?,?,?,?,?)";
-        PreparedStatement pstm;
-        int result = 0;
-        try {
-            pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, StAssWeb.get(0).getSt_am_id());
-            pstm.setInt(2, StAssWeb.get(1).getAm_id());
-            pstm.setInt(3, StAssWeb.get(2).getAcc_id());
-            pstm.setDouble(4, StAssWeb.get(4).getScore());
-            pstm.setDate(5, (java.sql.Date) StAssWeb.get(5).getSend_date());
-            result = pstm.executeUpdate();
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(StAssignmentOnWeb.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+//    public void setAm(StAssignmentOnWeb StAssWeb){
+//        Connection conn = ConnectionBuilder.getConnection();
+//        String sql = "insert into Student_assignment_on_web(st_ass_id,ass_id,acc_id,score,send_date) values(?,?,?,?,?)";
+//        PreparedStatement pstm;
+//        int result = 0;
+//        try {
+//            pstm = conn.prepareStatement(sql);
+//            pstm.setInt(1, StAssWeb.get(0).getSt_am_id());
+//            pstm.setInt(2, StAssWeb.get(1).getAm_id());
+//            pstm.setInt(3, StAssWeb.get(2).getAcc_id());
+//            pstm.setDouble(4, StAssWeb.get(4).getScore());
+//            pstm.setDate(5, (java.sql.Date) StAssWeb.get(5).getSend_date());
+//            result = pstm.executeUpdate();
+//            conn.close();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(StAssignmentOnWeb.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
     
     public void autoChecking(int st_am_id){
         
     }
+
+    @Override
+    public String toString() {
+        return "StAssignmentOnWeb{" + "st_am_id=" + st_am_id + ", am_id=" + am_id + ", acc_id=" + acc_id + ", score=" + score + ", send_date=" + send_date + ", member=" + member + ", comment=" + comment + ", anwerQuestion=" + anwerQuestion + '}';
+    }
+    
+    
 }
