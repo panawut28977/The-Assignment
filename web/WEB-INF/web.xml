@@ -22,6 +22,8 @@
         <url-pattern>/SentAssignment.jsp</url-pattern>
         <url-pattern>/groupWork.jsp</url-pattern>
         <url-pattern>/selectPeople</url-pattern>
+        <url-pattern>/uploadAssignment.jsp</url-pattern>
+        <url-pattern>/sendAssignment</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>
@@ -154,6 +156,10 @@
         <servlet-name>commentStAm</servlet-name>
         <servlet-class>servlet.commentStAm</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>uploadAssignmentFile</servlet-name>
+        <servlet-class>servlet.uploadAssignmentFile</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -261,6 +267,10 @@
     <servlet-mapping>
         <servlet-name>commentStAm</servlet-name>
         <url-pattern>/commentStAm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>uploadAssignmentFile</servlet-name>
+        <url-pattern>/uploadAssignmentFile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -406,7 +406,7 @@ public class Assignment {
             }
             pstm.setInt(7, ass.getAm_id());
             result = pstm.executeUpdate();
-            
+
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
@@ -420,9 +420,9 @@ public class Assignment {
         String sql = "";
         Connection conn = ConnectionBuilder.getConnection();
         if (a.getAss_type().equalsIgnoreCase("file")) {
-            sql = "select send_date from student_assignment_file where ass_id=? and acc_id=?";
+            sql = "select lasted_send_date from student_assignment_file where ass_id=? and acc_id=?";
         } else {
-            sql = "select send_date from student_assignment_on_web where ass_id=? and acc_id=? ";
+            sql = "select lasted_send_date from student_assignment_on_web where ass_id=? and acc_id=? ";
         }
         PreparedStatement pstm;
         try {
@@ -434,22 +434,30 @@ public class Assignment {
                 Date t = rs.getDate(1);
                 if (t != null) {
                     status = "sent";
+                }else{
+                    status = calculateTime(a);
                 }
             } else {
-                Date due_date = a.getDue_date();
-                Date today = new Date();
-                Double remaining_day = (double) ((due_date.getTime() - today.getTime()) / 1000 / 60 / 60 / 24);
-                if (remaining_day > 3) {
-                    status = "ontime";
-                } else if (remaining_day <= 3 && remaining_day >= 0) {
-                    status = "hurryup";
-                } else {
-                    status = "late";
-                }
+                status = calculateTime(a);
             }
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return status;
+    }
+
+    public static String calculateTime(Assignment a) {
+        String status = "";
+        Date due_date = a.getDue_date();
+        Date today = new Date();
+        Double remaining_day = (double) ((due_date.getTime() - today.getTime()) / 1000 / 60 / 60 / 24);
+        if (remaining_day > 3) {
+            status = "ontime";
+        } else if (remaining_day <= 3 && remaining_day >= 0) {
+            status = "hurryup";
+        } else {
+            status = "late";
         }
         return status;
     }

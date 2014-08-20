@@ -49,8 +49,10 @@ public class addMember extends HttpServlet {
             stF.setAcc_id(ac.getAcc_id());
             stF.setAm_id(Integer.parseInt(am_id));
             stF.setG_id(g_id);
+            stF.setList_id(StAssignmentFile.getLastedListId()+1);
             StAssignmentFile.setAm(stF);
         } else {
+            
         }
         url ="sendAssignment?am_id="+am_id;
         response.sendRedirect(url);

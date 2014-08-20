@@ -25,7 +25,7 @@ public class StAssignmentOnWeb {
     private int am_id;
     private int acc_id;
     private double score;
-    private Date send_date;
+    private Date lasted_send_date;
     private String member;
     private List<Comment> comment;
     private List<AnswerQuestion> anwerQuestion;
@@ -62,13 +62,14 @@ public class StAssignmentOnWeb {
         this.score = score;
     }
 
-    public Date getSend_date() {
-        return send_date;
+    public Date getLasted_send_date() {
+        return lasted_send_date;
     }
 
-    public void setSend_date(Date send_date) {
-        this.send_date = send_date;
+    public void setLasted_send_date(Date lasted_send_date) {
+        this.lasted_send_date = lasted_send_date;
     }
+
 
     public String getMember() {
         return member;
@@ -129,7 +130,7 @@ public class StAssignmentOnWeb {
                 saw.setAcc_id(rs.getInt("acc_id"));
                 saw.setAm_id(rs.getInt("ass_id"));
                 saw.setSt_am_id(st_am_id);
-                saw.setSend_date(rs.getDate("send_date"));
+                saw.setLasted_send_date(rs.getDate("send_date"));
                 saw.setScore(rs.getDouble("score"));
                 StAssInfo.add(saw);
             }
@@ -186,8 +187,8 @@ public class StAssignmentOnWeb {
 
     @Override
     public String toString() {
-        return "StAssignmentOnWeb{" + "st_am_id=" + st_am_id + ", am_id=" + am_id + ", acc_id=" + acc_id + ", score=" + score + ", send_date=" + send_date + ", member=" + member + ", comment=" + comment + ", anwerQuestion=" + anwerQuestion + '}';
+        return "StAssignmentOnWeb{" + "st_am_id=" + st_am_id + ", am_id=" + am_id + ", acc_id=" + acc_id + ", score=" + score + ", lasted_send_date=" + lasted_send_date + ", member=" + member + ", comment=" + comment + ", anwerQuestion=" + anwerQuestion + '}';
     }
-    
+
     
 }

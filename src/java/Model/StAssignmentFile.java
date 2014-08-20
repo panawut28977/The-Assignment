@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,9 +28,9 @@ public class StAssignmentFile {
     private int am_id;
     private int acc_id;
     private int g_id;
-    private String path_file;
+    private int list_id;
     private double score;
-    private Date send_date;
+    private Date lasted_send_date;
     private double similar_score;
 //    private String member;
     private List<Comment> comment;
@@ -66,12 +67,20 @@ public class StAssignmentFile {
         this.g_id = g_id;
     }
 
-    public String getPath_file() {
-        return path_file;
+    public int getList_id() {
+        return list_id;
     }
 
-    public void setPath_file(String path_file) {
-        this.path_file = path_file;
+    public void setList_id(int list_id) {
+        this.list_id = list_id;
+    }
+
+    public Date getLasted_send_date() {
+        return lasted_send_date;
+    }
+
+    public void setLasted_send_date(Date lasted_send_date) {
+        this.lasted_send_date = lasted_send_date;
     }
 
     public double getScore() {
@@ -80,14 +89,6 @@ public class StAssignmentFile {
 
     public void setScore(double score) {
         this.score = score;
-    }
-
-    public Date getSend_date() {
-        return send_date;
-    }
-
-    public void setSend_date(Date send_date) {
-        this.send_date = send_date;
     }
 
     public double getSimilar_score() {
@@ -148,9 +149,9 @@ public class StAssignmentFile {
                 s.setAm_id(rs.getInt("ass_id"));
                 s.setAcc_id(rs.getInt("acc_id"));
                 s.setSt_am_id(st_am_id);
-                s.setPath_file(rs.getString("path_file"));
+                s.setList_id(rs.getInt("list_id"));
                 s.setScore(rs.getDouble("score"));
-                s.setSend_date(rs.getDate("send_date"));
+                s.setLasted_send_date(rs.getDate("lasted_lasted_send_date"));
             }
             conn.close();
         } catch (SQLException ex) {
@@ -162,7 +163,7 @@ public class StAssignmentFile {
     public static List<StAssignmentFile> getStAmBbyAmID(int am_id) {
         List<StAssignmentFile> StAssList = new ArrayList<StAssignmentFile>();
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select * from student_assignment_file where ass_id = ? order by send_date desc fetch first 1 rows";
+        String sql = "select * from student_assignment_file where ass_id = ? order by lasted_send_date desc fetch first 1 rows";
         PreparedStatement pstm;
         StAssignmentFile saf = null;
         try {
@@ -174,9 +175,9 @@ public class StAssignmentFile {
                 saf.setAcc_id(rs.getInt("acc_id"));
                 saf.setAm_id(am_id);
                 saf.setSt_am_id(rs.getInt("st_ass_id"));
-                saf.setPath_file(rs.getString("path_file"));
+                saf.setList_id(rs.getInt("list_id"));
                 saf.setScore(rs.getDouble("score"));
-                saf.setSend_date(rs.getDate("send_date"));
+                saf.setLasted_send_date(rs.getDate("lasted_send_date"));
                 StAssList.add(saf);
             }
             conn.close();
@@ -186,36 +187,34 @@ public class StAssignmentFile {
         return StAssList;
     }
 
-    public static List<StAssignmentFile> getStAmAllVersion(int st_am_id) {
-        List<StAssignmentFile> StAssList = new ArrayList<StAssignmentFile>();
-        Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select score from student_assignment_file where st_ass_id = ? ";
-        PreparedStatement pstm;
-        StAssignmentFile saf = null;
-
-        try {
-            pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, st_am_id);
-            ResultSet rs = pstm.executeQuery();
-            while (rs.next()) {
-                saf = new StAssignmentFile();
-                saf.setAcc_id(rs.getInt("acc_id"));
-                saf.setAm_id(st_am_id);
-                saf.setSt_am_id(rs.getInt("st_ass_id"));
-                saf.setPath_file(rs.getString("path_file"));
-                saf.setScore(rs.getDouble("score"));
-                saf.setSend_date(rs.getDate("send_date"));
-                StAssList.add(saf);
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(StAssignmentFile.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return StAssList;
-    }
-    
-    
-    public static StAssignmentFile getStAmBbyAmIDAndGID(int am_id,int g_id) {
+//    public static List<StAssignmentFile> getStAmAllVersion(int st_am_id) {
+//        List<StAssignmentFile> StAssList = new ArrayList<StAssignmentFile>();
+//        Connection conn = ConnectionBuilder.getConnection();
+//        String sql = "select score from student_assignment_file where st_ass_id = ? ";
+//        PreparedStatement pstm;
+//        StAssignmentFile saf = null;
+//
+//        try {
+//            pstm = conn.prepareStatement(sql);
+//            pstm.setInt(1, st_am_id);
+//            ResultSet rs = pstm.executeQuery();
+//            while (rs.next()) {
+//                saf = new StAssignmentFile();
+//                saf.setAcc_id(rs.getInt("acc_id"));
+//                saf.setAm_id(st_am_id);
+//                saf.setSt_am_id(rs.getInt("st_ass_id"));
+//                saf.setList_id(rs.getInt("list_id"));
+//                saf.setScore(rs.getDouble("score"));
+//                saf.setLasted_send_date(rs.getDate("lasted_send_date"));
+//                StAssList.add(saf);
+//            }
+//            conn.close();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(StAssignmentFile.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return StAssList;
+//    }
+    public static StAssignmentFile getStAmBbyAmIDAndGID(int am_id, int g_id) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select * from student_assignment_file where ass_id = ? and g_id = ?";
         PreparedStatement pstm;
@@ -230,9 +229,36 @@ public class StAssignmentFile {
                 saf.setAcc_id(rs.getInt("acc_id"));
                 saf.setAm_id(am_id);
                 saf.setSt_am_id(rs.getInt("st_ass_id"));
-                saf.setPath_file(rs.getString("path_file"));
+                saf.setList_id(rs.getInt("list_id"));
                 saf.setScore(rs.getDouble("score"));
-                saf.setSend_date(rs.getDate("send_date"));
+                saf.setLasted_send_date(rs.getDate("lasted_send_date"));
+                saf.setComment(Comment.getCommentByStAmIDFile(rs.getInt("st_ass_id")));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(StAssignmentFile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return saf;
+    }
+
+    public static StAssignmentFile getStAmBbyAmIDAndAccId(int am_id, int acc_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select * from student_assignment_file where ass_id = ? and acc_id = ?";
+        PreparedStatement pstm;
+        StAssignmentFile saf = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, am_id);
+            pstm.setInt(2, acc_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                saf = new StAssignmentFile();
+                saf.setAcc_id(rs.getInt("acc_id"));
+                saf.setAm_id(am_id);
+                saf.setSt_am_id(rs.getInt("st_ass_id"));
+                saf.setList_id(rs.getInt("list_id"));
+                saf.setScore(rs.getDouble("score"));
+                saf.setLasted_send_date(rs.getDate("lasted_send_date"));
                 saf.setComment(Comment.getCommentByStAmIDFile(rs.getInt("st_ass_id")));
             }
             conn.close();
@@ -263,30 +289,68 @@ public class StAssignmentFile {
         return result;
     }
 
-    public static void setAm(StAssignmentFile StAssFile) {
+    public static int getLastedListId() {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "insert into Student_assignment_file(ass_id,acc_id,g_id,path_file,score) values(?,?,?,?,?)";
+        int list_id = 1;
+        String sql1 = "select max(list_id) from Student_assignment_file";
         PreparedStatement pstm;
-        int result = 0;
         try {
-            pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, StAssFile.getAm_id());
-            pstm.setInt(2, StAssFile.getAcc_id());
-            pstm.setInt(3, StAssFile.getG_id());
-            pstm.setString(4, StAssFile.getPath_file());
-            pstm.setDouble(5, StAssFile.getScore());
-            pstm.executeUpdate();
+            pstm = conn.prepareStatement(sql1);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                list_id = rs.getInt(1);
+            }
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(StAssignmentOnWeb.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return list_id;
+    }
+
+    public static int setAm(StAssignmentFile StAssFile) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql2 = "insert into Student_assignment_file(ass_id,acc_id,g_id,list_id,score) values(?,?,?,?,?)";
+        PreparedStatement pstm;
+        int result = 0;
+        try {
+            pstm = conn.prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS);
+            pstm.setInt(1, StAssFile.getAm_id());
+            pstm.setInt(2, StAssFile.getAcc_id());
+            pstm.setInt(3, StAssFile.getG_id());
+            pstm.setInt(4, StAssFile.getList_id());
+            pstm.setDouble(5, StAssFile.getScore());
+            pstm.executeUpdate();
+            ResultSet generatedKeys = pstm.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                result = generatedKeys.getInt(1);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(StAssignmentOnWeb.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
+    public static int updateLastedSend(StAssignmentFile a) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "update student_assignment_file set lasted_send_date=? where st_ass_id=?";
+        PreparedStatement pstm;
+        int result = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            pstm.setString(1, df.format(a.getLasted_send_date()));
+            pstm.setInt(2, a.getSt_am_id());
+            result = pstm.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
     }
 
     @Override
     public String toString() {
-        return "StAssignmentFile{" + "st_am_id=" + st_am_id + ", am_id=" + am_id + ", acc_id=" + acc_id + ", g_id=" + g_id + ", path_file=" + path_file + ", score=" + score + ", send_date=" + send_date + ", similar_score=" + similar_score + ", comment=" + comment + '}';
+        return "StAssignmentFile{" + "st_am_id=" + st_am_id + ", am_id=" + am_id + ", acc_id=" + acc_id + ", g_id=" + g_id + ", list_id=" + list_id + ", score=" + score + ", lasted_send_date=" + lasted_send_date + ", similar_score=" + similar_score + ", comment=" + comment + '}';
     }
-    
-    
-
 }

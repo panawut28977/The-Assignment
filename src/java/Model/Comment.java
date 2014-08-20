@@ -79,7 +79,7 @@ public class Comment {
     }
 
     //addToStComment(Comment c,int st_ass_id,String am_type)
-    public static boolean addToStComment(Comment c, int st_ass_id, String am_type) {
+    public static boolean addToStComment(Comment c, int st_am_id, String am_type) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "";
         PreparedStatement pstm;
@@ -88,7 +88,7 @@ public class Comment {
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, c.getAcc().getAcc_id());
-            pstm.setInt(2, st_ass_id);
+            pstm.setInt(2, st_am_id);
             pstm.setString(3, c.getText());
             pstm.setString(4, am_type);
             result = pstm.executeUpdate();

@@ -42,14 +42,15 @@ public class commentStAm extends HttpServlet {
         Comment c = new Comment();
         c.setAcc_id((Account) ss.getAttribute("ac"));
         c.setText(text);
-        int st_ass_id = 0;
+        int st_am_id = 0;
         if(am.getAss_type().equalsIgnoreCase("file")){
             StAssignmentFile saf = (StAssignmentFile)ss.getAttribute("sa");
-            st_ass_id = saf.getSt_am_id();
+            st_am_id = saf.getSt_am_id();
+            System.out.println(st_am_id);
         }else{
             // st ass on web
         }
-        Comment.addToStComment(c, st_ass_id, am.getAss_type());
+        Comment.addToStComment(c, st_am_id, am.getAss_type());
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

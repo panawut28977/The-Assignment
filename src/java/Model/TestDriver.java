@@ -328,11 +328,6 @@ public class TestDriver {
 //        g.setAcc_id(2);
 //        l.add(g);
 //        Group_member.addMember(l);
-          
-          //test util
-          Date d = new Date();
-          Timestamp t = new Timestamp(d.getTime());
-          System.out.println(Util.formatTime(t));
     }
 
 }

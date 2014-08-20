@@ -70,7 +70,6 @@ public class selectPeople extends HttpServlet {
             request.setAttribute("msg", "joined");
         }
         
-        
         url = "/groupWork.jsp?tab=AllAssignment";
         getServletContext().getRequestDispatcher(url).forward(request, response);
     }

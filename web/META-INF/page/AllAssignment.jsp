@@ -58,9 +58,9 @@
                             <c:when test="${status eq 'hurryup'}">
                                 <span class="text-warning">Hurry up!</span>
                             </c:when>
-                            <c:otherwise>
+                            <c:when test="${status eq 'sent'}">
                                 <span class="text-muted">Sent <span class="glyphicon glyphicon-check"></span></span>
-                                </c:otherwise>
+                                </c:when>
                             </c:choose>
                     </td>
                     <td>

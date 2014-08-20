@@ -80,67 +80,89 @@
                         </div>
                         <hr style="clear: both">
                         <div style="text-align: center"> 
-                            <h4 >Send your assignment <span class="text-danger">(Late)</span></h4>
-                            <form role="form" class="form-inline">
-                                <input type="file" class="form-control">
+                            <h4 >Send your assignment 
+                                <span class="text-danger">
+                                    <c:set value="${cf:remainingTimeforSend(curAm,ac.acc_id)}" var="status"/>
+                                    <c:choose>
+                                        <c:when test="${status eq 'late'}">
+                                            <span class="text-danger">Late</span>
+                                        </c:when>
+                                        <c:when test="${status eq 'ontime'}">
+                                            <span class="text-success">On time</span>
+                                        </c:when>
+                                        <c:when test="${status eq 'hurryup'}">
+                                            <span class="text-warning">Hurry up!</span>
+                                        </c:when>
+                                        <c:when test="${status eq 'sent'}">
+                                            <span class="text-muted">Sent <span class="glyphicon glyphicon-check"></span></span>
+                                            </c:when>
+                                        </c:choose>
+                                </span>
+                            </h4>
+                            <form role="form" class="form-inline" action="uploadAssignmentFile" method="post" enctype="multipart/form-data">
+                                <input type="file" class="form-control" name="file">
                                 <input type="submit" value="Upload" class="form-control btn btn-primary">
                             </form>
                             <br>
                             <h5 id="pvVs" class="usepointer">See your previous version.<span class="glyphicon glyphicon-chevron-right"></span></h5>
                         </div>
                         <div id="pvVersionTable">
-                            <table class="table" >
-                                <thead>
-                                    <tr>
-                                        <td>Name</td>
-                                        <td>Version</td>
-                                        <td>Sent date</td>
-                                        <td>Size(MB)</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>54216952_lab1</td>
-                                        <td>1</td>
-                                        <td>13/03/55</td>
-                                        <td>33.22</td>  
-                                    </tr>
-                                    <tr>
-                                        <td>54216952_lab1</td>
-                                        <td>2</td>
-                                        <td>14/03/55</td>
-                                        <td>31.22</td>  
-                                    </tr>
-                                    <tr>
-                                        <td>54216952_lab1</td>
-                                        <td>3</td>
-                                        <td>14/03/55</td>
-                                        <td>36.22</td>  
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <c:choose>
+                                <c:when test="${safl.size() != 0}">
+                                    <table class="table" >
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                <td>Version</td>
+                                                <td>Sent date</td>
+                                                <td>Size(MB)</td>
+                                                <td>Upload by</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:set var="count" value="${safl.size()}"/>
+                                            <c:forEach  items="${safl}" var="f">
+                                                <tr>
+                                                    <td><a href="file/student_assignment_file/${f.path_file}">${f.path_file}</a></td>
+                                                    <td>${count}</td>
+                                                    <td>${f.send_date}</td>
+                                                    <td>${f.file_size} KB</td> 
+                                                    <c:set value="${cf:getNameByID(f.send_acc_id)}" var="a"/>
+                                                    <td><img style="width:30px" src="${a.profile_pic}" data-toggle="tooltip" data-placement="top" title="" class="img-circle" data-original-title="${a.firstname}"></td>
+                                                </tr>
+                                                <c:set var="count" value="${count-1}"/>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </c:when>
+                                <c:otherwise>
+                                    <h3 class="text-muted">You never send assignment before. </h3>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                     </div>
-                    <br><hr>  
-                    <h3>Comment</h3>
-                    <form>
-                        <textarea class="form-control" placeholder="Tell your teacher and friends here." id="text"></textarea><br>
-                        <input type="button" value="comment"  id="addComment" class="btn btn-primary col-md-3 pull-right">
-                    </form>
-                    <br/><br/><br/>
-                    <div id="listComment">
-                        <c:forEach items="${sa.comment}" var="c">
-                            <div class="media">
-                                <a class="pull-left" href="#">
-                                    <img width="64" src="${c.acc.profile_pic}">
-                                </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading">${c.acc.firstname} ${c.acc.lastname}<small class="pull-right">${cf:formatTime(c.comment_date)}</small></h4>
-                                    <p>${c.text}<p>
+                    <c:if test="${curAm.total_member!=1}">
+                        <br><hr>  
+                        <h3>Comment</h3>
+                        <form>
+                            <textarea class="form-control" placeholder="Tell your teacher and friends here." id="text"></textarea><br>
+                            <input type="button" value="comment"  id="addComment" class="btn btn-primary col-md-3 pull-right">
+                        </form>
+                        <br/><br/><br/>
+                        <div id="listComment">
+                            <c:forEach items="${sa.comment}" var="c">
+                                <div class="media">
+                                    <a class="pull-left" href="#">
+                                        <img width="64" src="${c.acc.profile_pic}">
+                                    </a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">${c.acc.firstname} ${c.acc.lastname}<small class="pull-right">${cf:formatTime(c.comment_date)}</small></h4>
+                                        <p>${c.text}<p>
+                                    </div>
                                 </div>
-                            </div>
-                        </c:forEach>
-                    </div>
+                            </c:forEach>
+                        </div>
+                    </c:if>
                 </div>
             </div>
         </div>
@@ -169,6 +191,7 @@
                     $("#text").val("");
                 });
             });
+            $('img').tooltip("hide");
         });
     </script>
 </html>
