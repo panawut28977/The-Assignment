@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import util.MyFileRenamePolicy;
 
 /**
  *
@@ -41,7 +42,8 @@ public class uploadAssignmentFile extends HttpServlet {
         Account ac = (Account)ss.getAttribute("ac");
         StAssignmentFile saf = (StAssignmentFile)ss.getAttribute("sa");
         File f = new File(getServletContext().getRealPath("/") + "\\file\\student_assignment_file");
-        MultipartRequest m = new MultipartRequest(request, f.getPath(), "UTF-8");
+        MyFileRenamePolicy mf = new MyFileRenamePolicy();
+        MultipartRequest m = new MultipartRequest(request, f.getPath(),(5 * 1024 * 1024),"UTF-8" , mf);
         
         //add data to stamfilelist
         StAmFileList safl = new StAmFileList();

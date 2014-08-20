@@ -141,28 +141,26 @@
                             </c:choose>
                         </div>
                     </div>
-                    <c:if test="${curAm.total_member!=1}">
-                        <br><hr>  
-                        <h3>Comment</h3>
-                        <form>
-                            <textarea class="form-control" placeholder="Tell your teacher and friends here." id="text"></textarea><br>
-                            <input type="button" value="comment"  id="addComment" class="btn btn-primary col-md-3 pull-right">
-                        </form>
-                        <br/><br/><br/>
-                        <div id="listComment">
-                            <c:forEach items="${sa.comment}" var="c">
-                                <div class="media">
-                                    <a class="pull-left" href="#">
-                                        <img width="64" src="${c.acc.profile_pic}">
-                                    </a>
-                                    <div class="media-body">
-                                        <h4 class="media-heading">${c.acc.firstname} ${c.acc.lastname}<small class="pull-right">${cf:formatTime(c.comment_date)}</small></h4>
-                                        <p>${c.text}<p>
-                                    </div>
+                    <br><hr>  
+                    <h3>Comment</h3>
+                    <form>
+                        <textarea class="form-control" placeholder="Tell your teacher and friends here." id="text"></textarea><br>
+                        <input type="button" value="comment"  id="addComment" class="btn btn-primary col-md-3 pull-right">
+                    </form>
+                    <br/><br/><br/>
+                    <div id="listComment">
+                        <c:forEach items="${sa.comment}" var="c">
+                            <div class="media">
+                                <a class="pull-left" href="#">
+                                    <img width="64" src="${c.acc.profile_pic}">
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading">${c.acc.firstname} ${c.acc.lastname}<small class="pull-right">${cf:formatTime(c.comment_date)}</small></h4>
+                                    <p>${c.text}<p>
                                 </div>
-                            </c:forEach>
-                        </div>
-                    </c:if>
+                            </div>
+                        </c:forEach>
+                    </div>
                 </div>
             </div>
         </div>
