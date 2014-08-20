@@ -419,22 +419,27 @@ public class Assignment {
         String status = "";
         String sql = "";
         Connection conn = ConnectionBuilder.getConnection();
-        if (a.getAss_type().equalsIgnoreCase("file")) {
-            sql = "select lasted_send_date from student_assignment_file where ass_id=? and acc_id=?";
+        if (a.getAss_type().equalsIgnoreCase("file") && a.getTotal_member() == 1) {
+            sql = "select lasted_send_date from student_assignment_file where ass_id=? and acc_id="+acc_id;
+        } else if (a.getAss_type().equalsIgnoreCase("web") && a.getTotal_member() == 1) {
+            sql = "select lasted_send_date from student_assignment_on_web where ass_id=? and acc_id="+acc_id;
         } else {
-            sql = "select lasted_send_date from student_assignment_on_web where ass_id=? and acc_id=? ";
+            if (a.getAss_type().equalsIgnoreCase("file")) {
+                sql = "select saf.lasted_send_date from student_assignment_file saf join group_member g on saf.g_id = g.g_id where saf.ass_id=? and g.acc_id like '%" + acc_id + "%'";
+            } else {
+                sql = "select saow.lasted_send_date from student_assignment_on_web saow join group_member g on saow.g_id = g.g_id where saow.ass_id=? and g.acc_id like '%" + acc_id + "%'";
+            }
         }
         PreparedStatement pstm;
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, a.getAm_id());
-            pstm.setInt(2, acc_id);
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {
                 Date t = rs.getDate(1);
                 if (t != null) {
                     status = "sent";
-                }else{
+                } else {
                     status = calculateTime(a);
                 }
             } else {
