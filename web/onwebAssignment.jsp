@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
+<%@taglib uri="/WEB-INF/tlds/functions.tld" prefix="cf" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -36,6 +37,11 @@
             #questionList h5{
                 margin-top: 20px;
             }
+            
+            
+            #newComment{
+                display: none;
+            }
         </style>
     </head>
     <body>
@@ -62,29 +68,48 @@
                             </ol>
                         </c:otherwise>
                     </c:choose>-->
-                    <div><h3>INT202 Software Development Process II</h3></div>
+                    ${am}
+                    <div><h3>${ac.courseList.get(cId).course.name}</h3></div>
                     <%@include file="META-INF/page/CourseTab.jsp"%>
                     <ol class="breadcrumb" style="margin-top: 15px" >
                         <li><a href="course.jsp?tab=AllAssignment">Assignment</a></li>
-                        <li class="active"><a href="#">Assignment# 1...</a></li>
+                        <li class="active"><a href="#">${curAm.name}</a></li>
                     </ol>
                     <div >
                         <div >
                             <form role="form" id="questionList">
                                 <div class="pull-left">
-                                    <h4>Group No.1 <small class="text-muted">(Require 1-3 members in group)</small></h4>
-                                    <div class="member">
-                                        <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
-                                        <h4>Panawut</h4>
-                                    </div>
-                                    <div class="member">
-                                        <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
-                                        <h4>Thanakit</h4>
-                                    </div>
-                                    <div class="member">
-                                        <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
-                                        <h4 class="">Nitiwit</h4>
-                                    </div>
+                                    <c:choose>
+                                        <c:when test="${curAm.total_member==1}">
+                                            <h4>Individual work</h4>
+                                            <div class="member">
+                                                <img width="64" src="${ac.profile_pic}">
+                                                <h4>${ac.firstname} ${ac.lastname}</h4>
+                                            </div>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <h4>Group No. ${g.g_no}</h4>
+                                            <c:forEach items="${gAm}" var="m">
+                                                <div class="member">
+                                                    <img width="64" src="${m.profile_pic}">
+                                                    <h4>${m.firstname} ${m.lastname}</h4>
+                                                </div>
+                                            </c:forEach>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <!--                                    <h4>Group No.1 <small class="text-muted">(Require 1-3 members in group)</small></h4>
+                                                                        <div class="member">
+                                                                            <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                                                                            <h4>Panawut</h4>
+                                                                        </div>
+                                                                        <div class="member">
+                                                                            <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                                                                            <h4>Thanakit</h4>
+                                                                        </div>
+                                                                        <div class="member">
+                                                                            <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                                                                            <h4 class="">Nitiwit</h4>
+                                                                        </div>-->
                                 </div>
                                 <hr style="clear: both">
                                 <div class="assignmentBox col-md-12">
@@ -174,28 +199,24 @@
                     </div>
                     <div style="clear: both;padding: 10px 0"></div> 
                     <h3>Teacher Comment</h3>
-                    <div class="media">
-                        <a class="pull-left" href="#">
-                            <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
-                        </a>
-                        <div class="media-body">
-                            <h4 class="media-heading">AJ.Kittipong Warasup<small class="pull-right">16/01/57</small></h4>
-                            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-                        </div>
-                    </div>
-                    <div class="media">
-                        <a class="pull-left" href="#">
-                            <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
-                        </a>
-                        <div class="media-body">
-                            <h4 class="media-heading">AJ.Kittipong Warasup<small class="pull-right">16/01/57</small></h4>
-                            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-                        </div> 
-                    </div>
                     <form>
-                        <textarea class="form-control" placeholder="Tell your teacher here."></textarea><br>
-                        <input  type="submit" value="comment" class="btn btn-primary col-md-3 pull-right">
+                        <textarea class="form-control" placeholder="Tell your teacher and friends here." id="text"></textarea><br>
+                        <input type="button" value="comment"  id="addComment" class="btn btn-primary col-md-3 pull-right">
                     </form>
+                    <br/><br/><br/>
+                    <div id="listComment">
+                        <c:forEach items="${sa.comment}" var="c">
+                            <div class="media">
+                                <a class="pull-left" href="#">
+                                    <img width="64" src="${c.acc.profile_pic}">
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading">${c.acc.firstname} ${c.acc.lastname}<small class="pull-right">${cf:formatTime(c.comment_date)}</small></h4>
+                                    <p>${c.text}<p>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </div>
                 </div>
             </div>
         </div>
@@ -275,6 +296,22 @@
             $(".gi-chat ").hide();
             $(".gi-click-container ").hide();
 
+            $("#addComment").click(function() {
+                var pic = '${ac.profile_pic}';
+                var fullname = '${ac.firstname}' + '${ac.lastname}';
+                var d = new Date();
+                var dateSt = d.getFullYear() + "-" + ('0' + (d.getMonth() + 1)).slice(-2) + "-" + ('0' + d.getDate()).slice(-2) + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getMilliseconds();
+                $.ajax({
+                    type: "POST",
+                    url: "commentStAm",
+                    data: {text: $("#text").val()}
+                }).done(function(msg) {
+                    var html = '<div class="media" id="newComment"><a class="pull-left" href="#"><img class="img-circle" width="64" src="' + pic + '"></a><div class="media-body"><h4 class="media-heading">' + fullname + '<small class="pull-right">' + dateSt + '</small></h4><p>' + $("#text").val() + '</p></div></div>';
+                    $("#listComment").prepend(html);
+                    $("#newComment").slideDown().removeAttr("id");
+                    $("#text").val("");
+                });
+            });
             // Connect URL
             /*var url = 'https://goinstant.net/701ad7c04624/CollaborateAssignment';
              

@@ -9,6 +9,7 @@ import Model.Account;
 import Model.Assignment;
 import Model.Group_member;
 import Model.StAssignmentFile;
+import Model.StAssignmentOnWeb;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -49,12 +50,16 @@ public class addMember extends HttpServlet {
             stF.setAcc_id(ac.getAcc_id());
             stF.setAm_id(Integer.parseInt(am_id));
             stF.setG_id(g_id);
-            stF.setList_id(StAssignmentFile.getLastedListId()+1);
+            stF.setList_id(StAssignmentFile.getLastedListId() + 1);
             StAssignmentFile.setAm(stF);
         } else {
-            
+            StAssignmentOnWeb stw = new StAssignmentOnWeb();
+            stw.setAcc_id(ac.getAcc_id());
+            stw.setAm_id(Integer.parseInt(am_id));
+            stw.setG_id(g_id);
+            StAssignmentOnWeb.setAm(stw);
         }
-        url ="sendAssignment?am_id="+am_id;
+        url = "sendAssignment?am_id=" + am_id;
         response.sendRedirect(url);
     }
 

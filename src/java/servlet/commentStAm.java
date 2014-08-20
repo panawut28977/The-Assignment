@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package servlet;
 
 import Model.Account;
 import Model.Assignment;
 import Model.Comment;
 import Model.StAssignmentFile;
+import Model.StAssignmentOnWeb;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -38,17 +38,20 @@ public class commentStAm extends HttpServlet {
         PrintWriter out = response.getWriter();
         HttpSession ss = request.getSession();
         String text = request.getParameter("text");
-        Assignment am = (Assignment)ss.getAttribute("curAm");
+        Assignment am = (Assignment) ss.getAttribute("curAm");
         Comment c = new Comment();
         c.setAcc_id((Account) ss.getAttribute("ac"));
         c.setText(text);
         int st_am_id = 0;
-        if(am.getAss_type().equalsIgnoreCase("file")){
-            StAssignmentFile saf = (StAssignmentFile)ss.getAttribute("sa");
+        if (am.getAss_type().equalsIgnoreCase("file")) {
+            StAssignmentFile saf = (StAssignmentFile) ss.getAttribute("sa");
             st_am_id = saf.getSt_am_id();
             System.out.println(st_am_id);
-        }else{
+        } else {
             // st ass on web
+            StAssignmentOnWeb saw = (StAssignmentOnWeb) ss.getAttribute("sa");
+            st_am_id = saw.getSt_am_id();
+            System.out.println(st_am_id);
         }
         Comment.addToStComment(c, st_am_id, am.getAss_type());
     }

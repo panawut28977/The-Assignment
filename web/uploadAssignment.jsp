@@ -55,7 +55,7 @@
                     <%@include file="META-INF/page/CourseTab.jsp"%>
                     <ol class="breadcrumb" style="margin-top: 15px" >
                         <li><a href="course.jsp?tab=AllAssignment">Assignment</a></li>
-                        <li class="active"><a href="#">Assignment# 1...</a></li>
+                        <li class="active"><a href="#">${curAm.name}</a></li>
                     </ol>
                     <div >
                         <div  class="pull-left">
@@ -68,7 +68,7 @@
                                     </div>
                                 </c:when>
                                 <c:otherwise>
-                                    <h4>Group work</h4>
+                                    <h4>Group No. ${g.g_no}</h4>
                                     <c:forEach items="${gAm}" var="m">
                                         <div class="member">
                                             <img width="64" src="${m.profile_pic}">
@@ -142,7 +142,7 @@
                         </div>
                     </div>
                     <br><hr>  
-                    <h3>Comment</h3>
+                    <h3>Teacher Comment</h3>
                     <form>
                         <textarea class="form-control" placeholder="Tell your teacher and friends here." id="text"></textarea><br>
                         <input type="button" value="comment"  id="addComment" class="btn btn-primary col-md-3 pull-right">

@@ -104,7 +104,7 @@ public class StAmFileList {
     public static List<StAmFileList> getStAmAllVersion(int list_id) {
         List<StAmFileList> fileList = new ArrayList<StAmFileList>();
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select * from student_assignment_file_version where list_id = ? order by send_date,safv_id desc";
+        String sql = "select * from student_assignment_file_version where list_id = ? order by send_date desc,safv_id";
         PreparedStatement pstm;
         StAmFileList safl = null;
 

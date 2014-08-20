@@ -10,10 +10,10 @@ import Model.Assignment;
 import Model.Group_member;
 import Model.StAmFileList;
 import Model.StAssignmentFile;
+import Model.StAssignmentOnWeb;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -69,20 +69,30 @@ public class sendAssignment extends HttpServlet {
             for (StAmFileList stAmFileList : safl) {
                 File file = new File(getServletContext().getRealPath("/") + "\\file\\student_assignment_file\\" + stAmFileList.getPath_file());
                 long filesize = file.length();
-                System.out.println(filesize);
+//                System.out.println(filesize);
                 long filesizeInKB = filesize / 1024;
-                System.out.println(filesizeInKB);
+//                System.out.println(filesizeInKB);
                 stAmFileList.setFile_size(filesizeInKB);
             }
             request.setAttribute("safl", safl);
             url = "/uploadAssignment.jsp?tab=AllAssignment";
             getServletContext().getRequestDispatcher(url).forward(request, response);
         } else if (a.getTotal_member() == 1 && a.getAss_type().equalsIgnoreCase("web")) {
-            ///
-            ///
-            ///
-            //
-            //
+            StAssignmentOnWeb stw = StAssignmentOnWeb.getStAmByAmIDAndAccId(am_id, ac.getAcc_id());
+            if (stw == null) {
+                stw = new StAssignmentOnWeb();
+                stw.setAcc_id(ac.getAcc_id());
+                stw.setAm_id(am_id);
+                stw.setG_id(0);
+                int st_am_id = StAssignmentOnWeb.setAm(stw);
+                stw.setSt_am_id(st_am_id);
+                ss.setAttribute("sa", stw);
+            } else {
+                ss.setAttribute("sa", stw);
+            }
+
+            Assignment am = Assignment.getAmByAmID(am_id);
+            request.setAttribute("am", am);
             url = "/onwebAssignment.jsp?tab=AllAssignment";
             getServletContext().getRequestDispatcher(url).forward(request, response);
         } else if (Group_member.isInGroup(ac.getAcc_id(), am_id) < 1) {
@@ -95,8 +105,9 @@ public class sendAssignment extends HttpServlet {
                 gAm.add(Account.getNameByID(Integer.parseInt(accId)));
             }
             ss.setAttribute("gAm", gAm);
+            ss.setAttribute("g", g);
             if (a.getAss_type().equalsIgnoreCase("file")) {
-                //get original assignment file
+                //get student assignment file
                 StAssignmentFile sa = StAssignmentFile.getStAmBbyAmIDAndGID(am_id, g.getG_id());
                 ss.setAttribute("sa", sa);
                 url = "/uploadAssignment.jsp?tab=AllAssignment";
@@ -116,6 +127,9 @@ public class sendAssignment extends HttpServlet {
                 request.setAttribute("safl", safl);
                 getServletContext().getRequestDispatcher(url).forward(request, response);
             } else {
+                //get student assignment onweb
+                StAssignmentOnWeb stw = StAssignmentOnWeb.getStAmByAmIDAndAccId(am_id, ac.getAcc_id());
+                ss.setAttribute("sa", stw);
                 url = "/onwebAssignment.jsp?tab=AllAssignment";
                 getServletContext().getRequestDispatcher(url).forward(request, response);
             }
