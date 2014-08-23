@@ -66,3 +66,7 @@ and open the template in the editor.
 .multipleChoice,.explain,.tfQuestion,.matchWord,.instruction{
     cursor: move;
 }
+
+.assignmentBox > div{
+    margin: 20px 0;
+}

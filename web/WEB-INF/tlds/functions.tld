@@ -65,5 +65,14 @@
         <function-class>Model.Account</function-class>
         <function-signature>String getNameByID(int)</function-signature>
     </function>
-    
+     <function>
+        <name>replaceStringByIndex</name>
+        <function-class>util.Util</function-class>
+        <function-signature>String replaceStringByIndex(java.lang.String,int,int,java.lang.String)</function-signature>
+    </function>
+     <function>
+        <name>shuffleString</name>
+        <function-class>util.Util</function-class>
+        <function-signature>String shuffleString(java.lang.String)</function-signature>
+    </function>
 </taglib>

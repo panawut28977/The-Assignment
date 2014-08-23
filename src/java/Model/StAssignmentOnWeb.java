@@ -202,6 +202,34 @@ public class StAssignmentOnWeb {
         return stw;
     }
     
+    public static StAssignmentOnWeb getStAmbyAmIDAndGID(int am_id, int g_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select * from student_assignment_on_web where ass_id = ? and g_id = ?";
+        PreparedStatement pstm;
+        StAssignmentOnWeb stw = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, am_id);
+            pstm.setInt(2, g_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                stw = new StAssignmentOnWeb();
+                stw.setSt_am_id(rs.getInt("st_ass_id"));
+                stw.setAm_id(am_id);
+                stw.setAcc_id(rs.getInt("acc_id"));
+                stw.setG_id(rs.getInt("g_id"));
+                stw.setScore(rs.getDouble("score"));
+                stw.setLasted_send_date(rs.getDate("lasted_send_date"));
+                stw.setComment(Comment.getCommentByStAmIDWeb(rs.getInt("st_ass_id")));
+                stw.setAnwerQuestion(null);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(StAssignmentFile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return stw;
+    }
+    
     public static int setAm(StAssignmentOnWeb StAssWeb) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql2 = "insert into student_assignment_on_web(ass_id,acc_id,g_id,score) values(?,?,?,?)";

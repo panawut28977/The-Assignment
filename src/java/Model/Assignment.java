@@ -302,7 +302,7 @@ public class Assignment {
         String sql = "select ass.ass_id,ass.course_id,ass.name,ass.description,ass.ass_type,ass.total_member,ass.due_date,ass.ass_extension,ass.path_file,ass.create_date,ass.fully_mark from account a "
                 + "join account_course ac on a.acc_id = ac.acc_id "
                 + "join assignment ass on ac.course_id = ass.course_id "
-                + "where a.acc_id = ? AND ac.status =  \"approved\" AND ac.role = 'ST'";
+                + "where a.acc_id = ? AND ac.status =  \"approved\" AND ac.role = 'ST' order by ass.create_date desc";
         PreparedStatement pstm;
         Assignment am = null;
         try {

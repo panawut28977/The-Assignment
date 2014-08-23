@@ -10,7 +10,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,6 +22,7 @@ import java.util.logging.Logger;
  * @author Orarmor
  */
 public class Util {
+
     public static String formatTime(String old) {
         String str = null;
         Timestamp timestamp = null;
@@ -74,17 +77,37 @@ public class Util {
 
         return str;
     }
-    
+
     public static String addZero(int time) {
         return time < 10 ? "0" + time : "" + time;
     }
-    
-    public static boolean containsAns(String answer,String search){
-        String [] ansList = answer.split(", ");
+
+    public static boolean containsAns(String answer, String search) {
+        String[] ansList = answer.split(", ");
         ArrayList a = new ArrayList();
         for (String ans : ansList) {
             a.add(ans);
         }
         return a.contains(search);
+    }
+
+    public static String replaceStringByIndex(String original, int stIndex, int endIndex, String rep) {
+        StringBuilder newText = new StringBuilder(original);
+        newText.replace(stIndex, endIndex, rep);
+        return newText.toString();
+    }
+
+    public static String shuffleString(String s) {
+        String[] as = s.split(",");
+        List<String> asToList = new ArrayList<>();
+        for (String string : as) {
+            if (!string.equals("")) {
+                asToList.add(string);
+            }
+        }
+        Collections.shuffle(asToList);
+        String finalString =  asToList.toString().substring(1, asToList.toString().length()-1);
+        System.out.println(finalString);
+        return finalString;
     }
 }

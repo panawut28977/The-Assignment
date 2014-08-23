@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 /**
  *
  * @author Orarmor
@@ -90,9 +89,6 @@ public class sendAssignment extends HttpServlet {
             } else {
                 ss.setAttribute("sa", stw);
             }
-
-            Assignment am = Assignment.getAmByAmID(am_id);
-            request.setAttribute("am", am);
             url = "/onwebAssignment.jsp?tab=AllAssignment";
             getServletContext().getRequestDispatcher(url).forward(request, response);
         } else if (Group_member.isInGroup(ac.getAcc_id(), am_id) < 1) {
@@ -128,7 +124,8 @@ public class sendAssignment extends HttpServlet {
                 getServletContext().getRequestDispatcher(url).forward(request, response);
             } else {
                 //get student assignment onweb
-                StAssignmentOnWeb stw = StAssignmentOnWeb.getStAmByAmIDAndAccId(am_id, ac.getAcc_id());
+                StAssignmentOnWeb stw = StAssignmentOnWeb.getStAmbyAmIDAndGID(am_id, g.getG_id());
+                System.out.println(stw);
                 ss.setAttribute("sa", stw);
                 url = "/onwebAssignment.jsp?tab=AllAssignment";
                 getServletContext().getRequestDispatcher(url).forward(request, response);

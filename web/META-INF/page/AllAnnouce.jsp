@@ -1,3 +1,7 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<c:if test="${ac.announcement.size()==0}">
+        <h1 class="text-muted" style="text-align: center">ยังไม่มีข่าวหรือประกาศครับ XD</h1>
+    </c:if>
 <c:forEach items="${ac.announcement}" var="ann">
     <div class="media">
         <a class="pull-left" href="#">
