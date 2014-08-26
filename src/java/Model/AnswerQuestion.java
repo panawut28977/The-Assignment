@@ -20,10 +20,20 @@ import java.util.logging.Logger;
  */
 public class AnswerQuestion {
 
+    private int st_am_id;
     private int q_id;
+    private int q_order;
     private double score;
     private String hilightKeyword;
     private String answer;
+
+    public int getSt_am_id() {
+        return st_am_id;
+    }
+
+    public void setSt_am_id(int st_am_id) {
+        this.st_am_id = st_am_id;
+    }
 
     public int getQ_id() {
         return q_id;
@@ -31,6 +41,14 @@ public class AnswerQuestion {
 
     public void setQ_id(int q_id) {
         this.q_id = q_id;
+    }
+
+    public int getQ_order() {
+        return q_order;
+    }
+
+    public void setQ_order(int q_order) {
+        this.q_order = q_order;
     }
 
     public double getScore() {
@@ -55,11 +73,6 @@ public class AnswerQuestion {
 
     public void setAnswer(String answer) {
         this.answer = answer;
-    }
-
-    @Override
-    public String toString() {
-        return "AnswerQuestion{" + "q_id=" + q_id + ", score=" + score + ", hilightKeyword=" + hilightKeyword + ", answer=" + answer + '}';
     }
 
     //getStAMQuestion
@@ -88,14 +101,15 @@ public class AnswerQuestion {
     }
 
     //setAmQuestionList
-    public static int setAmQuestionList(List<AnswerQuestion> ansList, int st_ass_id) {
+    public static int setAnswerList(List<AnswerQuestion> ansList, int acc_id, int g_id) {
         Connection conn = ConnectionBuilder.getConnection();
         String data = "";
         for (AnswerQuestion answerQuestion : ansList) {
-            data += "(" + st_ass_id + "," + answerQuestion.getQ_id() + "," + answerQuestion.getAnswer() + "," + answerQuestion.getScore() + "),";
+            data += "(" + answerQuestion.getSt_am_id() + "," + answerQuestion.getQ_id() + "," + answerQuestion.getQ_order() + "," + acc_id + "," + g_id + ",'" + answerQuestion.getAnswer() + "'," + answerQuestion.getScore() + "),";
         }
-        data = data.substring(data.length() - 2, data.length() - 1);
-        String sql = "insert into student_assignment_on_web_question(st_ass_id,q_id,answer,score) values" + data;
+        data = data.substring(0, data.length() - 1);
+        String sql = "insert into student_answer_question(st_ass_id,q_id,q_order,acc_id,g_id,answer,score) values" + data;
+        System.out.println(sql);
         PreparedStatement pstm;
         int result = 0;
         try {
@@ -135,5 +149,11 @@ public class AnswerQuestion {
         int result = 0;
         return result;
     }
+
     //hilightKeyword
+    @Override
+    public String toString() {
+        return "AnswerQuestion{" + "st_am_id=" + st_am_id + ", q_id=" + q_id + ", q_order=" + q_order + ", score=" + score + ", hilightKeyword=" + hilightKeyword + ", answer=" + answer + '}';
+    }
+
 }

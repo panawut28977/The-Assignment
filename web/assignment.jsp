@@ -77,7 +77,7 @@ Author     : JenoVa
                                     </a>
                                 </c:when>
                                 <c:otherwise>
-                                    <a href="onwebAssignment.jsp?tab=AllAssignment<c:if test="${param.ct eq 'allAm'}">&&ct=allAm</c:if>" style="text-align: center;text-decoration: none" class="center-block">
+                                    <a href="sendAssignment?am_id=${am.am_id}&&cId=${ac.courseList.get(cId).course.course_id}" style="text-align: center;text-decoration: none" class="center-block">
                                             <span class="glyphicon glyphicon-upload center-block" style="font-size: 150px;margin: 40px auto;"></span><h4>Let's do it.</h4>
                                         </a>
                                 </c:otherwise>

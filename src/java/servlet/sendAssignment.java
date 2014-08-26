@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 /**
  *
  * @author Orarmor
@@ -115,9 +116,7 @@ public class sendAssignment extends HttpServlet {
                 for (StAmFileList stAmFileList : safl) {
                     File file = new File(getServletContext().getRealPath("/") + "\\file\\student_assignment_file\\" + stAmFileList.getPath_file());
                     long filesize = file.length();
-                    System.out.println(filesize);
                     long filesizeInKB = filesize / 1024;
-                    System.out.println(filesizeInKB);
                     stAmFileList.setFile_size(filesizeInKB);
                 }
                 request.setAttribute("safl", safl);
@@ -125,7 +124,6 @@ public class sendAssignment extends HttpServlet {
             } else {
                 //get student assignment onweb
                 StAssignmentOnWeb stw = StAssignmentOnWeb.getStAmbyAmIDAndGID(am_id, g.getG_id());
-                System.out.println(stw);
                 ss.setAttribute("sa", stw);
                 url = "/onwebAssignment.jsp?tab=AllAssignment";
                 getServletContext().getRequestDispatcher(url).forward(request, response);

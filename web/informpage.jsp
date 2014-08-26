@@ -50,6 +50,11 @@
                                 <h3>Upload Assignment successful. <a href="sendAssignment?am_id=${param.am_id}">Go back to see your assignment</a></h3>
                             </div>
                         </c:when>
+                        <c:when test="${msg eq '4'}">
+                            <div class="alert alert-success" role="alert">
+                                <h3>Send Assignment successful. <a href="sendAssignment?am_id=${param.am_id}">Go back to see your assignment</a></h3>
+                            </div>
+                        </c:when>
                     </c:choose>
                 </div>
             </div>

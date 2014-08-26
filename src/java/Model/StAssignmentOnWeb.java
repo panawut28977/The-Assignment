@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Model;
 
 import java.sql.Connection;
@@ -11,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,6 +23,7 @@ import java.util.logging.Logger;
  * @author JenoVa
  */
 public class StAssignmentOnWeb {
+
     private int st_am_id;
     private int am_id;
     private int acc_id;
@@ -59,8 +61,6 @@ public class StAssignmentOnWeb {
     public void setG_id(int g_id) {
         this.g_id = g_id;
     }
-    
-    
 
     public void setAcc_id(int acc_id) {
         this.acc_id = acc_id;
@@ -81,7 +81,6 @@ public class StAssignmentOnWeb {
     public void setLasted_send_date(Date lasted_send_date) {
         this.lasted_send_date = lasted_send_date;
     }
-
 
     public String getMember() {
         return member;
@@ -106,13 +105,13 @@ public class StAssignmentOnWeb {
     public void setAnwerQuestion(List<AnswerQuestion> anwerQuestion) {
         this.anwerQuestion = anwerQuestion;
     }
-    
-    public double getScore(int st_am_id){
+
+    public double getScore(int st_am_id) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select score from student_assignment_on_web where st_ass_id = ? ";
         PreparedStatement pstm;
         double result = 0;
-        
+
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, st_am_id);
@@ -126,8 +125,8 @@ public class StAssignmentOnWeb {
         }
         return result;
     }
-    
-    public List<StAssignmentOnWeb> getStAmInfo(int st_am_id){
+
+    public List<StAssignmentOnWeb> getStAmInfo(int st_am_id) {
         List<StAssignmentOnWeb> StAssInfo = new ArrayList<StAssignmentOnWeb>();
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select * from student_assignment_on_web where st_ass_id = ? order by send_date desc fetch first 1 rows";
@@ -152,13 +151,13 @@ public class StAssignmentOnWeb {
         }
         return StAssInfo;
     }
-    
-    public double getScoreByAccIDAndAmID(int acc_id , int am_id){
+
+    public double getScoreByAccIDAndAmID(int acc_id, int am_id) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select score from student_assignment_on_web where ass_id = ? and acc_id = ?";
         PreparedStatement pstm;
         double result = 0;
-        
+
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, acc_id);
@@ -173,7 +172,7 @@ public class StAssignmentOnWeb {
         }
         return result;
     }
-    
+
     public static StAssignmentOnWeb getStAmByAmIDAndAccId(int am_id, int acc_id) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select * from student_assignment_on_web where ass_id = ? and acc_id = ?";
@@ -201,7 +200,7 @@ public class StAssignmentOnWeb {
         }
         return stw;
     }
-    
+
     public static StAssignmentOnWeb getStAmbyAmIDAndGID(int am_id, int g_id) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select * from student_assignment_on_web where ass_id = ? and g_id = ?";
@@ -229,7 +228,7 @@ public class StAssignmentOnWeb {
         }
         return stw;
     }
-    
+
     public static int setAm(StAssignmentOnWeb StAssWeb) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql2 = "insert into student_assignment_on_web(ass_id,acc_id,g_id,score) values(?,?,?,?)";
@@ -252,7 +251,7 @@ public class StAssignmentOnWeb {
         }
         return result;
     }
-    
+
 //    public void setAm(StAssignmentOnWeb StAssWeb){
 //        Connection conn = ConnectionBuilder.getConnection();
 //        String sql = "insert into Student_assignment_on_web(st_ass_id,ass_id,acc_id,score,send_date) values(?,?,?,?,?)";
@@ -271,9 +270,26 @@ public class StAssignmentOnWeb {
 //            Logger.getLogger(StAssignmentOnWeb.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 //    }
-    
-    public void autoChecking(int st_am_id){
-        
+    public static int updateLastedSend(StAssignmentOnWeb a) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "update student_assignment_on_web set lasted_send_date=? where st_ass_id=?";
+        PreparedStatement pstm;
+        int result = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            pstm.setString(1, df.format(a.getLasted_send_date()));
+            pstm.setInt(2, a.getSt_am_id());
+            result = pstm.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
+    public void autoChecking(int st_am_id) {
+
     }
 
     @Override
