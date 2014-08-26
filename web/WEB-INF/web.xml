@@ -164,6 +164,10 @@
         <servlet-name>uploadAssignmentOnWeb</servlet-name>
         <servlet-class>servlet.uploadAssignmentOnWeb</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetSentAssignment</servlet-name>
+        <servlet-class>servlet.GetSentAssignment</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -279,6 +283,10 @@
     <servlet-mapping>
         <servlet-name>uploadAssignmentOnWeb</servlet-name>
         <url-pattern>/uploadAssignmentOnWeb</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetSentAssignment</servlet-name>
+        <url-pattern>/GetSentAssignment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

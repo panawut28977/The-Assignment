@@ -160,6 +160,32 @@ public class StAssignmentFile {
         return s;
     }
 
+    public static StAssignmentFile getSentStAm(int am_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select * from student_assignment_file where ass_id = ? and lasted_send_date not like '%null%' ";
+        PreparedStatement pstm;
+        int result = 0;
+        StAssignmentFile s = new StAssignmentFile();
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, am_id);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                int st_ass_id = rs.getInt("st_am_id");
+                s.setAm_id(rs.getInt("ass_id"));
+                s.setAcc_id(rs.getInt("acc_id"));
+                s.setSt_am_id(st_ass_id);
+                s.setList_id(rs.getInt("list_id"));
+                s.setScore(rs.getDouble("score"));
+                s.setLasted_send_date(rs.getDate("lasted_send_date"));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(StAssignmentFile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return s;
+    }
+    
     public static List<StAssignmentFile> getStAmBbyAmID(int am_id) {
         List<StAssignmentFile> StAssList = new ArrayList<StAssignmentFile>();
         Connection conn = ConnectionBuilder.getConnection();
