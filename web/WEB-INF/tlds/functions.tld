@@ -45,12 +45,12 @@
         <function-class>Model.AccountCourse</function-class>
         <function-signature>Timestamp getApprovedTime(int,int)</function-signature>
     </function>
-     <function>
+    <function>
         <name>getAccountRole</name>
         <function-class>Model.AccountCourse</function-class>
         <function-signature>String getAccountRole(int,int)</function-signature>
     </function>
-      <function>
+    <function>
         <name>formatTime</name>
         <function-class>util.Util</function-class>
         <function-signature>String formatTime(java.lang.String)</function-signature>
@@ -60,19 +60,39 @@
         <function-class>util.Util</function-class>
         <function-signature>Boolean containsAns(java.lang.String,java.lang.String)</function-signature>
     </function>
-     <function>
+    <function>
         <name>getNameByID</name>
         <function-class>Model.Account</function-class>
         <function-signature>String getNameByID(int)</function-signature>
     </function>
-     <function>
+    <function>
+        <name>getNameByGIDandAmID</name>
+        <function-class>Model.Account</function-class>
+        <function-signature>String getNameByGIDandAmID(int,int)</function-signature>
+    </function>
+    <function>
         <name>replaceStringByIndex</name>
         <function-class>util.Util</function-class>
         <function-signature>String replaceStringByIndex(java.lang.String,int,int,java.lang.String)</function-signature>
     </function>
-     <function>
+    <function>
         <name>shuffleString</name>
         <function-class>util.Util</function-class>
         <function-signature>String shuffleString(java.lang.String)</function-signature>
+    </function>
+    <function>
+        <name>lastedSentStatus</name>
+        <function-class>Model.Assignment</function-class> 
+        <function-signature>String lastedSentStatus(java.util.Date,Model.Assignment)</function-signature>
+    </function>
+    <function>
+        <name>createPopoverGroup</name>
+        <function-class>util.Util</function-class>
+        <function-signature>String createPopoverGroup(java.util.List)</function-signature>
+    </function>
+     <function>
+        <name>getGNOById</name>
+        <function-class>Model.Group_member</function-class>
+        <function-signature>int getGNOById(int)</function-signature>
     </function>
 </taglib>

@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static org.apache.coyote.http11.Constants.a;
 
 /**
  *
@@ -448,6 +449,20 @@ public class Assignment {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return status;
+    } 
+    
+    public static String lastedSentStatus(Date lastsent, Assignment a) {
+        String status = "";
+        Date due_date = a.getDue_date();
+        Double remaining_day = (double) ((due_date.getTime() - lastsent.getTime()) / 1000 / 60 / 60 / 24);
+        if (remaining_day > 3) {
+            status = "ontime";
+        } else if (remaining_day <= 3 && remaining_day >= 0) {
+            status = "hurryup";
+        } else {
+            status = "late";
         }
         return status;
     }

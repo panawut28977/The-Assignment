@@ -3,15 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package servlet;
 
 import Model.Account;
+import Model.AccountCourse;
 import Model.Assignment;
+import Model.Group_member;
 import Model.StAssignmentFile;
 import Model.StAssignmentOnWeb;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -37,17 +39,124 @@ public class GetSentAssignment extends HttpServlet {
             throws ServletException, IOException {
         HttpSession ss = request.getSession();
         Account ac = (Account) ss.getAttribute("ac");
-        int am_id = Integer.parseInt(ss.getAttribute("am_id") + "");
+        int am_id = Integer.parseInt(request.getParameter("am_id"));
         String cId = ss.getAttribute("cId") + "";
+        String url = "/SentAssignment.jsp?tab=AllAssignment";
         //set am
         Assignment a = Assignment.getAmByAmID(am_id);
-        StAssignmentOnWeb saw = new StAssignmentOnWeb();
-        StAssignmentFile stF = new StAssignmentFile();
-        if(a.getAss_type().equalsIgnoreCase("file")){
-            stF = StAssignmentFile.getSentStAm(am_id);
-        }else{
-//            saw = StAssignmentOnWeb.getSentStAm(am_id);
+
+        //ลิสของผู้ใช้ทั้งหมดในคอร์สนั้น
+        List<Account> allAcc = AccountCourse.getMemberInCourse(Integer.parseInt(cId));
+        List<Integer> allAccId = new ArrayList<>();
+        for (Account account : allAcc) {
+            allAccId.add(account.getAcc_id());
         }
+        //ลิสของผู้ใช้ที่มีค่าในกรุ๊ปแล้ว
+        List<Integer> accId = new ArrayList<>();
+        //ลิสของผู้ใช้ที่เหลือที่ยังไม่มีค่าใน St am file (ยังไม่เคยเปิดงานจะไม่มีค่าใน st am file) ใช้กับงานกลุ่ม
+        List<Integer> leftAccId = new ArrayList<>();
+        Group_member gm = null;
+
+        int sent = 0;
+        int left = 0;
+        int total = 0;
+        int checked = 0;
+        if (a.getAss_type().equalsIgnoreCase("file")) {
+            List<StAssignmentFile> sentList = new ArrayList<StAssignmentFile>();
+            List<StAssignmentFile> leftList = new ArrayList<StAssignmentFile>();
+            List<StAssignmentFile> stF = StAssignmentFile.getStAmByAmId(am_id);
+
+            for (StAssignmentFile sa : stF) {
+                if (sa.getLasted_send_date() != null) {
+                    sentList.add(sa);
+                    sent++;
+                } else {
+                    leftList.add(sa);
+                    left++;
+                }
+
+                if (sa.getScore() != 0) {
+                    checked++;
+                }
+
+                if (sa.getScore() == 0 && sa.getLasted_send_date() != null) {
+                    total++;
+                }
+
+                //ดึงคนที่มีกลุ่มมาเก็บลง accId
+                if (a.getTotal_member() > 1) {
+                    gm = Group_member.getMemberById(sa.getG_id());
+                    String accList[] = gm.getAcc_id().split(",");
+                    for (String string : accList) {
+                        accId.add(Integer.parseInt(string));
+                    }
+                } else {
+                    accId.add(sa.getAcc_id());
+                }
+            }
+
+            //logic สำหรับคิดว่ามีใครเหลืออีกบ้างที่ยังไม่มีกลุ่ม หรือไม่เคยกดเข้างานเลยสักครั้ง
+            for (Integer id : allAccId) {
+                if (!accId.contains(id)) {
+                    if (a.getTotal_member() == 1) {
+                        left++;
+                    }
+                    leftAccId.add(id);
+                }
+            }
+            request.setAttribute("sentList", sentList);
+            request.setAttribute("leftList", leftList);
+        } else {
+            List<StAssignmentOnWeb> sentList = new ArrayList<StAssignmentOnWeb>();
+            List<StAssignmentOnWeb> leftList = new ArrayList<StAssignmentOnWeb>();
+            List<StAssignmentOnWeb> saw = StAssignmentOnWeb.getStAmByAmId(am_id);
+            for (StAssignmentOnWeb sa : saw) {
+                if (sa.getLasted_send_date() != null) {
+                    sentList.add(sa);
+                    sent++;
+                } else {
+                    leftList.add(sa);
+                    left++;
+                }
+
+                if (sa.getScore() != 0) {
+                    checked++;
+                }
+
+                if (sa.getScore() == 0 && sa.getLasted_send_date() != null) {
+                    total++;
+                }
+
+                //ดึงคนที่มีกลุ่มมาเก็บลง accId
+                if (a.getTotal_member() > 1) {
+                    gm = Group_member.getMemberById(sa.getG_id());
+                    String accList[] = gm.getAcc_id().split(",");
+                    for (String string : accList) {
+                        accId.add(Integer.parseInt(string));
+                    }
+                } else {
+                    accId.add(sa.getAcc_id());
+                }
+            }
+            //logic สำหรับคิดว่ามีใครเหลืออีกบ้างที่ยังไม่มีกลุ่ม หรือไม่เคยกดเข้างานเลยสักครั้ง
+            for (Integer id : allAccId) {
+                if (!accId.contains(id)) {
+                    if (a.getTotal_member() == 1) {
+                        left++;
+                    }
+                    leftAccId.add(id);
+                }
+            }
+            request.setAttribute("sentList", sentList);
+            request.setAttribute("leftList", leftList);
+        }
+        request.setAttribute("leftAccId", leftAccId);
+        request.setAttribute("sent", sent);
+        request.setAttribute("left", left);
+        request.setAttribute("total", total);
+        request.setAttribute("checked", checked);
+        ss.setAttribute("am", a);
+        getServletContext().getRequestDispatcher(url).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

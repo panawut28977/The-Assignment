@@ -14,7 +14,7 @@
 <c:if test="${ac.courseList.get(cId).role eq 'TH'}"> 
     <a class="btn btn-primary"  href="CreateAssignment.jsp?tab=AllAssignment" style="margin-top: 20px"><span class="glyphicon glyphicon-plus-sign"></span> Create Assignment</a>
 </c:if>
-<div class="table-responsive">
+<div class="table-responsive" style="min-height: 520px;">
     <table class="table table-striped" id="AllAssignemnt">
         <thead>
             <tr>
@@ -82,7 +82,7 @@
                             </td>
                         </c:when>
                         <c:otherwise> 
-                            <td><a href="SentAssignment.jsp?tab=AllAssignment&&wkt=file">10</a></td>
+                            <td><a href="GetSentAssignment?am_id=${a.am_id}">10</a></td>
                         </c:otherwise>
                     </c:choose>
                 </tr>

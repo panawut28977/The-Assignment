@@ -1,7 +1,7 @@
  <div><h3>${param.nt} <button class='btn btn-default pull-right'>Clear all</button></h3></div>
 <div class="media">
     <a class="pull-left" href="#">
-        <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+        <img width="64" src="img/avatar.jpg">
     </a>
     <div class="media-body">
         <h4 class="media-heading">AJ.Kittiphan Puapholthep<small class="pull-right">16/01/57</small></h4>
@@ -10,7 +10,7 @@
 </div>
 <div class="media">
     <a class="pull-left" href="#">
-        <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+        <img width="64" src="img/avatar.jpg">
     </a>
     <div class="media-body">
         <h4 class="media-heading">AJ.Kittiphan Puapholthep<small class="pull-right">16/01/57</small></h4>
@@ -19,7 +19,7 @@
 </div>
 <div class="media">
     <a class="pull-left" href="#">
-        <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+        <img width="64" src="img/avatar.jpg">
     </a>
     <div class="media-body">
         <h4 class="media-heading">AJ.Kittiphan Puapholthep<small class="pull-right">16/01/57</small></h4>
