@@ -145,13 +145,13 @@ public class StAssignmentFile {
             pstm.setInt(1, st_am_id);
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {
-                int st_ass_id = rs.getInt("st_am_id");
+                int st_ass_id = rs.getInt("st_ass_id");
                 s.setAm_id(rs.getInt("ass_id"));
                 s.setAcc_id(rs.getInt("acc_id"));
                 s.setSt_am_id(st_am_id);
                 s.setList_id(rs.getInt("list_id"));
                 s.setScore(rs.getDouble("score"));
-                s.setLasted_send_date(rs.getDate("lasted_lasted_send_date"));
+                s.setLasted_send_date(rs.getDate("lasted_send_date"));
             }
             conn.close();
         } catch (SQLException ex) {

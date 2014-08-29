@@ -40,6 +40,9 @@ public class Assignment {
     private double fully_mark;
     private List<Comment> comment;
     private List<Question> questionList;
+    
+    //mobile attr
+    private String course_name;
 
     public int getAm_id() {
         return am_id;

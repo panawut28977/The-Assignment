@@ -19,10 +19,26 @@ import java.util.logging.Logger;
  * @author JenoVa
  */
 public class UserScore {
-
+    private String fullname;
     private Assignment assignment;
     private double score;
     private double full_mark;
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public double getFull_mark() {
+        return full_mark;
+    }
+
+    public void setFull_mark(double full_mark) {
+        this.full_mark = full_mark;
+    }
 
     public Assignment getAssignment() {
         return assignment;
@@ -64,6 +80,11 @@ public class UserScore {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
         return uScoreList;
+    }
+
+    @Override
+    public String toString() {
+        return "UserScore{" + "fullname=" + fullname + ", assignment=" + assignment + ", score=" + score + ", full_mark=" + full_mark + '}';
     }
 
 }

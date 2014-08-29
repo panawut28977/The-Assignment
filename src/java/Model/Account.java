@@ -168,7 +168,7 @@ public class Account {
                 for (AccountCourse accountCourse : CL) {
                     acc.CourseList.put((long) accountCourse.getCourse().getCourse_id(), accountCourse);
                 }
-//                acc.setListStudentScore(UserScore.getUserScore(acc_id));
+                acc.setListStudentScore(UserScore.getUserScore(acc_id));
             }
             conn.close();
         } catch (SQLException ex) {

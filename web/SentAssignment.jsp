@@ -67,7 +67,7 @@
                                         <tr>
                                             <th><b>Name</b></th>
                                             <th><b>Score</b></th>
-                                            <th><b>Sent</b></th>
+                                            <th><b>Lasted Sent</b></th>
                                             <th><b>Status</b></th>
                                             <th></th>
                                         </tr>
@@ -118,7 +118,7 @@
                                                         </c:otherwise>
                                                     </c:choose>
                                                 </td>
-                                                <td><a href="CheckAssignment.jsp?tab=AllAssignment">View</a></td>
+                                                <td><a href="checkAssignment?tab=AllAssignment&&st_am_id=${sentSa.st_am_id}">View</a></td>
                                             </tr>
                                         </c:forEach>
                                     </tbody>

@@ -57,12 +57,13 @@
                         <li class="active"><a href="#">Check Assignment# 1.....</a></li>
                     </ol>
                     <c:choose>
-                        <c:when test="${sessionScope.wkt eq 'file'}">
-                            <a href="Checkcopy.jsp?tab=AllAssignment" class="btn btn-primary" data-toggle="tooltip"  id="checkcopy" data-placement="bottom" title="If you want to know this person copied or not? click it!" type="button">
+                        <c:when test="${am.ass_type eq 'file'}">
+                            <a href="Checkcopy.jsp?tab=AllAssignment" class="btn btn-primary pull-right" data-toggle="tooltip"  id="checkcopy" data-placement="bottom" title="If you want to know this person copied or not? click it!" type="button">
                                 <span class="glyphicon glyphicon-copyright-mark"></span> 
                                 Check copy
                             </a>
-                            <div style="text-align: center">
+                            <br/><br/>
+                            <div>
                                 <h4>Individual work</h4>
                                 <div class="media">
                                     <a href="#">
@@ -73,8 +74,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <iframe class="col-md-12" style="min-height: 600px;margin-top: 20px" src="https://crocodoc.com/view/dvY3M9pEK42ZUqsd6VTq0nDkrbxLRWega4E49ZKaN6pOXtRN1f-2CbcfShaoyAODAX1uGzcVidkfU2Itw2jySpWVrXquGJsU7uATKA"/></iframe> 
-                            <div style="text-align: center;background-color: gainsboro;clear: both;padding: 5px 0;"><a target="_blank" style="text-align: center" href="https://crocodoc.com/view/dvY3M9pEK42ZUqsd6VTq0nDkrbxLRWega4E49ZKaN6pOXtRN1f-2CbcfShaoyAODAX1uGzcVidkfU2Itw2jySpWVrXquGJsU7uATKA">see in new window.</a></div>
+                            <iframe class="col-md-12" style="min-height: 600px;margin-top: 20px" src="https://crocodoc.com/view/${sessionKey}"/></iframe> 
+                            <div style="text-align: center;background-color: gainsboro;clear: both;padding: 5px 0;"><a target="_blank" style="text-align: center" href="https://crocodoc.com/view/${sessionKey}">see in new window.</a></div>
                             <div class="row" style="padding-top: 20px;clear: both;">
                                 <form role="form" class="form-horizontal">
                                     <div class="form-group">
@@ -89,7 +90,7 @@
                                 </form>
                             </div>
                         </c:when>
-                        <c:when test="${sessionScope.wkt eq 'web'}">
+                        <c:when test="${am.ass_type eq 'web'}">
                             <div >
                                 <div>
                                     <h4 style="text-align: center" >Group work</h4>
