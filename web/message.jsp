@@ -61,7 +61,7 @@
                 <%@include file="META-INF/page/side_bar.jsp"%>
                 <div class="col-md-9" style="padding-bottom: 20px">
                     <div class="col-md-8">
-                        <h4>Private Message</h4>
+                        <h4><i class="glyphicon glyphicon-envelope"></i> Private Message</h4>
                         <div class="well" style="height: 600px;overflow-y: scroll" id="messageBox" >
                             <div class="pull-left col-md-5 th-message">
                                 <h6><b>AJ.Kittiphan Puapholthep </b></h6>
