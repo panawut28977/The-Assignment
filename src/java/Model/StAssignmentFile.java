@@ -151,6 +151,7 @@ public class StAssignmentFile {
                 s.setSt_am_id(st_am_id);
                 s.setList_id(rs.getInt("list_id"));
                 s.setScore(rs.getDouble("score"));
+                s.setG_id(rs.getInt("g_id"));
                 s.setLasted_send_date(rs.getDate("lasted_send_date"));
                 s.setComment(Comment.getCommentByStAmIDFile(rs.getInt("st_ass_id")));
             }

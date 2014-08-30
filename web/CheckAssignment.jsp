@@ -42,8 +42,8 @@
                 margin-left: 2px;
                 margin-right: 2px;
             }
-            
-             #newComment{
+
+            #newComment{
                 display: none;
             }
         </style>
@@ -58,7 +58,7 @@
                     <%@include file="META-INF/page/CourseTab.jsp"%>
                     <ol class="breadcrumb" style="margin-top: 15px" >
                         <li><a href="course.jsp?tab=AllAssignment">Assignment</a></li>
-                        <li><a href="SentAssignment.jsp?tab=AllAssignment"">Assignment# 1.....</a></li>
+                        <li><a href="GetSentAssignment?am_id=${curAm.am_id}">${curAm.name}</a></li>
                         <li class="active"><a href="#">Check Assignment# 1.....</a></li>
                     </ol>
                     <c:choose>
@@ -66,6 +66,9 @@
                             <a href="Checkcopy.jsp?tab=AllAssignment" class="btn btn-primary pull-right" data-toggle="tooltip"  id="checkcopy" data-placement="bottom" title="If you want to know this person copied or not? click it!" type="button">
                                 <span class="glyphicon glyphicon-copyright-mark"></span> 
                                 Check copy
+                            </a>
+                            <a class="btn pull-right"  data-toggle="modal" data-target="#allAmVersion"  id="allversion">
+                                See all versions
                             </a>
                             <br/><br/>
                             <div>
@@ -80,6 +83,15 @@
                                                 <h4 class="media-heading">${send_acc.firstname} ${send_acc.lastname}</h4>
                                             </div>
                                         </div>
+                                    </c:when>
+                                    <c:when test="${gAm ne null}">
+                                        <h4>Group No. ${g.g_no}</h4>
+                                        <c:forEach items="${gAm}" var="m">
+                                            <div class="member">
+                                                <img width="64" src="${m.profile_pic}">
+                                                <h4>${m.firstname} ${m.lastname}</h4>
+                                            </div>
+                                        </c:forEach>
                                     </c:when>
                                 </c:choose>
                             </div>
@@ -303,10 +315,45 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="allAmVersion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">All Assignment version</h4>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table" >
+                            <thead>
+                                <tr>
+                                    <td>Version</td>
+                                    <td>Name</td>
+                                    <td>Sent date</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:set var="count" value="${safv.size()}"/>
+                                <c:forEach  items="${safv}" var="f">
+                                    <tr >
+                                        <td>${count}</td>
+                                        <td><a href="anotherAmFile?uuid=${f.uuid}">${f.path_file}</a></td>
+                                        <td>${f.send_date}</td>
+                                        <c:set value="${cf:getNameByID(f.send_acc_id)}" var="a"/>
+                                    </tr>
+                                    <c:set var="count" value="${count-1}"/>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <script>
             $(document).ready(function() {
                 var aTable = $('#SentAssignment').dataTable();
                 $('#checkcopy').tooltip("hide");
+                $('#allversion').tooltip("hide");
 
                 $("#addComment").click(function() {
                     var pic = '${ac.profile_pic}';

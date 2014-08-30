@@ -172,6 +172,10 @@
         <servlet-name>checkAssignment</servlet-name>
         <servlet-class>servlet.checkAssignment</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>anotherAmFile</servlet-name>
+        <servlet-class>servlet.anotherAmFile</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -295,6 +299,10 @@
     <servlet-mapping>
         <servlet-name>checkAssignment</servlet-name>
         <url-pattern>/checkAssignment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>anotherAmFile</servlet-name>
+        <url-pattern>/anotherAmFile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

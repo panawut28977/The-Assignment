@@ -5,19 +5,11 @@
  */
 package servlet;
 
-import Model.Account;
-import Model.Assignment;
-import Model.Group_member;
-import Model.StAmFileList;
-import Model.StAssignmentFile;
 import com.crocodoc.Crocodoc;
-import com.crocodoc.CrocodocDocument;
-import static com.crocodoc.CrocodocExamples.apiToken;
 import com.crocodoc.CrocodocException;
 import com.crocodoc.CrocodocSession;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,7 +20,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Orarmor
  */
-public class checkAssignment extends HttpServlet {
+public class anotherAmFile extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,54 +34,23 @@ public class checkAssignment extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession ss = request.getSession();
-        Account ac = (Account) ss.getAttribute("ac");
-        int st_am_id = Integer.parseInt(request.getParameter("st_am_id"));
-        String cId = ss.getAttribute("cId") + "";
-        String url = "/CheckAssignment.jsp?tab=AllAssignment";
-
+        String uuid = request.getParameter("uuid");
         String apiToken = "mGye5pCBUTgkhI7Zl0QL3oPJ";
         Crocodoc.setApiToken(apiToken);
-        Assignment a = (Assignment) ss.getAttribute("curAm");
-        Group_member g = null;
-        Account send_acc = null;
-        if (a.getAss_type().equalsIgnoreCase("file")) {
-            StAssignmentFile stF = StAssignmentFile.getStAm(st_am_id);
-            List<StAmFileList> safv = StAmFileList.getSafvByListId(stF.getList_id());
-            System.out.print("  Creating... ");
-            String sessionKey = null;
-            try {
-                sessionKey = CrocodocSession.create(safv.get(0).getUuid());
-                System.out.println("success :)");
-                System.out.println("  The session key is " + sessionKey + ".");
-            } catch (CrocodocException e) {
-                System.out.println("failed :(");
-                System.out.println("  Error Code: " + e.getCode());
-                System.out.println("  Error Message: " + e.getMessage());
-            }
-            System.out.println(sessionKey);
-            if (a.getTotal_member() > 1) {
-                g = Group_member.getMemberById(stF.getG_id());
-                System.out.println(g);
-                String accIdList[] = g.getAcc_id().split(",");
-                List<Account> gAm = new ArrayList<>();
-                for (String accId : accIdList) {
-                    gAm.add(Account.getNameByID(Integer.parseInt(accId)));
-                }
-                ss.setAttribute("gAm", gAm);
-                ss.setAttribute("g", g);
-            } else {
-                send_acc = Account.getAccountByID(stF.getAcc_id());
-                request.setAttribute("send_acc", send_acc);
-            }
-            ss.setAttribute("sa", stF);
-            ss.setAttribute("safv", safv);
-            ss.setAttribute("sessionKey", sessionKey);
-        } else {
-
+        System.out.print("  Creating... ");
+        String sessionKey = null;
+        try {
+            sessionKey = CrocodocSession.create(uuid);
+            System.out.println("success :)");
+            System.out.println("  The session key is " + sessionKey + ".");
+        } catch (CrocodocException e) {
+            System.out.println("failed :(");
+            System.out.println("  Error Code: " + e.getCode());
+            System.out.println("  Error Message: " + e.getMessage());
         }
-
-        getServletContext().getRequestDispatcher(url).forward(request, response);
-
+        System.out.println(sessionKey);
+        ss.setAttribute("sessionKey", sessionKey);
+        response.sendRedirect("CheckAssignment.jsp?tab=AllAssignment");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

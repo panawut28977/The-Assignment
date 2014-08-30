@@ -163,7 +163,7 @@ public class Assignment {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "insert into assignment(course_id,name,description,ass_type,total_member,due_date,title_assignment_onweb) values(?,?,?,?,?,?,?)";
         if (ass.getAss_type().equalsIgnoreCase("file")) {
-            sql = "insert into assignment(course_id,name,description,ass_type,total_member,due_date,path_file) values(?,?,?,?,?,?,?)";
+            sql = "insert into assignment(course_id,name,description,ass_type,total_member,due_date,path_file,fully_mark) values(?,?,?,?,?,?,?,?)";
         }
         PreparedStatement pstm = null;
         int result = 0;
@@ -180,6 +180,7 @@ public class Assignment {
 //            pstm.setString(7, ass.getAss_extension());
             if (ass.getAss_type().equalsIgnoreCase("file")) {
                 pstm.setString(7, ass.getPath_file());
+                pstm.setDouble(8, ass.getFully_mark());
             } else {
                 pstm.setString(7, ass.getTitle_assignment_onweb());
             }

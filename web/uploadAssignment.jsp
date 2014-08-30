@@ -112,8 +112,8 @@
                                     <table class="table" >
                                         <thead>
                                             <tr>
-                                                <td>Name</td>
                                                 <td>Version</td>
+                                                <td>Name</td>
                                                 <td>Sent date</td>
                                                 <td>Size(MB)</td>
                                                 <td>Upload by</td>
@@ -123,8 +123,8 @@
                                             <c:set var="count" value="${safl.size()}"/>
                                             <c:forEach  items="${safl}" var="f">
                                                 <tr>
-                                                    <td><a href="file/student_assignment_file/${f.path_file}">${f.path_file}</a></td>
                                                     <td>${count}</td>
+                                                    <td><a href="file/student_assignment_file/${f.path_file}">${f.path_file}</a></td>
                                                     <td>${f.send_date}</td>
                                                     <td>${f.file_size} KB</td> 
                                                     <c:set value="${cf:getNameByID(f.send_acc_id)}" var="a"/>

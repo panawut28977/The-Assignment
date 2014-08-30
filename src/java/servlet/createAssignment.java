@@ -84,6 +84,7 @@ public class createAssignment extends HttpServlet {
         String url = "";
         int key = 0;
         if (ass_type.equalsIgnoreCase("file")) {
+            a.setFully_mark(Double.parseDouble(m.getParameter("fullymark")));
             a.setPath_file(m.getFilesystemName("file"));
             key = Assignment.createAmInfo(a);
             url = "assignment.jsp?tab=AllAssignment&&amId=" + key;
