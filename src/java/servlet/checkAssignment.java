@@ -79,7 +79,7 @@ public class checkAssignment extends HttpServlet {
                 ss.setAttribute("g", g);
             } else {
                 send_acc = Account.getAccountByID(stF.getAcc_id());
-                request.setAttribute("send_acc", send_acc);
+                ss.setAttribute("send_acc", send_acc);
             }
             ss.setAttribute("sa", stF);
             ss.setAttribute("safv", safv);

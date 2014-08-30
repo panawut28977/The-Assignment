@@ -5,6 +5,7 @@
  */
 package servlet;
 
+import Model.StAssignmentFile;
 import com.crocodoc.Crocodoc;
 import com.crocodoc.CrocodocException;
 import com.crocodoc.CrocodocSession;
@@ -33,7 +34,7 @@ public class anotherAmFile extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession ss = request.getSession();
+        HttpSession ss = request.getSession(false);
         String uuid = request.getParameter("uuid");
         String apiToken = "mGye5pCBUTgkhI7Zl0QL3oPJ";
         Crocodoc.setApiToken(apiToken);
@@ -50,7 +51,12 @@ public class anotherAmFile extends HttpServlet {
         }
         System.out.println(sessionKey);
         ss.setAttribute("sessionKey", sessionKey);
-        response.sendRedirect("CheckAssignment.jsp?tab=AllAssignment");
+
+        //update session
+        StAssignmentFile stF = (StAssignmentFile) ss.getAttribute("sa");
+        stF = StAssignmentFile.getStAm(stF.getSt_am_id());
+        ss.setAttribute("sa", stF);
+        getServletContext().getRequestDispatcher("/CheckAssignment.jsp?tab=AllAssignment").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

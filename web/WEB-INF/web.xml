@@ -24,6 +24,10 @@
         <url-pattern>/selectPeople</url-pattern>
         <url-pattern>/uploadAssignment.jsp</url-pattern>
         <url-pattern>/sendAssignment</url-pattern>
+        <url-pattern>/CheckAssignment.jsp</url-pattern>
+        <url-pattern>/GetSentAssignment</url-pattern>
+        <url-pattern>/checkAssignment</url-pattern>
+        <url-pattern>/anotherAmFile</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>
