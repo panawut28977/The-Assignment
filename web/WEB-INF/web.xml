@@ -180,6 +180,10 @@
         <servlet-name>anotherAmFile</servlet-name>
         <servlet-class>servlet.anotherAmFile</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>updateScoreStAmFile</servlet-name>
+        <servlet-class>servlet.updateScoreStAmFile</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -307,6 +311,10 @@
     <servlet-mapping>
         <servlet-name>anotherAmFile</servlet-name>
         <url-pattern>/anotherAmFile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateScoreStAmFile</servlet-name>
+        <url-pattern>/updateScoreStAmFile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

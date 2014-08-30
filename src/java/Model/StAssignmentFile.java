@@ -327,6 +327,24 @@ public class StAssignmentFile {
         return result;
     }
 
+    public static int updateScore(double score, int st_am_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "update student_assignment_file set score=? where st_ass_id=?";
+        PreparedStatement pstm;
+        int result = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            pstm.setDouble(1, score);
+            pstm.setInt(2, st_am_id);
+            result = pstm.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
     @Override
     public String toString() {
         return "StAssignmentFile{" + "st_am_id=" + st_am_id + ", am_id=" + am_id + ", acc_id=" + acc_id + ", g_id=" + g_id + ", list_id=" + list_id + ", score=" + score + ", lasted_send_date=" + lasted_send_date + ", similar_score=" + similar_score + ", comment=" + comment + '}';

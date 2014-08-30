@@ -98,11 +98,11 @@
                             <iframe class="col-md-12" style="min-height: 600px;margin-top: 20px" src="https://crocodoc.com/view/${sessionKey}"/></iframe> 
                             <div style="text-align: center;background-color: gainsboro;clear: both;padding: 5px 0;"><a target="_blank" style="text-align: center" href="https://crocodoc.com/view/${sessionKey}">see in new window.</a></div>
                             <div class="row" style="padding-top: 20px;clear: both;">
-                                <form role="form" method="post" action="" class="form-horizontal">
+                                <form role="form" method="post" action="updateScoreStAmFile" class="form-horizontal">
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Score (Max ${curAm.fully_mark} point)</label>
                                         <div class="col-md-2">
-                                            <input type="number" min="0" max="${curAm.fully_mark}" class="form-control">
+                                            <input type="number" min="0" max="${curAm.fully_mark}" class="form-control" value="${sa.score}" required="yes" name="score">
                                         </div>
                                         <div class="col-md-2">
                                             <input type="submit" value="save" class="btn btn-primary btn-block">
