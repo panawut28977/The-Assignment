@@ -7,6 +7,7 @@ package servlet;
 
 import Model.Account;
 import Model.Assignment;
+import Model.Group_member;
 import Model.StAmFileList;
 import Model.StAssignmentFile;
 import com.crocodoc.Crocodoc;
@@ -47,7 +48,9 @@ public class checkAssignment extends HttpServlet {
 
         String apiToken = "mGye5pCBUTgkhI7Zl0QL3oPJ";
         Crocodoc.setApiToken(apiToken);
-        Assignment a = (Assignment) ss.getAttribute("am");
+        Assignment a = (Assignment) ss.getAttribute("curAm");
+        Group_member g = null;
+        Account send_acc = null;
         if (a.getAss_type().equalsIgnoreCase("file")) {
             StAssignmentFile stF = StAssignmentFile.getStAm(st_am_id);
             List<StAmFileList> safv = StAmFileList.getSafvByListId(stF.getList_id());
@@ -63,11 +66,18 @@ public class checkAssignment extends HttpServlet {
                 System.out.println("  Error Message: " + e.getMessage());
             }
             System.out.println(sessionKey);
-            ss.setAttribute("sessionKey",sessionKey);
+            if (a.getTotal_member() > 1) {
+//                g = Group_member.getGroupByMember(ac.getAcc_id(), am_id);
+            }else{
+                send_acc = Account.getAccountByID(stF.getAcc_id());
+                request.setAttribute("send_acc", send_acc);
+            }
+            ss.setAttribute("sa", stF);
+            ss.setAttribute("sessionKey", sessionKey);
         } else {
 
         }
-        
+
         getServletContext().getRequestDispatcher(url).forward(request, response);
 
     }

@@ -261,7 +261,7 @@
                     </div>
                 </div>
             </div>
-            <div class="gi-override gi-userlist">
+<!--            <div class="gi-override gi-userlist">
                 <div class="gi-options"></div>
                 <ul class="gi-inner">
                     <li class="gi-user" data-goinstant-id="1234">
@@ -280,7 +280,7 @@
             <div class="gi-override gi-form">
                 <div class="gi-indicator">
                     <div class="gi-user">
-                        <!-- The displayname of the user interacting with this input -->
+                         The displayname of the user interacting with this input 
                     </div>
                     <div class="gi-bar">
                     </div>
@@ -314,16 +314,16 @@
             <div class="gi-override gi-click-container">
                 <div class="gi-click">
                     <div class="gi-cursor">
-                        <!-- Cursor image background -->
+                         Cursor image background 
                     </div>
                     <div class="gi-animation">
-                        <!-- Click animation image background-->
+                         Click animation image background
                     </div>
                     <div class="gi-name">
-                        <!-- User's display name -->
+                         User's display name 
                     </div>
                 </div>
-            </div>
+            </div>-->
     </body>
 
     <script>

@@ -155,7 +155,7 @@ public class GetSentAssignment extends HttpServlet {
         request.setAttribute("left", left);
         request.setAttribute("total", total);
         request.setAttribute("checked", checked);
-        ss.setAttribute("am", a);
+        ss.setAttribute("curAm", a);
         getServletContext().getRequestDispatcher(url).forward(request, response);
     }
 

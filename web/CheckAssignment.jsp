@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
+<%@taglib uri="/WEB-INF/tlds/functions.tld" prefix="cf" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -35,11 +36,15 @@
                 margin-left: 10px;
                 margin-right: 10px;
             } 
-            
+
             .match_word_check input[type="number"]{
                 width: 40px;
-                 margin-left: 2px;
+                margin-left: 2px;
                 margin-right: 2px;
+            }
+            
+             #newComment{
+                display: none;
             }
         </style>
     </head>
@@ -57,22 +62,26 @@
                         <li class="active"><a href="#">Check Assignment# 1.....</a></li>
                     </ol>
                     <c:choose>
-                        <c:when test="${am.ass_type eq 'file'}">
+                        <c:when test="${curAm.ass_type eq 'file'}">
                             <a href="Checkcopy.jsp?tab=AllAssignment" class="btn btn-primary pull-right" data-toggle="tooltip"  id="checkcopy" data-placement="bottom" title="If you want to know this person copied or not? click it!" type="button">
                                 <span class="glyphicon glyphicon-copyright-mark"></span> 
                                 Check copy
                             </a>
                             <br/><br/>
                             <div>
-                                <h4>Individual work</h4>
-                                <div class="media">
-                                    <a href="#">
-                                        <img width="64" src="img/avatar.jpg">
-                                    </a>
-                                    <div class="media-body">
-                                        <h4 class="media-heading">Charlette Lemon</h4>
-                                    </div>
-                                </div>
+                                <c:choose>
+                                    <c:when test="${curAm.total_member eq 1 && send_acc ne null}">
+                                        <h4>Individual work</h4>
+                                        <div class="media">
+                                            <a href="#">
+                                                <img width="64" src="${send_acc.profile_pic}">
+                                            </a>
+                                            <div class="media-body">
+                                                <h4 class="media-heading">${send_acc.firstname} ${send_acc.lastname}</h4>
+                                            </div>
+                                        </div>
+                                    </c:when>
+                                </c:choose>
                             </div>
                             <iframe class="col-md-12" style="min-height: 600px;margin-top: 20px" src="https://crocodoc.com/view/${sessionKey}"/></iframe> 
                             <div style="text-align: center;background-color: gainsboro;clear: both;padding: 5px 0;"><a target="_blank" style="text-align: center" href="https://crocodoc.com/view/${sessionKey}">see in new window.</a></div>
@@ -90,7 +99,7 @@
                                 </form>
                             </div>
                         </c:when>
-                        <c:when test="${am.ass_type eq 'web'}">
+                        <c:when test="${curAm.ass_type eq 'web'}">
                             <div >
                                 <div>
                                     <h4 style="text-align: center" >Group work</h4>
@@ -156,7 +165,7 @@
                                                 <input disabled="yes" type="text" value="eeiudb"><input type="number" name="score" value="0"><span class="text-danger"><i class="glyphicon glyphicon-remove-circle"></i></span>amet nibh. Donec sodales sagittis magna. Sed consequat, leo 
                                                 <input disabled="yes" type="text" value="epioan"><input type="number" name="score" value="1"><span class="text-success"><i class="glyphicon glyphicon-ok-circle"></i></span> eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce 
                                                 <input disabled="yes" type="text" value="eoirr"><input type="number" name="score" value="1"><span class="text-success"><i class="glyphicon glyphicon-ok-circle"></i></span> vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia.
-                                                
+
                                             </p>
                                             <h5><b><u>Instruction:</u> Match the words</b></h5>    
                                             <h5>2.) Please match the suitable words form below.</h5><!--[Question Title]-->
@@ -271,30 +280,26 @@
                             </div> 
                         </c:when>
                     </c:choose>
-                    <div style="clear: both;padding: 10px 0"></div>  
-                    <h3>Comment</h3>
-                    <div class="media">
-                        <a class="pull-left" href="#">
-                            <img width="64" src="img/avatar.jpg">
-                        </a>
-                        <div class="media-body">
-                            <h4 class="media-heading">AJ.AAA SSSSS<small class="pull-right">16/01/57</small></h4>
-                            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-                        </div>
-                    </div>
-                    <div class="media">
-                        <a class="pull-left" href="#">
-                            <img width="64" src="img/avatar.jpg">
-                        </a>
-                        <div class="media-body">
-                            <h4 class="media-heading">AJ.AAA SSSSS<small class="pull-right">16/01/57</small></h4>
-                            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-                        </div>
-                    </div>
+                    <div style="clear: both;padding: 10px 0"><hr/></div> 
+                    <h3>Teacher Comment</h3>
                     <form>
-                        <textarea class="form-control" placeholder="Tell your teacher here."></textarea><br>
-                        <input  type="submit" value="comment" class="btn btn-primary col-md-3 pull-right">
+                        <textarea class="form-control" placeholder="Tell your teacher and friends here." id="text"></textarea><br>
+                        <input type="button" value="comment"  id="addComment" class="btn btn-primary col-md-3 pull-right">
                     </form>
+                    <br/><br/><br/>
+                    <div id="listComment">
+                        <c:forEach items="${sa.comment}" var="c">
+                            <div class="media">
+                                <a class="pull-left" href="#">
+                                    <img width="64" src="${c.acc.profile_pic}">
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading">${c.acc.firstname} ${c.acc.lastname}<small class="pull-right">${cf:formatTime(c.comment_date)}</small></h4>
+                                    <p>${c.text}<p>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </div>
                 </div>
             </div>
         </div>
@@ -302,6 +307,23 @@
             $(document).ready(function() {
                 var aTable = $('#SentAssignment').dataTable();
                 $('#checkcopy').tooltip("hide");
+
+                $("#addComment").click(function() {
+                    var pic = '${ac.profile_pic}';
+                    var fullname = '${ac.firstname}' + '${ac.lastname}';
+                    var d = new Date();
+                    var dateSt = d.getFullYear() + "-" + ('0' + (d.getMonth() + 1)).slice(-2) + "-" + ('0' + d.getDate()).slice(-2) + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getMilliseconds();
+                    $.ajax({
+                        type: "POST",
+                        url: "commentStAm",
+                        data: {text: $("#text").val()}
+                    }).done(function(msg) {
+                        var html = '<div class="media" id="newComment"><a class="pull-left" href="#"><img class="img-circle" width="64" src="' + pic + '"></a><div class="media-body"><h4 class="media-heading">' + fullname + '<small class="pull-right">' + dateSt + '</small></h4><p>' + $("#text").val() + '</p></div></div>';
+                        $("#listComment").prepend(html);
+                        $("#newComment").slideDown().removeAttr("id");
+                        $("#text").val("");
+                    });
+                });
             });
         </script>
     </body>

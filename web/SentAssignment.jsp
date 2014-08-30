@@ -49,7 +49,7 @@
                     <%@include file="META-INF/page/CourseTab.jsp"%>
                     <ol class="breadcrumb" style="margin-top: 15px" >
                         <li><a href="course.jsp?tab=AllAssignment">Assignment</a></li>
-                        <li class="active"><a href="#">${am.name}</a></li>
+                        <li class="active"><a href="#">${curAm.name}</a></li>
                     </ol>
                     <div style="text-align: center;margin-top:20px ">
                         <div class="col-md-4"><a id="sentAm"><h4>${sent} <br> Sent</h4></a></div>
@@ -90,9 +90,9 @@
                                                         </c:otherwise>
                                                     </c:choose>
                                                 </td>
-                                                <td>${sentSa.score}/${am.fully_mark}</td>
+                                                <td>${sentSa.score}/${curAm.fully_mark}</td>
                                                 <td>
-                                                    <c:set value="${cf:lastedSentStatus(sentSa.lasted_send_date, am)}" var="status"/>
+                                                    <c:set value="${cf:lastedSentStatus(sentSa.lasted_send_date, curAm)}" var="status"/>
                                                     <c:choose>
                                                         <c:when test="${status eq 'late'}">
                                                             <span class="text-danger">Late</span>
@@ -134,7 +134,7 @@
                             <c:when test="${leftList!=null}">
                                 <c:set value="" var="tableid"/>
                                 <c:choose>
-                                    <c:when test="${am.total_member > 1}">
+                                    <c:when test="${curAm.total_member > 1}">
                                         <c:set value="leftAssignment" var="tableid"/>
                                     </c:when>
                                     <c:otherwise>
@@ -166,7 +166,7 @@
                                             </tr>
                                         </c:forEach>
                                         <!-- ถ้าเป็นการบ้านแบบทำด้วยตัวเองให้ไปหาชื่อของคนที่ไม่ได้เข้ามาดูการบ้าน แล้วดึงมาแสดงให้หมด -->
-                                        <c:if test="${am.total_member == 1}">
+                                        <c:if test="${curAm.total_member == 1}">
                                             <c:forEach items="${leftAccId}" var="lai" >
                                                 <tr>
                                                     <td>
@@ -183,7 +183,7 @@
                         <hr style="clear:both"/>
 
                         <!-- ถ้าเป็นการบ้านแบบกลุ่มให้แสดงชื่อของคนที่ไม่ยังไม่เข้ากลุ่มด้วย(ถ้ามี) -->
-                        <c:if test="${am.total_member > 1}">
+                        <c:if test="${curAm.total_member > 1}">
                             <c:choose>
                                 <c:when test="${leftAccId!=null}">
                                     <table class="table table-striped" ID="wholeftAssignment">
