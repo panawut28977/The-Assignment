@@ -39,6 +39,10 @@
             .fillInBlankBox:hover{
                 cursor: pointer;
             }
+
+            .multipleChoice,.explain,.tfQuestion,.matchWord,.instruction,.fillBlank{
+                cursor: move;
+            }
         </style>
 
         <%@include file="META-INF/page/include_js.jsp" %>

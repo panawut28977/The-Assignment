@@ -6,10 +6,12 @@
 package servlet;
 
 import Model.Account;
+import Model.AnswerQuestion;
 import Model.Assignment;
 import Model.Group_member;
 import Model.StAmFileList;
 import Model.StAssignmentFile;
+import Model.StAssignmentOnWeb;
 import com.crocodoc.Crocodoc;
 import com.crocodoc.CrocodocDocument;
 import static com.crocodoc.CrocodocExamples.apiToken;
@@ -47,12 +49,12 @@ public class checkAssignment extends HttpServlet {
         String cId = ss.getAttribute("cId") + "";
         String url = "/CheckAssignment.jsp?tab=AllAssignment";
 
-        String apiToken = "mGye5pCBUTgkhI7Zl0QL3oPJ";
-        Crocodoc.setApiToken(apiToken);
         Assignment a = (Assignment) ss.getAttribute("curAm");
         Group_member g = null;
         Account send_acc = null;
         if (a.getAss_type().equalsIgnoreCase("file")) {
+            String apiToken = "mGye5pCBUTgkhI7Zl0QL3oPJ";
+            Crocodoc.setApiToken(apiToken);
             StAssignmentFile stF = StAssignmentFile.getStAm(st_am_id);
             List<StAmFileList> safv = StAmFileList.getSafvByListId(stF.getList_id());
             System.out.print("  Creating... ");
@@ -85,7 +87,25 @@ public class checkAssignment extends HttpServlet {
             ss.setAttribute("safv", safv);
             ss.setAttribute("sessionKey", sessionKey);
         } else {
-
+            StAssignmentOnWeb stw = StAssignmentOnWeb.getStAmInfo(st_am_id);
+//            stw.setAnwerQuestion(AnswerQuestion.getStAMQuestion(stw.getSt_am_id()));
+            System.out.println(stw);
+            ss.setAttribute("sa", stw);
+            
+            if (a.getTotal_member() > 1) {
+                g = Group_member.getMemberById(stw.getG_id());
+                System.out.println(g);
+                String accIdList[] = g.getAcc_id().split(",");
+                List<Account> gAm = new ArrayList<>();
+                for (String accId : accIdList) {
+                    gAm.add(Account.getNameByID(Integer.parseInt(accId)));
+                }
+                ss.setAttribute("gAm", gAm);
+                ss.setAttribute("g", g);
+            } else {
+                send_acc = Account.getAccountByID(stw.getAcc_id());
+                ss.setAttribute("send_acc", send_acc);
+            }
         }
 
         getServletContext().getRequestDispatcher(url).forward(request, response);

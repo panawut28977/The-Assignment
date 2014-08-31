@@ -95,4 +95,9 @@
         <function-class>Model.Group_member</function-class>
         <function-signature>int getGNOById(int)</function-signature>
     </function>
+     <function>
+        <name>getStAMQuestion</name>
+        <function-class>Model.AnswerQuestion</function-class>
+        <function-signature>java.util.List getStAMQuestion(int,int)</function-signature>
+    </function> 
 </taglib>

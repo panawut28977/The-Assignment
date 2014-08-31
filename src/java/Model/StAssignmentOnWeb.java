@@ -126,30 +126,31 @@ public class StAssignmentOnWeb {
         return result;
     }
 
-    public List<StAssignmentOnWeb> getStAmInfo(int st_am_id) {
-        List<StAssignmentOnWeb> StAssInfo = new ArrayList<StAssignmentOnWeb>();
+    public static StAssignmentOnWeb getStAmInfo(int st_am_id) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select * from student_assignment_on_web where st_ass_id = ? order by send_date desc fetch first 1 rows";
+        String sql = "select * from student_assignment_on_web where st_ass_id = ?";
         PreparedStatement pstm;
-        StAssignmentOnWeb saw = null;
+        StAssignmentOnWeb stw = null;
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, st_am_id);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                saw = new StAssignmentOnWeb();
-                saw.setAcc_id(rs.getInt("acc_id"));
-                saw.setAm_id(rs.getInt("ass_id"));
-                saw.setSt_am_id(st_am_id);
-                saw.setLasted_send_date(rs.getDate("send_date"));
-                saw.setScore(rs.getDouble("score"));
-                StAssInfo.add(saw);
+                stw = new StAssignmentOnWeb();
+                stw.setSt_am_id(rs.getInt("st_ass_id"));
+                stw.setAm_id(rs.getInt("ass_id"));
+                stw.setAcc_id(rs.getInt("acc_id"));
+                stw.setG_id(rs.getInt("g_id"));
+                stw.setScore(rs.getDouble("score"));
+                stw.setLasted_send_date(rs.getDate("lasted_send_date"));
+                stw.setComment(Comment.getCommentByStAmIDWeb(rs.getInt("st_ass_id")));
+                stw.setAnwerQuestion(null);
             }
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(StAssignmentOnWeb.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return StAssInfo;
+        return stw;
     }
 
     public double getScoreByAccIDAndAmID(int acc_id, int am_id) {
