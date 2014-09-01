@@ -85,5 +85,7 @@ public class UserScore {
     @Override
     public String toString() {
         return "UserScore{" + "fullname=" + fullname + ", assignment=" + assignment + ", score=" + score + ", full_mark=" + full_mark + '}';
+
     }
+
 }
