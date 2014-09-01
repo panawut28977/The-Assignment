@@ -64,6 +64,8 @@ public class uploadAssignmentOnWeb extends HttpServlet {
                 aq.setSt_am_id(sa.getSt_am_id());
                 aq.setQ_id(q_id);
                 aq.setQ_order(0);
+                aq.setAcc_id(q_id);
+                aq.setG_id(q_id);
                 aq.setAnswer(Arrays.toString(ans));
                 ansList.add(aq);
             } else if (q_type.equalsIgnoreCase("matchWord")) {

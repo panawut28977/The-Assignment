@@ -176,7 +176,7 @@ public class AnswerQuestion {
     //updateScore
     public static int updateScore(AnswerQuestion a, int st_ass_id) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "update student_assignment_on_web_question set score=? where st_ass_id=? and q_id=?";
+        String sql = "update student_assignment_on_web_question set score=? where st_ass_id=? and q_id=? and q_order=? and acc_id=? and g_id=?";
         PreparedStatement pstm;
         int result = 0;
         try {
@@ -184,6 +184,9 @@ public class AnswerQuestion {
             pstm.setDouble(1, a.getScore());
             pstm.setInt(2, st_ass_id);
             pstm.setInt(3, a.getQ_id());
+            pstm.setInt(4, a.getQ_order());
+            pstm.setInt(5, a.getAcc_id());
+            pstm.setInt(6, a.getG_id());
             result = pstm.executeUpdate();
             conn.close();
         } catch (SQLException ex) {
