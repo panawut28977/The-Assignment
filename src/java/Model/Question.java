@@ -25,7 +25,7 @@ public abstract class Question {
     private String instruction;
     private int q_no;
     private String q_type;
-
+    
     abstract public int add();
 
     abstract public String getQ_text();

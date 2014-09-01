@@ -1,0 +1,81 @@
+<!DOCTYPE html> 
+<html><head> 
+  <title>My Page</title> 
+  <meta name="viewport" content="initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="stylesheet" href="jquery.mobile-1.4.2.css" />
+  <link rel="stylesheet" href="font-awesome.min.css"/>
+  
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+</head> 
+<body>
+<div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-fixed-page1" data-title="Panel fixed positioning" data-url="panel-fixed-page1">
+    <div data-role="header" data-position="fixed">
+        <center>
+        <a href="IndexTeacher.html" rel="external" and data-ajax="false"><span class="fa fa-home fa-2x" style="alignment-adjust:auto;padding-right:25px;padding-top:15px;padding-bottom:15px"></span></a>
+        <span class="fa fa-globe fa-2x"></span></center>
+        <a href="#nav-panel"><i class="fa fa-bars fa-2x"></i></a>
+        <div style="background-color:white ;padding:1px;width:auto;">
+        	<div style="margin-left:15px;color:#999">
+            	<h3 align="center">LNG103 Academic English 
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="fa fa-gear fa-2x"></div></h3>
+            </div>
+        </div>
+        <div style="padding: 5px;width: auto;background: #E2E2E2;">
+				<input type="search" name="search" placeholder="Filter..."/>
+            </div>
+    </div><!-- /header -->
+    
+    	<div data-role="navbar">
+        	
+            	<a href="#" style="margin:0 0 0 0;background:#2F89CE;"><i class="fa fa-plus fa-2x" style="padding-right:10px"></i><b style="color:#FFF">Add Announce</b></a>
+            
+        </div>
+    
+   		<div id="add-test"></div>
+      
+    <!--Panel-->
+    <div data-role="panel" data-position-fixed="true" data-display="overlay"  id="nav-panel">
+        <ul data-role="listview">
+            <li style="background-color:#00F"><img src="60223.jpg" width="100" height="100" style="alignment-adjust:top"/>&nbsp; <b style="color:white">Panawut <br/>Ittitananun</b></li>
+            <li><a href="#">Join Course &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div class="fa fa-plus fa-2x"></div></a></li>
+            <li><a href="#">MTH111</a></li>
+            <li><a href="#">INT103</a></li>
+      	</ul>
+    </div>
+    <!-- /panel -->
+    
+    <div data-position="fixed" data-tap-toggle="false" data-role="footer" data-tap-toggle="false" >
+			<div data-role="navbar">
+				<ul>
+					<li><a href="IndexTeacher.html" rel="external" and data-ajax="false" class="ui-btn-active">Announce</a></li>
+					<li><a href="AssignmentInCourseTeacher.html" rel="external" and data-ajax="false">Assignment</a></li>
+                    <li><a href="TeacherScore.html" rel="external" and data-ajax="false">Score</a></li>
+				</ul>
+			</div>
+		</div>
+    
+</div>
+
+</body>
+    <script type="text/javascript">
+        $.getJSON('http://localhost:8084/TheAssignment/showAnnounceTeacher', function(result) {
+            var i=1;
+            $(result).each(function(k, v) {
+                $(
+                        '<div style="background-color:#'+(i%2==0?'FFFFFF':'F4F4F4')+' ;padding:1px;width:auto;">' +
+                        '<div style="margin-left:15px">' +
+                        '<h3>' + v.course + '</h3>' +
+                        '<p>' + v.title + '</p>' +
+                        '<p>' + v.content + '</p>' +
+                        '</div>' +
+                        '</div>').insertBefore($('#add-test'));
+                i+=1;
+            });
+        });
+
+    </script>
+</html>

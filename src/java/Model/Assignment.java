@@ -253,7 +253,43 @@ public class Assignment {
     public static List<Assignment> getAmByCourseIDNoSetCourse(int course_id) {
         return getAmByCourseID(course_id, false);
     }
-
+    
+    /*public static Assignment getCourseNameByAmID(int am_id){
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select name from course c and assignment a where c.course_id = a.course_id AND ass_id = ?";
+        PreparedStatement pstm;
+        Assignment am = null;
+        try{
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, am_id);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                am = new Assignment();
+                am.setAm_id(rs.getInt("ass_id"));
+                am.setCourse(Course.getCourseByID(rs.getInt("course_id")));
+                am.setName(rs.getString("name"));
+                am.setDescription(rs.getString("description"));
+                am.setAss_type(rs.getString("ass_type"));
+                am.setTotal_member(rs.getInt("total_member"));
+                am.setAss_extension(rs.getString("ass_extension"));
+                am.setCreate_date(rs.getTimestamp("create_date"));
+                am.setDue_date(rs.getDate("due_date"));
+                am.setComment(Comment.getCommentByAmID(am_id));
+                am.setFully_mark(rs.getDouble("fully_mark"));
+                if (am.getAss_type().equalsIgnoreCase("file")) {
+                    am.setPath_file(rs.getString("path_file"));
+                } else {
+                    am.setTitle_assignment_onweb(rs.getString("title_assignment_onweb"));
+                    am.setQuestionList(Question.getListQuestion(Question.getListQId(am.getAm_id())));
+                }
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return am;
+    }*/
+    
     //getAmByAmID(int am_id) 
     public static Assignment getAmByAmID(int am_id) {
         Connection conn = ConnectionBuilder.getConnection();
@@ -267,7 +303,7 @@ public class Assignment {
             if (rs.next()) {
                 am = new Assignment();
                 am.setAm_id(rs.getInt("ass_id"));
-//                am.setCourse(Course.getCourseByID(rs.getInt("course_id")));
+                am.setCourse(Course.getCourseByID(rs.getInt("course_id")));
                 am.setName(rs.getString("name"));
                 am.setDescription(rs.getString("description"));
                 am.setAss_type(rs.getString("ass_type"));
@@ -294,9 +330,9 @@ public class Assignment {
     public static Assignment getAmByAmID(String am_id) {
         return getAmByAmID(Integer.parseInt(am_id));
     }
-
-    //getAmByAccID(int acc_id)
-    public static List<Assignment> getAmByAccID(int acc_id) {
+    
+    //getAmByAccID2(int acc_id)
+    public static List<Assignment> getAmByAccID2(int acc_id) {
         List<Assignment> assList = new ArrayList<Assignment>();
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select ass.ass_id,ass.course_id,ass.name,ass.description,ass.ass_type,ass.total_member,ass.due_date,ass.ass_extension,ass.path_file,ass.create_date,ass.fully_mark from account a "
@@ -335,7 +371,49 @@ public class Assignment {
         }
         return assList;
     }
-
+    
+    //getAmByAccID(int acc_id)
+    public static List<Assignment> getAmByAccID(int acc_id) {
+        List<Assignment> assList = new ArrayList<Assignment>();
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select ass.ass_id,ass.course_id,ass.name,ass.description,ass.ass_type,ass.total_member,ass.due_date,ass.ass_extension,ass.path_file,ass.create_date,ass.fully_mark from account a "
+                + "join account_course ac on a.acc_id = ac.acc_id "
+                + "join assignment ass on ac.course_id = ass.course_id "
+                + "where a.acc_id = ? AND ac.status =  \"approved\" AND ac.role = 'ST' order by ass.create_date desc";
+        PreparedStatement pstm;
+        Assignment am = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, acc_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                am = new Assignment();
+                am.setAm_id(rs.getInt("ass_id"));
+                //am.setCourse(Course.getCourseByID(rs.getInt("course_id")));
+                am.setName(rs.getString("name"));
+                am.setDescription(rs.getString("description"));
+                am.setAss_type(rs.getString("ass_type"));
+                am.setTotal_member(rs.getInt("total_member"));
+                am.setAss_extension(rs.getString("ass_extension"));
+                am.setCreate_date(rs.getTimestamp("create_date"));
+                am.setDue_date(rs.getDate("due_date"));
+                am.setFully_mark(rs.getDouble("fully_mark"));
+                am.setComment(Comment.getCommentByAmID(am.getAm_id()));
+                if (am.getAss_type() == "file") {
+                    am.setPath_file(rs.getString("path_file"));
+                } else {
+                    am.setQuestionList(null);
+                }
+                assList.add(am);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return assList;
+    }
+    
+    
     //isSend(int acc_id,int st_am_id)
     public static boolean isSend(int acc_id, int am_id) {
         boolean result = false;

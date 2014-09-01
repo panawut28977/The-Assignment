@@ -168,6 +168,30 @@
         <servlet-name>GetSentAssignment</servlet-name>
         <servlet-class>servlet.GetSentAssignment</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>showAnnounceStudent</servlet-name>
+        <servlet-class>servlet.showAnnounceStudent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>showAnnounceTeacher</servlet-name>
+        <servlet-class>servlet.showAnnounceTeacher</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>showStudentScore</servlet-name>
+        <servlet-class>servlet.showStudentScore</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>showAssignmentDetail</servlet-name>
+        <servlet-class>servlet.showAssignmentDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>showAssignment</servlet-name>
+        <servlet-class>servlet.showAssignment</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>showAssignmentInCourse</servlet-name>
+        <servlet-class>servlet.showAssignmentInCourse</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -287,6 +311,30 @@
     <servlet-mapping>
         <servlet-name>GetSentAssignment</servlet-name>
         <url-pattern>/GetSentAssignment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>showAnnounceStudent</servlet-name>
+        <url-pattern>/showAnnounceStudent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>showAnnounceTeacher</servlet-name>
+        <url-pattern>/showAnnounceTeacher</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>showStudentScore</servlet-name>
+        <url-pattern>/showStudentScore</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>showAssignmentDetail</servlet-name>
+        <url-pattern>/showAssignmentDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>showAssignment</servlet-name>
+        <url-pattern>/showAssignment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>showAssignmentInCourse</servlet-name>
+        <url-pattern>/showAssignmentInCourse</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

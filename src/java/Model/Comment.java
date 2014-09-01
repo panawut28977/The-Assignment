@@ -25,7 +25,7 @@ public class Comment {
     private Account acc;
     private String text;
     private Date comment_date;
-
+    
     public int getComment_id() {
         return comment_id;
     }

@@ -66,4 +66,9 @@ public class UserScore {
         return uScoreList;
     }
 
+    @Override
+    public String toString() {
+        return "UserScore{" + "assignment=" + assignment + ", score=" + score + ", full_mark=" + full_mark + '}';
+    }
+
 }

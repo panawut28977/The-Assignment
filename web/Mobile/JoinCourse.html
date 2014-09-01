@@ -1,0 +1,53 @@
+<!DOCTYPE html> 
+<html><head> 
+  <title>My Page</title> 
+  <meta name="viewport" content="initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="stylesheet" href="jquery.mobile-1.4.2.css" />
+  <link rel="stylesheet" href="css/font-awesome.min.css"/>
+  
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+</head> 
+<body>
+<div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-fixed-page1" data-title="Panel fixed positioning" data-url="panel-fixed-page1">
+    <div data-role="header" data-position="fixed">
+        <center>
+        <a href="Index.html" rel="external" and data-ajax="false"><span class="fa fa-home fa-2x" style="alignment-adjust:auto;padding-right:25px;padding-top:15px;padding-bottom:15px"></span></a>
+        <span class="fa fa-globe fa-2x"></span></center>
+        <a href="#nav-panel"><i class="fa fa-bars fa-2x"></i></a>
+        <div style="padding: 5px;width: auto;background: #E2E2E2;">
+				<input type="search" name="search" placeholder="Search..."/>
+            </div>
+    </div><!-- /header -->
+   <br/>
+   <center>
+   <div style="padding: 10px;width: 300px;background: #EEEEF6;">   
+   <h3>Join Course</h3>
+   	<input type="text" name="code" placeholder="Course code"/>
+    <input type="submit" style="background-color:#00F" value="Join!"/>
+   </div>
+   </center>
+   
+   <h3 align="center">QR Code</h3>
+   
+   <!--Panel-->
+    <div data-role="panel" data-position-fixed="true" data-display="overlay"  id="nav-panel">
+        <ul data-role="listview">
+            <li style="background-color:#00F"><img src="60223.jpg" width="100" height="100" style="alignment-adjust:top"/>&nbsp; <b style="color:white">Panawut <br/>Ittitananun</b></li>
+            <li><a href="JoinCourse.html" rel="external" and data-ajax="false">Join Course &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div class="fa fa-plus fa-2x"></div></a></li>
+            <li><a href="#">MTH111</a></li>
+            <li><a href="#">INT103</a></li>
+      	</ul>
+    </div>
+    <!-- /panel -->
+    
+    
+   
+   		
+    
+</div>
+
+</body>
+</html>

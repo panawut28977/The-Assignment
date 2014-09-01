@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -37,6 +38,26 @@ public class Account {
     private List<Assignment> assignment;
     private List<UserScore> listStudentScore;
 
+    public Account() {
+    }
+
+    public Account(int acc_id, String firstname, String lastname) {
+        this.acc_id = acc_id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        announcement = new ArrayList<Announcement>();
+        Announcement a = new Announcement();
+        a.setTitle("TEST");
+        a.setAn_id(12345);
+        a.setCourse(989);
+        this.announcement.add(a);
+        this.announcement.add(a);
+    }
+
+    
+
+    
+    
     public int getAcc_id() {
         return acc_id;
     }

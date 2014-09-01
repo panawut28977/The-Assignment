@@ -18,12 +18,9 @@ import java.util.logging.Logger;
 public class ConnectionBuilder {
 
     private static final String DRIVER = "com.mysql.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost/chanin_tasm?useUnicode=yes&characterEncoding=UTF-8";
-    public static final String USER = "root";
-    public static final String PASSWORD = "";
-//    private static final String URL = "jdbc:mysql://server.chaninz.com/chanin_tasm?useUnicode=yes&characterEncoding=UTF-8";
-//    public static final String USER = "chanin_tasm";
-//    public static final String PASSWORD = "7WnO2KeDfiYVcTb";
+    private static final String URL = "jdbc:mysql://server.chaninz.com:3306/chanin_tasm";
+    public static final String USER = "chanin_tasm";
+   public static final String PASSWORD = "7WnO2KeDfiYVcTb";
 
     public static Connection getConnection() {
         Connection conn = null;
