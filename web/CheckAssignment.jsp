@@ -150,7 +150,7 @@
                                         </c:choose>
                                     </div>
                                     <hr style="clear: both">
-                                    <form>
+                                    <form method="post" action="updateScoreStAmOnWeb">
                                         <div class="assignmentBox col-md-12">
                                             <h4><u>Let's check it !</u></h4>
                                                     <c:set value="1" var="seqno" />
@@ -209,7 +209,7 @@
                                                                     <input type="radio" name="${seqno}answer" value="false" disabled="yes" <c:if test="${stans eq 'true'}">checked="yes"</c:if>> False
                                                                 </c:when>
                                                             </c:choose>
-                                                            <input type="number" name="score" placeholder="score"/>
+                                                            <input type="number" name="${seqno}score" placeholder="score"/>
                                                             <input type="hidden" name="${seqno}q_id" value="${q.q_id}"/>
                                                             <input type="hidden" value="multiple_choice" name="${seqno}q_type">
                                                             <input type="hidden" name="seqno" value="${seqno}">
@@ -221,7 +221,7 @@
                                                         <div>
                                                             <p>${q.q_no}.) ${q.q_text}</p>
                                                             <textarea class="form-control" name="${seqno}answer" disabled="yes">${stanswer.get(0).answer}</textarea><br/>
-                                                            <input type="number" name="score" placeholder="score"/>
+                                                            <input type="number" name="${seqno}score" placeholder="score"/>
                                                             <input type="hidden" name="${seqno}q_id" value="${q.q_id}"/>
                                                             <input type="hidden" value="explain" name="${seqno}q_type">
                                                             <input type="hidden" name="seqno" value="${seqno}">
@@ -253,7 +253,7 @@
                                                                 <p>${q.q_no}.) ${q.q_title}</p>
                                                                 <div class="col-md-8">
                                                                     <c:forEach begin="0" end="${stanswer.size()-1}" var="a">
-                                                                        <b><u>${stanswer.get(a).answer}</u></b> <span>${listchs[a]} <input type="number" name="score" placeholder="score"/></span>
+                                                                        <b><u>${stanswer.get(a).answer}</u></b> <span>${listchs[a]} <input type="number" name="${seqno}score" placeholder="score"/></span>
                                                                         <br/><br/>
                                                                     </c:forEach>
                                                                 </div>
@@ -286,7 +286,7 @@
                                                                         <c:set var="countStAns" value="${countStAns-1}"/>
                                                                         <c:set var="q_start_index" value="${curAm.questionList.get(countb).q_start_index}" />
                                                                         <c:set var="q_end_index" value="${curAm.questionList.get(countb).q_end_index}"/>
-                                                                        <c:set var="reptext" value="<input type='text' name='${seqno}answer' value='${stanswer.get(countStAns).answer}' disabled='yes'/><input type='number' name='score' placeholder='score'/>"/>
+                                                                        <c:set var="reptext" value="<input type='text' name='${seqno}answer' value='${stanswer.get(countStAns).answer}' disabled='yes'/><input type='number' name='${seqno}score' placeholder='score'/>"/>
                                                                         <c:set value="${ct_cf:replaceStringByIndex(q_text, q_start_index, q_end_index,reptext)}" var="q_text"/>
                                                                     </c:if>
                                                                 </c:forEach>
