@@ -110,10 +110,10 @@ public class Group_member {
 //        }
 //        return result > 0;
 //    }
-    //getMemberById(int am_id)
-    public static List<Group_member> getMemberById(int g_id) {
+    
+    //getMemberById(int g_id)
+    public static Group_member getMemberById(int g_id) {
         Connection conn = ConnectionBuilder.getConnection();
-        List<Group_member> mList = new ArrayList<>();
         PreparedStatement pstm;
         String sql = "";
         sql = "select * from group_member where g_id = ?";
@@ -123,7 +123,7 @@ public class Group_member {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, g_id);
             ResultSet rs = pstm.executeQuery();
-            while (rs.next()) {
+            if (rs.next()) {
                 m = new Group_member();
                 m.setAcc_id(rs.getString("acc_id"));
                 m.setG_id(rs.getInt("g_id"));
@@ -134,9 +134,29 @@ public class Group_member {
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return mList;
+        return m;
     }
 
+    public static int getGNOById(int g_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        PreparedStatement pstm;
+        String sql = "";
+        sql = "select g_no from group_member where g_id = ?";
+        int g_no = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, g_id);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                g_no = rs.getInt("g_no");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return g_no;
+    }
+    
     //getMemberByAmId(int am_id)
     //isFullMember(int am_id) change to remainingMember(int am_id,int g_no,Assignment a)
     public static int remainingMember(int acc_id, Assignment a) {

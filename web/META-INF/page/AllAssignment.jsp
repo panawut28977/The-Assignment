@@ -11,7 +11,7 @@
         font-weight: bold;
     }
 </style>
-<div class="table-responsive">
+<div class="table-responsive" style="min-height: 520px;">
     <table class="table table-striped " id="AllAssignment">
         <thead>
             <tr>

@@ -24,6 +24,10 @@
         <url-pattern>/selectPeople</url-pattern>
         <url-pattern>/uploadAssignment.jsp</url-pattern>
         <url-pattern>/sendAssignment</url-pattern>
+        <url-pattern>/CheckAssignment.jsp</url-pattern>
+        <url-pattern>/GetSentAssignment</url-pattern>
+        <url-pattern>/checkAssignment</url-pattern>
+        <url-pattern>/anotherAmFile</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>
@@ -192,6 +196,22 @@
         <servlet-name>showAssignmentInCourse</servlet-name>
         <servlet-class>servlet.showAssignmentInCourse</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>checkAssignment</servlet-name>
+        <servlet-class>servlet.checkAssignment</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>anotherAmFile</servlet-name>
+        <servlet-class>servlet.anotherAmFile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>updateScoreStAmFile</servlet-name>
+        <servlet-class>servlet.updateScoreStAmFile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>updateScoreStAmOnWeb</servlet-name>
+        <servlet-class>servlet.updateScoreStAmOnWeb</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -293,7 +313,7 @@
         <url-pattern>/addMember</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>sendAssignment</servlet-name>
+        <servlet-name>sendAssignment</servlet-name> 
         <url-pattern>/sendAssignment</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
@@ -335,6 +355,22 @@
     <servlet-mapping>
         <servlet-name>showAssignmentInCourse</servlet-name>
         <url-pattern>/showAssignmentInCourse</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>checkAssignment</servlet-name>
+        <url-pattern>/checkAssignment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>anotherAmFile</servlet-name>
+        <url-pattern>/anotherAmFile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateScoreStAmFile</servlet-name>
+        <url-pattern>/updateScoreStAmFile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateScoreStAmOnWeb</servlet-name>
+        <url-pattern>/updateScoreStAmOnWeb</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

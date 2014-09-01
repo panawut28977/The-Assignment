@@ -113,60 +113,60 @@
                                             <!--                                            <tr>
                                                                                             <td><b>1</b></td>
                                                                                             <td>
-                                                                                                <img style="width:50px" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Christopher Clive">
-                                                                                                <img style="width:50px" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Cherokee Graham">
-                                                                                                <img style="width:50px" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Panawut Ittitananun!">
+                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Christopher Clive">
+                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Cherokee Graham">
+                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Panawut Ittitananun!">
                                                                                             </td>
                                                                                         </tr>
                                                                                         <tr>
                                                                                             <td><b>2</b></td>
                                                                                             <td>
-                                                                                                <img style="width:50px" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Panawut Ittitananun!">
-                                                                                                <img style="width:50px" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Lon Zach">
-                                                                                                <img style="width:50px" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Shaunte Sowa">
-                                                                                                <img style="width:50px" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Harry Haig">
-                                                                                                <img style="width:50px" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Joanne Cockburn">
+                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Panawut Ittitananun!">
+                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Lon Zach">
+                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Shaunte Sowa">
+                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Harry Haig">
+                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Joanne Cockburn">
                                                                                             </td>
                                                                                         </tr>
                                                                                         <tr>
                                                                                             <td><b>3</b></td>
                                                                                             <td>
-                                                                                                <img style="width:50px" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Christopher Clive">
-                                                                                                <img style="width:50px" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Cherokee Graham">
-                                                                                                <img style="width:50px" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Panawut Ittitananun!">
+                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Christopher Clive">
+                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Cherokee Graham">
+                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Panawut Ittitananun!">
                                                                                             </td>
                                                                                         </tr>
                                                                                         <tr>
                                                                                             <td><b>4</b></td>
                                                                                             <td>
-                                                                                                <img style="width:50px" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Christopher Clive">
-                                                                                                <img style="width:50px" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Cherokee Graham">
-                                                                                                <img style="width:50px" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Panawut Ittitananun!">
+                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Christopher Clive">
+                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Cherokee Graham">
+                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Panawut Ittitananun!">
                                             
-                                                                                                <img style="width:50px" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Cherokee Graham">
-                                                                                                <img style="width:50px" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Panawut Ittitananun!">
+                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Cherokee Graham">
+                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Panawut Ittitananun!">
                                                                                             </td>
                                                                                         </tr>
                                                                                         <tr>
                                                                                             <td><b>5</b></td>
                                                                                             <td>
-                                                                                                <img style="width:50px" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Christopher Clive">
-                                                                                                <img style="width:50px" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Cherokee Graham">
-                                                                                                <img style="width:50px" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Panawut Ittitananun!">
-                                                                                                <img style="width:50px" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Cherokee Graham">
-                                                                                                <img style="width:50px" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Panawut Ittitananun!">
+                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Christopher Clive">
+                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Cherokee Graham">
+                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Panawut Ittitananun!">
+                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Cherokee Graham">
+                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Panawut Ittitananun!">
                                             
-                                                                                                <img style="width:50px" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Cherokee Graham">
-                                                                                                <img style="width:50px" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Panawut Ittitananun!">
+                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Cherokee Graham">
+                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Panawut Ittitananun!">
                                             
                                                                                             </td>
                                                                                         </tr>
                                                                                         <tr>
                                                                                             <td><b>6</b></td>
                                                                                             <td>
-                                                                                                <img style="width:50px" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Christopher Clive">
-                                                                                                <img style="width:50px" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Cherokee Graham">
-                                                                                                <img style="width:50px" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Panawut Ittitananun!">
+                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Christopher Clive">
+                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Cherokee Graham">
+                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Panawut Ittitananun!">
                                                                                             </td>
                                                                                         </tr>-->
                                         </tbody>
@@ -196,49 +196,49 @@
                                     </div>
                                 </c:forEach>
                                 <!--                                <div class="media col-md-4">
-                                                                    <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                                                                    <img width="64" src="img/avatar.jpg">
                                                                     <div class="media-body">
                                                                         <h4 class="media-heading" >Panawut Ittitananun</h4>
                                                                     </div>
                                                                 </div>
                                                                 <div class="media col-md-4">
-                                                                    <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                                                                    <img width="64" src="img/avatar.jpg">
                                                                     <div class="media-body">
                                                                         <h4 class="media-heading">Thanakit Mahamutjinda</h4>
                                                                     </div>
                                                                 </div>
                                                                 <div class="media col-md-4">
-                                                                    <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                                                                    <img width="64" src="img/avatar.jpg">
                                                                     <div class="media-body">
                                                                         <h4 class="media-heading">Nitiwit Wungwiwatna</h4>
                                                                     </div>
                                                                 </div>
                                                                 <div class="media col-md-4">
-                                                                    <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                                                                    <img width="64" src="img/avatar.jpg">
                                                                     <div class="media-body">
                                                                         <h4 class="media-heading">Thanapan Suwankanit</h4>
                                                                     </div>
                                                                 </div>
                                                                 <div class="media col-md-4">
-                                                                    <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                                                                    <img width="64" src="img/avatar.jpg">
                                                                     <div class="media-body">
                                                                         <h4 class="media-heading" >Panawut Ittitananun</h4>
                                                                     </div>
                                                                 </div>
                                                                 <div class="media col-md-4">
-                                                                    <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                                                                    <img width="64" src="img/avatar.jpg">
                                                                     <div class="media-body">
                                                                         <h4 class="media-heading">Thanakit Mahamutjinda</h4>
                                                                     </div>
                                                                 </div>
                                                                 <div class="media col-md-4">
-                                                                    <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                                                                    <img width="64" src="img/avatar.jpg">
                                                                     <div class="media-body">
                                                                         <h4 class="media-heading" >Panawut Ittitananun</h4>
                                                                     </div>
                                                                 </div>
                                                                 <div class="media col-md-4">
-                                                                    <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                                                                    <img width="64" src="img/avatar.jpg">
                                                                     <div class="media-body">
                                                                         <h4 class="media-heading">Thanakit Mahamutjinda</h4>
                                                                     </div>

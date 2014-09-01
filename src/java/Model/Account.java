@@ -188,7 +188,7 @@ public class Account {
                 for (AccountCourse accountCourse : CL) {
                     acc.CourseList.put((long) accountCourse.getCourse().getCourse_id(), accountCourse);
                 }
-//                acc.setListStudentScore(UserScore.getUserScore(acc_id));
+                acc.setListStudentScore(UserScore.getUserScore(acc_id));
             }
             conn.close();
         } catch (SQLException ex) {
@@ -320,8 +320,36 @@ public class Account {
         }
         return acc;
     }
-    
-    
+
+    public static List<Account> getNameByGIDandAmID(int g_id, int am_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql1 = "select acc_id from group_member where g_id = ? and ass_id =? ";
+        PreparedStatement pstm;
+        int result = 0;
+        List<Account> listAc = new ArrayList<>();
+        Account acc = null;
+        try {
+            pstm = conn.prepareStatement(sql1);
+            pstm.setInt(1, g_id);
+            pstm.setInt(2, am_id);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                String sql2 = "select  concat(firstname,'  ',lastname) as fullname,profile_pic from account where acc_id in(" + rs.getString("acc_id") + ")";
+                pstm = conn.prepareStatement(sql2);
+                ResultSet rs2 = pstm.executeQuery();
+                while (rs2.next()) {
+                    acc = new Account();
+                    acc.setFirstname(rs2.getString(1));
+                    acc.setProfile_pic(rs2.getString(2));
+                    listAc.add(acc);
+                }
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listAc;
+    }
 
     @Override
     public String toString() {

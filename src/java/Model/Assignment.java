@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static org.apache.coyote.http11.Constants.a;
 
 /**
  *
@@ -39,6 +40,9 @@ public class Assignment {
     private double fully_mark;
     private List<Comment> comment;
     private List<Question> questionList;
+    
+    //mobile attr
+    private String course_name;
 
     public int getAm_id() {
         return am_id;
@@ -159,7 +163,7 @@ public class Assignment {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "insert into assignment(course_id,name,description,ass_type,total_member,due_date,title_assignment_onweb) values(?,?,?,?,?,?,?)";
         if (ass.getAss_type().equalsIgnoreCase("file")) {
-            sql = "insert into assignment(course_id,name,description,ass_type,total_member,due_date,path_file) values(?,?,?,?,?,?,?)";
+            sql = "insert into assignment(course_id,name,description,ass_type,total_member,due_date,path_file,fully_mark) values(?,?,?,?,?,?,?,?)";
         }
         PreparedStatement pstm = null;
         int result = 0;
@@ -176,6 +180,7 @@ public class Assignment {
 //            pstm.setString(7, ass.getAss_extension());
             if (ass.getAss_type().equalsIgnoreCase("file")) {
                 pstm.setString(7, ass.getPath_file());
+                pstm.setDouble(8, ass.getFully_mark());
             } else {
                 pstm.setString(7, ass.getTitle_assignment_onweb());
             }
@@ -526,6 +531,20 @@ public class Assignment {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return status;
+    } 
+    
+    public static String lastedSentStatus(Date lastsent, Assignment a) {
+        String status = "";
+        Date due_date = a.getDue_date();
+        Double remaining_day = (double) ((due_date.getTime() - lastsent.getTime()) / 1000 / 60 / 60 / 24);
+        if (remaining_day > 3) {
+            status = "ontime";
+        } else if (remaining_day <= 3 && remaining_day >= 0) {
+            status = "hurryup";
+        } else {
+            status = "late";
         }
         return status;
     }

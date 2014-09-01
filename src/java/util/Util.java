@@ -5,6 +5,7 @@
  */
 package util;
 
+import Model.Account;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -106,8 +107,15 @@ public class Util {
             }
         }
         Collections.shuffle(asToList);
-        String finalString =  asToList.toString().substring(1, asToList.toString().length()-1);
-        System.out.println(finalString);
+        String finalString = asToList.toString().substring(1, asToList.toString().length() - 1);
         return finalString;
+    }
+
+    public static String createPopoverGroup(List<Account> accList) {
+        String dataContent = "";
+        for (Account account : accList) {
+            dataContent += "<img class='img-circle' src='"+account.getProfile_pic()+"' width='24'> "+account.getFirstname()+"<br/>";
+        }
+        return dataContent;
     }
 }

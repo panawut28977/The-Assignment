@@ -12,9 +12,10 @@
     }
 </style>
 <c:if test="${ac.courseList.get(cId).role eq 'TH'}"> 
-    <a class="btn btn-primary"  href="CreateAssignment.jsp?tab=AllAssignment" style="margin-top: 20px"><span class="glyphicon glyphicon-plus-sign"></span> Create Assignment</a>
+    <a class="btn btn-primary pull-right"  href="CreateAssignment.jsp?tab=AllAssignment" style="margin-top: 20px"><span class="glyphicon glyphicon-plus-sign"></span> Create Assignment</a>
+    <br/><br/><br/>
 </c:if>
-<div class="table-responsive">
+<div class="table-responsive" style="min-height: 520px;">
     <table class="table table-striped" id="AllAssignemnt">
         <thead>
             <tr>
@@ -29,7 +30,7 @@
                         <th></th>
                         </c:when>
                         <c:otherwise>
-                        <th>Sent</th>
+                        <th style="text-align: center">Check</th>
                         </c:otherwise>
                     </c:choose>
             </tr>
@@ -82,7 +83,7 @@
                             </td>
                         </c:when>
                         <c:otherwise> 
-                            <td><a href="SentAssignment.jsp?tab=AllAssignment&&wkt=file">10</a></td>
+                            <td style="text-align: center"><a href="GetSentAssignment?am_id=${a.am_id}"><i class="glyphicon glyphicon-check"></i></a></td>
                         </c:otherwise>
                     </c:choose>
                 </tr>

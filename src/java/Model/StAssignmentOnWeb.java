@@ -126,30 +126,31 @@ public class StAssignmentOnWeb {
         return result;
     }
 
-    public List<StAssignmentOnWeb> getStAmInfo(int st_am_id) {
-        List<StAssignmentOnWeb> StAssInfo = new ArrayList<StAssignmentOnWeb>();
+    public static StAssignmentOnWeb getStAmInfo(int st_am_id) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select * from student_assignment_on_web where st_ass_id = ? order by send_date desc fetch first 1 rows";
+        String sql = "select * from student_assignment_on_web where st_ass_id = ?";
         PreparedStatement pstm;
-        StAssignmentOnWeb saw = null;
+        StAssignmentOnWeb stw = null;
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, st_am_id);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                saw = new StAssignmentOnWeb();
-                saw.setAcc_id(rs.getInt("acc_id"));
-                saw.setAm_id(rs.getInt("ass_id"));
-                saw.setSt_am_id(st_am_id);
-                saw.setLasted_send_date(rs.getDate("send_date"));
-                saw.setScore(rs.getDouble("score"));
-                StAssInfo.add(saw);
+                stw = new StAssignmentOnWeb();
+                stw.setSt_am_id(rs.getInt("st_ass_id"));
+                stw.setAm_id(rs.getInt("ass_id"));
+                stw.setAcc_id(rs.getInt("acc_id"));
+                stw.setG_id(rs.getInt("g_id"));
+                stw.setScore(rs.getDouble("score"));
+                stw.setLasted_send_date(rs.getDate("lasted_send_date"));
+                stw.setComment(Comment.getCommentByStAmIDWeb(rs.getInt("st_ass_id")));
+                stw.setAnwerQuestion(null);
             }
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(StAssignmentOnWeb.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return StAssInfo;
+        return stw;
     }
 
     public double getScoreByAccIDAndAmID(int acc_id, int am_id) {
@@ -270,6 +271,36 @@ public class StAssignmentOnWeb {
 //            Logger.getLogger(StAssignmentOnWeb.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 //    }
+    
+    public static List<StAssignmentOnWeb> getStAmByAmId(int am_id) {
+        List<StAssignmentOnWeb> stfList = new ArrayList<>();
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select * from student_assignment_on_web where ass_id = ?";
+        PreparedStatement pstm;
+        int result = 0;
+        StAssignmentOnWeb s = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, am_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                s = new StAssignmentOnWeb();
+                int st_ass_id = rs.getInt("st_ass_id");
+                s.setAm_id(rs.getInt("ass_id"));
+                s.setAcc_id(rs.getInt("acc_id"));
+                s.setG_id(rs.getInt("g_id"));
+                s.setSt_am_id(st_ass_id);
+                s.setScore(rs.getDouble("score"));
+                s.setLasted_send_date(rs.getDate("lasted_send_date"));
+                stfList.add(s);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(StAssignmentFile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return stfList;
+    }
+    
     public static int updateLastedSend(StAssignmentOnWeb a) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "update student_assignment_on_web set lasted_send_date=? where st_ass_id=?";

@@ -40,7 +40,7 @@
         <!--        <div class="row"> 
                     <div class="media col-md-8">
                         <a class="pull-left" href="#">
-                            <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                            <img width="64" src="img/avatar.jpg">
                         </a>
                         <div class="media-body">
                             <h4 class="media-heading" >Steven Gerrard</h4>
@@ -56,7 +56,7 @@
                 <div class="row">
                     <div class="media col-md-8">
                         <a class="pull-left" href="#">
-                            <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                            <img width="64" src="img/avatar.jpg">
                         </a>
                         <div class="media-body">
                             <h4 class="media-heading" >Luis Suarez</h4>
@@ -72,7 +72,7 @@
                 <div class="row">
                     <div class="media col-md-8">
                         <a class="pull-left" href="#">
-                            <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                            <img width="64" src="img/avatar.jpg">
                         </a>
                         <div class="media-body">
                             <h4 class="media-heading" >Filipe Coutinho</h4>
@@ -88,7 +88,7 @@
                 <div class="row">
                     <div class="media col-md-8">
                         <a class="pull-left" href="#">
-                            <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                            <img width="64" src="img/avatar.jpg">
                         </a>
                         <div class="media-body">
                             <h4 class="media-heading" >Kolo Toure</h4>

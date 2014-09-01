@@ -39,6 +39,10 @@
             .fillInBlankBox:hover{
                 cursor: pointer;
             }
+
+            .multipleChoice,.explain,.tfQuestion,.matchWord,.instruction,.fillBlank{
+                cursor: move;
+            }
         </style>
 
         <%@include file="META-INF/page/include_js.jsp" %>
@@ -101,8 +105,19 @@
                         </section>
                         <section class="step" data-step-title="Create Assignment">
                             <div class="col-md-8 col-md-offset-2" id="uploadAmFile">
-                                <input type="file" name="file" class="form-control">
-                                <span class="text-danger">.doc .pdf .xls available</span>
+                                <div class="form-group">
+                                    <label for="fullymark" class="col-md-3 control-label">Fully score is</label>
+                                    <div class="col-md-3">
+                                        <input type="number" name="fullymark" class="form-control" required="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="file" class="col-md-3 control-label">Select Assignment</label>
+                                    <div class="col-md-9">
+                                        <input type="file" name="file" class="form-control">
+                                        <span class="text-danger">.doc .pdf .xls available</span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-10 col-md-offset-1" id="CreateAmOnweb">
                                 <input type="text" name="title_assignment_onweb" class="form-control" placeholder="Assignment Title" >

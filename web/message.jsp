@@ -61,7 +61,7 @@
                 <%@include file="META-INF/page/side_bar.jsp"%>
                 <div class="col-md-9" style="padding-bottom: 20px">
                     <div class="col-md-8">
-                        <h4>Private Message</h4>
+                        <h4><i class="glyphicon glyphicon-envelope"></i> Private Message</h4>
                         <div class="well" style="height: 600px;overflow-y: scroll" id="messageBox" >
                             <div class="pull-left col-md-5 th-message">
                                 <h6><b>AJ.Kittiphan Puapholthep </b></h6>
@@ -126,7 +126,7 @@
                             <div class="panel-body" id="teacherSelectionBox">
                                 <div class="media">
                                     <a class="pull-left" href="#">
-                                        <img width="32" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                                        <img width="32" src="img/avatar.jpg">
                                     </a>
                                     <div class="media-body">
                                         <h5 class="media-heading">AJ.Kittiphan Puapholthep</h5>
@@ -135,7 +135,7 @@
                                 <hr>
                                 <div class="media">
                                     <a class="pull-left" href="#">
-                                        <img width="32" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                                        <img width="32" src="img/avatar.jpg">
                                     </a>
                                     <div class="media-body">
                                         <h5 class="media-heading">AJ.Unhawa Ninrutsirikun</h5>
@@ -144,7 +144,7 @@
                                 <hr>
                                 <div class="media">
                                     <a class="pull-left" href="#">
-                                        <img width="32" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                                        <img width="32" src="img/avatar.jpg">
                                     </a>
                                     <div class="media-body">
                                         <h5 class="media-heading">AJ.Ekapong Jungcharoensukying</h5>
@@ -153,7 +153,7 @@
                                 <hr>
                                 <div class="media">
                                     <a class="pull-left" href="#">
-                                        <img width="32" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+                                        <img width="32" src="img/avatar.jpg">
                                     </a>
                                     <div class="media-body">
                                         <h5 class="media-heading">AJ.Kittipong Warasup</h5>

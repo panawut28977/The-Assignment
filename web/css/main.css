@@ -63,10 +63,6 @@ and open the template in the editor.
     margin-top: 20px;
 }
 
-.multipleChoice,.explain,.tfQuestion,.matchWord,.instruction{
-    cursor: move;
-}
-
 .assignmentBox > div{
     margin: 20px 0;
 }

@@ -23,9 +23,11 @@ public class AnswerQuestion {
     private int st_am_id;
     private int q_id;
     private int q_order;
+    private int acc_id;
+    private int g_id;
+    private String answer;
     private double score;
     private String hilightKeyword;
-    private String answer;
 
     public int getSt_am_id() {
         return st_am_id;
@@ -75,10 +77,28 @@ public class AnswerQuestion {
         this.answer = answer;
     }
 
+    public int getAcc_id() {
+        return acc_id;
+    }
+
+    public void setAcc_id(int acc_id) {
+        this.acc_id = acc_id;
+    }
+
+    public int getG_id() {
+        return g_id;
+    }
+
+    public void setG_id(int g_id) {
+        this.g_id = g_id;
+    }
+    
+    
+
     //getStAMQuestion
     public static List<AnswerQuestion> getStAMQuestion(int st_am_id) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select *  from student_assignment_on_web_question where st_ass_id = ?";
+        String sql = "select *  from student_answer_question where st_ass_id = ?";
         PreparedStatement pstm;
         List<AnswerQuestion> ans = new ArrayList<AnswerQuestion>();
         AnswerQuestion a = null;
@@ -88,8 +108,39 @@ public class AnswerQuestion {
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
                 a = new AnswerQuestion();
-                a.setAnswer(rs.getString("answer"));
+                a.setSt_am_id(rs.getInt("st_ass_id"));
                 a.setQ_id(rs.getInt("q_id"));
+                a.setQ_order(rs.getInt("q_order"));
+                
+                a.setAnswer(rs.getString("answer"));
+                a.setScore(rs.getDouble("score"));
+                ans.add(a);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ans;
+    }
+    
+    public static ArrayList<AnswerQuestion> getStAMQuestion(int st_am_id,int q_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select *  from student_answer_question where st_ass_id = ? and q_id = ?";
+        PreparedStatement pstm;
+        ArrayList<AnswerQuestion> ans = new ArrayList<AnswerQuestion>();
+        AnswerQuestion a = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, st_am_id);
+            pstm.setInt(2, q_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                a = new AnswerQuestion();
+                a.setSt_am_id(rs.getInt("st_ass_id"));
+                a.setQ_id(rs.getInt("q_id"));
+                a.setQ_order(rs.getInt("q_order"));
+                
+                a.setAnswer(rs.getString("answer"));
                 a.setScore(rs.getDouble("score"));
                 ans.add(a);
             }
@@ -153,7 +204,8 @@ public class AnswerQuestion {
     //hilightKeyword
     @Override
     public String toString() {
-        return "AnswerQuestion{" + "st_am_id=" + st_am_id + ", q_id=" + q_id + ", q_order=" + q_order + ", score=" + score + ", hilightKeyword=" + hilightKeyword + ", answer=" + answer + '}';
+        return "AnswerQuestion{" + "st_am_id=" + st_am_id + ", q_id=" + q_id + ", q_order=" + q_order + ", acc_id=" + acc_id + ", g_id=" + g_id + ", answer=" + answer + ", score=" + score + ", hilightKeyword=" + hilightKeyword + '}';
     }
+    
 
 }

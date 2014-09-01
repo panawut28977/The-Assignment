@@ -41,7 +41,7 @@ public class Register extends HttpServlet {
         a.setFirstname(firstname);
         a.setLastname(lastname);
         a.setPassword(password);
-        a.setProfile_pic("https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa");
+        a.setProfile_pic("img/avatar.jpg");
         int result = Account.register(a);
         String url = "";
         String msg = "";

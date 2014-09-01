@@ -9,14 +9,14 @@
     <c:when test="${ac.courseList.get(cId).role eq 'TH'}">
         <div class="media">
             <div class="media-body">
-                <form >
+                <form id="formAddAnnouce">
                     <input name="title" placeholder="Title" class="form-control"  name="title" id="title"/><br>
                     <textarea placeholder="Annouce to student here." class="form-control" name="content" id="content"></textarea>
                     <input type="button" id="addAnnouce" class="btn btn-primary pull-right" value="Post" style="margin-top: 10px">
                 </form>
+                <button id="newannounce" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-pencil"></i> Announce</button>
             </div>
         </div>
-        <hr>
     </c:when>
 </c:choose>
 <div id="listAnnounce">
@@ -40,14 +40,19 @@
         var pic = '${ac.profile_pic}';
         var fullname = '${ac.firstname}' + '${ac.lastname}';
         var d = new Date();
-        var dateSt = d.getFullYear() + "-" + ('0' + (d.getMonth()+1)).slice(-2) + "-" + ('0' + d.getDate()).slice(-2)+" "+d.getHours()+":"+d.getMinutes()+":"+d.getMilliseconds();
+        var dateSt = d.getFullYear() + "-" + ('0' + (d.getMonth() + 1)).slice(-2) + "-" + ('0' + d.getDate()).slice(-2) + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getMilliseconds();
+        $("#formAddAnnouce").hide();
+        $("#newannounce").click(function() {
+            $(this).hide();
+            $("#formAddAnnouce").slideDown()();
+        });
         $("#addAnnouce").click(function() {
             $.ajax({
                 type: "POST",
                 url: "AddAnnounce",
                 data: {title: $("#title").val(), content: $("#content").val()}
             }).done(function(msg) {
-                var html = '<div class="media" id="newAnnounce"><a class="pull-left" href="#"><img class="img-circle" width="64" src="' + pic + '"></a><div class="media-body"><h4 class="media-heading">' + $("#title").val() + '- <small class="text-muted">' + fullname + '</small><small class="pull-right">' +dateSt  + '</small></h4><p>' + $("#content").val() + '</p></div></div>';
+                var html = '<div class="media" id="newAnnounce"><a class="pull-left" href="#"><img class="img-circle" width="64" src="' + pic + '"></a><div class="media-body"><h4 class="media-heading">' + $("#title").val() + '- <small class="text-muted">' + fullname + '</small><small class="pull-right">' + dateSt + '</small></h4><p>' + $("#content").val() + '</p></div></div>';
                 $("#listAnnounce").prepend(html);
                 $("#newAnnounce").slideDown().removeAttr("id");
                 $("#title").val("");
@@ -58,7 +63,7 @@
 </script>
 <!--<div class="media">
     <a class="pull-left" href="#">
-        <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+        <img width="64" src="img/avatar.jpg">
     </a>
     <div class="media-body">
         <h4 class="media-heading">AJ. Kittiphan Puapholthep<small class="pull-right">16/01/57</small></h4>
@@ -67,7 +72,7 @@
 </div>
 <div class="media">
     <a class="pull-left" href="#">
-        <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+        <img width="64" src="img/avatar.jpg">
     </a>
     <div class="media-body">
         <h4 class="media-heading">AJ.Kittiphan Puapholthep<small class="pull-right">16/01/57</small></h4>
@@ -76,7 +81,7 @@
 </div>
 <div class="media">
     <a class="pull-left" href="#">
-        <img width="64" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfiXsFn2SG_qgzoK6Pxowr8z52K9PLD1kfc310AH2vzJ0L50wa">
+        <img width="64" src="img/avatar.jpg">
     </a>
     <div class="media-body">
         <h4 class="media-heading">AJ.Kittiphan Puapholthep<small class="pull-right">16/01/57</small></h4>
