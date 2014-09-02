@@ -33,10 +33,10 @@ public class Course {
     public Course() {
     }
 
-    public Course(int course_id){
+    public Course(int course_id) {
         this.course_id = course_id;
     }
-    
+
     public int getCourse_id() {
         return course_id;
     }
@@ -147,6 +147,35 @@ public class Course {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return c;
+    }
+
+    public static Course getCourseByID(int course_id, boolean nosetobject) {
+        Course c = new Course();
+        if (nosetobject) {
+            Connection conn = ConnectionBuilder.getConnection();
+            String sql = "select * from course where course_id = ? ";
+            PreparedStatement pstm;
+            int result = 0;
+            try {
+                pstm = conn.prepareStatement(sql);
+                pstm.setInt(1, course_id);
+                ResultSet rs = pstm.executeQuery();
+                if (rs.next()) {
+                    int courseId = rs.getInt("course_id");
+                    c.setCourse_id(courseId);
+                    c.setName(rs.getString("name"));
+                    c.setCourse_code(rs.getString("course_code"));
+                    c.setCourse_link(rs.getString("course_link"));
+                    c.setCreate_date(rs.getDate("create_date"));
+                }
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            c = getCourseByID(course_id);
         }
         return c;
     }

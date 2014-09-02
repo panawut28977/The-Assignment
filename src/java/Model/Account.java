@@ -54,10 +54,6 @@ public class Account {
         this.announcement.add(a);
     }
 
-    
-
-    
-    
     public int getAcc_id() {
         return acc_id;
     }
@@ -183,12 +179,18 @@ public class Account {
                 acc.setRegister_date(rs.getTimestamp("register_date"));
                 acc.setAnnouncement(Announcement.viewAnnByAccID(acc_id));
                 acc.setAssignment(Assignment.getAmByAccID(acc_id));
+                //old logic
 //                acc.setCourseList(AccountCourse.getCourseByAccID(acc_id));
-                List<AccountCourse> CL = AccountCourse.getCourseByAccID(acc_id);
-                for (AccountCourse accountCourse : CL) {
-                    acc.CourseList.put((long) accountCourse.getCourse().getCourse_id(), accountCourse);
-                }
-                acc.setListStudentScore(UserScore.getUserScore(acc_id));
+//                List<AccountCourse> CL = AccountCourse.getCourseByAccID(acc_id);
+//                for (AccountCourse accountCourse : CL) {
+//                    acc.CourseList.put((long) accountCourse.getCourse().getCourse_id(), accountCourse);
+//                }
+
+                //new logic
+                acc.setCourseList(AccountCourse.getCourseByAccIDMap(acc_id));
+
+                //ไม่ใช้ userscore ละค่าที่ได้ออกมามันมหาศาลเกินไป
+//                acc.setListStudentScore(UserScore.getUserScore(acc_id));
             }
             conn.close();
         } catch (SQLException ex) {

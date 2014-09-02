@@ -394,7 +394,7 @@ public class Assignment {
             while (rs.next()) {
                 am = new Assignment();
                 am.setAm_id(rs.getInt("ass_id"));
-                //am.setCourse(Course.getCourseByID(rs.getInt("course_id")));
+                am.setCourse(Course.getCourseByID(rs.getInt("course_id"),true));
                 am.setName(rs.getString("name"));
                 am.setDescription(rs.getString("description"));
                 am.setAss_type(rs.getString("ass_type"));

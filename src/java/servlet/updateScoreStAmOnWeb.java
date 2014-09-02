@@ -6,6 +6,7 @@
 package servlet;
 
 import Model.AnswerQuestion;
+import Model.Group_member;
 import Model.StAssignmentOnWeb;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -42,51 +43,82 @@ public class updateScoreStAmOnWeb extends HttpServlet {
         String q_type = null;
         String instruction = null;
         AnswerQuestion aq = null;
+        int total_score = 0;
         for (int i = 0; i < seqno.length; i++) {
             q_type = request.getParameter(seqno[i] + "q_type");
             int q_id = Integer.parseInt(request.getParameter(seqno[i] + "q_id"));
+            aq = new AnswerQuestion();
+            if (sa.getG_id() > 0) {
+                aq.setAcc_id(0);
+                aq.setG_id(sa.getG_id());
+            } else {
+                aq.setAcc_id(aq.getAcc_id());
+                aq.setG_id(0);
+            }
             if (q_type.equalsIgnoreCase("multiple_choice") || q_type.equalsIgnoreCase("tfQuestion")) {
-                aq = new AnswerQuestion();
                 String score = request.getParameter(seqno[i] + "score");
                 aq.setSt_am_id(sa.getSt_am_id());
                 aq.setQ_id(q_id);
                 aq.setQ_order(0);
                 aq.setScore(Double.parseDouble(score));
+                total_score += Double.parseDouble(score);
                 ansList.add(aq);
             } else if (q_type.equalsIgnoreCase("matchWord")) {
                 String score[] = request.getParameterValues(seqno[i] + "score");
                 for (int j = 0; j < score.length; j++) {
                     aq = new AnswerQuestion();
+                    if (sa.getG_id() > 0) {
+                        aq.setAcc_id(0);
+                        aq.setG_id(sa.getG_id());
+                    } else {
+                        aq.setAcc_id(aq.getAcc_id());
+                        aq.setG_id(0);
+                    }
                     aq.setSt_am_id(sa.getSt_am_id());
                     aq.setQ_id(q_id);
                     aq.setQ_order(j + 1);
                     aq.setScore(Double.parseDouble(score[j]));
+                    total_score += Double.parseDouble(score[j]);
                     ansList.add(aq);
                 }
             } else if (q_type.equalsIgnoreCase("explain")) {
                 String score = request.getParameter(seqno[i] + "score");
-                aq = new AnswerQuestion();
                 aq.setSt_am_id(sa.getSt_am_id());
                 aq.setQ_id(q_id);
                 aq.setQ_order(0);
                 aq.setScore(Double.parseDouble(score));
+                total_score += Double.parseDouble(score);
                 ansList.add(aq);
             } else if (q_type.equalsIgnoreCase("fillBlank")) {
                 String score[] = request.getParameterValues(seqno[i] + "score");
                 for (int x = 0; x < score.length; x++) {
                     aq = new AnswerQuestion();
+                    if (sa.getG_id() > 0) {
+                        aq.setAcc_id(0);
+                        aq.setG_id(sa.getG_id());
+                    } else {
+                        aq.setAcc_id(aq.getAcc_id());
+                        aq.setG_id(0);
+                    }
                     aq.setSt_am_id(sa.getSt_am_id());
                     aq.setQ_id(q_id);
                     aq.setQ_order(x + 1);
-                    aq.setAnswer(score[x]);
+                    aq.setScore(Double.parseDouble(score[x]));
+                    total_score += Double.parseDouble(score[x]);
                     ansList.add(aq);
                 }
             } else if (q_type.equalsIgnoreCase("instruction")) {
                 System.out.println("Do nothing.");
             }
         }
-        
-        System.out.println(ansList);
+        sa.setScore(total_score);
+        StAssignmentOnWeb.updateScore(sa);
+        for (AnswerQuestion a : ansList) {
+            AnswerQuestion.updateScore(a);
+        }
+
+        request.setAttribute("msg", 6);
+        getServletContext().getRequestDispatcher("/informpage.jsp?am_id=" + sa.getAm_id()).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

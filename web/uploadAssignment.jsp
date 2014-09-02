@@ -80,30 +80,41 @@
                         </div>
                         <hr style="clear: both">
                         <div style="text-align: center"> 
-                            <h4 >Send your assignment 
-                                <span class="text-danger">
-                                    <c:set value="${cf:remainingTimeforSend(curAm,ac.acc_id)}" var="status"/>
-                                    <c:choose>
-                                        <c:when test="${status eq 'late'}">
-                                            <span class="text-danger">Late</span>
-                                        </c:when>
-                                        <c:when test="${status eq 'ontime'}">
-                                            <span class="text-success">On time</span>
-                                        </c:when>
-                                        <c:when test="${status eq 'hurryup'}">
-                                            <span class="text-warning">Hurry up!</span>
-                                        </c:when>
-                                        <c:when test="${status eq 'sent'}">
-                                            <span class="text-muted">Sent <span class="glyphicon glyphicon-check"></span></span>
-                                            </c:when>
-                                        </c:choose>
-                                </span>
-                            </h4>
-                            <form role="form" class="form-inline" action="uploadAssignmentFile" method="post" enctype="multipart/form-data">
-                                <input type="file" class="form-control" name="file">
-                                <input type="submit" value="Upload" class="form-control btn btn-primary">
-                            </form>
-                            <br>
+                            <c:choose>
+                                <c:when test="${sa.score > 0}">
+                                    <div class="text-success">
+                                        <h1 style="font-size: 100px"><span class="glyphicon glyphicon-ok-circle"></span></h1>
+                                        <h1>Your assignment checked!! <br/>Score is ${sa.score}!</h1>
+                                    </div>
+                                </c:when>
+                                <c:when test="${sa.score eq 0}">
+                                    <h4 >Send your assignment 
+                                        <span class="text-danger">
+                                            <c:set value="${cf:remainingTimeforSend(curAm,ac.acc_id)}" var="status"/>
+                                            <c:choose>
+                                                <c:when test="${status eq 'late'}">
+                                                    <span class="text-danger">Late</span>
+                                                </c:when>
+                                                <c:when test="${status eq 'ontime'}">
+                                                    <span class="text-success">On time</span>
+                                                </c:when>
+                                                <c:when test="${status eq 'hurryup'}">
+                                                    <span class="text-warning">Hurry up!</span>
+                                                </c:when>
+                                                <c:when test="${status eq 'sent'}">
+                                                    <span class="text-muted">Sent <span class="glyphicon glyphicon-check"></span></span>
+                                                    </c:when>
+                                                </c:choose>
+                                        </span>
+                                    </h4>
+                                    <form role="form" class="form-inline" action="uploadAssignmentFile" method="post" enctype="multipart/form-data">
+                                        <input type="file" class="form-control" name="file">
+                                        <input type="submit" value="Upload" class="form-control btn btn-primary">
+                                    </form>
+                                    <br>
+                                </c:when>
+                            </c:choose>
+                            <br/>
                             <h5 id="pvVs" class="usepointer">See your previous version.<span class="glyphicon glyphicon-chevron-right"></span></h5>
                         </div>
                         <div id="pvVersionTable">

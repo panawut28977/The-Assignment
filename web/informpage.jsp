@@ -60,6 +60,11 @@
                                 <h3>Update Assignment score successful. <br/><a href="GetSentAssignment?am_id=${am_id}">Go back to check another assignment</a></h3>
                             </div>
                         </c:when>
+                        <c:when test="${msg eq '6'}">
+                            <div class="alert alert-success" role="alert">
+                                <h3>Check Assignment successful. <br/><a href="GetSentAssignment?am_id=${param.am_id}">Go back to check another assignment</a></h3>
+                            </div>
+                        </c:when>
                     </c:choose>
                 </div>
             </div>
