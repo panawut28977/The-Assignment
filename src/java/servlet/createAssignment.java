@@ -93,6 +93,7 @@ public class createAssignment extends HttpServlet {
             String[] seqno = m.getParameterValues("seqno");
             String q_type = null;
             String instruction = null;
+            double fullymark = 0;
             key = Assignment.createAmInfo(a);
             List<Question> qlist = new ArrayList<Question>();
             for (int i = 0; i < seqno.length; i++) {
@@ -116,6 +117,7 @@ public class createAssignment extends HttpServlet {
                     mul.setQ_choice_list(Arrays.toString(ctext));
                     mul.setQ_answer_list(Arrays.toString(ans));
                     mul.setQ_score(Double.parseDouble(score));
+                    fullymark += Double.parseDouble(score);
                     qlist.add(mul);
                 } else if (q_type.equalsIgnoreCase("tfQuestion")) {
                     String q_no = m.getParameter(seqno[i] + "q_no");
@@ -135,6 +137,7 @@ public class createAssignment extends HttpServlet {
                     mul.setQ_choice_list("[true,false]");
                     mul.setQ_answer_list(ans);
                     mul.setQ_score(Double.parseDouble(score));
+                    fullymark += Double.parseDouble(score);
                     qlist.add(mul);
                 } else if (q_type.equalsIgnoreCase("matchWord")) {
                     String q_no = m.getParameter(seqno[i] + "q_no");
@@ -157,6 +160,7 @@ public class createAssignment extends HttpServlet {
                         mw.setQ_text(match_text[j]);
                         mw.setQ_answer(match_ans[j]);
                         mw.setQ_score(Double.parseDouble(m_score[j]));
+                        fullymark += Double.parseDouble(m_score[j]);
                         qlist.add(mw);
                     }
                 } else if (q_type.equalsIgnoreCase("explain")) {
@@ -192,6 +196,7 @@ public class createAssignment extends HttpServlet {
                         fill.setQ_order(k + 1);
                         fill.setQ_text(qtext);
                         fill.setScore(Double.parseDouble(score[k]));
+                        fullymark += Double.parseDouble(score[k]);
                         fill.setAnswer(qanswer[k]);
                         fill.setQ_start_index(Integer.parseInt(startIndex[k]));
                         fill.setQ_end_index(Integer.parseInt(endIndex[k]));
@@ -201,6 +206,10 @@ public class createAssignment extends HttpServlet {
                     instruction = m.getParameter(seqno[i] + "instruction");
                 }
             }
+            System.out.println(fullymark);
+            a.setFully_mark(fullymark);
+            a.setAm_id(key);
+            Assignment.updateAmInfo(a);
             Question.addList(qlist);
             url = "assignment.jsp?tab=AllAssignment&&amId=" + key;
         }

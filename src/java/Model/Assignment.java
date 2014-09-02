@@ -466,9 +466,9 @@ public class Assignment {
     //updateAmInfo(Assignment ass)
     public static int updateAmInfo(Assignment ass) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "update assignment set name=?,description=?,ass_type=?,total_member=?,due_date=?,title_assignment_onweb=? where ass_id=?";
+        String sql = "update assignment set name=?,description=?,ass_type=?,total_member=?,due_date=?,fully_mark=?,title_assignment_onweb=? where ass_id=?";
         if (ass.getAss_type().equalsIgnoreCase("file")) {
-            sql = "update assignment set name=?,description=?,ass_type=?,total_member=?,due_date=?,path_file=? where ass_id=?";
+            sql = "update assignment set name=?,description=?,ass_type=?,total_member=?,due_date=?,fully_mark=?,path_file=? where ass_id=?";
         }
         PreparedStatement pstm;
         int result = 0;
@@ -480,14 +480,16 @@ public class Assignment {
             pstm.setInt(4, ass.getTotal_member());
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             pstm.setString(5, df.format(ass.getDue_date()));
+            System.out.println("before set"+ass.getFully_mark());
+            pstm.setDouble(6, ass.getFully_mark());
 //            pstm.setTimestamp(6, ass.getDue_date());
 //            pstm.setString(7, ass.getAss_extension());
             if (ass.getAss_type().equalsIgnoreCase("file")) {
-                pstm.setString(6, ass.getPath_file());
+                pstm.setString(7, ass.getPath_file());
             } else {
-                pstm.setString(6, ass.getTitle_assignment_onweb());
+                pstm.setString(7, ass.getTitle_assignment_onweb());
             }
-            pstm.setInt(7, ass.getAm_id());
+            pstm.setInt(8, ass.getAm_id());
             result = pstm.executeUpdate();
 
             conn.close();
