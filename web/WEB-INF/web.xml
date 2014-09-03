@@ -212,6 +212,10 @@
         <servlet-name>updateScoreStAmOnWeb</servlet-name>
         <servlet-class>servlet.updateScoreStAmOnWeb</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>showCon</servlet-name>
+        <servlet-class>servlet.showCon</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -313,7 +317,7 @@
         <url-pattern>/addMember</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>sendAssignment</servlet-name> 
+        <servlet-name>sendAssignment</servlet-name>
         <url-pattern>/sendAssignment</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
@@ -368,9 +372,12 @@
         <servlet-name>updateScoreStAmFile</servlet-name>
         <url-pattern>/updateScoreStAmFile</url-pattern>
     </servlet-mapping>
+    <servlet-mapping><servlet-name>updateScoreStAmOnWeb</servlet-name><url-pattern>/updateScoreStAmOnWeb</url-pattern>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; origin/master
+    </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>updateScoreStAmOnWeb</servlet-name>
-        <url-pattern>/updateScoreStAmOnWeb</url-pattern>
+        <servlet-name>showCon</servlet-name>
+        <url-pattern>/showCon</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

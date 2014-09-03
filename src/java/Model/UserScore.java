@@ -5,6 +5,7 @@
  */
 package Model;
 
+import com.google.gson.Gson;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -87,5 +88,4 @@ public class UserScore {
         return "UserScore{" + "fullname=" + fullname + ", assignment=" + assignment + ", score=" + score + ", full_mark=" + full_mark + '}';
 
     }
-
 }

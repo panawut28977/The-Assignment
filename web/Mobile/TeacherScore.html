@@ -4,8 +4,8 @@
   <meta name="viewport" content="initial-scale=1.0">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <link rel="stylesheet" href="jquery.mobile-1.4.2.css" />
-  <link rel="stylesheet" href="font-awesome.min.css"/>
+  <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/jquery.mobile-1.4.2.css" />
+  <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/font-awesome.min.css"/>
   
   <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
   <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
@@ -14,7 +14,7 @@
 <div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-fixed-page1" data-title="Panel fixed positioning" data-url="panel-fixed-page1">
     <div data-role="header" data-position="fixed">
         <center>
-        <a href="IndexTeacher.html" rel="external" and data-ajax="false"><span class="fa fa-home fa-2x" style="alignment-adjust:auto;padding-right:25px;padding-top:15px;padding-bottom:15px"></span></a>
+        <a href="http://jsp.chaninz.com/tasm/Mobile/indexTeacher.html" rel="external" and data-ajax="false"><span class="fa fa-home fa-2x" style="alignment-adjust:auto;padding-right:25px;padding-top:15px;padding-bottom:15px"></span></a>
         <span class="fa fa-globe fa-2x"></span></center>
         <a href="#nav-panel"><i class="fa fa-bars fa-2x"></i></a>
         <div style="background-color:white ;padding:1px;width:auto;">
@@ -45,8 +45,8 @@
     <div data-position="fixed" data-tap-toggle="false" data-role="footer" data-tap-toggle="false" >
 			<div data-role="navbar">
 				<ul>
-					<li><a href="IndexTeacher.html" rel="external" and data-ajax="false">Announce</a></li>
-					<li><a href="AssignmentInCourseTeacher.html" rel="external" and data-ajax="false">Assignment</a></li>
+					<li><a href="http://jsp.chaninz.com/tasm/Mobile/indexTeacher.html" rel="external" and data-ajax="false">Announce</a></li>
+					<li><a href="http://jsp.chaninz.com/tasm/Mobile/AssignmentInCourseTeacher.html" rel="external" and data-ajax="false">Assignment</a></li>
                     <li><a href="TeacherScore.html" rel="external" and data-ajax="false" class="ui-btn-active">Score</a></li>
 				</ul>
 			</div>
@@ -56,7 +56,7 @@
 
 </body>
 <script type="text/javascript">
-        $.getJSON('http://localhost:8084/TheAssignment/showStudentScore', function(result) {
+        $.getJSON('http://jsp.chaninz.com/tasm/showStudentScore', function(result) {
             $(result).each(function(k, v) {
                 $(
                         '<div data-role="collapsible" data-collapsed="true" style="padding-left:20px;padding-right:20px">' +

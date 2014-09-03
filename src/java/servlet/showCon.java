@@ -6,13 +6,11 @@
 
 package servlet;
 
-import Model.Account;
-import Model.Announcement;
-import Model.UserScore;
+import Model.ConnectionBuilder;
+import static Model.ConnectionBuilder.getConnection;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Shinomiya
  */
-public class showStudentScore extends HttpServlet {
+public class showCon extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,15 +33,12 @@ public class showStudentScore extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<UserScore> u = UserScore.getUserScore(2);
-        //Account a = Account.getNameByID(2);
-        
-        
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(new Gson().toJson(u));
-        //response.getWriter().write(new Gson().toJson(a));
-        
+        response.setContentType("text/html;charset=UTF-8");
+        ConnectionBuilder c = new ConnectionBuilder();
+        if(c.getConnection() == null){
+            response.getWriter().write(new Gson().toJson("0"));
+        }else
+            response.getWriter().write(new Gson().toJson("1"));
         
     }
 

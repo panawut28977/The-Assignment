@@ -4,8 +4,8 @@
   <meta name="viewport" content="initial-scale=1.0">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <link rel="stylesheet" href="jquery.mobile-1.4.2.css" />
-  <link rel="stylesheet" href="font-awesome.min.css"/>
+  <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/jquery.mobile-1.4.2.css" />
+  <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/font-awesome.min.css"/>
   
   <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
   <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
@@ -14,7 +14,7 @@
 <div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-fixed-page1" data-title="Panel fixed positioning" data-url="panel-fixed-page1">
     <div data-role="header" data-position="fixed">
         <center>
-        <a href="Index.html" rel="external" and data-ajax="false"><span class="fa fa-home fa-2x" style="alignment-adjust:auto;padding-right:25px;padding-top:15px;padding-bottom:15px"></span></a>
+        <a href="http://jsp.chaninz.com/tasm/Mobile/index.html" rel="external" and data-ajax="false"><span class="fa fa-home fa-2x" style="alignment-adjust:auto;padding-right:25px;padding-top:15px;padding-bottom:15px"></span></a>
         <span class="fa fa-globe fa-2x"></span></center>
         <a href="#nav-panel"><i class="fa fa-bars fa-2x"></i></a>
     </div><!-- /header -->
@@ -35,8 +35,8 @@
     <div data-position="fixed" data-tap-toggle="false" data-role="footer" data-tap-toggle="false" >
 			<div data-role="navbar">
 				<ul>
-					<li><a href="#">Announce</a></li>
-					<li><a href="#" class="ui-btn-active">Assignment</a></li>
+					<li><a href="http://jsp.chaninz.com/tasm/Mobile/index.html">Announce</a></li>
+					<li><a href="http://jsp.chaninz.com/tasm/Mobile/Assignment.html" class="ui-btn-active">Assignment</a></li>
 				</ul>
 			</div>
 		</div>
@@ -45,7 +45,7 @@
 
 </body>
     <script type="text/javascript">
-        $.getJSON('http://localhost:8084/TheAssignment/showAssignmentDetail', function(result) {
+        $.getJSON('http://jsp.chaninz.com/tasm/showAssignmentDetail', function(result) {
             $(result).each(function(k, v) {
                 $(
                         '<div style="background-color:#F4F4F4 ;padding:1px;width:auto;">' +
