@@ -63,12 +63,13 @@
                         '</div></td><td align="right" style="padding-left:70px"><br/><br/>' +
                         '<h2 style="color:#E74C3C">Late</h2></td>' +
                         '</tr></div>').insertBefore($('#add-test'));
+                        $(".assignment").click(function() {
+                         setToServlet($(this).attr("data-id"));
+                        });
                 i += 1;
             });
         });
-        $(".assignment").click(function() {
-            setToServlet($(this).attr("data-id"));
-        });
+        
         
         function warp() {
             location.href="http://jsp.chaninz.com/tasm/Mobile/AssignmentDetail.html";
@@ -79,7 +80,6 @@
                 type: "POST",
                 url: "'http://jsp.chaninz.com/tasm/showAssignmentDetail",
                 data: {id: id}
-                
             });
         }
         ;
