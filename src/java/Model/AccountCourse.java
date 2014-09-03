@@ -11,7 +11,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import util.Util;
@@ -216,6 +218,32 @@ public class AccountCourse {
                 Course c = Course.getCourseByID(rs.getInt("course_id"));
                 acc.setCourse(c);
                 courseList.add(acc);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return courseList;
+    }
+    
+    public static  Map<Long, AccountCourse> getCourseByAccIDMap(int acc_id) {
+         Map<Long, AccountCourse> courseList = new HashMap<>();
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select * from account_course where acc_id=? AND status =  \"approved\"";
+        PreparedStatement pstm;
+        AccountCourse acc = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, acc_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                acc = new AccountCourse();
+                acc.setApproved_date(rs.getTimestamp("approved_date"));
+                acc.setRole(rs.getString("role"));
+                acc.setStatus(rs.getString("status"));
+                Course c = Course.getCourseByID(rs.getInt("course_id"));
+                acc.setCourse(c);
+                courseList.put((long) c.getCourse_id(), acc);
             }
             conn.close();
         } catch (SQLException ex) {

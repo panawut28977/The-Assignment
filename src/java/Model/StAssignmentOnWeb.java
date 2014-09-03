@@ -271,7 +271,6 @@ public class StAssignmentOnWeb {
 //            Logger.getLogger(StAssignmentOnWeb.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 //    }
-    
     public static List<StAssignmentOnWeb> getStAmByAmId(int am_id) {
         List<StAssignmentOnWeb> stfList = new ArrayList<>();
         Connection conn = ConnectionBuilder.getConnection();
@@ -300,7 +299,7 @@ public class StAssignmentOnWeb {
         }
         return stfList;
     }
-    
+
     public static int updateLastedSend(StAssignmentOnWeb a) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "update student_assignment_on_web set lasted_send_date=? where st_ass_id=?";
@@ -310,6 +309,24 @@ public class StAssignmentOnWeb {
             pstm = conn.prepareStatement(sql);
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             pstm.setString(1, df.format(a.getLasted_send_date()));
+            pstm.setInt(2, a.getSt_am_id());
+            result = pstm.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
+    public static int updateScore(StAssignmentOnWeb a) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "update student_assignment_on_web set score=? where st_ass_id=?";
+        PreparedStatement pstm;
+        int result = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            pstm.setDouble(1, a.getScore());
             pstm.setInt(2, a.getSt_am_id());
             result = pstm.executeUpdate();
             conn.close();

@@ -99,143 +99,153 @@
                                     </c:choose>
                                 </div>
                                 <hr style="clear: both">
-                                <div class="assignmentBox col-md-12">
-                                    <h4><u>Let's do it !</u></h4>
-                                            <c:set value="1" var="seqno" />
-                                            <c:set value="0" var="used_id" />
-                                            <c:set value="0" var="no_seq" />
-                                            <c:set value="" var="inst"/>
-                                            <c:forEach  items="${curAm.questionList}" var="q">
-                                                <c:if test="${inst ne q.instruction && q.instruction ne 'null'}">
-                                            <div>
-                                                <h5><b><u>Instruction:</u> ${q.instruction}</b></h5><!--[Question Instruction]-->
-                                                <input type="hidden" name="${seqno}q_id" value="${q.q_id}"/>
-                                                <input type="hidden" value="instruction" name="${seqno}q_type">
-                                                <input type="hidden" name="seqno" value="${seqno}">
-                                                <c:set value="${q.instruction}" var="inst"/>
-                                                <c:set value="${seqno+1}" var="seqno" />
-                                                <c:set value="${no_seq+1}" var="no_seq" />
-                                            </div>
-                                        </c:if>
-                                        <c:choose>
-                                            <c:when test="${q.q_type eq 'multiple_choice' || q.q_type eq 'tfQuestion'}">
-                                                <c:set var="clist" value="${fn:substring(q.q_choice_list, 1, q.q_choice_list.length()-1)}"/>
-                                                <c:set var="anslist" value="${fn:substring(q.q_answer_list, 1, q.q_answer_list.length()-1)}"/>
-                                                <c:set var="choicesp" value="${fn:split(clist, ', ')}" />
-                                                <div>
-                                                    <p>${q.q_no}.) ${q.q_text}</p>
-                                                    <c:choose>
-                                                        <c:when test="${q.q_category eq 'one'}">
-                                                            <c:forEach items="${choicesp}" var="choice">
-                                                                <input type="radio" name="${seqno}answer" value="${choice}"> ${choice}
-                                                            </c:forEach>
-                                                        </c:when>
-                                                        <c:when test="${q.q_category eq 'multiple'}">
-                                                            <c:forEach items="${choicesp}" var="choice">
-                                                                <input type="checkbox" name="${seqno}answer" value="${choice}"> ${choice}
-                                                            </c:forEach>
-                                                        </c:when>
-                                                        <c:when test="${q.q_category eq 'tf'}">
-                                                            <input type="radio" name="${seqno}answer" value="true"> True
-                                                            <input type="radio" name="${seqno}answer" value="false"> False
-                                                        </c:when>
-                                                    </c:choose>
-                                                    <input type="hidden" name="${seqno}q_id" value="${q.q_id}"/>
-                                                    <input type="hidden" value="multiple_choice" name="${seqno}q_type">
-                                                    <input type="hidden" name="seqno" value="${seqno}">
-                                                </div>
-                                                <c:set value="${seqno+1}" var="seqno" />
-                                            </c:when>
-                                            <c:when test="${q.q_type eq 'explain'}">
-                                                <div>
-                                                    <p>${q.q_no}.) ${q.q_text}</p>
-                                                    <textarea class="form-control" name="${seqno}answer"></textarea>
-                                                    <input type="hidden" name="${seqno}q_id" value="${q.q_id}"/>
-                                                    <input type="hidden" value="explain" name="${seqno}q_type">
-                                                    <input type="hidden" name="seqno" value="${seqno}">
-                                                </div>
-                                                <c:set value="${seqno+1}" var="seqno" />
-                                            </c:when>
-                                            <c:when test="${q.q_type eq 'matchWord'}">
-                                                <c:if test="${q.q_id != used_id}">
-                                                    <!-- set new var-->
-                                                    <c:set value="" var="listchs"/>
-                                                    <c:set value="" var="listans"/>
-
-                                                    <!-- loop concat string of each question -->
-                                                    <c:forEach  items="${curAm.questionList}" var="m">
-                                                        <c:if test="${q.q_id  eq m.q_id}">
-                                                            <!--<input type="hidden" value="${m.q_order}" name="${seqno}q_order"/>-->
-                                                            <c:set value="${listchs.concat(',').concat(m.q_text)}" var="listchs"/>
-                                                            <c:set value="${listans.concat(',').concat(m.q_answer)}" var="listans"/>
-                                                        </c:if>
-                                                    </c:forEach> 
-
-                                                    <!-- shuffle concantinate string -->
-                                                    <c:set value="${ct_cf:shuffleString(listans)}" var="listans"/>
-
-                                                    <!-- split new shffle string for display-->
-                                                    <c:set value="${fn:split(listchs,', ')}" var="listchs"/>
-                                                    <c:set value="${fn:split(listans,', ')}" var="listans"/>
-                                                    <div class="row">
-                                                        <p>${q.q_no}.) ${q.q_title}</p>
-                                                        <div class="col-md-8">
-                                                            <c:forEach items="${listchs}" var="c">
-                                                                <select name="${seqno}answer">
-                                                                    <c:forEach items="${listans}" var="ansl">
-                                                                        <option value="${ansl}">${ansl}</option>
-                                                                    </c:forEach>
-                                                                </select>
-                                                                <span>${c}</span>
-                                                                <br/><br/>
-                                                            </c:forEach>
-                                                        </div>
-                                                        <div class="col-md-2 col-md-offset-2">
-                                                            <c:forEach items="${listans}" var="ansl">
-                                                                <span>${ansl}</span><br/><br/>
-                                                            </c:forEach>
-                                                        </div>
-                                                        <input type="hidden" name="${seqno}q_id" value="${q.q_id}"/>
-                                                        <input type="hidden" value="matchWord"  name="${seqno}q_type">
-                                                        <input type="hidden" name="seqno" value="${seqno}">
-                                                    </div>
-                                                    <c:set value="${q.q_id}" var="used_id" />
-                                                    <c:set value="${seqno+1}" var="seqno" />
-                                                </c:if>
-                                            </c:when>
-                                            <c:when test="${q.q_type eq 'fillBlank'}">
-                                                <c:if test="${q.q_id != used_id}">
+                                <c:choose>
+                                    <c:when test="${sa.score > 0}">
+                                        <div class="text-success" style="text-align: center">
+                                            <h1 style="font-size: 100px"><span class="glyphicon glyphicon-ok-circle"></span></h1>
+                                            <h1>Your assignment is checked!! <br/>Score is ${sa.score}!</h1>
+                                        </div>
+                                    </c:when>
+                                    <c:when test="${sa.score eq 0}">
+                                        <div class="assignmentBox col-md-12">
+                                            <h4><u>Let's do it !</u></h4>
+                                                    <c:set value="1" var="seqno" />
+                                                    <c:set value="0" var="used_id" />
+                                                    <c:set value="0" var="no_seq" />
+                                                    <c:set value="" var="inst"/>
+                                                    <c:forEach  items="${curAm.questionList}" var="q">
+                                                        <c:if test="${inst ne q.instruction && q.instruction ne 'null'}">
                                                     <div>
-                                                        <!-- algor for replace string index with input text-->
-                                                        <c:set value="${q.q_text}" var="q_text"/>
-                                                        <c:set var="countb" value="${curAm.questionList.size()}"/>
-                                                        <c:forEach begin="1" end="${curAm.questionList.size()}" var="f">
-                                                            <c:set var="countb" value="${countb-1}"/>
-                                                            <c:if test="${q.q_id  eq curAm.questionList.get(countb).q_id}">
-                                                                <c:set var="q_start_index" value="${curAm.questionList.get(countb).q_start_index}" />
-                                                                <c:set var="q_end_index" value="${curAm.questionList.get(countb).q_end_index}"/>
-                                                                <c:set var="reptext" value="<input type='text' name='${seqno}answer'/>"/>
-                                                                <c:set value="${ct_cf:replaceStringByIndex(q_text, q_start_index, q_end_index,reptext)}" var="q_text"/>
-                                                            </c:if>
-                                                        </c:forEach>
-                                                        <!-- end algor-->
-
-                                                        <p>${q.q_no}.) ${q_text}</p>
-
-                                                        <!-- set value-->
+                                                        <h5><b><u>Instruction:</u> ${q.instruction}</b></h5><!--[Question Instruction]-->
                                                         <input type="hidden" name="${seqno}q_id" value="${q.q_id}"/>
+                                                        <input type="hidden" value="instruction" name="${seqno}q_type">
                                                         <input type="hidden" name="seqno" value="${seqno}">
-                                                        <input type="hidden" value="fillBlank" name="${seqno}q_type">
-                                                        <c:set value="${q.q_id}" var="used_id" />
+                                                        <c:set value="${q.instruction}" var="inst"/>
                                                         <c:set value="${seqno+1}" var="seqno" />
+                                                        <c:set value="${no_seq+1}" var="no_seq" />
                                                     </div>
                                                 </c:if>
-                                            </c:when>
-                                        </c:choose>
-                                    </c:forEach>
-                                    <br>
-                                    <input type="submit" class="btn btn-primary pull-right" value="Send !!">
-                                </div>
+                                                <c:choose>
+                                                    <c:when test="${q.q_type eq 'multiple_choice' || q.q_type eq 'tfQuestion'}">
+                                                        <c:set var="clist" value="${fn:substring(q.q_choice_list, 1, q.q_choice_list.length()-1)}"/>
+                                                        <c:set var="anslist" value="${fn:substring(q.q_answer_list, 1, q.q_answer_list.length()-1)}"/>
+                                                        <c:set var="choicesp" value="${fn:split(clist, ', ')}" />
+                                                        <div>
+                                                            <p>${q.q_no}.) ${q.q_text}</p>
+                                                            <c:choose>
+                                                                <c:when test="${q.q_category eq 'one'}">
+                                                                    <c:forEach items="${choicesp}" var="choice">
+                                                                        <input type="radio" name="${seqno}answer" value="${choice}"> ${choice}
+                                                                    </c:forEach>
+                                                                </c:when>
+                                                                <c:when test="${q.q_category eq 'multiple'}">
+                                                                    <c:forEach items="${choicesp}" var="choice">
+                                                                        <input type="checkbox" name="${seqno}answer" value="${choice}"> ${choice}
+                                                                    </c:forEach>
+                                                                </c:when>
+                                                                <c:when test="${q.q_category eq 'tf'}">
+                                                                    <input type="radio" name="${seqno}answer" value="true"> True
+                                                                    <input type="radio" name="${seqno}answer" value="false"> False
+                                                                </c:when>
+                                                            </c:choose>
+                                                            <input type="hidden" name="${seqno}q_id" value="${q.q_id}"/>
+                                                            <input type="hidden" value="multiple_choice" name="${seqno}q_type">
+                                                            <input type="hidden" name="seqno" value="${seqno}">
+                                                        </div>
+                                                        <c:set value="${seqno+1}" var="seqno" />
+                                                    </c:when>
+                                                    <c:when test="${q.q_type eq 'explain'}">
+                                                        <div>
+                                                            <p>${q.q_no}.) ${q.q_text}</p>
+                                                            <textarea class="form-control" name="${seqno}answer"></textarea>
+                                                            <input type="hidden" name="${seqno}q_id" value="${q.q_id}"/>
+                                                            <input type="hidden" value="explain" name="${seqno}q_type">
+                                                            <input type="hidden" name="seqno" value="${seqno}">
+                                                        </div>
+                                                        <c:set value="${seqno+1}" var="seqno" />
+                                                    </c:when>
+                                                    <c:when test="${q.q_type eq 'matchWord'}">
+                                                        <c:if test="${q.q_id != used_id}">
+                                                            <!-- set new var-->
+                                                            <c:set value="" var="listchs"/>
+                                                            <c:set value="" var="listans"/>
+
+                                                            <!-- loop concat string of each question -->
+                                                            <c:forEach  items="${curAm.questionList}" var="m">
+                                                                <c:if test="${q.q_id  eq m.q_id}">
+                                                                    <!--<input type="hidden" value="${m.q_order}" name="${seqno}q_order"/>-->
+                                                                    <c:set value="${listchs.concat(',').concat(m.q_text)}" var="listchs"/>
+                                                                    <c:set value="${listans.concat(',').concat(m.q_answer)}" var="listans"/>
+                                                                </c:if>
+                                                            </c:forEach> 
+
+                                                            <!-- shuffle concantinate string -->
+                                                            <c:set value="${ct_cf:shuffleString(listans)}" var="listans"/>
+
+                                                            <!-- split new shffle string for display-->
+                                                            <c:set value="${fn:split(listchs,', ')}" var="listchs"/>
+                                                            <c:set value="${fn:split(listans,', ')}" var="listans"/>
+                                                            <div class="row">
+                                                                <p>${q.q_no}.) ${q.q_title}</p>
+                                                                <div class="col-md-8">
+                                                                    <c:forEach items="${listchs}" var="c">
+                                                                        <select name="${seqno}answer">
+                                                                            <c:forEach items="${listans}" var="ansl">
+                                                                                <option value="${ansl}">${ansl}</option>
+                                                                            </c:forEach>
+                                                                        </select>
+                                                                        <span>${c}</span>
+                                                                        <br/><br/>
+                                                                    </c:forEach>
+                                                                </div>
+                                                                <div class="col-md-2 col-md-offset-2">
+                                                                    <c:forEach items="${listans}" var="ansl">
+                                                                        <span>${ansl}</span><br/><br/>
+                                                                    </c:forEach>
+                                                                </div>
+                                                                <input type="hidden" name="${seqno}q_id" value="${q.q_id}"/>
+                                                                <input type="hidden" value="matchWord"  name="${seqno}q_type">
+                                                                <input type="hidden" name="seqno" value="${seqno}">
+                                                            </div>
+                                                            <c:set value="${q.q_id}" var="used_id" />
+                                                            <c:set value="${seqno+1}" var="seqno" />
+                                                        </c:if>
+                                                    </c:when>
+                                                    <c:when test="${q.q_type eq 'fillBlank'}">
+                                                        <c:if test="${q.q_id != used_id}">
+                                                            <div>
+                                                                <!-- algor for replace string index with input text-->
+                                                                <c:set value="${q.q_text}" var="q_text"/>
+                                                                <c:set var="countb" value="${curAm.questionList.size()}"/>
+                                                                <c:forEach begin="1" end="${curAm.questionList.size()}" var="f">
+                                                                    <c:set var="countb" value="${countb-1}"/>
+                                                                    <c:if test="${q.q_id  eq curAm.questionList.get(countb).q_id}">
+                                                                        <c:set var="q_start_index" value="${curAm.questionList.get(countb).q_start_index}" />
+                                                                        <c:set var="q_end_index" value="${curAm.questionList.get(countb).q_end_index}"/>
+                                                                        <c:set var="reptext" value="<input type='text' name='${seqno}answer'/>"/>
+                                                                        <c:set value="${ct_cf:replaceStringByIndex(q_text, q_start_index, q_end_index,reptext)}" var="q_text"/>
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <!-- end algor-->
+
+                                                                <p>${q.q_no}.) ${q_text}</p>
+
+                                                                <!-- set value-->
+                                                                <input type="hidden" name="${seqno}q_id" value="${q.q_id}"/>
+                                                                <input type="hidden" name="seqno" value="${seqno}">
+                                                                <input type="hidden" value="fillBlank" name="${seqno}q_type">
+                                                                <c:set value="${q.q_id}" var="used_id" />
+                                                                <c:set value="${seqno+1}" var="seqno" />
+                                                            </div>
+                                                        </c:if>
+                                                    </c:when>
+                                                </c:choose>
+                                            </c:forEach>
+                                            <br>
+                                            <input type="submit" class="btn btn-primary pull-right" value="Send !!">
+                                        </div>
+                                    </c:when>
+                                </c:choose>
                             </form>
                         </div>
                         <div style="clear: both;padding: 10px 0"><hr/></div> 
@@ -261,69 +271,69 @@
                     </div>
                 </div>
             </div>
-<!--            <div class="gi-override gi-userlist">
-                <div class="gi-options"></div>
-                <ul class="gi-inner">
-                    <li class="gi-user" data-goinstant-id="1234">
-                        <div class="gi-color">
-                            <div class="gi-avatar">
-                                <img class="gi-avatar-img">
+            <!--            <div class="gi-override gi-userlist">
+                            <div class="gi-options"></div>
+                            <ul class="gi-inner">
+                                <li class="gi-user" data-goinstant-id="1234">
+                                    <div class="gi-color">
+                                        <div class="gi-avatar">
+                                            <img class="gi-avatar-img">
+                                        </div>
+                                    </div>
+                                    <div class="gi-name">
+                                        <span>Guest</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="gi-collapse"></div>
+                        </div>
+                        <div class="gi-override gi-form">
+                            <div class="gi-indicator">
+                                <div class="gi-user">
+                                     The displayname of the user interacting with this input 
+                                </div>
+                                <div class="gi-bar">
+                                </div>
                             </div>
                         </div>
-                        <div class="gi-name">
-                            <span>Guest</span>
-                        </div>
-                    </li>
-                </ul>
-                <div class="gi-collapse"></div>
-            </div>
-            <div class="gi-override gi-form">
-                <div class="gi-indicator">
-                    <div class="gi-user">
-                         The displayname of the user interacting with this input 
-                    </div>
-                    <div class="gi-bar">
-                    </div>
-                </div>
-            </div>
-
-            <div class="gi-chat gi-override">
-                <div class="gi-collapse-wrapper">
-                    <div class="gi-collapse">
-                        <span class="gi-icon"></span>
-                    </div>
-                </div>
-                <div class="gi-chat-wrapper">
-                    <ul class="gi-message-list">
-                        <li class="gi-message">
-                            <div class="gi-color"></div>
-                            <div class="gi-avatar">
-                                <img class="gi-avatar-img" src="http://YOURDOMAIN.com/YOURAVATAR.png">
+            
+                        <div class="gi-chat gi-override">
+                            <div class="gi-collapse-wrapper">
+                                <div class="gi-collapse">
+                                    <span class="gi-icon"></span>
+                                </div>
                             </div>
-                            <div class="gi-name">Guest</div>
-                            <div class="gi-text">Hi</div>
-                            <span class="gi-time">Monday, 1:10 pm</span>
-                        </li>
-                    </ul>
-                    <div class="gi-message-form">
-                        <input class="gi-message-input" type="text">
-                        <button class="gi-message-btn">Send</button>
-                    </div>
-                </div>
-            </div>
-            <div class="gi-override gi-click-container">
-                <div class="gi-click">
-                    <div class="gi-cursor">
-                         Cursor image background 
-                    </div>
-                    <div class="gi-animation">
-                         Click animation image background
-                    </div>
-                    <div class="gi-name">
-                         User's display name 
-                    </div>
-                </div>
-            </div>-->
+                            <div class="gi-chat-wrapper">
+                                <ul class="gi-message-list">
+                                    <li class="gi-message">
+                                        <div class="gi-color"></div>
+                                        <div class="gi-avatar">
+                                            <img class="gi-avatar-img" src="http://YOURDOMAIN.com/YOURAVATAR.png">
+                                        </div>
+                                        <div class="gi-name">Guest</div>
+                                        <div class="gi-text">Hi</div>
+                                        <span class="gi-time">Monday, 1:10 pm</span>
+                                    </li>
+                                </ul>
+                                <div class="gi-message-form">
+                                    <input class="gi-message-input" type="text">
+                                    <button class="gi-message-btn">Send</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gi-override gi-click-container">
+                            <div class="gi-click">
+                                <div class="gi-cursor">
+                                     Cursor image background 
+                                </div>
+                                <div class="gi-animation">
+                                     Click animation image background
+                                </div>
+                                <div class="gi-name">
+                                     User's display name 
+                                </div>
+                            </div>
+                        </div>-->
     </body>
 
     <script>

@@ -108,7 +108,7 @@
                                 <div class="form-group">
                                     <label for="fullymark" class="col-md-3 control-label">Fully score is</label>
                                     <div class="col-md-3">
-                                        <input type="number" name="fullymark" class="form-control" required="">
+                                        <input type="number" name="fullymark" id="fullymark" class="form-control" required="">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -360,9 +360,11 @@
                                                 if ($(this).val() == "file") {
                                                     $('#uploadAmFile').show();
                                                     $('#CreateAmOnweb').hide();
+                                                    $('#fullymark').attr("required","yes");
                                                 } else {
                                                     $('#CreateAmOnweb').show();
                                                     $('#uploadAmFile').hide();
+                                                    $('#fullymark').removeAttr("required");
                                                 }
                                             });
                                             $("#description").change(function() {

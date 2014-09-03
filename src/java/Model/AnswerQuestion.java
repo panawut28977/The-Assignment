@@ -111,7 +111,6 @@ public class AnswerQuestion {
                 a.setSt_am_id(rs.getInt("st_ass_id"));
                 a.setQ_id(rs.getInt("q_id"));
                 a.setQ_order(rs.getInt("q_order"));
-                
                 a.setAnswer(rs.getString("answer"));
                 a.setScore(rs.getDouble("score"));
                 ans.add(a);
@@ -139,7 +138,6 @@ public class AnswerQuestion {
                 a.setSt_am_id(rs.getInt("st_ass_id"));
                 a.setQ_id(rs.getInt("q_id"));
                 a.setQ_order(rs.getInt("q_order"));
-                
                 a.setAnswer(rs.getString("answer"));
                 a.setScore(rs.getDouble("score"));
                 ans.add(a);
@@ -174,16 +172,17 @@ public class AnswerQuestion {
     }
 
     //updateScore
-    public static int updateScore(AnswerQuestion a, int st_ass_id) {
+    public static int updateScore(AnswerQuestion a) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "update student_assignment_on_web_question set score=? where st_ass_id=? and q_id=? and q_order=? and acc_id=? and g_id=?";
+        String sql = "update student_answer_question set score=? where st_ass_id=? and q_id=? and q_order=? and acc_id=? and g_id=?";
         PreparedStatement pstm;
         int result = 0;
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setDouble(1, a.getScore());
-            pstm.setInt(2, st_ass_id);
+            pstm.setInt(2, a.getSt_am_id());
             pstm.setInt(3, a.getQ_id());
+            System.out.println(a.getQ_order());
             pstm.setInt(4, a.getQ_order());
             pstm.setInt(5, a.getAcc_id());
             pstm.setInt(6, a.getG_id());
@@ -196,13 +195,13 @@ public class AnswerQuestion {
     }
 
     //updateAllScore
-    public static int updateScore(List<AnswerQuestion> a, int st_ass_id) {
-        Connection conn = ConnectionBuilder.getConnection();
-        String sql = "";
-        PreparedStatement pstm;
-        int result = 0;
-        return result;
-    }
+//    public static int updateScore(List<AnswerQuestion> a, int st_ass_id) {
+//        Connection conn = ConnectionBuilder.getConnection();
+//        String sql = "";
+//        PreparedStatement pstm;
+//        int result = 0;
+//        return result;
+//    }
 
     //hilightKeyword
     @Override
