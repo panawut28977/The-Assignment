@@ -9,7 +9,6 @@ package servlet;
 import Model.Assignment;
 import com.google.gson.Gson;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,8 +30,9 @@ public class showAssignmentDetail extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {;
-        Assignment as2 = Assignment.getAmByAmID(1);
+            throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Assignment as2 = Assignment.getAmByAmID(id);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(new Gson().toJson(as2));
