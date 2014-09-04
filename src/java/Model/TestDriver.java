@@ -5,9 +5,31 @@
  */
 package Model;
 
-import java.sql.Timestamp;
-import java.util.Date;
-import util.Util;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.apache.lucene.analysis.th.ThaiAnalyzer;
+import org.apache.lucene.document.Document;
+import org.apache.lucene.document.Field;
+import org.apache.lucene.document.Field.Index;
+import org.apache.lucene.document.Field.Store;
+import org.apache.lucene.index.DirectoryReader;
+import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.index.IndexWriterConfig;
+import org.apache.lucene.queryparser.classic.ParseException;
+import org.apache.lucene.queryparser.classic.QueryParser;
+import org.apache.lucene.search.IndexSearcher;
+import org.apache.lucene.search.Query;
+import org.apache.lucene.search.ScoreDoc;
+import org.apache.lucene.search.Sort;
+import org.apache.lucene.search.SortField;
+import org.apache.lucene.search.TopDocs;
+import org.apache.lucene.search.TopFieldCollector;
+import org.apache.lucene.store.Directory;
+import org.apache.lucene.store.FSDirectory;
+import org.apache.lucene.util.Version;
 
 /**
  *
@@ -42,7 +64,7 @@ public class TestDriver {
 //        AccountCourse.joinCourse(ac, 2);
 //        AccountCourse.joinCourse(ac, 1);
         //---- Test approve method
-          AccountCourse.approve(5, 1);
+        //  AccountCourse.approve(5, 1);
         //---- Test disapprove method
 //        AccountCourse.disapprove(1,1);
         //---- Test change role 
@@ -328,6 +350,64 @@ public class TestDriver {
 //        g.setAcc_id(2);
 //        l.add(g);
 //        Group_member.addMember(l);
+        Directory directory = null;
+        IndexWriter writer = null;
+        try {
+            directory = FSDirectory.open(new File("web/index/indexdir"));
+            IndexWriterConfig iw = new IndexWriterConfig(Version.LUCENE_47, new ThaiAnalyzer(Version.LUCENE_47));
+            writer = new IndexWriter(directory, iw.setRAMBufferSizeMB(iw.getRAMBufferSizeMB()));
+
+            String st1 = "Be sure to note the document's เป็นการฟาวล์อย่างชัดเจน UUID";
+            Document doc = new Document();
+
+            Field f1 = new Field("name", st1, Store.YES, Index.ANALYZED);
+
+            doc.add(f1);
+            writer.addDocument(doc);
+            String st2 = "เป็นการฟาวล์อย่างชัดเจน UUID";
+            Document doc2 = new Document();
+
+            Field f2 = new Field("name", st1, Store.YES, Index.ANALYZED);
+
+            doc2.add(f2);
+            writer.addDocument(doc2);
+            writer.close();
+
+        } catch (IOException ex) {
+            Logger.getLogger(TestDriver.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+
+        IndexReader indexReader;
+        try {
+            indexReader = DirectoryReader.open(directory);
+            IndexSearcher searcher = new IndexSearcher(indexReader);
+            String keyword = " เป็นการฟาวล์อย่างชัดเจน UUID";
+
+            QueryParser qp = new QueryParser(Version.LUCENE_47, "name", new ThaiAnalyzer(Version.LUCENE_47));
+            Query query;
+            query = qp.parse(keyword);
+
+            int hitsPerPage = 10;
+            Sort sort = new Sort(new SortField[]{SortField.FIELD_SCORE, new SortField("name", SortField.Type.STRING)});
+            TopFieldCollector topField = TopFieldCollector.create(sort, hitsPerPage, true, true, true, false);
+            searcher.search(query, topField);
+            TopDocs docs = topField.topDocs();
+
+            for (ScoreDoc sd : docs.scoreDocs) {
+                Document d = searcher.doc(sd.doc);
+                String name = d.get("name");
+                //String numb = d.get("number");
+                System.out.println(name + " " + sd.score);
+
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(TestDriver.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(TestDriver.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

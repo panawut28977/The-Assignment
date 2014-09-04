@@ -120,7 +120,7 @@
                         <c:when test="${curAm.ass_type eq 'web'}">
                             <div >
                                 <div>
-                                    <a href="#" class="btn btn-primary pull-right" data-toggle="tooltip"  id="checkcopy" data-placement="bottom" title="Auto Checking answer like a magic click here." type="button">
+                                    <a href="autoChecking?st_am_id=${sa.st_am_id}" class="btn btn-primary pull-right" data-toggle="tooltip"  id="checkcopy" data-placement="bottom" title="Auto Checking answer like a magic click here." type="button">
                                         <span class="glyphicon glyphicon-ok-circle"></span> 
                                         Auto Checking
                                     </a>
@@ -172,10 +172,14 @@
                                                 <c:choose>
                                                     <c:when test="${q.q_type eq 'multiple_choice' || q.q_type eq 'tfQuestion'}">
                                                         <c:set var="stanswer" value="${ct_cf:getStAMQuestion(sa.st_am_id, q.q_id)}"/>
+                                                        <!-- remove [    ] -->
                                                         <c:set var="clist" value="${fn:substring(q.q_choice_list, 1, q.q_choice_list.length()-1)}"/>
                                                         <c:set var="anslist" value="${fn:substring(q.q_answer_list, 1, q.q_answer_list.length()-1)}"/>
                                                         <c:set var="stans" value="${fn:substring(stanswer.get(0).answer, 1, stanswer.get(0).answer.length()-1)}"/>
+
+                                                        <!--split -->
                                                         <c:set var="choicesp" value="${fn:split(clist, ', ')}" />
+                                                        <c:set var="anslistsp" value="${fn:split(anslist, ', ')}" />
                                                         <c:set var="stanssp" value="${fn:split(stans, ', ')}" />
                                                         <div>
                                                             <p>${q.q_no}.) ${q.q_text}</p>
@@ -209,7 +213,37 @@
                                                                     <input type="radio" name="${seqno}answer" value="false" disabled="yes" <c:if test="${stans eq 'true'}">checked="yes"</c:if>> False
                                                                 </c:when>
                                                             </c:choose>
-                                                            <input type="number" name="${seqno}score" value="${stanswer.get(0).score}" min="0" max="${q.q_score}" placeholder="score"/>
+
+                                                            <!-- auto checking -->
+                                                            <c:choose>
+                                                                <c:when test="${autocheck eq 1}">
+                                                                    <!-- set ans length -->        
+                                                                    <c:set value="${fn:length(anslistsp)}" var="anslength"/>        
+                                                                    <!--set score per choice-->
+                                                                    <c:set value="${q.q_score/anslength}" var="scoreperchoice"/>
+                                                                    <!--set correct score -->
+                                                                    <c:set value="0" var="correctscore"/>
+                                                                    <c:forEach begin="0" end="${anslength-1}" var="i">
+                                                                        <c:if test="${anslistsp[i] eq stanssp[i]}">
+                                                                            <c:set var="correctscore" value="${correctscore+scoreperchoice}"/>
+                                                                        </c:if>
+                                                                    </c:forEach>
+                                                                    <input type="number" name="${seqno}score" value="${correctscore}" min="0" max="${q.q_score}" placeholder="score"/>
+                                                                    <c:choose>
+                                                                        <c:when test="${correctscore > 0}">
+                                                                            <span class="text-success"><i class="glyphicon glyphicon-ok-circle"></i></span>
+                                                                            </c:when>
+                                                                            <c:otherwise>
+                                                                            <span class="text-danger"><i class="glyphicon glyphicon-remove-circle"></i></span>
+                                                                            </c:otherwise>
+                                                                        </c:choose>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                    <input type="number" name="${seqno}score" value="${stanswer.get(0).score}" min="0" max="${q.q_score}" placeholder="score"/>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                            <!-- / auto checking -->
+
                                                             <input type="hidden" name="${seqno}q_id" value="${q.q_id}"/>
                                                             <input type="hidden" value="multiple_choice" name="${seqno}q_type">
                                                             <input type="hidden" name="seqno" value="${seqno}">
@@ -234,16 +268,15 @@
                                                             <!-- set new var-->
                                                             <c:set value="" var="listchs"/>
                                                             <c:set value="" var="listans"/>
-
                                                             <!-- loop concat string of each question -->
-                                                            <c:forEach  items="${curAm.questionList}" var="m">
-                                                                <c:if test="${q.q_id  eq m.q_id}">
-                                                                    <!--<input type="hidden" value="${m.q_order}" name="${seqno}q_order"/>-->
-                                                                    <c:set value="${listchs.concat(',').concat(m.q_text)}" var="listchs"/>
-                                                                    <c:set value="${listans.concat(',').concat(m.q_answer)}" var="listans"/>
+                                                            <c:forEach begin="0" end="${curAm.questionList.size()-1}" var="m">
+                                                                <c:if test="${q.q_id  eq curAm.questionList.get(m).q_id}">
+                                                                    <c:set value="${listchs.concat(',').concat(curAm.questionList.get(m).q_text)}" var="listchs"/>
+                                                                    <c:set value="${listans.concat(',').concat(curAm.questionList.get(m).q_answer)}" var="listans"/>
                                                                 </c:if>
                                                             </c:forEach> 
-
+                                                            <!-- no shuffle answer -->
+                                                            <c:set value="${fn:split(listans,', ')}" var="listansNoshuffle"/>
                                                             <!-- shuffle concantinate string -->
                                                             <c:set value="${ct_cf:shuffleString(listans)}" var="listans"/>
                                                             <!-- split new shffle string for display-->
@@ -253,7 +286,30 @@
                                                                 <p>${q.q_no}.) ${q.q_title}</p>
                                                                 <div class="col-md-8">
                                                                     <c:forEach begin="0" end="${stanswer.size()-1}" var="a">
-                                                                        <b><u>${stanswer.get(a).answer}</u></b> <span>${listchs[a]} <input type="number" name="${seqno}score" value="${stanswer.get(a).score}" min="0" max="${q.q_score}"  placeholder="score"/></span>
+                                                                        <!-- auto checking -->
+                                                                        <c:choose>
+                                                                            <c:when test="${autocheck eq 1}">
+                                                                                <c:set value="0" var="correctscore"/>
+                                                                                <c:if test="${listansNoshuffle[a] ne ''}">
+                                                                                    <c:if test="${listansNoshuffle[a] eq stanswer.get(a).answer}">
+                                                                                        <c:set value="${q.q_score}" var="correctscore"/>
+                                                                                    </c:if>
+                                                                                </c:if>
+                                                                                <!-- / auto checking -->
+                                                                                <b><u>${stanswer.get(a).answer}</u></b> <span>${listchs[a]} <input type="number" name="${seqno}score" value="${correctscore}" min="0" max="${q.q_score}"  placeholder="score"/></span>
+                                                                                        <c:choose>
+                                                                                            <c:when test="${correctscore > 0}">
+                                                                                        <span class="text-success"><i class="glyphicon glyphicon-ok-circle"></i></span>
+                                                                                        </c:when>
+                                                                                        <c:otherwise>
+                                                                                        <span class="text-danger"><i class="glyphicon glyphicon-remove-circle"></i></span>
+                                                                                        </c:otherwise>
+                                                                                    </c:choose>
+                                                                                </c:when>
+                                                                                <c:otherwise>
+                                                                                <b><u>${stanswer.get(a).answer}</u></b> <span>${listchs[a]} <input type="number" name="${seqno}score" value="${stanswer.get(a).score}" min="0" max="${q.q_score}"  placeholder="score"/></span>
+                                                                                    </c:otherwise>
+                                                                                </c:choose>
                                                                         <br/><br/>
                                                                     </c:forEach>
                                                                 </div>
@@ -286,7 +342,31 @@
                                                                         <c:set var="countStAns" value="${countStAns-1}"/>
                                                                         <c:set var="q_start_index" value="${curAm.questionList.get(countb).q_start_index}" />
                                                                         <c:set var="q_end_index" value="${curAm.questionList.get(countb).q_end_index}"/>
-                                                                        <c:set var="reptext" value="<input type='text' name='${seqno}answer' value='${stanswer.get(countStAns).answer}' disabled='yes'/><input type='number' name='${seqno}score' value='${stanswer.get(countStAns).score}' min='0' max='${curAm.questionList.get(countb).score}' placeholder='score'/>"/>
+
+                                                                        <!-- auto checking -->
+                                                                        <c:choose>
+                                                                            <c:when test="${autocheck eq 1}">
+                                                                                <c:set value="0" var="correctscore"/>
+                                                                                ${curAm.questionList.get(countb).answer}/${ stanswer.get(countStAns).answer}
+                                                                                <c:if test="${curAm.questionList.get(countb).answer eq stanswer.get(countStAns).answer}">
+                                                                                    <c:set value="${curAm.questionList.get(countb).score}" var="correctscore"/>
+                                                                                </c:if>
+                                                                                <c:set var="checkicon" value=""/>
+                                                                                <c:choose>
+                                                                                    <c:when test="${correctscore > 0}">
+                                                                                        <c:set var="checkicon" value='<span class="text-success"><i class="glyphicon glyphicon-ok-circle"></i></span> '/>
+                                                                                    </c:when>
+                                                                                    <c:otherwise>
+                                                                                        <c:set var="checkicon" value='<span class="text-danger"><i class="glyphicon glyphicon-remove-circle"></i></span> '/>
+                                                                                    </c:otherwise>
+                                                                                </c:choose>
+                                                                                <c:set var="reptext" value="<input type='text' name='${seqno}answer' value='${stanswer.get(countStAns).answer}' disabled='yes'/><input type='number' name='${seqno}score' value='${correctscore}' min='0' max='${curAm.questionList.get(countb).score}' placeholder='score'/> ${checkicon}"/>
+                                                                            </c:when>
+                                                                            <c:otherwise>
+                                                                                <c:set var="reptext" value="<input type='text' name='${seqno}answer' value='${stanswer.get(countStAns).answer}' disabled='yes'/><input type='number' name='${seqno}score' value='${stanswer.get(countStAns).score}' min='0' max='${curAm.questionList.get(countb).score}' placeholder='score'/>"/>
+                                                                            </c:otherwise>
+                                                                        </c:choose>
+                                                                        <!-- / auto checking -->
                                                                         <c:set value="${ct_cf:replaceStringByIndex(q_text, q_start_index, q_end_index,reptext)}" var="q_text"/>
                                                                     </c:if>
                                                                 </c:forEach>
