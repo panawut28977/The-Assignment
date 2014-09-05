@@ -8,6 +8,7 @@ package servlet;
 import Model.Account;
 import Model.StAmFileList;
 import Model.StAssignmentFile;
+import Model.TestDriver;
 import com.crocodoc.Crocodoc;
 import static com.crocodoc.Crocodoc.apiToken;
 import com.crocodoc.CrocodocDocument;
@@ -18,12 +19,24 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.lucene.analysis.th.ThaiAnalyzer;
+import org.apache.lucene.document.Document;
+import org.apache.lucene.document.Field;
+import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.index.IndexWriterConfig;
+import org.apache.lucene.store.Directory;
+import org.apache.lucene.store.FSDirectory;
+import org.apache.lucene.util.Version;
+import util.DocumentFunction;
 import util.MyFileRenamePolicy;
+import util.lucenceFunction;
 
 /**
  *
@@ -45,6 +58,7 @@ public class uploadAssignmentFile extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         request.setCharacterEncoding("UTF-8");
         HttpSession ss = request.getSession();
+        Long cId = (Long) ss.getAttribute("cId");
         Account ac = (Account) ss.getAttribute("ac");
         StAssignmentFile saf = (StAssignmentFile) ss.getAttribute("sa");
         File f = new File(getServletContext().getRealPath("/") + "\\file\\student_assignment_file");
@@ -94,24 +108,14 @@ public class uploadAssignmentFile extends HttpServlet {
             System.out.println("  Error Message: " + e.getMessage());
         }
 
-//        String sessionKey = null;
-//        System.out.println(safl.getUuid());
-//        try {
-//            sessionKey = CrocodocSession.create(safl.getUuid());
-//            System.out.println("success :)");
-//            System.out.println("  The session key is " + sessionKey + ".");
-//        } catch (CrocodocException e) {
-//            System.out.println("failed :(");
-//            System.out.println("  Error Code: " + e.getCode());
-//            System.out.println("  Error Message: " + e.getMessage());
-//        }
-//        System.out.println(sessionKey);
-        //update lasted send date in stamfile
         Date d = new Date();
         saf.setLasted_send_date(d);
         StAssignmentFile.updateLastedSend(saf);
         ss.setAttribute("sa", saf);
-
+ 
+        //setting index
+        lucenceFunction.settingIndexer(getServletContext().getRealPath("/") + "\\file\\student_assignment_file\\", safl.getPath_file(), cId, saf.getAm_id(), saf.getSt_am_id()); 
+        //end setting
         request.setAttribute("msg", 3);
         getServletContext().getRequestDispatcher("/informpage.jsp?am_id=" + saf.getAm_id()).forward(request, response);
 

@@ -69,7 +69,7 @@
                     </ol>
                     <c:choose>
                         <c:when test="${curAm.ass_type eq 'file'}">
-                            <a href="Checkcopy.jsp?tab=AllAssignment" class="btn btn-primary pull-right" data-toggle="tooltip"  id="checkcopy" data-placement="bottom" title="If you want to know this person copied or not? click it!" type="button">
+                            <a href="Checkcopy?tab=AllAssignment&&safv_id=${safv_id}" class="btn btn-primary pull-right" data-toggle="tooltip"  id="checkcopy" data-placement="bottom" title="If you want to know this person copied or not? click it!" type="button">
                                 <span class="glyphicon glyphicon-copyright-mark"></span> 
                                 Check copy
                             </a>
@@ -554,7 +554,7 @@
                                 <c:forEach  items="${safv}" var="f">
                                     <tr >
                                         <td>${count}</td>
-                                        <td><a href="anotherAmFile?uuid=${f.uuid}">${f.path_file}</a></td>
+                                        <td><a href="anotherAmFile?uuid=${f.uuid}&&safv_id=${f.safv_id}">${f.path_file}</a></td>
                                         <td>${f.send_date}</td>
                                         <c:set value="${cf:getNameByID(f.send_acc_id)}" var="a"/>
                                     </tr>

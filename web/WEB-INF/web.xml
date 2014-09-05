@@ -216,6 +216,10 @@
         <servlet-name>autoChecking</servlet-name>
         <servlet-class>servlet.autoChecking</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Checkcopy</servlet-name>
+        <servlet-class>servlet.Checkcopy</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -379,6 +383,10 @@
     <servlet-mapping>
         <servlet-name>autoChecking</servlet-name>
         <url-pattern>/autoChecking</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Checkcopy</servlet-name>
+        <url-pattern>/Checkcopy</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

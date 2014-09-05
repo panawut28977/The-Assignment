@@ -161,6 +161,32 @@ public class StAmFileList {
         }
         return safv;
     }
+    
+     public static StAmFileList getSafvByListIdSafv(int safv_id,int list_id){
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select * from student_assignment_file_version where list_id = ? and safv_id = ?";
+        PreparedStatement pstm;
+        StAmFileList s = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, list_id);
+            pstm.setInt(2, safv_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                s = new StAmFileList();
+                s.setList_id(rs.getInt("list_id"));
+                s.setPath_file(rs.getString("path_file"));
+                s.setSafv_id(rs.getInt("safv_id"));
+                s.setSend_acc_id(rs.getInt("send_acc_id"));
+                s.setSend_date(rs.getTimestamp("send_date"));
+                s.setUuid(rs.getString("uuid"));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(StAmFileList.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return s;
+    }
 
     @Override
     public String toString() {
