@@ -210,7 +210,7 @@
                                                                 </c:when>
                                                                 <c:when test="${q.q_category eq 'tf'}">
                                                                     <input type="radio" name="${seqno}answer" value="true" disabled="yes" <c:if test="${stans eq 'true'}">checked="yes"</c:if>> True
-                                                                    <input type="radio" name="${seqno}answer" value="false" disabled="yes" <c:if test="${stans eq 'true'}">checked="yes"</c:if>> False
+                                                                    <input type="radio" name="${seqno}answer" value="false" disabled="yes" <c:if test="${stans eq 'false'}">checked="yes"</c:if>> False
                                                                 </c:when>
                                                             </c:choose>
 

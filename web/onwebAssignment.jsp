@@ -15,18 +15,18 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="META-INF/page/include_css.jsp" %>
         <%@include file="META-INF/page/include_js.jsp" %>
-        <script type="text/javascript" src="https://cdn.goinstant.net/v1/platform.min.js"></script>
-        <script type="text/javascript" src="https://cdn.goinstant.net/widgets/user-list/latest/user-list.min.js"></script>
-        <script type="text/javascript" src="https://cdn.goinstant.net/widgets/form/latest/form.min.js"></script>
-        <script type="text/javascript" src="https://cdn.goinstant.net/widgets/click-indicator/latest/click-indicator.min.js"></script>
-        <script type="text/javascript" src="https://cdn.goinstant.net/widgets/notifications/latest/notifications.min.js"></script>
-        <script type="text/javascript" src="https://cdn.goinstant.net/widgets/chat/latest/chat.min.js"></script>
-        <!-- CSS is optional -->
-        <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/user-list/latest/user-list.css" />
-        <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/form/latest/form.css" />
-        <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/click-indicator/latest/click-indicator.css" />
-        <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/notifications/latest/notifications.css" />
-        <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/chat/latest/chat.css" />
+        <!--        <script type="text/javascript" src="https://cdn.goinstant.net/v1/platform.min.js"></script>
+                <script type="text/javascript" src="https://cdn.goinstant.net/widgets/user-list/latest/user-list.min.js"></script>
+                <script type="text/javascript" src="https://cdn.goinstant.net/widgets/form/latest/form.min.js"></script>
+                <script type="text/javascript" src="https://cdn.goinstant.net/widgets/click-indicator/latest/click-indicator.min.js"></script>
+                <script type="text/javascript" src="https://cdn.goinstant.net/widgets/notifications/latest/notifications.min.js"></script>
+                <script type="text/javascript" src="https://cdn.goinstant.net/widgets/chat/latest/chat.min.js"></script>
+                 CSS is optional 
+                <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/user-list/latest/user-list.css" />
+                <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/form/latest/form.css" />
+                <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/click-indicator/latest/click-indicator.css" />
+                <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/notifications/latest/notifications.css" />
+                <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/chat/latest/chat.css" />-->
         <title>On web Assignment ...</title>
         <style>
             #pvVs{
@@ -99,6 +99,8 @@
                                     </c:choose>
                                 </div>
                                 <hr style="clear: both">
+                                <!--- delte choose -->
+
                                 <c:choose>
                                     <c:when test="${sa.score > 0}">
                                         <div class="text-success" style="text-align: center">
@@ -127,25 +129,44 @@
                                                 </c:if>
                                                 <c:choose>
                                                     <c:when test="${q.q_type eq 'multiple_choice' || q.q_type eq 'tfQuestion'}">
+                                                        <c:set var="stanswer" value="${ct_cf:getStAMQuestion(sa.st_am_id, q.q_id)}"/>
+
                                                         <c:set var="clist" value="${fn:substring(q.q_choice_list, 1, q.q_choice_list.length()-1)}"/>
                                                         <c:set var="anslist" value="${fn:substring(q.q_answer_list, 1, q.q_answer_list.length()-1)}"/>
+
                                                         <c:set var="choicesp" value="${fn:split(clist, ', ')}" />
+                                                        <c:if test="${stanswer.size() !=0}">
+                                                            <c:set var="stans" value="${fn:substring(stanswer.get(0).answer, 1, stanswer.get(0).answer.length()-1)}"/>
+                                                            <c:set var="stanssp" value="${fn:split(stans, ', ')}" />
+                                                        </c:if>
                                                         <div>
                                                             <p>${q.q_no}.) ${q.q_text}</p>
                                                             <c:choose>
                                                                 <c:when test="${q.q_category eq 'one'}">
                                                                     <c:forEach items="${choicesp}" var="choice">
-                                                                        <input type="radio" name="${seqno}answer" value="${choice}"> ${choice}
+                                                                        <input type="radio" name="${seqno}answer" value="${choice}" 
+                                                                               <c:forEach items="${stanssp}" var="sans">
+                                                                                   ${sans}
+                                                                                   <c:if test="${sans eq choice}">
+                                                                                       checked="yes"
+                                                                                   </c:if>
+                                                                               </c:forEach>> ${choice}
                                                                     </c:forEach>
                                                                 </c:when>
                                                                 <c:when test="${q.q_category eq 'multiple'}">
                                                                     <c:forEach items="${choicesp}" var="choice">
-                                                                        <input type="checkbox" name="${seqno}answer" value="${choice}"> ${choice}
+                                                                        <input type="checkbox" name="${seqno}answer" value="${choice}" 
+                                                                               <c:forEach items="${stanssp}" var="sans">
+                                                                                   ${sans}
+                                                                                   <c:if test="${sans eq choice}">
+                                                                                       checked="yes"
+                                                                                   </c:if>
+                                                                               </c:forEach>> ${choice}
                                                                     </c:forEach>
                                                                 </c:when>
                                                                 <c:when test="${q.q_category eq 'tf'}">
-                                                                    <input type="radio" name="${seqno}answer" value="true"> True
-                                                                    <input type="radio" name="${seqno}answer" value="false"> False
+                                                                    <input type="radio" name="${seqno}answer" value="true" <c:if test="${stans eq 'true'}">checked="yes"</c:if>> True
+                                                                    <input type="radio" name="${seqno}answer" value="false" <c:if test="${stans eq 'false'}">checked="yes"</c:if>> False
                                                                 </c:when>
                                                             </c:choose>
                                                             <input type="hidden" name="${seqno}q_id" value="${q.q_id}"/>
@@ -155,9 +176,10 @@
                                                         <c:set value="${seqno+1}" var="seqno" />
                                                     </c:when>
                                                     <c:when test="${q.q_type eq 'explain'}">
+                                                        <c:set var="stanswer" value="${ct_cf:getStAMQuestion(sa.st_am_id, q.q_id)}"/>
                                                         <div>
                                                             <p>${q.q_no}.) ${q.q_text}</p>
-                                                            <textarea class="form-control" name="${seqno}answer"></textarea>
+                                                            <textarea class="form-control" name="${seqno}answer"><c:if test="${stanswer.size() ne 0}">${stanswer.get(0).answer}</c:if></textarea>
                                                             <input type="hidden" name="${seqno}q_id" value="${q.q_id}"/>
                                                             <input type="hidden" value="explain" name="${seqno}q_type">
                                                             <input type="hidden" name="seqno" value="${seqno}">
@@ -166,6 +188,7 @@
                                                     </c:when>
                                                     <c:when test="${q.q_type eq 'matchWord'}">
                                                         <c:if test="${q.q_id != used_id}">
+                                                            <c:set var="stanswer" value="${ct_cf:getStAMQuestion(sa.st_am_id, q.q_id)}"/>
                                                             <!-- set new var-->
                                                             <c:set value="" var="listchs"/>
                                                             <c:set value="" var="listans"/>
@@ -178,6 +201,8 @@
                                                                     <c:set value="${listans.concat(',').concat(m.q_answer)}" var="listans"/>
                                                                 </c:if>
                                                             </c:forEach> 
+                                                            <!-- no shuffle answer -->
+                                                            <c:set value="${fn:split(listans,', ')}" var="listansNoshuffle"/>
 
                                                             <!-- shuffle concantinate string -->
                                                             <c:set value="${ct_cf:shuffleString(listans)}" var="listans"/>
@@ -188,14 +213,17 @@
                                                             <div class="row">
                                                                 <p>${q.q_no}.) ${q.q_title}</p>
                                                                 <div class="col-md-8">
+
+                                                                    <c:set value="0" var="a"/>
                                                                     <c:forEach items="${listchs}" var="c">
                                                                         <select name="${seqno}answer">
                                                                             <c:forEach items="${listans}" var="ansl">
-                                                                                <option value="${ansl}">${ansl}</option>
+                                                                                <option value="${ansl}" <c:if test="${stanswer.size() ne 0 and stanswer.get(a).answer eq ansl}">selected="yes"</c:if>>${ansl}</option>
                                                                             </c:forEach>
                                                                         </select>
                                                                         <span>${c}</span>
                                                                         <br/><br/>
+                                                                        <c:set value="${a+1}" var="a"/>
                                                                     </c:forEach>
                                                                 </div>
                                                                 <div class="col-md-2 col-md-offset-2">
@@ -213,16 +241,29 @@
                                                     </c:when>
                                                     <c:when test="${q.q_type eq 'fillBlank'}">
                                                         <c:if test="${q.q_id != used_id}">
+                                                            <c:set var="stanswer" value="${ct_cf:getStAMQuestion(sa.st_am_id, q.q_id)}"/>
                                                             <div>
                                                                 <!-- algor for replace string index with input text-->
                                                                 <c:set value="${q.q_text}" var="q_text"/>
+                                                                <!-- variable for loop back -->
                                                                 <c:set var="countb" value="${curAm.questionList.size()}"/>
+                                                                <!-- variable for loop st answer -->
+                                                                <c:set var="countStAns" value="${stanswer.size()}"/>
                                                                 <c:forEach begin="1" end="${curAm.questionList.size()}" var="f">
                                                                     <c:set var="countb" value="${countb-1}"/>
                                                                     <c:if test="${q.q_id  eq curAm.questionList.get(countb).q_id}">
+                                                                        <c:set var="countStAns" value="${countStAns-1}"/>
                                                                         <c:set var="q_start_index" value="${curAm.questionList.get(countb).q_start_index}" />
                                                                         <c:set var="q_end_index" value="${curAm.questionList.get(countb).q_end_index}"/>
-                                                                        <c:set var="reptext" value="<input type='text' name='${seqno}answer'/>"/>
+                                                                        <c:set var="reptext" value=""/>
+                                                                        <c:choose>
+                                                                            <c:when test="${stanswer.size() !=0}">
+                                                                                <c:set var="reptext" value="<input type='text' name='${seqno}answer' value='${stanswer.get(countStAns).answer}'/>"/>
+                                                                            </c:when>
+                                                                            <c:otherwise>
+                                                                                <c:set var="reptext" value="<input type='text' name='${seqno}answer'/>"/>
+                                                                            </c:otherwise>
+                                                                        </c:choose>
                                                                         <c:set value="${ct_cf:replaceStringByIndex(q_text, q_start_index, q_end_index,reptext)}" var="q_text"/>
                                                                     </c:if>
                                                                 </c:forEach>

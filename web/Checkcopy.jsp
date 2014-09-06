@@ -29,12 +29,13 @@
                         <li><a href="CheckAssignment.jsp?tab=AllAssignment">Check Assignment# 1.....</a></li>
                         <li class="active"><a href="#">Check copy Assignment# 1.....</a></li>
                     </ol>
-                    <h2>Your student assignment text.</h2><small class="text-muted">(keyword for check with another student assignment)</small>
-                    ${keyword}
+                    <h3>Your student assignment text. <small class="text-muted">(keyword for check with another student assignment)</small>
+                    </h3>
+                    <p>${keyword}</p>
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th><b>Hilight text</b></th>
+                                <th><b>Hilight copy text</b></th>
                                 <th><b>Like score</b></th>
                                 <th><b>Owner</b></th>
                                 <!--<th></th>-->

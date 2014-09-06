@@ -86,7 +86,7 @@ public class checkAssignment extends HttpServlet {
             ss.setAttribute("sa", stF);
             ss.setAttribute("safv", safv);
             ss.setAttribute("sessionKey", sessionKey);
-            request.setAttribute("safv_id", safv.get(0).getSafv_id());
+            ss.setAttribute("safv_id", safv.get(0).getSafv_id());
         } else {
             StAssignmentOnWeb stw = StAssignmentOnWeb.getStAmInfo(st_am_id);
 //            stw.setAnwerQuestion(AnswerQuestion.getStAMQuestion(stw.getSt_am_id()));

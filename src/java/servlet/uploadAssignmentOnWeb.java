@@ -100,14 +100,21 @@ public class uploadAssignmentOnWeb extends HttpServlet {
                 System.out.println("Do nothing.");
             }
         }
-        if (a.getTotal_member() > 1) {
-            AnswerQuestion.setAnswerList(ansList, 0, g.getG_id());
+
+        if (sa.getLasted_send_date() != null) {
+            for (AnswerQuestion ans : ansList) {
+                AnswerQuestion.updateAns(ans);
+            }
         } else {
-            AnswerQuestion.setAnswerList(ansList, ac.getAcc_id(), 0);
+            if (a.getTotal_member() > 1) {
+                AnswerQuestion.setAnswerList(ansList, 0, g.getG_id());
+            } else {
+                AnswerQuestion.setAnswerList(ansList, ac.getAcc_id(), 0);
+            }
         }
-        
+
         //update lasted send date in stamfile
-         Date d = new Date();
+        Date d = new Date();
         sa.setLasted_send_date(d);
         StAssignmentOnWeb.updateLastedSend(sa);
         request.setAttribute("msg", 4);

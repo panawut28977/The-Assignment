@@ -193,6 +193,25 @@ public class AnswerQuestion {
         }
         return result;
     }
+    
+    public static int updateAns(AnswerQuestion a) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "update student_answer_question set answer=? where st_ass_id=? and q_id=? and q_order=?";
+        PreparedStatement pstm;
+        int result = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, a.getAnswer());
+            pstm.setInt(2, a.getSt_am_id());
+            pstm.setInt(3, a.getQ_id());
+            pstm.setInt(4, a.getQ_order());
+            result = pstm.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
 
     //updateAllScore
 //    public static int updateScore(List<AnswerQuestion> a, int st_ass_id) {
