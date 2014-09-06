@@ -25,7 +25,7 @@ import org.apache.lucene.util.Version;
  * @author Orarmor
  */
 public class lucenceFunction {
-    public static void settingIndexer(String indexPath,String filname,Long course_id,int am_id,int st_am_id){
+    public static void settingIndexer(String indexPath,String filname,Long course_id,int am_id,int st_am_id,int safv_id){
         Directory directory = null;
         IndexWriter writer = null;
         try {
@@ -51,8 +51,10 @@ public class lucenceFunction {
             Document doc = new Document();
             Field f1 = new Field("student_assignment", st, Field.Store.YES, Field.Index.ANALYZED);
             Field f2 = new Field("st_am_id", st_am_id+"", Field.Store.YES, Field.Index.ANALYZED);
+            Field f3 = new Field("safv_id", safv_id+"", Field.Store.YES, Field.Index.ANALYZED);
             doc.add(f1);
             doc.add(f2);
+            doc.add(f3);
             writer.addDocument(doc);
             writer.close();
 

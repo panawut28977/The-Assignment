@@ -29,63 +29,68 @@
                         <li><a href="CheckAssignment.jsp?tab=AllAssignment">Check Assignment# 1.....</a></li>
                         <li class="active"><a href="#">Check copy Assignment# 1.....</a></li>
                     </ol>
+                    <h2>Your student assignment text.</h2><small class="text-muted">(keyword for check with another student assignment)</small>
+                    ${keyword}
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th><b>Name</b></th>
-                                <th><b>Like</b></th>
-                                <th></th>
+                                <th><b>Hilight text</b></th>
+                                <th><b>Like score</b></th>
+                                <th><b>Owner</b></th>
+                                <!--<th></th>-->
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>the truth</td>
-                                <td>1.10</td>
-                                <td><a href="#" onclick="compareView()">compare view</a></td>
-                            </tr>
-                            <tr>
-                                <td>truth</td>
-                                <td>1.10</td>
-                                <td><a href="#" onclick="compareView()">compare view</a></td>
-                            </tr>
-                            <tr>
-                                <td>natus error</td>
-                                <td>1.10</td>
-                                <td><a href="#" onclick="compareView()">compare view</a></td>
-                            </tr>
-                            <tr>
-                                <td>great explorer</td>
-                                <td>0.5</td>
-                                <td><a href="#" onclick="compareView()">compare view</a></td>
-                            </tr>
-                            <tr>
-                                <td>the actual</td>
-                                <td>0.5</td>
-                                <td><a href="#" onclick="compareView()">compare view</a></td>
-                            </tr>
-                            <tr>
-                                <td>oluptatem accusantium</td>
-                                <td>0.5</td>
-                                <td><a href="#" onclick="compareView()">compare view</a></td>
-                            </tr>
-                            <tr>
-                                <td>denouncing ple</td>
-                                <td>0.44</td>
-                                <td><a href="#" onclick="compareView()">compare view</a></td>
-                            </tr> 
-                            
+                            <c:forEach items="${indexsetList}" var="index">
+                                <tr>
+                                    <td>${index[1]}</td><!-- 1 is hltext-->
+                                    <td>${index[3]}</td><!-- 3 is score -->
+                                    <td>${index[2]}</td><!-- 2 is owner html generate form servlet-->
+                                    <!--<td><a href="#" onclick="compareView()">compare view</a></td>-->
+                                </tr>
+                            </c:forEach>
+                            <!--                            <tr>
+                                                            <td>truth</td>
+                                                            <td>1.10</td>
+                                                            <td><a href="#" onclick="compareView()">compare view</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>natus error</td>
+                                                            <td>1.10</td>
+                                                            <td><a href="#" onclick="compareView()">compare view</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>great explorer</td>
+                                                            <td>0.5</td>
+                                                            <td><a href="#" onclick="compareView()">compare view</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>the actual</td>
+                                                            <td>0.5</td>
+                                                            <td><a href="#" onclick="compareView()">compare view</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>oluptatem accusantium</td>
+                                                            <td>0.5</td>
+                                                            <td><a href="#" onclick="compareView()">compare view</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>denouncing ple</td>
+                                                            <td>0.44</td>
+                                                            <td><a href="#" onclick="compareView()">compare view</a></td>
+                                                        </tr> -->
                         </tbody>
                     </table> 
-                    <div id="compareBox">
-                        <div class="col-md-6 ">
-                            <h4>rrrr fff work</h4>
-                            and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because
-                        </div>
-                        <div class="col-md-6">
-                            <h4>natus error work</h4>
-                            <p>tinctio. Nam libero <span class="hilight">tempore,</span> cum soluta nobis est eligendi <span class="hilight">optio</span>  cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. <span class="hilight">Temporibus autem quibusdam et</span>  aut officiis debitis aut rerum necessitatibus saepe eveniet ut et <span class="hilight">voluptates repudiandae sint</span>  et molestiae non recusandae. <span class="hilight">Itaque earum rerum</span> hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis dol</p>
-                        </div>
-                    </div>
+                    <!--                    <div id="compareBox">
+                                            <div class="col-md-6 ">
+                                                <h4>rrrr fff work</h4>
+                                                and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h4>natus error work</h4>
+                                                <p>tinctio. Nam libero <span class="hilight">tempore,</span> cum soluta nobis est eligendi <span class="hilight">optio</span>  cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. <span class="hilight">Temporibus autem quibusdam et</span>  aut officiis debitis aut rerum necessitatibus saepe eveniet ut et <span class="hilight">voluptates repudiandae sint</span>  et molestiae non recusandae. <span class="hilight">Itaque earum rerum</span> hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis dol</p>
+                                            </div>
+                                        </div>-->
                 </div>
             </div>
         </div>
@@ -94,10 +99,14 @@
                 var aTable = $('#SentAssignment').dataTable();
                 $('#checkcopy').tooltip("hide");
                 $('#compareBox').hide();
+                $('img').tooltip("hide");
+                $(".showGroup").popover(
+                        {placement: 'top'}
+                );
             });
-            function compareView(){
-                 $('#compareBox').show();
-                 $("html, body").animate({ scrollTop: $('body').height() }, "slow");	
+            function compareView() {
+                $('#compareBox').show();
+                $("html, body").animate({scrollTop: $('body').height()}, "slow");
             }
         </script>
     </body>

@@ -266,6 +266,34 @@ public class StAssignmentFile {
         }
         return result;
     }
+    
+    public static StAssignmentFile getStAmBbyAmIDAndList(int am_id, int list_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select * from student_assignment_file where ass_id = ? and list_id = ?";
+        PreparedStatement pstm;
+        StAssignmentFile saf = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, am_id);
+            pstm.setInt(2, list_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                saf = new StAssignmentFile();
+                saf.setAcc_id(rs.getInt("acc_id"));
+                saf.setAm_id(am_id);
+                saf.setSt_am_id(rs.getInt("st_ass_id"));
+                saf.setG_id(rs.getInt("g_id"));
+                saf.setList_id(rs.getInt("list_id"));
+                saf.setScore(rs.getDouble("score"));
+                saf.setLasted_send_date(rs.getDate("lasted_send_date"));
+                saf.setComment(Comment.getCommentByStAmIDFile(rs.getInt("st_ass_id")));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(StAssignmentFile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return saf;
+    }
 
     public static int getLastedListId() {
         Connection conn = ConnectionBuilder.getConnection();

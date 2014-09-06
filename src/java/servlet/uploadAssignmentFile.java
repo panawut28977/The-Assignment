@@ -77,12 +77,13 @@ public class uploadAssignmentFile extends HttpServlet {
         System.out.print("  Uploading... ");
         String uuid = null;
         File file = new File(fileurl);
+        int safv_id = 0;
         try {
             uuid = CrocodocDocument.upload(file);
             System.out.println("success :)");
             System.out.println("  UUID is " + uuid);
             safl.setUuid(uuid);
-            StAmFileList.setAmFile(safl);
+            safv_id = StAmFileList.setAmFile(safl);
         } catch (CrocodocException e) {
             System.out.println("failed :(");
             System.out.println("  Error Code: " + e.getCode());
@@ -114,7 +115,7 @@ public class uploadAssignmentFile extends HttpServlet {
         ss.setAttribute("sa", saf);
  
         //setting index
-        lucenceFunction.settingIndexer(getServletContext().getRealPath("/") + "\\file\\student_assignment_file\\", safl.getPath_file(), cId, saf.getAm_id(), saf.getSt_am_id()); 
+        lucenceFunction.settingIndexer(getServletContext().getRealPath("/") + "\\file\\student_assignment_file\\", safl.getPath_file(), cId, saf.getAm_id(), saf.getSt_am_id(),safv_id); 
         //end setting
         request.setAttribute("msg", 3);
         getServletContext().getRequestDispatcher("/informpage.jsp?am_id=" + saf.getAm_id()).forward(request, response);

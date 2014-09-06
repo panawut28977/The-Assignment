@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -85,7 +86,6 @@ public class StAmFileList {
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }
-    
 
     public static int setAmFile(StAmFileList safl) {
         Connection conn = ConnectionBuilder.getConnection();
@@ -93,13 +93,16 @@ public class StAmFileList {
         PreparedStatement pstm;
         int result = 0;
         try {
-            pstm = conn.prepareStatement(sql1);
+            pstm = conn.prepareStatement(sql1, Statement.RETURN_GENERATED_KEYS);
             pstm.setInt(1, safl.getList_id());
             pstm.setString(2, safl.getPath_file());
             pstm.setInt(3, safl.getSend_acc_id());
             pstm.setString(4, safl.getUuid());
-            result = pstm.executeUpdate();
-
+            pstm.executeUpdate();
+            ResultSet key = pstm.getGeneratedKeys();
+            if (key.next()) {
+                result = key.getInt(1);
+            }
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(StAssignmentOnWeb.class.getName()).log(Level.SEVERE, null, ex);
@@ -134,9 +137,9 @@ public class StAmFileList {
         }
         return fileList;
     }
-    
-    public static List<StAmFileList> getSafvByListId(int list_id){
-        List<StAmFileList> safv= new ArrayList<StAmFileList>();
+
+    public static List<StAmFileList> getSafvByListId(int list_id) {
+        List<StAmFileList> safv = new ArrayList<StAmFileList>();
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select * from student_assignment_file_version where list_id = ? order by send_date desc";
         PreparedStatement pstm;
@@ -161,8 +164,8 @@ public class StAmFileList {
         }
         return safv;
     }
-    
-     public static StAmFileList getSafvByListIdSafv(int safv_id,int list_id){
+
+    public static StAmFileList getSafvByListIdSafv(int safv_id, int list_id) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select * from student_assignment_file_version where list_id = ? and safv_id = ?";
         PreparedStatement pstm;
@@ -171,6 +174,31 @@ public class StAmFileList {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, list_id);
             pstm.setInt(2, safv_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                s = new StAmFileList();
+                s.setList_id(rs.getInt("list_id"));
+                s.setPath_file(rs.getString("path_file"));
+                s.setSafv_id(rs.getInt("safv_id"));
+                s.setSend_acc_id(rs.getInt("send_acc_id"));
+                s.setSend_date(rs.getTimestamp("send_date"));
+                s.setUuid(rs.getString("uuid"));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(StAmFileList.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return s;
+    }
+    
+    public static StAmFileList getSafvBySafv(int safv_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select * from student_assignment_file_version where safv_id = ?";
+        PreparedStatement pstm;
+        StAmFileList s = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, safv_id);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
                 s = new StAmFileList();
