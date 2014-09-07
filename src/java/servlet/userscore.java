@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package servlet;
 
 import Model.Account;
 import Model.AccountCourse;
 import Model.Assignment;
-import Model.Course;
+import Model.StAssignmentFile;
+import Model.StAssignmentOnWeb;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -37,24 +37,64 @@ public class userscore extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession ss = request.getSession();
-        Account ac = (Account)ss.getAttribute("ac");
-        Long cId = (Long)ss.getAttribute("cId");
-        int sent = 0,leftover =0;
-        String remaintTimeSt="";
-        double  fully_mark=0,mark=0;
-        AccountCourse yourCourse = (AccountCourse)(ac.getCourseList().get(cId));
+        Account ac = (Account) ss.getAttribute("ac");
+        Long cId = (Long) ss.getAttribute("cId");
+        int sent = 0, leftover = 0;
+        String remaintTimeSt = "";
+        double fully_mark = 0, mark = 0;
+        AccountCourse yourCourse = (AccountCourse) (ac.getCourseList().get(cId));
         List<Assignment> courseAssignment = yourCourse.getCourse().getAssignment();
-        if(yourCourse.getRole().equalsIgnoreCase("ST")){
+        List<StAssignmentFile> stf = new ArrayList<>();
+        List<StAssignmentOnWeb> stow = new ArrayList<>();
+        if (yourCourse.getRole().equalsIgnoreCase("ST")) {
             for (Assignment assignment : courseAssignment) {
-                fully_mark +=assignment.getFully_mark();
-                remaintTimeSt = Assignment.remainingTimeforSend(assignment,ac.getAcc_id());
-                if(remaintTimeSt=="sent"){
+                fully_mark += assignment.getFully_mark();
+                remaintTimeSt = Assignment.remainingTimeforSend(assignment, ac.getAcc_id());
+                if (remaintTimeSt == "sent") {
                     sent++;
-                }else{
+                } else {
                     leftover++;
                 }
+
+                if (assignment.getAss_type().equalsIgnoreCase("file")) {
+                    StAssignmentFile nstf = null;
+                    if (assignment.getTotal_member() == 1) {
+                        nstf = StAssignmentFile.getStAmBbyAmIDAndAccId(assignment.getAm_id(), ac.getAcc_id());
+                    } else {
+                        nstf = StAssignmentFile.getStAmBbyAmIDAndAccId(assignment.getAm_id(), ac.getAcc_id(), true);
+                    }
+                    if (nstf != null) {
+                        stf.add(nstf);
+                    }
+                } else {
+                    StAssignmentOnWeb nstow = null;
+                    if (assignment.getTotal_member() == 1) {
+                        nstow = StAssignmentOnWeb.getStAmByAmIDAndAccId(assignment.getAm_id(), ac.getAcc_id());
+                    } else {
+                        nstow = StAssignmentOnWeb.getStAmByAmIDAndAccId(assignment.getAm_id(), ac.getAcc_id(), true);
+                    }
+                    if (nstow != null) {
+                        stow.add(nstow);
+                    }
+                }
+            }
+
+        }
+
+        int total_score = 0;
+        for (StAssignmentFile f : stf) {
+            if(f.getLasted_send_date() != null){
+                total_score += f.getScore();
             }
         }
+        for (StAssignmentOnWeb w : stow) {
+            if(w.getLasted_send_date() != null){
+                total_score += w.getScore();
+            }
+        }
+        System.out.println(stf.size());
+        System.out.println(stow.size());
+        ss.setAttribute("total_score", total_score);
         ss.setAttribute("total_sent_am", sent);
         ss.setAttribute("leftover_am", leftover);
         ss.setAttribute("fully_mark", fully_mark);

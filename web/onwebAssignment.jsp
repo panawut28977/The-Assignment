@@ -104,13 +104,13 @@
                                 <!--- delte choose -->
 
                                 <c:choose>
-                                    <c:when test="${sa.score > 0}">
+                                    <c:when test="${sa.checked_time ne null}">
                                         <div class="text-success" style="text-align: center">
                                             <h1 style="font-size: 100px"><span class="glyphicon glyphicon-ok-circle"></span></h1>
                                             <h1>Your assignment is checked!! <br/>Score is ${sa.score}!</h1>
                                         </div>
                                     </c:when>
-                                    <c:when test="${sa.score eq 0}">
+                                    <c:when test="${sa.checked_time eq null}">
                                         <div class="assignmentBox col-md-12">
                                             <h4><u>Let's do it !</u></h4>
                                                     <c:set value="1" var="seqno" />

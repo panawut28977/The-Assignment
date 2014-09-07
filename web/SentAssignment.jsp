@@ -108,9 +108,9 @@
                                                             </c:when>
                                                         </c:choose>
                                                 </td>
-                                                <td <c:if test="${sentSa.score != 0.0}">class="text-success"</c:if>>
+                                                <td <c:if test="${sentSa.checked_time != null}">class="text-success"</c:if>>
                                                     <c:choose>
-                                                        <c:when test="${sentSa.score == 0.0}">
+                                                        <c:when test="${sentSa.checked_time == null}">
                                                             Not check
                                                         </c:when>
                                                         <c:otherwise>

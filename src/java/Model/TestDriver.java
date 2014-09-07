@@ -351,7 +351,7 @@ public class TestDriver {
 //        g.setAcc_id(2);
 //        l.add(g);
 //        Group_member.addMember(l);
-        Directory directory = null;
+//        Directory directory = null;
 //        IndexWriter writer = null;
 //        try {
 //            directory = FSDirectory.open(new File("web/index/indexdir"));
@@ -379,72 +379,75 @@ public class TestDriver {
 //                    .getName()).log(Level.SEVERE, null, ex);
 //        }
 
-        IndexReader indexReader;
-        try {
-            directory = FSDirectory.open(new File("D:\\Orarmorarm\\The-Assignment\\build\\web\\file\\student_assignment_file\\305\\32"));
-            indexReader = DirectoryReader.open(directory);
-            IndexSearcher searcher = new IndexSearcher(indexReader);
-            QueryParser parser = new QueryParser(Version.LUCENE_47, "student_assignment", new ThaiAnalyzer(Version.LUCENE_47));
-            String keyword = "Layer 2 Data Link";
-            Query query = parser.parse(keyword);
-
-            int hitsPerPage = 10;
-            Sort sort = new Sort(new SortField[]{SortField.FIELD_SCORE, new SortField("student_assignment", SortField.Type.STRING)});
-            TopFieldCollector topField = TopFieldCollector.create(sort, hitsPerPage, true, true, true, false);
-            searcher.search(query, topField);
-            TopDocs docs = topField.topDocs();
-            SimpleHTMLFormatter htmlFormatter = new SimpleHTMLFormatter("<font color=red><b>", "<b></font>");
-            Highlighter highlighter = new Highlighter(htmlFormatter, new QueryScorer(query));
-            for (int i = 0; i < docs.totalHits; i++) {
-                int id = docs.scoreDocs[i].doc;
-                Document doc = searcher.doc(id);
-                String text = doc.get("student_assignment");
-                TokenStream tokenStream = TokenSources.getAnyTokenStream(searcher.getIndexReader(), id, "student_assignment", new ThaiAnalyzer(Version.LUCENE_47));
-
-                String[] hltext = highlighter.getBestFragments(tokenStream, text, hitsPerPage);
-                for (String string : hltext) {
-                    System.out.println(string.toString());
-                }
-                System.out.println("-----------");
-//                StringBuilder hltext = new StringBuilder("");
-//                TextFragment[] frag = highlighter.getBestTextFragments(tokenStream, text, false, 20);//highlighter.getBestFragments(tokenStream, text, 3, "...");
-//                for (int j = 0; j < frag.length; j++) {
-//                    if ((frag[j] != null) && (frag[j].getScore() > 0)) {
-//                        hltext.append(frag[j].toString());
-//                    }
-//                }
-//                System.out.println(hltext.toString());
-//                System.out.println("-------------");
-            }
+//        IndexReader indexReader;
+//        try {
 //            directory = FSDirectory.open(new File("D:\\Orarmorarm\\The-Assignment\\build\\web\\file\\student_assignment_file\\305\\32"));
 //            indexReader = DirectoryReader.open(directory);
 //            IndexSearcher searcher = new IndexSearcher(indexReader);
+//            QueryParser parser = new QueryParser(Version.LUCENE_47, "student_assignment", new ThaiAnalyzer(Version.LUCENE_47));
 //            String keyword = "Layer 2 Data Link";
-//
-//            QueryParser qp = new QueryParser(Version.LUCENE_47, "student_assignment", new ThaiAnalyzer(Version.LUCENE_47));
-//            Query query;
-//            query = qp.parse(keyword);
+//            Query query = parser.parse(keyword);
 //
 //            int hitsPerPage = 10;
 //            Sort sort = new Sort(new SortField[]{SortField.FIELD_SCORE, new SortField("student_assignment", SortField.Type.STRING)});
 //            TopFieldCollector topField = TopFieldCollector.create(sort, hitsPerPage, true, true, true, false);
 //            searcher.search(query, topField);
 //            TopDocs docs = topField.topDocs();
+//            SimpleHTMLFormatter htmlFormatter = new SimpleHTMLFormatter("<font color=red><b>", "<b></font>");
+//            Highlighter highlighter = new Highlighter(htmlFormatter, new QueryScorer(query));
+//            for (int i = 0; i < docs.totalHits; i++) {
+//                int id = docs.scoreDocs[i].doc;
+//                Document doc = searcher.doc(id);
+//                String text = doc.get("student_assignment");
+//                TokenStream tokenStream = TokenSources.getAnyTokenStream(searcher.getIndexReader(), id, "student_assignment", new ThaiAnalyzer(Version.LUCENE_47));
 //
-//            for (ScoreDoc sd : docs.scoreDocs) {
-//                Document d = searcher.doc(sd.doc);
-//                String student_assignment = d.get("student_assignment");
-////                String hilightText = makeHighligh(student_assignment, keyword, "student_assignment");
-//                String st_am_id = d.get("st_am_id");
-//                System.out.println(st_am_id + " " + sd.score);
-//                System.out.println(hilightText);
+//                String[] hltext = highlighter.getBestFragments(tokenStream, text, hitsPerPage);
+//                for (String string : hltext) {
+//                    System.out.println(string.toString());
+//                }
+//                System.out.println("-----------");
+////                StringBuilder hltext = new StringBuilder("");
+////                TextFragment[] frag = highlighter.getBestTextFragments(tokenStream, text, false, 20);//highlighter.getBestFragments(tokenStream, text, 3, "...");
+////                for (int j = 0; j < frag.length; j++) {
+////                    if ((frag[j] != null) && (frag[j].getScore() > 0)) {
+////                        hltext.append(frag[j].toString());
+////                    }
+////                }
+////                System.out.println(hltext.toString());
+////                System.out.println("-------------");
 //            }
-        } catch (IOException ex) {
-            Logger.getLogger(TestDriver.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
-            Logger.getLogger(TestDriver.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvalidTokenOffsetsException ex) {
-            Logger.getLogger(TestDriver.class.getName()).log(Level.SEVERE, null, ex);
-        }
+////            directory = FSDirectory.open(new File("D:\\Orarmorarm\\The-Assignment\\build\\web\\file\\student_assignment_file\\305\\32"));
+////            indexReader = DirectoryReader.open(directory);
+////            IndexSearcher searcher = new IndexSearcher(indexReader);
+////            String keyword = "Layer 2 Data Link";
+////
+////            QueryParser qp = new QueryParser(Version.LUCENE_47, "student_assignment", new ThaiAnalyzer(Version.LUCENE_47));
+////            Query query;
+////            query = qp.parse(keyword);
+////
+////            int hitsPerPage = 10;
+////            Sort sort = new Sort(new SortField[]{SortField.FIELD_SCORE, new SortField("student_assignment", SortField.Type.STRING)});
+////            TopFieldCollector topField = TopFieldCollector.create(sort, hitsPerPage, true, true, true, false);
+////            searcher.search(query, topField);
+////            TopDocs docs = topField.topDocs();
+////
+////            for (ScoreDoc sd : docs.scoreDocs) {
+////                Document d = searcher.doc(sd.doc);
+////                String student_assignment = d.get("student_assignment");
+//////                String hilightText = makeHighligh(student_assignment, keyword, "student_assignment");
+////                String st_am_id = d.get("st_am_id");
+////                System.out.println(st_am_id + " " + sd.score);
+////                System.out.println(hilightText);
+////            }
+//        } catch (IOException ex) {
+//            Logger.getLogger(TestDriver.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (ParseException ex) {
+//            Logger.getLogger(TestDriver.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (InvalidTokenOffsetsException ex) {
+//            Logger.getLogger(TestDriver.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        
+//        System.out.println(StAssignmentFile.getStAmBbyAmIDAndAccId(132, 2, true));
+        System.out.println(StAssignmentOnWeb.getStAmByAmIDAndAccId(127, 2, true));
     }
 }

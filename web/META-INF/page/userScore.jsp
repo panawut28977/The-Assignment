@@ -9,11 +9,11 @@
     <c:when test="${ac.courseList.get(cId).role eq 'ST'}">
         <div style="text-align: center;margin-top:20px ">
             <div class="col-md-4"><h4>${total_sent_am}<br> Sent</h4></div>
-            <div class="col-md-4"><h4>38/${fully_mark} <br>Scores</h4></div>
+            <div class="col-md-4"><h4>${total_score}/${fully_mark} <br>Scores</h4></div>
             <div class="col-md-4"><h4>${leftover_am} <br> Leftovers</h4></div>
         </div>
         <hr style="clear:both">
-        <table class="table" >
+        <table class="table"  id="AllUserScore">
             <thead>
                 <tr>
                     <td><b>Assignment</b></td>
@@ -158,6 +158,10 @@
 </c:choose>
 <script>
     $(function() {
+          var aTable = $('#AllUserScore').dataTable({
+            /* Disable initial sort */
+            "aaSorting": []
+        });
         $("#AllStudentScore").dataTable();
     });
 </script>

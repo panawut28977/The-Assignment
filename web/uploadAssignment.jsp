@@ -81,13 +81,13 @@
                         <hr style="clear: both">
                         <div style="text-align: center"> 
                             <c:choose>
-                                <c:when test="${sa.score > 0}">
+                                <c:when test="${sa.checked_time ne null}">
                                     <div class="text-success">
                                         <h1 style="font-size: 100px"><span class="glyphicon glyphicon-ok-circle"></span></h1>
                                         <h1>Your assignment checked!! <br/>Score is ${sa.score}!</h1>
                                     </div>
                                 </c:when>
-                                <c:when test="${sa.score eq 0}">
+                                <c:when test="${sa.checked_time eq null}">
                                     <h4 >Send your assignment 
                                         <span class="text-danger">
                                             <c:set value="${cf:remainingTimeforSend(curAm,ac.acc_id)}" var="status"/>
