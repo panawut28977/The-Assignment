@@ -4,6 +4,9 @@
     Author     : JenoVa
 --%>
 
+<%@page import="Model.Question"%>
+<%@page import="Model.Assignment"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
@@ -255,7 +258,7 @@
                                                         <div>
                                                             <p>${q.q_no}.) ${q.q_text}</p>
                                                             <textarea class="form-control" name="${seqno}answer" disabled="yes">${stanswer.get(0).answer}</textarea><br/>
-                                                            <input type="number" name="${seqno}score" value="${stanswer.get(0).score}" placeholder="score"/>
+                                                            <input type="number" name="${seqno}score" value="${stanswer.get(0).score}" placeholder="score" min="0" max="${q.score}"/>
                                                             <input type="hidden" name="${seqno}q_id" value="${q.q_id}"/>
                                                             <input type="hidden" value="explain" name="${seqno}q_type">
                                                             <input type="hidden" name="seqno" value="${seqno}">
@@ -333,21 +336,45 @@
                                                                 <!-- algor for replace string index with input text-->
                                                                 <c:set value="${q.q_text}" var="q_text"/>
                                                                 <!-- variable for loop back -->
-                                                                <c:set var="countb" value="${curAm.questionList.size()}"/>
+                                                                <c:set var="countb" value="${curAm.questionList.size()}" target="java.lang.Integer"/>
+
+                                                                <%
+                                                                    HttpSession ss = request.getSession();
+                                                                    Assignment a = (Assignment) ss.getAttribute("curAm");
+                                                                    ArrayList curqList = new ArrayList();
+                                                                %>
+                                                                <c:forEach begin="1" end="${curAm.questionList.size()}" var="addList">
+                                                                    <c:set var="countb" value="${countb-1}" target="java.lang.Integer"/>
+                                                                    <c:if test="${q.q_id  eq curAm.questionList.get(countb).q_id}">
+                                                                        <%
+                                                                            Integer countb = Integer.parseInt(pageContext.getAttribute("countb") + "");
+                                                                            curqList.add(a.getQuestionList().get(countb));
+                                                                        %>
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <%    pageContext.setAttribute("curqList", curqList);
+                                                                %>
+
+                                                                ${ct_cf:sortQuestionIndex(curqList)}
+                                                                <!-- variable for loop back -->
+                                                                <c:set var="countb" value="${curAm.questionList.size()}" target="java.lang.Integer"/>
                                                                 <!-- variable for loop st answer -->
                                                                 <c:set var="countStAns" value="${stanswer.size()}"/>
-                                                                <c:forEach begin="1" end="${curAm.questionList.size()}" var="f">
-                                                                    <c:set var="countb" value="${countb-1}"/>
+                                                                <!-- variable for loop sort index -->
+                                                                <c:set var="curq" value="${curqList.size()}"/>
+                                                                <c:forEach  begin="1" end="${curAm.questionList.size()}" var="f">
+                                                                    <c:set var="countb" value="${countb-1}" target="java.lang.Integer"/>
                                                                     <c:if test="${q.q_id  eq curAm.questionList.get(countb).q_id}">
                                                                         <c:set var="countStAns" value="${countStAns-1}"/>
-                                                                        <c:set var="q_start_index" value="${curAm.questionList.get(countb).q_start_index}" />
-                                                                        <c:set var="q_end_index" value="${curAm.questionList.get(countb).q_end_index}"/>
+                                                                        <c:set var="curq" value="${curq-1}"/>
+                                                                        <c:set var="q_start_index" value="${curqList.get(curq).q_start_index}" />
+                                                                        <c:set var="q_end_index" value="${curqList.get(curq).q_end_index}"/>
+                                                                        <!--${q_start_index}/ ${q_end_index}-->
 
                                                                         <!-- auto checking -->
                                                                         <c:choose>
                                                                             <c:when test="${autocheck eq 1}">
                                                                                 <c:set value="0" var="correctscore"/>
-                                                                                ${curAm.questionList.get(countb).answer}/${ stanswer.get(countStAns).answer}
                                                                                 <c:if test="${curAm.questionList.get(countb).answer eq stanswer.get(countStAns).answer}">
                                                                                     <c:set value="${curAm.questionList.get(countb).score}" var="correctscore"/>
                                                                                 </c:if>
@@ -359,7 +386,7 @@
                                                                                     <c:otherwise>
                                                                                         <c:set var="checkicon" value='<span class="text-danger"><i class="glyphicon glyphicon-remove-circle"></i></span> '/>
                                                                                     </c:otherwise>
-                                                                                </c:choose>
+                                                                                </c:choose> 
                                                                                 <c:set var="reptext" value="<input type='text' name='${seqno}answer' value='${stanswer.get(countStAns).answer}' disabled='yes'/><input type='number' name='${seqno}score' value='${correctscore}' min='0' max='${curAm.questionList.get(countb).score}' placeholder='score'/> ${checkicon}"/>
                                                                             </c:when>
                                                                             <c:otherwise>
@@ -370,6 +397,7 @@
                                                                         <c:set value="${ct_cf:replaceStringByIndex(q_text, q_start_index, q_end_index,reptext)}" var="q_text"/>
                                                                     </c:if>
                                                                 </c:forEach>
+
                                                                 <!-- end algor-->
 
                                                                 <p>${q.q_no}.) ${q_text}</p>
