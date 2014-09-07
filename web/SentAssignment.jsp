@@ -53,8 +53,8 @@
                     </ol>
                     <div style="text-align: center;margin-top:20px ">
                         <div class="col-md-4"><a id="sentAm"><h4>${sent} <br> Sent</h4></a></div>
-                        <div class="col-md-4"><h4>${checked}/${total} <br>Checked</h4></div>
                         <div class="col-md-4"><a id="leftAm"><h4>${left} <br> Leftovers</h4></a></div>
+                        <div class="col-md-4"><h4>${checked}/${total} <br>Checked</h4></div>
                     </div>
                     <hr style="clear:both">
 

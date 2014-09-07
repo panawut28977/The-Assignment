@@ -73,7 +73,7 @@ Author     : JenoVa
                                             <c:set value="web" var="wkt" />
                                         </c:otherwise>
                                     </c:choose>
-                                    <a href="http://localhost:8084/TheAssignment/SentAssignment.jsp?tab=AllAssignment&&wkt=${wkt}" style="text-align: center;text-decoration: none" class="center-block">
+                                    <a href="GetSentAssignment?am_id=${am.am_id}" style="text-align: center;text-decoration: none" class="center-block">
                                         <span class="glyphicon glyphicon-check center-block" style="font-size: 150px;margin: 40px auto;"></span><h4>Go to check : ) !</h4>
                                     </a>
                                 </c:when>
