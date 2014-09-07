@@ -43,7 +43,9 @@
                 </c:choose>
             </span>
             <c:forEach items="${ac.getCourseList()}" var="c">
-                <a id="${c.key}" onclick="load_course(${c.key})" class="list-group-item usepointer">${c.value.course.name}</a>
+                <a id="${c.key}" onclick="load_course(${c.key})" class="list-group-item usepointer">${c.value.course.name} 
+                    <c:if test="${c.value.role eq 'TH'}"> <span class="label label-primary pull-right">Teacher</span></c:if>
+                    </a>
             </c:forEach>
             <!--            <a id="1" onclick="load_course(1)" class="list-group-item usepointer"><span class="badge">3</span>INT103 Office</a>
                         <a id="2" onclick="load_course(2)" class="list-group-item usepointer"><span class="badge">3</span>INT206 Software Development Process II</a>

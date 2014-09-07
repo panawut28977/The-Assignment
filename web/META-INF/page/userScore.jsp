@@ -18,13 +18,65 @@
                 <tr>
                     <td><b>Assignment</b></td>
                     <td><b>Scores</b></td>
+                    <td><b>Lasted sent</b></td>
+                    <td><b>Work on</b></td>
                 </tr>
             </thead>
             <tbody>
                 <c:forEach  items="${ac.courseList.get(cId).course.assignment}" var="a">
                     <tr>
                         <td>${a.name}</td>
-                        <td>0/${a.fully_mark}</td>
+                        <c:choose>
+                            <c:when test="${stf.get(a.am_id) ne null and stf.get(a.am_id).lasted_send_date ne null}">
+                                <td>
+                                    ${stf.get(a.am_id).score}
+                                    /${a.fully_mark}</td>
+                                <td><b>
+                                    <c:set value="${cf:lastedSentStatus(stf.get(a.am_id).lasted_send_date, a)}" var="status"/>
+                                    <c:choose>
+                                        <c:when test="${status eq 'late'}">
+                                            <span class="text-danger">Late</span>
+                                        </c:when>
+                                        <c:when test="${status eq 'ontime'}">
+                                            <span class="text-success">On time</span>
+                                        </c:when>
+                                        <c:when test="${status eq 'hurryup'}">
+                                            <span class="text-warning">Hurry up!</span>
+                                        </c:when>
+                                        <c:when test="${status eq 'sent'}">
+                                            <span class="text-muted">Sent <span class="glyphicon glyphicon-check"></span></span>
+                                            </c:when>
+                                            </c:choose></b>
+                                </td>
+                            </c:when>
+                            <c:when test="${stow.get(a.am_id) ne null and stow.get(a.am_id).lasted_send_date ne null}">
+                                <td>    
+                                    ${stow.get(a.am_id).score}
+                                    /${a.fully_mark}</td>
+                                <td><b>
+                                    <c:set value="${cf:lastedSentStatus(stow.get(a.am_id).lasted_send_date, a)}" var="status"/>
+                                    <c:choose>
+                                        <c:when test="${status eq 'late'}">
+                                            <span class="text-danger">Late</span>
+                                        </c:when>
+                                        <c:when test="${status eq 'ontime'}">
+                                            <span class="text-success">On time</span>
+                                        </c:when>
+                                        <c:when test="${status eq 'hurryup'}">
+                                            <span class="text-warning">Hurry up!</span>
+                                        </c:when>
+                                        <c:when test="${status eq 'sent'}">
+                                            <span class="text-muted">Sent <span class="glyphicon glyphicon-check"></span></span>
+                                            </c:when>
+                                            </c:choose></b>
+                                </td>
+                            </c:when>
+                            <c:otherwise>
+                                <td>0.0 /${a.fully_mark}</td>
+                                <td><b> - </b></td>
+                            </c:otherwise>
+                        </c:choose>
+                        <td>${a.ass_type}</td>
                     </tr>
                 </c:forEach>
                 <!--                <tr>
@@ -158,10 +210,10 @@
 </c:choose>
 <script>
     $(function() {
-          var aTable = $('#AllUserScore').dataTable({
-            /* Disable initial sort */
-            "aaSorting": []
+            var aTable = $('#AllUserScore').dataTable({
+        /* Disable initial sort */
+        "aaSorting": []
         });
-        $("#AllStudentScore").dataTable();
+    $("#AllStudentScore").dataTable();
     });
 </script>

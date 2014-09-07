@@ -331,6 +331,29 @@ public class Assignment {
         }
         return am;
     }
+    
+    //getAmByAmID(int am_id) 
+    public static Assignment getAmInfoByAmID(int am_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select name,fully_mark,ass_type from assignment where ass_id=?";
+        PreparedStatement pstm;
+        Assignment am = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, am_id);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                am = new Assignment();
+                am.setName(rs.getString("name"));
+                am.setAss_type(rs.getString("ass_type"));
+                am.setFully_mark(rs.getDouble("fully_mark"));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return am;
+    }
 
     public static Assignment getAmByAmID(String am_id) {
         return getAmByAmID(Integer.parseInt(am_id));

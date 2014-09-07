@@ -11,13 +11,16 @@ import Model.Assignment;
 import Model.StAssignmentFile;
 import Model.StAssignmentOnWeb;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import static jdk.nashorn.internal.objects.NativeArray.map;
 
 /**
  *
@@ -44,8 +47,8 @@ public class userscore extends HttpServlet {
         double fully_mark = 0, mark = 0;
         AccountCourse yourCourse = (AccountCourse) (ac.getCourseList().get(cId));
         List<Assignment> courseAssignment = yourCourse.getCourse().getAssignment();
-        List<StAssignmentFile> stf = new ArrayList<>();
-        List<StAssignmentOnWeb> stow = new ArrayList<>();
+        Map<Integer, StAssignmentFile> stf = new HashMap<>();
+        Map<Integer, StAssignmentOnWeb> stow = new HashMap<>();
         if (yourCourse.getRole().equalsIgnoreCase("ST")) {
             for (Assignment assignment : courseAssignment) {
                 fully_mark += assignment.getFully_mark();
@@ -64,7 +67,7 @@ public class userscore extends HttpServlet {
                         nstf = StAssignmentFile.getStAmBbyAmIDAndAccId(assignment.getAm_id(), ac.getAcc_id(), true);
                     }
                     if (nstf != null) {
-                        stf.add(nstf);
+                        stf.put(assignment.getAm_id(), nstf);
                     }
                 } else {
                     StAssignmentOnWeb nstow = null;
@@ -74,7 +77,7 @@ public class userscore extends HttpServlet {
                         nstow = StAssignmentOnWeb.getStAmByAmIDAndAccId(assignment.getAm_id(), ac.getAcc_id(), true);
                     }
                     if (nstow != null) {
-                        stow.add(nstow);
+                        stow.put(assignment.getAm_id(), nstow);
                     }
                 }
             }
@@ -82,18 +85,37 @@ public class userscore extends HttpServlet {
         }
 
         int total_score = 0;
-        for (StAssignmentFile f : stf) {
-            if(f.getLasted_send_date() != null){
+        Iterator loopf = stf.entrySet().iterator();
+        Iterator loopw = stow.entrySet().iterator();
+        while (loopf.hasNext()) {
+            Map.Entry mapEntry = (Map.Entry) loopf.next();
+            StAssignmentFile f = (StAssignmentFile) mapEntry.getValue();
+            if (f.getLasted_send_date() != null) {
                 total_score += f.getScore();
             }
         }
-        for (StAssignmentOnWeb w : stow) {
-            if(w.getLasted_send_date() != null){
+
+        while (loopw.hasNext()) {
+            Map.Entry mapEntry = (Map.Entry) loopw.next();
+            StAssignmentOnWeb w = (StAssignmentOnWeb) mapEntry.getValue();
+            if (w.getLasted_send_date() != null) {
                 total_score += w.getScore();
             }
         }
+//        for (StAssignmentFile f : stf) {
+//            if(f.getLasted_send_date() != null){
+//                total_score += f.getScore();
+//            }
+//        }
+//        for (StAssignmentOnWeb w : stow) {
+//            if(w.getLasted_send_date() != null){
+//                total_score += w.getScore();
+//            }
+//        }
         System.out.println(stf.size());
         System.out.println(stow.size());
+        ss.setAttribute("stf", stf);
+        ss.setAttribute("stow", stow);
         ss.setAttribute("total_score", total_score);
         ss.setAttribute("total_sent_am", sent);
         ss.setAttribute("leftover_am", leftover);
