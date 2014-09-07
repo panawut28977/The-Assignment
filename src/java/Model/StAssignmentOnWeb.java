@@ -336,10 +336,25 @@ public class StAssignmentOnWeb {
         return result;
     }
 
-    public void autoChecking(int st_am_id) {
-
+    public static boolean deleteByAm_id(int am_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "delete from student_assignment_on_web where ass_id = ?";
+        PreparedStatement pstm;
+        int result = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, am_id);
+            result = pstm.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result > 0;
     }
 
+//    public void autoChecking(int st_am_id) {
+//
+//    }
     @Override
     public String toString() {
         return "StAssignmentOnWeb{" + "st_am_id=" + st_am_id + ", am_id=" + am_id + ", acc_id=" + acc_id + ", g_id=" + g_id + ", score=" + score + ", lasted_send_date=" + lasted_send_date + ", member=" + member + ", comment=" + comment + ", anwerQuestion=" + anwerQuestion + '}';

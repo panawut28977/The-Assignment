@@ -12,6 +12,8 @@ import Model.FillBlank;
 import Model.MatchWord;
 import Model.MultipleChoice;
 import Model.Question;
+import Model.StAssignmentFile;
+import Model.StAssignmentOnWeb;
 import com.oreilly.servlet.MultipartRequest;
 import java.io.File;
 import java.io.IOException;
@@ -54,10 +56,7 @@ public class updateAssignment extends HttpServlet {
         File f = new File(getServletContext().getRealPath("/") + "\\file\\assignment_file");
 //        System.out.println("check dir " +f.exists());
         MultipartRequest m = new MultipartRequest(request, f.getPath(), "UTF-8");
-        String[] q_id = m.getParameterValues("q_id");
-        if (q_id != null) {
-            Question.delete(q_id);
-        }
+
         Integer cId = (int) ((long) ss.getAttribute("cId"));
         int am_id = Integer.parseInt(m.getParameter("am_id"));
         String name = m.getParameter("amName");
@@ -115,6 +114,7 @@ public class updateAssignment extends HttpServlet {
                         mul.setQ_text(qtext);
                         mul.setQ_category(qcategory);
                         mul.setQ_choice_list(Arrays.toString(ctext));
+                        System.out.println(Arrays.toString(ans));
                         mul.setQ_answer_list(Arrays.toString(ans));
                         mul.setQ_score(Double.parseDouble(score));
                         qlist.add(mul);
@@ -164,6 +164,7 @@ public class updateAssignment extends HttpServlet {
                         String q_no = m.getParameter(seqno[i] + "q_no");
                         String qtext = m.getParameter(seqno[i] + "qtext");
                         String qanswer = m.getParameter(seqno[i] + "qanswer");
+                        String score = m.getParameter(seqno[i] + "score");
                         Explain ep = new Explain();
                         //set question info
                         ep.setAss_id(am_id);
@@ -173,6 +174,7 @@ public class updateAssignment extends HttpServlet {
                         //set explain choice info
                         ep.setQ_text(qtext);
                         ep.setQ_keyword_check(qanswer);
+                        ep.setScore(Double.parseDouble(score));
                         qlist.add(ep);
                     } else if (q_type.equalsIgnoreCase("fillBlank")) {
                         String q_no = m.getParameter(seqno[i] + "q_no");
@@ -202,7 +204,15 @@ public class updateAssignment extends HttpServlet {
                         instruction = m.getParameter(seqno[i] + "instruction");
                     }
                 }
-                Question.addList(qlist);
+                int[] qIdList = new int[qlist.size()];
+                for (int i = 0; i < qIdList.length; i++) {
+                    qIdList[i] = qlist.get(0).getQ_id();
+                }
+                //delet all st am
+                if (Question.deleteByAm_id(am_id)) {
+                    StAssignmentOnWeb.deleteByAm_id(am_id);
+                    Question.addList(qlist);
+                }
             }
             url = "assignment.jsp?tab=AllAssignment&&amId=" + am_id;
         }

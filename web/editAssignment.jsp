@@ -182,14 +182,22 @@
                                                                 <c:forEach items="${choicesp}" var="choice">
                                                                     <c:choose>
                                                                         <c:when test="${q.q_category eq 'one'}">
-                                                                            <div><br/><input <c:if test="${cf:containsAns(anslist,choice)}">selected="yes"</c:if> type="radio" onClick="mark(this)" name="${seqno}c" value="${choice}"> <input type="text" name="${seqno}ctext" class="form-control" onkeyup="addToC(this)" value="${choice}"></div>
-                                                                            </c:when>
-                                                                            <c:otherwise>
-                                                                            <div><br/><input <c:if test="${cf:containsAns(anslist,choice)}">checked="yes"</c:if> type="checkbox" onClick="mark(this)" name="${seqno}c" value="${choice}"> <input type="text" name="${seqno}ctext" class="form-control" onkeyup="addToC(this)" value="${choice}"></div>
-                                                                            </c:otherwise>
-                                                                        </c:choose>
-                                                                    </c:forEach>
-            <!--                                                        <div><input type="radio" onClick="mark(this)" name="${seqno}c" value=""> <input type="text" name="${seqno}ctext" class="form-control" onkeyup="addToC(this)"></div>-->
+                                                                            <div><br/>
+                                                                                <input <c:if test="${cf:containsAns(anslist,choice)}">checked="yes"</c:if> type="radio" onClick="mark(this)" name="${seqno}c" value="${choice}">
+                                                                                <input type="text" name="${seqno}ctext" class="form-control" onkeyup="addToC(this)" value="${choice}">
+                                                                                <a onclick="removeC(this)"><span class="glyphicon glyphicon-remove"></span></a>
+                                                                            </div>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <div><br/>
+                                                                                <input <c:if test="${cf:containsAns(anslist,choice)}">checked="yes"</c:if> type="checkbox" onClick="mark(this)" name="${seqno}c" value="${choice}"> 
+                                                                                <input type="text" name="${seqno}ctext" class="form-control" onkeyup="addToC(this)" value="${choice}">
+                                                                                <a onclick="removeC(this)"><span class="glyphicon glyphicon-remove"></span></a>
+                                                                            </div>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                </c:forEach>
+        <!--                                                        <div><input type="radio" onClick="mark(this)" name="${seqno}c" value=""> <input type="text" name="${seqno}ctext" class="form-control" onkeyup="addToC(this)"></div>-->
                                                             </div>
                                                             <br>
                                                             <a onclick="appendChoice(this)">Add other</a>
@@ -225,6 +233,12 @@
                                                         <label  class="col-md-3 control-label">Answer</label>
                                                         <div class="col-md-9">
                                                             <textarea class="form-control" name="${seqno}qanswer">${q.q_keyword_check}</textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label  class="col-md-3 control-label">Max score</label>
+                                                        <div class="col-md-4">
+                                                            <input type="number" name="${seqno}score" min="0" step="any" class="form-control"  placeholder="Max score." required="yes" value="${q.score}"/>'
                                                         </div>
                                                     </div>
                                                     <input type="hidden" value="explain" name="${seqno}q_type">
@@ -756,6 +770,12 @@
                                                         + '            <textarea class="form-control" name="' + seqno + 'qanswer"></textarea>'
                                                         + '        </div>'
                                                         + '    </div>'
+                                                        + '    <div class="form-group">'
+                                                        + '        <label  class="col-md-3 control-label">Max score</label>'
+                                                        + '        <div class="col-md-4">'
+                                                        + '            <input type="number" name="' + seqno + 'score" min="0" step="any" class="form-control"  placeholder="Max score." required="yes"/>'
+                                                        + '        </div>'
+                                                        + '    </div>'
                                                         + '    <input type="hidden" value="explain" name="' + seqno + 'q_type">'
                                                         + '</div>';
                                             }
@@ -780,12 +800,13 @@
                                             var seq_of_choice = $(this).parent().parent().parent().find("[name='seqno']").val();
                                             var html = '';
                                             if ($(this).val() == "one") {
-                                                html = '<div class="choice-group form-inline"><div><input type="radio" name="' + seq_of_choice + 'c"> <input type="text" class="form-control" name="' + seq_of_choice + 'ctext"></div></div><br><a onclick="appendChoice(this)">Add other</a>';
+                                                html = '<div class="choice-group form-inline"><div><input type="radio" name="' + seq_of_choice + 'c" onClick="mark(this)" value=""> <input type="text" class="form-control" name="' + seq_of_choice + 'ctext" onkeyup="addToC(this)" required="yes"></div></div><br><a onclick="appendChoice(this)">Add other</a>';
                                             } else {
-                                                html = '<div class="choice-group form-inline"><div><input type="checkbox" name="' + seq_of_choice + 'c"> <input type="text" class="form-control" name="' + seq_of_choice + 'ctext"></div></div><br><a onclick="appendChoice(this)">Add other</a>';
+                                                html = '<div class="choice-group form-inline"><div><input type="checkbox" name="' + seq_of_choice + 'c" onClick="mark(this)" value=""> <input type="text" class="form-control" name="' + seq_of_choice + 'ctext" onkeyup="addToC(this)" required="yes"></div></div><br><a onclick="appendChoice(this)">Add other</a>';
                                             }
                                             $(this).parent().parent().parent(".multipleChoice").find(".c_list").html(html);
                                         });
+                                        
                                         function addTitle() {
                                             var titleBox = '<div class="row instruction"><hr><input type="hidden" name="seqno" value="' + seqno + '"/><label class="col-md-3 control-label">Instruction </label><div class="col-md-8"><input type="text" class="form-control" placeholder="Instruction" name="' + seqno + 'instruction" required="yes" ></div><a onclick="remove_title(this)"  style="vertical-align: -webkit-baseline-middle"><span class="glyphicon glyphicon-trash"></span></a><input type="hidden" value="instruction" name="' + seqno + 'q_type"></div>';
                                             $(".amQuestion").append(titleBox);

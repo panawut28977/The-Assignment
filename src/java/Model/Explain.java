@@ -19,6 +19,7 @@ public class Explain extends Question {
 
     private String q_text;
     private String q_keyword_check;
+    private double score;
 
 //    public Explain(String q_text){  
 //        this.q_text = q_text;
@@ -42,10 +43,21 @@ public class Explain extends Question {
     public void setQ_keyword_check(String q_keyword_check) {
         this.q_keyword_check = q_keyword_check;
     }
+    
+    @Override
+    public double getScore() {
+        return score;
+    }
+
+    @Override
+    public void setScore(double score) {
+        this.score = score;
+    }
+    
 
     public int add() {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "insert into explain_list(q_id,q_text,q_keyword_check) values(?,?,?)";
+        String sql = "insert into explain_list(q_id,q_text,q_keyword_check,score) values(?,?,?,?)";
         PreparedStatement pstm = null;
         int result = 0;
         try {
@@ -53,6 +65,7 @@ public class Explain extends Question {
             pstm.setInt(1, super.getQ_id());
             pstm.setString(2, this.q_text);
             pstm.setString(3, this.q_keyword_check);
+            pstm.setDouble(4, this.score);
             result = pstm.executeUpdate();
             conn.close();
         } catch (SQLException ex) {
@@ -63,13 +76,14 @@ public class Explain extends Question {
 
     public int update() {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "update explain_list set q_text=?,q_keyword_check=? where q_id=?";
+        String sql = "update explain_list set q_text=?,q_keyword_check=?,score=? where q_id=?";
         PreparedStatement pstm;
         int result = 0;
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, this.q_text);
             pstm.setString(2, this.q_keyword_check);
+            pstm.setDouble(3, this.score);
             pstm.setInt(3, super.getQ_id());
             result = pstm.executeUpdate();
             conn.close();
@@ -81,20 +95,11 @@ public class Explain extends Question {
 
     @Override
     public String toString() {
-        return "Explain{" + "q_text=" + q_text + ", q_keyword_check=" + q_keyword_check + '}';
+        return "Explain{" + "q_text=" + q_text + ", q_keyword_check=" + q_keyword_check + ", score=" + score + '}';
     }
+
 
     // <editor-fold defaultstate="collapsed" desc=" Method that is not support in this class ">
-    @Override
-    public double getScore() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setScore(double score) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     @Override
     public String getAnswer() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
