@@ -216,6 +216,14 @@
         <servlet-name>showCon</servlet-name>
         <servlet-class>servlet.showCon</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>showNavBar</servlet-name>
+        <servlet-class>servlet.showNavBar</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoginMobile</servlet-name>
+        <servlet-class>servlet.LoginMobile</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -378,6 +386,14 @@
     <servlet-mapping>
         <servlet-name>showCon</servlet-name>
         <url-pattern>/showCon</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>showNavBar</servlet-name>
+        <url-pattern>/showNavBar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginMobile</servlet-name>
+        <url-pattern>/LoginMobile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

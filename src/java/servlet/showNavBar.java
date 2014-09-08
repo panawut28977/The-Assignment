@@ -6,7 +6,7 @@
 
 package servlet;
 
-import Model.Announcement;
+import Model.AccountCourse;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Shinomiya
  */
-public class showAnnounceTeacher extends HttpServlet {
+public class showNavBar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,13 +33,12 @@ public class showAnnounceTeacher extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         int id = Integer.parseInt(request.getParameter("id"));
-        List<Announcement> ac = Announcement.viewAnnByAccID(id);
-        
+        List<AccountCourse> ac = AccountCourse.getCourseByAccID(id);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(new Gson().toJson(ac));
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

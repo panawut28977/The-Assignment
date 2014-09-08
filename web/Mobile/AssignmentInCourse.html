@@ -57,7 +57,8 @@
 
 </body>
     <script type="text/javascript">
-        $.getJSON('http://jsp.chaninz.com/tasm/showAssignmentInCourse', function(result) {
+        var id = sessionStorage.getItem('id');
+        $.getJSON('http://jsp.chaninz.com/tasm/showAssignmentInCourse?id='+id, function(result) {
             var i=1;
             $(result).each(function(k, v) {
                 $(

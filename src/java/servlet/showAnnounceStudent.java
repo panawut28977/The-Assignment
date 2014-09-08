@@ -33,8 +33,8 @@ public class showAnnounceStudent extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        List<Announcement> ac = Announcement.viewAnnByAccID(1);
+        int id = Integer.parseInt(request.getParameter("id"));
+        List<Announcement> ac = Announcement.viewAnnByAccID(id);
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

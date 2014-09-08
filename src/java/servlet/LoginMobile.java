@@ -6,11 +6,10 @@
 
 package servlet;
 
-import Model.Announcement;
+import Model.Account;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Shinomiya
  */
-public class showAnnounceTeacher extends HttpServlet {
+public class LoginMobile extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,13 +32,21 @@ public class showAnnounceTeacher extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        List<Announcement> ac = Announcement.viewAnnByAccID(id);
-        
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(new Gson().toJson(ac));
-        
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        Account a = Account.login(email, password);
+        if (a.getAcc_id() != 0) {
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            out.write(new Gson().toJson(a));
+            
+        }else{
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            out.write(new Gson().toJson("False"));
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -34,7 +34,8 @@ public class showAssignmentInCourse extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        List<Assignment> as = Assignment.getAmByCourseIDNoSetCourse(3);
+        int id = Integer.parseInt(request.getParameter("id"));
+        List<Assignment> as = Assignment.getAmByCourseIDNoSetCourse(id);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(new Gson().toJson(as));

@@ -11,7 +11,7 @@
   <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
 </head> 
 <body>
-<div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-fixed-page1" data-title="Panel fixed positioning" data-url="panel-fixed-page1">
+<div data-role="page" class="jqm-demos ui-responsive-panel"  data-title="Panel fixed positioning" >
     <div data-role="header" data-position="fixed">
         <center>
         <a href="http://jsp.chaninz.com/tasm/Mobile/index.html" rel="external" and data-ajax="false"><span class="fa fa-home fa-2x" style="alignment-adjust:auto;padding-right:25px;padding-top:15px;padding-bottom:15px"></span></a>
@@ -45,19 +45,20 @@
 
 </body>
     <script type="text/javascript">
-        $.getJSON('http://jsp.chaninz.com/tasm/showAssignmentDetail', function(result) {
+        var id = sessionStorage.getItem('id');
+        $.getJSON('http://jsp.chaninz.com/tasm/showAssignmentDetail?id='+ id, function(result) {
             $(result).each(function(k, v) {
                 $(
                         '<div style="background-color:#F4F4F4 ;padding:1px;width:auto;">' +
                         '<div style="margin-left:15px;color:#999">' +
-                        '<h3 align="center">' + v.course.name + '</h3>' +
-                        ' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' +
+                        '<h3 align="center">' + v.course.name +
+                        ' &nbsp;&nbsp;&nbsp;' +
                         '<div class="fa fa-gear fa-2x"></div></h3>' +
                         '</div>' +
                         '</div><br/>' +
                         '<div style="background-color:#F4F4F4 ;padding:1px;width:auto;">' +
                         '<div style="margin-left:15px;color:#999">' +
-                        '<h4>' + v.name + '</h4></div></div>'+
+                        '<h4 align="center">' + v.name + '</h4></div></div>'+
                         '<div style="padding:7px;">'+
                         '<h4>Description:</h4>'+
                         '<p>' + v.description + '</p>' +
