@@ -83,7 +83,7 @@
                                         <input type="radio" name="total_member" id="groupwork" value=""> Group of <input type="number" min="2" id="inputpepole" disabled="yes"> People
                                     </div>
                                 </div>
-                                <div class="form-group" id="due_date">
+                                <div class="form-group" id="due_date" style="margin-bottom: 0">
                                     <label  class="col-md-3 control-label">Due date</label>
                                     <div class="input-group date form_datetime col-md-9" style="padding-right: 15px;  padding-left: 15px;"  data-link-field="dtp_input1">
                                         <input class="form-control" size="16" type="text" value="" readonly>
@@ -91,6 +91,17 @@
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                     </div>
                                     <input type="hidden" id="dtp_input1" name="due_date" value="" /><br/>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-9 col-md-offset-3">
+                                        <input type="checkbox" id="latePeriodbtn" name="latesend" value="true"> Can send after due date. please select period.
+                                        <div id="latePeriod" class="input-group date form_datetime"  data-link-field="dtp_input2">
+                                            <input class="form-control" size="16" type="text" value="" readonly >
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" id="dtp_input2" name="late_date" value="" /><br/>
                                 </div>
                                 <div class="form-group">
                                     <label for="AmType" class="col-md-3 control-label">Assignment Type</label>
@@ -320,11 +331,21 @@
                                             $("#CreateAmOnweb div").disableSelection();
                                             $('#compareBox').hide();
                                             $('#CreateAmOnweb').hide();
+                                            $('#latePeriod').hide();
                                             var monthNames = ["January", "February", "March", "April", "May", "June",
                                                 "July", "August", "September", "October", "November", "December"];
                                             var d = new Date();
                                             $('#due_date input').val(d.getFullYear() + "-" + monthNames[d.getMonth()] + "-" + ('0' + d.getDate()).slice(-2));
                                             $('#due_date input[name="due_date"]').val(d.getFullYear() + "-" + ('0' + (d.getMonth() + 1)).slice(-2) + "-" + ('0' + d.getDate()).slice(-2));
+
+                                            $('#latePeriod input').val(d.getFullYear() + "-" + monthNames[d.getMonth()] + "-" + ('0' + d.getDate()).slice(-2));
+                                            $('#dtp_input2').val(d.getFullYear() + "-" + ('0' + (d.getMonth() + 1)).slice(-2) + "-" + ('0' + d.getDate()).slice(-2));
+
+                                            $('#due_date input').change(function() {
+                                                $('#latePeriod input').val($(this).val());
+                                                $('#dtp_input2').val($('#dtp_input1').val());
+                                            });
+
                                             $('.form_datetime').datetimepicker({
                                                 format: 'yyyy-MM-dd',
                                                 weekStart: 1,
@@ -353,6 +374,13 @@
                                             $('#individual').click(function() {
                                                 $('#inputpepole').attr("disabled", "yes");
                                             });
+                                            $('#latePeriodbtn').click(function() {
+                                                if ($(this).prop('checked')) {
+                                                    $('#latePeriod').show();
+                                                } else {
+                                                    $('#latePeriod').hide();
+                                                }
+                                            });
                                             $('#inputpepole').change(function() {
                                                 $('#groupwork').val($(this).val());
                                             });
@@ -360,7 +388,7 @@
                                                 if ($(this).val() == "file") {
                                                     $('#uploadAmFile').show();
                                                     $('#CreateAmOnweb').hide();
-                                                    $('#fullymark').attr("required","yes");
+                                                    $('#fullymark').attr("required", "yes");
                                                 } else {
                                                     $('#CreateAmOnweb').show();
                                                     $('#uploadAmFile').hide();

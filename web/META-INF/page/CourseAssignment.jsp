@@ -56,7 +56,7 @@
                             <td>${a.total_member} <a href="selectPeople?am_id=${a.am_id}">join group</a></td>
                         </c:otherwise>
                     </c:choose>
-                    <td>${a.due_date}</td>
+                    <td>${a.due_date} <c:if test="${a.due_date eq null}"> - </c:if></td>
                     <c:choose>
                         <c:when test="${ac.courseList.get(cId).role eq 'ST'}">
                             <td>
@@ -72,7 +72,10 @@
                                         <span class="text-warning">Hurry up!</span>
                                     </c:when>
                                     <c:when test="${status eq 'sent'}">
-                                        <span class="text-muted">Sent <span class="glyphicon glyphicon-check"></span></span>
+                                        <span class="text-primary">Sent <span class="glyphicon glyphicon-check"></span></span>
+                                        </c:when>
+                                        <c:when test="${status eq 'miss'}">
+                                        <span class="text-muted">Miss</span>
                                         </c:when>
                                     </c:choose>
                             </td>
@@ -84,8 +87,8 @@
                         </c:when>
                         <c:otherwise> 
                             <td style="text-align: center"><a href="GetSentAssignment?am_id=${a.am_id}"><i class="glyphicon glyphicon-check"></i></a></td>
-                        </c:otherwise>
-                    </c:choose>
+                                </c:otherwise>
+                            </c:choose>
                 </tr>
             </c:forEach>
         </tbody>
@@ -116,8 +119,11 @@
             <c:when test="${status eq 'hurryup'}">
         color = '#8a6d3b';
             </c:when>
+            <c:when test="${status eq 'sent'}">
+        color = '#5F8BCA';
+            </c:when>
             <c:otherwise>
-        color = '#777';
+        color = '#999';
             </c:otherwise>
         </c:choose>
         jsonArr.push({

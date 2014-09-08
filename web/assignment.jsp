@@ -94,27 +94,40 @@ Author     : JenoVa
                                 <tr>
                                     <td><b>Due date</b></td>
                                     <td>${am.due_date}
-                                        <span class="text-danger pull-right">
-                                            <b>
-                                                <c:set value="${cf:remainingTimeforSend(am,ac.acc_id)}" var="status"/>
-                                                <c:choose>
-                                                    <c:when test="${status eq 'late'}">
-                                                        <span class="text-danger">Late</span>
-                                                    </c:when>
-                                                    <c:when test="${status eq 'ontime'}">
-                                                        <span class="text-success">On time</span>
-                                                    </c:when>
-                                                    <c:when test="${status eq 'hurryup'}">
-                                                        <span class="text-warning">Hurry up!</span>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <span class="text-muted">Sent <span class="glyphicon glyphicon-check"></span></span>
-                                                        </c:otherwise>
+                                        <c:if test="${ac.courseList.get(cId).role eq 'ST'}">
+                                            <span class="text-danger pull-right">
+                                                <b>
+                                                    <c:set value="${cf:remainingTimeforSend(am,ac.acc_id)}" var="status"/>
+                                                    <c:choose>
+                                                        <c:when test="${status eq 'late'}">
+                                                            <span class="text-danger">Late</span>
+                                                        </c:when>
+                                                        <c:when test="${status eq 'ontime'}">
+                                                            <span class="text-success">On time</span>
+                                                        </c:when>
+                                                        <c:when test="${status eq 'hurryup'}">
+                                                            <span class="text-warning">Hurry up!</span>
+                                                        </c:when>
+                                                        <c:when test="${status eq 'sent'}">
+                                                            <span class="text-primary">Sent <span class="glyphicon glyphicon-check"></span></span>
+                                                            </c:when>
+                                                            <c:when test="${status eq 'miss'}">
+                                                            <span class="text-muted">Miss</span>
+                                                        </c:when>
                                                     </c:choose>
-                                            </b>
-                                        </span>
+                                                </b>
+                                            </span>
+                                        </c:if>
                                     </td>
                                 </tr>
+                                <c:if test="${ac.courseList.get(cId).role eq 'TH'}">
+                                    <tr>
+                                        <td>Late sent</td>
+                                        <td>
+                                            ${am.late_date}
+                                        </td>
+                                    </tr>    
+                                </c:if>
                                 <tr>
                                     <td><b>Description</b></td>
                                     <td>${am.description} </td>

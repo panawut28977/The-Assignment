@@ -104,6 +104,12 @@
                                 <!--- delte choose -->
 
                                 <c:choose>
+                                    <c:when test="${ct_cf:isLock(curAm)}">
+                                        <div class="text-muted"  style="text-align: center">
+                                            <h1 style="font-size: 100px"><span class="glyphicon glyphicon-folder-close"></span></h1>
+                                            <h1>Your time is over!! </h1>
+                                        </div>
+                                    </c:when>
                                     <c:when test="${sa.checked_time ne null}">
                                         <div class="text-success" style="text-align: center">
                                             <h1 style="font-size: 100px"><span class="glyphicon glyphicon-ok-circle"></span></h1>

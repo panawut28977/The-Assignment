@@ -41,8 +41,9 @@ public class refreshAccount implements Filter {
         Account a = (Account) ss.getAttribute("ac");
         List<Assignment> amList = a.getAssignment();
         String st = "";
-        Integer late = 0, hurry = 0, ontime = 0, sent = 0;
+        Integer late = 0, hurry = 0, ontime = 0, sent = 0,miss=0;
         for (Assignment assignment : amList) {
+//            System.out.println(assignment.getDue_date());
             st = Assignment.remainingTimeforSend(assignment, a.getAcc_id());
             if (st.equalsIgnoreCase("sent")) {
                 sent++;
@@ -50,14 +51,17 @@ public class refreshAccount implements Filter {
                 ontime++;
             } else if (st.equalsIgnoreCase("hurryup")) {
                 hurry++;
-            } else {
+            } else if(st.equalsIgnoreCase("late")){
                 late++;
+            }else if(st.equalsIgnoreCase("miss")){
+                miss++;
             }
         }
         ss.setAttribute("late", late);
         ss.setAttribute("hurry", hurry);
         ss.setAttribute("ontime", ontime);
         ss.setAttribute("sent", sent);
+        ss.setAttribute("miss", miss);
 
         if (!((ss.getAttribute("objStatus") + "").equalsIgnoreCase("updated"))) {
             a = Account.login(a.getEmail(), a.getPassword());

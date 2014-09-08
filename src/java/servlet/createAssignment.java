@@ -58,8 +58,10 @@ public class createAssignment extends HttpServlet {
         String description = m.getParameter("description");
         String ass_type = m.getParameter("AmType");
         Date due_date = null;
+        Date late_date = null;
         try {
             due_date = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(m.getParameter("due_date"));
+            late_date = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(m.getParameter("late_date"));
         } catch (ParseException ex) {
             Logger.getLogger(createAssignment.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -81,6 +83,7 @@ public class createAssignment extends HttpServlet {
         a.setAss_type(ass_type);
         a.setCourse(new Course(cId));
         a.setDue_date(due_date);
+        a.setLate_date(late_date);
         String url = "";
         int key = 0;
         if (ass_type.equalsIgnoreCase("file")) {
