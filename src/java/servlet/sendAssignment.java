@@ -124,7 +124,19 @@ public class sendAssignment extends HttpServlet {
             } else {
                 //get student assignment onweb
                 StAssignmentOnWeb stw = StAssignmentOnWeb.getStAmbyAmIDAndGID(am_id, g.getG_id());
-                ss.setAttribute("sa", stw);
+                if (stw == null) {
+                    stw = new StAssignmentOnWeb();
+                    stw.setAcc_id(ac.getAcc_id());
+                    stw.setAm_id(am_id);
+                    stw.setG_id(g.getG_id());
+                    //set new stam info
+                    int st_am_id = StAssignmentOnWeb.setAm(stw);
+                    //get stam again
+                    stw = StAssignmentOnWeb.getStAmbyAmIDAndGID(am_id, g.getG_id());
+                    ss.setAttribute("sa", stw);
+                } else {
+                    ss.setAttribute("sa", stw);
+                }
                 url = "/onwebAssignment.jsp?tab=AllAssignment";
                 getServletContext().getRequestDispatcher(url).forward(request, response);
             }

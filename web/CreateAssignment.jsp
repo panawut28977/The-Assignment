@@ -624,6 +624,12 @@
                                                         + '            <textarea class="form-control" name="' + seqno + 'qanswer"></textarea>'
                                                         + '        </div>'
                                                         + '    </div>'
+                                                        + '    <div class="form-group">'
+                                                        + '        <label  class="col-md-3 control-label">Max score</label>'
+                                                        + '        <div class="col-md-4">'
+                                                        + '            <input type="number" name="' + seqno + 'score" min="0" step="any" class="form-control"  placeholder="Max score." required="yes"/>'
+                                                        + '        </div>'
+                                                        + '    </div>'
                                                         + '    <input type="hidden" value="explain" name="' + seqno + 'q_type">'
                                                         + '</div>';
                                             }

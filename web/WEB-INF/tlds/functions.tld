@@ -100,4 +100,14 @@
         <function-class>Model.AnswerQuestion</function-class>
         <function-signature>java.util.List getStAMQuestion(int,int)</function-signature>
     </function> 
+     <function>
+        <name>sortQuestionIndex</name>
+        <function-class>util.Util</function-class>
+        <function-signature>void sortQuestionIndex(java.util.ArrayList)</function-signature>
+    </function>
+      <function>
+        <name>getAmInfoByAmID</name>
+        <function-class>Model.Assignment</function-class>
+        <function-signature>Model.Assignment getAmInfoByAmID(int)</function-signature>
+    </function>  
 </taglib>

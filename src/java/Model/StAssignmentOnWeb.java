@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class StAssignmentOnWeb {
     private int g_id;
     private double score;
     private Date lasted_send_date;
+    private Timestamp checked_time;
     private String member;
     private List<Comment> comment;
     private List<AnswerQuestion> anwerQuestion;
@@ -106,6 +108,16 @@ public class StAssignmentOnWeb {
         this.anwerQuestion = anwerQuestion;
     }
 
+    public Timestamp getChecked_time() {
+        return checked_time;
+    }
+
+    public void setChecked_time(Timestamp checked_time) {
+        this.checked_time = checked_time;
+    }
+    
+    
+
     public double getScore(int st_am_id) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select score from student_assignment_on_web where st_ass_id = ? ";
@@ -143,6 +155,7 @@ public class StAssignmentOnWeb {
                 stw.setG_id(rs.getInt("g_id"));
                 stw.setScore(rs.getDouble("score"));
                 stw.setLasted_send_date(rs.getDate("lasted_send_date"));
+                stw.setChecked_time(rs.getTimestamp("checked_time"));
                 stw.setComment(Comment.getCommentByStAmIDWeb(rs.getInt("st_ass_id")));
                 stw.setAnwerQuestion(null);
             }
@@ -192,12 +205,44 @@ public class StAssignmentOnWeb {
                 stw.setG_id(rs.getInt("g_id"));
                 stw.setScore(rs.getDouble("score"));
                 stw.setLasted_send_date(rs.getDate("lasted_send_date"));
+                stw.setChecked_time(rs.getTimestamp("checked_time"));
                 stw.setComment(Comment.getCommentByStAmIDWeb(rs.getInt("st_ass_id")));
                 stw.setAnwerQuestion(null);
             }
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(StAssignmentOnWeb.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return stw;
+    }
+
+    public static StAssignmentOnWeb getStAmByAmIDAndAccId(int am_id, int acc_id, boolean ingroup) {
+        StAssignmentOnWeb stw = null;
+        if (ingroup) {
+           Connection conn = ConnectionBuilder.getConnection();
+            String sql = "select * from group_member g where ass_id = ?";
+            PreparedStatement pstm;
+            try {
+                pstm = conn.prepareStatement(sql);
+                pstm.setInt(1, am_id);
+                ResultSet rs = pstm.executeQuery();
+                while (rs.next()) {
+                    String accList[] = rs.getString("acc_id").split(",");
+                    List<Integer> accl = new ArrayList<>();
+                    for (String acc : accList) {
+                        accl.add(Integer.parseInt(acc));
+                    }
+//                    System.out.println(accl.contains(acc_id));
+                    if (accl.contains(acc_id)) {
+//                        System.out.println("g_id:"+rs.getInt("g_id"));
+                        stw = StAssignmentOnWeb.getStAmbyAmIDAndGID(am_id, rs.getInt("g_id"));
+                        break;
+                    }
+                }
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(StAssignmentOnWeb.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return stw;
     }
@@ -220,6 +265,7 @@ public class StAssignmentOnWeb {
                 stw.setG_id(rs.getInt("g_id"));
                 stw.setScore(rs.getDouble("score"));
                 stw.setLasted_send_date(rs.getDate("lasted_send_date"));
+                stw.setChecked_time(rs.getTimestamp("checked_time"));
                 stw.setComment(Comment.getCommentByStAmIDWeb(rs.getInt("st_ass_id")));
                 stw.setAnwerQuestion(null);
             }
@@ -291,6 +337,7 @@ public class StAssignmentOnWeb {
                 s.setSt_am_id(st_ass_id);
                 s.setScore(rs.getDouble("score"));
                 s.setLasted_send_date(rs.getDate("lasted_send_date"));
+                s.setChecked_time(rs.getTimestamp("checked_time"));
                 stfList.add(s);
             }
             conn.close();
@@ -320,7 +367,7 @@ public class StAssignmentOnWeb {
 
     public static int updateScore(StAssignmentOnWeb a) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "update student_assignment_on_web set score=? where st_ass_id=?";
+        String sql = "update student_assignment_on_web set score=?,checked_time=current_time where st_ass_id=?";
         PreparedStatement pstm;
         int result = 0;
         try {
@@ -336,13 +383,28 @@ public class StAssignmentOnWeb {
         return result;
     }
 
-    public void autoChecking(int st_am_id) {
-
+    public static boolean deleteByAm_id(int am_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "delete from student_assignment_on_web where ass_id = ?";
+        PreparedStatement pstm;
+        int result = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, am_id);
+            result = pstm.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result > 0;
     }
 
+//    public void autoChecking(int st_am_id) {
+//
+//    }
     @Override
     public String toString() {
-        return "StAssignmentOnWeb{" + "st_am_id=" + st_am_id + ", am_id=" + am_id + ", acc_id=" + acc_id + ", g_id=" + g_id + ", score=" + score + ", lasted_send_date=" + lasted_send_date + ", member=" + member + ", comment=" + comment + ", anwerQuestion=" + anwerQuestion + '}';
+        return "StAssignmentOnWeb{" + "st_am_id=" + st_am_id + ", am_id=" + am_id + ", acc_id=" + acc_id + ", g_id=" + g_id + ", score=" + score + ", lasted_send_date=" + lasted_send_date + ", checked_time=" + checked_time + ", member=" + member + ", comment=" + comment + ", anwerQuestion=" + anwerQuestion + '}';
     }
 
 }

@@ -53,8 +53,8 @@
                     </ol>
                     <div style="text-align: center;margin-top:20px ">
                         <div class="col-md-4"><a id="sentAm"><h4>${sent} <br> Sent</h4></a></div>
-                        <div class="col-md-4"><h4>${checked}/${total} <br>Checked</h4></div>
                         <div class="col-md-4"><a id="leftAm"><h4>${left} <br> Leftovers</h4></a></div>
+                        <div class="col-md-4"><h4>${checked}/${total} <br>Checked</h4></div>
                     </div>
                     <hr style="clear:both">
 
@@ -108,9 +108,9 @@
                                                             </c:when>
                                                         </c:choose>
                                                 </td>
-                                                <td <c:if test="${sentSa.score != 0.0}">class="text-success"</c:if>>
+                                                <td <c:if test="${sentSa.checked_time != null}">class="text-success"</c:if>>
                                                     <c:choose>
-                                                        <c:when test="${sentSa.score == 0.0}">
+                                                        <c:when test="${sentSa.checked_time == null}">
                                                             Not check
                                                         </c:when>
                                                         <c:otherwise>

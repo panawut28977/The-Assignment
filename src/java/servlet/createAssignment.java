@@ -167,6 +167,7 @@ public class createAssignment extends HttpServlet {
                     String q_no = m.getParameter(seqno[i] + "q_no");
                     String qtext = m.getParameter(seqno[i] + "qtext");
                     String qanswer = m.getParameter(seqno[i] + "qanswer");
+                    String score = m.getParameter(seqno[i] + "score");
                     Explain ep = new Explain();
                     //set question info
                     ep.setAss_id(key);
@@ -176,6 +177,7 @@ public class createAssignment extends HttpServlet {
                     //set explain choice info
                     ep.setQ_text(qtext);
                     ep.setQ_keyword_check(qanswer);
+                    ep.setScore(Double.parseDouble(score));
                     qlist.add(ep);
                 } else if (q_type.equalsIgnoreCase("fillBlank")) {
                     String q_no = m.getParameter(seqno[i] + "q_no");

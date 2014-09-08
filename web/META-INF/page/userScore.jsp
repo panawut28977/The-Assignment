@@ -4,27 +4,96 @@
     #AllStudentScore_wrapper{
         margin-top: 20px;
     }
+    #chart canvas{
+        height: auto !important;
+    }
+    #chart div{
+        text-align: center;
+    }
 </style>
+<script src="module/chartjs/Chart.js" ></script>
 <c:choose> 
     <c:when test="${ac.courseList.get(cId).role eq 'ST'}">
-        <div style="text-align: center;margin-top:20px ">
-            <div class="col-md-4"><h4>${total_sent_am}<br> Sent</h4></div>
-            <div class="col-md-4"><h4>38/${fully_mark} <br>Scores</h4></div>
-            <div class="col-md-4"><h4>${leftover_am} <br> Leftovers</h4></div>
+        <div class="row" id="chart" style="margin-top: 20px" >
+            <div  class="col-md-6">
+                <canvas  id="sentLeftChart"></canvas>
+                <h4 >Sent / Leftover</h4>
+            </div>
+            <div  class="col-md-6">
+                <canvas id="scoreChart"></canvas>
+                <h4>Score (Max score is ${fully_mark})</h4>
+            </div>
         </div>
+        <!--        <div style="text-align: center;margin-top:20px ">
+                    <div class="col-md-4"><h4>${total_sent_am}<br> Sent</h4></div>
+                    <div class="col-md-4"><h4>${total_score}/${fully_mark} <br>Scores</h4></div>
+                    <div class="col-md-4"><h4>${leftover_am} <br> Leftovers</h4></div>
+                </div>-->
         <hr style="clear:both">
-        <table class="table" >
+        <table class="table"  id="AllUserScore">
             <thead>
                 <tr>
                     <td><b>Assignment</b></td>
                     <td><b>Scores</b></td>
+                    <td><b>Lasted sent</b></td>
+                    <td><b>Work on</b></td>
                 </tr>
             </thead>
             <tbody>
                 <c:forEach  items="${ac.courseList.get(cId).course.assignment}" var="a">
                     <tr>
                         <td>${a.name}</td>
-                        <td>0/${a.fully_mark}</td>
+                        <c:choose>
+                            <c:when test="${stf.get(a.am_id) ne null and stf.get(a.am_id).lasted_send_date ne null}">
+                                <td>
+                                    ${stf.get(a.am_id).score}
+                                    /${a.fully_mark}</td>
+                                <td><b>
+                                        <c:set value="${cf:lastedSentStatus(stf.get(a.am_id).lasted_send_date, a)}" var="status"/>
+                                        <c:choose>
+                                            <c:when test="${status eq 'late'}">
+                                                <span class="text-danger">Late</span>
+                                            </c:when>
+                                            <c:when test="${status eq 'ontime'}">
+                                                <span class="text-success">On time</span>
+                                            </c:when>
+                                            <c:when test="${status eq 'hurryup'}">
+                                                <span class="text-warning">Hurry up!</span>
+                                            </c:when>
+                                            <c:when test="${status eq 'sent'}">
+                                                <span class="text-muted">Sent <span class="glyphicon glyphicon-check"></span></span>
+                                                </c:when>
+                                            </c:choose></b>
+                                </td>
+                            </c:when>
+                            <c:when test="${stow.get(a.am_id) ne null and stow.get(a.am_id).lasted_send_date ne null}">
+                                <td>    
+                                    ${stow.get(a.am_id).score}
+                                    /${a.fully_mark}</td>
+                                <td><b>
+                                        <c:set value="${cf:lastedSentStatus(stow.get(a.am_id).lasted_send_date, a)}" var="status"/>
+                                        <c:choose>
+                                            <c:when test="${status eq 'late'}">
+                                                <span class="text-danger">Late</span>
+                                            </c:when>
+                                            <c:when test="${status eq 'ontime'}">
+                                                <span class="text-success">On time</span>
+                                            </c:when>
+                                            <c:when test="${status eq 'hurryup'}">
+                                                <span class="text-warning">Hurry up!</span>
+                                            </c:when>
+                                            <c:when test="${status eq 'sent'}">
+                                                <span class="text-muted">Sent <span class="glyphicon glyphicon-check"></span></span>
+                                                </c:when>
+                                            </c:choose></b>
+                                </td>
+                            </c:when>
+                            <c:otherwise>
+                                <td>0.0 /${a.fully_mark}</td>
+                                <td><b> - </b></td>
+                            </c:otherwise>
+                        </c:choose>
+                        <td>${a.ass_type}</td>
                     </tr>
                 </c:forEach>
                 <!--                <tr>
@@ -158,6 +227,47 @@
 </c:choose>
 <script>
     $(function() {
+        var aTable = $('#AllUserScore').dataTable({
+            /* Disable initial sort */
+            "aaSorting": []
+        });
+
+        var option = [{
+                 responsive: true,
+                 maintainAspectRatio: true,
+                 percentageInnerCutout : 0
+            }]
+        
+        var ctx = $("#sentLeftChart").get(0).getContext("2d");
+        var data = [
+            {
+                value: ${total_sent_am},
+                color: "#428bca",
+                label: "Sent"
+            },
+            {
+                value: ${leftover_am},
+                color: "#999",
+                label: "Leftover"
+            }
+        ]
+        var dslChart = new Chart(ctx).Doughnut(data);
+
+        var ctx2 = $("#scoreChart").get(0).getContext("2d");
+        var data = [
+            {
+                value: ${total_score},
+                color: "#40d47e",
+                label: "Your total score"
+            },
+            {
+                value: ${fully_mark-total_score},
+                color: "#999",
+                label: "Miss score"
+            }
+        ]
+        var dscChart = new Chart(ctx2).Doughnut(data);
+
         $("#AllStudentScore").dataTable();
     });
 </script>

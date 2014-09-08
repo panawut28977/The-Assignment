@@ -6,6 +6,7 @@
 package util;
 
 import Model.Account;
+import Model.Question;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -95,6 +96,8 @@ public class Util {
     public static String replaceStringByIndex(String original, int stIndex, int endIndex, String rep) {
         StringBuilder newText = new StringBuilder(original);
         newText.replace(stIndex, endIndex, rep);
+        System.out.println(newText.toString());
+        System.out.println("-------");
         return newText.toString();
     }
 
@@ -114,8 +117,23 @@ public class Util {
     public static String createPopoverGroup(List<Account> accList) {
         String dataContent = "";
         for (Account account : accList) {
-            dataContent += "<img class='img-circle' src='"+account.getProfile_pic()+"' width='24'> "+account.getFirstname()+"<br/>";
+            dataContent += "<img class='img-circle' src='" + account.getProfile_pic() + "' width='24'> " + account.getFirstname() + "<br/>";
         }
         return dataContent;
+    }
+
+    public static void sortQuestionIndex(ArrayList<Question> curqList) {
+        Question temp = null;
+        System.out.println("before sort:" + curqList);
+        for (int i = 0; i < curqList.size(); i++) {
+            for (int j = i + 1; j < curqList.size(); j++) {
+                if (curqList.get(j).getQ_start_index() < curqList.get(i).getQ_start_index()) {
+                    temp = curqList.get(i);
+                    curqList.set(i, curqList.get(j));
+                    curqList.set(j, temp);
+                }
+            }
+        }
+        System.out.println("after :" + curqList);
     }
 }

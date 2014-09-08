@@ -15,6 +15,12 @@ Author     : JenoVa
         <%@include file="META-INF/page/include_css.jsp" %>
         <%@include file="META-INF/page/include_js.jsp" %>
         <c:set var="am" value="${cf:getAmByAmID(param.amId)}" scope="session" target="Model.Assignment"/>
+        <c:if test="${param.cId ne null}">
+            <%  HttpSession ss = request.getSession();
+                Long cId = Long.parseLong(request.getParameter("cId"));
+                ss.setAttribute("cId", cId);
+            %>
+        </c:if>
         <title>${am.name}</title>
         <style>
             #pvVs{
@@ -67,7 +73,7 @@ Author     : JenoVa
                                             <c:set value="web" var="wkt" />
                                         </c:otherwise>
                                     </c:choose>
-                                    <a href="http://localhost:8084/TheAssignment/SentAssignment.jsp?tab=AllAssignment&&wkt=${wkt}" style="text-align: center;text-decoration: none" class="center-block">
+                                    <a href="GetSentAssignment?am_id=${am.am_id}" style="text-align: center;text-decoration: none" class="center-block">
                                         <span class="glyphicon glyphicon-check center-block" style="font-size: 150px;margin: 40px auto;"></span><h4>Go to check : ) !</h4>
                                     </a>
                                 </c:when>
@@ -78,8 +84,8 @@ Author     : JenoVa
                                 </c:when>
                                 <c:otherwise>
                                     <a href="sendAssignment?am_id=${am.am_id}&&cId=${ac.courseList.get(cId).course.course_id}" style="text-align: center;text-decoration: none" class="center-block">
-                                            <span class="glyphicon glyphicon-upload center-block" style="font-size: 150px;margin: 40px auto;"></span><h4>Let's do it.</h4>
-                                        </a>
+                                        <span class="glyphicon glyphicon-upload center-block" style="font-size: 150px;margin: 40px auto;"></span><h4>Let's do it.</h4>
+                                    </a>
                                 </c:otherwise>
                             </c:choose>
                         </div>
@@ -169,9 +175,9 @@ Author     : JenoVa
                         <div class="clearboth"><hr></div> 
                         <h3>Comment</h3>
                         <form>
-                                <textarea class="form-control" placeholder="Tell your teacher here." name="text" id="text"></textarea><br>
-                                <input  type="button" class="btn btn-primary col-md-3 pull-right" id="addComment" value="Comment">
-                            </form>
+                            <textarea class="form-control" placeholder="Tell your teacher here." name="text" id="text"></textarea><br>
+                            <input  type="button" class="btn btn-primary col-md-3 pull-right" id="addComment" value="Comment">
+                        </form>
                         <br/><br/><br/>
                         <div id="listComment">
                             <c:forEach items="${am.comment}" var="c">
@@ -221,7 +227,7 @@ Author     : JenoVa
             var pic = '${ac.profile_pic}';
             var fullname = '${ac.firstname}' + '${ac.lastname}';
             var d = new Date();
-            var dateSt = d.getFullYear() + "-" + ('0' + (d.getMonth()+1)).slice(-2) + "-" + ('0' + d.getDate()).slice(-2) + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getMilliseconds();
+            var dateSt = d.getFullYear() + "-" + ('0' + (d.getMonth() + 1)).slice(-2) + "-" + ('0' + d.getDate()).slice(-2) + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getMilliseconds();
             $("#addComment").click(function() {
                 $.ajax({
                     type: "POST",

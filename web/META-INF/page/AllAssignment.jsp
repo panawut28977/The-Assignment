@@ -27,7 +27,7 @@
         <tbody>
             <c:forEach items="${ac.assignment}" var="a">
                 <tr>
-                    <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment&&amId=${a.am_id}">${a.name}</a></td>
+                    <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment&&amId=${a.am_id}&&cId=${a.course.course_id}">${a.name}</a></td>
                     <td>${a.course.name}</td>
                     <c:choose>
                         <c:when test="${a.ass_type eq 'file'}">

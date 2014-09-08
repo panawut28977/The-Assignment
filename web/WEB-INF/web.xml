@@ -213,8 +213,12 @@
         <servlet-class>servlet.updateScoreStAmOnWeb</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>showCon</servlet-name>
-        <servlet-class>servlet.showCon</servlet-class>
+        <servlet-name>autoChecking</servlet-name>
+        <servlet-class>servlet.autoChecking</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Checkcopy</servlet-name>
+        <servlet-class>servlet.Checkcopy</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>showNavBar</servlet-name>
@@ -380,12 +384,17 @@
         <servlet-name>updateScoreStAmFile</servlet-name>
         <url-pattern>/updateScoreStAmFile</url-pattern>
     </servlet-mapping>
-    <servlet-mapping><servlet-name>updateScoreStAmOnWeb</servlet-name><url-pattern>/updateScoreStAmOnWeb</url-pattern>
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; origin/master
+    <servlet-mapping>
+        <servlet-name>updateScoreStAmOnWeb</servlet-name>
+        <url-pattern>/updateScoreStAmOnWeb</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>showCon</servlet-name>
-        <url-pattern>/showCon</url-pattern>
+        <servlet-name>autoChecking</servlet-name>
+        <url-pattern>/autoChecking</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Checkcopy</servlet-name>
+        <url-pattern>/Checkcopy</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>showNavBar</servlet-name>

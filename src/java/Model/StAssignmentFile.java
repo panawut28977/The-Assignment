@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ public class StAssignmentFile {
     private int list_id;
     private double score;
     private Date lasted_send_date;
+    private Timestamp checked_time;
     private double similar_score;
 //    private String member;
     private List<Comment> comment;
@@ -98,14 +100,7 @@ public class StAssignmentFile {
     public void setSimilar_score(double similar_score) {
         this.similar_score = similar_score;
     }
-
-//    public String getMember() {
-//        return member;
-//    }
-//
-//    public void setMember(String member) {
-//        this.member = member;
-//    }
+    
     public List<Comment> getComment() {
         return comment;
     }
@@ -113,6 +108,16 @@ public class StAssignmentFile {
     public void setComment(List<Comment> comment) {
         this.comment = comment;
     }
+
+    public Timestamp getChecked_time() {
+        return checked_time;
+    }
+
+    public void setChecked_time(Timestamp checked_time) {
+        this.checked_time = checked_time;
+    }
+    
+    
 
     public static double getScore(int st_am_id) {
         Connection conn = ConnectionBuilder.getConnection();
@@ -153,6 +158,7 @@ public class StAssignmentFile {
                 s.setScore(rs.getDouble("score"));
                 s.setG_id(rs.getInt("g_id"));
                 s.setLasted_send_date(rs.getDate("lasted_send_date"));
+                s.setChecked_time(rs.getTimestamp("checked_time"));
                 s.setComment(Comment.getCommentByStAmIDFile(rs.getInt("st_ass_id")));
             }
             conn.close();
@@ -183,6 +189,7 @@ public class StAssignmentFile {
                 s.setList_id(rs.getInt("list_id"));
                 s.setScore(rs.getDouble("score"));
                 s.setLasted_send_date(rs.getDate("lasted_send_date"));
+                s.setChecked_time(rs.getTimestamp("checked_time"));
                 stfList.add(s);
             }
             conn.close();
@@ -206,10 +213,12 @@ public class StAssignmentFile {
                 saf = new StAssignmentFile();
                 saf.setAcc_id(rs.getInt("acc_id"));
                 saf.setAm_id(am_id);
+                saf.setG_id(rs.getInt("g_id"));
                 saf.setSt_am_id(rs.getInt("st_ass_id"));
                 saf.setList_id(rs.getInt("list_id"));
                 saf.setScore(rs.getDouble("score"));
                 saf.setLasted_send_date(rs.getDate("lasted_send_date"));
+                saf.setChecked_time(rs.getTimestamp("checked_time"));
                 saf.setComment(Comment.getCommentByStAmIDFile(rs.getInt("st_ass_id")));
             }
             conn.close();
@@ -237,11 +246,43 @@ public class StAssignmentFile {
                 saf.setList_id(rs.getInt("list_id"));
                 saf.setScore(rs.getDouble("score"));
                 saf.setLasted_send_date(rs.getDate("lasted_send_date"));
+                saf.setChecked_time(rs.getTimestamp("checked_time"));
                 saf.setComment(Comment.getCommentByStAmIDFile(rs.getInt("st_ass_id")));
             }
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(StAssignmentFile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return saf;
+    }
+
+    public static StAssignmentFile getStAmBbyAmIDAndAccId(int am_id, int acc_id, boolean ingroup) {
+        StAssignmentFile saf = null;
+        if (ingroup) {
+            Connection conn = ConnectionBuilder.getConnection();
+            String sql = "select * from group_member g where ass_id = ?";
+            PreparedStatement pstm;
+            try {
+                pstm = conn.prepareStatement(sql);
+                pstm.setInt(1, am_id);
+                ResultSet rs = pstm.executeQuery();
+                while (rs.next()) {
+                    String accList[] = rs.getString("acc_id").split(",");
+                    List<Integer> accl = new ArrayList<>();
+                    for (String acc : accList) {
+                        accl.add(Integer.parseInt(acc));
+                    }
+//                    System.out.println(accl.contains(acc_id));
+                    if (accl.contains(acc_id)) {
+//                        System.out.println("g_id:"+rs.getInt("g_id"));
+                        saf = StAssignmentFile.getStAmBbyAmIDAndGID(am_id, rs.getInt("g_id"));
+                        break;
+                    }
+                }
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(StAssignmentFile.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return saf;
     }
@@ -265,6 +306,35 @@ public class StAssignmentFile {
             Logger.getLogger(StAssignmentFile.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
+    }
+
+    public static StAssignmentFile getStAmBbyAmIDAndList(int am_id, int list_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select * from student_assignment_file where ass_id = ? and list_id = ?";
+        PreparedStatement pstm;
+        StAssignmentFile saf = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, am_id);
+            pstm.setInt(2, list_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                saf = new StAssignmentFile();
+                saf.setAcc_id(rs.getInt("acc_id"));
+                saf.setAm_id(am_id);
+                saf.setSt_am_id(rs.getInt("st_ass_id"));
+                saf.setG_id(rs.getInt("g_id"));
+                saf.setList_id(rs.getInt("list_id"));
+                saf.setScore(rs.getDouble("score"));
+                saf.setLasted_send_date(rs.getDate("lasted_send_date"));
+                saf.setChecked_time(rs.getTimestamp("checked_time"));
+                saf.setComment(Comment.getCommentByStAmIDFile(rs.getInt("st_ass_id")));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(StAssignmentFile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return saf;
     }
 
     public static int getLastedListId() {
@@ -329,7 +399,7 @@ public class StAssignmentFile {
 
     public static int updateScore(double score, int st_am_id) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "update student_assignment_file set score=? where st_ass_id=?";
+        String sql = "update student_assignment_file set score=?, checked_time=current_timestamp where st_ass_id=?";
         PreparedStatement pstm;
         int result = 0;
         try {
@@ -347,6 +417,8 @@ public class StAssignmentFile {
 
     @Override
     public String toString() {
-        return "StAssignmentFile{" + "st_am_id=" + st_am_id + ", am_id=" + am_id + ", acc_id=" + acc_id + ", g_id=" + g_id + ", list_id=" + list_id + ", score=" + score + ", lasted_send_date=" + lasted_send_date + ", similar_score=" + similar_score + ", comment=" + comment + '}';
+        return "StAssignmentFile{" + "st_am_id=" + st_am_id + ", am_id=" + am_id + ", acc_id=" + acc_id + ", g_id=" + g_id + ", list_id=" + list_id + ", score=" + score + ", lasted_send_date=" + lasted_send_date + ", checked_time=" + checked_time + ", similar_score=" + similar_score + ", comment=" + comment + '}';
     }
+    
+    
 }

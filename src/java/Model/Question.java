@@ -25,7 +25,7 @@ public abstract class Question {
     private String instruction;
     private int q_no;
     private String q_type;
-    
+
     abstract public int add();
 
     abstract public String getQ_text();
@@ -220,7 +220,7 @@ public abstract class Question {
         for (int i = 0; i < q_id.length; i++) {
             sql.append(q_id[i] + ",");
         }
-        sql.replace(sql.length()-1, sql.length()-1, ")");
+        sql.replace(sql.length() - 1, sql.length() - 1, ")");
         System.out.println(sql);
         PreparedStatement pstm;
         int result = 0;
@@ -233,14 +233,16 @@ public abstract class Question {
         }
         return result > 0;
     }
+
     public static boolean delete(String[] q_id) {
         Connection conn = ConnectionBuilder.getConnection();
         StringBuilder sql = new StringBuilder("delete from question where q_id in(");
         for (int i = 0; i < q_id.length; i++) {
             sql.append(q_id[i] + ",");
         }
-        sql.deleteCharAt(sql.length()-1);
+        sql.deleteCharAt(sql.length() - 1);
         sql.append(")");
+        System.out.println(sql);
         PreparedStatement pstm;
         int result = 0;
         try {
@@ -253,6 +255,22 @@ public abstract class Question {
         return result > 0;
     }
 
+    public static boolean deleteByAm_id(int am_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        StringBuilder sql = new StringBuilder("delete from question where ass_id = ?");
+        PreparedStatement pstm;
+        int result = 0;
+        try {
+            pstm = conn.prepareStatement(sql.toString());
+            pstm.setInt(1, am_id);
+            result = pstm.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result > 0;
+    }
+    
     public static List<Integer> getListQId(int am_id) {
         List<Integer> idList = new ArrayList<Integer>();
         Connection conn = ConnectionBuilder.getConnection();
@@ -289,7 +307,7 @@ public abstract class Question {
 
         qIdList.deleteCharAt(qIdList.length() - 1).append(")");
         sql += qIdList.toString() + " order by q.q_no";
-//        System.out.println(sql);
+        System.out.println(sql);
         PreparedStatement pstm;
         try {
             pstm = conn.prepareStatement(sql);
@@ -304,31 +322,32 @@ public abstract class Question {
                     ex = new Explain();
                     ex.setQ_text(rs.getString(7));
                     ex.setQ_keyword_check(rs.getString(8));
+                    ex.setScore(rs.getDouble(9));
                     q = ex;
                 } else if (q_type.equalsIgnoreCase("fillBlank")) {
                     fb = new FillBlank();
-                    fb.setQ_order(rs.getInt(10));
-                    fb.setQ_text(rs.getString(11));
-                    fb.setScore(rs.getDouble(12));
-                    fb.setAnswer(rs.getString(13));
-                    fb.setQ_start_index(rs.getInt(14));
-                    fb.setQ_end_index(rs.getInt(15));
+                    fb.setQ_order(rs.getInt(11));
+                    fb.setQ_text(rs.getString(12));
+                    fb.setScore(rs.getDouble(13));
+                    fb.setAnswer(rs.getString(14));
+                    fb.setQ_start_index(rs.getInt(15));
+                    fb.setQ_end_index(rs.getInt(16));
                     q = fb;
                 } else if (q_type.equalsIgnoreCase("matchWord")) {
                     mw = new MatchWord();
-                    mw.setQ_order(rs.getInt(17));
-                    mw.setQ_title(rs.getString(18));
-                    mw.setQ_text(rs.getString(19));
-                    mw.setQ_answer(rs.getString(20));
-                    mw.setQ_score(rs.getDouble(21));
+                    mw.setQ_order(rs.getInt(18));
+                    mw.setQ_title(rs.getString(19));
+                    mw.setQ_text(rs.getString(20));
+                    mw.setQ_answer(rs.getString(21));
+                    mw.setQ_score(rs.getDouble(22));
                     q = mw;
                 } else if (q_type.equalsIgnoreCase("tfQuestion") || q_type.equalsIgnoreCase("multiple_choice")) {
                     mc = new MultipleChoice();
-                    mc.setQ_text(rs.getString(23));
-                    mc.setQ_category(rs.getString(24));
-                    mc.setQ_choice_list(rs.getString(25));
-                    mc.setQ_answer_list(rs.getString(26));
-                    mc.setQ_score(rs.getDouble(27));
+                    mc.setQ_text(rs.getString(24));
+                    mc.setQ_category(rs.getString(25));
+                    mc.setQ_choice_list(rs.getString(26));
+                    mc.setQ_answer_list(rs.getString(27));
+                    mc.setQ_score(rs.getDouble(28));
                     q = mc;
                 }
                 q.setQ_id(rs.getInt(1));

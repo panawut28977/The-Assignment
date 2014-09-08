@@ -75,11 +75,11 @@ public class GetSentAssignment extends HttpServlet {
                     left++;
                 }
 
-                if (sa.getScore() != 0) {
+                if (sa.getChecked_time() != null) {
                     checked++;
                 }
 
-                if (sa.getScore() == 0 && sa.getLasted_send_date() != null) {
+                if (sa.getLasted_send_date() != null) {
                     total++;
                 }
 
@@ -119,11 +119,11 @@ public class GetSentAssignment extends HttpServlet {
                     left++;
                 }
 
-                if (sa.getScore() != 0) {
+                if (sa.getChecked_time() != null) {
                     checked++;
                 }
 
-                if (sa.getScore() == 0 && sa.getLasted_send_date() != null) {
+                if (sa.getLasted_send_date() != null) {
                     total++;
                 }
 

@@ -36,9 +36,10 @@ public class anotherAmFile extends HttpServlet {
             throws ServletException, IOException {
         HttpSession ss = request.getSession(false);
         String uuid = request.getParameter("uuid");
+        String safv_id = request.getParameter("safv_id");
         String apiToken = "mGye5pCBUTgkhI7Zl0QL3oPJ";
         Crocodoc.setApiToken(apiToken);
-        System.out.print("  Creating... ");
+        System.out.print("Creating... ");
         String sessionKey = null;
         try {
             sessionKey = CrocodocSession.create(uuid);
@@ -51,6 +52,7 @@ public class anotherAmFile extends HttpServlet {
         }
         System.out.println(sessionKey);
         ss.setAttribute("sessionKey", sessionKey);
+        request.setAttribute("safv_id", safv_id);
 
         //update session
         StAssignmentFile stF = (StAssignmentFile) ss.getAttribute("sa");
