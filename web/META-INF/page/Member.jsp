@@ -18,9 +18,9 @@
                                 <c:when test="${cf:getAccountRole(st.acc_id, cId) eq 'TH'}">
                                     <li><a class="removeTH" data-id="${st.acc_id}">Remove as Teacher</a></li>
                                     </c:when>
-                                    <c:otherwise>
+                                    <c:when test="${st.account_type eq 'TH'}">
                                     <li><a class="makeTH" data-id="${st.acc_id}">Make as Teacher</a></li>
-                                    </c:otherwise>
+                                    </c:when>
                                 </c:choose>
                             <li><a class="kick" data-id="${st.acc_id}">Remove form course</a></li>
                         </ul>
