@@ -28,6 +28,7 @@
         <url-pattern>/GetSentAssignment</url-pattern>
         <url-pattern>/checkAssignment</url-pattern>
         <url-pattern>/anotherAmFile</url-pattern>
+        <url-pattern>/userscore</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>

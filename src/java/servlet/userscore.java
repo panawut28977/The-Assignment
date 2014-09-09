@@ -43,20 +43,29 @@ public class userscore extends HttpServlet {
         Long cId = (Long) ss.getAttribute("cId");
         int sent = 0, leftover = 0, miss = 0;
         String remaintTimeSt = "";
-        double fully_mark = 0, mark = 0;
+        //fully_score คะแนนเต็มของทุกงานรวมกัน
+        //mark คะแนนที่ได้
+        //max_mark คะแนนทงานรวมทั้งหมดแล้วควรได้เท่าไหร่ รวมถึงงานที่ไม่ได้ส่งด้วย
+        //max_sent_mark คะแนนเต็มของงานทั้งหมดที่ส่งเป็นเท่าไหร่
+        //miss_score คะแนนที่พลาดเนื่องจากไม่ได้ส่ง
+        double fully_score = 0, mark = 0,max_mark=0,max_sent_mark=0,miss_score=0;
         AccountCourse yourCourse = (AccountCourse) (ac.getCourseList().get(cId));
         List<Assignment> courseAssignment = yourCourse.getCourse().getAssignment();
         Map<Integer, StAssignmentFile> stf = new HashMap<>();
         Map<Integer, StAssignmentOnWeb> stow = new HashMap<>();
         if (yourCourse.getRole().equalsIgnoreCase("ST")) {
             for (Assignment assignment : courseAssignment) {
-                fully_mark += assignment.getFully_mark();
+                fully_score += assignment.getFully_mark();
                 remaintTimeSt = Assignment.remainingTimeforSend(assignment, ac.getAcc_id());
                 if (remaintTimeSt.equalsIgnoreCase("sent")) {
                     sent++;
+                    max_mark+= assignment.getFully_mark();
+                    max_sent_mark += assignment.getFully_mark();
                 } else if (remaintTimeSt.equalsIgnoreCase("miss")) {
                     miss++;
-                } else {
+                    miss_score+= assignment.getFully_mark();
+                    max_mark+= assignment.getFully_mark();
+                } else  {
                     leftover++;
                 }
 
@@ -85,14 +94,13 @@ public class userscore extends HttpServlet {
 
         }
 
-        int total_score = 0;
         Iterator loopf = stf.entrySet().iterator();
         Iterator loopw = stow.entrySet().iterator();
         while (loopf.hasNext()) {
             Map.Entry mapEntry = (Map.Entry) loopf.next();
             StAssignmentFile f = (StAssignmentFile) mapEntry.getValue();
             if (f.getLasted_send_date() != null) {
-                total_score += f.getScore();
+                mark += f.getScore();
             }
         }
 
@@ -100,29 +108,32 @@ public class userscore extends HttpServlet {
             Map.Entry mapEntry = (Map.Entry) loopw.next();
             StAssignmentOnWeb w = (StAssignmentOnWeb) mapEntry.getValue();
             if (w.getLasted_send_date() != null) {
-                total_score += w.getScore();
+                mark += w.getScore();
             }
         }
 //        for (StAssignmentFile f : stf) {
 //            if(f.getLasted_send_date() != null){
-//                total_score += f.getScore();
+//                mark += f.getScore();
 //            }
 //        }
 //        for (StAssignmentOnWeb w : stow) {
 //            if(w.getLasted_send_date() != null){
-//                total_score += w.getScore();
+//                mark += w.getScore();
 //            }
 //        }
         System.out.println(stf.size());
         System.out.println(stow.size());
         ss.setAttribute("stf", stf);
         ss.setAttribute("stow", stow);
-        ss.setAttribute("total_score", total_score);
         ss.setAttribute("miss", miss);
         ss.setAttribute("total_sent_am", sent);
         ss.setAttribute("leftover_am", leftover);
-        ss.setAttribute("fully_mark", fully_mark);
-        response.sendRedirect("course.jsp?tab=score");
+        ss.setAttribute("total_mark", mark);
+        ss.setAttribute("max_mark", max_mark);
+        ss.setAttribute("max_sent_mark", max_sent_mark);
+        ss.setAttribute("miss_score", miss_score);
+        ss.setAttribute("fully_score", fully_score);
+        getServletContext().getRequestDispatcher("/course.jsp?tab=score").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
