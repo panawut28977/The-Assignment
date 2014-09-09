@@ -13,6 +13,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -177,7 +178,6 @@ public class Account {
                 acc.setAccount_type(rs.getString("account_type"));
                 acc.setProfile_pic(rs.getString("profile_pic"));
                 acc.setRegister_date(rs.getTimestamp("register_date"));
-                acc.setAnnouncement(Announcement.viewAnnByAccID(acc_id));
                 acc.setAssignment(Assignment.getAmByAccID(acc_id));
                 //old logic
 //                acc.setCourseList(AccountCourse.getCourseByAccID(acc_id));
@@ -188,6 +188,13 @@ public class Account {
 
                 //new logic
                 acc.setCourseList(AccountCourse.getCourseByAccIDMap(acc_id));
+                Iterator iterator = acc.getCourseList().entrySet().iterator();
+                ArrayList<Long> courseIdList = new ArrayList<>();
+                while (iterator.hasNext()) {
+                    Map.Entry mapEntry = (Map.Entry) iterator.next();
+                    courseIdList.add((Long)mapEntry.getKey());
+                }
+                acc.setAnnouncement(Announcement.viewAnnByCourseList(courseIdList));
 
                 //ไม่ใช้ userscore ละค่าที่ได้ออกมามันมหาศาลเกินไป
 //                acc.setListStudentScore(UserScore.getUserScore(acc_id));

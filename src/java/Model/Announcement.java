@@ -186,6 +186,40 @@ public class Announcement {
         }
         return ann;
     }
+    
+    //viewAnnouncementByCourse
+    public static List<Announcement> viewAnnByCourseList(ArrayList<Long> course_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        StringBuilder cIdList = new StringBuilder("(");
+        for (Long id : course_id) {
+            cIdList.append(id+",");
+        }
+        cIdList.deleteCharAt(cIdList.length()-1);
+        cIdList.append(")");
+        System.out.println(cIdList.toString());
+        String sql = "select *  from announcement where course_id in "+cIdList.toString()+" order by announce_date desc";
+        PreparedStatement pstm;
+        List<Announcement> ann = new ArrayList<Announcement>();
+        Announcement a = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                a = new Announcement();
+                a.setAn_acc(Account.getAccountByID(rs.getInt("acc_id")));
+                a.setCourse(rs.getInt("course_id"));
+                a.setAn_id(rs.getInt("an_id"));
+                a.setAnnounce_date(rs.getTimestamp("announce_date"));
+                a.setContent(rs.getString("content"));
+                a.setTitle(rs.getString("title"));
+                ann.add(a);
+            }
+             conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ann;
+    }
 
     @Override
     public String toString() {
