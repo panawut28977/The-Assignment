@@ -42,7 +42,7 @@ public class userscore extends HttpServlet {
         HttpSession ss = request.getSession();
         Account ac = (Account) ss.getAttribute("ac");
         Long cId = (Long) ss.getAttribute("cId");
-        int sent = 0, leftover = 0;
+        int sent = 0, leftover = 0, miss = 0;
         String remaintTimeSt = "";
         double fully_mark = 0, mark = 0;
         AccountCourse yourCourse = (AccountCourse) (ac.getCourseList().get(cId));
@@ -53,8 +53,10 @@ public class userscore extends HttpServlet {
             for (Assignment assignment : courseAssignment) {
                 fully_mark += assignment.getFully_mark();
                 remaintTimeSt = Assignment.remainingTimeforSend(assignment, ac.getAcc_id());
-                if (remaintTimeSt == "sent") {
+                if (remaintTimeSt.equalsIgnoreCase("sent")) {
                     sent++;
+                } else if (remaintTimeSt.equalsIgnoreCase("miss")) {
+                    miss++;
                 } else {
                     leftover++;
                 }
@@ -117,6 +119,7 @@ public class userscore extends HttpServlet {
         ss.setAttribute("stf", stf);
         ss.setAttribute("stow", stow);
         ss.setAttribute("total_score", total_score);
+        ss.setAttribute("miss", miss);
         ss.setAttribute("total_sent_am", sent);
         ss.setAttribute("leftover_am", leftover);
         ss.setAttribute("fully_mark", fully_mark);

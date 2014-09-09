@@ -53,7 +53,16 @@
                             <td>Individual</td>
                         </c:when>
                         <c:otherwise>
-                            <td>${a.total_member} <a href="selectPeople?am_id=${a.am_id}">join group</a></td>
+                            <td>${a.total_member} 
+                                <c:choose>
+                                    <c:when test="${ac.courseList.get(cId).role eq 'ST'}">
+                                        <a href="selectPeople?am_id=${a.am_id}">join group</a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="selectPeople?am_id=${a.am_id}">see group</a>
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
                         </c:otherwise>
                     </c:choose>
                     <td>${a.due_date} <c:if test="${a.due_date eq null}"> - </c:if></td>
@@ -76,8 +85,8 @@
                                         </c:when>
                                         <c:when test="${status eq 'miss'}">
                                         <span class="text-muted">Miss</span>
-                                        </c:when>
-                                    </c:choose>
+                                    </c:when>
+                                </c:choose>
                             </td>
                             <td>
                                 <a title="Send Assignment" href="sendAssignment?am_id=${a.am_id}">

@@ -577,13 +577,17 @@ public class Assignment {
         String status = "";
         Date due_date = a.getDue_date();
         Double remaining_day = (double) ((due_date.getTime() - lastsent.getTime()) / 1000 / 60 / 60 / 24);
-        if (remaining_day > 3) {
-            status = "ontime";
-        } else if (remaining_day <= 3 && remaining_day >= 0) {
-            //status = "hurryup";
-            status = "ontime";
+        if (lastsent != null) {
+            if (remaining_day > 3) {
+                status = "ontime";
+            } else if (remaining_day <= 3 && remaining_day >= 0) {
+                //status = "hurryup";
+                status = "ontime";
+            } else {
+                status = "late";
+            }
         } else {
-            status = "late";
+            status = "miss";
         }
         return status;
     }

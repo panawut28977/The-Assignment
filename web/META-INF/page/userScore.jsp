@@ -233,11 +233,11 @@
         });
 
         var option = [{
-                 responsive: true,
-                 maintainAspectRatio: true,
-                 percentageInnerCutout : 0
+                responsive: true,
+                maintainAspectRatio: true,
+                percentageInnerCutout: 0
             }]
-        
+
         var ctx = $("#sentLeftChart").get(0).getContext("2d");
         var data = [
             {
@@ -246,8 +246,13 @@
                 label: "Sent"
             },
             {
-                value: ${leftover_am},
+                value: ${miss},
                 color: "#999",
+                label: "Miss"
+            },
+            {
+                value: ${leftover_am},
+                color: "#F8F8F8",
                 label: "Leftover"
             }
         ]
@@ -262,7 +267,7 @@
             },
             {
                 value: ${fully_mark-total_score},
-                color: "#999",
+                color: "#F8F8F8",
                 label: "Miss score"
             }
         ]
