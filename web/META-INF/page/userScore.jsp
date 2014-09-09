@@ -17,11 +17,11 @@
         <div class="row" id="chart" style="margin-top: 20px" >
             <div  class="col-md-6">
                 <canvas  id="sentLeftChart"></canvas>
-                <h4 >Sent / Leftover</h4>
+                <h4 >Sent / Miss / Leftover</h4>
             </div>
             <div  class="col-md-6">
                 <canvas id="scoreChart"></canvas>
-                <h4>Score (Max score is ${fully_mark})</h4>
+                <h4>Score (Max score is ${fully_score})</h4>
             </div>
         </div>
         <!--        <div style="text-align: center;margin-top:20px ">
@@ -35,7 +35,7 @@
                 <tr>
                     <td><b>Assignment</b></td>
                     <td><b>Scores</b></td>
-                    <td><b>Lasted sent</b></td>
+                    <td><b>Sent status</b></td>
                     <td><b>Work on</b></td>
                 </tr>
             </thead>
@@ -60,10 +60,11 @@
                                             <c:when test="${status eq 'hurryup'}">
                                                 <span class="text-warning">Hurry up!</span>
                                             </c:when>
-                                            <c:when test="${status eq 'sent'}">
-                                                <span class="text-muted">Sent <span class="glyphicon glyphicon-check"></span></span>
-                                                </c:when>
-                                            </c:choose></b>
+                                            <c:when test="${status eq 'miss'}">
+                                                <span class="text-muted">Miss</span>
+                                            </c:when>
+                                        </c:choose>
+                                    </b>
                                 </td>
                             </c:when>
                             <c:when test="${stow.get(a.am_id) ne null and stow.get(a.am_id).lasted_send_date ne null}">
@@ -82,17 +83,25 @@
                                             <c:when test="${status eq 'hurryup'}">
                                                 <span class="text-warning">Hurry up!</span>
                                             </c:when>
-                                            <c:when test="${status eq 'sent'}">
-                                                <span class="text-muted">Sent <span class="glyphicon glyphicon-check"></span></span>
-                                                </c:when>
-                                            </c:choose></b>
+                                            <c:when test="${status eq 'miss'}">
+                                                <span class="text-muted">Miss</span>
+                                            </c:when>
+                                        </c:choose></b>
                                 </td>
                             </c:when>
                             <c:otherwise>
                                 <td>0.0 /${a.fully_mark}</td>
-                                <td><b> - </b></td>
-                            </c:otherwise>
-                        </c:choose>
+                                <td><b>
+                                        <c:set value="${cf:remainingTimeforSend(a,ac.acc_id)}" var="status"/>
+                                        <c:choose>
+                                            <c:when test="${status eq 'miss'}">
+                                                <span class="text-muted">Miss</span>
+                                            </c:when>
+                                            <c:otherwise> - </c:otherwise>
+                                        </c:choose>
+                                    </b></td>
+                                </c:otherwise>
+                            </c:choose>
                         <td>${a.ass_type}</td>
                     </tr>
                 </c:forEach>
@@ -252,7 +261,7 @@
             },
             {
                 value: ${leftover_am},
-                color: "#F8F8F8",
+                color: "#ede8e8",
                 label: "Leftover"
             }
         ]
@@ -261,14 +270,24 @@
         var ctx2 = $("#scoreChart").get(0).getContext("2d");
         var data = [
             {
-                value: ${total_score},
+                value: ${total_mark},
                 color: "#40d47e",
-                label: "Your total score"
+                label: "Your total mark"
             },
             {
-                value: ${fully_mark-total_score},
-                color: "#F8F8F8",
-                label: "Miss score"
+                value: ${max_sent_mark-total_mark},
+                color: "#E74C3C",
+                label: "Your miss Mark"
+            },
+            {
+                value: ${miss_score},
+                color: "#999",
+                label: "Miss score "
+            },
+            {
+                value: ${fully_score-max_mark},
+                color: "#ede8e8",
+                label: "Left score"
             }
         ]
         var dscChart = new Chart(ctx2).Doughnut(data);

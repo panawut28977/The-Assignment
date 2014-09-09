@@ -576,8 +576,12 @@ public class Assignment {
     public static String lastedSentStatus(Date lastsent, Assignment a) {
         String status = "";
         Date due_date = a.getDue_date();
+        Date today = new Date();
         Double remaining_day = (double) ((due_date.getTime() - lastsent.getTime()) / 1000 / 60 / 60 / 24);
-        if (lastsent != null) {
+        Double timeout = (double) ((a.getLate_date().getTime() - today.getTime()) / 1000 / 60 / 60 / 24);
+        System.out.println(a.getAm_id());
+        System.out.println(lastsent +" / due "+ a.getDue_date()+"/last "+a.getLate_date());
+        if (lastsent != null ) {
             if (remaining_day > 3) {
                 status = "ontime";
             } else if (remaining_day <= 3 && remaining_day >= 0) {
@@ -589,6 +593,8 @@ public class Assignment {
         } else {
             status = "miss";
         }
+        System.out.println(status);
+        System.out.println("-----");
         return status;
     }
 
