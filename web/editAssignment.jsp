@@ -75,11 +75,22 @@
                             <div class="form-group" id="due_date">
                                 <label  class="col-md-3 control-label">Due date</label>
                                 <div class="input-group date form_datetime col-md-9" style="padding-right: 15px;  padding-left: 15px;"  data-link-field="dtp_input1">
-                                        <input class="form-control" size="16" type="text" value=${a.due_date}"" readonly>
+                                        <input class="form-control" size="16" type="text" value="" readonly>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                             </div>
                             <input type="hidden" id="dtp_input1" name="due_date" value="" /><br/>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-9 col-md-offset-3">
+                                <input type="checkbox" id="latePeriodbtn" checked="yes" name="latesend" value="true"> Can send after due date. please select period.
+                                <div id="latePeriod" class="input-group date form_datetime"  data-link-field="dtp_input2">
+                                    <input class="form-control" size="16" type="text" value="" readonly >
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                </div>
+                            </div>
+                            <input type="hidden" id="dtp_input2" name="late_date" value="" /><br/>
                         </div>
                         <!--                        <div class="form-group">
                                                     <label for="AmType" class="col-md-3 control-label">Assignment Type</label>
@@ -467,6 +478,11 @@
                                             var d = new Date('${a.due_date}');
                                             $('#due_date input').val(d.getFullYear() + "-" + monthNames[d.getMonth()] + "-" + ('0' + d.getDate()).slice(-2));
                                             $('#due_date input[name="due_date"]').val(d.getFullYear() + "-" + ('0' + (d.getMonth() + 1)).slice(-2) + "-" + ('0' + d.getDate()).slice(-2));
+
+                                            d = new Date('${a.late_date}');
+                                            $('#latePeriod input').val(d.getFullYear() + "-" + monthNames[d.getMonth()] + "-" + ('0' + d.getDate()).slice(-2));
+                                            $('#dtp_input2').val(d.getFullYear() + "-" + ('0' + (d.getMonth() + 1)).slice(-2) + "-" + ('0' + d.getDate()).slice(-2));
+
                                             $('.form_datetime').datetimepicker({
                                                 format: 'yyyy-MM-dd',
                                                 weekStart: 1,
@@ -806,7 +822,7 @@
                                             }
                                             $(this).parent().parent().parent(".multipleChoice").find(".c_list").html(html);
                                         });
-                                        
+
                                         function addTitle() {
                                             var titleBox = '<div class="row instruction"><hr><input type="hidden" name="seqno" value="' + seqno + '"/><label class="col-md-3 control-label">Instruction </label><div class="col-md-8"><input type="text" class="form-control" placeholder="Instruction" name="' + seqno + 'instruction" required="yes" ></div><a onclick="remove_title(this)"  style="vertical-align: -webkit-baseline-middle"><span class="glyphicon glyphicon-trash"></span></a><input type="hidden" value="instruction" name="' + seqno + 'q_type"></div>';
                                             $(".amQuestion").append(titleBox);
