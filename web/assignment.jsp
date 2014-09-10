@@ -122,7 +122,7 @@ Author     : JenoVa
                                 </tr>
                                 <c:if test="${ac.courseList.get(cId).role eq 'TH'}">
                                     <tr>
-                                        <td>Late sent</td>
+                                        <td><b>Late sent</b></td>
                                         <td>
                                             ${am.late_date}
                                         </td>
@@ -159,31 +159,28 @@ Author     : JenoVa
                                         </c:choose>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <c:choose >
-                                        <c:when test="${ac.courseList.get(cId).role eq 'TH'}">
-                                            <c:choose>
-                                                <c:when test="${am.ass_type eq 'file'}">
-                                                    <td>
-                                                        <a class="btn btn-primary" href="editAssignment?am_id=${param.amId}"><span class="glyphicon glyphicon-upload"></span> Update</a>
-                                                        <button class="btn btn-danger delete" style="margin-left: 10px" data-id="${am.am_id}"><span class="glyphicon glyphicon-remove"></span> Delete</button>
-                                                    </td>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <td>
-                                                        <a class="btn btn-primary" href="editAssignment?am_id=${param.amId}"><span class="glyphicon glyphicon-upload"></span> Edit</a>
-                                                        <button class="btn btn-danger delete" style="margin-left: 10px" data-id="${am.am_id}"><span class="glyphicon glyphicon-remove"></span> Delete</button>
-                                                    </td>
-                                                </c:otherwise>
-                                            </c:choose>
+                            </table>
+                            <c:choose >
+                                <c:when test="${ac.courseList.get(cId).role eq 'TH'}">
+                                    <c:choose>
+                                        <c:when test="${am.ass_type eq 'file'}">
+                                            <td>
+                                                <a class="btn btn-primary" href="editAssignment?am_id=${param.amId}"><span class="glyphicon glyphicon-upload"></span> Update</a>
+                                                <button class="btn btn-danger delete" style="margin-left: 10px" data-id="${am.am_id}"><span class="glyphicon glyphicon-remove"></span> Delete</button>
+                                            </td>
                                         </c:when>
                                         <c:otherwise>
-                                            <td></td>
+                                            <td>
+                                                <a class="btn btn-primary" href="editAssignment?am_id=${param.amId}"><span class="glyphicon glyphicon-upload"></span> Update</a>
+                                                <button class="btn btn-danger delete" style="margin-left: 10px" data-id="${am.am_id}"><span class="glyphicon glyphicon-remove"></span> Delete</button>
+                                            </td>
                                         </c:otherwise>
                                     </c:choose>
+                                </c:when>
+                                <c:otherwise>
                                     <td></td>
-                                </tr>
-                            </table>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                         <div class="clearboth"><hr></div> 
                         <h3>Comment</h3>

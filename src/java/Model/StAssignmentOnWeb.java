@@ -115,10 +115,8 @@ public class StAssignmentOnWeb {
     public void setChecked_time(Timestamp checked_time) {
         this.checked_time = checked_time;
     }
-    
-    
 
-    public double getScore(int st_am_id) {
+    public static double getScore(int st_am_id) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select score from student_assignment_on_web where st_ass_id = ? ";
         PreparedStatement pstm;
@@ -166,7 +164,47 @@ public class StAssignmentOnWeb {
         return stw;
     }
 
-    public double getScoreByAccIDAndAmID(int acc_id, int am_id) {
+    public static int getStAmIdByAmIDAndGID(int am_id, int g_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select st_ass_id from student_assignment_on_web where ass_id = ? and g_id = ?";
+        PreparedStatement pstm;
+        int id = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, am_id);
+            pstm.setInt(2, g_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                id = rs.getInt("st_ass_id");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(StAssignmentFile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+    }
+
+    public static int getStAmIdByAmIDAndAccId(int am_id, int acc_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select st_ass_id from student_assignment_on_web where ass_id = ? and acc_id = ?";
+        PreparedStatement pstm;
+        int id = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, am_id);
+            pstm.setInt(2, acc_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                id = rs.getInt("st_ass_id");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(StAssignmentFile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+    }
+
+    public static double getScoreByAccIDAndAmID(int acc_id, int am_id) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select score from student_assignment_on_web where ass_id = ? and acc_id = ?";
         PreparedStatement pstm;
@@ -219,7 +257,7 @@ public class StAssignmentOnWeb {
     public static StAssignmentOnWeb getStAmByAmIDAndAccId(int am_id, int acc_id, boolean ingroup) {
         StAssignmentOnWeb stw = null;
         if (ingroup) {
-           Connection conn = ConnectionBuilder.getConnection();
+            Connection conn = ConnectionBuilder.getConnection();
             String sql = "select * from group_member g where ass_id = ?";
             PreparedStatement pstm;
             try {
@@ -245,6 +283,37 @@ public class StAssignmentOnWeb {
             }
         }
         return stw;
+    }
+
+    public static int getStAmIdByAmIDAndAccId(int am_id, int acc_id, boolean ingroup) {
+        int id = 0;
+        if (ingroup) {
+            Connection conn = ConnectionBuilder.getConnection();
+            String sql = "select * from group_member g where ass_id = ?";
+            PreparedStatement pstm;
+            try {
+                pstm = conn.prepareStatement(sql);
+                pstm.setInt(1, am_id);
+                ResultSet rs = pstm.executeQuery();
+                while (rs.next()) {
+                    String accList[] = rs.getString("acc_id").split(",");
+                    List<Integer> accl = new ArrayList<>();
+                    for (String acc : accList) {
+                        accl.add(Integer.parseInt(acc));
+                    }
+//                    System.out.println(accl.contains(acc_id));
+                    if (accl.contains(acc_id)) {
+//                        System.out.println("g_id:"+rs.getInt("g_id"));
+                        id = StAssignmentFile.getStAmIdByAmIDAndGID(am_id, rs.getInt("g_id"));
+                        break;
+                    }
+                }
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(StAssignmentFile.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return id;
     }
 
     public static StAssignmentOnWeb getStAmbyAmIDAndGID(int am_id, int g_id) {
@@ -388,7 +457,7 @@ public class StAssignmentOnWeb {
         String sql = "delete from student_assignment_on_web where ass_id = ?";
         PreparedStatement pstm;
         int result = 0;
-        try {
+        try { 
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, am_id);
             result = pstm.executeUpdate();
@@ -399,9 +468,6 @@ public class StAssignmentOnWeb {
         return result > 0;
     }
 
-//    public void autoChecking(int st_am_id) {
-//
-//    }
     @Override
     public String toString() {
         return "StAssignmentOnWeb{" + "st_am_id=" + st_am_id + ", am_id=" + am_id + ", acc_id=" + acc_id + ", g_id=" + g_id + ", score=" + score + ", lasted_send_date=" + lasted_send_date + ", checked_time=" + checked_time + ", member=" + member + ", comment=" + comment + ", anwerQuestion=" + anwerQuestion + '}';

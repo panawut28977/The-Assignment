@@ -227,6 +227,26 @@ public class StAssignmentFile {
         }
         return saf;
     }
+    
+    public static int getStAmIdByAmIDAndGID(int am_id, int g_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select st_ass_id from student_assignment_file where ass_id = ? and g_id = ?";
+        PreparedStatement pstm;
+        int id = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, am_id);
+            pstm.setInt(2, g_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                id = rs.getInt("st_ass_id");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(StAssignmentFile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+    }
 
     public static StAssignmentFile getStAmBbyAmIDAndAccId(int am_id, int acc_id) {
         Connection conn = ConnectionBuilder.getConnection();
@@ -254,6 +274,26 @@ public class StAssignmentFile {
             Logger.getLogger(StAssignmentFile.class.getName()).log(Level.SEVERE, null, ex);
         }
         return saf;
+    }
+    
+    public static int getStAmIdByAmIDAndAccId(int am_id, int acc_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select st_ass_id from student_assignment_file where ass_id = ? and acc_id = ?";
+        PreparedStatement pstm;
+        int id = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, am_id);
+            pstm.setInt(2, acc_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                id = rs.getInt("st_ass_id");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(StAssignmentFile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
     }
 
     public static StAssignmentFile getStAmBbyAmIDAndAccId(int am_id, int acc_id, boolean ingroup) {
@@ -285,6 +325,37 @@ public class StAssignmentFile {
             }
         }
         return saf;
+    }
+    
+    public static int getStAmIdByAmIDAndAccId(int am_id, int acc_id, boolean ingroup) {
+        int id = 0;
+        if (ingroup) {
+            Connection conn = ConnectionBuilder.getConnection();
+            String sql = "select * from group_member g where ass_id = ?";
+            PreparedStatement pstm;
+            try {
+                pstm = conn.prepareStatement(sql);
+                pstm.setInt(1, am_id);
+                ResultSet rs = pstm.executeQuery();
+                while (rs.next()) {
+                    String accList[] = rs.getString("acc_id").split(",");
+                    List<Integer> accl = new ArrayList<>();
+                    for (String acc : accList) {
+                        accl.add(Integer.parseInt(acc));
+                    }
+//                    System.out.println(accl.contains(acc_id));
+                    if (accl.contains(acc_id)) {
+//                        System.out.println("g_id:"+rs.getInt("g_id"));
+                        id = StAssignmentFile.getStAmIdByAmIDAndGID(am_id, rs.getInt("g_id"));
+                        break;
+                    }
+                }
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(StAssignmentFile.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return id;
     }
 
     public static double getScoreByAccIDAmID(int am_id, int acc_id) {

@@ -10,7 +10,9 @@ import Model.AccountCourse;
 import Model.Assignment;
 import Model.StAssignmentFile;
 import Model.StAssignmentOnWeb;
+import Model.UserScore;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -43,74 +45,75 @@ public class userscore extends HttpServlet {
         Long cId = (Long) ss.getAttribute("cId");
         int sent = 0, leftover = 0, miss = 0;
         String remaintTimeSt = "";
-        //fully_score คะแนนเต็มของทุกงานรวมกัน
-        //mark คะแนนที่ได้
-        //max_mark คะแนนทงานรวมทั้งหมดแล้วควรได้เท่าไหร่ รวมถึงงานที่ไม่ได้ส่งด้วย
-        //max_sent_mark คะแนนเต็มของงานทั้งหมดที่ส่งเป็นเท่าไหร่
-        //miss_score คะแนนที่พลาดเนื่องจากไม่ได้ส่ง
-        double fully_score = 0, mark = 0,max_mark=0,max_sent_mark=0,miss_score=0;
         AccountCourse yourCourse = (AccountCourse) (ac.getCourseList().get(cId));
-        List<Assignment> courseAssignment = yourCourse.getCourse().getAssignment();
-        Map<Integer, StAssignmentFile> stf = new HashMap<>();
-        Map<Integer, StAssignmentOnWeb> stow = new HashMap<>();
         if (yourCourse.getRole().equalsIgnoreCase("ST")) {
-            for (Assignment assignment : courseAssignment) {
-                fully_score += assignment.getFully_mark();
-                remaintTimeSt = Assignment.remainingTimeforSend(assignment, ac.getAcc_id());
-                if (remaintTimeSt.equalsIgnoreCase("sent")) {
-                    sent++;
-                    max_mark+= assignment.getFully_mark();
-                    max_sent_mark += assignment.getFully_mark();
-                } else if (remaintTimeSt.equalsIgnoreCase("miss")) {
-                    miss++;
-                    miss_score+= assignment.getFully_mark();
-                    max_mark+= assignment.getFully_mark();
-                } else  {
-                    leftover++;
+            //fully_score คะแนนเต็มของทุกงานรวมกัน
+            //mark คะแนนที่ได้
+            //max_mark คะแนนทงานรวมทั้งหมดแล้วควรได้เท่าไหร่ รวมถึงงานที่ไม่ได้ส่งด้วย
+            //max_sent_mark คะแนนเต็มของงานทั้งหมดที่ส่งเป็นเท่าไหร่
+            //miss_score คะแนนที่พลาดเนื่องจากไม่ได้ส่ง
+            double fully_score = 0, mark = 0, max_mark = 0, max_sent_mark = 0, miss_score = 0;
+            List<Assignment> courseAssignment = yourCourse.getCourse().getAssignment();
+            Map<Integer, StAssignmentFile> stf = new HashMap<>();
+            Map<Integer, StAssignmentOnWeb> stow = new HashMap<>();
+            if (yourCourse.getRole().equalsIgnoreCase("ST")) {
+                for (Assignment assignment : courseAssignment) {
+                    fully_score += assignment.getFully_mark();
+                    remaintTimeSt = Assignment.remainingTimeforSend(assignment, ac.getAcc_id());
+                    if (remaintTimeSt.equalsIgnoreCase("sent")) {
+                        sent++;
+                        max_mark += assignment.getFully_mark();
+                        max_sent_mark += assignment.getFully_mark();
+                    } else if (remaintTimeSt.equalsIgnoreCase("miss")) {
+                        miss++;
+                        miss_score += assignment.getFully_mark();
+                        max_mark += assignment.getFully_mark();
+                    } else {
+                        leftover++;
+                    }
+
+                    if (assignment.getAss_type().equalsIgnoreCase("file")) {
+                        StAssignmentFile nstf = null;
+                        if (assignment.getTotal_member() == 1) {
+                            nstf = StAssignmentFile.getStAmBbyAmIDAndAccId(assignment.getAm_id(), ac.getAcc_id());
+                        } else {
+                            nstf = StAssignmentFile.getStAmBbyAmIDAndAccId(assignment.getAm_id(), ac.getAcc_id(), true);
+                        }
+                        if (nstf != null) {
+                            stf.put(assignment.getAm_id(), nstf);
+                        }
+                    } else {
+                        StAssignmentOnWeb nstow = null;
+                        if (assignment.getTotal_member() == 1) {
+                            nstow = StAssignmentOnWeb.getStAmByAmIDAndAccId(assignment.getAm_id(), ac.getAcc_id());
+                        } else {
+                            nstow = StAssignmentOnWeb.getStAmByAmIDAndAccId(assignment.getAm_id(), ac.getAcc_id(), true);
+                        }
+                        if (nstow != null) {
+                            stow.put(assignment.getAm_id(), nstow);
+                        }
+                    }
                 }
 
-                if (assignment.getAss_type().equalsIgnoreCase("file")) {
-                    StAssignmentFile nstf = null;
-                    if (assignment.getTotal_member() == 1) {
-                        nstf = StAssignmentFile.getStAmBbyAmIDAndAccId(assignment.getAm_id(), ac.getAcc_id());
-                    } else {
-                        nstf = StAssignmentFile.getStAmBbyAmIDAndAccId(assignment.getAm_id(), ac.getAcc_id(), true);
-                    }
-                    if (nstf != null) {
-                        stf.put(assignment.getAm_id(), nstf);
-                    }
-                } else {
-                    StAssignmentOnWeb nstow = null;
-                    if (assignment.getTotal_member() == 1) {
-                        nstow = StAssignmentOnWeb.getStAmByAmIDAndAccId(assignment.getAm_id(), ac.getAcc_id());
-                    } else {
-                        nstow = StAssignmentOnWeb.getStAmByAmIDAndAccId(assignment.getAm_id(), ac.getAcc_id(), true);
-                    }
-                    if (nstow != null) {
-                        stow.put(assignment.getAm_id(), nstow);
-                    }
+            }
+
+            Iterator loopf = stf.entrySet().iterator();
+            Iterator loopw = stow.entrySet().iterator();
+            while (loopf.hasNext()) {
+                Map.Entry mapEntry = (Map.Entry) loopf.next();
+                StAssignmentFile f = (StAssignmentFile) mapEntry.getValue();
+                if (f.getLasted_send_date() != null) {
+                    mark += f.getScore();
                 }
             }
 
-        }
-
-        Iterator loopf = stf.entrySet().iterator();
-        Iterator loopw = stow.entrySet().iterator();
-        while (loopf.hasNext()) {
-            Map.Entry mapEntry = (Map.Entry) loopf.next();
-            StAssignmentFile f = (StAssignmentFile) mapEntry.getValue();
-            if (f.getLasted_send_date() != null) {
-                mark += f.getScore();
+            while (loopw.hasNext()) {
+                Map.Entry mapEntry = (Map.Entry) loopw.next();
+                StAssignmentOnWeb w = (StAssignmentOnWeb) mapEntry.getValue();
+                if (w.getLasted_send_date() != null) {
+                    mark += w.getScore();
+                }
             }
-        }
-
-        while (loopw.hasNext()) {
-            Map.Entry mapEntry = (Map.Entry) loopw.next();
-            StAssignmentOnWeb w = (StAssignmentOnWeb) mapEntry.getValue();
-            if (w.getLasted_send_date() != null) {
-                mark += w.getScore();
-            }
-        }
 //        for (StAssignmentFile f : stf) {
 //            if(f.getLasted_send_date() != null){
 //                mark += f.getScore();
@@ -121,18 +124,63 @@ public class userscore extends HttpServlet {
 //                mark += w.getScore();
 //            }
 //        }
-        System.out.println(stf.size());
-        System.out.println(stow.size());
-        ss.setAttribute("stf", stf);
-        ss.setAttribute("stow", stow);
-        ss.setAttribute("miss", miss);
-        ss.setAttribute("total_sent_am", sent);
-        ss.setAttribute("leftover_am", leftover);
-        ss.setAttribute("total_mark", mark);
-        ss.setAttribute("max_mark", max_mark);
-        ss.setAttribute("max_sent_mark", max_sent_mark);
-        ss.setAttribute("miss_score", miss_score);
-        ss.setAttribute("fully_score", fully_score);
+            System.out.println(stf.size());
+            System.out.println(stow.size());
+            ss.setAttribute("stf", stf);
+            ss.setAttribute("stow", stow);
+            ss.setAttribute("miss", miss);
+            ss.setAttribute("total_sent_am", sent);
+            ss.setAttribute("leftover_am", leftover);
+            ss.setAttribute("total_mark", mark);
+            ss.setAttribute("max_mark", max_mark);
+            ss.setAttribute("max_sent_mark", max_sent_mark);
+            ss.setAttribute("miss_score", miss_score);
+            ss.setAttribute("fully_score", fully_score);
+        } else {
+            List<Account> listStudent = yourCourse.getCourse().getListStudent();
+            List<Assignment> listAm = yourCourse.getCourse().getAssignment();
+            List<UserScore> usList = null;
+            //loop ดึงนักเรียนทั้งหมดออกมาเพื่อ set ค่า userscore ให้กับทุกคนเพราะปกติแล้วมันจะเป้น null ไม่ได้ดึงมาให้
+            UserScore u = null;
+            for (Account account : listStudent) {
+                usList = new ArrayList<>();
+                String accName = account.getFirstname() + " " + account.getLastname();
+//                System.out.println(u.getFullname());
+                //จะ set score ให้กับแต่ละคนต้องรู้ว่าในคอร์สของคนนั้นมีวิชาไรอยุ่บ้างเลยต้องลูบทุกวิชา
+                for (Assignment assignment : listAm) {
+                    u = new UserScore();
+                    u.setFullname(accName);
+                    u.setAm_id(assignment.getAm_id());
+                    u.setAm_name(assignment.getName());
+                    u.setFull_mark(assignment.getFully_mark());
+                    Double score = null;
+                    int st_am_id = 0;
+                    //ทำการดึงคะแนนของงานมาใส่ใน userscore แต่ต้อง check ว่าเป็นงานประเภทไหนก่อนถึงจะใช้ method ถูก
+                    if (assignment.getAss_type().equalsIgnoreCase("file")) {
+                        //เช็คต่อว่าเป็นงานเดี่ยวหรือกลุ่ม
+                        if (assignment.getTotal_member() > 1) {
+                            st_am_id = StAssignmentFile.getStAmIdByAmIDAndAccId(assignment.getAm_id(), account.getAcc_id(), true);
+                        } else {
+                            st_am_id = StAssignmentFile.getStAmIdByAmIDAndAccId(assignment.getAm_id(), account.getAcc_id());
+                        }
+                        System.out.println("st_am_id file:"+st_am_id);
+                        score = StAssignmentFile.getScore(st_am_id);
+                    } else {
+                        if (assignment.getTotal_member() > 1) {
+                            st_am_id = StAssignmentOnWeb.getStAmIdByAmIDAndAccId(assignment.getAm_id(), account.getAcc_id(), true);
+                        } else {
+                            st_am_id = StAssignmentOnWeb.getStAmIdByAmIDAndAccId(assignment.getAm_id(), account.getAcc_id());
+                        }
+                        System.out.println("st_am_id web:"+st_am_id);
+                        score = StAssignmentOnWeb.getScore(st_am_id);
+                    }
+                    u.setScore(score);
+                    usList.add(u);
+                }
+                System.out.println(usList);
+                account.setListStudentScore(usList);
+            }
+        }
         getServletContext().getRequestDispatcher("/course.jsp?tab=score").forward(request, response);
     }
 

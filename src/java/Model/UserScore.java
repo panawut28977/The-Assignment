@@ -21,7 +21,8 @@ import java.util.logging.Logger;
  */
 public class UserScore {
     private String fullname;
-    private Assignment assignment;
+    private int am_id;
+    private String am_name;
     private double score;
     private double full_mark;
 
@@ -41,12 +42,20 @@ public class UserScore {
         this.full_mark = full_mark;
     }
 
-    public Assignment getAssignment() {
-        return assignment;
+    public int getAm_id() {
+        return am_id;
     }
 
-    public void setAssignment(Assignment assignment) {
-        this.assignment = assignment;
+    public void setAm_id(int am_id) {
+        this.am_id = am_id;
+    }
+
+    public String getAm_name() {
+        return am_name;
+    }
+
+    public void setAm_name(String am_name) {
+        this.am_name = am_name;
     }
 
     public double getScore() {
@@ -72,7 +81,8 @@ public class UserScore {
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
                 uScore = new UserScore();
-                uScore.setAssignment(Assignment.getAmByAmID(rs.getInt("ass_id")));
+                uScore.setAm_id(rs.getInt("ass_id"));
+                //ยังไม่ได้ set course name;
                 uScore.setScore(rs.getDouble("score"));
                 uScoreList.add(uScore);
             }
@@ -85,7 +95,7 @@ public class UserScore {
 
     @Override
     public String toString() {
-        return "UserScore{" + "fullname=" + fullname + ", assignment=" + assignment + ", score=" + score + ", full_mark=" + full_mark + '}';
-
+        return "UserScore{" + "fullname=" + fullname + ", am_id=" + am_id + ", am_name=" + am_name + ", score=" + score + ", full_mark=" + full_mark + '}';
     }
+    
 }
