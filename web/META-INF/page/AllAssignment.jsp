@@ -11,6 +11,8 @@
         font-weight: bold;
     }
 </style>
+<div id='calendar' style="margin-bottom: 20px;margin-top: 30px"></div>
+<hr/>
 <div class="table-responsive" style="min-height: 520px;">
     <table class="table table-striped " id="AllAssignment">
         <thead>
@@ -63,8 +65,8 @@
                                 </c:when>
                                 <c:when test="${status eq 'miss'}">
                                 <span class="text-muted">Miss</span>
-                                </c:when>
-                            </c:choose>
+                            </c:when>
+                        </c:choose>
                     </td>
                     <td>
                         <!--                        <a title="Send Assignment File" href="uploadAssignment.jsp?ct=allAm&&tab=AllAssignment">
@@ -79,8 +81,6 @@
         </tbody>
     </table>
 </div>
-<hr>
-<div id='calendar' style="margin-bottom: 20px"></div>
 <script src="module/fullcalendar/fullcalendar.min.js"></script>
 <script>
 
