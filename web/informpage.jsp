@@ -62,7 +62,12 @@
                         </c:when>
                         <c:when test="${msg eq '6'}">
                             <div class="alert alert-success" role="alert">
-                                <h3>Check Assignment successful. <br/><a href="GetSentAssignment?am_id=${param.am_id}">Go back to check another assignment</a></h3>
+                                <h3>Check Assignment successful.  <br/><br/><a href="GetSentAssignment?am_id=${param.am_id}">Go back to check another assignment</a></h3>
+                            </div>
+                        </c:when>
+                        <c:when test="${msg eq '7'}">
+                            <div class="alert alert-warning" role="alert">
+                                <h3><span class="glyphicon glyphicon-hand-left"></span> Please select your course on the left before.</h3>
                             </div>
                         </c:when>
                     </c:choose>

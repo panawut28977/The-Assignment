@@ -6,8 +6,11 @@
 
 package servlet;
 
+import Model.Account;
+import Model.AccountCourse;
+import Model.Assignment;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,6 +36,20 @@ public class setCourseSession extends HttpServlet {
             throws ServletException, IOException {
         Long cId = Long.parseLong(request.getParameter("cId"));
         HttpSession ss = request.getSession();
+        Account a = (Account) ss.getAttribute("ac");
+        List<Assignment> amList = ((AccountCourse)(a.getCourseList().get(cId))).getCourse().getAssignment(); 
+        int leftover = 0;
+        String st = "";
+        for (Assignment assignment : amList) {
+//            System.out.println(assignment.getDue_date());
+            st = Assignment.remainingTimeforSend(assignment, a.getAcc_id());
+            if (st.equalsIgnoreCase("ontime") || st.equalsIgnoreCase("hurryup") || st.equalsIgnoreCase("late") ) {
+                leftover++;
+            } else{
+                System.out.print(st+"/");
+            }
+        }
+        ss.setAttribute("leftoverInCourse", leftover);
         ss.setAttribute("cId", cId);
         response.sendRedirect("course.jsp");
     }

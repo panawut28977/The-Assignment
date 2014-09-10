@@ -12,6 +12,10 @@
         <filter-name>refreshAccount</filter-name>
         <filter-class>filter.refreshAccount</filter-class>
     </filter>
+    <filter>
+        <filter-name>authenCourseSession</filter-name>
+        <filter-class>filter.authenCourseSession</filter-class>
+    </filter>
     <filter-mapping>
         <filter-name>authenFilter</filter-name>
         <url-pattern>/home.jsp</url-pattern>
@@ -49,6 +53,21 @@
     <filter-mapping>
         <filter-name>UTF8Filter</filter-name>
         <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>authenCourseSession</filter-name>
+        <url-pattern>/course.jsp</url-pattern>
+        <url-pattern>/userscore</url-pattern>
+        <url-pattern>/CreateAssignment.jsp</url-pattern>
+        <url-pattern>/GetSentAssignment</url-pattern>
+        <url-pattern>/checkAssignment</url-pattern>
+        <url-pattern>/CheckAssignment.jsp</url-pattern>
+        <url-pattern>/Checkcopy</url-pattern>
+        <url-pattern>/Checkcopy.jsp</url-pattern>
+        <url-pattern>/anotherAmFile</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>

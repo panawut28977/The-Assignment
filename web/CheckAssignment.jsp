@@ -539,9 +539,9 @@
                         </c:when>
                     </c:choose>
                     <div style="clear: both;padding: 10px 0"><hr/></div> 
-                    <h3>Teacher Comment</h3>
+                    <h3>Comment</h3>
                     <form>
-                        <textarea class="form-control" placeholder="Tell your teacher and friends here." id="text"></textarea><br>
+                        <textarea class="form-control" placeholder="Tell your student here." id="text"></textarea><br>
                         <input type="button" value="comment"  id="addComment" class="btn btn-primary col-md-3 pull-right">
                     </form>
                     <br/><br/><br/>

@@ -70,6 +70,7 @@ public class GetSentAssignment extends HttpServlet {
                 if (sa.getLasted_send_date() != null) {
                     sentList.add(sa);
                     sent++;
+                    total++;
                 } else {
                     leftList.add(sa);
                     left++;
@@ -77,10 +78,6 @@ public class GetSentAssignment extends HttpServlet {
 
                 if (sa.getChecked_time() != null) {
                     checked++;
-                }
-
-                if (sa.getLasted_send_date() != null) {
-                    total++;
                 }
 
                 //ดึงคนที่มีกลุ่มมาเก็บลง accId
@@ -98,9 +95,7 @@ public class GetSentAssignment extends HttpServlet {
             //logic สำหรับคิดว่ามีใครเหลืออีกบ้างที่ยังไม่มีกลุ่ม หรือไม่เคยกดเข้างานเลยสักครั้ง
             for (Integer id : allAccId) {
                 if (!accId.contains(id)) {
-                    if (a.getTotal_member() == 1) {
-                        left++;
-                    }
+                    left++;
                     leftAccId.add(id);
                 }
             }
@@ -114,6 +109,7 @@ public class GetSentAssignment extends HttpServlet {
                 if (sa.getLasted_send_date() != null) {
                     sentList.add(sa);
                     sent++;
+                    total++;
                 } else {
                     leftList.add(sa);
                     left++;
@@ -121,10 +117,6 @@ public class GetSentAssignment extends HttpServlet {
 
                 if (sa.getChecked_time() != null) {
                     checked++;
-                }
-
-                if (sa.getLasted_send_date() != null) {
-                    total++;
                 }
 
                 //ดึงคนที่มีกลุ่มมาเก็บลง accId
@@ -141,9 +133,7 @@ public class GetSentAssignment extends HttpServlet {
             //logic สำหรับคิดว่ามีใครเหลืออีกบ้างที่ยังไม่มีกลุ่ม หรือไม่เคยกดเข้างานเลยสักครั้ง
             for (Integer id : allAccId) {
                 if (!accId.contains(id)) {
-                    if (a.getTotal_member() == 1) {
-                        left++;
-                    }
+                    left++;
                     leftAccId.add(id);
                 }
             }
