@@ -63,7 +63,7 @@
             <div class="row">
                 <%@include file="META-INF/page/side_bar.jsp"%>
                 <div class="col-md-9" style="padding-bottom: 20px">
-                    <!--<c:choose>
+                    <%--<c:choose>
                         <c:when test="${param.ct eq 'allAm'}">
                             <div><h3>All Course</h3></div>
                             <%@include file="META-INF/page/allCourseTab.jsp"%>
@@ -80,7 +80,7 @@
                                 <li class="active"><a href="#">Member</a></li>
                             </ol>
                         </c:otherwise>
-                    </c:choose>-->
+                    </c:choose>--%>
                     <%@include file="META-INF/page/CourseHeader.jsp"%>
                     <%@include file="META-INF/page/CourseTab.jsp"%>
                     <ol class="breadcrumb" style="margin-top: 15px" >

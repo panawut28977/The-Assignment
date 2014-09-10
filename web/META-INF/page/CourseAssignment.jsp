@@ -65,7 +65,7 @@
                             </td>
                         </c:otherwise>
                     </c:choose>
-                    <td>${a.due_date} <c:if test="${a.due_date eq null}"> - </c:if></td>
+                    <td>${a.due_date}</td>
                     <c:choose>
                         <c:when test="${ac.courseList.get(cId).role eq 'ST'}">
                             <td>

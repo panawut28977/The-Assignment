@@ -524,10 +524,10 @@ public class Assignment {
             } else {
                 pstm.setString(7, ass.getTitle_assignment_onweb());
             }
-            pstm.setInt(8, ass.getAm_id());
-            pstm.setString(9, df.format(ass.getLate_date()));
+            pstm.setString(8, df.format(ass.getLate_date()));
+            pstm.setInt(9, ass.getAm_id());
             result = pstm.executeUpdate();
-
+            System.out.println(result);
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);

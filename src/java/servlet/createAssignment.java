@@ -181,6 +181,7 @@ public class createAssignment extends HttpServlet {
                     ep.setQ_text(qtext);
                     ep.setQ_keyword_check(qanswer);
                     ep.setScore(Double.parseDouble(score));
+                    fullymark += Double.parseDouble(score);
                     qlist.add(ep);
                 } else if (q_type.equalsIgnoreCase("fillBlank")) {
                     String q_no = m.getParameter(seqno[i] + "q_no");
@@ -211,7 +212,7 @@ public class createAssignment extends HttpServlet {
                     instruction = m.getParameter(seqno[i] + "instruction");
                 }
             }
-            System.out.println(fullymark);
+            System.out.println("fully mark:"+fullymark);
             a.setFully_mark(fullymark);
             a.setAm_id(key);
             Assignment.updateAmInfo(a);

@@ -483,6 +483,13 @@
                             $('#latePeriod input').val(d.getFullYear() + "-" + monthNames[d.getMonth()] + "-" + ('0' + d.getDate()).slice(-2));
                             $('#dtp_input2').val(d.getFullYear() + "-" + ('0' + (d.getMonth() + 1)).slice(-2) + "-" + ('0' + d.getDate()).slice(-2));
 
+                            $('#due_date input').change(function() {
+                                $('#latePeriod').datetimepicker('setStartDate', $(this).val());
+                                $('#latePeriod input').val($(this).val());
+                                $('#dtp_input2').val($('#dtp_input1').val());
+                                $('#latePeriod').datetimepicker('update');
+                            });
+
                             $('.form_datetime').datetimepicker({
                                 format: 'yyyy-MM-dd',
                                 weekStart: 1,
@@ -495,6 +502,16 @@
                                 minView: 2
                             });
 
+                            $('#latePeriod').datetimepicker({
+                                format: 'yyyy-MM-dd',
+                                weekStart: 1,
+                                autoclose: 1,
+                                todayHighlight: 0,
+                                startView: 2,
+                                forceParse: 0,
+                                startDate: new Date(),
+                                minView: 2
+                            });
                             $("#ffup").hide();
                             $("#uploadnew").click(function() {
                                 $("#ffup").slideDown();
