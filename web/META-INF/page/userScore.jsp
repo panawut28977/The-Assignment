@@ -45,9 +45,17 @@
                         <td>${a.name}</td>
                         <c:choose>
                             <c:when test="${stf.get(a.am_id) ne null and stf.get(a.am_id).lasted_send_date ne null}">
-                                <td>
-                                    ${stf.get(a.am_id).score}
-                                    /${a.fully_mark}</td>
+                                <c:choose>
+                                    <c:when test="${stf.get(a.am_id).checked_time eq null}">
+                                        <td>wait checked</td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>
+                                            ${stf.get(a.am_id).score}
+                                            /${a.fully_mark}</td>
+                                        </c:otherwise>
+                                    </c:choose>
+
                                 <td><b>
                                         <c:set value="${cf:lastedSentStatus(stf.get(a.am_id).lasted_send_date, a)}" var="status"/>
                                         <c:choose>
@@ -68,9 +76,16 @@
                                 </td>
                             </c:when>
                             <c:when test="${stow.get(a.am_id) ne null and stow.get(a.am_id).lasted_send_date ne null}">
-                                <td>    
-                                    ${stow.get(a.am_id).score}
-                                    /${a.fully_mark}</td>
+                                <c:choose>
+                                    <c:when test="${stow.get(a.am_id).checked_time eq null}">
+                                        <td>wait checked</td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>
+                                            ${stow.get(a.am_id).score}
+                                            /${a.fully_mark}</td>
+                                        </c:otherwise>
+                                    </c:choose>
                                 <td><b>
                                         <c:set value="${cf:lastedSentStatus(stow.get(a.am_id).lasted_send_date, a)}" var="status"/>
                                         <c:choose>
@@ -255,7 +270,7 @@
                 label: "Sent"
             },
             {
-                value: ${miss},
+                value: ${miss_am},
                 color: "#999",
                 label: "Miss"
             },

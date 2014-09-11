@@ -43,7 +43,6 @@ public class userscore extends HttpServlet {
         HttpSession ss = request.getSession();
         Account ac = (Account) ss.getAttribute("ac");
         Long cId = (Long) ss.getAttribute("cId");
-        int sent = 0, leftover = 0, miss = 0;
         String remaintTimeSt = "";
         AccountCourse yourCourse = (AccountCourse) (ac.getCourseList().get(cId));
         if (yourCourse.getRole().equalsIgnoreCase("ST")) {
@@ -52,12 +51,14 @@ public class userscore extends HttpServlet {
             //max_mark คะแนนทงานรวมทั้งหมดแล้วควรได้เท่าไหร่ รวมถึงงานที่ไม่ได้ส่งด้วย
             //max_sent_mark คะแนนเต็มของงานทั้งหมดที่ส่งเป็นเท่าไหร่
             //miss_score คะแนนที่พลาดเนื่องจากไม่ได้ส่ง
+            int sent = 0, leftover = 0, miss_am = 0;
             double fully_score = 0, mark = 0, max_mark = 0, max_sent_mark = 0, miss_score = 0;
             List<Assignment> courseAssignment = yourCourse.getCourse().getAssignment();
             Map<Integer, StAssignmentFile> stf = new HashMap<>();
             Map<Integer, StAssignmentOnWeb> stow = new HashMap<>();
             if (yourCourse.getRole().equalsIgnoreCase("ST")) {
                 for (Assignment assignment : courseAssignment) {
+//                    System.out.println(assignment);
                     fully_score += assignment.getFully_mark();
                     remaintTimeSt = Assignment.remainingTimeforSend(assignment, ac.getAcc_id());
                     if (remaintTimeSt.equalsIgnoreCase("sent")) {
@@ -65,7 +66,7 @@ public class userscore extends HttpServlet {
                         max_mark += assignment.getFully_mark();
                         max_sent_mark += assignment.getFully_mark();
                     } else if (remaintTimeSt.equalsIgnoreCase("miss")) {
-                        miss++;
+                        miss_am++;
                         miss_score += assignment.getFully_mark();
                         max_mark += assignment.getFully_mark();
                     } else {
@@ -128,7 +129,7 @@ public class userscore extends HttpServlet {
             System.out.println(stow.size());
             ss.setAttribute("stf", stf);
             ss.setAttribute("stow", stow);
-            ss.setAttribute("miss", miss);
+            ss.setAttribute("miss_am", miss_am);
             ss.setAttribute("total_sent_am", sent);
             ss.setAttribute("leftover_am", leftover);
             ss.setAttribute("total_mark", mark);
@@ -163,7 +164,7 @@ public class userscore extends HttpServlet {
                         } else {
                             st_am_id = StAssignmentFile.getStAmIdByAmIDAndAccId(assignment.getAm_id(), account.getAcc_id());
                         }
-                        System.out.println("st_am_id file:"+st_am_id);
+                        System.out.println("st_am_id file:" + st_am_id);
                         score = StAssignmentFile.getScore(st_am_id);
                     } else {
                         if (assignment.getTotal_member() > 1) {
@@ -171,7 +172,7 @@ public class userscore extends HttpServlet {
                         } else {
                             st_am_id = StAssignmentOnWeb.getStAmIdByAmIDAndAccId(assignment.getAm_id(), account.getAcc_id());
                         }
-                        System.out.println("st_am_id web:"+st_am_id);
+                        System.out.println("st_am_id web:" + st_am_id);
                         score = StAssignmentOnWeb.getScore(st_am_id);
                     }
                     u.setScore(score);

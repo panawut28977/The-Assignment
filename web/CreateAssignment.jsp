@@ -278,6 +278,7 @@
                                         <li><a onclick="setType('fill')"><img src="img/icon/fill.gif"> Fill in Blank</a></li>
                                         <li><a onclick="setType('ep')"><img src="img/icon/explain.gif"> Explain</a></li>
                                     </ul>
+                                    <button type="button" class="btn btn-default" onclick="addTitle()" style="margin-left: 20px;"> Add Instruction</button>
                                 </div>
                             </div>
                         </section>
