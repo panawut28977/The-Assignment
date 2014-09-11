@@ -12,7 +12,9 @@ import Model.Group_member;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -45,7 +47,7 @@ public class selectPeople extends HttpServlet {
         } else {
             cId = Integer.parseInt(ss.getAttribute("cId") + "");
         }
-        
+
         List<Group_member> gList = Group_member.getAllGroup(a.getAm_id());
         StringBuilder temp = new StringBuilder(" ");
         for (Group_member group_member : gList) {
@@ -53,12 +55,18 @@ public class selectPeople extends HttpServlet {
         }
         temp.deleteCharAt(0);
         String accList[] = temp.toString().split(",");
-        
-        List<Account> allMember = AccountCourse.getMemberInCourse(cId);
+
+        Map<AccountCourse, Account> allMember = AccountCourse.getMemberInCourseWithRole(cId);
+        Iterator loopa = allMember.entrySet().iterator();
         List<Account> noGMember = new ArrayList<>();
-        for (Account m : allMember) {
-            if(!Arrays.asList(accList).contains(m.getAcc_id()+"")){
-                noGMember.add(m);
+        while (loopa.hasNext()) {
+            Map.Entry mapEntry = (Map.Entry) loopa.next();
+            if (((AccountCourse) mapEntry.getKey()).getRole().equalsIgnoreCase("ST")) {
+                Account m = (Account) mapEntry.getValue();
+//                System.out.println(m);
+                if (!Arrays.asList(accList).contains(m.getAcc_id() + "")) {
+                    noGMember.add(m);
+                }
             }
         }
         request.setAttribute("noGMember", noGMember);
@@ -69,7 +77,7 @@ public class selectPeople extends HttpServlet {
         if (Group_member.isInGroup(ac.getAcc_id(), a.getAm_id()) >= 1) {
             request.setAttribute("msg", "joined");
         }
-        
+
         url = "/groupWork.jsp?tab=AllAssignment";
         getServletContext().getRequestDispatcher(url).forward(request, response);
     }

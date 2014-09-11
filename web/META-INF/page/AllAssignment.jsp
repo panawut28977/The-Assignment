@@ -12,7 +12,7 @@
     }
 </style>
 <div id='calendar' style="margin-bottom: 20px;margin-top: 30px"></div>
-<hr/>
+<hr id='calendar-line-break'/>
 <div class="table-responsive" style="min-height: 520px;">
     <table class="table table-striped " id="AllAssignment">
         <thead>
@@ -89,6 +89,12 @@
             /* Disable initial sort */
             "aaSorting": []
         });
+        if ('${param.st}'.length) {
+            $('html, body').animate({
+                scrollTop: $("#AllAssignment_wrapper").offset().top + 560
+            }, 1000);
+        }
+
         aTable.fnFilter('${param.st}');
         var jsonArr = [];
     <c:forEach items="${ac.assignment}" var="a">
@@ -122,7 +128,6 @@
         var d = date.getDate();
         var m = date.getMonth();
         var y = date.getFullYear();
-
         $('#calendar').fullCalendar({
             header: {
                 left: 'prev,next today',
