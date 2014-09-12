@@ -10,6 +10,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <c:set value="" var="cId" scope="session"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="META-INF/page/include_css.jsp" %>
         <%@include file="META-INF/page/include_js.jsp" %>
@@ -121,44 +122,59 @@
                     <div class="col-md-4" style="margin-top: 36px;">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title">Select your teacher</h3>
+                                <h3 class="panel-title">Message to your teacher</h3>
                             </div>
                             <div class="panel-body" id="teacherSelectionBox">
-                                <div class="media">
-                                    <a class="pull-left" href="#">
-                                        <img width="32" src="img/avatar.jpg">
-                                    </a>
-                                    <div class="media-body">
-                                        <h5 class="media-heading">AJ.Kittiphan Puapholthep</h5>
+                                <c:if test="${youTeacher.size()==0}">
+                                    <br/>
+                                    <p class="text-center text-muted"><b>You don't have a Teacher</b></p>
+                                </c:if>
+                                <c:forEach items="${youTeacher}" var="t">
+                                    <div class="media" style="padding: 10px">
+                                        <a class="pull-left" href="#">
+                                            <img width="32" src="${t.profile_pic}">
+                                        </a>
+                                        <div class="media-body">
+                                            <h5 class="media-heading">${t.firstname} ${t.lastname}</h5>
+                                        </div>
                                     </div>
-                                </div>
-                                <hr>
-                                <div class="media">
-                                    <a class="pull-left" href="#">
-                                        <img width="32" src="img/avatar.jpg">
-                                    </a>
-                                    <div class="media-body">
-                                        <h5 class="media-heading">AJ.Unhawa Ninrutsirikun</h5>
-                                    </div> 
-                                </div>
-                                <hr>
-                                <div class="media">
-                                    <a class="pull-left" href="#">
-                                        <img width="32" src="img/avatar.jpg">
-                                    </a>
-                                    <div class="media-body">
-                                        <h5 class="media-heading">AJ.Ekapong Jungcharoensukying</h5>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="media">
-                                    <a class="pull-left" href="#">
-                                        <img width="32" src="img/avatar.jpg">
-                                    </a>
-                                    <div class="media-body">
-                                        <h5 class="media-heading">AJ.Kittipong Warasup</h5>
-                                    </div>
-                                </div>
+                                    <hr>
+                                </c:forEach>
+                                <!--                                <div class="media">
+                                                                    <a class="pull-left" href="#">
+                                                                        <img width="32" src="img/avatar.jpg">
+                                                                    </a>
+                                                                    <div class="media-body">
+                                                                        <h5 class="media-heading">AJ.Kittiphan Puapholthep</h5>
+                                                                    </div>
+                                                                </div>
+                                                                <hr>
+                                                                <div class="media">
+                                                                    <a class="pull-left" href="#">
+                                                                        <img width="32" src="img/avatar.jpg">
+                                                                    </a>
+                                                                    <div class="media-body">
+                                                                        <h5 class="media-heading">AJ.Unhawa Ninrutsirikun</h5>
+                                                                    </div> 
+                                                                </div>
+                                                                <hr>
+                                                                <div class="media">
+                                                                    <a class="pull-left" href="#">
+                                                                        <img width="32" src="img/avatar.jpg">
+                                                                    </a>
+                                                                    <div class="media-body">
+                                                                        <h5 class="media-heading">AJ.Ekapong Jungcharoensukying</h5>
+                                                                    </div>
+                                                                </div>
+                                                                <hr>
+                                                                <div class="media">
+                                                                    <a class="pull-left" href="#">
+                                                                        <img width="32" src="img/avatar.jpg">
+                                                                    </a>
+                                                                    <div class="media-body">
+                                                                        <h5 class="media-heading">AJ.Kittipong Warasup</h5>
+                                                                    </div>
+                                                                </div>-->
                             </div>
                         </div>
                     </div>

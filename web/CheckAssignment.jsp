@@ -414,7 +414,7 @@
                                                 </c:choose>
                                             </c:forEach>
                                             <br>
-                                            <input type="submit" class="btn btn-primary pull-right" value="Send !!">
+                                            <input type="submit" class="btn btn-primary pull-right" value="Save">
                                             <!--                                            
                                                                                                                                     <h5><b><u>Instruction:</u> Fill in the blank</b></h5>[Question Title]
                                                                                                                                     <p class="match_word_check">1.) Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, <input disabled="yes" type="text" value="lit"><input type="number" name="score" value="1"><span class="text-success"><i class="glyphicon glyphicon-ok-circle"></i></span> sem 

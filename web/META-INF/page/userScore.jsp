@@ -140,21 +140,28 @@
         </table> 
     </c:when>
     <c:otherwise>
-        <button class="btn btn-primary" style="margin-top: 20px"><span class="glyphicon glyphicon-export"></span> Export Scoresheet</button>
-        <div style="overflow-y:scroll;margin-top: 30px"  >
+        <div>
+            <button class="btn btn-primary pull-right" style="margin-top: 20px"><span class="glyphicon glyphicon-export"></span> Export Scoresheet</button>
+        </div>
+        <div style="overflow-y:scroll;margin-top: 75px;clear: both"  >
             <table class="table table-striped" ID="AllStudentScore">
                 <thead>
+                    <c:set value="" var="head_column"/>
+                    <c:set value="${listStudentScore.get(0).listStudentScore.size()}"  var="countback"/>
+                    <c:set value="0" var="total_fully_mark"/>
+                    <c:forEach begin="0" end="${countback-1}" var="am">
+                        <c:set value="${countback-1}"  var="countback"/>
+                        <c:set value="${listStudentScore.get(0).listStudentScore.get(countback).full_mark}" var="full_mark"/>
+                        <c:set value="${total_fully_mark+full_mark}" var="total_fully_mark"/>
+                        <c:set value="${head_column}<th class=\"text-center\"><abbr title=\"${listStudentScore.get(0).listStudentScore.get(countback).am_name}\">${am+1}<br/>(${full_mark}) </abbr></th>" var="head_column"/>            
+                    </c:forEach>
                     <tr>
                         <th rowspan="2" style="text-align: center;vertical-align: inherit;"><b>Name</b></th>
                         <th colspan="${listStudentScore.get(0).listStudentScore.size()}" style="text-align: center"><b>Assignment score</b></th>
-                        <th rowspan="2" style="text-align: center;vertical-align: inherit;"><b>Total</b></th>
+                        <th rowspan="2" style="text-align: center;vertical-align: inherit;"><b>Total <br/>(${total_fully_mark})</b></th>
                     </tr>
                     <tr>
-                        <c:set value="${listStudentScore.get(0).listStudentScore.size()}"  var="countback"/>
-                        <c:forEach begin="0" end="${countback-1}" var="am">
-                            <c:set value="${countback-1}"  var="countback"/>
-                            <th><abbr title="${listStudentScore.get(0).listStudentScore.get(countback).am_name}">${am+1}</abbr></th>
-                            </c:forEach>
+                        ${head_column}
                         <!--                    <th>(10) <abbr title="งานที่ 1 เขียนโค้ดจาว่าซะ">Assignment# 1</abbr></th>
                                             <th>(10) <abbr title="งานที่ 2 เตรียมโปรเจคเว้ยย">Assignment# 2</abbr></th>
                                             <th>(5) <abbr title="งานที่ 3 งานนี้งานดีต้องทำ">Assignment# 3</abbr></th>-->
@@ -190,8 +197,8 @@
                                                             <c:choose>
                                                                 <c:when test="${status eq 'miss'}">
                                                             <span class="text-muted">${sc.stof.score}</span>
-                                                            </c:when>
-                                                            <c:otherwise> - </c:otherwise>
+                                                        </c:when>
+                                                        <c:otherwise> - </c:otherwise>
                                                     </c:choose>
                                                 </c:otherwise>
                                             </c:choose>
