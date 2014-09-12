@@ -567,9 +567,9 @@ public class Assignment {
             sql = "select lasted_send_date from student_assignment_on_web where ass_id=? and acc_id=" + acc_id;
         } else {
             if (a.getAss_type().equalsIgnoreCase("file")) {
-                sql = "select saf.lasted_send_date from student_assignment_file saf join group_member g on saf.g_id = g.g_id where saf.ass_id=? and g.acc_id like '%" + acc_id + "%'";
+                sql = "select saf.lasted_send_date from student_assignment_file saf join group_member g on saf.g_id = g.g_id where saf.ass_id=? and (g.acc_id like '%," + acc_id + "%' or g.acc_id like '%" + acc_id + ",%' or g.acc_id like '" + acc_id + "%')";
             } else {
-                sql = "select saow.lasted_send_date from student_assignment_on_web saow join group_member g on saow.g_id = g.g_id where saow.ass_id=? and g.acc_id like '%" + acc_id + "%'";
+                sql = "select saow.lasted_send_date from student_assignment_on_web saow join group_member g on saow.g_id = g.g_id where saow.ass_id=? and (g.acc_id like '%," + acc_id + "%' or g.acc_id like '%" + acc_id + ",%' or g.acc_id like '" + acc_id + "%')";
             }
         }
         PreparedStatement pstm;
