@@ -139,48 +139,68 @@ public class userscore extends HttpServlet {
             ss.setAttribute("fully_score", fully_score);
         } else {
             List<Account> listStudent = yourCourse.getCourse().getListStudent();
+            List<Account> listStudentScore = new ArrayList<>();
             List<Assignment> listAm = yourCourse.getCourse().getAssignment();
             List<UserScore> usList = null;
             //loop ดึงนักเรียนทั้งหมดออกมาเพื่อ set ค่า userscore ให้กับทุกคนเพราะปกติแล้วมันจะเป้น null ไม่ได้ดึงมาให้
             UserScore u = null;
             for (Account account : listStudent) {
-                usList = new ArrayList<>();
-                String accName = account.getFirstname() + " " + account.getLastname();
-//                System.out.println(u.getFullname());
-                //จะ set score ให้กับแต่ละคนต้องรู้ว่าในคอร์สของคนนั้นมีวิชาไรอยุ่บ้างเลยต้องลูบทุกวิชา
-                for (Assignment assignment : listAm) {
-                    u = new UserScore();
-                    u.setFullname(accName);
-                    u.setAm_id(assignment.getAm_id());
-                    u.setAm_name(assignment.getName());
-                    u.setFull_mark(assignment.getFully_mark());
-                    Double score = null;
-                    int st_am_id = 0;
-                    //ทำการดึงคะแนนของงานมาใส่ใน userscore แต่ต้อง check ว่าเป็นงานประเภทไหนก่อนถึงจะใช้ method ถูก
-                    if (assignment.getAss_type().equalsIgnoreCase("file")) {
-                        //เช็คต่อว่าเป็นงานเดี่ยวหรือกลุ่ม
-                        if (assignment.getTotal_member() > 1) {
-                            st_am_id = StAssignmentFile.getStAmIdByAmIDAndAccId(assignment.getAm_id(), account.getAcc_id(), true);
+                String acc_role = AccountCourse.getAccountRole(account.getAcc_id(), Integer.parseInt(cId + ""));
+                if (acc_role.equalsIgnoreCase("ST")) {
+                    usList = new ArrayList<>();
+                    String accName = account.getFirstname() + " " + account.getLastname();
+//                System.out.println(u.getFullname()); 
+                    //จะ set score ให้กับแต่ละคนต้องรู้ว่าในคอร์สของคนนั้นมีวิชาไรอยุ่บ้างเลยต้องลูบทุกวิชา
+                    for (Assignment assignment : listAm) {
+                        u = new UserScore();
+                        u.setFullname(accName);
+                        u.setAm_id(assignment.getAm_id());
+                        u.setAm_name(assignment.getName());
+                        u.setFull_mark(assignment.getFully_mark());
+                        //ทำการดึงคะแนนของงานมาใส่ใน userscore แต่ต้อง check ว่าเป็นงานประเภทไหนก่อนถึงจะใช้ method ถูก
+                        if (assignment.getAss_type().equalsIgnoreCase("file")) {
+                            StAssignmentFile stf = new StAssignmentFile();
+                            //เช็คต่อว่าเป็นงานเดี่ยวหรือกลุ่ม
+                            if (assignment.getTotal_member() > 1) {
+                                stf = StAssignmentFile.getStAmBbyAmIDAndAccId(assignment.getAm_id(), account.getAcc_id(), true);
+                            } else {
+                                stf = StAssignmentFile.getStAmBbyAmIDAndAccId(assignment.getAm_id(), account.getAcc_id());
+                            }
+
+                            // ถ้างานยังไม่มีส่งให้เซ็ต am_id เปน default มาให้
+                            if (stf == null) {
+                                stf = new StAssignmentFile();
+                                stf.setAm_id(u.getAm_id());
+                            }
+                            u.setStf(stf);
+                            //เช็คว่างานนั้นเคยส่งมั้ย ถ้าส่งไปล้วให้ไปคิดว่าเวลาส่งมัน ontime หรือ late
+//                            System.out.println("am_id : " + assignment.getAm_id() + " / acc_id : " + account.getAcc_id()  + " /score: " + score + "/" + sent_status);
                         } else {
-                            st_am_id = StAssignmentFile.getStAmIdByAmIDAndAccId(assignment.getAm_id(), account.getAcc_id());
+                            StAssignmentOnWeb stow = new StAssignmentOnWeb();
+                            if (assignment.getTotal_member() > 1) {
+                                stow = StAssignmentOnWeb.getStAmByAmIDAndAccId(assignment.getAm_id(), account.getAcc_id(), true);
+                            } else {
+                                stow = StAssignmentOnWeb.getStAmByAmIDAndAccId(assignment.getAm_id(), account.getAcc_id());
+                            }
+
+                            // ถ้างานยังไม่มีส่งให้เซ็ต am_id เปน default มาให้
+                            if (stow == null) {
+                                stow = new StAssignmentOnWeb();
+                                stow.setAm_id(u.getAm_id());
+                            }
+                            u.setStof(stow);
+//                            System.out.println("am_id : " + assignment.getAm_id() + " / acc_id : " + account.getAcc_id()  + " /score: " + score + "/" + sent_status);
                         }
-                        System.out.println("st_am_id file:" + st_am_id);
-                        score = StAssignmentFile.getScore(st_am_id);
-                    } else {
-                        if (assignment.getTotal_member() > 1) {
-                            st_am_id = StAssignmentOnWeb.getStAmIdByAmIDAndAccId(assignment.getAm_id(), account.getAcc_id(), true);
-                        } else {
-                            st_am_id = StAssignmentOnWeb.getStAmIdByAmIDAndAccId(assignment.getAm_id(), account.getAcc_id());
-                        }
-                        System.out.println("st_am_id web:" + st_am_id);
-                        score = StAssignmentOnWeb.getScore(st_am_id);
+                        u.setAss_type(assignment.getAss_type());
+                        usList.add(u);
                     }
-                    u.setScore(score);
-                    usList.add(u);
+//                    System.out.println(usList);
+                    account.setListStudentScore(usList);
+                    listStudentScore.add(account);
                 }
-                System.out.println(usList);
-                account.setListStudentScore(usList);
             }
+
+            request.setAttribute("listStudentScore", listStudentScore);
         }
         getServletContext().getRequestDispatcher("/course.jsp?tab=score").forward(request, response);
     }
@@ -222,6 +242,6 @@ public class userscore extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }// </editor-fold> 
 
 }

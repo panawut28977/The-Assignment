@@ -365,6 +365,27 @@ public class Assignment {
         }
         return am;
     }
+    
+    public static Assignment getAmTimeByAmID(int am_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select due_date,late_date from assignment where ass_id=?";
+        PreparedStatement pstm;
+        Assignment am = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, am_id);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                am = new Assignment();
+                am.setDue_date(rs.getDate("due_date"));
+                am.setLate_date(rs.getDate("late_date"));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return am;
+    }
 
     public static Assignment getAmByAmID(String am_id) {
         return getAmByAmID(Integer.parseInt(am_id));
@@ -577,17 +598,18 @@ public class Assignment {
         String status = "";
         Date due_date = a.getDue_date();
         Date today = new Date();
-        Double remaining_day = (double) ((due_date.getTime() - lastsent.getTime()) / 1000 / 60 / 60 / 24);
-        Double timeout = (double) ((a.getLate_date().getTime() - today.getTime()) / 1000 / 60 / 60 / 24);
-        System.out.println(a.getAm_id());
-        System.out.println(lastsent +" / due "+ a.getDue_date()+"/last "+a.getLate_date());
-        if (lastsent != null ) {
+        if (lastsent != null) {
+            Double remaining_day = (double) ((due_date.getTime() - lastsent.getTime()) / 1000 / 60 / 60 / 24);
+            Double timeout = (double) ((a.getLate_date().getTime() - today.getTime()) / 1000 / 60 / 60 / 24);
+            System.out.println("--lated sent function---");
+            System.out.println(a.getAm_id());
+            System.out.println(lastsent + " / due " + a.getDue_date() + "/last " + a.getLate_date());
             if (remaining_day > 3) {
                 status = "ontime";
             } else if (remaining_day <= 3 && remaining_day >= 0) {
                 //status = "hurryup";
                 status = "ontime";
-            } else {
+            } else if (remaining_day < 0 && timeout > 0) {
                 status = "late";
             }
         } else {

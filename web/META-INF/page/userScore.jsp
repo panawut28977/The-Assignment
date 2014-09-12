@@ -78,7 +78,7 @@
                             <c:when test="${stow.get(a.am_id) ne null and stow.get(a.am_id).lasted_send_date ne null}">
                                 <c:choose>
                                     <c:when test="${stow.get(a.am_id).checked_time eq null}">
-                                        <td>wait checked</td>
+                                        <td>wait check</td>
                                     </c:when>
                                     <c:otherwise>
                                         <td>
@@ -141,112 +141,184 @@
     </c:when>
     <c:otherwise>
         <button class="btn btn-primary" style="margin-top: 20px"><span class="glyphicon glyphicon-export"></span> Export Scoresheet</button>
-        <table class="table table-striped" ID="AllStudentScore">
-            <thead>
-                <tr>
-                    <th rowspan="2" style="text-align: center;vertical-align: inherit;"><b>Name</b></th>
-                    <th colspan="3" style="text-align: center"><b>Assignment score</b></th>
-                </tr>
-                <tr>
-                    <th>(10) <abbr title="งานที่ 1 เขียนโค้ดจาว่าซะ">Assignment# 1</abbr></th>
-                    <th>(10) <abbr title="งานที่ 2 เตรียมโปรเจคเว้ยย">Assignment# 2</abbr></th>
-                    <th>(5) <abbr title="งานที่ 3 งานนี้งานดีต้องทำ">Assignment# 3</abbr></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Panawut Ittitananun</td>
-                    <td>10</td>
-                    <td>10</td>
-                    <td>5</td>
-                </tr>
-                <tr>
-                    <td>Thanakit Mahamutjinda</td>
-                    <td>7</td>
-                    <td>8</td>
-                    <td>5</td>
-                </tr>
-                <tr>
-                    <td>Nitiwit Wungwiwatna</td>
-                    <td>9</td>
-                    <td>9</td>
-                    <td>3</td>
-                </tr> 
-                <tr>
-                    <td>Thanapan Suwankanit</td>
-                    <td>7</td>
-                    <td>8</td>
-                    <td>5</td>
-                </tr>
-                <tr>
-                    <td>Ghislaine Weatherholtz </td>
-                    <td>7</td>
-                    <td>10</td>
-                    <td>5</td>
-                </tr>
-                <tr>
-                    <td>Steven Gerrard</td>
-                    <td>10</td>
-                    <td>10</td>
-                    <td>5</td>
-                </tr>
-                <tr>
-                    <td>Luis Suarez</td>
-                    <td>7</td>
-                    <td>8</td>
-                    <td>5</td>
-                </tr>
-                <tr>
-                    <td>Filipe Coutinho</td>
-                    <td>9</td>
-                    <td>9</td>
-                    <td>3</td>
-                </tr> 
-                <tr>
-                    <td>Kolo Toure</td>
-                    <td>7</td>
-                    <td>8</td>
-                    <td>5</td>
-                </tr>
-                <tr>
-                    <td>Charlette Lemon</td>
-                    <td>7</td>
-                    <td>10</td>
-                    <td>5</td>
-                </tr>
-                <tr>
-                    <td>Marcy Mathis</td>
-                    <td>10</td>
-                    <td>10</td>
-                    <td>5</td>
-                </tr>
-                <tr>
-                    <td>Rheba Leto</td>
-                    <td>7</td>
-                    <td>8</td>
-                    <td>5</td>
-                </tr>
-                <tr>
-                    <td>Eric Stancil </td>
-                    <td>9</td>
-                    <td>9</td>
-                    <td>3</td>
-                </tr> 
-                <tr>
-                    <td>Stevie Dorn</td>
-                    <td>7</td>
-                    <td>8</td>
-                    <td>5</td>
-                </tr> 
-                <tr>
-                    <td>In Borth</td>
-                    <td>7</td>
-                    <td>10</td>
-                    <td>5</td>
-                </tr>
+        <div style="overflow-y:scroll" >
+            <table class="table table-striped" ID="AllStudentScore">
+                <thead>
+                    <tr>
+                        <th rowspan="2" style="text-align: center;vertical-align: inherit;"><b>Name</b></th>
+                        <th colspan="${listStudentScore.get(0).listStudentScore.size()}" style="text-align: center"><b>Assignment score</b></th>
+                    </tr>
+                    <tr>
+                        <c:set value="${listStudentScore.get(0).listStudentScore.size()}"  var="countback"/>
+                        <c:forEach begin="0" end="${countback-1}" var="am">
+                            <c:set value="${countback-1}"  var="countback"/>
+                            <th><abbr title="${listStudentScore.get(0).listStudentScore.get(countback).am_name}">${am+1}</abbr></th>
+                            </c:forEach>
+                        <!--                    <th>(10) <abbr title="งานที่ 1 เขียนโค้ดจาว่าซะ">Assignment# 1</abbr></th>
+                                            <th>(10) <abbr title="งานที่ 2 เตรียมโปรเจคเว้ยย">Assignment# 2</abbr></th>
+                                            <th>(5) <abbr title="งานที่ 3 งานนี้งานดีต้องทำ">Assignment# 3</abbr></th>-->
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${listStudentScore}" var="stacc">
+                        <tr>
+                            <td>${stacc.firstname} ${stacc.lastname}</td>
+                            <%--${stacc.listStudentScore}--%>
+                            <c:set value="${stacc.listStudentScore.size()}"  var="countback"/>
+                            <c:forEach begin="0" end="${stacc.listStudentScore.size()-1}" var="sccount">
+                                <c:set value="${countback-1}"  var="countback"/>
+                                <c:set value="${stacc.listStudentScore.get(countback)}" var="sc"/>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${sc.ass_type eq 'web'}">
+                                            <c:set var="a" value="${cf:getAmTimeByAmID(sc.stof.am_id)}" target="Model.Assignment"/>
+                                            <c:set value="${cf:lastedSentStatus(sc.stof.lasted_send_date, a)}" var="status"/>
+                                            <c:choose>
+                                                <c:when test="${status eq 'late'}">
+                                                    <span class="text-danger">Late</span>
+                                                </c:when>
+                                                <c:when test="${status eq 'ontime'}">
+                                                    <span class="text-success">On time</span>
+                                                </c:when>
+                                                <c:when test="${status eq 'hurryup'}">
+                                                    <span class="text-warning">Hurry up!</span>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <c:set value="${cf:calculateTime(a)}" var="status"/>
+                                                    <c:choose>
+                                                        <c:when test="${status eq 'miss'}">
+                                                            <span class="text-muted">Miss</span>
+                                                        </c:when>
+                                                        <c:otherwise> - </c:otherwise>
+                                                    </c:choose>
+                                                </c:otherwise>
+                                            </c:choose>
+                                            ${sc.stof.score}
+                                        </c:when>
+                                        <c:when test="${sc.ass_type eq 'file'}">
+                                            <c:set var="a" value="${cf:getAmTimeByAmID(sc.stf.am_id)}" target="Model.Assignment"/>
+                                            <c:set value="${cf:lastedSentStatus(sc.stf.lasted_send_date, a)}" var="status"/>
+                                            <c:choose>
+                                                <c:when test="${status eq 'late'}">
+                                                    <span class="text-danger">Late</span>
+                                                </c:when>
+                                                <c:when test="${status eq 'ontime'}">
+                                                    <span class="text-success">On time</span>
+                                                </c:when>
+                                                <c:when test="${status eq 'hurryup'}">
+                                                    <span class="text-warning">Hurry up!</span>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <c:set value="${cf:calculateTime(a)}" var="status"/>
+                                                    <c:choose>
+                                                        <c:when test="${status eq 'miss'}">
+                                                            <span class="text-muted">Miss</span>
+                                                        </c:when>
+                                                        <c:otherwise> - </c:otherwise>
+                                                    </c:choose>
+                                                </c:otherwise>
+                                            </c:choose>
+                                            ${sc.stf.score}
+                                        </c:when>
+                                    </c:choose>
+                                </td>
+                            </c:forEach>
+                        </tr>
+                    </c:forEach>
+                    <!--                    <tr>
+                                            <td>Panawut Ittitananun</td>
+                                            <td>10</td>
+                                            <td>10</td>
+                                            <td>5</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Thanakit Mahamutjinda</td>
+                                            <td>7</td>
+                                            <td>8</td>
+                                            <td>5</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Nitiwit Wungwiwatna</td>
+                                            <td>9</td>
+                                            <td>9</td>
+                                            <td>3</td>
+                                        </tr> 
+                                        <tr>
+                                            <td>Thanapan Suwankanit</td>
+                                            <td>7</td>
+                                            <td>8</td>
+                                            <td>5</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ghislaine Weatherholtz </td>
+                                            <td>7</td>
+                                            <td>10</td>
+                                            <td>5</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Steven Gerrard</td>
+                                            <td>10</td>
+                                            <td>10</td>
+                                            <td>5</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Luis Suarez</td>
+                                            <td>7</td>
+                                            <td>8</td>
+                                            <td>5</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Filipe Coutinho</td>
+                                            <td>9</td>
+                                            <td>9</td>
+                                            <td>3</td>
+                                        </tr> 
+                                        <tr>
+                                            <td>Kolo Toure</td>
+                                            <td>7</td>
+                                            <td>8</td>
+                                            <td>5</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Charlette Lemon</td>
+                                            <td>7</td>
+                                            <td>10</td>
+                                            <td>5</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Marcy Mathis</td>
+                                            <td>10</td>
+                                            <td>10</td>
+                                            <td>5</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Rheba Leto</td>
+                                            <td>7</td>
+                                            <td>8</td>
+                                            <td>5</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Eric Stancil </td>
+                                            <td>9</td>
+                                            <td>9</td>
+                                            <td>3</td>
+                                        </tr> 
+                                        <tr>
+                                            <td>Stevie Dorn</td>
+                                            <td>7</td>
+                                            <td>8</td>
+                                            <td>5</td>
+                                        </tr> 
+                                        <tr>
+                                            <td>In Borth</td>
+                                            <td>7</td>
+                                            <td>10</td>
+                                            <td>5</td>
+                                        </tr>-->
 
-            </tbody>
-        </table> 
+                </tbody>
+            </table> 
+        </div>
     </c:otherwise>
 </c:choose>
 <script>

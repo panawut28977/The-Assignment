@@ -115,4 +115,14 @@
         <function-class>Model.Assignment</function-class>
         <function-signature>boolean isLock(Model.Assignment)</function-signature>
     </function>  
+     <function>
+        <name>getAmTimeByAmID</name>
+        <function-class>Model.Assignment</function-class>
+        <function-signature>Model.Assignmennt getAmTimeByAmID(int)</function-signature>
+    </function> 
+      <function>
+        <name>calculateTime</name>
+        <function-class>Model.Assignment</function-class>
+        <function-signature>String calculateTime(Model.Assignment)</function-signature>
+    </function> 
 </taglib>

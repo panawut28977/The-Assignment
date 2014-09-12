@@ -23,8 +23,10 @@ public class UserScore {
     private String fullname;
     private int am_id;
     private String am_name;
-    private double score;
     private double full_mark;
+    private String ass_type;
+    private StAssignmentFile stf;
+    private StAssignmentOnWeb stof;
 
     public String getFullname() {
         return fullname;
@@ -58,44 +60,60 @@ public class UserScore {
         this.am_name = am_name;
     }
 
-    public double getScore() {
-        return score;
+    public String getAss_type() {
+        return ass_type;
     }
 
-    public void setScore(double score) {
-        this.score = score;
+    public void setAss_type(String ass_type) {
+        this.ass_type = ass_type;
     }
 
+    public StAssignmentFile getStf() {
+        return stf;
+    }
+
+    public void setStf(StAssignmentFile stf) {
+        this.stf = stf;
+    }
+
+    public StAssignmentOnWeb getStof() {
+        return stof;
+    }
+
+    public void setStof(StAssignmentOnWeb stof) {
+        this.stof = stof;
+    }
+    
     //setUserScore(UserScore) เอาไว้ทำไรจำไม่ได้ละ แต่ไม่น่าจำเป็นละ
     //getUserScore(List<int> acc_id)
-    public static List<UserScore> getUserScore(int acc_id) {
-        List<UserScore> uScoreList = new ArrayList<UserScore>();
-        Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select  f.ass_id,f.score,w.ass_id,w.score from student_assignment_file f,student_assignment_on_web w where f.acc_id = ? and w.acc_id=?";
-        PreparedStatement pstm;
-        UserScore uScore = null;
-        try {
-            pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, acc_id);
-            pstm.setInt(2, acc_id);
-            ResultSet rs = pstm.executeQuery();
-            while (rs.next()) {
-                uScore = new UserScore();
-                uScore.setAm_id(rs.getInt("ass_id"));
-                //ยังไม่ได้ set course name;
-                uScore.setScore(rs.getDouble("score"));
-                uScoreList.add(uScore);
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return uScoreList;
-    }
+//    public static List<UserScore> getUserScore(int acc_id) {
+//        List<UserScore> uScoreList = new ArrayList<UserScore>();
+//        Connection conn = ConnectionBuilder.getConnection();
+//        String sql = "select  f.ass_id,f.score,w.ass_id,w.score from student_assignment_file f,student_assignment_on_web w where f.acc_id = ? and w.acc_id=?";
+//        PreparedStatement pstm;
+//        UserScore uScore = null;
+//        try {
+//            pstm = conn.prepareStatement(sql);
+//            pstm.setInt(1, acc_id);
+//            pstm.setInt(2, acc_id);
+//            ResultSet rs = pstm.executeQuery();
+//            while (rs.next()) {
+//                uScore = new UserScore();
+//                uScore.setAm_id(rs.getInt("ass_id"));
+//                //ยังไม่ได้ set course name;
+//                uScore.setScore(rs.getDouble("score"));
+//                uScoreList.add(uScore);
+//            }
+//            conn.close();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return uScoreList;
+//    }
 
     @Override
     public String toString() {
-        return "UserScore{" + "fullname=" + fullname + ", am_id=" + am_id + ", am_name=" + am_name + ", score=" + score + ", full_mark=" + full_mark + '}';
+        return "UserScore{" + "fullname=" + fullname + ", am_id=" + am_id + ", am_name=" + am_name + ", full_mark=" + full_mark + ", ass_type=" + ass_type + ", stf=" + stf + ", stof=" + stof + '}';
     }
-    
+
 }

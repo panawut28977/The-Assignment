@@ -184,25 +184,25 @@ public class StAssignmentOnWeb {
         return id;
     }
 
-    public static int getStAmIdByAmIDAndAccId(int am_id, int acc_id) {
-        Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select st_ass_id from student_assignment_on_web where ass_id = ? and acc_id = ?";
-        PreparedStatement pstm;
-        int id = 0;
-        try {
-            pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, am_id);
-            pstm.setInt(2, acc_id);
-            ResultSet rs = pstm.executeQuery();
-            while (rs.next()) {
-                id = rs.getInt("st_ass_id");
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(StAssignmentFile.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return id;
-    }
+//    public static int getStAmIdByAmIDAndAccId(int am_id, int acc_id) {
+//        Connection conn = ConnectionBuilder.getConnection();
+//        String sql = "select st_ass_id from student_assignment_on_web where ass_id = ? and acc_id = ?";
+//        PreparedStatement pstm;
+//        int id = 0;
+//        try {
+//            pstm = conn.prepareStatement(sql);
+//            pstm.setInt(1, am_id);
+//            pstm.setInt(2, acc_id);
+//            ResultSet rs = pstm.executeQuery();
+//            while (rs.next()) {
+//                id = rs.getInt("st_ass_id");
+//            }
+//            conn.close();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(StAssignmentFile.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return id;
+//    }
 
     public static double getScoreByAccIDAndAmID(int acc_id, int am_id) {
         Connection conn = ConnectionBuilder.getConnection();
@@ -244,8 +244,8 @@ public class StAssignmentOnWeb {
                 stw.setScore(rs.getDouble("score"));
                 stw.setLasted_send_date(rs.getDate("lasted_send_date"));
                 stw.setChecked_time(rs.getTimestamp("checked_time"));
-                stw.setComment(Comment.getCommentByStAmIDWeb(rs.getInt("st_ass_id")));
-                stw.setAnwerQuestion(null);
+//                stw.setComment(Comment.getCommentByStAmIDWeb(rs.getInt("st_ass_id")));
+//                stw.setAnwerQuestion(null);
             }
             conn.close();
         } catch (SQLException ex) {
@@ -285,36 +285,36 @@ public class StAssignmentOnWeb {
         return stw;
     }
 
-    public static int getStAmIdByAmIDAndAccId(int am_id, int acc_id, boolean ingroup) {
-        int id = 0;
-        if (ingroup) {
-            Connection conn = ConnectionBuilder.getConnection();
-            String sql = "select * from group_member g where ass_id = ?";
-            PreparedStatement pstm;
-            try {
-                pstm = conn.prepareStatement(sql);
-                pstm.setInt(1, am_id);
-                ResultSet rs = pstm.executeQuery();
-                while (rs.next()) {
-                    String accList[] = rs.getString("acc_id").split(",");
-                    List<Integer> accl = new ArrayList<>();
-                    for (String acc : accList) {
-                        accl.add(Integer.parseInt(acc));
-                    }
-//                    System.out.println(accl.contains(acc_id));
-                    if (accl.contains(acc_id)) {
-//                        System.out.println("g_id:"+rs.getInt("g_id"));
-                        id = StAssignmentFile.getStAmIdByAmIDAndGID(am_id, rs.getInt("g_id"));
-                        break;
-                    }
-                }
-                conn.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(StAssignmentFile.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        return id;
-    }
+//    public static int getStAmIdByAmIDAndAccId(int am_id, int acc_id, boolean ingroup) {
+//        int id = 0;
+//        if (ingroup) {
+//            Connection conn = ConnectionBuilder.getConnection();
+//            String sql = "select * from group_member g where ass_id = ?";
+//            PreparedStatement pstm;
+//            try {
+//                pstm = conn.prepareStatement(sql);
+//                pstm.setInt(1, am_id);
+//                ResultSet rs = pstm.executeQuery();
+//                while (rs.next()) {
+//                    String accList[] = rs.getString("acc_id").split(",");
+//                    List<Integer> accl = new ArrayList<>();
+//                    for (String acc : accList) {
+//                        accl.add(Integer.parseInt(acc));
+//                    }
+////                    System.out.println(accl.contains(acc_id));
+//                    if (accl.contains(acc_id)) {
+////                        System.out.println("g_id:"+rs.getInt("g_id"));
+//                        id = StAssignmentOnWeb.getStAmIdByAmIDAndGID(am_id, rs.getInt("g_id"));
+//                        break;
+//                    }
+//                }
+//                conn.close();
+//            } catch (SQLException ex) {
+//                Logger.getLogger(StAssignmentFile.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+//        return id;
+//    }
 
     public static StAssignmentOnWeb getStAmbyAmIDAndGID(int am_id, int g_id) {
         Connection conn = ConnectionBuilder.getConnection();
@@ -335,8 +335,8 @@ public class StAssignmentOnWeb {
                 stw.setScore(rs.getDouble("score"));
                 stw.setLasted_send_date(rs.getDate("lasted_send_date"));
                 stw.setChecked_time(rs.getTimestamp("checked_time"));
-                stw.setComment(Comment.getCommentByStAmIDWeb(rs.getInt("st_ass_id")));
-                stw.setAnwerQuestion(null);
+//                stw.setComment(Comment.getCommentByStAmIDWeb(rs.getInt("st_ass_id")));
+//                stw.setAnwerQuestion(null);
             }
             conn.close();
         } catch (SQLException ex) {
