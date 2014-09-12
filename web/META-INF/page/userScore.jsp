@@ -141,12 +141,13 @@
     </c:when>
     <c:otherwise>
         <button class="btn btn-primary" style="margin-top: 20px"><span class="glyphicon glyphicon-export"></span> Export Scoresheet</button>
-        <div style="overflow-y:scroll" >
+        <div style="overflow-y:scroll;margin-top: 30px"  >
             <table class="table table-striped" ID="AllStudentScore">
                 <thead>
                     <tr>
                         <th rowspan="2" style="text-align: center;vertical-align: inherit;"><b>Name</b></th>
                         <th colspan="${listStudentScore.get(0).listStudentScore.size()}" style="text-align: center"><b>Assignment score</b></th>
+                        <th rowspan="2" style="text-align: center;vertical-align: inherit;"><b>Total</b></th>
                     </tr>
                     <tr>
                         <c:set value="${listStudentScore.get(0).listStudentScore.size()}"  var="countback"/>
@@ -165,6 +166,7 @@
                             <td>${stacc.firstname} ${stacc.lastname}</td>
                             <%--${stacc.listStudentScore}--%>
                             <c:set value="${stacc.listStudentScore.size()}"  var="countback"/>
+                            <c:set value="0" var="total"/>
                             <c:forEach begin="0" end="${stacc.listStudentScore.size()-1}" var="sccount">
                                 <c:set value="${countback-1}"  var="countback"/>
                                 <c:set value="${stacc.listStudentScore.get(countback)}" var="sc"/>
@@ -175,54 +177,55 @@
                                             <c:set value="${cf:lastedSentStatus(sc.stof.lasted_send_date, a)}" var="status"/>
                                             <c:choose>
                                                 <c:when test="${status eq 'late'}">
-                                                    <span class="text-danger">Late</span>
-                                                </c:when>
-                                                <c:when test="${status eq 'ontime'}">
-                                                    <span class="text-success">On time</span>
-                                                </c:when>
-                                                <c:when test="${status eq 'hurryup'}">
-                                                    <span class="text-warning">Hurry up!</span>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <c:set value="${cf:calculateTime(a)}" var="status"/>
-                                                    <c:choose>
-                                                        <c:when test="${status eq 'miss'}">
-                                                            <span class="text-muted">Miss</span>
+                                                    <span class="text-danger"><b>${sc.stof.score}</b></span>
                                                         </c:when>
-                                                        <c:otherwise> - </c:otherwise>
+                                                        <c:when test="${status eq 'ontime'}">
+                                                    <span class="text-success"><b>${sc.stof.score}</b></span>
+                                                        </c:when>
+                                                        <c:when test="${status eq 'hurryup'}">
+                                                    <span class="text-warning"><b>${sc.stof.score}</b></span>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <c:set value="${cf:calculateTime(a)}" var="status"/>
+                                                            <c:choose>
+                                                                <c:when test="${status eq 'miss'}">
+                                                            <span class="text-muted">${sc.stof.score}</span>
+                                                            </c:when>
+                                                            <c:otherwise> - </c:otherwise>
                                                     </c:choose>
                                                 </c:otherwise>
                                             </c:choose>
-                                            ${sc.stof.score}
+                                            <c:set value="${total+sc.stof.score}" var="total"/>
                                         </c:when>
                                         <c:when test="${sc.ass_type eq 'file'}">
                                             <c:set var="a" value="${cf:getAmTimeByAmID(sc.stf.am_id)}" target="Model.Assignment"/>
                                             <c:set value="${cf:lastedSentStatus(sc.stf.lasted_send_date, a)}" var="status"/>
                                             <c:choose>
                                                 <c:when test="${status eq 'late'}">
-                                                    <span class="text-danger">Late</span>
+                                                    <span class="text-danger"><b> ${sc.stf.score}</b></span>
                                                 </c:when>
                                                 <c:when test="${status eq 'ontime'}">
-                                                    <span class="text-success">On time</span>
+                                                    <span class="text-success"><b> ${sc.stf.score}</b></span>
                                                 </c:when>
                                                 <c:when test="${status eq 'hurryup'}">
-                                                    <span class="text-warning">Hurry up!</span>
+                                                    <span class="text-warning"><b> ${sc.stf.score}</b></span>
                                                 </c:when>
                                                 <c:otherwise>
                                                     <c:set value="${cf:calculateTime(a)}" var="status"/>
                                                     <c:choose>
                                                         <c:when test="${status eq 'miss'}">
-                                                            <span class="text-muted">Miss</span>
+                                                            <span class="text-muted"> ${sc.stf.score}</span>
                                                         </c:when>
                                                         <c:otherwise> - </c:otherwise>
                                                     </c:choose>
                                                 </c:otherwise>
                                             </c:choose>
-                                            ${sc.stf.score}
+                                            <c:set value="${total+sc.stf.score}" var="total"/>
                                         </c:when>
                                     </c:choose>
                                 </td>
                             </c:forEach>
+                            <td>${total}</td>
                         </tr>
                     </c:forEach>
                     <!--                    <tr>
@@ -315,7 +318,6 @@
                                             <td>10</td>
                                             <td>5</td>
                                         </tr>-->
-
                 </tbody>
             </table> 
         </div>
