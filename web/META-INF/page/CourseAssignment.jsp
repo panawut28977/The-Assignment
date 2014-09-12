@@ -119,28 +119,57 @@
     <c:forEach items="${ac.courseList.get(cId).course.assignment}" var="a">
         <c:set value="${cf:remainingTimeforSend(a,ac.acc_id)}" var="status"/>
         <c:choose>
-            <c:when test="${status eq 'late'}">
+            <c:when test="${ac.courseList.get(cId).role eq 'TH'}">
+                <c:choose>
+                    <c:when test="${status eq 'late'}">
         color = '#a94442';
-            </c:when>
-            <c:when test="${status eq 'ontime'}">
+                    </c:when>
+                    <c:when test="${status eq 'ontime'}">
         color = '#3c763d';
-            </c:when>
-            <c:when test="${status eq 'hurryup'}">
+                    </c:when>
+                    <c:when test="${status eq 'hurryup'}">
         color = '#8a6d3b';
-            </c:when>
-            <c:when test="${status eq 'sent'}">
-        color = '#5F8BCA';
-            </c:when>
-            <c:otherwise>
+                    </c:when>
+                    <c:when test="${status eq 'sent'}">
         color = '#999';
-            </c:otherwise>
-        </c:choose>
+                    </c:when>
+                    <c:otherwise>
+        color = '#999';
+                    </c:otherwise>
+                </c:choose>
         jsonArr.push({
             title: '${a.name}',
             start: '${a.due_date}',
             borderColor: color,
             backgroundColor: color
         });
+            </c:when>
+            <c:when test="${ac.courseList.get(cId).role eq 'ST'}">
+                <c:choose>
+                    <c:when test="${status eq 'late'}">
+        color = '#a94442';
+                    </c:when>
+                    <c:when test="${status eq 'ontime'}">
+        color = '#3c763d';
+                    </c:when>
+                    <c:when test="${status eq 'hurryup'}">
+        color = '#8a6d3b';
+                    </c:when>
+                    <c:when test="${status eq 'sent'}">
+        color = '#5F8BCA';
+                    </c:when>
+                    <c:otherwise>
+        color = '#999';
+                    </c:otherwise>
+                </c:choose>
+        jsonArr.push({
+            title: '${a.name}',
+            start: '${a.due_date}',
+            borderColor: color,
+            backgroundColor: color
+        });
+            </c:when>
+        </c:choose>
     </c:forEach>
         var date = new Date();
         var d = date.getDate();

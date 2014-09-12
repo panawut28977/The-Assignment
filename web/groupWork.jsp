@@ -177,7 +177,7 @@
                                 <div class="col-md-11 col-md-offset-1 bg-danger" style="padding-top: 10px;padding-bottom: 10px;">
                                     <h4><b>People who have not group.</b></h4>
                                     <c:forEach items="${noGMember}" var="noGm">
-                                        <img style="width:50px" src="${noGm.profile_pic}" data-toggle="tooltip"  data-placement="top" title="${noGm.firstname} ${noGm.lastname}">
+                                        <img style="width:50px" src="${noGm.profile_pic}" data-toggle="tooltip"  data-placement="top" title="${noGm.firstname} ${noGm.lastname}">&nbsp;
                                     </c:forEach>
 
                                 </div>
@@ -261,13 +261,12 @@
             $(function() {
                 var max_member = '${am.total_member}';
                 var count = 0;
-                var iconok = ' <span class="text-success"><i class="member-selected glyphicon glyphicon-ok-circle"></i></span>';
+                var iconok = '<span class="text-success"><i class="member-selected glyphicon glyphicon-ok-circle"></i></span>';
 
                 $(".media[id='youracc'] div").prepend(iconok);
                 var oldv = $("#youracc").attr("data-id");
                 $("#acc_id").val(oldv);
                 count++;
-
 
                 $(".media[id='youracc']").click(function() {
                     alert("Cannot check out your own.");

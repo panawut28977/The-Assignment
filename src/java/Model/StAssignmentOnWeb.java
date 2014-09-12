@@ -244,7 +244,7 @@ public class StAssignmentOnWeb {
                 stw.setScore(rs.getDouble("score"));
                 stw.setLasted_send_date(rs.getDate("lasted_send_date"));
                 stw.setChecked_time(rs.getTimestamp("checked_time"));
-//                stw.setComment(Comment.getCommentByStAmIDWeb(rs.getInt("st_ass_id")));
+                stw.setComment(Comment.getCommentByStAmIDWeb(rs.getInt("st_ass_id")));
 //                stw.setAnwerQuestion(null);
             }
             conn.close();
@@ -335,7 +335,7 @@ public class StAssignmentOnWeb {
                 stw.setScore(rs.getDouble("score"));
                 stw.setLasted_send_date(rs.getDate("lasted_send_date"));
                 stw.setChecked_time(rs.getTimestamp("checked_time"));
-//                stw.setComment(Comment.getCommentByStAmIDWeb(rs.getInt("st_ass_id")));
+                stw.setComment(Comment.getCommentByStAmIDWeb(rs.getInt("st_ass_id")));
 //                stw.setAnwerQuestion(null);
             }
             conn.close();

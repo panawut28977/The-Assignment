@@ -217,7 +217,7 @@ public class StAssignmentFile {
                 saf.setScore(rs.getDouble("score"));
                 saf.setLasted_send_date(rs.getDate("lasted_send_date"));
                 saf.setChecked_time(rs.getTimestamp("checked_time"));
-//                saf.setComment(Comment.getCommentByStAmIDFile(rs.getInt("st_ass_id")));
+                saf.setComment(Comment.getCommentByStAmIDFile(rs.getInt("st_ass_id")));
             }
             conn.close();
         } catch (SQLException ex) {
@@ -265,7 +265,7 @@ public class StAssignmentFile {
                 saf.setScore(rs.getDouble("score"));
                 saf.setLasted_send_date(rs.getDate("lasted_send_date"));
                 saf.setChecked_time(rs.getTimestamp("checked_time"));
-//                saf.setComment(Comment.getCommentByStAmIDFile(rs.getInt("st_ass_id")));
+                saf.setComment(Comment.getCommentByStAmIDFile(rs.getInt("st_ass_id")));
             }
             conn.close();
         } catch (SQLException ex) {

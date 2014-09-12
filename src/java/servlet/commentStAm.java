@@ -53,7 +53,7 @@ public class commentStAm extends HttpServlet {
             st_am_id = saw.getSt_am_id();
             System.out.println(st_am_id);
         }
-        Comment.addToStComment(c, st_am_id, am.getAss_type());
+        System.out.println("update : "+Comment.addToStComment(c, st_am_id, am.getAss_type()));
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

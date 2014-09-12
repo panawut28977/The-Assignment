@@ -113,6 +113,10 @@ public class Checkcopy extends HttpServlet {
                     String text = doc.get("student_assignment");
                     String st_am_id = doc.get("st_am_id");
                     String owner_safv_id = doc.get("safv_id");
+//                    System.out.println(text);
+//                    System.out.println(st_am_id);
+//                    System.out.println(owner_safv_id);
+//                    System.out.println("-----------");
                     TokenStream tokenStream = TokenSources.getAnyTokenStream(searcher.getIndexReader(), id, "student_assignment", new ThaiAnalyzer(Version.LUCENE_47));
 
                     String[] hltextArr = highlighter.getBestFragments(tokenStream, text, hitsPerPage);

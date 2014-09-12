@@ -50,7 +50,11 @@ public class uploadAssignmentOnWeb extends HttpServlet {
         if (a.getTotal_member() > 1) {
             g = (Group_member) ss.getAttribute("g");
         }
-        StAssignmentOnWeb sa = (StAssignmentOnWeb) ss.getAttribute("sa");
+        StAssignmentOnWeb reqsa = (StAssignmentOnWeb) ss.getAttribute("sa");
+        
+        //ไปดึง student assignment มาใหม่จะได้ชัวว่า lasted sent date มันไม่มี เพราะมีโอกาสที่จะส่งงานตอนที่ lasted ยังไม่มี พร้อมกัน
+        StAssignmentOnWeb sa = StAssignmentOnWeb.getStAmInfo(reqsa.getSt_am_id());
+        
         String[] seqno = request.getParameterValues("seqno");
         String q_type = null;
         String instruction = null;
