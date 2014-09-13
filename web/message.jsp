@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
+<%@taglib uri="/WEB-INF/tlds/functions.tld" prefix="cf" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -29,26 +30,26 @@
                 border-radius: 10px
             }
 
-            #teacherSelectionBox{
-                height: 400px;
+            #teacherSelectionBox,#studentSelectionBox{
+                height: 300px;
                 overflow-y: scroll;
                 padding:  0;
             }
 
-            #teacherSelectionBox hr{
+            #teacherSelectionBox hr,#studentSelectionBox hr{
                 margin: 0;
             }
 
-            #teacherSelectionBox .media{
+            #teacherSelectionBox .media,#studentSelectionBox .media{
                 cursor: pointer;
                 margin-top: 0;
             }
 
-            #teacherSelectionBox .media:hover{
+            #teacherSelectionBox .media:hover,#studentSelectionBox.media:hover{
                 background-color:#DADCFF;
             }
 
-            #teacherSelectionBox .media h5{
+            #teacherSelectionBox .media h5,#studentSelectionBox .media h5{
                 padding-top: 8px;
             }
 
@@ -64,59 +65,88 @@
                     <div class="col-md-8">
                         <h4><i class="glyphicon glyphicon-envelope"></i> Private Message</h4>
                         <div class="well" style="height: 600px;overflow-y: scroll" id="messageBox" >
-                            <div class="pull-left col-md-5 th-message">
-                                <h6><b>AJ.Kittiphan Puapholthep </b></h6>
-                                ising pain was born and I will give you a complete account of the system, and expound the actual teac
-                                <br>
-                                <small class="pull-right text-muted">13/08/2556 23:55:00</small>
-                            </div>
-                            <div class="pull-right col-md-5 st-message">
-                                <h6><b>orarmor arm</b> </h6>
-                                mistaken id
-                                <br>
-                                <small class="pull-right text-muted">13/08/2556 23:55:00</small>
-                            </div>
-                            <div class="pull-left col-md-5 th-message">
-                                <h6><b>AJ.Kittiphan Puapholthep </b> </h6>
-                                ill give you a complete account of the system, and expound the actual teac
-                                <br>
-                                <small class="pull-left text-muted">13/08/2556 23:55:00</small>
-                            </div>
-                            <div class="pull-right col-md-5 st-message">
-                                <h6><b>orarmor arm</b> </h6>
-                                I must explain to you how all this mistaken id<br>
-                                <small class="pull-right text-muted">13/08/2556 23:55:00</small>
-                            </div>
-                            <div class="pull-left col-md-5 th-message">
-                                <h6><b>AJ.Kittiphan Puapholthep </b>  </h6>
-                                and praising pain was born and I will give you a complete account of the system, and expound the actual teac<br>
-                                <small class="pull-right text-muted">13/08/2556 23:55:00</small>
-                            </div>
-                            <div class="pull-right col-md-5 st-message">
-                                <h6><b>orarmor arm</b> </h6>
-                                I must explain to you how all this mistaken id<br>
-                                <small class="pull-right text-muted">13/08/2556 23:55:00</small>
-                            </div>
-                            <div class="pull-left col-md-5 th-message">
-                                <h6><b>AJ.Kittiphan Puapholthep </b> </h6>
-                                born and I will give you a complete account of the system, and expound the actual teac<br>
-                                <small class="pull-right text-muted">13/08/2556 23:55:00</small>
-                            </div>
-                            <div class="pull-right col-md-5 st-message">
-                                <h6><b>orarmor arm</b> </h6>
-                                ut I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was<br>
-                                <small class="pull-right text-muted">13/08/2556 23:55:00</small>
-                            </div>
-                            <div class="pull-right col-md-5 st-message">
-                                <h6><b>orarmor arm</b> </h6>
-                                complete account of the system, an<br>
-                                <small class="pull-right text-muted">13/08/2556 23:55:00</small>
-                            </div>
+                            <c:choose>
+                                <c:when test="${msg eq 'nopvmsg'}">
+                                    <div class="alert alert-info" role="alert">
+                                        <h3>Select people before. <span class="glyphicon glyphicon-hand-right pull-right"></span></h3>
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:forEach items="${mList}" var="m">
+                                        <c:choose>
+                                            <c:when test="${m.source_acc_id.acc_id== ac.acc_id}">
+                                                <div class="pull-right col-md-5 st-message">
+                                                    <h6><b>${m.source_acc_id.firstname} ${m.source_acc_id.lastname}</b> </h6>
+                                                    ${m.message}
+                                                    <br>
+                                                    <small class="pull-right text-muted">${cf:formatTime(m.send_date)}</small>
+                                                </div>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <div class="pull-left col-md-5 th-message">
+                                                    <h6><b>${m.source_acc_id.firstname} ${m.source_acc_id.lastname}</b> </h6>
+                                                    ${m.message}
+                                                    <br>
+                                                    <small class="pull-right text-muted">${cf:formatTime(m.send_date)}</small>
+                                                </div>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:forEach>
+                                    <!--                                    <div class="pull-left col-md-5 th-message">
+                                                                            <h6><b>AJ.Kittiphan Puapholthep </b></h6>
+                                                                            ising pain was born and I will give you a complete account of the system, and expound the actual teac
+                                                                            <br>
+                                                                            <small class="pull-right text-muted">13/08/2556 23:55:00</small>
+                                                                        </div>
+                                                                        <div class="pull-right col-md-5 st-message">
+                                                                            <h6><b>orarmor arm</b> </h6>
+                                                                            mistaken id
+                                                                            <br>
+                                                                            <small class="pull-right text-muted">13/08/2556 23:55:00</small>
+                                                                        </div>
+                                                                        <div class="pull-left col-md-5 th-message">
+                                                                            <h6><b>AJ.Kittiphan Puapholthep </b> </h6>
+                                                                            ill give you a complete account of the system, and expound the actual teac
+                                                                            <br>
+                                                                            <small class="pull-left text-muted">13/08/2556 23:55:00</small>
+                                                                        </div>
+                                                                        <div class="pull-right col-md-5 st-message">
+                                                                            <h6><b>orarmor arm</b> </h6>
+                                                                            I must explain to you how all this mistaken id<br>
+                                                                            <small class="pull-right text-muted">13/08/2556 23:55:00</small>
+                                                                        </div>
+                                                                        <div class="pull-left col-md-5 th-message">
+                                                                            <h6><b>AJ.Kittiphan Puapholthep </b>  </h6>
+                                                                            and praising pain was born and I will give you a complete account of the system, and expound the actual teac<br>
+                                                                            <small class="pull-right text-muted">13/08/2556 23:55:00</small>
+                                                                        </div>
+                                                                        <div class="pull-right col-md-5 st-message">
+                                                                            <h6><b>orarmor arm</b> </h6>
+                                                                            I must explain to you how all this mistaken id<br>
+                                                                            <small class="pull-right text-muted">13/08/2556 23:55:00</small>
+                                                                        </div>
+                                                                        <div class="pull-left col-md-5 th-message">
+                                                                            <h6><b>AJ.Kittiphan Puapholthep </b> </h6>
+                                                                            born and I will give you a complete account of the system, and expound the actual teac<br>
+                                                                            <small class="pull-right text-muted">13/08/2556 23:55:00</small>
+                                                                        </div>
+                                                                        <div class="pull-right col-md-5 st-message">
+                                                                            <h6><b>orarmor arm</b> </h6>
+                                                                            ut I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was<br>
+                                                                            <small class="pull-right text-muted">13/08/2556 23:55:00</small>
+                                                                        </div>
+                                                                        <div class="pull-right col-md-5 st-message">
+                                                                            <h6><b>orarmor arm</b> </h6>
+                                                                            complete account of the system, an<br>
+                                                                            <small class="pull-right text-muted">13/08/2556 23:55:00</small>
+                                                                        </div>-->
+                                </c:otherwise>
+                            </c:choose>
                         </div>
-                        <form>
-                            <textarea class="form-control"  placeholder="Tell your teacher here."></textarea>
+                        <form >
+                            <textarea class="form-control" id="messagetext"  placeholder="Tell your teacher here."></textarea>
                             <br>
-                            <input type="submit" class="btn btn-primary pull-right" value="Send">
+                            <input type="button"  id="sendMessage"  class="btn btn-primary pull-right" value="Send">
                         </form>
                     </div>
                     <div class="col-md-4" style="margin-top: 36px;">
@@ -130,7 +160,7 @@
                                     <p class="text-center text-muted"><b>You don't have a Teacher</b></p>
                                 </c:if>
                                 <c:forEach items="${youTeacher}" var="t">
-                                    <div class="media" style="padding: 10px">
+                                    <div class="media" style="padding: 10px" data-id="${t.acc_id}" onclick="getMessage(this)">
                                         <a class="pull-left" href="#">
                                             <img width="32" src="${t.profile_pic}">
                                         </a>
@@ -177,6 +207,30 @@
                                                                 </div>-->
                             </div>
                         </div>
+                        <c:if test="${ac.account_type eq 'TH'}">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Message to your student</h3>
+                                </div>
+                                <div class="panel-body" id="studentSelectionBox">
+                                    <c:if test="${yourStudent.size()==0}">
+                                        <br/>
+                                        <p class="text-center text-muted"><b>You don't have a Student</b></p>
+                                    </c:if>
+                                    <c:forEach items="${yourStudent}" var="s">
+                                        <div class="media" style="padding: 10px" data-id="${s.acc_id}" onclick="getMessage(this)">
+                                            <a class="pull-left" href="#">
+                                                <img width="32" src="${s.profile_pic}">
+                                            </a>
+                                            <div class="media-body">
+                                                <h5 class="media-heading">${s.firstname} ${s.lastname}</h5>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                    </c:forEach>
+                                </div>
+                            </div>
+                        </c:if>
                     </div>
                 </div>
             </div>
@@ -185,7 +239,39 @@
             $(function() {
                 $("#message_menu").addClass("active");
                 $("#home_menu").removeClass("active");
+                $("#sendMessage").click(function() {
+                    var text = $("#messagetext").val();
+                    var send_acc_id = '${ac.acc_id}';
+                    var to_acc_id = '${to_acc_id}';
+                    var d = new Date();
+                    var dateSt = d.getFullYear() + "-" + ('0' + (d.getMonth() + 1)).slice(-2) + "-" + ('0' + d.getDate()).slice(-2) + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getMilliseconds();
+                    $.ajax({
+                        type: 'POST',
+                        url: "smessage",
+                        data: {text: text, send_acc_id: send_acc_id, to_acc_id: to_acc_id},
+                        success: function(data) {
+                            if (data == "success") {
+                                var html = '<div class="pull-right col-md-5 st-message">' +
+                                        '        <h6><b>${ac.firstname} ${ac.lastname}</b> </h6>' +
+                                        '        ' + text + '<br>' +
+                                        '        <small class="pull-right text-muted">' + dateSt + '</small>' +
+                                        '    </div>"';
+                                $("#messageBox").append(html);
+                                $('#messageBox').animate({
+                                    scrollTop: $("#messageBox").offset().top + $("#messageBox").height()
+                                }, 500);
+                                $("#messagetext").val('');
+                            } else {
+                                alert("failed");
+                            }
+                        }
+                    });
+                });
             });
+            function getMessage(t) {
+                var to_acc_id = $(t).attr("data-id");
+                location.href = "gmessage?to_acc_id=" + to_acc_id;
+            }
         </script>
     </body> 
 </html>

@@ -70,7 +70,7 @@ public class Message {
     }
 
     //send(int send_acc_id,int to_acc_id,String message)
-    public static void send(Message m) {
+    public static int send(Message m) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "insert into contact_message(send_acc_id,to_acc_id,message) values(?,?,?)";
         PreparedStatement pstm = null;
@@ -85,19 +85,22 @@ public class Message {
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return result;
     }
 
     //getMessageBetweenSourceAndDest(int source_acc_id,int dest_acc_id)
     public static List<Message> getMessageBetweenSourceAndDest(int source_acc_id, int dest_acc_id) {
         List<Message> msList = new ArrayList<Message>();
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select * from contact_message where send_acc_id=? and to_acc_id=?";
+        String sql = "select * from contact_message where (send_acc_id=? and to_acc_id=?) or (send_acc_id=? and to_acc_id=?) order by send_date";
         PreparedStatement pstm;
         Message ms = null;
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, source_acc_id);
             pstm.setInt(2, dest_acc_id);
+            pstm.setInt(3, dest_acc_id);
+            pstm.setInt(4, source_acc_id);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
                 ms = new Message();

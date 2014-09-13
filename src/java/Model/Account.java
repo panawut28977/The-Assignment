@@ -42,6 +42,10 @@ public class Account {
     public Account() {
     }
 
+    public Account(int acc_id) {
+        this.acc_id = acc_id;
+    }
+    
     public Account(int acc_id, String firstname, String lastname) {
         this.acc_id = acc_id;
         this.firstname = firstname;

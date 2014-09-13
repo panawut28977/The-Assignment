@@ -254,6 +254,14 @@
         <servlet-name>message</servlet-name>
         <servlet-class>servlet.message</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>gmessage</servlet-name>
+        <servlet-class>servlet.gmessage</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>smessage</servlet-name>
+        <servlet-class>servlet.smessage</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -433,6 +441,14 @@
     <servlet-mapping>
         <servlet-name>message</servlet-name>
         <url-pattern>/message</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>gmessage</servlet-name>
+        <url-pattern>/gmessage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>smessage</servlet-name>
+        <url-pattern>/smessage</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

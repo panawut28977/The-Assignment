@@ -6,12 +6,9 @@
 package servlet;
 
 import Model.Account;
-import Model.AccountCourse;
+import Model.Message;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +19,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Orarmor
  */
-public class message extends HttpServlet {
+public class gmessage extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,34 +34,11 @@ public class message extends HttpServlet {
             throws ServletException, IOException {
         HttpSession ss = request.getSession();
         Account a = (Account) ss.getAttribute("ac");
-        Map<Long, AccountCourse> courseList = a.getCourseList();
-        Iterator i = courseList.entrySet().iterator();
-        List<Account> yourTeacher = new ArrayList<>();
-        List<Account> yourStudent = new ArrayList<>();
-        //teacherAddedId เกบไอดีของอาจารย์ที่แอดคาเข้า yourTeacher ไปแล้ว
-        List<Integer> teacherAddedId = new ArrayList<>();
-
-        while (i.hasNext()) {
-            Map.Entry mapEntry = (Map.Entry) i.next();
-            List<Account> tInCourse = AccountCourse.getTeacherCourse(Integer.parseInt(mapEntry.getKey() + ""));
-            for (Account account : tInCourse) {
-                if ((!teacherAddedId.contains(account.getAcc_id())) && account.getAcc_id() != a.getAcc_id()) {
-                    teacherAddedId.add(account.getAcc_id());
-                    yourTeacher.add(account);
-                }
-            }
-
-            if (a.getAccount_type().equalsIgnoreCase("TH")) {
-                List<Account> sInCourse = AccountCourse.getStudentCourse(Integer.parseInt(mapEntry.getKey() + ""));
-                for (Account account : sInCourse) {
-                    yourStudent.add(account);
-                }
-            }
-        }
-
-        ss.setAttribute("yourStudent", yourStudent);
-        ss.setAttribute("youTeacher", yourTeacher);
-        request.setAttribute("msg", "nopvmsg");
+        Integer to_acc_id  = Integer.parseInt(request.getParameter("to_acc_id"));
+        
+        List<Message> mList = Message.getMessageBetweenSourceAndDest(a.getAcc_id(), to_acc_id);
+        request.setAttribute("mList", mList);
+        request.setAttribute("to_acc_id", to_acc_id);
         String url = "/message.jsp";
         getServletContext().getRequestDispatcher(url).forward(request, response);
     }
