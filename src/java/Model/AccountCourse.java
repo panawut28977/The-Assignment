@@ -424,6 +424,26 @@ public class AccountCourse {
         }
         return listAccount;
     }
+     
+     public static List<Integer> getStudentIdCourse(int course_id,int ownid) {
+        List<Integer> listAccount = new ArrayList<>();
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select acc_id from account_course where course_id=? AND role =  \"ST\" AND status =  \"approved\" and acc_id !=? order by acc_id";
+        PreparedStatement pstm;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, course_id);
+            pstm.setInt(2, ownid);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                listAccount.add(rs.getInt("acc_id"));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listAccount;
+    }
 
     @Override
     public String toString() {

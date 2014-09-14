@@ -263,6 +263,14 @@
         <servlet-name>smessage</servlet-name>
         <servlet-class>servlet.smessage</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>HelloServlet</servlet-name>
+        <servlet-class>servlet.HelloServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>notify</servlet-name>
+        <servlet-class>servlet.notify</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -450,6 +458,14 @@
     <servlet-mapping>
         <servlet-name>smessage</servlet-name>
         <url-pattern>/smessage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HelloServlet</servlet-name>
+        <url-pattern>/HelloServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>notify</servlet-name>
+        <url-pattern>/notify</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

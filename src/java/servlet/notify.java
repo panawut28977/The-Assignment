@@ -3,13 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package servlet;
 
 import Model.Account;
-import Model.AccountCourse;
-import Model.Announcement;
 import Model.Notification;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -21,9 +19,9 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author JenoVa
+ * @author Orarmor
  */
-public class AddAnnounce extends HttpServlet {
+public class notify extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,27 +34,26 @@ public class AddAnnounce extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
+        response.setContentType("text/event-stream");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter writer = response.getWriter();
         HttpSession ss = request.getSession();
-        String title = request.getParameter("title");
-        String content = request.getParameter("content");
-        Account ac = (Account)ss.getAttribute("ac");
-        int cId = Integer.parseInt((Long)ss.getAttribute("cId") + "");
-        Announcement a = new Announcement();
-        a.setAn_acc(ac);
-        a.setTitle(title);
-        a.setContent(content);
-        a.setCourse(Integer.parseInt(ss.getAttribute("cId")+""));
-        int rs = Announcement.add(a);
-        Notification n = new Notification();
-        n.setAcc_id(ac.getAcc_id());
-        n.setType("announce");
-        n.setText(title+"<br/>"+content);
+        Account ac = (Account) ss.getAttribute("ac");
         
-        //select people you want to notify
-        List<Integer> listac = AccountCourse.getStudentIdCourse(cId, ac.getAcc_id());
-        Notification.announce(n,listac);
-        out.write(rs);
+        System.out.println("notify");
+        List<Notification> anNoti = Notification.getAnnounce(ac.getAcc_id());
+        System.out.println(anNoti);
+        writer.write("event:announcement\n");
+        Gson g = new Gson();
+        writer.write("data:" + g.toJson(anNoti)+"\n\n");
+        writer.flush();
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        writer.close();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

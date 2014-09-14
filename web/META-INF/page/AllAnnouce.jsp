@@ -1,19 +1,44 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <c:if test="${ac.announcement.size()==0}">
-        <h1 class="text-muted" style="text-align: center">ยังไม่มีข่าวหรือประกาศครับ XD</h1>
-    </c:if>
-<c:forEach items="${ac.announcement}" var="ann">
-    <div class="media">
-        <a class="pull-left" href="#">
-            <img width="64" src="${ann.an_acc.profile_pic}">
-        </a>
-        <div class="media-body">
-            <h4 class="media-heading">${ann.title} - <small>${ann.an_acc.firstname} ${ann.an_acc.lastname}</small><small class="pull-right">${cf:formatTime(ann.announce_date)}</small></h4>
-            <p>${ann.content}</p>
-        </div>
-    </div>
-</c:forEach>
-
+    <h1 class="text-muted" style="text-align: center">ยังไม่มีข่าวหรือประกาศครับ XD</h1>
+</c:if>
+<div class="table-responsive" style="min-height: 520px; margin-top: 30px">
+    <table class="table table-striped " id="AllAnnounce">
+        <thead>
+            <tr>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${ac.announcement}" var="ann">
+            <tr>
+                <td>
+                    <div class="media">
+                        <a class="pull-left" href="#">
+                            <img width="64" src="${ann.an_acc.profile_pic}">
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading">${ann.title} - <small>${ann.an_acc.firstname} ${ann.an_acc.lastname}</small><small class="pull-right">${cf:formatTime(ann.announce_date)}</small></h4>
+                            <p>${ann.content}</p>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+</div>
+<script>
+    $(function() {
+        var aTable = $('#AllAnnounce').dataTable({
+            /* Disable initial sort */
+            "aaSorting": [],
+            "bLengthChange": false,
+            "bFilter": true,
+            "bInfo": false
+        });
+    });
+</script>
 <!--<div class="media">
     <a class="pull-left" href="#">
         <img width="64" src="img/avatar.jpg">

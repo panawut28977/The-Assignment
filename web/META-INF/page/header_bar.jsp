@@ -8,10 +8,10 @@
         border-radius: 2px;
         padding: 3px 3px;
     }
-    
-/*    .navbar-nav{
-        text-align: center;
-    }*/
+
+    /*    .navbar-nav{
+            text-align: center;
+        }*/
 </style>
 <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
@@ -52,12 +52,19 @@
 
     </div>
 </nav>
-<!--<script>
+<script>
     $(function() {
-        $(".navbar-nav li").mouseover(function() {
-            $(this).css("backgroud-color","e7e7e7");
-        }).mouseout(function() {
-            $(this).css("backgroud-color","none");
-        });
+        var eventSource = new EventSource("notify");
+        eventSource.addEventListener('announcement', function(event) {
+            console.log(event.data);
+        }, false);
+
+
+//        $(".navbar-nav li").mouseover(function() {
+//            $(this).css("backgroud-color","e7e7e7");
+//        }).mouseout(function() {
+//            $(this).css("backgroud-color","none");
+//        });
+
     });
-</script>-->
+</script>
