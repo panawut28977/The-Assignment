@@ -35,6 +35,7 @@
         <url-pattern>/userscore</url-pattern>
         <url-pattern>/message</url-pattern>
         <url-pattern>/message.jsp</url-pattern>
+        <url-pattern>/gmessage</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>

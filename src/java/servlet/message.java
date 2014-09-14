@@ -7,9 +7,11 @@ package servlet;
 
 import Model.Account;
 import Model.AccountCourse;
+import Model.Message;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -39,32 +41,46 @@ public class message extends HttpServlet {
         Account a = (Account) ss.getAttribute("ac");
         Map<Long, AccountCourse> courseList = a.getCourseList();
         Iterator i = courseList.entrySet().iterator();
-        List<Account> yourTeacher = new ArrayList<>();
-        List<Account> yourStudent = new ArrayList<>();
+        Map<Message, Account> yourTeacher = new LinkedHashMap<>();
+        Map<Message, Account> yourStudent = new LinkedHashMap<>();
         //teacherAddedId เกบไอดีของอาจารย์ที่แอดคาเข้า yourTeacher ไปแล้ว
         List<Integer> teacherAddedId = new ArrayList<>();
+        List<Integer> studentAddedId = new ArrayList<>();
 
         while (i.hasNext()) {
             Map.Entry mapEntry = (Map.Entry) i.next();
-            List<Account> tInCourse = AccountCourse.getTeacherCourse(Integer.parseInt(mapEntry.getKey() + ""));
+            List<Account> tInCourse = AccountCourse.getTeacherCourse(Integer.parseInt(mapEntry.getKey() + ""),a.getAcc_id());
             for (Account account : tInCourse) {
-                if ((!teacherAddedId.contains(account.getAcc_id())) && account.getAcc_id() != a.getAcc_id()) {
+                if (!teacherAddedId.contains(account.getAcc_id())) {
                     teacherAddedId.add(account.getAcc_id());
-                    yourTeacher.add(account);
+                    Message isAllSeen = new Message();
+                    isAllSeen.setIsAllSeen(Message.isAllSeen(a.getAcc_id(), account.getAcc_id()));
+                    yourTeacher.put(isAllSeen, account);
                 }
             }
 
             if (a.getAccount_type().equalsIgnoreCase("TH")) {
-                List<Account> sInCourse = AccountCourse.getStudentCourse(Integer.parseInt(mapEntry.getKey() + ""));
+                List<Account> sInCourse = AccountCourse.getStudentCourse(Integer.parseInt(mapEntry.getKey() + ""),a.getAcc_id());
                 for (Account account : sInCourse) {
-                    yourStudent.add(account);
+                    if (!studentAddedId.contains(account.getAcc_id())) {
+                        studentAddedId.add(account.getAcc_id());
+                        Message isAllSeen = new Message();
+                        isAllSeen.setIsAllSeen(Message.isAllSeen(a.getAcc_id(), account.getAcc_id()));
+                        yourStudent.put(isAllSeen, account);
+                    }
                 }
             }
         }
 
+        System.out.println(yourStudent);
+        System.out.println("===");
+        System.out.println(yourTeacher);
         ss.setAttribute("yourStudent", yourStudent);
         ss.setAttribute("youTeacher", yourTeacher);
-        request.setAttribute("msg", "nopvmsg");
+
+        if (ss.getAttribute("mList") == null) {
+            request.setAttribute("msg", "nopvmsg");
+        }
         String url = "/message.jsp";
         getServletContext().getRequestDispatcher(url).forward(request, response);
     }

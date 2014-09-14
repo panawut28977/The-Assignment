@@ -6,9 +6,16 @@
 package servlet;
 
 import Model.Account;
+import Model.ConnectionBuilder;
+import Model.Course;
 import Model.Message;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -37,11 +44,17 @@ public class gmessage extends HttpServlet {
         Integer to_acc_id  = Integer.parseInt(request.getParameter("to_acc_id"));
         
         List<Message> mList = Message.getMessageBetweenSourceAndDest(a.getAcc_id(), to_acc_id);
-        request.setAttribute("mList", mList);
-        request.setAttribute("to_acc_id", to_acc_id);
-        String url = "/message.jsp";
+        for (Message message : mList) {
+            if (message.getSource_acc_id().getAcc_id()==to_acc_id) {
+                Message.seen(message.getMs_id());
+            }
+        }
+        ss.setAttribute("mList", mList);
+        ss.setAttribute("to_acc_id", to_acc_id);
+        String url = "/message";
         getServletContext().getRequestDispatcher(url).forward(request, response);
     }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

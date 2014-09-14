@@ -28,6 +28,8 @@ public class Message {
     private Account dest_acc_id;
     private String message;
     private Date send_date;
+    private Date dest_seen;
+    private boolean isAllSeen;
 
     public int getMs_id() {
         return ms_id;
@@ -69,6 +71,24 @@ public class Message {
         this.send_date = send_date;
     }
 
+    public Date getDest_seen() {
+        return dest_seen;
+    }
+
+    public void setDest_seen(Date dest_seen) {
+        this.dest_seen = dest_seen;
+    }
+
+    public boolean isIsAllSeen() {
+        return isAllSeen;
+    }
+
+    public void setIsAllSeen(boolean isAllSeen) {
+        this.isAllSeen = isAllSeen;
+    }
+    
+    
+
     //send(int send_acc_id,int to_acc_id,String message)
     public static int send(Message m) {
         Connection conn = ConnectionBuilder.getConnection();
@@ -109,6 +129,7 @@ public class Message {
                 ms.setDest_acc_id(Account.getAccountByID(rs.getInt("to_acc_id")));
                 ms.setMessage(rs.getString("message"));
                 ms.setSend_date(rs.getTimestamp("send_date"));
+                ms.setDest_seen(rs.getTimestamp("dest_seen"));
                 msList.add(ms);
             }
             conn.close();
@@ -118,9 +139,48 @@ public class Message {
         return msList;
     }
 
-    @Override
-    public String toString() {
-        return "Message{" + "ms_id=" + ms_id + ", source_acc_id=" + source_acc_id + ", dest_acc_id=" + dest_acc_id + ", message=" + message + ", send_date=" + send_date + '}';
+    public static int seen(int ms_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "update contact_message set dest_seen=current_timestamp where ms_id=?";
+        PreparedStatement pstm;
+        int result = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, ms_id);
+            result = pstm.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+    
+     public static boolean isAllSeen(int send_acc_id,int to_acc_id) {
+        String e = null;
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select * from contact_message where send_acc_id=? and to_acc_id=? and dest_seen is NULL";
+        boolean result = true;
+        PreparedStatement pstm;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, to_acc_id);
+            pstm.setInt(2, send_acc_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                result = false;
+                break;
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
     }
 
+    @Override
+    public String toString() {
+        return "Message{" + "ms_id=" + ms_id + ", source_acc_id=" + source_acc_id + ", dest_acc_id=" + dest_acc_id + ", message=" + message + ", send_date=" + send_date + ", dest_seen=" + dest_seen + ", isAllSeen=" + isAllSeen + '}';
+    }
+
+     
 }

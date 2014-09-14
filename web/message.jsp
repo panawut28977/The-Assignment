@@ -53,6 +53,9 @@
                 padding-top: 8px;
             }
 
+            .seen{
+                background: aliceblue;
+            }
         </style>
         <title>Message</title>
     </head>
@@ -160,15 +163,15 @@
                                     <p class="text-center text-muted"><b>You don't have a Teacher</b></p>
                                 </c:if>
                                 <c:forEach items="${youTeacher}" var="t">
-                                    <div class="media" style="padding: 10px" data-id="${t.acc_id}" onclick="getMessage(this)">
-                                        <a class="pull-left" href="#">
-                                            <img width="32" src="${t.profile_pic}">
+                                    <div class="media <c:if test="${t.key.isAllSeen eq false}">seen</c:if>" style="padding: 10px" data-id="${t.value.acc_id}" onclick="getMessage(this)">
+                                            <a class="pull-left" href="#">
+                                                <img width="32" src="${t.value.profile_pic}">
                                         </a>
                                         <div class="media-body">
-                                            <h5 class="media-heading">${t.firstname} ${t.lastname}</h5>
+                                            <h5 class="media-heading">${t.value.firstname} ${t.value.lastname} <c:if test="${t.key.isAllSeen eq false}"><span class="label label-info">new</span></c:if></h5>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <hr>
+                                        <hr>
                                 </c:forEach>
                                 <!--                                <div class="media">
                                                                     <a class="pull-left" href="#">
@@ -218,15 +221,15 @@
                                         <p class="text-center text-muted"><b>You don't have a Student</b></p>
                                     </c:if>
                                     <c:forEach items="${yourStudent}" var="s">
-                                        <div class="media" style="padding: 10px" data-id="${s.acc_id}" onclick="getMessage(this)">
-                                            <a class="pull-left" href="#">
-                                                <img width="32" src="${s.profile_pic}">
+                                        <div class="media <c:if test="${s.key.isAllSeen eq false}">seen</c:if>" style="padding: 10px" data-id="${s.value.acc_id}" onclick="getMessage(this)">
+                                                <a class="pull-left" href="#">
+                                                    <img width="32" src="${s.value.profile_pic}">
                                             </a>
                                             <div class="media-body">
-                                                <h5 class="media-heading">${s.firstname} ${s.lastname}</h5>
+                                                <h5 class="media-heading">${s.value.firstname} ${s.value.lastname} <c:if test="${s.key.isAllSeen eq false}"><span class="label label-info">new</span></c:if></h5>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <hr>
+                                            <hr>
                                     </c:forEach>
                                 </div>
                             </div>
@@ -239,6 +242,9 @@
             $(function() {
                 $("#message_menu").addClass("active");
                 $("#home_menu").removeClass("active");
+                $('#messageBox').animate({
+                    scrollTop: $("#messageBox").offset().top + $("#messageBox")[0].scrollHeight
+                }, 0);
                 $("#sendMessage").click(function() {
                     var text = $("#messagetext").val();
                     var send_acc_id = '${ac.acc_id}';
@@ -258,7 +264,7 @@
                                         '    </div>"';
                                 $("#messageBox").append(html);
                                 $('#messageBox').animate({
-                                    scrollTop: $("#messageBox").offset().top + $("#messageBox").height()
+                                    scrollTop: $("#messageBox").offset().top + $("#messageBox")[0].scrollHeight
                                 }, 500);
                                 $("#messagetext").val('');
                             } else {
