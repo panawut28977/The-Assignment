@@ -20,33 +20,38 @@
     </c:when>
 </c:choose>
 <div id="listAnnounce" class="table-responsive" style="min-height: 520px; margin-top: 30px">
-    <table class="table table-striped " id="AllAnnounce">
-        <thead>
-            <tr>
-                <td></td>
-            </tr>
-        </thead>
-        <tbody>
-            <c:if test="${ac.courseList.get(cId).course.announcement.size()==0}">
+    <c:choose>
+        <c:when test="${ac.courseList.get(cId).course.announcement.size()==0}">
             <h1 class="text-muted" style="text-align: center">ยังไม่มีข่าวหรือประกาศครับ XD</h1>
-        </c:if>
-        <c:forEach items="${ac.courseList.get(cId).course.announcement}" var="a">
-            <tr>
-                <td>
-                    <div class="media">
-                        <a class="pull-left" href="#">
-                            <img width="64" src="${a.an_acc.profile_pic}">
-                        </a>
-                        <div class="media-body">
-                            <h4 class="media-heading">${a.title} - <small class="text-muted">${a.an_acc.firstname} ${a.an_acc.lastname}</small><small class="pull-right">${cf:formatTime(a.announce_date)}</small></h4>
-                            <p>${a.content}</p>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+        </c:when>
+        <c:otherwise>
+            <table class="table table-striped " id="AllAnnounce">
+                <thead>
+                    <tr>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${ac.courseList.get(cId).course.announcement}" var="a">
+                        <tr>
+                            <td>
+                                <div class="media">
+                                    <a class="pull-left" href="#">
+                                        <img width="64" src="${a.an_acc.profile_pic}">
+                                    </a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">${a.title} - <small class="text-muted">${a.an_acc.firstname} ${a.an_acc.lastname}</small><small class="pull-right">${cf:formatTime(a.announce_date)}</small></h4>
+                                        <p>${a.content}</p>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </c:otherwise>
+    </c:choose>
+
 </div>
 <script>
     $(function() {

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package servlet;
 
 import Model.Account;
@@ -37,16 +36,18 @@ public class setCourseSession extends HttpServlet {
         Long cId = Long.parseLong(request.getParameter("cId"));
         HttpSession ss = request.getSession();
         Account a = (Account) ss.getAttribute("ac");
-        List<Assignment> amList = ((AccountCourse)(a.getCourseList().get(cId))).getCourse().getAssignment(); 
         int leftover = 0;
-        String st = "";
-        for (Assignment assignment : amList) {
+        if (a.getCourseList().get(cId) != null) {
+            List<Assignment> amList = ((AccountCourse) (a.getCourseList().get(cId))).getCourse().getAssignment();
+            String st = "";
+            for (Assignment assignment : amList) {
 //            System.out.println(assignment.getDue_date());
-            st = Assignment.remainingTimeforSend(assignment, a.getAcc_id());
-            if (st.equalsIgnoreCase("ontime") || st.equalsIgnoreCase("hurryup") || st.equalsIgnoreCase("late") ) {
-                leftover++;
-            } else{
-                System.out.print(st+"/");
+                st = Assignment.remainingTimeforSend(assignment, a.getAcc_id());
+                if (st.equalsIgnoreCase("ontime") || st.equalsIgnoreCase("hurryup") || st.equalsIgnoreCase("late")) {
+                    leftover++;
+                } else {
+                    System.out.print(st + "/");
+                }
             }
         }
         ss.setAttribute("leftoverInCourse", leftover);
