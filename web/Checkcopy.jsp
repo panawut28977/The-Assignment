@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
+<%@taglib uri="/WEB-INF/tlds/functions.tld" prefix="cf" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -49,10 +50,25 @@
                                     <td>${index[2]}</td><!-- 2 is owner html generate form servlet-->
                                     <!--<td><a href="#" onclick="compareView()">compare view</a></td>-->
                                 </tr>
+                                <c:set value="${ct_cf:getSafvBySafv(index[4])}" var="detail"/>
+                                <c:set value="${ct_cf:getStAm(index[0])}" var="stinfo"/>
                                 <tr class="stDetails">
-                                    <td colspan="3">
-                                        test
+                                    <td>
+                                        <b>Name :</b> ${detail.path_file}<br>
+                                        <b>Send date :</b> ${ct_cf:formatTime(detail.send_date)}<br>
+                                        <b  <c:if test="${stinfo.checked_time != null}">class="text-success"</c:if>>Check status :</b>
+                                        <c:choose>
+                                            <c:when test="${stinfo.checked_time == null}">
+                                                Not check
+                                            </c:when>
+                                            <c:otherwise>
+                                                <span class="glyphicon glyphicon-ok"></span> Checked
+                                            </c:otherwise>
+                                        </c:choose>
+
                                     </td>
+                                    <td><b>Score :</b></td>
+                                    <td><a href="">Compare view</a></td>
                                 </tr>
                             </c:forEach>
                             <!--                            <tr>
@@ -111,7 +127,7 @@
                         {placement: 'top'}
                 );
                 $(".checktext").click(function() {
-                    if (!$(this).next('.stDetails').is(":visible") ) {
+                    if (!$(this).next('.stDetails').is(":visible")) {
                         $(this).next('.stDetails').show();
                     } else {
                         $(this).next('.stDetails').hide();

@@ -115,14 +115,24 @@
         <function-class>Model.Assignment</function-class>
         <function-signature>boolean isLock(Model.Assignment)</function-signature>
     </function>  
-     <function>
+    <function>
         <name>getAmTimeByAmID</name>
         <function-class>Model.Assignment</function-class>
         <function-signature>Model.Assignmennt getAmTimeByAmID(int)</function-signature>
     </function> 
-      <function>
+    <function>
         <name>calculateTime</name>
         <function-class>Model.Assignment</function-class>
         <function-signature>String calculateTime(Model.Assignment)</function-signature>
+    </function> 
+    <function>
+        <name>getSafvBySafv</name>
+        <function-class>Model.StAmFileList</function-class>
+        <function-signature>StAmFileList getSafvBySafv(int)</function-signature>
+    </function> 
+     <function>
+        <name>getStAm</name>
+        <function-class>Model.StAssignmentFile</function-class>
+        <function-signature>StAssignmentFile getStAm(int)</function-signature>
     </function> 
 </taglib>

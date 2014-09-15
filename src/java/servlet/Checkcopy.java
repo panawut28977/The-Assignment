@@ -106,7 +106,7 @@ public class Checkcopy extends HttpServlet {
 
                 indexsetList = new ArrayList<>();
                 for (int i = 0; i < docs.totalHits; i++) {
-                    String[] indexset = new String[4];
+                    String[] indexset = new String[5];
                     int id = docs.scoreDocs[i].doc;
                     float score = docs.scoreDocs[i].score;
                     Document doc = searcher.doc(id);
@@ -150,6 +150,7 @@ public class Checkcopy extends HttpServlet {
                     }
                     indexset[2] = html;
                     indexset[3] = score + "";
+                    indexset[4] = owner_safv_id;
                     if (add) {
                         indexsetList.add(indexset);
                     }
