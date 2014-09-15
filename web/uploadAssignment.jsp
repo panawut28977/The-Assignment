@@ -108,7 +108,7 @@
                                                     <span class="text-warning">Hurry up!</span>
                                                 </c:when>
                                                 <c:when test="${status eq 'sent'}">
-                                                    <span class="text-muted">Sent <span class="glyphicon glyphicon-check"></span></span>
+                                                    <span class="text-primary">Sent <span class="glyphicon glyphicon-check"></span></span>
                                                     </c:when>
                                                 </c:choose>
                                         </span>

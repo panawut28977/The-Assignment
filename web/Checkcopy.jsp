@@ -43,11 +43,16 @@
                         </thead>
                         <tbody>
                             <c:forEach items="${indexsetList}" var="index">
-                                <tr>
+                                <tr class="checktext usepointer">
                                     <td>${index[1]}</td><!-- 1 is hltext-->
                                     <td>${index[3]}</td><!-- 3 is score -->
                                     <td>${index[2]}</td><!-- 2 is owner html generate form servlet-->
                                     <!--<td><a href="#" onclick="compareView()">compare view</a></td>-->
+                                </tr>
+                                <tr class="stDetails">
+                                    <td colspan="3">
+                                        test
+                                    </td>
                                 </tr>
                             </c:forEach>
                             <!--                            <tr>
@@ -98,12 +103,20 @@
         <script>
             $(document).ready(function() {
                 var aTable = $('#SentAssignment').dataTable();
+                $('.stDetails').hide();
                 $('#checkcopy').tooltip("hide");
                 $('#compareBox').hide();
                 $('img').tooltip("hide");
                 $(".showGroup").popover(
                         {placement: 'top'}
                 );
+                $(".checktext").click(function() {
+                    if (!$(this).next('.stDetails').is(":visible") ) {
+                        $(this).next('.stDetails').show();
+                    } else {
+                        $(this).next('.stDetails').hide();
+                    }
+                });
             });
             function compareView() {
                 $('#compareBox').show();

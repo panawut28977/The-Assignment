@@ -2,6 +2,66 @@
 <%@taglib  prefix="cf" uri="/WEB-INF/tlds/functions.tld" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="module/fullcalendar/fullcalendar.css">
+<script src="module/fullcalendar/fullcalendar.min.js"></script>
+<script>
+
+    $(document).ready(function() {
+        var aTable = $('#AllAssignment').dataTable({
+            /* Disable initial sort */
+            "aaSorting": []
+        });
+        if ('${param.st}'.length) {
+            $('html, body').animate({
+                scrollTop: $("#AllAssignment_wrapper").offset().top + 560
+            }, 1000);
+        }
+
+        aTable.fnFilter('${param.st}');
+        var jsonArr = [];
+    <c:forEach items="${ac.assignment}" var="a">
+        var color = '';
+        <c:set value="${cf:remainingTimeforSend(a,ac.acc_id)}" var="status"/>
+        <c:choose>
+            <c:when test="${status eq 'late'}">
+        color = '#a94442';
+            </c:when>
+            <c:when test="${status eq 'ontime'}">
+        color = '#3c763d';
+            </c:when>
+            <c:when test="${status eq 'hurryup'}">
+        color = '#8a6d3b';
+            </c:when>
+            <c:when test="${status eq 'sent'}">
+        color = '#5F8BCA';
+            </c:when>
+            <c:otherwise>
+        color = '#999';
+            </c:otherwise>
+        </c:choose>
+        jsonArr.push({
+            title: '${a.name}',
+            start: '${a.due_date}',
+            borderColor: color,
+            backgroundColor: color
+        });
+    </c:forEach>
+        var date = new Date();
+        var d = date.getDate();
+        var m = date.getMonth();
+        var y = date.getFullYear();
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month'
+            },
+            editable: true,
+            events: jsonArr,
+        });
+
+    });
+
+</script>
 <style>
     #AllAssignment_wrapper{
         margin-top: 20px;
@@ -81,63 +141,3 @@
         </tbody>
     </table>
 </div>
-<script src="module/fullcalendar/fullcalendar.min.js"></script>
-<script>
-
-    $(document).ready(function() {
-        var aTable = $('#AllAssignment').dataTable({
-            /* Disable initial sort */
-            "aaSorting": []
-        });
-        if ('${param.st}'.length) {
-            $('html, body').animate({
-                scrollTop: $("#AllAssignment_wrapper").offset().top + 560
-            }, 1000);
-        }
-
-        aTable.fnFilter('${param.st}');
-        var jsonArr = [];
-    <c:forEach items="${ac.assignment}" var="a">
-        var color = '';
-        <c:set value="${cf:remainingTimeforSend(a,ac.acc_id)}" var="status"/>
-        <c:choose>
-            <c:when test="${status eq 'late'}">
-        color = '#a94442';
-            </c:when>
-            <c:when test="${status eq 'ontime'}">
-        color = '#3c763d';
-            </c:when>
-            <c:when test="${status eq 'hurryup'}">
-        color = '#8a6d3b';
-            </c:when>
-            <c:when test="${status eq 'sent'}">
-        color = '#5F8BCA';
-            </c:when>
-            <c:otherwise>
-        color = '#999';
-            </c:otherwise>
-        </c:choose>
-        jsonArr.push({
-            title: '${a.name}',
-            start: '${a.due_date}',
-            borderColor: color,
-            backgroundColor: color
-        });
-    </c:forEach>
-        var date = new Date();
-        var d = date.getDate();
-        var m = date.getMonth();
-        var y = date.getFullYear();
-        $('#calendar').fullCalendar({
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'month'
-            },
-            editable: true,
-            events: jsonArr,
-        });
-
-    });
-
-</script>

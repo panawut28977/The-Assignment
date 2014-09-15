@@ -130,17 +130,29 @@ public class Checkcopy extends HttpServlet {
                     StAmFileList file = StAmFileList.getSafvBySafv(Integer.parseInt(owner_safv_id));
                     StAssignmentFile stam = StAssignmentFile.getStAmBbyAmIDAndList(a.getAm_id(), file.getList_id());
                     String html = "";
+                    //add เปนตัวแปรสำหรับเช็คว่าไม่ควรจะแอดค่าเช็คก็อปปี้ของตัวเอง
+                    boolean add = true;
                     if (stam.getG_id() == 0) {
                         //if no group that mean it's a individual work
-                        Account owneracc = Account.getNameByID(stam.getAcc_id());
-                        html = "<img style=\"width:30px\" src=\"" + owneracc.getProfile_pic() + "\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"\" class=\"img-circle\" data-original-title=\"" + owneracc.getFirstname() + "\">";
+                        if (sa.getAcc_id() != stam.getAcc_id()) {
+                            Account owneracc = Account.getNameByID(stam.getAcc_id());
+                            html = "<img style=\"width:30px\" src=\"" + owneracc.getProfile_pic() + "\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"\" class=\"img-circle\" data-original-title=\"" + owneracc.getFirstname() + "\">";
+                        } else {
+                            add = false;
+                        }
                     } else {
-                        List<Account> ownerlist = Account.getNameByGIDandAmID(stam.getG_id(), stam.getAm_id());
-                        html = "<a class=\"showGroup\" data-toggle=\"popover\" data-html=\"true\" data-content=\"" + Util.createPopoverGroup(ownerlist) + "\">Group no. " + Group_member.getGNOById(stam.getG_id()) + "</a>";
+                        if (sa.getG_id() != stam.getG_id()) {
+                            List<Account> ownerlist = Account.getNameByGIDandAmID(stam.getG_id(), stam.getAm_id());
+                            html = "<a class=\"showGroup\" data-toggle=\"popover\" data-html=\"true\" data-content=\"" + Util.createPopoverGroup(ownerlist) + "\">Group no. " + Group_member.getGNOById(stam.getG_id()) + "</a>";
+                        } else {
+                            add = false;
+                        }
                     }
                     indexset[2] = html;
                     indexset[3] = score + "";
-                    indexsetList.add(indexset);
+                    if (add) {
+                        indexsetList.add(indexset);
+                    }
                 }
             } catch (IOException ex) {
                 Logger.getLogger(TestDriver.class.getName()).log(Level.SEVERE, null, ex);

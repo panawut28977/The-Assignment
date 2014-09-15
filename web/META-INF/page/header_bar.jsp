@@ -54,10 +54,10 @@
 </nav>
 <script>
     $(function() {
-        var eventSource = new EventSource("notify");
-        eventSource.addEventListener('announcement', function(event) {
-            console.log(event.data);
-        }, false);
+//        var eventSource = new EventSource("notify");
+//        eventSource.addEventListener('announcement', function(event) {
+//            console.log(event.data);
+//        }, false);
 
 
 //        $(".navbar-nav li").mouseover(function() {

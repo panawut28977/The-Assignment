@@ -1,6 +1,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<script>
+    $(function() {
+        var aTable = $('#AllAnnounce').dataTable({
+            /* Disable initial sort */
+            "aaSorting": [],
+            "bLengthChange": false,
+            "bFilter": true,
+            "bInfo": false
+        });
+    });
+</script>
 <c:choose>
     <c:when test="${ac.announcement.size()==0}">
         <h1 class="text-muted" style="text-align: center">ยังไม่มีข่าวหรือประกาศครับ XD</h1>
@@ -34,17 +45,6 @@
         </div>
     </c:otherwise>
 </c:choose>
-<script>
-    $(function() {
-        var aTable = $('#AllAnnounce').dataTable({
-            /* Disable initial sort */
-            "aaSorting": [],
-            "bLengthChange": false,
-            "bFilter": true,
-            "bInfo": false
-        });
-    });
-</script>
 <!--<div class="media">
     <a class="pull-left" href="#">
         <img width="64" src="img/avatar.jpg">

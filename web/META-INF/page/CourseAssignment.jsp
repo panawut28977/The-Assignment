@@ -2,6 +2,90 @@
 <%@taglib uri="/WEB-INF/tlds/functions" prefix="cf" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="module/fullcalendar/fullcalendar.css">
+<script src="module/fullcalendar/fullcalendar.min.js"></script>
+<script>
+
+    $(document).ready(function() {
+        var aTable = $('#AllAssignemnt').dataTable({
+            /* Disable initial sort */
+            "aaSorting": []
+        });
+        aTable.fnFilter('${param.st}');
+        var color = '';
+        var jsonArr = [];
+    <c:forEach items="${ac.courseList.get(cId).course.assignment}" var="a">
+        <c:set value="${cf:remainingTimeforSend(a,ac.acc_id)}" var="status"/>
+        <c:choose>
+            <c:when test="${ac.courseList.get(cId).role eq 'TH'}">
+                <c:choose>
+                    <c:when test="${status eq 'late'}">
+        color = '#a94442';
+                    </c:when>
+                    <c:when test="${status eq 'ontime'}">
+        color = '#3c763d';
+                    </c:when>
+                    <c:when test="${status eq 'hurryup'}">
+        color = '#8a6d3b';
+                    </c:when>
+                    <c:when test="${status eq 'sent'}">
+        color = '#999';
+                    </c:when>
+                    <c:otherwise>
+        color = '#999';
+                    </c:otherwise>
+                </c:choose>
+        jsonArr.push({
+            title: '${a.name}',
+            start: '${a.due_date}',
+            borderColor: color,
+            backgroundColor: color
+        });
+            </c:when>
+            <c:when test="${ac.courseList.get(cId).role eq 'ST'}">
+                <c:choose>
+                    <c:when test="${status eq 'late'}">
+        color = '#a94442';
+                    </c:when>
+                    <c:when test="${status eq 'ontime'}">
+        color = '#3c763d';
+                    </c:when>
+                    <c:when test="${status eq 'hurryup'}">
+        color = '#8a6d3b';
+                    </c:when>
+                    <c:when test="${status eq 'sent'}">
+        color = '#5F8BCA';
+                    </c:when>
+                    <c:otherwise>
+        color = '#999';
+                    </c:otherwise>
+                </c:choose>
+        jsonArr.push({
+            title: '${a.name}',
+            start: '${a.due_date}',
+            borderColor: color,
+            backgroundColor: color
+        });
+            </c:when>
+        </c:choose>
+    </c:forEach>
+        var date = new Date();
+        var d = date.getDate();
+        var m = date.getMonth();
+        var y = date.getFullYear();
+
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month'
+            },
+            editable: true,
+            events: jsonArr
+        });
+
+    });
+
+</script>
 <style>
     #AllAssignemnt_wrapper{
         margin-top: 20px;
@@ -105,87 +189,3 @@
         </tbody>
     </table>
 </div>
-<script src="module/fullcalendar/fullcalendar.min.js"></script>
-<script>
-
-    $(document).ready(function() {
-        var aTable = $('#AllAssignemnt').dataTable({
-            /* Disable initial sort */
-            "aaSorting": []
-        });
-        aTable.fnFilter('${param.st}');
-        var color = '';
-        var jsonArr = [];
-    <c:forEach items="${ac.courseList.get(cId).course.assignment}" var="a">
-        <c:set value="${cf:remainingTimeforSend(a,ac.acc_id)}" var="status"/>
-        <c:choose>
-            <c:when test="${ac.courseList.get(cId).role eq 'TH'}">
-                <c:choose>
-                    <c:when test="${status eq 'late'}">
-        color = '#a94442';
-                    </c:when>
-                    <c:when test="${status eq 'ontime'}">
-        color = '#3c763d';
-                    </c:when>
-                    <c:when test="${status eq 'hurryup'}">
-        color = '#8a6d3b';
-                    </c:when>
-                    <c:when test="${status eq 'sent'}">
-        color = '#999';
-                    </c:when>
-                    <c:otherwise>
-        color = '#999';
-                    </c:otherwise>
-                </c:choose>
-        jsonArr.push({
-            title: '${a.name}',
-            start: '${a.due_date}',
-            borderColor: color,
-            backgroundColor: color
-        });
-            </c:when>
-            <c:when test="${ac.courseList.get(cId).role eq 'ST'}">
-                <c:choose>
-                    <c:when test="${status eq 'late'}">
-        color = '#a94442';
-                    </c:when>
-                    <c:when test="${status eq 'ontime'}">
-        color = '#3c763d';
-                    </c:when>
-                    <c:when test="${status eq 'hurryup'}">
-        color = '#8a6d3b';
-                    </c:when>
-                    <c:when test="${status eq 'sent'}">
-        color = '#5F8BCA';
-                    </c:when>
-                    <c:otherwise>
-        color = '#999';
-                    </c:otherwise>
-                </c:choose>
-        jsonArr.push({
-            title: '${a.name}',
-            start: '${a.due_date}',
-            borderColor: color,
-            backgroundColor: color
-        });
-            </c:when>
-        </c:choose>
-    </c:forEach>
-        var date = new Date();
-        var d = date.getDate();
-        var m = date.getMonth();
-        var y = date.getFullYear();
-
-        $('#calendar').fullCalendar({
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'month'
-            },
-            editable: true,
-            events: jsonArr
-        });
-
-    });
-
-</script>

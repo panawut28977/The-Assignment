@@ -7,7 +7,8 @@
     </c:if>
     <c:set var="count" value="0"/>
     <c:if test="${changeRoleMsg eq 'false'}">
-        <h3 class="text-warning">Can't remove teacher. You are only one teacher in group.</h3>
+        <c:set value="" var="changeRoleMsg" scope="session" />
+        <h3 class="text-warning">Can't remove teacher. You are only one teacher in course.</h3>
     </c:if>
     <c:forEach items="${ac.courseList.get(cId).course.listStudent}" var="st">
         <c:if test="${count==0}">

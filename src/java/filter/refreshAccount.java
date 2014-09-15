@@ -65,6 +65,10 @@ public class refreshAccount implements Filter {
 
         if (!((ss.getAttribute("objStatus") + "").equalsIgnoreCase("updated"))) {
             a = Account.login(a.getEmail(), a.getPassword());
+            System.out.println(a.getAnnouncement());
+            System.out.println(a.getAssignment());
+            System.out.println(a.getListStudentScore());
+            System.out.println(a.getCourseList());
             ss.setAttribute("ac", a);
             System.out.println("refreshaccount");
         } else {
