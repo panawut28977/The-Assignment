@@ -5,9 +5,10 @@
  */
 package servlet;
 
+import Model.Account;
 import Model.AccountCourse;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,8 +34,19 @@ public class removeTeacher extends HttpServlet {
             throws ServletException, IOException {
         HttpSession ss = request.getSession();
         String acc_id = request.getParameter("acc_id");
-        boolean result = AccountCourse.changeRole(Integer.parseInt(acc_id), Integer.parseInt(ss.getAttribute("cId") + ""), 2);
+        boolean result = false;
+        int cId = Integer.parseInt(ss.getAttribute("cId") + "");
+        List<Account> acList = AccountCourse.getTeacherCourseWithOwn(cId);
+        if (acList.size() > 1) {
+            result = AccountCourse.changeRole(Integer.parseInt(acc_id), cId, 2);
+        } else {
+            result = false;
+        }
+
         if (result) {
+            response.sendRedirect("course.jsp?tab=member");
+        }else{
+            ss.setAttribute("changeRoleMsg", "false");
             response.sendRedirect("course.jsp?tab=member");
         }
     }

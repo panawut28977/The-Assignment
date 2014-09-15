@@ -404,6 +404,26 @@ public class AccountCourse {
         return listAccount;
     }
      
+     public static List<Account> getTeacherCourseWithOwn(int course_id) {
+        List<Account> listAccount = new ArrayList<>();
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select acc_id from account_course where course_id=? AND role =  \"TH\" AND status =  \"approved\"  order by acc_id";
+        PreparedStatement pstm;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, course_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                Account acc = Account.getAccountByID(rs.getInt("acc_id"));
+                listAccount.add(acc);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listAccount;
+    }
+     
      public static List<Account> getStudentCourse(int course_id,int ownid) {
         List<Account> listAccount = new ArrayList<>();
         Connection conn = ConnectionBuilder.getConnection();
