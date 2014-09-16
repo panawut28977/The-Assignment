@@ -26,9 +26,9 @@
                     <%@include file="META-INF/page/CourseTab.jsp"%>
                     <ol class="breadcrumb" style="margin-top: 15px" >
                         <li><a href="course.jsp?tab=AllAssignment">Assignment</a></li>
-                        <li><a href="SentAssignment.jsp?tab=AllAssignment">Assignment# 1.....</a></li>
-                        <li><a href="CheckAssignment.jsp?tab=AllAssignment">Check Assignment# 1.....</a></li>
-                        <li class="active"><a href="#">Check copy Assignment# 1.....</a></li>
+                        <li><a href="GetSentAssignment?am_id=${curAm.am_id}">${curAm.name}.</a></li>
+                        <li><a href="checkAssignment?tab=AllAssignment&&st_am_id=${sa.st_am_id}">Check Assignment</a></li>
+                        <li class="active"><a href="#">Check copy Assignment</a></li>
                     </ol>
                     <h3>Your student assignment text. <small class="text-muted">(keyword for check with another student assignment)</small>
                     </h3>
@@ -67,8 +67,8 @@
                                         </c:choose>
 
                                     </td>
-                                    <td><b>Score :</b></td>
-                                    <td><a href="">Compare view</a></td>
+                                    <td><b>Score : ${stinfo.score}</b></td>
+                                    <td><a href="compareCopySl?uuid1=${nowUUid}&&uuid2=${detail.uuid}" target="_blank">Compare view</a></td>
                                 </tr>
                             </c:forEach>
                             <!--                            <tr>

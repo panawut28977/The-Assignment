@@ -271,6 +271,10 @@
         <servlet-name>notify</servlet-name>
         <servlet-class>servlet.notify</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>compareCopySl</servlet-name>
+        <servlet-class>servlet.compareCopySl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -467,6 +471,10 @@
         <servlet-name>notify</servlet-name>
         <url-pattern>/notify</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>compareCopySl</servlet-name>
+        <url-pattern>/compareCopySl</url-pattern>
+    </servlet-mapping>   
     <session-config>
         <session-timeout>
             30

@@ -68,7 +68,7 @@
                     <ol class="breadcrumb" style="margin-top: 15px" >
                         <li><a href="course.jsp?tab=AllAssignment">Assignment</a></li>
                         <li><a href="GetSentAssignment?am_id=${curAm.am_id}">${curAm.name}</a></li>
-                        <li class="active"><a href="#">Check Assignment# 1.....</a></li>
+                        <li class="active"><a href="#">Check Assignment</a></li>
                     </ol>
                     <c:choose>
                         <c:when test="${curAm.ass_type eq 'file'}">

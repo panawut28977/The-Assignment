@@ -165,6 +165,7 @@ public class Checkcopy extends HttpServlet {
 //            for (String[] strings : indexsetList) {
 //                System.out.println(strings[0] + " : "+ strings[2] +" : " + strings[1] );
 //            }
+            request.setAttribute("nowUUid", f.getUuid());
             request.setAttribute("keyword", keyword);
             request.setAttribute("indexsetList", indexsetList);
             getServletContext().getRequestDispatcher("/Checkcopy.jsp?tab=AllAssignment").forward(request, response);
