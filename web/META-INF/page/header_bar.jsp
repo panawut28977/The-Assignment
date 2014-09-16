@@ -43,8 +43,8 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding-top: 10px;padding-bottom: 10px"><img class="img-circle" src="${ac.profile_pic}" width="30"/> ${ac.firstname} ${ac.lastname} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Your Profile</a></li>
-                        <li><a href="signout">Sign out</a></li>
+                        <li><a href="#">Your Profile<span class="glyphicon glyphicon-user pull-right"></span></a></li>
+                        <li><a href="signout">Sign out <span class="glyphicon glyphicon-log-out pull-right"></span></a></li>
                     </ul>
                 </li>
             </ul>
