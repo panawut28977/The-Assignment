@@ -14,6 +14,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="META-INF/page/include_css.jsp" %>
         <%@include file="META-INF/page/include_js.jsp" %>
+        <script type="text/javascript" src="js/bootstrap-filestyle.min.js"/></script>
         <title>Upload Assignment</title>
         <style>
             #pvVs{
@@ -114,10 +115,13 @@
                                         </span>
                                     </h4>
                                     <form role="form" class="form-inline" action="uploadAssignmentFile" method="post" enctype="multipart/form-data">
-                                        <input type="file" class="form-control" name="file">
-                                        <input type="submit" value="Upload" class="form-control btn btn-primary">
+                                        <div class="col-md-6 col-md-offset-3">
+                                            <input type="file" class="form-control" name="file"/>    
+                                        </div>
+                                        <br/><br/><br/>
+                                        <input type="submit" value="Upload" class="form-control btn btn-primary"/>
                                     </form>
-                                    <br>
+                                    <br/>
                                 </c:when>
                             </c:choose>
                             <br/>
@@ -207,6 +211,7 @@
                 });
             });
             $('img').tooltip("hide");
+            $(":file").filestyle();
         });
     </script>
 </html>
