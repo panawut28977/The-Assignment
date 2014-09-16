@@ -49,7 +49,7 @@
 				<ul>
 					<li><a href="http://jsp.chaninz.com/tasm/Mobile/indexTeacher.html" rel="external" and data-ajax="false">Announce</a></li>
 					<li><a href="http://jsp.chaninz.com/tasm/Mobile/AssignmentInCourseTeacher.html" rel="external" and data-ajax="false" class="ui-btn-active">Assignment</a></li>
-                    <li><a href="TeacherScore.html" rel="external" and data-ajax="false">Score</a></li>
+                                        <li><a href="TeacherScore.html" rel="external" and data-ajax="false">Score</a></li>
 				</ul>
 			</div>
 		</div>
@@ -58,12 +58,12 @@
 
 </body>
     <script type="text/javascript">
-        var id = sessionStorage.getItem('id');
+        var id = sessionStorage.getItem('cID');
         $.getJSON('http://jsp.chaninz.com/tasm/showAssignmentInCourse?id=' + id, function(result) {
             var i=1;
             $(result).each(function(k, v) {
                 $(
-                        '<div style="background-color:#'+(i%2==0?'FFFFFF':'F4F4F4')+ ';padding:1px;width:auto;">' +
+                        '<div class="assignment" data-id="' + v.am_id + '" onclick="warp()" style="background-color:#'+(i%2==0?'FFFFFF':'F4F4F4')+ ';padding:1px;width:auto;">' +
                         '<table><tr><td>' +
                         '<div style="margin-left:15px;color:#999">' + 
                         '<h4>'+ v.name + '</h4>' +
@@ -74,7 +74,13 @@
                         '</tr></div>').insertBefore($('#add-test'));
                 i+=1;
             });
+            $(".assignment").click(function() {
+                sessionStorage.setItem('aID', $(this).attr("data-id"));
+            });
         });
+        function warp() {
+            location.href="http://jsp.chaninz.com/tasm/Mobile/AssignmentDetailTeacher.html";
+        }
 
     </script>
 </html>

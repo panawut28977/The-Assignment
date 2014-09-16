@@ -5,13 +5,13 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/jquery.mobile-1.4.2.css" />
-  <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/font-awesome.min.css"/>
+  <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/css/font-awesome.min.css"/>
   
   <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
   <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
 </head> 
 <body>
-<div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-fixed-page1" data-title="Panel fixed positioning" data-url="panel-fixed-page1">
+<div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-fixed-page1" data-title="Panel fixed positioning">
     <div data-role="header" data-position="fixed">
         <center>
         <a href="http://jsp.chaninz.com/tasm/Mobile/index.html" rel="external" and data-ajax="false"><span class="fa fa-home fa-2x" style="alignment-adjust:auto;padding-right:25px;padding-top:15px;padding-bottom:15px"></span></a>
@@ -57,23 +57,29 @@
 
 </body>
     <script type="text/javascript">
-        var id = sessionStorage.getItem('id');
+        var id = sessionStorage.getItem('cID');
         $.getJSON('http://jsp.chaninz.com/tasm/showAssignmentInCourse?id='+id, function(result) {
             var i=1;
             $(result).each(function(k, v) {
                 $(
-                        '<div style="background-color:#'+(i%2==0?'FFFFFF':'F4F4F4')+ ';padding:1px;width:auto;">' +
+                        '<div class="assignment" data-id="' + v.am_id + '" onclick="warp()" style="background-color:#'+(i%2==0?'FFFFFF':'F4F4F4')+ ';padding:1px;width:auto;">' +
                         '<table><tr><td>' +
                         '<div style="margin-left:15px;color:#999">' + 
                         '<h4>'+ v.name + '</h4>' +
                         '<p>' + v.description + '</p>' +
                         '<b>Due Date: ' + v.due_date + '</b>' + 
-                        '</div></td><td align="right"><br/><br/>' +
-                        '<h3 style="color:#E74C3C" align="right">Late</h3></td>' + 
+                        '</div></td><td><br/><br/>' +
+                        '<h2 style="color:#E74C3C;">Late</h2></td>' + 
                         '</tr></div>').insertBefore($('#add-test'));
                 i+=1;
             });
+             $(".assignment").click(function() {
+                sessionStorage.setItem('aID', $(this).attr("data-id"));
+            });
         });
-
+        
+        function warp() {
+            location.href="http://jsp.chaninz.com/tasm/Mobile/AssignmentDetail.html";
+        }
     </script>
 </html>

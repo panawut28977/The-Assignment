@@ -44,8 +44,12 @@
                             sessionStorage.setItem('fName', data.firstname);
                             sessionStorage.setItem('lName', data.lastname);
                             sessionStorage.setItem('pic', data.profile_pic);
-                            sessionStorage.setItem('cList', data.CourseList);
-                            $(location).attr('href', 'http://jsp.chaninz.com/tasm/Mobile/index.html');
+                            sessionStorage.setItem('cList', JSON.stringify(data.CourseList));
+                            if(data.account_type == 'ST'){
+                                $(location).attr('href', 'http://jsp.chaninz.com/tasm/Mobile/index.html');
+                            }else if(data.account_type == 'TH'){
+                                $(location).attr('href', 'http://jsp.chaninz.com/tasm/Mobile/indexTeacher.html');
+                            }
                         } else {
                             alert('Please try again...');
                         }
