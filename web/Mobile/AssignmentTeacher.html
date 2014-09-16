@@ -26,16 +26,20 @@
             <div id="add-test"></div>
 
 
-            <!--Panel-->
             <div data-role="panel" data-position-fixed="true" data-display="overlay"  id="nav-panel">
-                <ul data-role="listview">
-                    <li style="background-color:#00F"><img src="http://jsp.chaninz.com/tasm/Mobile/60223.jpg" width="100" height="100" style="alignment-adjust:top"/>&nbsp; <b style="color:white">Panawut <br/>Ittitananun</b></li>
-                    <li><a href="#">Join Course &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div class="fa fa-plus fa-2x"></div></a></li>
-                    <li><a href="#">MTH111</a></li>
-                    <li><a href="#">INT103</a></li>
+                <ul data-role="listview" id="lcList">
+                    <li style="background-color:#00F">
+                        <img src="" id ="dPIC" width="100" height="100" style="alignment-adjust:top"/>&nbsp;
+                        <b style="color:white" id="fName"></b><br/>
+                        <b style="color:white" id="lName"></b>
+                    </li>
+                    <li>
+                        <a href="#">Join Course &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <div class="fa fa-plus fa-2x"></div>
+                        </a>
+                    </li>
                 </ul>
             </div>
-            <!-- /panel -->
 
             <div data-position="fixed" data-tap-toggle="false" data-role="footer" data-tap-toggle="false" >
                 <div data-role="navbar">
@@ -52,7 +56,7 @@
     </body>
     <script type="text/javascript">
         var id = sessionStorage.getItem('accID');
-        $.getJSON('http://jsp.chaninz.com/tasm/showAssignment?id='+id, function(result) {
+        $.getJSON('http://jsp.chaninz.com/tasm/showAssignment?id=' + id, function(result) {
             var i = 1;
             $(result).each(function(k, v) {
                 $(
@@ -71,11 +75,29 @@
             $(".assignment").click(function() {
                 sessionStorage.setItem('aID', $(this).attr("data-id"));
             });
+            var fName = sessionStorage.getItem('fName');
+            var lName = sessionStorage.getItem('lName');
+            var pic = sessionStorage.getItem('pic');
+            var cList = JSON.parse(sessionStorage.getItem('cList'));
+            console.dir(cList);
+            $("#dPIC").attr("src", "../" + pic);
+            $("#fName").text(fName);
+            $("#lName").text(lName);
+            var key, count = 0;
+            for (key in cList) {
+                if (cList.hasOwnProperty(key)) {
+                    $("#lcList").append('<li class="cLink" data-id="' + key + '"><a class="ui-btn ui-btn-icon-right ui-icon-carat-r">' + cList[key].course.name + '</a></li>').trigger('refresh');
+                }
+                $(".cLink").click(function() {
+                    sessionStorage.setItem('cID', $(this).attr("data-id"));
+                    $(location).attr('href', 'http://jsp.chaninz.com/tasm/Mobile/AssignmentInCourse.html');
+                });
+            }
         });
 
 
         function warp() {
-            location.href="http://jsp.chaninz.com/tasm/Mobile/AssignmentDetail.html";
+            location.href = "http://jsp.chaninz.com/tasm/Mobile/AssignmentDetail.html";
         }
 
 //        function setToServlet(id) {
