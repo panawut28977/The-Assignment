@@ -9,9 +9,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -84,12 +85,10 @@ public class Notification {
     public void setReceive_list_id(int receive_list_id) {
         this.receive_list_id = receive_list_id;
     }
-    
-    
 
     public static int announce(Notification n, List<Integer> acc_id) {
         Connection conn = ConnectionBuilder.getConnection();
-        int last_id = getLastReceive_list_id()+1;
+        int last_id = getLastReceive_list_id() + 1;
         StringBuilder insert_receive = new StringBuilder("insert into receive_noti_id(receive_list_id,acc_id) values");
         for (Integer id : acc_id) {
             StringBuilder cIdList = new StringBuilder("(");
@@ -109,7 +108,7 @@ public class Notification {
             pstm.setString(3, n.getText());
             pstm.setInt(4, last_id);
             result = pstm.executeUpdate();
-            
+
             pstm = conn.prepareCall(insert_receive.toString());
             pstm.executeUpdate();
             conn.close();
@@ -119,10 +118,10 @@ public class Notification {
         return result;
     }
 
-    public static List<Notification> getAnnounce(int receive_id) {
+    public static Map<Integer, String> getNotify(int receive_id) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select * from notification n join receive_noti_id r on n.receive_list_id = r.receive_list_id where r.acc_id=?";
-        List<Notification> notiList = new ArrayList<>();
+        String sql = "select n.noti_id,n.type from notification n join receive_noti_id r on n.receive_list_id = r.receive_list_id where r.acc_id=? and r.seen_date is null";
+        Map<Integer, String> notiMap = new HashMap<>();
         PreparedStatement pstm;
         Notification n = null;
         try {
@@ -130,27 +129,28 @@ public class Notification {
             pstm.setInt(1, receive_id);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                n= new Notification();
-                n.setAcc_id(rs.getInt("acc_id"));
-                n.setLink(rs.getString("link"));
-                n.setNoti_date(rs.getDate("noti_date"));
-                n.setNoti_id(rs.getInt("noti_id"));
-                n.setText(rs.getString("text"));
-                n.setType(rs.getString("type"));
-                n.setReceive_list_id(rs.getInt("receive_list_id"));
-                notiList.add(n);
+//                n= new Notification();
+//                n.setAcc_id(rs.getInt("acc_id"));
+//                n.setLink(rs.getString("link"));
+//                n.setNoti_date(rs.getDate("noti_date"));
+//                n.setNoti_id(rs.getInt("noti_id"));
+//                n.setText(rs.getString("text"));
+//                n.setType(rs.getString("type"));
+//                n.setReceive_list_id(rs.getInt("receive_list_id"));
+//                notiList.add(n);
+                notiMap.put(rs.getInt("noti_id"), rs.getString("type"));
             }
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return notiList;
+        return notiMap;
     }
-    
+
     public static int getLastReceive_list_id() {
         String e = null;
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select max(receive_list_id) from receive_noti_id";
+        String sql = "select max(receive_list_id) from notification";
         int result = 0;
         PreparedStatement pstm;
         try {
@@ -174,5 +174,4 @@ public class Notification {
         return "Notification{" + "noti_id=" + noti_id + ", acc_id=" + acc_id + ", type=" + type + ", text=" + text + ", link=" + link + ", noti_date=" + noti_date + ", receive_list_id=" + receive_list_id + '}';
     }
 
-    
 }

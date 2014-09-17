@@ -8,7 +8,8 @@
             "aaSorting": [],
             "bLengthChange": false,
             "bFilter": true,
-            "bInfo": false
+            "bInfo": false,
+            "bSort": false
         });
     });
 </script>

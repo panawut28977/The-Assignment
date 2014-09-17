@@ -7,17 +7,40 @@
     #formAddAnnouce{
         display: none;
     }
+
+    table.dataTable tr.odd,table.dataTable tr.even{
+        background-color: white !important; 
+    }
+
 </style>
 
 <script>
     $(function() {
-        $(function() {
-            var aTable = $('#AllAnnounce').dataTable({
-                /* Disable initial sort */
-                "aaSorting": [],
-                "bLengthChange": false,
-                "bFilter": true,
-                "bInfo": false
+        var aTable = $('#AllAnnounce').dataTable({
+            /* Disable initial sort */
+            "aaSorting": [],
+            "bLengthChange": false,
+            "bFilter": true,
+            "bInfo": false,
+            "bSort": false
+        });
+        var sData = aTable.fnGetData();
+        if (sData.length == 0) {
+            var html = '<h1 class="text-muted" style="text-align: center">ยังไม่มีข่าวหรือประกาศครับ XD</h1>';
+            $("#AllAnnounce_wrapper table tbody").html(html);
+        }
+        $("#addAnnouce").click(function() {
+            $.ajax({
+                type: "POST",
+                url: "AddAnnounce",
+                data: {title: $("#title").val(), content: $("#content").val()}
+            }).done(function(msg) {
+                var html = '<tr class="even"><td><div class="media" id="newAnnounce"><a class="pull-left" href="#"><img class="img-circle" width="64" src="' + pic + '"></a><div class="media-body"><h4 class="media-heading">' + $("#title").val() + '- <small class="text-muted">' + fullname + '</small><small class="pull-right">' + dateSt + '</small></h4><p>' + $("#content").val() + '</p></div></div></td></tr>';
+                $("#listAnnounce table tbody").prepend(html);
+                $("#newAnnounce").slideDown().removeAttr("id");
+                $("#title").val("");
+                $("#content").val("");
+                //aTable.fnDraw();
             });
         });
         var pic = '${ac.profile_pic}';
@@ -26,21 +49,9 @@
         var dateSt = d.getFullYear() + "-" + ('0' + (d.getMonth() + 1)).slice(-2) + "-" + ('0' + d.getDate()).slice(-2) + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getMilliseconds();
         $("#newannounce").click(function() {
             $(this).hide();
-            $("#formAddAnnouce").slideDown()();
+            $("#formAddAnnouce").slideDown();
         });
-        $("#addAnnouce").click(function() {
-            $.ajax({
-                type: "POST",
-                url: "AddAnnounce",
-                data: {title: $("#title").val(), content: $("#content").val()}
-            }).done(function(msg) {
-                var html = '<div class="media" id="newAnnounce"><a class="pull-left" href="#"><img class="img-circle" width="64" src="' + pic + '"></a><div class="media-body"><h4 class="media-heading">' + $("#title").val() + '- <small class="text-muted">' + fullname + '</small><small class="pull-right">' + dateSt + '</small></h4><p>' + $("#content").val() + '</p></div></div>';
-                $("#listAnnounce").prepend(html);
-                $("#newAnnounce").slideDown().removeAttr("id");
-                $("#title").val("");
-                $("#content").val("");
-            });
-        });
+
     });
 </script>
 <c:choose>
@@ -58,18 +69,15 @@
     </c:when>
 </c:choose>
 <div id="listAnnounce" class="table-responsive" style="min-height: 520px; margin-top: 30px">
-    <c:choose>
-        <c:when test="${ac.courseList.get(cId).course.announcement.size()==0}">
-            <h1 class="text-muted" style="text-align: center">ยังไม่มีข่าวหรือประกาศครับ XD</h1>
-        </c:when>
-        <c:otherwise>
-            <table class="table table-striped " id="AllAnnounce">
-                <thead>
-                    <tr>
-                        <td></td>
-                    </tr>
-                </thead>
-                <tbody>
+    <table class="table table-striped" id="AllAnnounce">
+        <thead>
+            <tr>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            <c:choose>
+                <c:when test="${ac.courseList.get(cId).course.announcement.size()!=0}">
                     <c:forEach items="${ac.courseList.get(cId).course.announcement}" var="a">
                         <tr>
                             <td>
@@ -85,11 +93,10 @@
                             </td>
                         </tr>
                     </c:forEach>
-                </tbody>
-            </table>
-        </c:otherwise>
-    </c:choose>
-
+                </c:when>
+            </c:choose>
+        </tbody>
+    </table>
 </div>
 <!--<div class="media">
     <a class="pull-left" href="#">

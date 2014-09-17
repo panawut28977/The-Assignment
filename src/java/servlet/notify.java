@@ -10,7 +10,9 @@ import Model.Notification;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -39,15 +41,116 @@ public class notify extends HttpServlet {
         PrintWriter writer = response.getWriter();
         HttpSession ss = request.getSession();
         Account ac = (Account) ss.getAttribute("ac");
-        
-        System.out.println("notify");
-        List<Notification> anNoti = Notification.getAnnounce(ac.getAcc_id());
-        System.out.println(anNoti);
-        writer.write("event:announcement\n");
-        Gson g = new Gson();
-        writer.write("data:" + g.toJson(anNoti)+"\n\n");
-        writer.flush();
 
+        System.out.println("notify");
+        //current notification
+        Map<Integer, String> curNoti = (Map<Integer, String>) ss.getAttribute("notification");
+        //get new notificastion
+        Map<Integer, String> noti = Notification.getNotify(ac.getAcc_id());
+        System.out.println("noti :" + noti);
+        if (curNoti == null) {
+            System.out.println("if");
+            Iterator i = noti.entrySet().iterator();
+            int cAnn = 0, cAlert = 0, cAm = 0, cScore = 0, total = 0;
+            while (i.hasNext()) {
+                Entry entry = (Entry) i.next();
+                if ((entry.getValue() + "").equalsIgnoreCase("announce")) {
+                    cAnn++;
+                } else if ((entry.getValue() + "").equalsIgnoreCase("alert")) {
+                    cAlert++;
+                } else if ((entry.getValue() + "").equalsIgnoreCase("score")) {
+                    cAm++;
+                } else if ((entry.getValue() + "").equalsIgnoreCase("assignment")) {
+                    cScore++;
+                }
+                // if สำหรับเช็คว่าสำกับ obj เดิมมั้ย
+            }
+            total = cAnn + cAlert + cAm + cScore;
+            Gson g = new Gson();
+
+            writer.write("event:cAnn\n");
+            writer.write("data:" + cAnn + "\n\n");
+
+            writer.write("event:cAlert\n");
+            writer.write("data:" + cAlert + "\n\n");
+
+            writer.write("event:cScore\n");
+            writer.write("data:" + cScore + "\n\n");
+
+            writer.write("event:cAm\n");
+            writer.write("data:" + cAm + "\n\n");
+
+            writer.write("event:cTotal\n");
+            writer.write("data:" + total + "\n\n");
+
+            //set session
+            ss.setAttribute("cAnn", cAnn);
+            ss.setAttribute("cAlert", cAlert);
+            ss.setAttribute("cScore", cScore);
+            ss.setAttribute("cAm", cAm);
+            ss.setAttribute("cTotal", total);
+            ss.setAttribute("notification", noti);
+        } else {
+            System.out.println("else");
+            boolean newNoti = false;
+            //check current and new notification
+            if (noti != null) {
+                Iterator i = noti.entrySet().iterator();
+                while (i.hasNext()) {
+                    Entry entry = (Entry) i.next();
+                    if (!curNoti.containsKey(entry.getKey())) {
+                        newNoti = true;
+                    }
+                    //if สำหรับเช็คว่าสำกับ obj เดิมมั้ย
+                }
+            }
+            System.out.println("newNoti: " + newNoti);
+            if (newNoti) {
+                Iterator i = noti.entrySet().iterator();
+                int cAnn = 0, cAlert = 0, cAm = 0, cScore = 0, total = 0;
+                while (i.hasNext()) {
+                    Entry entry = (Entry) i.next();
+                    if ((entry.getValue() + "").equalsIgnoreCase("announce")) {
+                        cAnn++;
+                    } else if ((entry.getValue() + "").equalsIgnoreCase("alert")) {
+                        cAlert++;
+                    } else if ((entry.getValue() + "").equalsIgnoreCase("score")) {
+                        cAm++;
+                    } else if ((entry.getValue() + "").equalsIgnoreCase("assignment")) {
+                        cScore++;
+                    }
+                    //if สำหรับเช็คว่าสำกับ obj เดิมมั้ย
+                }
+                total = cAnn + cAlert + cAm + cScore;
+                Gson g = new Gson();
+
+                writer.write("event:cAnn\n");
+                writer.write("data:" + cAnn + "\n\n");
+
+                writer.write("event:cAlert\n");
+                writer.write("data:" + cAlert + "\n\n");
+
+                writer.write("event:cScore\n");
+                writer.write("data:" + cScore + "\n\n");
+
+                writer.write("event:cAm\n");
+                writer.write("data:" + cAm + "\n\n");
+
+                writer.write("event:cTotal\n");
+                writer.write("data:" + total + "\n\n");
+
+                //set session
+                ss.setAttribute("cAnn", cAnn);
+                ss.setAttribute("cAlert", cAlert);
+                ss.setAttribute("cScore", cScore);
+                ss.setAttribute("cAm", cAm);
+                ss.setAttribute("cTotal", total);
+                ss.setAttribute("notification", noti);
+            }
+
+        }
+
+        writer.flush();
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -95,4 +198,35 @@ public class notify extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+//    public static void countNoti(Map<Integer, String> noti, PrintWriter writer) {
+//        Iterator i = noti.entrySet().iterator();
+//        int cAnn = 0, cAlert = 0, cAm = 0, cScore = 0, total = 0;
+//        while (i.hasNext()) {
+//            Entry entry = (Entry) i.next();
+//            if ((entry.getValue() + "").equalsIgnoreCase("announce")) {
+//                cAnn++;
+//            } else if ((entry.getValue() + "").equalsIgnoreCase("alert")) {
+//                cAlert++;
+//            } else if ((entry.getValue() + "").equalsIgnoreCase("score")) {
+//                cAm++;
+//            } else if ((entry.getValue() + "").equalsIgnoreCase("assignment")) {
+//                cScore++;
+//            }
+//            //if สำหรับเช็คว่าสำกับ obj เดิมมั้ย
+//        }
+//        total = cAnn + cAlert + cAm + cScore;
+//        Gson g = new Gson();
+//
+//        writer.write("event:cAnn\n");
+//        writer.write("data:" + cAnn + "\n\n");
+//
+//        writer.write("event:cAlert\n");
+//        writer.write("data:" + cAlert + "\n\n");
+//
+//        writer.write("event:cScore\n");
+//        writer.write("data:" + cScore + "\n\n");
+//
+//        writer.write("event:cAm\n");
+//        writer.write("data:" + cAm + "\n\n");
+//    }
 }
