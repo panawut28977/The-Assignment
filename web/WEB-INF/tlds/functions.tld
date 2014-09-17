@@ -134,5 +134,10 @@
         <name>getStAm</name>
         <function-class>Model.StAssignmentFile</function-class>
         <function-signature>StAssignmentFile getStAm(int)</function-signature>
+    </function>
+       <function>
+        <name>getCourseNameByID</name>
+        <function-class>Model.Course</function-class>
+        <function-signature>String getCourseNameByID(int)</function-signature>
     </function> 
 </taglib>

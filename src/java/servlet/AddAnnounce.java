@@ -50,8 +50,10 @@ public class AddAnnounce extends HttpServlet {
         int rs = Announcement.add(a);
         Notification n = new Notification();
         n.setAcc_id(ac.getAcc_id());
+        n.setCourse_id(cId);
         n.setType("announce");
-        n.setText(title+"<br/>"+content);
+//        n.setText(title+"<br/>"+content);
+        n.setText(content);
         
         //select people you want to notify
         List<Integer> listac = AccountCourse.getStudentIdCourse(cId, ac.getAcc_id());

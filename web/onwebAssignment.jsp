@@ -17,18 +17,18 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="META-INF/page/include_css.jsp" %>
         <%@include file="META-INF/page/include_js.jsp" %>
-        <script type="text/javascript" src="https://cdn.goinstant.net/v1/platform.min.js"></script>
+<!--        <script type="text/javascript" src="https://cdn.goinstant.net/v1/platform.min.js"></script>
         <script type="text/javascript" src="https://cdn.goinstant.net/widgets/user-list/latest/user-list.min.js"></script>
         <script type="text/javascript" src="https://cdn.goinstant.net/widgets/form/latest/form.min.js"></script>
         <script type="text/javascript" src="https://cdn.goinstant.net/widgets/click-indicator/latest/click-indicator.min.js"></script>
         <script type="text/javascript" src="https://cdn.goinstant.net/widgets/notifications/latest/notifications.min.js"></script>
         <script type="text/javascript" src="https://cdn.goinstant.net/widgets/chat/latest/chat.min.js"></script>
-        <!--CSS is optional--> 
+        CSS is optional 
         <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/user-list/latest/user-list.css" />
         <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/form/latest/form.css" />
         <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/click-indicator/latest/click-indicator.css" />
         <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/notifications/latest/notifications.css" />
-        <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/chat/latest/chat.css" />
+        <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/chat/latest/chat.css" />-->
         <title>On web Assignment ...</title>
         <style>
             #pvVs{

@@ -25,6 +25,7 @@ public class Notification {
 
     private int noti_id;
     private int acc_id;
+    private int course_id;
     private String type;
     private String text;
     private String link;
@@ -45,6 +46,14 @@ public class Notification {
 
     public void setAcc_id(int acc_id) {
         this.acc_id = acc_id;
+    }
+
+    public int getCourse_id() {
+        return course_id;
+    }
+
+    public void setCourse_id(int course_id) {
+        this.course_id = course_id;
     }
 
     public String getType() {
@@ -99,15 +108,16 @@ public class Notification {
         }
         insert_receive.deleteCharAt(insert_receive.length() - 1);
         System.out.println(insert_receive);
-        String sql = "insert into notification(acc_id,type,text,receive_list_id) values(?,?,?,?)";
+        String sql = "insert into notification(acc_id,course_id,type,text,receive_list_id) values(?,?,?,?,?)";
         PreparedStatement pstm;
         int result = 0;
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, n.getAcc_id());
-            pstm.setString(2, n.getType());
-            pstm.setString(3, n.getText());
-            pstm.setInt(4, last_id);
+            pstm.setInt(2, n.getCourse_id());
+            pstm.setString(3, n.getType());
+            pstm.setString(4, n.getText());
+            pstm.setInt(5, last_id);
             result = pstm.executeUpdate();
 
             pstm = conn.prepareCall(insert_receive.toString());
@@ -169,7 +179,7 @@ public class Notification {
         }
         return result;
     }
-    
+
     public static List<Notification> getAnnounce(int receive_id) {
         String e = null;
         Connection conn = ConnectionBuilder.getConnection();
@@ -182,8 +192,9 @@ public class Notification {
             pstm.setInt(1, receive_id);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                n= new Notification();
+                n = new Notification();
                 n.setAcc_id(rs.getInt("acc_id"));
+                n.setCourse_id(rs.getInt("course_id"));
                 n.setLink(rs.getString("link"));
                 n.setNoti_date(rs.getDate("noti_date"));
                 n.setNoti_id(rs.getInt("noti_id"));
@@ -197,7 +208,7 @@ public class Notification {
         }
         return notiList;
     }
-    
+
     public static List<Notification> getAssignment(int receive_id) {
         String e = null;
         Connection conn = ConnectionBuilder.getConnection();
@@ -210,8 +221,9 @@ public class Notification {
             pstm.setInt(1, receive_id);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                n= new Notification();
+                n = new Notification();
                 n.setAcc_id(rs.getInt("acc_id"));
+                n.setCourse_id(rs.getInt("course_id"));
                 n.setLink(rs.getString("link"));
                 n.setNoti_date(rs.getDate("noti_date"));
                 n.setNoti_id(rs.getInt("noti_id"));
@@ -225,7 +237,7 @@ public class Notification {
         }
         return notiList;
     }
-    
+
     public static List<Notification> getAlert(int receive_id) {
         String e = null;
         Connection conn = ConnectionBuilder.getConnection();
@@ -238,8 +250,9 @@ public class Notification {
             pstm.setInt(1, receive_id);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                n= new Notification();
+                n = new Notification();
                 n.setAcc_id(rs.getInt("acc_id"));
+                n.setCourse_id(rs.getInt("course_id"));
                 n.setLink(rs.getString("link"));
                 n.setNoti_date(rs.getDate("noti_date"));
                 n.setNoti_id(rs.getInt("noti_id"));
@@ -253,7 +266,7 @@ public class Notification {
         }
         return notiList;
     }
-    
+
     public static List<Notification> getScore(int receive_id) {
         String e = null;
         Connection conn = ConnectionBuilder.getConnection();
@@ -266,8 +279,9 @@ public class Notification {
             pstm.setInt(1, receive_id);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                n= new Notification();
+                n = new Notification();
                 n.setAcc_id(rs.getInt("acc_id"));
+                n.setCourse_id(rs.getInt("course_id"));
                 n.setLink(rs.getString("link"));
                 n.setNoti_date(rs.getDate("noti_date"));
                 n.setNoti_id(rs.getInt("noti_id"));
@@ -284,7 +298,7 @@ public class Notification {
 
     @Override
     public String toString() {
-        return "Notification{" + "noti_id=" + noti_id + ", acc_id=" + acc_id + ", type=" + type + ", text=" + text + ", link=" + link + ", noti_date=" + noti_date + ", receive_list_id=" + receive_list_id + '}';
+        return "Notification{" + "noti_id=" + noti_id + ", acc_id=" + acc_id + ", course_id=" + course_id + ", type=" + type + ", text=" + text + ", link=" + link + ", noti_date=" + noti_date + ", receive_list_id=" + receive_list_id + '}';
     }
 
 }

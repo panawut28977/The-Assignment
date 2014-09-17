@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="cf" uri="/WEB-INF/tlds/functions.tld" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <script>
     $(function() {
@@ -33,7 +34,7 @@
                                         <img width="64" src="${ann.an_acc.profile_pic}">
                                     </a>
                                     <div class="media-body">
-                                        <h4 class="media-heading">${ann.title} - <small>${ann.an_acc.firstname} ${ann.an_acc.lastname}</small><small class="pull-right">${cf:formatTime(ann.announce_date)}</small></h4>
+                                        <h4 class="media-heading"><small>${ann.an_acc.firstname} ${ann.an_acc.lastname} (${cf:getCourseNameByID(ann.course)})</small><small class="pull-right">${cf:formatTime(ann.announce_date)}</small></h4>
                                         <p>${ann.content}</p>
                                     </div>
                                 </div>

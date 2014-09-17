@@ -136,6 +136,22 @@
             console.log(event.data);
             $("#cTotal").text(event.data);
         }, false);
+        
+        eventSource.addEventListener('cNewAnn', function(event) {
+            console.log(event.data);
+        }, false);
+
+        eventSource.addEventListener('cNewAlert', function(event) {
+            console.log(event.data);
+        }, false);
+
+        eventSource.addEventListener('cNewScore', function(event) {
+            console.log(event.data);
+        }, false);
+
+        eventSource.addEventListener('cNewAm', function(event) {
+            console.log(event.data);
+        }, false);
 
 //        $(".navbar-nav li").mouseover(function() {
 //            $(this).css("backgroud-color","e7e7e7");

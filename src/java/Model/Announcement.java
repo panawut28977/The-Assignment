@@ -114,7 +114,7 @@ public class Announcement {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, a.getAn_acc().getAcc_id());
             pstm.setInt(2, a.getCourse());
-            pstm.setString(3, a.getTitle());
+            pstm.setString(3, a.getTitle()+"");
             pstm.setString(4, a.getContent());
             result = pstm.executeUpdate();
              conn.close();

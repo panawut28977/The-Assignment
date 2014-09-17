@@ -30,18 +30,25 @@
             $("#AllAnnounce_wrapper table tbody").html(html);
         }
         $("#addAnnouce").click(function() {
-            $.ajax({
-                type: "POST",
-                url: "AddAnnounce",
-                data: {title: $("#title").val(), content: $("#content").val()}
-            }).done(function(msg) {
-                var html = '<tr class="even"><td><div class="media" id="newAnnounce"><a class="pull-left" href="#"><img class="img-circle" width="64" src="' + pic + '"></a><div class="media-body"><h4 class="media-heading">' + $("#title").val() + '- <small class="text-muted">' + fullname + '</small><small class="pull-right">' + dateSt + '</small></h4><p>' + $("#content").val() + '</p></div></div></td></tr>';
-                $("#listAnnounce table tbody").prepend(html);
-                $("#newAnnounce").slideDown().removeAttr("id");
-                $("#title").val("");
-                $("#content").val("");
-                //aTable.fnDraw();
-            });
+            var content = $("#content").val();
+            if (content.length > 0) {
+                $.ajax({
+                    type: "POST",
+                    url: "AddAnnounce",
+                    data: {title: $("#title").val(), content: content}
+                }).done(function(msg) {
+                    var html = '<tr class="even"><td><div class="media" id="newAnnounce"><a class="pull-left" href="#"><img class="img-circle" width="64" src="' + pic + '"></a><div class="media-body"><h4 class="media-heading"><small class="text-muted">' + fullname + '</small><small class="pull-right">' + dateSt + '</small></h4><p>' + $("#content").val() + '</p></div></div></td></tr>';
+                    $("#listAnnounce table tbody").prepend(html);
+                    $("#newAnnounce").slideDown().removeAttr("id");
+                    $("#title").val("");
+                    $("#content").val("");
+                    //aTable.fnDraw();
+                });
+            }
+            else{
+                alert("Please write something in text box!");
+                $("#content").focus();
+            }
         });
         var pic = '${ac.profile_pic}';
         var fullname = '${ac.firstname}' + '${ac.lastname}';
@@ -59,8 +66,8 @@
         <div class="media">
             <div class="media-body">
                 <form id="formAddAnnouce">
-                    <input name="title" placeholder="Title" class="form-control"  name="title" id="title"/><br>
-                    <textarea placeholder="Annouce to student here." class="form-control" name="content" id="content"></textarea>
+                    <!--<input name="title" placeholder="Title" class="form-control"  name="title" id="title"/><br>-->
+                    <textarea placeholder="Annouce to student here." class="form-control" required="yes" name="content" id="content"></textarea>
                     <input type="button" id="addAnnouce" class="btn btn-primary pull-right" value="Post" style="margin-top: 10px">
                 </form>
                 <button id="newannounce" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-pencil"></i> Announce</button>
@@ -86,7 +93,7 @@
                                         <img width="64" src="${a.an_acc.profile_pic}">
                                     </a>
                                     <div class="media-body">
-                                        <h4 class="media-heading">${a.title} - <small class="text-muted">${a.an_acc.firstname} ${a.an_acc.lastname}</small><small class="pull-right">${cf:formatTime(a.announce_date)}</small></h4>
+                                        <h4 class="media-heading"><small class="text-muted">${a.an_acc.firstname} ${a.an_acc.lastname}</small><small class="pull-right">${cf:formatTime(a.announce_date)}</small></h4>
                                         <p>${a.content}</p>
                                     </div>
                                 </div>

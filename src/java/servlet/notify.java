@@ -94,11 +94,23 @@ public class notify extends HttpServlet {
             System.out.println("else");
             boolean newNoti = false;
             //check current and new notification
+            int cNewAnn = 0, cNewAm = 0, cNewAlert = 0, cNewScore = 0;
             if (noti != null) {
                 Iterator i = noti.entrySet().iterator();
                 while (i.hasNext()) {
                     Entry entry = (Entry) i.next();
                     if (!curNoti.containsKey(entry.getKey())) {
+                        String type = (String) entry.getValue();
+                        //นับ notify ที่มาใหม่ว่าเป้นของประเภทอะไรเท่าไหร่
+                        if (type.equalsIgnoreCase("announce")) {
+                            cNewAnn++;
+                        } else if (type.equalsIgnoreCase("alert")) {
+                            cNewAlert++;
+                        } else if (type.equalsIgnoreCase("score")) {
+                            cNewAm++;
+                        } else if (type.equalsIgnoreCase("assignment")) {
+                            cNewScore++;
+                        }
                         newNoti = true;
                     }
                     //if สำหรับเช็คว่าสำกับ obj เดิมมั้ย
@@ -124,6 +136,7 @@ public class notify extends HttpServlet {
                 total = cAnn + cAlert + cAm + cScore;
                 Gson g = new Gson();
 
+                //notfy cout of each type event
                 writer.write("event:cAnn\n");
                 writer.write("data:" + cAnn + "\n\n");
 
@@ -138,6 +151,27 @@ public class notify extends HttpServlet {
 
                 writer.write("event:cTotal\n");
                 writer.write("data:" + total + "\n\n");
+
+                //notify count of new event if count geather than 0
+                if (cNewAlert > 0) {
+                    writer.write("event:cNewAlert\n");
+                    writer.write("data:" + cNewAlert + "\n\n");
+                }
+
+                if (cNewAm > 0) {
+                    writer.write("event:cNewAm\n");
+                    writer.write("data:" + cNewAm + "\n\n");
+                }
+
+                if (cNewAnn > 0) {
+                    writer.write("event:cNewAnn\n");
+                    writer.write("data:" + cNewAnn + "\n\n");
+                }
+
+                if (cNewScore > 0) {
+                    writer.write("event:cNewScore\n");
+                    writer.write("data:" + cNewScore + "\n\n");
+                }
 
                 //set session
                 ss.setAttribute("cAnn", cAnn);

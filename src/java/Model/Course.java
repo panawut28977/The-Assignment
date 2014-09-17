@@ -305,6 +305,26 @@ public class Course {
         }
         return code;
     }
+    
+    
+    public static String getCourseNameByID(int course_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select name from course where course_id = ? ";
+        PreparedStatement pstm;
+        String name = "";
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, course_id);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                name = rs.getString("name");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return name;
+    }
 
     //getScoreSheet อาจไม่ต้องมีตอนทำฟังชั่นนี้ เดียวดึงเอาข้อมูลที่มีอยู่แล้วมาใช้
     //exportScoreSheet รอทำจริงค่อยทำ
