@@ -50,10 +50,10 @@
                 <li class="dropdown" id="notification_menu"> 
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span><span class="badge" id="cTotal">${cTotal}</span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="notification.jsp?nt=Announcement"><span class="badge pull-right" id="cAnn">${cAnn}</span> Announcement</a></li>
-                        <li><a href="notification.jsp?nt=Assignment"><span class="badge pull-right" id="cAm">${cAm}</span> Assignment</a></li>
-                        <li><a href="notification.jsp?nt=Alert"><span class="badge pull-right" id="cAlert">${cAlert}</span> Alert</a></li>
-                        <li><a href="notification.jsp?nt=Score"><span class="badge pull-right" id="cScore">${cScore}</span> Score</a></li>
+                        <li><a href="notification?nt=Announcement"><span class="badge pull-right" id="cAnn">${cAnn}</span> Announcement</a></li>
+                        <li><a href="notification?nt=Assignment"><span class="badge pull-right" id="cAm">${cAm}</span> Assignment</a></li>
+                        <li><a href="notification?nt=Alert"><span class="badge pull-right" id="cAlert">${cAlert}</span> Alert</a></li>
+                        <li><a href="notification?nt=Score"><span class="badge pull-right" id="cScore">${cScore}</span> Score</a></li>
                     </ul>
                 </li>
             </ul>

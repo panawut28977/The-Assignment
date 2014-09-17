@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -167,6 +168,118 @@ public class Notification {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
+    }
+    
+    public static List<Notification> getAnnounce(int receive_id) {
+        String e = null;
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select * from notification n join receive_noti_id r on n.receive_list_id = r.receive_list_id where n.type like 'announce' and  r.acc_id=? order by n.noti_id desc";
+        List<Notification> notiList = new ArrayList<>();
+        PreparedStatement pstm;
+        Notification n = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, receive_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                n= new Notification();
+                n.setAcc_id(rs.getInt("acc_id"));
+                n.setLink(rs.getString("link"));
+                n.setNoti_date(rs.getDate("noti_date"));
+                n.setNoti_id(rs.getInt("noti_id"));
+                n.setText(rs.getString("text"));
+                n.setType(rs.getString("type"));
+                notiList.add(n);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return notiList;
+    }
+    
+    public static List<Notification> getAssignment(int receive_id) {
+        String e = null;
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select * from notification n join receive_noti_id r on n.receive_list_id = r.receive_list_id where n.type like 'assignment'  and r.acc_id=? order by n.noti_id desc";
+        List<Notification> notiList = new ArrayList<>();
+        PreparedStatement pstm;
+        Notification n = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, receive_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                n= new Notification();
+                n.setAcc_id(rs.getInt("acc_id"));
+                n.setLink(rs.getString("link"));
+                n.setNoti_date(rs.getDate("noti_date"));
+                n.setNoti_id(rs.getInt("noti_id"));
+                n.setText(rs.getString("text"));
+                n.setType(rs.getString("type"));
+                notiList.add(n);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return notiList;
+    }
+    
+    public static List<Notification> getAlert(int receive_id) {
+        String e = null;
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select * from notification n join receive_noti_id r on n.receive_list_id = r.receive_list_id where n.type like 'alert' and r.acc_id=? order by n.noti_id desc";
+        List<Notification> notiList = new ArrayList<>();
+        PreparedStatement pstm;
+        Notification n = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, receive_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                n= new Notification();
+                n.setAcc_id(rs.getInt("acc_id"));
+                n.setLink(rs.getString("link"));
+                n.setNoti_date(rs.getDate("noti_date"));
+                n.setNoti_id(rs.getInt("noti_id"));
+                n.setText(rs.getString("text"));
+                n.setType(rs.getString("type"));
+                notiList.add(n);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return notiList;
+    }
+    
+    public static List<Notification> getScore(int receive_id) {
+        String e = null;
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select * from notification n join receive_noti_id r on n.receive_list_id = r.receive_list_id where n.type like 'score' and r.acc_id=? order by n.noti_id desc";
+        List<Notification> notiList = new ArrayList<>();
+        PreparedStatement pstm;
+        Notification n = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, receive_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                n= new Notification();
+                n.setAcc_id(rs.getInt("acc_id"));
+                n.setLink(rs.getString("link"));
+                n.setNoti_date(rs.getDate("noti_date"));
+                n.setNoti_id(rs.getInt("noti_id"));
+                n.setText(rs.getString("text"));
+                n.setType(rs.getString("type"));
+                notiList.add(n);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return notiList;
     }
 
     @Override

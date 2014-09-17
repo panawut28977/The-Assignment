@@ -275,6 +275,10 @@
         <servlet-name>compareCopySl</servlet-name>
         <servlet-class>servlet.compareCopySl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>notification</servlet-name>
+        <servlet-class>servlet.notification</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -474,7 +478,11 @@
     <servlet-mapping>
         <servlet-name>compareCopySl</servlet-name>
         <url-pattern>/compareCopySl</url-pattern>
-    </servlet-mapping>   
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>notification</servlet-name>
+        <url-pattern>/notification</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

@@ -22,16 +22,16 @@
                 <%@include file="META-INF/page/side_bar.jsp"%>
                 <div class="col-md-9">
                     <c:choose>
-                        <c:when test="${param.nt eq 'Announcement'}">
+                        <c:when test="${nt eq 'Announcement'}">
                             <%@include file="META-INF/page/notify_announcement.jsp" %>
                         </c:when>
-                        <c:when test="${param.nt eq 'Assignment'}">
+                        <c:when test="${nt eq 'Assignment'}">
                             <%@include file="META-INF/page/notify_assignment.jsp" %>
                         </c:when>
-                        <c:when test="${param.nt eq 'Alert'}">
+                        <c:when test="${nt eq 'Alert'}">
                             <%@include file="META-INF/page/notify_alert.jsp" %>
                         </c:when>
-                        <c:when test="${param.nt eq 'Score'}">
+                        <c:when test="${nt eq 'Score'}">
                             <%@include file="META-INF/page/notify_score.jsp" %>
                         </c:when>
                     </c:choose>
