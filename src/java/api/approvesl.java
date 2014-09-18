@@ -52,14 +52,14 @@ public class approvesl extends HttpServlet {
             n.setCourse_id(cId);
             n.setType("alert");
             //Assignment# 1 ( INT206 Software Development Process II ) <b9/10
-            String content = "<h4>Your request to join "+Course.getCourseNameByID(course_id)+" is approved</h4>";
+            String content = "<h4>Your request to join <b>\""+Course.getCourseNameByID(course_id)+"\"</b> is approved</h4>";
             n.setText(content);
 
             List<Integer> listac = new ArrayList<>();
             listac.add(acc_id);
             Notification.announce(n, listac);
         }
-        out.write(result);
+        out.write(result+"");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
