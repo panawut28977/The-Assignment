@@ -280,6 +280,10 @@
         <servlet-name>notification</servlet-name>
         <servlet-class>servlet.notification</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>removeStudent</servlet-name>
+        <servlet-class>servlet.removeStudent</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -483,6 +487,10 @@
     <servlet-mapping>
         <servlet-name>notification</servlet-name>
         <url-pattern>/notification</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>removeStudent</servlet-name>
+        <url-pattern>/removeStudent</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

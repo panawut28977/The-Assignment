@@ -67,5 +67,12 @@
                 location.href = "removeTeacher?acc_id=" + acc_id;
             }
         });
+        
+         $(".kick").click(function() {
+            var acc_id = $(this).attr("data-id");
+            if (confirm('You will student from your course?')) {
+                location.href = "removeStudent?acc_id=" + acc_id;
+            }
+        });
     });
 </script>

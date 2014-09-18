@@ -4,8 +4,8 @@
         padding-left: 10px;
     }
 </style>
-<div><h3>${param.nt} <button class='btn btn-default pull-right'>Clear all</button></h3></div>
-<div class="media">
+<div><h3>${nt} <button class='btn btn-default pull-right'>Clear all</button></h3></div>
+<!--<div class="media">
     <a href="course.jsp">
         <span class="glyphicon glyphicon-check pull-left" style="font-size: 64px"></span>
     </a> 
@@ -21,4 +21,4 @@
         <h4 class="media-heading">AJ.Kittiphan Puapholthep <a href="message.jsp">message</a> to you.</h4>
         <h4><b>5/10</b></h4>
     </div>
-</div>
+</div>-->

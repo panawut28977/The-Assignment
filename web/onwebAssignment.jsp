@@ -345,7 +345,7 @@
                     </div>
                 </div>
             </div>
-            <div class="gi-override gi-userlist">
+<!--            <div class="gi-override gi-userlist">
                 <div class="gi-options"></div>
                 <ul class="gi-inner">
                     <li class="gi-user" data-goinstant-id="1234">
@@ -407,7 +407,7 @@
                     <div class="gi-name">
                         User's display name 
                     </div>
-                </div>
+                </div>-->
             </div>
     </body>
 

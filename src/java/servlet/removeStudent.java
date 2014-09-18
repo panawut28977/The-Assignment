@@ -3,17 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package api;
+package servlet;
 
 import Model.Account;
 import Model.AccountCourse;
-import Model.Assignment;
-import Model.Course;
-import Model.Notification;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Array;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +20,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Orarmor
  */
-public class approvesl extends HttpServlet {
+public class removeStudent extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,27 +34,14 @@ public class approvesl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession ss = request.getSession();
-        Account ac = (Account) ss.getAttribute("ac");
+        String acc_id = request.getParameter("acc_id");
         int cId = Integer.parseInt(ss.getAttribute("cId") + "");
-        PrintWriter out = response.getWriter();
-        int acc_id = Integer.parseInt(request.getParameter("acc_id"));
-        int course_id = Integer.parseInt(request.getParameter("course_id"));
-        int result = AccountCourse.approve(acc_id, course_id) == true ? 1 : 0;
-        System.out.println("result:"+result);
-        if (result > 0) {
-            Notification n = new Notification();
-            n.setAcc_id(ac.getAcc_id());
-            n.setCourse_id(cId);
-            n.setType("alert");
-            //Assignment# 1 ( INT206 Software Development Process II ) <b9/10
-            String content = "<h4>Your request to join "+Course.getCourseNameByID(course_id)+" is approved</h4>";
-            n.setText(content);
-
-            List<Integer> listac = new ArrayList<>();
-            listac.add(acc_id);
-            Notification.announce(n, listac);
+        boolean result = AccountCourse.leaveCourse(Integer.parseInt(acc_id), cId);
+        if (result) {
+            result = AccountCourse.changeRole(Integer.parseInt(acc_id), cId, 2);
         }
-        out.write(result);
+
+        response.sendRedirect("course.jsp?tab=member");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
