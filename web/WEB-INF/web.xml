@@ -36,6 +36,7 @@
         <url-pattern>/message</url-pattern>
         <url-pattern>/message.jsp</url-pattern>
         <url-pattern>/gmessage</url-pattern>
+        <url-pattern>/notification</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>

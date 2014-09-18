@@ -59,9 +59,9 @@ public class notify extends HttpServlet {
                 } else if ((entry.getValue() + "").equalsIgnoreCase("alert")) {
                     cAlert++;
                 } else if ((entry.getValue() + "").equalsIgnoreCase("score")) {
-                    cAm++;
-                } else if ((entry.getValue() + "").equalsIgnoreCase("assignment")) {
                     cScore++;
+                } else if ((entry.getValue() + "").equalsIgnoreCase("assignment")) {
+                    cAm++;
                 }
                 // if สำหรับเช็คว่าสำกับ obj เดิมมั้ย
             }
@@ -107,9 +107,9 @@ public class notify extends HttpServlet {
                         } else if (type.equalsIgnoreCase("alert")) {
                             cNewAlert++;
                         } else if (type.equalsIgnoreCase("score")) {
-                            cNewAm++;
-                        } else if (type.equalsIgnoreCase("assignment")) {
                             cNewScore++;
+                        } else if (type.equalsIgnoreCase("assignment")) {
+                            cNewAm++;
                         }
                         newNoti = true;
                     }
@@ -127,9 +127,9 @@ public class notify extends HttpServlet {
                     } else if ((entry.getValue() + "").equalsIgnoreCase("alert")) {
                         cAlert++;
                     } else if ((entry.getValue() + "").equalsIgnoreCase("score")) {
-                        cAm++;
-                    } else if ((entry.getValue() + "").equalsIgnoreCase("assignment")) {
                         cScore++;
+                    } else if ((entry.getValue() + "").equalsIgnoreCase("assignment")) {
+                        cAm++;
                     }
                     //if สำหรับเช็คว่าสำกับ obj เดิมมั้ย
                 }

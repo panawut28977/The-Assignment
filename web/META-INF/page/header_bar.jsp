@@ -1,3 +1,4 @@
+<link href="module/bootstrap-notify/css/bootstrap-notify.css" rel="stylesheet"/>
 <style>
     .navbar-nav .glyphicon{
         top: 3px;
@@ -106,9 +107,10 @@
                 </li>
             </ul>
         </div>
-
     </div>
 </nav>
+<div class='notifications bottom-left'></div>
+<script src="module/bootstrap-notify/js/bootstrap-notify.js" type="text/javascript"/></script>
 <script>
     $(function() {
         var eventSource = new EventSource("notify");
@@ -131,26 +133,42 @@
             console.log(event.data);
             $("#cAm").text(event.data);
         }, false);
-        
+
         eventSource.addEventListener('cTotal', function(event) {
             console.log(event.data);
             $("#cTotal").text(event.data);
         }, false);
-        
+
         eventSource.addEventListener('cNewAnn', function(event) {
             console.log(event.data);
+            $('.bottom-left').notify({
+                message: {text: event.data+' New Announcement '},
+                type : 'info'
+            }).show();
         }, false);
 
         eventSource.addEventListener('cNewAlert', function(event) {
             console.log(event.data);
+             $('.bottom-left').notify({
+                message: {text: event.data+' New Alert '},
+                type : 'info'
+            }).show();
         }, false);
 
         eventSource.addEventListener('cNewScore', function(event) {
             console.log(event.data);
+              $('.bottom-left').notify({
+                message: {text: event.data +" Assignment is checked"},
+                type : 'info'
+            }).show();
         }, false);
 
         eventSource.addEventListener('cNewAm', function(event) {
             console.log(event.data);
+              $('.bottom-left').notify({
+                message: {text: "You have "+event.data+" New Assignment "},
+                type : 'info'
+            }).show();
         }, false);
 
 //        $(".navbar-nav li").mouseover(function() {

@@ -2,7 +2,7 @@
 <%@taglib uri="/WEB-INF/tlds/functions" prefix="cf" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="module/fullcalendar/fullcalendar.css">
-<script src="module/fullcalendar/fullcalendar.min.js"></script>
+<script src="module/fullcalendar/fullcalendar.js"></script>
 <script>
 
     $(document).ready(function() {
@@ -35,6 +35,7 @@
                     </c:otherwise>
                 </c:choose>
         jsonArr.push({
+            id: '${a.am_id}',
             title: '${a.name}',
             start: '${a.due_date}',
             borderColor: color,
@@ -60,6 +61,7 @@
                     </c:otherwise>
                 </c:choose>
         jsonArr.push({
+            id: '${a.am_id}',
             title: '${a.name}',
             start: '${a.due_date}',
             borderColor: color,
@@ -79,8 +81,11 @@
                 center: 'title',
                 right: 'month'
             },
-            editable: true,
+            eventClick: function(calEvent, jsEvent, view) {
+                location.href = "assignment.jsp?tab=AllAssignment&&amId="+calEvent.id;
+            },
             events: jsonArr
+            
         });
 
     });

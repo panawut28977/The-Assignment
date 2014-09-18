@@ -5,8 +5,12 @@
  */
 package servlet;
 
+import Model.Account;
+import Model.AccountCourse;
 import Model.AnswerQuestion;
+import Model.Assignment;
 import Model.Group_member;
+import Model.Notification;
 import Model.StAssignmentOnWeb;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -39,6 +43,9 @@ public class updateScoreStAmOnWeb extends HttpServlet {
         HttpSession ss = request.getSession();
         List<AnswerQuestion> ansList = new ArrayList<>();
         StAssignmentOnWeb sa = (StAssignmentOnWeb) ss.getAttribute("sa");
+        Account ac = (Account) ss.getAttribute("ac");
+        int cId = Integer.parseInt(ss.getAttribute("cId") + "");
+        Assignment a = (Assignment) ss.getAttribute("curAm");
         String[] seqno = request.getParameterValues("seqno");
         String q_type = null;
         String instruction = null;
@@ -113,9 +120,20 @@ public class updateScoreStAmOnWeb extends HttpServlet {
         }
         sa.setScore(total_score);
         StAssignmentOnWeb.updateScore(sa);
-        for (AnswerQuestion a : ansList) {
-            AnswerQuestion.updateScore(a);
+        for (AnswerQuestion ans : ansList) {
+            AnswerQuestion.updateScore(ans);
         }
+
+        Notification n = new Notification();
+        n.setAcc_id(ac.getAcc_id());
+        n.setCourse_id(cId);
+        n.setType("score");
+        //Assignment# 1 ( INT206 Software Development Process II ) <b9/10
+        String content = "<h4>" + a.getName() + "  <small class='text-muted'>" + a.getCourse().getName() + "</small><br/><br/>"+ total_score + "/" + a.getFully_mark()+"</h4>";
+        n.setText(content);
+
+        List<Integer> listac = AccountCourse.getStudentIdCourse(cId, ac.getAcc_id());
+        Notification.announce(n, listac);
 
         request.setAttribute("msg", 6);
         getServletContext().getRequestDispatcher("/informpage.jsp?am_id=" + sa.getAm_id()).forward(request, response);

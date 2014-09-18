@@ -5,9 +5,14 @@
  */
 package servlet;
 
+import Model.Account;
+import Model.AccountCourse;
+import Model.Assignment;
+import Model.Notification;
 import Model.StAssignmentFile;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,16 +38,31 @@ public class updateScoreStAmFile extends HttpServlet {
             throws ServletException, IOException {
         double score = Double.parseDouble(request.getParameter("score"));
         HttpSession ss = request.getSession();
-        StAssignmentFile stf = (StAssignmentFile)ss.getAttribute("sa");
+        StAssignmentFile stf = (StAssignmentFile) ss.getAttribute("sa");
         int result = StAssignmentFile.updateScore(score, stf.getSt_am_id());
-        if(result>0){
+        Account ac = (Account) ss.getAttribute("ac");
+        int cId = Integer.parseInt(ss.getAttribute("cId") + "");
+        Assignment a = (Assignment) ss.getAttribute("curAm");
+
+        if (result > 0) {
+            Notification n = new Notification();
+            n.setAcc_id(ac.getAcc_id());
+            n.setCourse_id(cId);
+            n.setType("score");
+            //Assignment# 1 ( INT206 Software Development Process II ) <b9/10
+            String content = "<h4>" + a.getName() + "  <small class='text-muted'>" + a.getCourse().getName() + "</small><br/><br/>"+score + "/" + a.getFully_mark()+"</h4>";
+            n.setText(content);
+
+            List<Integer> listac = AccountCourse.getStudentIdCourse(cId, ac.getAcc_id());
+            Notification.announce(n, listac);
+
             request.setAttribute("msg", 5);
             request.setAttribute("am_id", stf.getAm_id());
             getServletContext().getRequestDispatcher("/informpage.jsp").forward(request, response);
-        }else{
+        } else {
             System.out.println("can not update assignment score.");
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -5,12 +5,15 @@
  */
 package servlet;
 
+import Model.Account;
+import Model.AccountCourse;
 import Model.Assignment;
 import Model.Course;
 import Model.Explain;
 import Model.FillBlank;
 import Model.MatchWord;
 import Model.MultipleChoice;
+import Model.Notification;
 import Model.Question;
 import com.oreilly.servlet.MultipartRequest;
 import java.io.File;
@@ -50,6 +53,7 @@ public class createAssignment extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         request.setCharacterEncoding("UTF-8");
         HttpSession ss = request.getSession();
+        Account ac = (Account) ss.getAttribute("ac");
         File f = new File(getServletContext().getRealPath("/") + "\\file\\assignment_file");
 //        System.out.println("check dir " +f.exists());
         MultipartRequest m = new MultipartRequest(request, f.getPath(), "UTF-8");
@@ -212,13 +216,26 @@ public class createAssignment extends HttpServlet {
                     instruction = m.getParameter(seqno[i] + "instruction");
                 }
             }
-            System.out.println("fully mark:"+fullymark);
+            System.out.println("fully mark:" + fullymark);
             a.setFully_mark(fullymark);
             a.setAm_id(key);
             Assignment.updateAmInfo(a);
             Question.addList(qlist);
+
             url = "assignment.jsp?tab=AllAssignment&&amId=" + key;
         }
+
+        Notification n = new Notification();
+        n.setAcc_id(ac.getAcc_id());
+        n.setCourse_id(cId);
+        n.setType("assignment");
+        String content = "<p><b>" + a.getName() + "</b> - " + a.getDescription() + "</p>\n";
+        n.setText(content);
+        n.setLink("assignment.jsp?ct=allAm&&tab=AllAssignment&&amId="+key+"&&cId="+cId+"");
+
+        List<Integer> listac = AccountCourse.getStudentIdCourse(cId, ac.getAcc_id());
+        Notification.announce(n, listac);
+
         response.sendRedirect(url);
     }
 

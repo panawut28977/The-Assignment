@@ -6,9 +6,11 @@
 package servlet;
 
 import Model.Account;
+import Model.AccountCourse;
 import Model.AnswerQuestion;
 import Model.Assignment;
 import Model.Group_member;
+import Model.Notification;
 import Model.StAmFileList;
 import Model.StAssignmentFile;
 import Model.StAssignmentOnWeb;
@@ -108,7 +110,7 @@ public class checkAssignment extends HttpServlet {
                 ss.setAttribute("send_acc", send_acc);
             }
         }
-
+        
         getServletContext().getRequestDispatcher(url).forward(request, response);
 
     }

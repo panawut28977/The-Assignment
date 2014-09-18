@@ -108,7 +108,7 @@ public class Notification {
         }
         insert_receive.deleteCharAt(insert_receive.length() - 1);
         System.out.println(insert_receive);
-        String sql = "insert into notification(acc_id,course_id,type,text,receive_list_id) values(?,?,?,?,?)";
+        String sql = "insert into notification(acc_id,course_id,type,text,link,receive_list_id) values(?,?,?,?,?,?)";
         PreparedStatement pstm;
         int result = 0;
         try {
@@ -117,7 +117,8 @@ public class Notification {
             pstm.setInt(2, n.getCourse_id());
             pstm.setString(3, n.getType());
             pstm.setString(4, n.getText());
-            pstm.setInt(5, last_id);
+            pstm.setString(5, n.getLink());
+            pstm.setInt(6, last_id);
             result = pstm.executeUpdate();
 
             pstm = conn.prepareCall(insert_receive.toString());
