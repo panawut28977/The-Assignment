@@ -117,7 +117,7 @@ public class notify extends HttpServlet {
                 }
             }
             System.out.println("newNoti: " + newNoti);
-            if (newNoti) {
+            if ((newNoti && noti.size() > curNoti.size()) || noti.size() < curNoti.size() ) {
                 Iterator i = noti.entrySet().iterator();
                 int cAnn = 0, cAlert = 0, cAm = 0, cScore = 0, total = 0;
                 while (i.hasNext()) {
