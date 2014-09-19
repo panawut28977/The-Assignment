@@ -13,7 +13,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -175,6 +177,25 @@ public class Message {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
+    }
+     
+     public static List<Integer> getUnseenMsgId(int to_acc_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select ms_id from contact_message where to_acc_id=? and dest_seen is NULL";
+        List<Integer> newMsgList = new ArrayList<>();
+        PreparedStatement pstm;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, to_acc_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                newMsgList.add(rs.getInt("ms_id"));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return newMsgList;
     }
 
     @Override

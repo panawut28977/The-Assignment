@@ -284,6 +284,10 @@
         <servlet-name>removeStudent</servlet-name>
         <servlet-class>servlet.removeStudent</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>notifyMessage</servlet-name>
+        <servlet-class>servlet.notifyMessage</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -491,6 +495,10 @@
     <servlet-mapping>
         <servlet-name>removeStudent</servlet-name>
         <url-pattern>/removeStudent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>notifyMessage</servlet-name>
+        <url-pattern>/notifyMessage</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

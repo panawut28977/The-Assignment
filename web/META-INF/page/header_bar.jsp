@@ -47,7 +47,7 @@
         <div class="collapse navbar-collapse" style="padding-left: 0;" id="collapse-menu">
             <ul class="nav navbar-nav">
                 <li id="home_menu" class="active"><a href="home.jsp?tab=AllAnnouce"><span class="glyphicon glyphicon-home"></span></a></li>
-                <li id="message_menu"><a href="message"><span class="glyphicon glyphicon-envelope"></span></a></li>
+                <li id="message_menu"><a href="message"><span class="glyphicon glyphicon-envelope"></span><span class="badge" id="totalUnseen">${totalUnseen}</span></a></li>
                 <li class="dropdown" id="notification_menu"> 
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span><span class="badge" id="cTotal">${cTotal}</span></a>
                     <ul class="dropdown-menu">
@@ -142,40 +142,48 @@
         eventSource.addEventListener('cNewAnn', function(event) {
             console.log(event.data);
             $('.bottom-left').notify({
-                message: {text: event.data+' New Announcement '},
-                type : 'info'
+                message: {text: event.data + ' New Announcement '},
+                type: 'info'
             }).show();
         }, false);
 
         eventSource.addEventListener('cNewAlert', function(event) {
             console.log(event.data);
-             $('.bottom-left').notify({
-                message: {text: event.data+' New Alert '},
-                type : 'info'
+            $('.bottom-left').notify({
+                message: {text: event.data + ' New Alert '},
+                type: 'info'
             }).show();
         }, false);
 
         eventSource.addEventListener('cNewScore', function(event) {
             console.log(event.data);
-              $('.bottom-left').notify({
-                message: {text: event.data +" Assignment is checked"},
-                type : 'info'
+            $('.bottom-left').notify({
+                message: {text: event.data + " Assignment is checked"},
+                type: 'info'
             }).show();
         }, false);
 
         eventSource.addEventListener('cNewAm', function(event) {
             console.log(event.data);
-              $('.bottom-left').notify({
-                message: {text: "You have "+event.data+" New Assignment "},
-                type : 'info'
+            $('.bottom-left').notify({
+                message: {text: "You have " + event.data + " New Assignment "},
+                type: 'info'
             }).show();
         }, false);
 
-//        $(".navbar-nav li").mouseover(function() {
-//            $(this).css("backgroud-color","e7e7e7");
-//        }).mouseout(function() {
-//            $(this).css("backgroud-color","none");
-//        });
+        var eventSource2 = new EventSource("notifyMessage");
+        eventSource2.addEventListener('totalUnseen', function(event) {
+            console.log(event.data);
+            $("#totalUnseen").text(event.data);
+        }, false);
+        
+         eventSource2.addEventListener('totalNewMsg', function(event) {
+            console.log(event.data);
+             $('.bottom-left').notify({
+                message: {text: "You have " + event.data + " New Message "},
+                type: 'info'
+            }).show();
+        }, false);
 
     });
 </script>
