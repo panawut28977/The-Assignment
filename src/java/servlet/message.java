@@ -78,9 +78,7 @@ public class message extends HttpServlet {
         ss.setAttribute("yourStudent", yourStudent);
         ss.setAttribute("youTeacher", yourTeacher);
 
-        if (ss.getAttribute("mList") == null) {
             request.setAttribute("msg", "nopvmsg");
-        }
         String url = "/message.jsp";
         getServletContext().getRequestDispatcher(url).forward(request, response);
     }
