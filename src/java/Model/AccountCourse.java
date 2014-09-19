@@ -464,6 +464,15 @@ public class AccountCourse {
         }
         return listAccount;
     }
+     
+     public static boolean isTeacher(int course_id, int acc_id){
+         String role = getAccountRole(acc_id, course_id);
+         boolean result= false;
+         if(role.equalsIgnoreCase("TH")){
+             result=true;
+         }
+         return result;
+     }
 
     @Override
     public String toString() {

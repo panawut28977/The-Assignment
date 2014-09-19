@@ -94,7 +94,7 @@ public class GetSentAssignment extends HttpServlet {
 
             //logic สำหรับคิดว่ามีใครเหลืออีกบ้างที่ยังไม่มีกลุ่ม หรือไม่เคยกดเข้างานเลยสักครั้ง
             for (Integer id : allAccId) {
-                if (!accId.contains(id)) {
+                if ((!accId.contains(id)) && !(AccountCourse.isTeacher(Integer.parseInt(cId), id))) {
                     left++;
                     leftAccId.add(id);
                 }
@@ -132,7 +132,7 @@ public class GetSentAssignment extends HttpServlet {
             }
             //logic สำหรับคิดว่ามีใครเหลืออีกบ้างที่ยังไม่มีกลุ่ม หรือไม่เคยกดเข้างานเลยสักครั้ง
             for (Integer id : allAccId) {
-                if (!accId.contains(id)) {
+                if (!accId.contains(id) && !(AccountCourse.isTeacher(Integer.parseInt(cId), id))) {
                     left++;
                     leftAccId.add(id);
                 }
