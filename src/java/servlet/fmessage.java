@@ -3,19 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package servlet;
 
-import Model.Account;
-import Model.ConnectionBuilder;
-import Model.Course;
-import Model.Message;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +18,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Orarmor
  */
-public class gmessage extends HttpServlet {
+public class fmessage extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,22 +32,9 @@ public class gmessage extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession ss = request.getSession();
-        Account a = (Account) ss.getAttribute("ac");
-        Integer to_acc_id  = Integer.parseInt(request.getParameter("to_acc_id"));
-        
-        List<Message> mList = Message.getMessageBetweenSourceAndDest(a.getAcc_id(), to_acc_id);
-        for (Message message : mList) {
-            if (message.getSource_acc_id().getAcc_id()==to_acc_id) {
-                Message.seen(message.getMs_id());
-            }
-        }
-        ss.setAttribute("havePvm","true");
-        ss.setAttribute("mList", mList);
-        ss.setAttribute("to_acc_id", to_acc_id);
-        String url = "/message";
-        getServletContext().getRequestDispatcher(url).forward(request, response);
+        ss.setAttribute("havePvm", "false");
+        response.sendRedirect("message");
     }
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

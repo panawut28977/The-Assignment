@@ -47,7 +47,7 @@
         <div class="collapse navbar-collapse" style="padding-left: 0;" id="collapse-menu">
             <ul class="nav navbar-nav">
                 <li id="home_menu" class="active"><a href="home.jsp?tab=AllAnnouce"><span class="glyphicon glyphicon-home"></span></a></li>
-                <li id="message_menu"><a href="message"><span class="glyphicon glyphicon-envelope"></span><span class="badge" id="totalUnseen">${totalUnseen}</span></a></li>
+                <li id="message_menu"><a href="fmessage"><span class="glyphicon glyphicon-envelope"></span><span class="badge" id="totalUnseen">${totalUnseen}</span></a></li>
                 <li class="dropdown" id="notification_menu"> 
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span><span class="badge" id="cTotal">${cTotal}</span></a>
                     <ul class="dropdown-menu">

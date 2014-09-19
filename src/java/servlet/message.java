@@ -77,7 +77,7 @@ public class message extends HttpServlet {
         ss.setAttribute("yourStudent", yourStudent);
         ss.setAttribute("youTeacher", yourTeacher);
 
-        if (ss.getAttribute("havePvm") == null) {
+        if (((String)ss.getAttribute("havePvm")).equalsIgnoreCase("false")) {
             request.setAttribute("msg", "nopvmsg");
         }
         String url = "/message.jsp";

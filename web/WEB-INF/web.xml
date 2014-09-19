@@ -288,6 +288,10 @@
         <servlet-name>notifyMessage</servlet-name>
         <servlet-class>servlet.notifyMessage</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>fmessage</servlet-name>
+        <servlet-class>servlet.fmessage</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -499,6 +503,10 @@
     <servlet-mapping>
         <servlet-name>notifyMessage</servlet-name>
         <url-pattern>/notifyMessage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>fmessage</servlet-name>
+        <url-pattern>/fmessage</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
