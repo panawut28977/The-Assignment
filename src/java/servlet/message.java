@@ -73,12 +73,13 @@ public class message extends HttpServlet {
         }
 
         System.out.println(yourStudent);
-        System.out.println("===");
         System.out.println(yourTeacher);
         ss.setAttribute("yourStudent", yourStudent);
         ss.setAttribute("youTeacher", yourTeacher);
 
+        if (ss.getAttribute("havePvm") == null) {
             request.setAttribute("msg", "nopvmsg");
+        }
         String url = "/message.jsp";
         getServletContext().getRequestDispatcher(url).forward(request, response);
     }
