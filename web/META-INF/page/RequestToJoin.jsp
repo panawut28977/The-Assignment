@@ -114,7 +114,6 @@
                         url: "approvesl",
                         data: {acc_id: $(this).attr("acc_id"), course_id: $(this).attr("cId")}
                     }).done(function(msg) {
-                        alert(msg);
                         if(msg == 1){
                             pos.slideUp("slow",function(){
                                 pos.html('<div class="col-md-12"><div class="alert alert-success" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Approved !!</strong></div></div>');

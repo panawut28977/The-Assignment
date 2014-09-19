@@ -30,7 +30,7 @@
                                         <li><a class="makeTH" data-id="${st.acc_id}">Make as Teacher</a></li>
                                         </c:when>
                                     </c:choose>
-                                <li><a class="kick" data-id="${st.acc_id}">Remove form course</a></li>
+                                <li><a class="kick" data-id="${st.acc_id}">Remove from course</a></li>
                             </ul>
                         </span>
                     </c:if>

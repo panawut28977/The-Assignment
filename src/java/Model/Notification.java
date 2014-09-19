@@ -296,6 +296,23 @@ public class Notification {
         }
         return notiList;
     }
+    
+    public static boolean removeCourseUserNoti(int acc_id, int course_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "delete r.* from notification n left join receive_noti_id r on n.receive_list_id = r.receive_list_id where r.acc_id=? and n.course_id=?";
+        PreparedStatement pstm;
+        int result = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, acc_id);
+            pstm.setInt(2, course_id);
+            result = pstm.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result > 0;
+    }
 
     @Override
     public String toString() {

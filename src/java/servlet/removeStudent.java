@@ -7,6 +7,7 @@ package servlet;
 
 import Model.Account;
 import Model.AccountCourse;
+import Model.Notification;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -38,7 +39,7 @@ public class removeStudent extends HttpServlet {
         int cId = Integer.parseInt(ss.getAttribute("cId") + "");
         boolean result = AccountCourse.leaveCourse(Integer.parseInt(acc_id), cId);
         if (result) {
-            result = AccountCourse.changeRole(Integer.parseInt(acc_id), cId, 2);
+            System.out.println(Notification.removeCourseUserNoti(Integer.parseInt(acc_id), cId));
         }
 
         response.sendRedirect("course.jsp?tab=member");
