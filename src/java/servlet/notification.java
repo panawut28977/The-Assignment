@@ -39,12 +39,16 @@ public class notification extends HttpServlet {
         List<Notification> noti = null;
         if (nt.equalsIgnoreCase("Announcement")) {
             noti = Notification.getAnnounce(ac.getAcc_id());
+            Notification.seen(ac.getAcc_id(), "announce");
         } else if (nt.equalsIgnoreCase("Assignment")) {
             noti = Notification.getAssignment(ac.getAcc_id());
+            Notification.seen(ac.getAcc_id(), "assignment");
         } else if (nt.equalsIgnoreCase("Alert")) {
             noti = Notification.getAlert(ac.getAcc_id());
+            Notification.seen(ac.getAcc_id(), "alert");
         } else if (nt.equalsIgnoreCase("Score")) {
             noti = Notification.getScore(ac.getAcc_id());
+            Notification.seen(ac.getAcc_id(), "score");
         }
 
         request.setAttribute("nt", nt);

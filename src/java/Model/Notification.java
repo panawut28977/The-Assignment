@@ -296,7 +296,7 @@ public class Notification {
         }
         return notiList;
     }
-    
+
     public static boolean removeCourseUserNoti(int acc_id, int course_id) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "delete r.* from notification n left join receive_noti_id r on n.receive_list_id = r.receive_list_id where r.acc_id=? and n.course_id=?";
@@ -312,6 +312,26 @@ public class Notification {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result > 0;
+    }
+
+    public static int seen(int acc_id,String type) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "update notification n"
+                + " join receive_noti_id r on  n.receive_list_id =  r.receive_list_id "
+                + " set r.seen_date = CURRENT_TIMESTAMP"
+                + " WHERE n.type = ? and r.acc_id = ? ";
+        PreparedStatement pstm;
+        int result = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, type);
+            pstm.setInt(2, acc_id);
+            result = pstm.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
     }
 
     @Override
