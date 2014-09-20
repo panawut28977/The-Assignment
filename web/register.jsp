@@ -89,16 +89,18 @@
 
 <script>
     $(function() {
-        $("#email").on("focusout", function() {
+        $("#email").on("change", function() {
+            
             var value = $(this).val();
             if (value.length == 0) {
-                addCheckingStatus('true');
+                addCheckingStatus('false');
             } else {
                 $.ajax({
                     type: "POST",
                     url: "isExistingEmail",
                     data: {email: value}
                 }).done(function(msg) {
+//                    alert(msg);
                     addCheckingStatus(msg);
                 });
             }
@@ -106,7 +108,7 @@
 
         function addCheckingStatus(msg) {
             //true if it's a existing email
-            if (msg == 'true') {
+            if (msg == 'false') {
                 $("#email").parent().removeClass("has-success   has-feedback").find("span").remove("span");
                 $("#email").parent().addClass("has-error  has-feedback").append('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
                 $("#submit").attr("disabled", "disabled");

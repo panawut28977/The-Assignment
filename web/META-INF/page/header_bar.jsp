@@ -1,4 +1,5 @@
 <link href="module/bootstrap-notify/css/bootstrap-notify.css" rel="stylesheet"/>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
     .navbar-nav .glyphicon{
         top: 3px;
@@ -41,20 +42,22 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="home.jsp">The Assignment</a>
+            <a class="navbar-brand" href="home.jsp?tab=AllAnnouce">The Assignment</a>
         </div>
 
         <div class="collapse navbar-collapse" style="padding-left: 0;" id="collapse-menu">
             <ul class="nav navbar-nav">
                 <li id="home_menu" class="active"><a href="home.jsp?tab=AllAnnouce"><span class="glyphicon glyphicon-home"></span></a></li>
-                <li id="message_menu"><a href="fmessage"><span class="glyphicon glyphicon-envelope"></span><span class="badge" id="totalUnseen">${totalUnseen}</span></a></li>
+                <li id="message_menu"><a href="fmessage"><span class="glyphicon glyphicon-envelope"></span>
+                        <span class="badge <c:if test="${totalUnseen==0}">hide</c:if>" id="totalUnseen">${totalUnseen}</span>
+                    </a></li>
                 <li class="dropdown" id="notification_menu"> 
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span><span class="badge" id="cTotal">${cTotal}</span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span><span class="badge <c:if test="${cTotal==0}">hide</c:if>" id="cTotal">${cTotal}</span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="notification?nt=Announcement"><span class="badge pull-right" id="cAnn">${cAnn}</span> Announcement</a></li>
-                        <li><a href="notification?nt=Assignment"><span class="badge pull-right" id="cAm">${cAm}</span> Assignment</a></li>
-                        <li><a href="notification?nt=Alert"><span class="badge pull-right" id="cAlert">${cAlert}</span> Alert</a></li>
-                        <li><a href="notification?nt=Score"><span class="badge pull-right" id="cScore">${cScore}</span> Score</a></li>
+                        <li><a href="notification?nt=Announcement"><span class="badge pull-right <c:if test="${cAnn==0}">hide</c:if>" id="cAnn">${cAnn}</span> Announcement</a></li>
+                        <li><a href="notification?nt=Assignment"><span class="badge pull-right <c:if test="${cAm==0}">hide</c:if>" id="cAm">${cAm}</span> Assignment</a></li>
+                        <li><a href="notification?nt=Alert"><span class="badge pull-right <c:if test="${cAlert==0}">hide</c:if>" id="cAlert">${cAlert}</span> Alert</a></li>
+                        <li><a href="notification?nt=Score"><span class="badge pull-right <c:if test="${cScore==0}">hide</c:if>" id="cScore">${cScore}</span> Score</a></li>
                     </ul>
                 </li>
             </ul>
@@ -116,27 +119,48 @@
         var eventSource = new EventSource("notify");
         eventSource.addEventListener('cAnn', function(event) {
             console.log(event.data);
-            $("#cAnn").text(event.data);
+            if (event.data == 0) {
+                $("#cAnn").addClass("hide");
+            } else {
+                $("#cAnn").text(event.data).removeClass("hide");
+            }
         }, false);
 
         eventSource.addEventListener('cAlert', function(event) {
             console.log(event.data);
-            $("#cAlert").text(event.data);
+            if (event.data == 0) {
+                $("#cAlert").addClass("hide");
+            } else {
+                $("#cAlert").text(event.data).removeClass("hide");
+            }
         }, false);
 
         eventSource.addEventListener('cScore', function(event) {
             console.log(event.data);
-            $("#cScore").text(event.data);
+            if (event.data == 0) {
+                $("#cScore").addClass("hide");
+            } else {
+                $("#cScore").text(event.data).removeClass("hide");
+            }
         }, false);
 
         eventSource.addEventListener('cAm', function(event) {
             console.log(event.data);
-            $("#cAm").text(event.data);
+            if (event.data == 0) {
+                $("#cAm").addClass("hide");
+            } else {
+                $("#cAm").text(event.data).removeClass("hide");
+            }
         }, false);
 
         eventSource.addEventListener('cTotal', function(event) {
             console.log(event.data);
-            $("#cTotal").text(event.data);
+            if (event.data == 0) {
+                $("#cTotal").addClass("hide");
+            } else {
+                $("#cTotal").text(event.data).removeClass("hide");
+            }
+
         }, false);
 
         eventSource.addEventListener('cNewAnn', function(event) {
@@ -174,12 +198,16 @@
         var eventSource2 = new EventSource("notifyMessage");
         eventSource2.addEventListener('totalUnseen', function(event) {
             console.log(event.data);
-            $("#totalUnseen").text(event.data);
+             if (event.data == 0) {
+                $("#totalUnseen").addClass("hide");
+            } else {
+                $("#totalUnseen").text(event.data).removeClass("hide");
+            }
         }, false);
-        
-         eventSource2.addEventListener('totalNewMsg', function(event) {
+
+        eventSource2.addEventListener('totalNewMsg', function(event) {
             console.log(event.data);
-             $('.bottom-left').notify({
+            $('.bottom-left').notify({
                 message: {text: "You have " + event.data + " New Message "},
                 type: 'info'
             }).show();

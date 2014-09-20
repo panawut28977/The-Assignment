@@ -27,7 +27,8 @@
 </div>
 <script>
      $(function() {
-        $("#email").on("focusout", function() {
+        $("#email").on("change", function() {
+            alert("sfsadf");
             var value = $(this).val();
             if (value.length == 0) {
                 addCheckingStatus('true');
@@ -37,6 +38,7 @@
                     url: "isExistingEmail",
                     data: {email: value}
                 }).done(function(msg) {
+                    alert(msg);
                     addCheckingStatus(msg);
                 });
             }

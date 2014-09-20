@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -39,13 +41,15 @@ public class Account {
     private List<Assignment> assignment;
     private List<UserScore> listStudentScore;
 
+    public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+
     public Account() {
     }
 
     public Account(int acc_id) {
         this.acc_id = acc_id;
     }
-    
+
     public Account(int acc_id, String firstname, String lastname) {
         this.acc_id = acc_id;
         this.firstname = firstname;
@@ -196,7 +200,7 @@ public class Account {
                 ArrayList<Long> courseIdList = new ArrayList<>();
                 while (iterator.hasNext()) {
                     Map.Entry mapEntry = (Map.Entry) iterator.next();
-                    courseIdList.add((Long)mapEntry.getKey());
+                    courseIdList.add((Long) mapEntry.getKey());
                 }
                 acc.setAnnouncement(Announcement.viewAnnByCourseList(courseIdList));
 
@@ -362,6 +366,11 @@ public class Account {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listAc;
+    }
+
+    public static boolean validate(String emailStr) {
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
+        return matcher.find();
     }
 
     @Override

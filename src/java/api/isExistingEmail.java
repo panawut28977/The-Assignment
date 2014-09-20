@@ -33,7 +33,11 @@ public class isExistingEmail extends HttpServlet {
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         String email = request.getParameter("email");
-        out.write(Account.isExistingEmail(email)+"");
+        boolean exist = Account.isExistingEmail(email);
+        boolean isEmail = Account.validate(email);
+        System.out.println("exist:"+exist);
+        System.out.println("isEmail:"+isEmail);
+        out.write((exist && isEmail) +"");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
