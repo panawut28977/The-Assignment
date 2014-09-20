@@ -200,7 +200,7 @@ public class userscore extends HttpServlet {
                 }
             }
 
-            request.setAttribute("listStudentScore", listStudentScore);
+            ss.setAttribute("listStudentScore", listStudentScore);
         }
         getServletContext().getRequestDispatcher("/course.jsp?tab=score").forward(request, response);
     }

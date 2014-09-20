@@ -141,7 +141,7 @@
     </c:when>
     <c:otherwise>
         <div>
-            <button class="btn btn-primary pull-right" style="margin-top: 20px"><span class="glyphicon glyphicon-export"></span> Export Scoresheet</button>
+            <a class="btn btn-primary pull-right" style="margin-top: 20px" href="exportScoreSheet"><span class="glyphicon glyphicon-export"></span> Export Scoresheet</a>
         </div>
         <div style="overflow-y:scroll;margin-top: 75px;clear: both"  >
             <table class="table table-striped" ID="AllStudentScore">
@@ -396,5 +396,6 @@
         var dscChart = new Chart(ctx2).Doughnut(data);
 
         $("#AllStudentScore").dataTable();
+        
     });
 </script>

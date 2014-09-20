@@ -600,7 +600,8 @@ public class Assignment {
         Date today = new Date();
         if (lastsent != null) {
             Double remaining_day = (double) ((due_date.getTime() - lastsent.getTime()) / 1000 / 60 / 60 / 24);
-            Double timeout = (double) ((a.getLate_date().getTime() - today.getTime()) / 1000 / 60 / 60 / 24);
+//            Double timeout = (double) ((a.getLate_date().getTime() - today.getTime()) / 1000 / 60 / 60 / 24);
+            Double timeout = (double) ((a.getLate_date().getTime() - lastsent.getTime() ) / 1000 / 60 / 60 / 24);
             System.out.println("--lated sent function---");
             System.out.println(a.getAm_id());
             System.out.println(lastsent + " / due " + a.getDue_date() + "/last " + a.getLate_date());

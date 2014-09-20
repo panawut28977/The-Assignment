@@ -292,6 +292,10 @@
         <servlet-name>fmessage</servlet-name>
         <servlet-class>servlet.fmessage</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>exportScoreSheet</servlet-name>
+        <servlet-class>servlet.exportScoreSheet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -507,6 +511,10 @@
     <servlet-mapping>
         <servlet-name>fmessage</servlet-name>
         <url-pattern>/fmessage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>exportScoreSheet</servlet-name>
+        <url-pattern>/exportScoreSheet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
