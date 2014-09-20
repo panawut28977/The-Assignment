@@ -64,8 +64,10 @@ public class AccountCourse {
     public static int joinCourse(AccountCourse detail, int acc_id) {
         Connection conn = ConnectionBuilder.getConnection();
         int result = 0;
+        String curStatus = accStatus(acc_id, detail.getCourse().getCourse_id());
+        System.out.println(curStatus);
         if (!isExist(acc_id, detail.getCourse().getCourse_id())) {
-            String sql = "insert into account_course(acc_id,course_id,status,role,approved_date) values(?,?,?,?,?)";
+            String sql = "insert into account_course(acc_id,course_id,status,role,approved_date) values(?,?,?,?,?) ";
             PreparedStatement pstm;
             try {
                 pstm = conn.prepareStatement(sql);
@@ -74,6 +76,18 @@ public class AccountCourse {
                 pstm.setString(3, detail.getStatus());
                 pstm.setString(4, detail.getRole());
                 pstm.setTimestamp(5, detail.getApproved_date());
+                result = pstm.executeUpdate();
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (curStatus.equalsIgnoreCase("disapproved")) {
+            String sql = "update account_course set status = \"waiting\", approved_date = null where acc_id=? and course_id=?";
+            PreparedStatement pstm;
+            try {
+                pstm = conn.prepareStatement(sql);
+                pstm.setInt(1, acc_id);
+                pstm.setInt(2, detail.getCourse().getCourse_id());
                 result = pstm.executeUpdate();
                 conn.close();
             } catch (SQLException ex) {
@@ -225,9 +239,9 @@ public class AccountCourse {
         }
         return courseList;
     }
-    
-    public static  Map<Long, AccountCourse> getCourseByAccIDMap(int acc_id) {
-         Map<Long, AccountCourse> courseList = new HashMap<>();
+
+    public static Map<Long, AccountCourse> getCourseByAccIDMap(int acc_id) {
+        Map<Long, AccountCourse> courseList = new HashMap<>();
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select * from account_course where acc_id=? AND status =  \"approved\"";
         PreparedStatement pstm;
@@ -252,8 +266,8 @@ public class AccountCourse {
         return courseList;
     }
 
-    public static Map<AccountCourse,Account> getMemberInCourseWithRole(int course_id) {
-        Map<AccountCourse,Account> listAccount = new HashMap<>();
+    public static Map<AccountCourse, Account> getMemberInCourseWithRole(int course_id) {
+        Map<AccountCourse, Account> listAccount = new HashMap<>();
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select * from account_course where course_id=? AND status =  \"approved\"";
         PreparedStatement pstm;
@@ -273,8 +287,8 @@ public class AccountCourse {
         }
         return listAccount;
     }
-    
-     public static List<Account> getMemberInCourse(int course_id) {
+
+    public static List<Account> getMemberInCourse(int course_id) {
         List<Account> listAccount = new ArrayList<>();
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select * from account_course where course_id=? AND status =  \"approved\"";
@@ -339,6 +353,26 @@ public class AccountCourse {
         return result;
     }
 
+    public static String accStatus(int acc_id, int course_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select status from account_course where course_id=? and acc_id=?";
+        String result = "";
+        PreparedStatement pstm;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, course_id);
+            pstm.setInt(2, acc_id);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                result = rs.getString("status");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
     public static String getApprovedTime(int acc_id, int course_id) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select approved_date from account_course where course_id=? and acc_id=?";
@@ -356,13 +390,13 @@ public class AccountCourse {
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
-        String timest="";
-        if(time != null){
-            timest = Util.formatTime(time+"");
+        String timest = "";
+        if (time != null) {
+            timest = Util.formatTime(time + "");
         }
         return timest;
     }
-    
+
     public static String getAccountRole(int acc_id, int course_id) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select role from account_course where course_id=? and acc_id=?";
@@ -382,8 +416,8 @@ public class AccountCourse {
         }
         return r;
     }
-    
-     public static List<Account> getTeacherCourse(int course_id,int ownid) {
+
+    public static List<Account> getTeacherCourse(int course_id, int ownid) {
         List<Account> listAccount = new ArrayList<>();
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select acc_id from account_course where course_id=? AND role =  \"TH\" AND status =  \"approved\" and acc_id !=?  order by acc_id";
@@ -403,8 +437,8 @@ public class AccountCourse {
         }
         return listAccount;
     }
-     
-     public static List<Account> getTeacherCourseWithOwn(int course_id) {
+
+    public static List<Account> getTeacherCourseWithOwn(int course_id) {
         List<Account> listAccount = new ArrayList<>();
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select acc_id from account_course where course_id=? AND role =  \"TH\" AND status =  \"approved\"  order by acc_id";
@@ -423,8 +457,8 @@ public class AccountCourse {
         }
         return listAccount;
     }
-     
-     public static List<Account> getStudentCourse(int course_id,int ownid) {
+
+    public static List<Account> getStudentCourse(int course_id, int ownid) {
         List<Account> listAccount = new ArrayList<>();
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select acc_id from account_course where course_id=? AND role =  \"ST\" AND status =  \"approved\" and acc_id !=? order by acc_id";
@@ -444,8 +478,8 @@ public class AccountCourse {
         }
         return listAccount;
     }
-     
-     public static List<Integer> getStudentIdCourse(int course_id,int ownid) {
+
+    public static List<Integer> getStudentIdCourse(int course_id, int ownid) {
         List<Integer> listAccount = new ArrayList<>();
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select acc_id from account_course where course_id=? AND role =  \"ST\" AND status =  \"approved\" and acc_id !=? order by acc_id";
@@ -464,15 +498,15 @@ public class AccountCourse {
         }
         return listAccount;
     }
-     
-     public static boolean isTeacher(int course_id, int acc_id){
-         String role = getAccountRole(acc_id, course_id);
-         boolean result= false;
-         if(role.equalsIgnoreCase("TH")){
-             result=true;
-         }
-         return result;
-     }
+
+    public static boolean isTeacher(int course_id, int acc_id) {
+        String role = getAccountRole(acc_id, course_id);
+        boolean result = false;
+        if (role.equalsIgnoreCase("TH")) {
+            result = true;
+        }
+        return result;
+    }
 
     @Override
     public String toString() {

@@ -23,7 +23,7 @@
     $(function() {
 
         var coursecode = '${ac.courseList.get(cId).course.course_code}';
-        var courselink = '${ac.courseList.get(cId).course.course_link}';
+        var courselink = 'http://localhost:8084/TheAssignment/linkjoin?course_code='+'${ac.courseList.get(cId).course.course_code}';
         $("#coursecode").val(coursecode);
         $("#courselink").val(courselink);
         $(".qrcode").qrcode({
