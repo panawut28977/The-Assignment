@@ -7,16 +7,23 @@ package servlet;
 
 import Model.Account;
 import Model.Assignment;
+import Model.Course;
 import Model.UserScore;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.PrintSetup;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -43,9 +50,12 @@ public class exportScoreSheet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession ss = request.getSession();
         Account ac = (Account) ss.getAttribute("ac");
-        Long cId = (Long) ss.getAttribute("cId");
+        int cId = Integer.parseInt((Long) ss.getAttribute("cId") + "");
+        Course c = Course.getCourseByID(cId);
 
         Workbook wb = new XSSFWorkbook();
+        Map<String, CellStyle> styles = createStyles(wb);
+
         Sheet sheet = wb.createSheet("scoresheet");
         PrintSetup printSetup = sheet.getPrintSetup();
         printSetup.setLandscape(true);
@@ -55,15 +65,37 @@ public class exportScoreSheet extends HttpServlet {
         Row titleRow = sheet.createRow(0);
         titleRow.setHeightInPoints(45);
         Cell titleCell = titleRow.createCell(0);
-        titleCell.setCellValue("Score sheet of " + "...." + " course");
-        sheet.addMergedRegion(CellRangeAddress.valueOf("$A$1:$D$1"));
+        titleCell.setCellValue("Score sheet of " + c.getName() + " course");
+        titleCell.setCellStyle(styles.get("title"));
+        sheet.addMergedRegion(CellRangeAddress.valueOf("$A$1:$N$1"));
 
         List<Account> listStudentScore = (List<Account>) ss.getAttribute("listStudentScore");
         int rownum = 2;
+        int cellcount = 1;
+        Row sumRow = sheet.createRow(rownum);
+        sumRow.setHeightInPoints(55);
+        Cell cell;
+        cell = sumRow.createCell(0);
+        cell.setCellValue("Student name");
+        cell.setCellStyle(styles.get("header"));
+        int countback = listStudentScore.get(0).getListStudentScore().size();
+        int maxScore = 0;
+        for (int i = countback - 1; i >= 0; i--) {
+            cell = sumRow.createCell(cellcount);
+            UserScore u = listStudentScore.get(0).getListStudentScore().get(i);
+            cell.setCellValue("(" + cellcount + ") " + u.getAm_name() + " (" + u.getFull_mark() + ")");
+            cell.setCellStyle(styles.get("header"));
+            cellcount++;
+            maxScore += u.getFull_mark();
+        }
+        cell = sumRow.createCell(cellcount);
+        cell.setCellValue("Total (" + maxScore + ")");
+        cell.setCellStyle(styles.get("header"));
+        rownum++;
+
         for (Account account : listStudentScore) {
-            Row sumRow = sheet.createRow(rownum);
+            sumRow = sheet.createRow(rownum);
             sumRow.setHeightInPoints(35);
-            Cell cell;
             cell = sumRow.createCell(0);
             cell.setCellValue(account.getFirstname() + " " + account.getLastname());
             int j = 1;
@@ -121,10 +153,14 @@ public class exportScoreSheet extends HttpServlet {
         }
 
         // Write the output to a file
-        String file = "C:\\Users\\Orarmor\\Desktop\\scoresheet.xlsx";
+        String filename = "scoresheet_"+c.getName()+".xlsx";
+        String file = getServletContext().getRealPath("/") + "\\file\\scoresheet\\" + filename;
+//        String file = "C:\\Users\\Orarmor\\Desktop\\scoresheet.xlsx";
         FileOutputStream out = new FileOutputStream(file);
         wb.write(out);
         out.close();
+        
+        response.sendRedirect("file/scoresheet/" + filename);
 
 //
 //        Workbook wb = new XSSFWorkbook();
@@ -160,6 +196,62 @@ public class exportScoreSheet extends HttpServlet {
 //        FileOutputStream out = new FileOutputStream(file);
 //        wb.write(out);
 //        out.close();
+    }
+
+    private static Map<String, CellStyle> createStyles(Workbook wb) {
+        Map<String, CellStyle> styles = new HashMap<String, CellStyle>();
+        CellStyle style;
+        Font titleFont = wb.createFont();
+        titleFont.setFontHeightInPoints((short) 18);
+        titleFont.setBoldweight(Font.BOLDWEIGHT_BOLD);
+        style = wb.createCellStyle();
+        style.setAlignment(CellStyle.ALIGN_CENTER);
+        style.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+        style.setFont(titleFont);
+        styles.put("title", style);
+
+        Font monthFont = wb.createFont();
+        monthFont.setFontHeightInPoints((short) 11);
+        monthFont.setColor(IndexedColors.WHITE.getIndex());
+        style = wb.createCellStyle();
+        style.setAlignment(CellStyle.ALIGN_CENTER);
+        style.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+        style.setFillForegroundColor(IndexedColors.GREY_50_PERCENT.getIndex());
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
+        style.setFont(monthFont);
+        style.setWrapText(true);
+        styles.put("header", style);
+
+        style = wb.createCellStyle();
+        style.setAlignment(CellStyle.ALIGN_CENTER);
+        style.setWrapText(true);
+        style.setBorderRight(CellStyle.BORDER_THIN);
+        style.setRightBorderColor(IndexedColors.BLACK.getIndex());
+        style.setBorderLeft(CellStyle.BORDER_THIN);
+        style.setLeftBorderColor(IndexedColors.BLACK.getIndex());
+        style.setBorderTop(CellStyle.BORDER_THIN);
+        style.setTopBorderColor(IndexedColors.BLACK.getIndex());
+        style.setBorderBottom(CellStyle.BORDER_THIN);
+        style.setBottomBorderColor(IndexedColors.BLACK.getIndex());
+        styles.put("cell", style);
+
+        style = wb.createCellStyle();
+        style.setAlignment(CellStyle.ALIGN_CENTER);
+        style.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+        style.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
+        style.setDataFormat(wb.createDataFormat().getFormat("0.00"));
+        styles.put("formula", style);
+
+        style = wb.createCellStyle();
+        style.setAlignment(CellStyle.ALIGN_CENTER);
+        style.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+        style.setFillForegroundColor(IndexedColors.GREY_40_PERCENT.getIndex());
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
+        style.setDataFormat(wb.createDataFormat().getFormat("0.00"));
+        styles.put("formula_2", style);
+
+        return styles;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

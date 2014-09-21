@@ -50,10 +50,10 @@ public class TestGson {
         
         
         
-        List<UserScore> u = UserScore.getUserScore(2);
-        String json3 = gson.toJson(u);
-        System.out.println("-------------------------------------------------------------------");
-        System.out.println("User Score:  "+ json3);
+//        List<UserScore> u = UserScore.getUserScore(2);
+//        String json3 = gson.toJson(u);
+//        System.out.println("-------------------------------------------------------------------");
+//        System.out.println("User Score:  "+ json3);
         
         System.out.println("------------------------------------------------------------");
         Course c = Course.getCourseByID(306);
