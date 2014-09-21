@@ -29,7 +29,7 @@
         $(".qrcode").qrcode({
             size: 100,
             background: 'white',
-            text: '${ac.courseList.get(cId).course.course_link}'
+            text: 'http://localhost:8084/TheAssignment/linkjoin?course_code='+'${ac.courseList.get(cId).course.course_code}'
         });
         
         $("#openCodeBtn").click(function() {
