@@ -8,8 +8,11 @@ package servlet;
 import Model.Account;
 import Model.AccountCourse;
 import Model.Course;
+import Model.Notification;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +38,7 @@ public class joinCourseServlet extends HttpServlet {
             throws ServletException, IOException {
         String code = request.getParameter("course_code");
         HttpSession ss = request.getSession();
-        Account ac = (Account)ss.getAttribute("ac");
+        Account ac = (Account) ss.getAttribute("ac");
         Course c = Course.getCourseByCode(code);
         String url = "";
         if (!code.equals("")) {
@@ -44,12 +47,23 @@ public class joinCourseServlet extends HttpServlet {
             member.setRole("ST");
             member.setStatus("waiting");
             int result = AccountCourse.joinCourse(member, ac.getAcc_id());
-            if (result > 0)  {
-                request.setAttribute("msg","1");
-            }else{               
-                request.setAttribute("msg","2");
+            if (result > 0) {
+                request.setAttribute("msg", "1");
+                Notification n = new Notification();
+                n.setAcc_id(ac.getAcc_id());
+                n.setCourse_id(c.getCourse_id());
+                n.setType("alert");
+                //Assignment# 1 ( INT206 Software Development Process II ) <b9/10
+                String content = "<h4><b>\"" + ac.getFirstname() +" "+ ac.getLastname() + "\"</b> request to join in <b>"+c.getName()+"</b></h4>";
+                n.setText(content);
+
+                List<Integer> listac = AccountCourse.getTeacherIdCourse(c.getCourse_id(),ac.getAcc_id());
+                Notification.announce(n, listac);
+
+            } else {
+                request.setAttribute("msg", "2");
             }
-           getServletContext().getRequestDispatcher("/informpage.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/informpage.jsp").forward(request, response);
         }
     }
 
