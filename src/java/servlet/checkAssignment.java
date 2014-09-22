@@ -94,7 +94,7 @@ public class checkAssignment extends HttpServlet {
 //            stw.setAnwerQuestion(AnswerQuestion.getStAMQuestion(stw.getSt_am_id()));
             System.out.println(stw);
             ss.setAttribute("sa", stw);
-            
+
             if (a.getTotal_member() > 1) {
                 g = Group_member.getMemberById(stw.getG_id());
                 System.out.println(g);
@@ -110,7 +110,7 @@ public class checkAssignment extends HttpServlet {
                 ss.setAttribute("send_acc", send_acc);
             }
         }
-        
+
         getServletContext().getRequestDispatcher(url).forward(request, response);
 
     }
@@ -127,6 +127,11 @@ public class checkAssignment extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession ss = request.getSession();
+        if (request.getParameter("cId") != null) {
+            Long cId = Long.parseLong(request.getParameter("cId"));
+            ss.setAttribute("cId", cId);
+        }
         processRequest(request, response);
     }
 

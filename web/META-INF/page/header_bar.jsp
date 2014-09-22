@@ -190,7 +190,7 @@
         eventSource.addEventListener('cNewAm', function(event) {
             console.log(event.data);
             $('.bottom-left').notify({
-                message: {text: "You have " + event.data + " New Assignment "},
+                message: {text: "You have " + event.data + " alert about Assignment "},
                 type: 'info'
             }).show();
         }, false);

@@ -229,7 +229,7 @@ public class createAssignment extends HttpServlet {
         n.setAcc_id(ac.getAcc_id());
         n.setCourse_id(cId);
         n.setType("assignment");
-        String content = "<p><b>" + a.getName() + "</b> - " + a.getDescription() + "</p>\n";
+        String content = "<p>You have new assignment <b>" + a.getName() + "</b> - " + a.getDescription() + "</p>\n";
         n.setText(content);
         n.setLink("assignment.jsp?ct=allAm&&tab=AllAssignment&&amId="+key+"&&cId="+cId+"");
 

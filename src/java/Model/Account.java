@@ -294,7 +294,7 @@ public class Account {
 
     public static Account getNameByID(int acc_id) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select concat(`firstname`,' ',`lastname`) as fullname,profile_pic from account where acc_id = ? ";
+        String sql = "select acc_id,concat(`firstname`,' ',`lastname`) as fullname,profile_pic from account where acc_id = ? ";
         PreparedStatement pstm;
         Account ac = new Account();
         try {
@@ -302,8 +302,9 @@ public class Account {
             pstm.setInt(1, acc_id);
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {
-                ac.setFirstname(rs.getString(1));
-                ac.setProfile_pic(rs.getString(2));
+                ac.setAcc_id(rs.getInt(1));
+                ac.setFirstname(rs.getString(2));
+                ac.setProfile_pic(rs.getString(3));
             }
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);

@@ -304,6 +304,10 @@
         <servlet-name>LoginServletTmp</servlet-name>
         <servlet-class>servlet.LoginServletTmp</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>routeCommentStAm</servlet-name>
+        <servlet-class>servlet.routeCommentStAm</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -531,6 +535,10 @@
     <servlet-mapping>
         <servlet-name>LoginServletTmp</servlet-name>
         <url-pattern>/LoginServletTmp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>routeCommentStAm</servlet-name>
+        <url-pattern>/routeCommentStAm</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

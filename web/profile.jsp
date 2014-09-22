@@ -57,7 +57,7 @@
                 text-align: center;
             }
 
-            .statusbox div{
+            .statusbox .panel-body .col-md-4,.statusbox .panel-body .col-md-6{
                 padding: 10px 0;
             }
         </style>
@@ -69,28 +69,6 @@
         -->
         <%@include file="META-INF/page/header_bar.jsp"%>
         <div class="container">
-            <div class="col-md-7 statusbox">
-                <h1>Comming soon</h1>
-<!--                <div >
-                    <div class="col-md-4" style="background-color: #40d47e;cursor: pointer;">
-                        <span>${ontime}</span><br><span>On time</span>
-                    </div>
-                    <div class="col-md-4" style="background-color: #f1c40f;cursor: pointer;">
-                        <span>${hurry}</span><br><span>Hurry up</span>
-                    </div>
-                    <div class="col-md-4" style="background-color: #e74c3c;cursor: pointer;">
-                        <span>${late}</span><br><span>Late</span>
-                    </div>                    
-                </div>
-                <div>
-                    <div class="col-md-6" style="background-color: #5F8BCA;cursor: pointer;">
-                        <span>${sent}</span><br><span>Sent</span>
-                    </div>
-                    <div class="col-md-6" style="background-color: #999;cursor: pointer;">
-                        <span>${miss}</span><br><span>Miss</span>
-                    </div>
-                </div>-->
-            </div>
             <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" >
                 <div class="panel panel-info">
                     <div class="panel-heading">
@@ -130,8 +108,8 @@
 
                                     </tbody>
                                 </table>
-
-                                <a href="#" class="btn btn-primary">Forgot your password?</a>
+                                <a href="#" class="">Change profile picture</a><br/>
+                                <a href="#" class="s">Forgot your password?</a>
                                 <!--<a href="#" class="btn btn-primary">Team Sales Performance</a>-->
                             </div>
                         </div>
@@ -143,6 +121,45 @@
                         </span>
                     </div>
                 </div>
+            </div>
+
+            <div class="col-md-7 statusbox">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Assignment status</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div >
+                            <div class="col-md-4" style="background-color: #40d47e;cursor: pointer;">
+                                <span>${ontime}</span><br><span>On time</span>
+                            </div>
+                            <div class="col-md-4" style="background-color: #f1c40f;cursor: pointer;">
+                                <span>${hurry}</span><br><span>Hurry up</span>
+                            </div>
+                            <div class="col-md-4" style="background-color: #e74c3c;cursor: pointer;">
+                                <span>${late}</span><br><span>Late</span>
+                            </div>                    
+                        </div>
+                        <div>
+                            <div class="col-md-6" style="background-color: #5F8BCA;cursor: pointer;">
+                                <span>${sent}</span><br><span>Sent</span>
+                            </div>
+                            <div class="col-md-6" style="background-color: #999;cursor: pointer;">
+                                <span>${miss}</span><br><span>Miss</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Course you are wait for approval</h3>
+                    </div>
+                    <div class="panel-body">
+                        
+                    </div>
+                </div>
+                <!--<h1>Comming soon</h1>-->
             </div>
         </div>
         <!--        <a href="setSession.jsp?acct=th"><span>teacher mode</span></a>
