@@ -8,7 +8,7 @@
             <img width="64" src="${ann_acc.profile_pic}">
         </a>
         <div class="media-body">
-            <h4 class="media-heading">${ann_acc.firstname}  <small>(${cf:getCourseNameByID(n.course_id)})</small><small class="pull-right">${n.noti_date}</small></h4>
+            <h4 class="media-heading">${ann_acc.firstname}  <small>(${cf:getCourseNameByID(n.course_id)})</small><small class="pull-right">${cf:formatTime(n.noti_date)}</small></h4>
             <p>${n.text}</p>
         </div>
     </div>

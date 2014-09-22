@@ -30,7 +30,7 @@
                     <c:choose>
                         <c:when test="${msg eq '1'}">
                             <div class="alert alert-success" role="alert">
-                                <h3>Waiting for approve. <a href="home.jsp?tab=AllAnnouce">Go back to home page</a></h3>
+                                <h3>Waiting for approve. <a href="home.jsp?tab=AllAnnouce">Go back to homepage</a></h3>
                             </div>
                         </c:when>
                         <c:when test="${msg eq '2'}">
@@ -68,6 +68,11 @@
                         <c:when test="${msg eq '7'}">
                             <div class="alert alert-warning" role="alert">
                                 <h3><span class="glyphicon glyphicon-hand-left"></span> Please select your course on the left before.</h3>
+                            </div>
+                        </c:when>
+                        <c:when test="${msg eq '8'}">
+                            <div class="alert alert-warning" role="alert">
+                                <h3>you out of course.  <a href="home.jsp?tab=AllAnnouce">Go back to homepage</a></h3>
                             </div>
                         </c:when>
                     </c:choose>

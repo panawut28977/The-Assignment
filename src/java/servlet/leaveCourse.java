@@ -5,13 +5,9 @@
  */
 package servlet;
 
-import Model.Account;
 import Model.AccountCourse;
-import Model.Announcement;
-import Model.Notification;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,9 +16,9 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author JenoVa
+ * @author Orarmor
  */
-public class AddAnnounce extends HttpServlet {
+public class leaveCourse extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,33 +31,13 @@ public class AddAnnounce extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
         HttpSession ss = request.getSession();
-        String title = request.getParameter("title");
-        String content = request.getParameter("content");
-        Account ac = (Account) ss.getAttribute("ac");
-        int cId = Integer.parseInt((Long) ss.getAttribute("cId") + "");
-        Announcement a = new Announcement();
-        a.setAn_acc(ac);
-        a.setTitle(title);
-        a.setContent(content);
-        a.setCourse(Integer.parseInt(ss.getAttribute("cId") + ""));
-        int rs = Announcement.add(a);
-        Notification n = new Notification();
-        n.setAcc_id(ac.getAcc_id());
-        n.setCourse_id(cId);
-        n.setType("announce");
-//        n.setText(title+"<br/>"+content);
-        n.setText(content);
-
-        //select people you want to notify
-        List<Integer> listac = AccountCourse.getStudentIdCourse(cId, ac.getAcc_id());
-        List<Integer> taAc = AccountCourse.getTeacherIdCourse(cId, ac.getAcc_id());
-        for (Integer integer : taAc) {
-            listac.add(integer);
+        int acc_id = Integer.parseInt(request.getParameter("acc_id"));
+        int cId = Integer.parseInt((Long)ss.getAttribute("cId")+"");
+        if (AccountCourse.leaveCourse(acc_id, cId)) {
+            request.setAttribute("msg", "8");
+            getServletContext().getRequestDispatcher("/informpage.jsp").forward(request, response);
         }
-        Notification.announce(n, listac);
-        out.write(rs);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

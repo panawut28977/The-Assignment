@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -29,7 +30,7 @@ public class Notification {
     private String type;
     private String text;
     private String link;
-    private Date noti_date;
+    private Timestamp noti_date;
     private int receive_list_id;
 
     public int getNoti_id() {
@@ -80,11 +81,11 @@ public class Notification {
         this.link = link;
     }
 
-    public Date getNoti_date() {
+    public Timestamp getNoti_date() {
         return noti_date;
     }
 
-    public void setNoti_date(Date noti_date) {
+    public void setNoti_date(Timestamp noti_date) {
         this.noti_date = noti_date;
     }
 
@@ -197,7 +198,7 @@ public class Notification {
                 n.setAcc_id(rs.getInt("acc_id"));
                 n.setCourse_id(rs.getInt("course_id"));
                 n.setLink(rs.getString("link"));
-                n.setNoti_date(rs.getDate("noti_date"));
+                n.setNoti_date(rs.getTimestamp("noti_date"));
                 n.setNoti_id(rs.getInt("noti_id"));
                 n.setText(rs.getString("text"));
                 n.setType(rs.getString("type"));
@@ -226,7 +227,7 @@ public class Notification {
                 n.setAcc_id(rs.getInt("acc_id"));
                 n.setCourse_id(rs.getInt("course_id"));
                 n.setLink(rs.getString("link"));
-                n.setNoti_date(rs.getDate("noti_date"));
+                n.setNoti_date(rs.getTimestamp("noti_date"));
                 n.setNoti_id(rs.getInt("noti_id"));
                 n.setText(rs.getString("text"));
                 n.setType(rs.getString("type"));
@@ -255,7 +256,7 @@ public class Notification {
                 n.setAcc_id(rs.getInt("acc_id"));
                 n.setCourse_id(rs.getInt("course_id"));
                 n.setLink(rs.getString("link"));
-                n.setNoti_date(rs.getDate("noti_date"));
+                n.setNoti_date(rs.getTimestamp("noti_date"));
                 n.setNoti_id(rs.getInt("noti_id"));
                 n.setText(rs.getString("text"));
                 n.setType(rs.getString("type"));
@@ -284,7 +285,7 @@ public class Notification {
                 n.setAcc_id(rs.getInt("acc_id"));
                 n.setCourse_id(rs.getInt("course_id"));
                 n.setLink(rs.getString("link"));
-                n.setNoti_date(rs.getDate("noti_date"));
+                n.setNoti_date(rs.getTimestamp("noti_date"));
                 n.setNoti_id(rs.getInt("noti_id"));
                 n.setText(rs.getString("text"));
                 n.setType(rs.getString("type"));

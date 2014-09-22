@@ -8,10 +8,14 @@ package servlet;
 import Model.Account;
 import Model.AccountCourse;
 import Model.Assignment;
+import Model.Group_member;
 import Model.Notification;
 import Model.StAssignmentFile;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -50,10 +54,22 @@ public class updateScoreStAmFile extends HttpServlet {
             n.setCourse_id(cId);
             n.setType("score");
             //Assignment# 1 ( INT206 Software Development Process II ) <b9/10
-            String content = "<h4>" + a.getName() + "  <small class='text-muted'>" + a.getCourse().getName() + "</small><br/><br/>"+score + "/" + a.getFully_mark()+"</h4>";
+            Date d = new Date();
+            Timestamp now = new Timestamp(d.getTime());
+            String content = "<h4>" + a.getName() + "  <small class='text-muted'>" + a.getCourse().getName() + "</small><small class='pull-right'>" + util.Util.formatTime(now + "") + "</small><br/><br/>You have new score update " + score + "/" + a.getFully_mark() + ".</h4>";
             n.setText(content);
 
-            List<Integer> listac = AccountCourse.getStudentIdCourse(cId, ac.getAcc_id());
+            List<Integer> listac = new ArrayList<>();
+            if (a.getTotal_member() > 1) {
+                Group_member g = Group_member.getMemberById(stf.getG_id());
+                String accIdList[] = g.getAcc_id().split(",");
+                List<Account> gAm = new ArrayList<>();
+                for (String accId : accIdList) {
+                    listac.add(Integer.parseInt(accId));
+                }
+            } else {
+                listac.add(stf.getAcc_id());
+            }
             Notification.announce(n, listac);
 
             request.setAttribute("msg", 5);

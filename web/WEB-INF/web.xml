@@ -308,6 +308,10 @@
         <servlet-name>routeCommentStAm</servlet-name>
         <servlet-class>servlet.routeCommentStAm</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>leaveCourse</servlet-name>
+        <servlet-class>servlet.leaveCourse</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -539,6 +543,10 @@
     <servlet-mapping>
         <servlet-name>routeCommentStAm</servlet-name>
         <url-pattern>/routeCommentStAm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>leaveCourse</servlet-name>
+        <url-pattern>/leaveCourse</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

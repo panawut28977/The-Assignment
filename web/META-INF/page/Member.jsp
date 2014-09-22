@@ -2,7 +2,7 @@
 <div>
     <c:if test="${ac.courseList.get(cId).role eq 'ST'}">
         <div class="col-md-12" style="margin-top: 12px;">
-            <button class="pull-right btn btn-default">Leave course</button>
+            <button class="pull-right btn btn-default" id="leavecourse">Leave course</button>
         </div>
     </c:if>
     <c:set var="count" value="0"/>
@@ -72,6 +72,11 @@
             var acc_id = $(this).attr("data-id");
             if (confirm('You will student from your course?')) {
                 location.href = "removeStudent?acc_id=" + acc_id;
+            }
+        });
+        $("#leavecourse").click(function(){
+            if(confirm("You want to leave course sure?")){
+                location.href= "leaveCourse?acc_id=${ac.acc_id}";
             }
         });
     });
