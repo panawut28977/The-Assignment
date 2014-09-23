@@ -131,138 +131,11 @@
                                 </div>
                             </div>
                             <div class="col-md-10 col-md-offset-1" id="CreateAmOnweb">
-                                <input type="text" name="title_assignment_onweb" class="form-control" placeholder="Assignment Title" >
+                                <input type="text" name="title_assignment_onweb" id="title_assignment_onweb" class="form-control" placeholder="Assignment Title" >
                                 <br>
                                 <p id="AmDescription"></p>
                                 <div class="amQuestion" id="sortable">
-                                    <!--                                    <div class="multipleChoice">
-                                                                            <hr>
-                                                                            <div class="q_no">
-                                                                                <span class="label label-default">1</span> 
-                                                                                <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label  class="col-md-3 control-label">Question Text</label>
-                                                                                <div class="col-md-9">
-                                                                                    <input type="text" class="form-control" >
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label class="col-md-3 control-label">One or multiple answers?</label>
-                                                                                <div class="col-md-5">
-                                                                                    <select class="form-control" id="multiple_type">
-                                                                                        <option value="one">One answer only</option>
-                                                                                        <option value="multiple">Multiple choide allowed</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label class="col-md-3 control-label">Choice <br><span class='text-danger'>(Don't forget to select answer)</span></label>
-                                                                                <div class="col-md-8 c_list">
-                                                                                    <div class="choice-group form-inline">
-                                                                                        <div><input type="radio" name="c_ans"> <input type="text" class="form-control"></div>
-                                                                                    </div>
-                                                                                    <br>
-                                                                                    <a onclick="appendChoice(this)">Add other</a>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label class="col-md-3 control-label">Score</label>
-                                                                                <div class="col-md-2">
-                                                                                    <input type="number" min="0" step="any" class="form-control" name="score" >
-                                                                                </div>
-                                                                            </div>
-                                                                            <input type="hidden" value="multiple_choice" name="q_type">
-                                    
-                                                                        </div>
-                                                                        <div class="explain">
-                                                                            <hr>
-                                                                            <div class="q_no">
-                                                                                <span class="label label-default">2</span> 
-                                                                                <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label class="col-md-3 control-label">Question</label>
-                                                                                <div class="col-md-9">
-                                                                                    <textarea class="form-control explain_q_text" name="explain_q_text" ></textarea>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label  class="col-md-3 control-label">Answer</label>
-                                                                                <div class="col-md-9">
-                                                                                    <textarea class="form-control"></textarea>
-                                                                                </div>
-                                                                            </div>
-                                                                            <input type="hidden" value="explain" name="q_type">
-                                                                        </div>
-                                    
-                                                                        <div class="tfQuestion">
-                                                                            <hr>
-                                                                            <div class="q_no">
-                                                                                <span class="label label-default">3</span> 
-                                                                                <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label  class="col-md-3 control-label">Question Text</label>
-                                                                                <div class="col-md-9">
-                                                                                    <input type="text" class="form-control" >
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label class="col-md-3 control-label">Choice <br><span class='text-danger'>(Don't forget to select answer)</span></label>
-                                                                                <div class="col-md-8">
-                                                                                    <input type="radio" name="c_ans"> Yes
-                                                                                    <input type="radio" name="c_ans"> No
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label class="col-md-3 control-label">Score</label>
-                                                                                <div class="col-md-2">
-                                                                                    <input type="number" min="0" step="any" class="form-control" name="score" >
-                                                                                </div>
-                                                                            </div>
-                                                                            <input type="hidden" value="tfQuestion" name="q_type">
-                                                                        </div>
-                                                                        <div class="matchWord">
-                                                                            <hr>
-                                                                            <div class="q_no">
-                                                                                <span class="label label-default">4</span> 
-                                                                                <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>
-                                                                            </div>  
-                                                                            <div class="form-group">
-                                                                                <label  class="col-md-3 control-label">How Many Pair?</label>
-                                                                                <div class="col-md-2">
-                                                                                    <input type="number" id="total_pair" min="1" class="form-control" >
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <div class="col-md-offset-3 col-md-9 matchWord_q_list">
-                                                                                    <span class="text-danger">Please tell me how many question before</span>
-                                                                                </div>
-                                                                            </div>
-                                                                            <input type="hidden" value="matchWord" name="q_type">
-                                                                        </div>
-                                                                        <div class="fillBlank">
-                                                                            <hr>
-                                                                            <div class="q_no">
-                                                                                <span class="label label-default">5</span> 
-                                                                                <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label  class="col-md-3 control-label">Question Text</label>
-                                                                                <div class="col-md-9">
-                                                                                    <textarea class="form-control"  ></textarea>
-                                                                                    <br>
-                                                                                    <a class=" btn btn-default" onclick="addAnswer(this)">Add Answer</a>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <div class="col-md-offset-3 col-md-9 ansList">
-                                    
-                                                                                </div>
-                                                                            </div>
-                                                                            <input type="hidden" value="fillBlank" name="q_type">
-                                                                        </div>-->
+
                                 </div>
                                 <div class="btn-group dropup center-block" >
                                     <hr>
@@ -283,8 +156,10 @@
                             </div>
                         </section>
                         <section class="step" data-step-title="Complete and preview">
-                            <div class="col-md-8 col-md-offset-2">
-                                <h1 class="text-muted">Preview Coming soon !!</h1>
+                            <div class="col-md-12">
+                                <div class="well col-md-12" id="preview">
+                                    <h4 id="pv_title"><b><u></u></b></h4>
+                                </div>
                             </div>
                         </section>
                     </form>
@@ -293,13 +168,21 @@
         </div>
         <script src="js/bootstrap-datetimepicker.min.js"></script>
         <script src="module/easyWizard/lib/jquery.easyWizard.js"></script>
-        <script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+        <!--<script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>-->
         <script src="js/jquery-ui.js"></script>
         <script>
                                         $(document).ready(function() {
                                             $('#myWizard').easyWizard({
                                                 buttonsClass: 'btn btn-default',
-                                                submitButtonClass: 'btn btn-primary'});
+                                                submitButtonClass: 'btn btn-primary',
+                                                after: function(wizardObj, prevStepObj, currentStepObj) {
+                                                    if (currentStepObj.selector == '.step[data-step="3"]') {
+//                                                       alert("step3");
+                                                        $("#preview").html("");
+                                                        createpreview();
+                                                    }
+                                                }
+                                            });
 //                                            tinymce.init({selector: '.explain .explain_q_text'});
                                             $("#sortable").sortable({
                                                 revert: true,
@@ -336,17 +219,14 @@
                                             var d = new Date();
                                             $('#due_date input').val(d.getFullYear() + "-" + monthNames[d.getMonth()] + "-" + ('0' + d.getDate()).slice(-2));
                                             $('#due_date input[name="due_date"]').val(d.getFullYear() + "-" + ('0' + (d.getMonth() + 1)).slice(-2) + "-" + ('0' + d.getDate()).slice(-2));
-
                                             $('#latePeriod input').val(d.getFullYear() + "-" + monthNames[d.getMonth()] + "-" + ('0' + d.getDate()).slice(-2));
                                             $('#dtp_input2').val(d.getFullYear() + "-" + ('0' + (d.getMonth() + 1)).slice(-2) + "-" + ('0' + d.getDate()).slice(-2));
-
                                             $('#due_date input').change(function() {
                                                 $('#latePeriod').datetimepicker('setStartDate', $(this).val());
                                                 $('#latePeriod input').val($(this).val());
                                                 $('#dtp_input2').val($('#dtp_input1').val());
                                                 $('#latePeriod').datetimepicker('update');
                                             });
-
                                             $('.form_datetime').datetimepicker({
                                                 format: 'yyyy-MM-dd',
                                                 weekStart: 1,
@@ -357,7 +237,6 @@
                                                 startDate: new Date(),
                                                 minView: 2
                                             });
-
                                             $('#latePeriod').datetimepicker({
                                                 format: 'yyyy-MM-dd',
                                                 weekStart: 1,
@@ -408,6 +287,9 @@
                                             });
                                             $("#description").change(function() {
                                                 $("#AmDescription").text($(this).val());
+                                            });
+                                            $("#title_assignment_onweb").change(function() {
+                                                $("#pv_title b u").text($(this).val());
                                             });
                                             $(document).on("change", "#total_pair", function() {
                                                 var seq_of_choice = $(this).parent().parent().parent().find("[name='seqno']").val();
@@ -496,6 +378,7 @@
                                             } else {
                                                 textArea.attr("onmouseup", "GetSelectedText(this)").attr("readonly", "readonly");
                                             }
+
                                         }
 
                                         var amCurrentType = 'multi';
@@ -744,6 +627,114 @@
                                         function remove_title(t) {
                                             seqno--;
                                             $(t).parent().remove();
+                                        }
+
+                                        function createpreview() {
+                                            var html = "";
+                                            $('.amQuestion').children().each(function() {
+                                                var q = $(this); // "this" is the current element in the loop
+//                                                console.log(q.find("[name$='q_type']").val());
+                                                var type = q.find("[name$='q_type']").val();
+                                                var q_no = q.find("[name$='q_no']").val();
+                                                if (type == 'instruction') {
+                                                    var ins = q.find("[name$='instruction']").val();
+                                                    html = '<h5><b><u>Instruction:</u> ' + ins + '</b></h5>';
+                                                    $("#preview").append(html);
+                                                } else if (type == 'tfQuestion') {
+                                                    var qtext = q.find("[name$='qtext']").val();
+                                                    html = '<div>'
+                                                            + '        <p>' + q_no + '.) ' + qtext + '</p>'
+                                                            + '                <input type="radio" disabled="yes" value="true"> True'
+                                                            + '                <input type="radio" disabled="yes" value="false"> False'
+//                                                  +'          <input type="hidden" name="2q_id" value="188">
+//                                                  +'          <input type="hidden" value="multiple_choice" name="2q_type">
+//                                                  +'          <input type="hidden" name="seqno" value="2">
+                                                            + '    </div>';
+                                                    $("#preview").append(html);
+                                                } else if (type == 'multiple_choice') {
+                                                    var qtext = q.find("[name$='qtext']").val();
+                                                    var cate = q.find("[name$='qcategory']").val();
+                                                    var choice = "";
+                                                    if (cate == "one") {
+                                                        console.log("if " + cate);
+                                                        $.each(q.find("[name$='ctext']"), function() {
+                                                            choice += '<input type="radio"> ' + $(this).val() + "  ";
+                                                        });
+                                                    } else if (cate == "multiple") {
+                                                        console.log("else " + cate);
+                                                        $.each(q.find("[name$='ctext']"), function() {
+                                                            choice += '<input type="checkbox"> ' + $(this).val() + "  ";
+                                                        });
+                                                    }
+                                                    html = '<div>'
+                                                            + '           <p>' + q_no + '.) ' + qtext + '</p>'
+                                                            + choice
+                                                            + '   </div>';
+                                                    $("#preview").append(html);
+                                                } else if (type == 'matchWord') {
+                                                    var qtext = q.find("[name$='qtext']").val();
+                                                    var qselect = "<select>";
+                                                    $.each(q.find("[name$='match_text']"), function() {
+                                                        if ($(this).val() != '') {
+                                                            qselect += ' <option>' + $(this).val() + '</option>';
+                                                        }
+                                                    });
+                                                    qselect += " </select>"
+
+                                                    var qlist = "";
+                                                    $.each(q.find("[name$='match_text']"), function() {
+                                                        if ($(this).val() != '') {
+                                                            qlist += qselect + '<span>' + $(this).val() + '</span><br><br>';
+                                                        }
+                                                    });
+                                                    var qanswer = "";
+                                                    $.each(q.find("[name$='match_ans']"), function() {
+                                                        qanswer += '<span>' + $(this).val() + '</span><br><br>';
+                                                    });
+                                                    html = '<div>'
+                                                            + '           <p>' + q_no + '.) ' + qtext + '</p>'
+                                                            + ' <div class="col-md-8">'
+                                                            + qlist
+                                                            + '</div>'
+                                                            + '<div class="col-md-2 col-md-offset-2">'
+                                                            + qanswer
+                                                            + '</div>'
+                                                            + '</div>';
+                                                    $("#preview").append(html);
+                                                } else if (type == 'fillBlank') {
+                                                    var qtext = q.find("[name$='qtext']").val();
+                                                    var reptext = "<input type='text' value=''/>";
+                                                    var startEndList = [];
+                                                    q.find(".ansList .a_group").each(function() {
+                                                        var startEnd = [$(this).find("[name$='startIndex']").val(), $(this).find("[name$='endIndex']").val()];
+                                                        startEndList.push(startEnd);
+                                                    });
+//                                                    console.log(startEndList);
+                                                    $.ajax({
+                                                        type: 'POST',
+                                                        url: 'replaceStringByIndex',
+                                                        async: false,
+                                                        data: {qtext: qtext, "startEndList[]": startEndList, reptext: reptext},
+                                                        success: function(newQText) {
+                                                            console.log(newQText);
+                                                            html = '<div>'
+                                                                    + '           <p>' + q_no + '.) ' + newQText + '</p>'
+                                                                    + '</div>';
+                                                            console.log(html);
+                                                            $("#preview").append(html);
+                                                        }
+                                                    });
+
+                                                } else if (type == 'explain') {
+                                                    var qtext = q.find("[name$='qtext']").val();
+                                                    html = '<div>'
+                                                            + '           <p>' + q_no + '.) ' + qtext + '</p>'
+                                                            + '           <textarea class="form-control" name="2answer"></textarea>'
+                                                            + '       </div>';
+                                                    $("#preview").append(html);
+                                                }
+                                            });
+
                                         }
         </script>
     </body>

@@ -9,7 +9,7 @@ and open the template in the editor.
 */
 /*body{
     font-family: 'Source Sans Pro', sans-serif;
-}*/
+}*/   
 body{
     /*font-family: Arimo,"Helvetica Neue", Helvetica, Arial, sans-serif;*/
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -73,6 +73,10 @@ body{
 
 .assignmentBox > div{
     margin: 20px 0;
+}
+
+#preview > div {
+margin: 20px 0;
 }
 
 .fc-event-inner{

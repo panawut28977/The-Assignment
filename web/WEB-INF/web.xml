@@ -312,6 +312,10 @@
         <servlet-name>leaveCourse</servlet-name>
         <servlet-class>servlet.leaveCourse</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>replaceStringByIndex</servlet-name>
+        <servlet-class>api.replaceStringByIndex</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -547,6 +551,10 @@
     <servlet-mapping>
         <servlet-name>leaveCourse</servlet-name>
         <url-pattern>/leaveCourse</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>replaceStringByIndex</servlet-name>
+        <url-pattern>/replaceStringByIndex</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

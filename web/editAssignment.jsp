@@ -445,37 +445,37 @@
                 <script src="js/bootstrap-datetimepicker.min.js"></script>
                 <script src="js/jquery-ui.js"></script>
                 <script>
-                        $(document).ready(function() {
-                            $("#sortable").sortable({
+                    $(document).ready(function() {
+                        $("#sortable").sortable({
                             revert: true,
-                                update: function() {
+                            update: function() {
                                 var new_seq = 1;
                                 var new_Qno = 1;
                                 var old_seq = 0;
                                 var old_name = 0;
                                 var new_name = 0;
-                                    $("#sortable >div").each(function() {
+                                $("#sortable >div").each(function() {
                                     old_seq = $(this).find("input[name='seqno']").val();
                                     $(this).find("input[name='seqno']").val(new_seq);
-                                        $(this).find("[name^='" + old_seq + "']").each(function() {
+                                    $(this).find("[name^='" + old_seq + "']").each(function() {
                                         old_name = $(this).attr("name");
                                         new_name = old_name.replace(old_seq, new_seq);
                                         console.log(new_name);
-                                    $(this).attr("name", new_name);
+                                        $(this).attr("name", new_name);
                                     });
-                                new_seq++;
+                                    new_seq++;
                                 });
-                                    $("#sortable .q_no").each(function() {
+                                $("#sortable .q_no").each(function() {
                                     $(this).find(".label").text(new_Qno);
                                     $(this).find("input[name$='q_no']").val(new_Qno);
-                                new_Qno++;
-                            });
-                        }
+                                    new_Qno++;
+                                });
+                            }
                         });
                         $("#CreateAmOnweb div").disableSelection();
                         $('#compareBox').hide();
-                            var monthNames = ["January", "February", "March", "April", "May", "June",
-                        "July", "August", "September", "October", "November", "December"];
+                        var monthNames = ["January", "February", "March", "April", "May", "June",
+                            "July", "August", "September", "October", "November", "December"];
                         var d = new Date('${a.due_date}');
                         $('#due_date input').val(d.getFullYear() + "-" + monthNames[d.getMonth()] + "-" + ('0' + d.getDate()).slice(-2));
                         $('#due_date input[name="due_date"]').val(d.getFullYear() + "-" + ('0' + (d.getMonth() + 1)).slice(-2) + "-" + ('0' + d.getDate()).slice(-2));
@@ -484,14 +484,14 @@
                         $('#latePeriod input').val(d.getFullYear() + "-" + monthNames[d.getMonth()] + "-" + ('0' + d.getDate()).slice(-2));
                         $('#dtp_input2').val(d.getFullYear() + "-" + ('0' + (d.getMonth() + 1)).slice(-2) + "-" + ('0' + d.getDate()).slice(-2));
 
-                            $('#due_date input').change(function() {
+                        $('#due_date input').change(function() {
                             $('#latePeriod').datetimepicker('setStartDate', $(this).val());
                             $('#latePeriod input').val($(this).val());
                             $('#dtp_input2').val($('#dtp_input1').val());
-                        $('#latePeriod').datetimepicker('update');
+                            $('#latePeriod').datetimepicker('update');
                         });
 
-                            $('.form_datetime').datetimepicker({
+                        $('.form_datetime').datetimepicker({
                             format: 'yyyy-MM-dd',
                             weekStart: 1,
                             todayBtn: 1,
@@ -500,10 +500,10 @@
                             startView: 2,
                             forceParse: 0,
                             startDate: new Date(),
-                        minView: 2
+                            minView: 2
                         });
 
-                            $('#latePeriod').datetimepicker({
+                        $('#latePeriod').datetimepicker({
                             format: 'yyyy-MM-dd',
                             weekStart: 1,
                             autoclose: 1,
@@ -511,155 +511,155 @@
                             startView: 2,
                             forceParse: 0,
                             startDate: new Date(),
-                        minView: 2
+                            minView: 2
                         });
                         $("#ffup").hide();
-                            $("#uploadnew").click(function() {
-                        $("#ffup").slideDown();
+                        $("#uploadnew").click(function() {
+                            $("#ffup").slideDown();
                         });
 
-                            $("#myWizard").submit(function() {
+                        $("#myWizard").submit(function() {
                             var type = $("#AmType").val();
-                                if (type == "file") {
-                                    if ($("#uploadAmFile input").val() == "") {
+                            if (type == "file") {
+                                if ($("#uploadAmFile input").val() == "") {
                                     alert("please select your assignment file");
                                     $(".prev").trigger("click");
                                     $("#uploadAmFile input").focus();
+                                    return false;
+                                }
+                            }
+                        });
+                        $('#groupwork').click(function() {
+                            $('#inputpepole').removeAttr("disabled");
+                        });
+                        $('#individual').click(function() {
+                            $('#inputpepole').attr("disabled", "yes");
+                        });
+                        $('#inputpepole').change(function() {
+                            $('#groupwork').val($(this).val());
+                        });
+                        $("#AmType").change(function() {
+                            if ($(this).val() == "file") {
+                                $('#uploadAmFile').show();
+                                $('#CreateAmOnweb').hide();
+                            } else {
+                                $('#CreateAmOnweb').show();
+                                $('#uploadAmFile').hide();
+                            }
+                        });
+                        $("#description").change(function() {
+                            $("#AmDescription").text($(this).val());
+                        });
+                        $(document).on("change", "#total_pair", function() {
+                            var seq_of_choice = $(this).parent().parent().parent().find("[name='seqno']").val();
+                            var matchWord_box = '<div class="row"><div class="col-md-4"><b>Question Text</b></div><div class="col-md-4"><b>Answer</b></div><div class="col-md-2"><b>Score</b></div></div>';
+                            for (var i = 0; i < $(this).val(); i++) {
+                                matchWord_box += '<div class="row"><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_text"></div><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_ans"></div><div class="col-md-2"><input type="number" min="0" step="any" class="form-control" name="' + seq_of_choice + 'm_score"></div></div>';
+                            }
+                            $(this).parent().parent().parent(".matchWord").find(".matchWord_q_list").html(matchWord_box);
+                        });
+                    });
+                    function compareView() {
+                        $('#compareBox').show();
+                        $("html, body").animate({scrollTop: $('body').height()}, "slow");
+                    }
+
+                    function removeC(t) {
+                        $(t).parent().remove();
+                    }
+
+                    function GetSelectedText(t) {
+                        var selText = "";
+                        if (window.getSelection) {  // all browsers, except IE before version 9
+                            if (document.activeElement &&
+                                    (document.activeElement.tagName.toLowerCase() == "textarea"))
+                            {
+                                var text = document.activeElement.value;
+                                selText = text.substring(document.activeElement.selectionStart,
+                                        document.activeElement.selectionEnd);
+                            }
+                            else {
+                                var selRange = window.getSelection();
+                                selText = selRange.toString();
+                            }
+                        }
+                        else {
+                            if (document.selection.createRange) {       // Internet Explorer
+                                var range = document.selection.createRange();
+                                selText = range.text;
+                            }
+                        }
+                        if (selText !== "") {
+                            var startIndex = document.activeElement.selectionStart;
+                            var endIndex = document.activeElement.selectionEnd;
+                            if (checkConfilctIndex(t, startIndex, endIndex)) {
+                                appendAnswerBox(t, selText, startIndex, endIndex);
+                            } else {
+                                alert("Your answer are confilct");
+                            }
+                            //alert(selText + " " + document.activeElement.selectionStart + "/ " + document.activeElement.selectionEnd);
+                        }
+                    }
+
+                    function checkConfilctIndex(t, newStartIndex, newEndIndex) {
+                        var startIndex = $(t).parent().parent().parent(".fillBlank").find(".ansList input[name='startIndex']").map(function() {
+                            return $(this).val();
+                        }).get();
+                        var endIndex = $(t).parent().parent().parent(".fillBlank").find(".ansList input[name='endIndex']").map(function() {
+                            return $(this).val();
+                        }).get();
+                        for (i = 0; i < startIndex.length; i++) {
+                            if ((newStartIndex > startIndex[i] && newStartIndex < endIndex[i]) || (newEndIndex > startIndex[i] && newEndIndex <= endIndex[i]) || (newStartIndex <= startIndex[i] && newEndIndex >= endIndex[i])) {
                                 return false;
                             }
                         }
-                        });
-                            $('#groupwork').click(function() {
-                        $('#inputpepole').removeAttr("disabled");
-                        });
-                            $('#individual').click(function() {
-                        $('#inputpepole').attr("disabled", "yes");
-                        });
-                            $('#inputpepole').change(function() {
-                        $('#groupwork').val($(this).val());
-                        });
-                            $("#AmType").change(function() {
-                                if ($(this).val() == "file") {
-                                $('#uploadAmFile').show();
-                            $('#CreateAmOnweb').hide();
-                                } else {
-                                $('#CreateAmOnweb').show();
-                            $('#uploadAmFile').hide();
-                        }
-                        });
-                            $("#description").change(function() {
-                        $("#AmDescription").text($(this).val());
-                        });
-                            $(document).on("change", "#total_pair", function() {
-                            var seq_of_choice = $(this).parent().parent().parent().find("[name='seqno']").val();
-                            var matchWord_box = '<div class="row"><div class="col-md-4"><b>Question Text</b></div><div class="col-md-4"><b>Answer</b></div><div class="col-md-2"><b>Score</b></div></div>';
-                                for (var i = 0; i < $(this).val(); i++) {
-                            matchWord_box += '<div class="row"><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_text"></div><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_ans"></div><div class="col-md-2"><input type="number" min="0" step="any" class="form-control" name="' + seq_of_choice + 'm_score"></div></div>';
-                            }
-                        $(this).parent().parent().parent(".matchWord").find(".matchWord_q_list").html(matchWord_box);
-                    });
-                    });
-                        function compareView() {
-                        $('#compareBox').show();
-                    $("html, body").animate({scrollTop: $('body').height()}, "slow");
+                        return true;
                     }
 
-                        function removeC(t) {
-                    $(t).parent().remove();
-                    }
-
-                        function GetSelectedText(t) {
-                        var selText = "";
-                            if (window.getSelection) {  // all browsers, except IE before version 9
-                                    if (document.activeElement &&
-                            (document.activeElement.tagName.toLowerCase() == "textarea"))
-                                {
-                                var text = document.activeElement.value;
-                                        selText = text.substring(document.activeElement.selectionStart,
-                            document.activeElement.selectionEnd);
-                            }
-                                else {
-                                var selRange = window.getSelection();
-                            selText = selRange.toString();
-                        }
-                        }
-                            else {
-                                if (document.selection.createRange) {       // Internet Explorer
-                                var range = document.selection.createRange();
-                            selText = range.text;
-                        }
-                        }
-                            if (selText !== "") {
-                            var startIndex = document.activeElement.selectionStart;
-                            var endIndex = document.activeElement.selectionEnd;
-                                if (checkConfilctIndex(t, startIndex, endIndex)) {
-                            appendAnswerBox(t, selText, startIndex, endIndex);
-                                } else {
-                            alert("Your answer are confilct");
-                            }
-                        //alert(selText + " " + document.activeElement.selectionStart + "/ " + document.activeElement.selectionEnd);
-                    }
-                    }
-
-                        function checkConfilctIndex(t, newStartIndex, newEndIndex) {
-                            var startIndex = $(t).parent().parent().parent(".fillBlank").find(".ansList input[name='startIndex']").map(function() {
-                        return $(this).val();
-                        }).get();
-                            var endIndex = $(t).parent().parent().parent(".fillBlank").find(".ansList input[name='endIndex']").map(function() {
-                        return $(this).val();
-                        }).get();
-                            for (i = 0; i < startIndex.length; i++) {
-                                if ((newStartIndex > startIndex[i] && newStartIndex < endIndex[i]) || (newEndIndex > startIndex[i] && newEndIndex <= endIndex[i]) || (newStartIndex <= startIndex[i] && newEndIndex >= endIndex[i])) {
-                            return false;
-                        }
-                        }
-                    return true;
-                    }
-
-                        function appendAnswerBox(t, ans, startIndex, endIndex) {
+                    function appendAnswerBox(t, ans, startIndex, endIndex) {
                         var seq_of_choice = $(t).parent().parent().parent().find("[name='seqno']").val();
                         var ansbox = '<div class="row a_group"><div class="col-md-4"><input type="text" class="form-control" value="' + ans + '" readonly="yes" name="' + seq_of_choice + 'qanswer"></div><div class="col-md-3"><input type="number" class="form-control" placeholder="score" name="' + seq_of_choice + 'score" required="yes"></div><input type="hidden" value="' + startIndex + '" name="' + seq_of_choice + 'startIndex"><input type="hidden" value="' + endIndex + '" name="' + seq_of_choice + 'endIndex"><a onclick="remove_ans_fillInBlank(this)"><span class="glyphicon glyphicon-trash"></span></a><div>';
-                    $(t).parent().parent().parent(".fillBlank").find(".ansList").append(ansbox);
+                        $(t).parent().parent().parent(".fillBlank").find(".ansList").append(ansbox);
                     }
 
-                        function remove_ans_fillInBlank(t) {
-                    $(t).parent(".a_group").remove();
+                    function remove_ans_fillInBlank(t) {
+                        $(t).parent(".a_group").remove();
                     }
 
-                        function addAnswer(t) {
+                    function addAnswer(t) {
                         $(t).parent().parent().parent(".fillBlank").find(".ansList").append('<span class="text-danger">Hilight text that is your answer for fill in</span>');
                         var textArea = $(t).siblings("textarea");
-                            if (textArea.attr("readonly") == "readonly") {
+                        if (textArea.attr("readonly") == "readonly") {
                             textArea.removeAttr("readonly");
                             textArea.removeAttr("onmouseup");
-                        $(t).parent().parent().parent(".fillBlank").find(".ansList div,.ansList span").remove();
-                            } else {
-                        textArea.attr("onmouseup", "GetSelectedText(this)").attr("readonly", "readonly");
-                    }
+                            $(t).parent().parent().parent(".fillBlank").find(".ansList div,.ansList span").remove();
+                        } else {
+                            textArea.attr("onmouseup", "GetSelectedText(this)").attr("readonly", "readonly");
+                        }
                     }
 
                     var amCurrentType = 'multi';
                     var button_text = '';
-                        function setType(type) {
+                    function setType(type) {
                         amCurrentType = type;
-                            if (amCurrentType == 'multi') {
-                        button_text = '<img src="img/icon/multiple.gif"> Multiple Choice';
-                            } else if (amCurrentType == 'tf') {
-                        button_text = '<img src="img/icon/trueFalse.gif"> True/False';
-                            } else if (amCurrentType == 'match') {
-                        button_text = ' <img src="img/icon/matching.png"> Match word';
-                            } else if (amCurrentType == 'fill') {
-                        button_text = '<img src="img/icon/fill.gif"> Fill in Blank';
-                            } else if (amCurrentType == 'ep') {
-                        button_text = '<img src="img/icon/explain.gif"> Explain'
+                        if (amCurrentType == 'multi') {
+                            button_text = '<img src="img/icon/multiple.gif"> Multiple Choice';
+                        } else if (amCurrentType == 'tf') {
+                            button_text = '<img src="img/icon/trueFalse.gif"> True/False';
+                        } else if (amCurrentType == 'match') {
+                            button_text = ' <img src="img/icon/matching.png"> Match word';
+                        } else if (amCurrentType == 'fill') {
+                            button_text = '<img src="img/icon/fill.gif"> Fill in Blank';
+                        } else if (amCurrentType == 'ep') {
+                            button_text = '<img src="img/icon/explain.gif"> Explain'
                         }
-                    $("#addq").html(button_text);
+                        $("#addq").html(button_text);
                     }
 
                     var total_q = '${total_q+1}';
                     var seqno = '${total_seq+1}';
-                        function addQuestion(t) {
-                                var question = '<div class="multipleChoice">'
+                    function addQuestion(t) {
+                        var question = '<div class="multipleChoice">'
                                 + '          <hr>'
                                 + '          <input type="hidden" name="seqno" value="' + seqno + '"/>'
                                 + '          <div class="q_no">'
@@ -699,9 +699,9 @@
                                 + '              </div>'
                                 + '          </div>'
                                 + '          <input type="hidden" value="multiple_choice" name="' + seqno + 'q_type">'
-                        + '      </div>';
-                            if (amCurrentType == 'tf') {
-                                    question = '<div class="tfQuestion">'
+                                + '      </div>';
+                        if (amCurrentType == 'tf') {
+                            question = '<div class="tfQuestion">'
                                     + '    <hr>'
                                     + '          <input type="hidden" name="seqno" value="' + seqno + '"/>'
                                     + '    <div class="q_no">'
@@ -730,9 +730,9 @@
                                     + '    </div>'
                                     + '    <input type="hidden" value="tf" name="' + seqno + 'qcategory">'
                                     + '    <input type="hidden" value="tfQuestion" name="' + seqno + 'q_type">'
-                        + '</div>';
-                            } else if (amCurrentType == 'match') {
-                                    question = '<div class="matchWord">'
+                                    + '</div>';
+                        } else if (amCurrentType == 'match') {
+                            question = '<div class="matchWord">'
                                     + '     <hr>'
                                     + '          <input type="hidden" name="seqno" value="' + seqno + '"/>'
                                     + '     <div class="q_no">'
@@ -759,9 +759,9 @@
                                     + '         </div>'
                                     + '     </div>'
                                     + '     <input type="hidden" value="matchWord"  name="' + seqno + 'q_type">'
-                        + ' </div>';
-                            } else if (amCurrentType == 'fill') {
-                                    question = '<div class="fillBlank">'
+                                    + ' </div>';
+                        } else if (amCurrentType == 'fill') {
+                            question = '<div class="fillBlank">'
                                     + '    <hr>'
                                     + '          <input type="hidden" name="seqno" value="' + seqno + '"/>'
                                     + '    <div class="q_no">'
@@ -782,9 +782,9 @@
                                     + '        </div>'
                                     + '    </div>'
                                     + '    <input type="hidden" value="fillBlank" name="' + seqno + 'q_type">'
-                        + '</div>';
-                            } else if (amCurrentType == 'ep') {
-                                    question = '<div class="explain">'
+                                    + '</div>';
+                        } else if (amCurrentType == 'ep') {
+                            question = '<div class="explain">'
                                     + '    <hr>'
                                     + '          <input type="hidden" name="seqno" value="' + seqno + '"/>'
                                     + '    <div class="q_no">'
@@ -811,82 +811,82 @@
                                     + '        </div>'
                                     + '    </div>'
                                     + '    <input type="hidden" value="explain" name="' + seqno + 'q_type">'
-                        + '</div>';
+                                    + '</div>';
                         }
                         total_q++;
                         seqno++;
-                    $(".amQuestion").append(question);
+                        $(".amQuestion").append(question);
                     }
 
-                        function appendChoice(t) {
+                    function appendChoice(t) {
                         var type = $(t).parent().parent().parent().find('#multiple_type').val();
                         var seq_of_choice = $(t).parent().parent().parent().find("[name='seqno']").val();
                         var inputC = '';
-                            if (type == "one") {
-                        inputC = '<div><br><input type="radio" name="' + seq_of_choice + 'c" onClick="mark(this)" value=""> <input type="text" name="' + seq_of_choice + 'ctext" class="form-control" onkeyup="addToC(this)" required="yes"> <a onclick="removeC(this)"><span class="glyphicon glyphicon-remove"></span></a></div>';
-                            } else {
-                        inputC = '<div><br><input type="checkbox" name="' + seq_of_choice + 'c" onClick="mark(this)" value=""> <input type="text" name="' + seq_of_choice + 'ctext" class="form-control" onkeyup="addToC(this)" required="yes"> <a onclick="removeC(this)"><span class="glyphicon glyphicon-remove"></span></a></div>';
+                        if (type == "one") {
+                            inputC = '<div><br><input type="radio" name="' + seq_of_choice + 'c" onClick="mark(this)" value=""> <input type="text" name="' + seq_of_choice + 'ctext" class="form-control" onkeyup="addToC(this)" required="yes"> <a onclick="removeC(this)"><span class="glyphicon glyphicon-remove"></span></a></div>';
+                        } else {
+                            inputC = '<div><br><input type="checkbox" name="' + seq_of_choice + 'c" onClick="mark(this)" value=""> <input type="text" name="' + seq_of_choice + 'ctext" class="form-control" onkeyup="addToC(this)" required="yes"> <a onclick="removeC(this)"><span class="glyphicon glyphicon-remove"></span></a></div>';
                         }
-                    $(t).parent().find('.choice-group').append(inputC);
+                        $(t).parent().find('.choice-group').append(inputC);
                     }
 
-                        $(document).on("change", "#multiple_type", function() {
+                    $(document).on("change", "#multiple_type", function() {
                         var seq_of_choice = $(this).parent().parent().parent().find("[name='seqno']").val();
                         var html = '';
-                            if ($(this).val() == "one") {
-                        html = '<div class="choice-group form-inline"><div><input type="radio" name="' + seq_of_choice + 'c" onClick="mark(this)" value=""> <input type="text" class="form-control" name="' + seq_of_choice + 'ctext" onkeyup="addToC(this)" required="yes"></div></div><br><a onclick="appendChoice(this)">Add other</a>';
-                            } else {
-                        html = '<div class="choice-group form-inline"><div><input type="checkbox" name="' + seq_of_choice + 'c" onClick="mark(this)" value=""> <input type="text" class="form-control" name="' + seq_of_choice + 'ctext" onkeyup="addToC(this)" required="yes"></div></div><br><a onclick="appendChoice(this)">Add other</a>';
+                        if ($(this).val() == "one") {
+                            html = '<div class="choice-group form-inline"><div><input type="radio" name="' + seq_of_choice + 'c" onClick="mark(this)" value=""> <input type="text" class="form-control" name="' + seq_of_choice + 'ctext" onkeyup="addToC(this)" required="yes"></div></div><br><a onclick="appendChoice(this)">Add other</a>';
+                        } else {
+                            html = '<div class="choice-group form-inline"><div><input type="checkbox" name="' + seq_of_choice + 'c" onClick="mark(this)" value=""> <input type="text" class="form-control" name="' + seq_of_choice + 'ctext" onkeyup="addToC(this)" required="yes"></div></div><br><a onclick="appendChoice(this)">Add other</a>';
                         }
-                    $(this).parent().parent().parent(".multipleChoice").find(".c_list").html(html);
+                        $(this).parent().parent().parent(".multipleChoice").find(".c_list").html(html);
                     });
 
-                        function addTitle() {
+                    function addTitle() {
                         var titleBox = '<div class="row instruction"><hr><input type="hidden" name="seqno" value="' + seqno + '"/><label class="col-md-3 control-label">Instruction </label><div class="col-md-8"><input type="text" class="form-control" placeholder="Instruction" name="' + seqno + 'instruction" required="yes" ></div><a onclick="remove_title(this)"  style="vertical-align: -webkit-baseline-middle"><span class="glyphicon glyphicon-trash"></span></a><input type="hidden" value="instruction" name="' + seqno + 'q_type"></div>';
                         $(".amQuestion").append(titleBox);
-                    seqno++;
+                        seqno++;
                     }
 
-                        function addToC(t) {
-                    $(t).siblings("[name$='c']").val($(t).val());
+                    function addToC(t) {
+                        $(t).siblings("[name$='c']").val($(t).val());
                     }
 
-                        function mark(t) {
+                    function mark(t) {
                         var ans = $(t).siblings('[type="text"]').val();
-                    $(t).val(ans);
+                        $(t).val(ans);
                     }
 
                     var newTotal_q = 1;
-                        function remove_q(t) {
+                    function remove_q(t) {
                         total_q--;
                         seqno--;
                         var new_q_no = 1;
                         $(t).parent().parent().remove();
-                            $(".q_no").each(function() {
+                        $(".q_no").each(function() {
                             $(this).find(".label").text(new_q_no);
                             $(this).find("input").val(new_q_no);
-                        new_q_no++;
+                            new_q_no++;
                         });
-                            $(".amQuestion > div").each(function() {
+                        $(".amQuestion > div").each(function() {
                             $(this).find("[name='seqno']").val(newTotal_q);
-                                $(this).find("[name]").each(function() {
+                            $(this).find("[name]").each(function() {
                                 var namevl = $(this).attr("name").match(/\d+/);
                                 var newvl = "";
-                                    if ($.isNumeric(namevl)) {
+                                if ($.isNumeric(namevl)) {
                                     newvl = $(this).attr("name").replace(namevl, newTotal_q);
-                                $(this).attr("name", newvl);
-                            }
+                                    $(this).attr("name", newvl);
+                                }
                             });
-                        newTotal_q++;
+                            newTotal_q++;
                         });
                         //reset value
-                    newTotal_q = 1
+                        newTotal_q = 1
                     }
 
-                        function remove_title(t) {
+                    function remove_title(t) {
                         seqno--;
-                    $(t).parent().remove();
-}
+                        $(t).parent().remove();
+                    }
                 </script>
                 </body>
                 </html>

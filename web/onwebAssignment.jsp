@@ -118,7 +118,8 @@
                                     </c:when>
                                     <c:when test="${sa.checked_time eq null}">
                                         <div class="assignmentBox col-md-12">
-                                            <h4><u>Let's do it !</u></h4>
+                                            <h4 class="text-muted">Let's do it !</h4>
+                                            <h4><u>${curAm.title_assignment_onweb}</u></h4>
                                                     <c:set value="1" var="seqno" />
                                                     <c:set value="0" var="used_id" />
                                                     <c:set value="0" var="no_seq" />
