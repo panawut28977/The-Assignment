@@ -14,7 +14,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="META-INF/page/include_css.jsp" %>
         <%@include file="META-INF/page/include_js.jsp" %>
-        <script type="text/javascript" src="js/bootstrap-filestyle.min.js"/></script>
         <title>Upload Assignment</title>
         <style>
             #pvVs{
@@ -211,7 +210,7 @@
                 });
             });
             $('img').tooltip("hide");
-            $(":file").filestyle();
+            
         });
     </script>
 </html>

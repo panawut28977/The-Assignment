@@ -40,8 +40,13 @@
                 cursor: pointer;
             }
 
-            .multipleChoice,.explain,.tfQuestion,.matchWord,.instruction,.fillBlank{
+            .moveselect{
                 cursor: move;
+            }
+
+            .pvtable tr td:first-child{
+                font-weight: bold;
+                width: 200px;
             }
         </style>
 
@@ -125,7 +130,7 @@
                                 <div class="form-group">
                                     <label for="file" class="col-md-3 control-label">Select Assignment</label>
                                     <div class="col-md-9">
-                                        <input type="file" name="file" class="form-control">
+                                        <input type="file" name="file" id="amfile" class="form-control">
                                         <span class="text-danger">.doc .pdf .xls available</span>
                                     </div>
                                 </div>
@@ -157,8 +162,39 @@
                         </section>
                         <section class="step" data-step-title="Complete and preview">
                             <div class="col-md-12">
-                                <div class="well col-md-12" id="preview">
-                                    <h4 id="pv_title"><b><u></u></b></h4>
+                                <div class="well col-md-12">
+                                    <table class="table pvtable">   
+                                        <tbody>
+                                            <tr>
+                                                <td>Name:</td>
+                                                <td id="pvamName"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Description:</td>
+                                                <td id="pvamDesc"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Work with:</td>
+                                                <td id="pvamWorkwith"></td>
+                                            </tr>   
+                                            <tr>
+                                                <td>Due Date:</td>
+                                                <td id="pvamDue"></td>
+                                            </tr>   
+                                            <tr>
+                                                <td>Late Date:</td>
+                                                <td id="pvamLate"></td>
+                                            </tr>   
+                                            <tr>
+                                                <td>Assignment Type:</td>
+                                                <td id="pvamType"></td>
+                                            </tr>   
+                                        </tbody>
+                                    </table>
+                                    <hr/>
+                                    <div id="preview">
+
+                                    </div>
                                 </div>
                             </div>
                         </section>
@@ -169,6 +205,7 @@
         <script src="js/bootstrap-datetimepicker.min.js"></script>
         <script src="module/easyWizard/lib/jquery.easyWizard.js"></script>
         <!--<script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>-->
+
         <script src="js/jquery-ui.js"></script>
         <script>
                                         $(document).ready(function() {
@@ -178,14 +215,39 @@
                                                 after: function(wizardObj, prevStepObj, currentStepObj) {
                                                     if (currentStepObj.selector == '.step[data-step="3"]') {
 //                                                       alert("step3");
-                                                        $("#preview").html("");
-                                                        createpreview();
+                                                        var name = $("#name").val();
+                                                        $("#pvamName").text(name);
+
+                                                        var description = $("#description").val();
+                                                        $("#pvamDesc").text(description);
+
+                                                        var amtype = $("#AmType").val();
+                                                        $("#pvamWorkwith").text(amtype);
+
+                                                        var due = $("#dtp_input1").val();
+                                                        $("#pvamDue").text(due);
+
+                                                        var late = $("#dtp_input2").val();
+                                                        $("#pvamLate").text(late);
+
+                                                        var amtype = $("#AmType").val();
+                                                        $("#pvamType").text(amtype);
+
+                                                        if (amtype == "web") {
+                                                            $("#preview").html("");
+                                                            createpreview();
+                                                        } else {
+                                                            var fullpath = $('#amfile').val();
+                                                            var name = getFileName(fullpath);
+                                                            $("#preview").html("<h3><span class='glyphicon glyphicon-file'></span><b>File name : </b>" + name + "</h3>");
+                                                        }
                                                     }
                                                 }
                                             });
 //                                            tinymce.init({selector: '.explain .explain_q_text'});
                                             $("#sortable").sortable({
                                                 revert: true,
+                                                handle: ".moveselect",
                                                 update: function() {
                                                     var new_seq = 1;
                                                     var new_Qno = 1;
@@ -288,9 +350,9 @@
                                             $("#description").change(function() {
                                                 $("#AmDescription").text($(this).val());
                                             });
-                                            $("#title_assignment_onweb").change(function() {
-                                                $("#pv_title b u").text($(this).val());
-                                            });
+//                                            $("#title_assignment_onweb").change(function() {
+//                                                $("#pv_title b u").text($(this).val());
+//                                            });
                                             $(document).on("change", "#total_pair", function() {
                                                 var seq_of_choice = $(this).parent().parent().parent().find("[name='seqno']").val();
                                                 var matchWord_box = '<span class="label label-info"><i class="glyphicon glyphicon-info-sign"></i> If you want to add dummy answer, add text in answer box only.</span><br/><br/>';
@@ -406,6 +468,7 @@
                                                     + '          <hr>'
                                                     + '          <input type="hidden" name="seqno" value="' + seqno + '"/>'
                                                     + '          <div class="q_no">'
+                                                    + '             <span class="moveselect pull-left text-muted"><span class="glyphicon glyphicon-align-justify"></span></span>'
                                                     + '              <span class="label label-default">' + total_q + '</span> '
                                                     + '              <input type="hidden" name="' + seqno + 'q_no" value="' + total_q + '"/>'
                                                     + '              <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>'
@@ -448,6 +511,7 @@
                                                         + '    <hr>'
                                                         + '          <input type="hidden" name="seqno" value="' + seqno + '"/>'
                                                         + '    <div class="q_no">'
+                                                        + '             <span class="moveselect pull-left text-muted"><span class="glyphicon glyphicon-align-justify"></span></span>'
                                                         + '        <span class="label label-default">' + total_q + '</span> '
                                                         + '          <input type="hidden" name="' + seqno + 'q_no" value="' + total_q + '"/>'
                                                         + '        <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>'
@@ -479,6 +543,7 @@
                                                         + '     <hr>'
                                                         + '          <input type="hidden" name="seqno" value="' + seqno + '"/>'
                                                         + '     <div class="q_no">'
+                                                        + '             <span class="moveselect pull-left text-muted"><span class="glyphicon glyphicon-align-justify"></span></span>'
                                                         + '         <span class="label label-default">' + total_q + '</span> '
                                                         + '          <input type="hidden" name="' + seqno + 'q_no" value="' + total_q + '"/>'
                                                         + '         <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>'
@@ -508,6 +573,7 @@
                                                         + '    <hr>'
                                                         + '          <input type="hidden" name="seqno" value="' + seqno + '"/>'
                                                         + '    <div class="q_no">'
+                                                        + '             <span class="moveselect pull-left text-muted"><span class="glyphicon glyphicon-align-justify"></span></span>'
                                                         + '        <span class="label label-default">' + total_q + '</span> '
                                                         + '          <input type="hidden" name="' + seqno + 'q_no" value="' + total_q + '"/>'
                                                         + '        <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>'
@@ -531,6 +597,7 @@
                                                         + '    <hr>'
                                                         + '          <input type="hidden" name="seqno" value="' + seqno + '"/>'
                                                         + '    <div class="q_no">'
+                                                        + '             <span class="moveselect pull-left text-muted"><span class="glyphicon glyphicon-align-justify"></span></span>'
                                                         + '        <span class="label label-default">' + total_q + '</span> '
                                                         + '          <input type="hidden" name="' + seqno + 'q_no" value="' + total_q + '"/>'
                                                         + '        <a onclick="remove_q(this)" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>'
@@ -584,7 +651,7 @@
                                             $(this).parent().parent().parent(".multipleChoice").find(".c_list").html(html);
                                         });
                                         function addTitle() {
-                                            var titleBox = '<div class="row instruction"><hr><input type="hidden" name="seqno" value="' + seqno + '"/><label class="col-md-3 control-label">Instruction </label><div class="col-md-8"><input type="text" class="form-control" placeholder="Instruction" name="' + seqno + 'instruction" required="yes" ></div><a onclick="remove_title(this)"  style="vertical-align: -webkit-baseline-middle"><span class="glyphicon glyphicon-trash"></span></a><input type="hidden" value="instruction" name="' + seqno + 'q_type"></div>';
+                                            var titleBox = '<div class="row instruction"><hr><span class="moveselect pull-left text-muted"><span class="glyphicon glyphicon-align-justify"></span></span><input type="hidden" name="seqno" value="' + seqno + '"/><label class="col-md-3 control-label">Instruction </label><div class="col-md-8"><input type="text" class="form-control" placeholder="Instruction" name="' + seqno + 'instruction" required="yes" ></div><a onclick="remove_title(this)"  style="vertical-align: -webkit-baseline-middle"><span class="glyphicon glyphicon-trash"></span></a><input type="hidden" value="instruction" name="' + seqno + 'q_type"></div>';
                                             $(".amQuestion").append(titleBox);
                                             seqno++;
                                         }
@@ -630,7 +697,8 @@
                                         }
 
                                         function createpreview() {
-                                            var html = "";
+                                            var html = " <h4 id=\"pv_title\"><b><u>" + $("#title_assignment_onweb").val() + "</u></b></h4>";
+                                            $("#preview").append(html);
                                             $('.amQuestion').children().each(function() {
                                                 var q = $(this); // "this" is the current element in the loop
 //                                                console.log(q.find("[name$='q_type']").val());
