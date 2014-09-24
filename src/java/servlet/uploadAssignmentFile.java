@@ -6,6 +6,10 @@
 package servlet;
 
 import Model.Account;
+import Model.AccountCourse;
+import Model.Assignment;
+import Model.Course;
+import Model.Notification;
 import Model.StAmFileList;
 import Model.StAssignmentFile;
 import Model.TestDriver;
@@ -18,6 +22,7 @@ import com.oreilly.servlet.MultipartRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -58,8 +63,10 @@ public class uploadAssignmentFile extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         request.setCharacterEncoding("UTF-8");
         HttpSession ss = request.getSession();
-        Long cId = (Long) ss.getAttribute("cId");
+        Integer cId = Integer.parseInt(((Long) ss.getAttribute("cId")) + "");
+        Course c = Course.getCourseByID(cId);
         Account ac = (Account) ss.getAttribute("ac");
+        Assignment a = (Assignment) ss.getAttribute("curAm");
         StAssignmentFile saf = (StAssignmentFile) ss.getAttribute("sa");
         File f = new File(getServletContext().getRealPath("/") + "\\file\\student_assignment_file");
         MyFileRenamePolicy mf = new MyFileRenamePolicy();
@@ -113,10 +120,21 @@ public class uploadAssignmentFile extends HttpServlet {
         saf.setLasted_send_date(d);
         StAssignmentFile.updateLastedSend(saf);
         ss.setAttribute("sa", saf);
- 
+
         //setting index
-        lucenceFunction.settingIndexer(getServletContext().getRealPath("/") + "\\file\\student_assignment_file\\", safl.getPath_file(), cId, saf.getAm_id(), saf.getSt_am_id(),safv_id); 
+        lucenceFunction.settingIndexer(getServletContext().getRealPath("/") + "\\file\\student_assignment_file\\", safl.getPath_file(), Long.parseLong(cId+""), saf.getAm_id(), saf.getSt_am_id(), safv_id);
         //end setting
+
+        Notification n = new Notification();
+        n.setAcc_id(ac.getAcc_id());
+        n.setCourse_id(cId);
+        n.setType("assignment");
+        String content = "<p><b>" + ac.getFirstname() + " " + ac.getLastname() + "</b>  has sent or updated <b>" + a.getName() + "</b> assignment (" + c.getName() + ").</p>\n";
+        n.setText(content);
+        n.setLink("routeCheckStAm?st_am_id=" + saf.getSt_am_id() + "&&cId=" + cId+"&&am_id="+a.getAm_id());
+        List<Integer> listac = AccountCourse.getTeacherIdCourse(cId, ac.getAcc_id());
+        Notification.announce(n, listac);
+
         request.setAttribute("msg", 3);
         getServletContext().getRequestDispatcher("/informpage.jsp?am_id=" + saf.getAm_id()).forward(request, response);
 

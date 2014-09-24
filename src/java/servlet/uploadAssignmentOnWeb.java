@@ -6,9 +6,12 @@
 package servlet;
 
 import Model.Account;
+import Model.AccountCourse;
 import Model.AnswerQuestion;
 import Model.Assignment;
+import Model.Course;
 import Model.Group_member;
+import Model.Notification;
 import Model.StAmFileList;
 import Model.StAssignmentFile;
 import Model.StAssignmentOnWeb;
@@ -44,6 +47,8 @@ public class uploadAssignmentOnWeb extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         List<AnswerQuestion> ansList = new ArrayList<>();
         HttpSession ss = request.getSession();
+        int cId = Integer.parseInt(((Long) ss.getAttribute("cId"))+"");
+        Course c = Course.getCourseByID(cId);
         Account ac = (Account) ss.getAttribute("ac");
         Assignment a = (Assignment) ss.getAttribute("curAm");
         Group_member g = null;
@@ -51,10 +56,10 @@ public class uploadAssignmentOnWeb extends HttpServlet {
             g = (Group_member) ss.getAttribute("g");
         }
         StAssignmentOnWeb reqsa = (StAssignmentOnWeb) ss.getAttribute("sa");
-        
+
         //ไปดึง student assignment มาใหม่จะได้ชัวว่า lasted sent date มันไม่มี เพราะมีโอกาสที่จะส่งงานตอนที่ lasted ยังไม่มี พร้อมกัน
         StAssignmentOnWeb sa = StAssignmentOnWeb.getStAmInfo(reqsa.getSt_am_id());
-        
+
         String[] seqno = request.getParameterValues("seqno");
         String q_type = null;
         String instruction = null;
@@ -121,6 +126,17 @@ public class uploadAssignmentOnWeb extends HttpServlet {
         Date d = new Date();
         sa.setLasted_send_date(d);
         StAssignmentOnWeb.updateLastedSend(sa);
+
+        Notification n = new Notification();
+        n.setAcc_id(ac.getAcc_id());
+        n.setCourse_id(cId);
+        n.setType("assignment");
+        String content = "<p><b>" + ac.getFirstname() + " " + ac.getLastname() + "</b>  has sent or updated <b>" + a.getName() + "</b> assignment ("+c.getName()+").</p>\n";
+        n.setText(content);
+        n.setLink("routeCheckStAm?st_am_id=" + sa.getSt_am_id() + "&&cId=" + cId+"&&am_id="+a.getAm_id());
+        List<Integer> listac = AccountCourse.getTeacherIdCourse(cId, ac.getAcc_id());
+        Notification.announce(n, listac);
+
         request.setAttribute("msg", 4);
         getServletContext().getRequestDispatcher("/informpage.jsp?am_id=" + a.getAm_id()).forward(request, response);
     }

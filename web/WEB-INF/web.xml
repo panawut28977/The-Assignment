@@ -316,6 +316,10 @@
         <servlet-name>replaceStringByIndex</servlet-name>
         <servlet-class>api.replaceStringByIndex</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>routeCheckStAm</servlet-name>
+        <servlet-class>servlet.routeCheckStAm</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -555,6 +559,10 @@
     <servlet-mapping>
         <servlet-name>replaceStringByIndex</servlet-name>
         <url-pattern>/replaceStringByIndex</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>routeCheckStAm</servlet-name>
+        <url-pattern>/routeCheckStAm</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
