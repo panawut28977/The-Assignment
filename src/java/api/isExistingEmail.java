@@ -37,7 +37,7 @@ public class isExistingEmail extends HttpServlet {
         boolean isEmail = Account.validate(email);
         System.out.println("exist:"+exist);
         System.out.println("isEmail:"+isEmail);
-        out.write((exist && isEmail) +"");
+        out.write((!exist && isEmail) +"");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
