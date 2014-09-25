@@ -17,18 +17,18 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="META-INF/page/include_css.jsp" %>
         <%@include file="META-INF/page/include_js.jsp" %>
-<!--        <script type="text/javascript" src="https://cdn.goinstant.net/v1/platform.min.js"></script>
-        <script type="text/javascript" src="https://cdn.goinstant.net/widgets/user-list/latest/user-list.min.js"></script>
-        <script type="text/javascript" src="https://cdn.goinstant.net/widgets/form/latest/form.min.js"></script>
-        <script type="text/javascript" src="https://cdn.goinstant.net/widgets/click-indicator/latest/click-indicator.min.js"></script>
-        <script type="text/javascript" src="https://cdn.goinstant.net/widgets/notifications/latest/notifications.min.js"></script>
-        <script type="text/javascript" src="https://cdn.goinstant.net/widgets/chat/latest/chat.min.js"></script>
-        CSS is optional 
-        <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/user-list/latest/user-list.css" />
-        <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/form/latest/form.css" />
-        <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/click-indicator/latest/click-indicator.css" />
-        <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/notifications/latest/notifications.css" />
-        <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/chat/latest/chat.css" />-->
+        <!--        <script type="text/javascript" src="https://cdn.goinstant.net/v1/platform.min.js"></script>
+                <script type="text/javascript" src="https://cdn.goinstant.net/widgets/user-list/latest/user-list.min.js"></script>
+                <script type="text/javascript" src="https://cdn.goinstant.net/widgets/form/latest/form.min.js"></script>
+                <script type="text/javascript" src="https://cdn.goinstant.net/widgets/click-indicator/latest/click-indicator.min.js"></script>
+                <script type="text/javascript" src="https://cdn.goinstant.net/widgets/notifications/latest/notifications.min.js"></script>
+                <script type="text/javascript" src="https://cdn.goinstant.net/widgets/chat/latest/chat.min.js"></script>
+                CSS is optional 
+                <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/user-list/latest/user-list.css" />
+                <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/form/latest/form.css" />
+                <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/click-indicator/latest/click-indicator.css" />
+                <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/notifications/latest/notifications.css" />
+                <link rel="stylesheet" href="https://cdn.goinstant.net/widgets/chat/latest/chat.css" />-->
         <title>On web Assignment ...</title>
         <style>
             #pvVs{
@@ -43,6 +43,10 @@
 
 
             #newComment{
+                display: none;
+            }
+            
+            #togetherjs-share-button{
                 display: none;
             }
         </style>
@@ -346,74 +350,78 @@
                     </div>
                 </div>
             </div>
-<!--            <div class="gi-override gi-userlist">
-                <div class="gi-options"></div>
-                <ul class="gi-inner">
-                    <li class="gi-user" data-goinstant-id="1234">
-                        <div class="gi-color">
-                            <div class="gi-avatar">
-                                <img class="gi-avatar-img">
+            <!--            <div class="gi-override gi-userlist">
+                            <div class="gi-options"></div>
+                            <ul class="gi-inner">
+                                <li class="gi-user" data-goinstant-id="1234">
+                                    <div class="gi-color">
+                                        <div class="gi-avatar">
+                                            <img class="gi-avatar-img">
+                                        </div>
+                                    </div>
+                                    <div class="gi-name">
+                                        <span>Guest</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="gi-collapse"></div>
+                        </div>
+                        <div class="gi-override gi-form">
+                            <div class="gi-indicator">
+                                <div class="gi-user">
+                                    The displayname of the user interacting with this input 
+                                </div>
+                                <div class="gi-bar">
+                                </div>
                             </div>
                         </div>
-                        <div class="gi-name">
-                            <span>Guest</span>
-                        </div>
-                    </li>
-                </ul>
-                <div class="gi-collapse"></div>
-            </div>
-            <div class="gi-override gi-form">
-                <div class="gi-indicator">
-                    <div class="gi-user">
-                        The displayname of the user interacting with this input 
-                    </div>
-                    <div class="gi-bar">
-                    </div>
-                </div>
-            </div>
-
-            <div class="gi-chat gi-override">
-                <div class="gi-collapse-wrapper">
-                    <div class="gi-collapse">
-                        <span class="gi-icon"></span>
-                    </div>
-                </div>
-                <div class="gi-chat-wrapper">
-                    <ul class="gi-message-list">
-                        <li class="gi-message">
-                            <div class="gi-color"></div>
-                            <div class="gi-avatar">
-                                <img class="gi-avatar-img" src="http://YOURDOMAIN.com/YOURAVATAR.png">
+            
+                        <div class="gi-chat gi-override">
+                            <div class="gi-collapse-wrapper">
+                                <div class="gi-collapse">
+                                    <span class="gi-icon"></span>
+                                </div>
                             </div>
-                            <div class="gi-name">Guest</div>
-                            <div class="gi-text">Hi</div>
-                            <span class="gi-time">Monday, 1:10 pm</span>
-                        </li>
-                    </ul>
-                    <div class="gi-message-form">
-                        <input class="gi-message-input" type="text">
-                        <button class="gi-message-btn">Send</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="gi-override gi-click-container">
-                <div class="gi-click">
-                    <div class="gi-cursor">
-                        Cursor image background 
-                    </div>
-                    <div class="gi-animation">
-                        Click animation image background
-                    </div>
-                    <div class="gi-name">
-                        User's display name 
-                    </div>
-                </div>-->
-            </div>
+                            <div class="gi-chat-wrapper">
+                                <ul class="gi-message-list">
+                                    <li class="gi-message">
+                                        <div class="gi-color"></div>
+                                        <div class="gi-avatar">
+                                            <img class="gi-avatar-img" src="http://YOURDOMAIN.com/YOURAVATAR.png">
+                                        </div>
+                                        <div class="gi-name">Guest</div>
+                                        <div class="gi-text">Hi</div>
+                                        <span class="gi-time">Monday, 1:10 pm</span>
+                                    </li>
+                                </ul>
+                                <div class="gi-message-form">
+                                    <input class="gi-message-input" type="text">
+                                    <button class="gi-message-btn">Send</button>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="gi-override gi-click-container">
+                            <div class="gi-click">
+                                <div class="gi-cursor">
+                                    Cursor image background 
+                                </div>
+                                <div class="gi-animation">
+                                    Click animation image background
+                                </div>
+                                <div class="gi-name">
+                                    User's display name 
+                                </div>
+                            </div>-->
+        </div>
+                    <%
+                        String abPath = getServletContext().getRealPath("/");
+                        pageContext.setAttribute("abPath", abPath);
+                    %>
     </body>
-
     <script>
         $(function() {
+            //together.js
             $("#pvVersionTable").hide();
             $("#pvVs").click(function() {
                 $("#pvVersionTable").slideToggle();
@@ -440,138 +448,155 @@
                 });
             });
 
-            var am_member = '${curAm.total_member}';
-            if (am_member > 1) {
-                // Connect URL
-                var url = 'https://goinstant.net/701ad7c04624/CollaborateAssignment';
-
-                var connection = new goinstant.Connection(url);
-                connection.connect(function(err) {
-                    if (err) {
-                        // there was an error connecting OR the token was invalid.
-                        return;
-                    }
-                    var roomname = 'ai' + '${sa.st_am_id}' + 'g' + '${sa.g_id}';
-                    var room = connection.room(roomname);
-
-                    // Create a new instance of the Notifications widget
-                    var notifications = new goinstant.widgets.Notifications();
-
-                    // Get all notifications
-                    notifications.subscribe(room, function(err) {
-                        if (err) {
-                            throw err;
-                        }
-                        // We're now receiving notifications
-                    });
-                    var fullname = '${ac.firstname}' + ' ' + '${ac.lastname}';
-                    room.join({displayName: fullname}, function(err, yourRoom, userData) {
-                        if (err) {
-                            console.log("Error joining room:", err);
-                            // Failed to join room; clean up or retry.
-                            return;
-                        }
-
-                        // Joined the room. Start getting and manipulating keys.
-
-                        // Create a new instance of the UserList widget
-                        var userList = new goinstant.widgets.UserList({
-                            room: yourRoom,
-                            collapsed: false,
-                            position: 'right'
-                        });
-
-                        // Initialize the UserList widget
-                        userList.initialize(function(err) {
-                            if (err) {
-                                throw err;
-                            }
-                        });
-
-                        // Create a new instance of the Chat widget
-                        var chat = new goinstant.widgets.Chat({
-                            room: yourRoom
-                        });
-
-                        // Initialize the Chat widget
-                        chat.initialize(function(err) {
-                            if (err) {
-                                throw err;
-                            }
-                            // Now it should render on the page
-                        });
-
-                        // Create a key to store the form data
-                        var stformkey = 'f' + roomname;
-                        var formKey = yourRoom.key(stformkey);
-
-                        // Create a new instance of the widget
-                        var form = new goinstant.widgets.Form({
-                            el: document.getElementById('questionList'),
-                            key: formKey,
-                            room: yourRoom
-                        });
-
-                        form.initialize(function(err) {
-                            if (err) {
-                                throw err;
-                            }
-                            // Your form should now be initialized!
-                        });
-
-                        // Create a new instance of the Click Indicator widget
-                        var clickIndicator = new goinstant.widgets.ClickIndicator({room: yourRoom});
-
-                        // Initialize the Click Indicator widget
-                        clickIndicator.initialize(function(err) {
-                            if (err) {
-                                throw err;
-                            }
-                            // Click Indicator widget ready to use
-                        });
-
-                        console.log("Your name is " + userData.displayName); // "Your name is Custom"
-                    });
-
-                    // The listener will fire everytime a user leaves the Room
-                    room.on('leave', function(userData) {
-                        // Set options for the notification we're about to publish
-                        var options = {
-                            room: room,
-                            type: 'warning',
-                            message: 'user' + userData.displayName + ' left the lobby!',
-                            displayToSelf: true
-                        };
-
-                        // Send a single notification
-                        notifications.publish(options, function(err) {
-                            if (err) {
-                                throw err;
-                            }
-                            // Notification has been sent
-                        });
-                    });
-
-                    // The listener will fire every time another user joins the room
-                    room.on('join', function(userData) {
-                        // Set options for the notification we're about to publish
-                        var options = {
-                            room: room,
-                            type: 'success',
-                            message: 'user ' + userData.displayName + ' join the lobby!',
-                            displayToSelf: true
-                        };
-
-                        // Send a single notification
-                        notifications.publish(options, function(err) {
-                            if (err) {
-                                throw err;
-                            }
-                            // Notification has been sent
-                        });
-                    });
-                });
-            }
+//            var am_member = '${curAm.total_member}';
+//            if (am_member > 1) {
+//                // Connect URL
+//                var url = 'https://goinstant.net/701ad7c04624/CollaborateAssignment';
+//
+//                var connection = new goinstant.Connection(url);
+//                connection.connect(function(err) {
+//                    if (err) {
+//                        // there was an error connecting OR the token was invalid.
+//                        return;
+//                    }
+//                    var roomname = 'ai' + '${sa.st_am_id}' + 'g' + '${sa.g_id}';
+//                    var room = connection.room(roomname);
+//
+//                    // Create a new instance of the Notifications widget
+//                    var notifications = new goinstant.widgets.Notifications();
+//
+//                    // Get all notifications
+//                    notifications.subscribe(room, function(err) {
+//                        if (err) {
+//                            throw err;
+//                        }
+//                        // We're now receiving notifications
+//                    });
+//                    var fullname = '${ac.firstname}' + ' ' + '${ac.lastname}';
+//                    room.join({displayName: fullname}, function(err, yourRoom, userData) {
+//                        if (err) {
+//                            console.log("Error joining room:", err);
+//                            // Failed to join room; clean up or retry.
+//                            return;
+//                        }
+//
+//                        // Joined the room. Start getting and manipulating keys.
+//
+//                        // Create a new instance of the UserList widget
+//                        var userList = new goinstant.widgets.UserList({
+//                            room: yourRoom,
+//                            collapsed: false,
+//                            position: 'right'
+//                        });
+//
+//                        // Initialize the UserList widget
+//                        userList.initialize(function(err) {
+//                            if (err) {
+//                                throw err;
+//                            }
+//                        });
+//
+//                        // Create a new instance of the Chat widget
+//                        var chat = new goinstant.widgets.Chat({
+//                            room: yourRoom
+//                        });
+//
+//                        // Initialize the Chat widget
+//                        chat.initialize(function(err) {
+//                            if (err) {
+//                                throw err;
+//                            }
+//                            // Now it should render on the page
+//                        });
+//
+//                        // Create a key to store the form data
+//                        var stformkey = 'f' + roomname;
+//                        var formKey = yourRoom.key(stformkey);
+//
+//                        // Create a new instance of the widget
+//                        var form = new goinstant.widgets.Form({
+//                            el: document.getElementById('questionList'),
+//                            key: formKey,
+//                            room: yourRoom
+//                        });
+//
+//                        form.initialize(function(err) {
+//                            if (err) {
+//                                throw err;
+//                            }
+//                            // Your form should now be initialized!
+//                        });
+//
+//                        // Create a new instance of the Click Indicator widget
+//                        var clickIndicator = new goinstant.widgets.ClickIndicator({room: yourRoom});
+//
+//                        // Initialize the Click Indicator widget
+//                        clickIndicator.initialize(function(err) {
+//                            if (err) {
+//                                throw err;
+//                            }
+//                            // Click Indicator widget ready to use
+//                        });
+//
+//                        console.log("Your name is " + userData.displayName); // "Your name is Custom"
+//                    });
+//
+//                    // The listener will fire everytime a user leaves the Room
+//                    room.on('leave', function(userData) {
+//                        // Set options for the notification we're about to publish
+//                        var options = {
+//                            room: room,
+//                            type: 'warning',
+//                            message: 'user' + userData.displayName + ' left the lobby!',
+//                            displayToSelf: true
+//                        };
+//
+//                        // Send a single notification
+//                        notifications.publish(options, function(err) {
+//                            if (err) {
+//                                throw err;
+//                            }
+//                            // Notification has been sent
+//                        });
+//                    });
+//
+//                    // The listener will fire every time another user joins the room
+//                    room.on('join', function(userData) {
+//                        // Set options for the notification we're about to publish
+//                        var options = {
+//                            room: room,
+//                            type: 'success',
+//                            message: 'user ' + userData.displayName + ' join the lobby!',
+//                            displayToSelf: true
+//                        };
+//
+//                        // Send a single notification
+//                        notifications.publish(options, function(err) {
+//                            if (err) {
+//                                throw err;
+//                            }
+//                            // Notification has been sent
+//                        });
+//                    });
+//                });
+//            }
         });
     </script>
+    <script>
+        var am_member = '${curAm.total_member}';
+        var roomname = 'ai' + '${sa.st_am_id}' + 'g' + '${sa.g_id}';
+        if (am_member > 1) {
+//            alert(roomname);
+            TogetherJSConfig_findRoom = {prefix: roomname, max: parseInt(am_member)};
+            TogetherJSConfig_autoStart = true;
+            TogetherJSConfig_getUserAvatar = "http://localhost:8084/TheAssignment/${ac.profile_pic}";
+            TogetherJSConfig_getUserName = '${ac.firstname}';
+            TogetherJSConfig_disableWebRTC = true;
+            TogetherJSConfig_enableShortcut = false;
+            TogetherJSConfig_suppressInvite = true;
+            TogetherJSConfig_suppressJoinConfirmation = true;
+            TogetherJSConfig_storagePrefix = "tjs_madlibs";
+        }
+    </script>
+    <script src="js/togetherjs-min.js"></script>
 </html> 

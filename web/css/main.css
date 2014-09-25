@@ -86,3 +86,7 @@ margin: 20px 0;
 .badge{
     background-color: #D9534F;
 }
+
+img:not([class='qrcode']){
+ border-radius: 50% 50% 50% 50%;   
+}

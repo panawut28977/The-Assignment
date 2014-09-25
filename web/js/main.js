@@ -6,7 +6,7 @@
 
 
 $(function() {
-    $("img[class!='qrcode']").addClass("img-circle");
+//    $("img[class!='qrcode']").addClass("img-circle");
     $(":file").filestyle();
 });
 
