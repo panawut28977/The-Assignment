@@ -5,12 +5,15 @@
  */
 package servlet;
 
+import Model.Account;
+import Model.AccountCourse;
 import Model.Assignment;
 import Model.Course;
 import Model.Explain;
 import Model.FillBlank;
 import Model.MatchWord;
 import Model.MultipleChoice;
+import Model.Notification;
 import Model.Question;
 import Model.StAssignmentFile;
 import Model.StAssignmentOnWeb;
@@ -58,19 +61,19 @@ public class updateAssignment extends HttpServlet {
         MultipartRequest m = new MultipartRequest(request, f.getPath(), "UTF-8");
 
         Integer cId = (int) ((long) ss.getAttribute("cId"));
+        Account ac = (Account) ss.getAttribute("ac");
         int am_id = Integer.parseInt(m.getParameter("am_id"));
         String name = m.getParameter("amName");
         String description = m.getParameter("description");
         String ass_type = m.getParameter("AmType");
         Date due_date = null;
-        Date late_date =null;
+        Date late_date = null;
         try {
             due_date = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(m.getParameter("due_date"));
             late_date = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(m.getParameter("late_date"));
         } catch (ParseException ex) {
             Logger.getLogger(createAssignment.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        int total_member = Integer.parseInt(m.getParameter("total_member"));
         Assignment a = Assignment.getAmByAmID(am_id);
         a.setAm_id(am_id);
         a.setName(name);
@@ -81,6 +84,22 @@ public class updateAssignment extends HttpServlet {
         a.setDue_date(due_date);
         a.setLate_date(late_date);
         String url = "";
+
+        Notification n = new Notification();
+        n.setAcc_id(ac.getAcc_id());
+        n.setCourse_id(cId);
+        n.setType("assignment");
+        String content = "update <b>"+a.getName()+"</b> assignment information";
+        n.setText(content);
+
+        //select people you want to notify
+        List<Integer> listac = AccountCourse.getStudentIdCourse(cId, ac.getAcc_id());
+        List<Integer> taAc = AccountCourse.getTeacherIdCourse(cId, ac.getAcc_id());
+        for (Integer integer : taAc) {
+            listac.add(integer);
+        }
+        Notification.announce(n, listac);
+
 //        int key = 0;
         Assignment.updateAmInfo(a);
 //        if (ass_type.equalsIgnoreCase("file")) {
