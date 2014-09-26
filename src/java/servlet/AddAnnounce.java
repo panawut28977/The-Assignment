@@ -39,14 +39,17 @@ public class AddAnnounce extends HttpServlet {
         HttpSession ss = request.getSession();
         String title = request.getParameter("title");
         String content = request.getParameter("content");
+        
         Account ac = (Account) ss.getAttribute("ac");
         int cId = Integer.parseInt((Long) ss.getAttribute("cId") + "");
+        
         Announcement a = new Announcement();
         a.setAn_acc(ac);
         a.setTitle(title);
         a.setContent(content);
         a.setCourse(Integer.parseInt(ss.getAttribute("cId") + ""));
         int rs = Announcement.add(a);
+        
         Notification n = new Notification();
         n.setAcc_id(ac.getAcc_id());
         n.setCourse_id(cId);

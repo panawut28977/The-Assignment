@@ -156,19 +156,24 @@ public class createAssignment extends HttpServlet {
                     MatchWord mw = null;
                     for (int j = 0; j < match_text.length; j++) {
                         mw = new MatchWord();
-                        //set question info
-                        mw.setAss_id(key);
-                        mw.setInstruction(instruction);
-                        mw.setQ_no(Integer.parseInt(q_no));
-                        mw.setQ_type(q_type);
-                        //set mw choice info
-                        mw.setQ_order(j + 1);
-                        mw.setQ_title(qtext);
-                        mw.setQ_text(match_text[j]);
-                        mw.setQ_answer(match_ans[j]);
-                        mw.setQ_score(Double.parseDouble(m_score[j]));
-                        fullymark += Double.parseDouble(m_score[j]);
-                        qlist.add(mw);
+                        if (m_score[j] != null && match_ans != null) {
+                            //set question info
+                            mw.setAss_id(key);
+                            mw.setInstruction(instruction);
+                            mw.setQ_no(Integer.parseInt(q_no));
+                            mw.setQ_type(q_type);
+                            //set mw choice info
+                            mw.setQ_order(j + 1);
+                            mw.setQ_title(qtext);
+                            mw.setQ_text(match_text[j]);
+                            mw.setQ_answer(match_ans[j]);
+                            if (m_score[j] == null) {
+                                m_score[j] = "0";
+                            }
+                            mw.setQ_score(Double.parseDouble(m_score[j]));
+                            fullymark += Double.parseDouble(m_score[j]);
+                            qlist.add(mw);
+                        }
                     }
                 } else if (q_type.equalsIgnoreCase("explain")) {
                     String q_no = m.getParameter(seqno[i] + "q_no");
@@ -231,7 +236,7 @@ public class createAssignment extends HttpServlet {
         n.setType("assignment");
         String content = "<p>You have new assignment <b>" + a.getName() + "</b> - " + a.getDescription() + "</p>\n";
         n.setText(content);
-        n.setLink("assignment.jsp?ct=allAm&&tab=AllAssignment&&amId="+key+"&&cId="+cId+"");
+        n.setLink("assignment.jsp?ct=allAm&&tab=AllAssignment&&amId=" + key + "&&cId=" + cId + "");
 
         List<Integer> listac = AccountCourse.getStudentIdCourse(cId, ac.getAcc_id());
         Notification.announce(n, listac);

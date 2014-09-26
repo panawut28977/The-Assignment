@@ -91,7 +91,7 @@
                                 <div class="form-group" id="due_date" style="margin-bottom: 0">
                                     <label  class="col-md-3 control-label">Due date</label>
                                     <div class="input-group date form_datetime col-md-9" style="padding-right: 15px;  padding-left: 15px;"  data-link-field="dtp_input1">
-                                        <input class="form-control" size="16" type="text" value="" readonly>
+                                        <input class="form-control" size="16" type="text" id="dtp_input1_text" value="" readonly>
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                     </div>
@@ -101,7 +101,7 @@
                                     <div class="col-md-9 col-md-offset-3">
                                         <input type="checkbox" id="latePeriodbtn" name="latesend" value="true"> Can send after due date. please select period.
                                         <div id="latePeriod" class="input-group date form_datetime2"  data-link-field="dtp_input2">
-                                            <input class="form-control" size="16" type="text" value="" readonly >
+                                            <input class="form-control" size="16" type="text" value="" id="dtp_input2_text" readonly >
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                         </div>
@@ -224,10 +224,10 @@
                                                         var amtype = $("#AmType").val();
                                                         $("#pvamWorkwith").text(amtype);
 
-                                                        var due = $("#dtp_input1").val();
+                                                        var due = $("#dtp_input1_text").val();
                                                         $("#pvamDue").text(due);
 
-                                                        var late = $("#dtp_input2").val();
+                                                        var late = $("#dtp_input2_text").val();
                                                         $("#pvamLate").text(late);
 
                                                         var amtype = $("#AmType").val();
@@ -279,10 +279,13 @@
                                             var monthNames = ["January", "February", "March", "April", "May", "June",
                                                 "July", "August", "September", "October", "November", "December"];
                                             var d = new Date();
+
                                             $('#due_date input').val(d.getFullYear() + "-" + monthNames[d.getMonth()] + "-" + ('0' + d.getDate()).slice(-2));
-                                            $('#due_date input[name="due_date"]').val(d.getFullYear() + "-" + ('0' + (d.getMonth() + 1)).slice(-2) + "-" + ('0' + d.getDate()).slice(-2));
+                                            $('#dtp_input1').val(d.getFullYear() + "-" + ('0' + (d.getMonth() + 1)).slice(-2) + "-" + ('0' + d.getDate()).slice(-2));
+
                                             $('#latePeriod input').val(d.getFullYear() + "-" + monthNames[d.getMonth()] + "-" + ('0' + d.getDate()).slice(-2));
                                             $('#dtp_input2').val(d.getFullYear() + "-" + ('0' + (d.getMonth() + 1)).slice(-2) + "-" + ('0' + d.getDate()).slice(-2));
+                                            
                                             $('#due_date input').change(function() {
                                                 $('#latePeriod').datetimepicker('setStartDate', $(this).val());
                                                 $('#latePeriod input').val($(this).val());
@@ -355,10 +358,10 @@
 //                                            });
                                             $(document).on("change", "#total_pair", function() {
                                                 var seq_of_choice = $(this).parent().parent().parent().find("[name='seqno']").val();
-                                                var matchWord_box = '<span class="label label-info"><i class="glyphicon glyphicon-info-sign"></i> If you want to add dummy answer, add text in answer box only.</span><br/><br/>';
+                                                var matchWord_box = '<span class="label label-info"><i class="glyphicon glyphicon-info-sign"></i> If you want to add dummy answer, add text in answer box and put score to 0.</span><br/><br/>';
                                                 matchWord_box += '<div class="row"><div class="col-md-4"><b>Question Text</b></div><div class="col-md-4"><b>Answer</b></div><div class="col-md-2"><b>Score</b></div></div>';
                                                 for (var i = 0; i < $(this).val(); i++) {
-                                                    matchWord_box += '<div class="row"><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_text"></div><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_ans"></div><div class="col-md-2"><input type="number" min="0" step="any" class="form-control" name="' + seq_of_choice + 'm_score"></div></div>';
+                                                    matchWord_box += '<div class="row"><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_text"></div><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_ans"></div><div class="col-md-2"><input type="number" min="0" step="any" class="form-control" name="' + seq_of_choice + 'm_score" required="yes"></div></div>';
                                                 }
                                                 $(this).parent().parent().parent(".matchWord").find(".matchWord_q_list").html(matchWord_box);
                                             });
@@ -375,9 +378,7 @@
                                         function GetSelectedText(t) {
                                             var selText = "";
                                             if (window.getSelection) {  // all browsers, except IE before version 9
-                                                if (document.activeElement &&
-                                                        (document.activeElement.tagName.toLowerCase() == "textarea"))
-                                                {
+                                                if (document.activeElement && (document.activeElement.tagName.toLowerCase() == "textarea")){
                                                     var text = document.activeElement.value;
                                                     selText = text.substring(document.activeElement.selectionStart,
                                                             document.activeElement.selectionEnd);
@@ -393,6 +394,7 @@
                                                     selText = range.text;
                                                 }
                                             }
+                                            console.log("select text:"+selText);
                                             if (selText !== "") {
                                                 var startIndex = document.activeElement.selectionStart;
                                                 var endIndex = document.activeElement.selectionEnd;
@@ -406,13 +408,17 @@
                                         }
 
                                         function checkConfilctIndex(t, newStartIndex, newEndIndex) {
-                                            var startIndex = $(t).parent().parent().parent(".fillBlank").find(".ansList input[name='startIndex']").map(function() {
+                                            console.log("newstart:"+newStartIndex);
+                                            console.log("newend:"+newEndIndex);
+                                            var startIndex = $(t).parent().parent().parent(".fillBlank").find(".ansList input[name$='startIndex']").map(function() {
                                                 return $(this).val();
                                             }).get();
-                                            var endIndex = $(t).parent().parent().parent(".fillBlank").find(".ansList input[name='endIndex']").map(function() {
+                                            var endIndex = $(t).parent().parent().parent(".fillBlank").find(".ansList input[name$='endIndex']").map(function() {
                                                 return $(this).val();
                                             }).get();
                                             for (i = 0; i < startIndex.length; i++) {
+                                                console.log(startIndex[i]);
+                                                console.log(endIndex[i]);
                                                 if ((newStartIndex > startIndex[i] && newStartIndex < endIndex[i]) || (newEndIndex > startIndex[i] && newEndIndex <= endIndex[i]) || (newStartIndex <= startIndex[i] && newEndIndex >= endIndex[i])) {
                                                     return false;
                                                 }
@@ -742,7 +748,7 @@
                                                 } else if (type == 'matchWord') {
                                                     var qtext = q.find("[name$='qtext']").val();
                                                     var qselect = "<select>";
-                                                    $.each(q.find("[name$='match_text']"), function() {
+                                                    $.each(q.find("[name$='match_ans']"), function() {
                                                         if ($(this).val() != '') {
                                                             qselect += ' <option>' + $(this).val() + '</option>';
                                                         }
@@ -752,7 +758,7 @@
                                                     var qlist = "";
                                                     $.each(q.find("[name$='match_text']"), function() {
                                                         if ($(this).val() != '') {
-                                                            qlist += qselect + '<span>' + $(this).val() + '</span><br><br>';
+                                                            qlist += qselect + '<span>  ' + $(this).val() + '</span><br><br>';
                                                         }
                                                     });
                                                     var qanswer = "";
@@ -777,7 +783,6 @@
                                                         var startEnd = [$(this).find("[name$='startIndex']").val(), $(this).find("[name$='endIndex']").val()];
                                                         startEndList.push(startEnd);
                                                     });
-//                                                    console.log(startEndList);
                                                     $.ajax({
                                                         type: 'POST',
                                                         url: 'replaceStringByIndex',

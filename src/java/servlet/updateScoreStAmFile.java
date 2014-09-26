@@ -56,7 +56,7 @@ public class updateScoreStAmFile extends HttpServlet {
             //Assignment# 1 ( INT206 Software Development Process II ) <b9/10
             Date d = new Date();
             Timestamp now = new Timestamp(d.getTime());
-            String content = "<h4>" + a.getName() + "  <small class='text-muted'>" + a.getCourse().getName() + "</small><small class='pull-right'>" + util.Util.formatTime(now + "") + "</small><br/><br/>You have new score update " + score + "/" + a.getFully_mark() + ".</h4>";
+            String content = "<h4>" + a.getName() + "  <small class='text-muted'>" + a.getCourse().getName() + "</small><small class='pull-right'>" + util.Util.formatTime(now + "") + "</small><br/><br/>You have new score update " + score + "/" + a.getFully_mark() + "</h4>";
             n.setText(content);
 
             List<Integer> listac = new ArrayList<>();
