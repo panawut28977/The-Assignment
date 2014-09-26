@@ -86,7 +86,7 @@
             },
             events: jsonArr
             
-        });
+        }).find("#loader").remove();
 
     });
 
@@ -104,7 +104,9 @@
     <a class="btn btn-primary pull-right"  href="CreateAssignment.jsp?tab=AllAssignment" style="margin-top: 20px"><span class="glyphicon glyphicon-plus-sign"></span> Create Assignment</a>
     <br/><br/><br/>
 </c:if>
-<div id='calendar' style="margin-bottom: 20px;margin-top: 30px"></div>
+    <div id='calendar' style="margin-bottom: 20px;margin-top: 30px">
+        <div class="text-center" id="loader"><i class="fa fa-spinner fa-5x fa-spin"></i></div>
+    </div>
 <hr/>
 <div class="table-responsive" style="min-height: 520px;">
     <table class="table table-striped" id="AllAssignemnt">

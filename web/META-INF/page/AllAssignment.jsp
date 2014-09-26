@@ -61,7 +61,7 @@
                 location.href = "assignment.jsp?tab=AllAssignment&&amId=" + calEvent.id+"&&cId="+calEvent.cId;
             },
             events: jsonArr
-        });
+        }).find("#loader").remove();
 
     });
 
@@ -75,7 +75,9 @@
         font-weight: bold;
     }
 </style>
-<div id='calendar' style="margin-bottom: 20px;margin-top: 30px"></div>
+<div id='calendar' style="margin-bottom: 20px;margin-top: 30px">
+    <div class="text-center" id="loader"><i class="fa fa-spinner fa-5x fa-spin"></i></div>
+</div>
 <hr id='calendar-line-break'/>
 <div class="table-responsive" style="min-height: 520px;">
     <table class="table table-striped " id="AllAssignment">

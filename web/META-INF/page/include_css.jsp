@@ -3,4 +3,5 @@
 <!--<link rel="stylesheet" href="css/arimo.css">-->
 <link rel="stylesheet" href="css/main.css" >
 <link rel="stylesheet" href="css/bootstrap-multiselect.css">
+<link rel="stylesheet" href="Mobile/css/font-awesome.min.css">
 <!--<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>-->

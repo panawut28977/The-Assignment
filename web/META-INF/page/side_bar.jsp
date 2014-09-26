@@ -46,7 +46,7 @@
                 </c:choose>
             </span>
             <c:forEach items="${ac.getCourseList()}" var="c">
-                <a id="${c.key}" onclick="load_course(${c.key})" class="list-group-item usepointer">${c.value.course.name} 
+                <a id="${c.key}" onclick="load_course(${c.key})" class="list-group-item usepointer <c:if test="${sessionScope.cId==c.key}">active</c:if>">${c.value.course.name} 
                     <c:if test="${c.value.role eq 'TH'}"> <span class="label label-primary pull-right">Teacher</span></c:if>
                     </a>
             </c:forEach>
@@ -105,12 +105,12 @@
     </div>
 </div>
 <script>
-    $(function() {
-        var courseId = '${sessionScope.cId}';
-        if (courseId != "" && courseId != null) {
-            $("#" + courseId).addClass("active");
-        }
-    });
+//    $(function() {
+//        var courseId = '${sessionScope.cId}';
+//        if (courseId != "" && courseId != null) {
+//            $("#" + courseId).addClass("active");
+//        }
+//    });
 
     function view_assignment_by_status(status) {
         location.href = "home.jsp?tab=AllAssignment&st=" + status;
