@@ -140,7 +140,7 @@ public class Course {
                 c.setCourse_code(rs.getString("course_code"));
                 c.setCourse_link(rs.getString("course_link"));
                 c.setCreate_date(rs.getDate("create_date"));
-                c.setAnnouncement(Announcement.viewAnnByCourse(course_id));
+                //c.setAnnouncement(Announcement.viewAnnByCourse(course_id));
                 c.setAssignment(Assignment.getAmByCourseIDNoSetCourse(course_id));
                 c.setListStudent(AccountCourse.getMemberInCourse(course_id));
             }

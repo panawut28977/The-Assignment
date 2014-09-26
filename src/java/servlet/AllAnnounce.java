@@ -6,10 +6,12 @@
 package servlet;
 
 import Model.Account;
-import Model.AccountCourse;
-import Model.Assignment;
+import Model.Announcement;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Orarmor
  */
-public class setCourseSession extends HttpServlet {
+public class AllAnnounce extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,26 +35,18 @@ public class setCourseSession extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Long cId = Long.parseLong(request.getParameter("cId"));
         HttpSession ss = request.getSession();
-        Account a = (Account) ss.getAttribute("ac");
-        int leftover = 0;
-        if (a.getCourseList().get(cId) != null) {
-            List<Assignment> amList = ((AccountCourse) (a.getCourseList().get(cId))).getCourse().getAssignment();
-            String st = "";
-            for (Assignment assignment : amList) {
-//            System.out.println(assignment.getDue_date());
-                st = Assignment.remainingTimeforSend(assignment, a.getAcc_id());
-                if (st.equalsIgnoreCase("ontime") || st.equalsIgnoreCase("hurryup") || st.equalsIgnoreCase("late")) {
-                    leftover++;
-                } else {
-                    System.out.print(st + "/");
-                }
-            }
+        Account acc = (Account) ss.getAttribute("ac");
+        Iterator iterator = acc.getCourseList().entrySet().iterator();
+        ArrayList<Long> courseIdList = new ArrayList<>();
+        while (iterator.hasNext()) {
+            Map.Entry mapEntry = (Map.Entry) iterator.next();
+            courseIdList.add((Long) mapEntry.getKey());
         }
-        ss.setAttribute("leftoverInCourse", leftover);
-        ss.setAttribute("cId", cId);
-        response.sendRedirect("CourseAnnounce");
+        List<Announcement> announcement = Announcement.viewAnnByCourseList(courseIdList);
+        System.out.println(acc.getAnnouncement());
+        ss.setAttribute("announcement", announcement);
+        response.sendRedirect("home.jsp?tab=AllAnnouce");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

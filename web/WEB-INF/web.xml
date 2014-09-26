@@ -320,6 +320,14 @@
         <servlet-name>routeCheckStAm</servlet-name>
         <servlet-class>servlet.routeCheckStAm</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AllAnnounce</servlet-name>
+        <servlet-class>servlet.AllAnnounce</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CourseAnnounce</servlet-name>
+        <servlet-class>servlet.CourseAnnounce</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -563,6 +571,14 @@
     <servlet-mapping>
         <servlet-name>routeCheckStAm</servlet-name>
         <url-pattern>/routeCheckStAm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AllAnnounce</servlet-name>
+        <url-pattern>/AllAnnounce</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CourseAnnounce</servlet-name>
+        <url-pattern>/CourseAnnounce</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

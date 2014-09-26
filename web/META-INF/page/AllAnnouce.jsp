@@ -14,7 +14,7 @@
     });
 </script>
 <c:choose>
-    <c:when test="${ac.announcement.size()==0}">
+    <c:when test="${announcement.size()==0}">
         <h1 class="text-muted" style="text-align: center">ยังไม่มีข่าวหรือประกาศครับ XD</h1>
     </c:when>
     <c:otherwise>
@@ -26,7 +26,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach items="${ac.announcement}" var="ann">
+                    <c:forEach items="${announcement}" var="ann">
                         <tr>
                             <td>
                                 <div class="media">

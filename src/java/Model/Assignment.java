@@ -251,7 +251,7 @@ public class Assignment {
                 am.setDue_date(rs.getDate("due_date"));
                 am.setLate_date(rs.getDate("late_date"));
                 am.setFully_mark(rs.getDouble("fully_mark"));
-                am.setComment(Comment.getCommentByAmID(am.getAm_id()));
+                //am.setComment(Comment.getCommentByAmID(am.getAm_id()));
                 if (am.getAss_type().equalsIgnoreCase("file")) {
                     am.setPath_file(rs.getString("path_file"));
                 } else {
@@ -460,7 +460,7 @@ public class Assignment {
                 am.setDue_date(rs.getDate("due_date"));
                 am.setLate_date(rs.getDate("late_date"));
                 am.setFully_mark(rs.getDouble("fully_mark"));
-                am.setComment(Comment.getCommentByAmID(am.getAm_id()));
+                //am.setComment(Comment.getCommentByAmID(am.getAm_id()));
                 if (am.getAss_type() == "file") {
                     am.setPath_file(rs.getString("path_file"));
                 } else {

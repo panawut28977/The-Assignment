@@ -196,13 +196,16 @@ public class Account {
 
                 //new logic
                 acc.setCourseList(AccountCourse.getCourseByAccIDMap(acc_id));
-                Iterator iterator = acc.getCourseList().entrySet().iterator();
-                ArrayList<Long> courseIdList = new ArrayList<>();
-                while (iterator.hasNext()) {
-                    Map.Entry mapEntry = (Map.Entry) iterator.next();
-                    courseIdList.add((Long) mapEntry.getKey());
-                }
-                acc.setAnnouncement(Announcement.viewAnnByCourseList(courseIdList));
+                
+                
+                //เปลี่ยนเปน servlet allannounce แทนละ
+//                Iterator iterator = acc.getCourseList().entrySet().iterator();
+//                ArrayList<Long> courseIdList = new ArrayList<>();
+//                while (iterator.hasNext()) {
+//                    Map.Entry mapEntry = (Map.Entry) iterator.next();
+//                    courseIdList.add((Long) mapEntry.getKey());
+//                }
+//                acc.setAnnouncement(Announcement.viewAnnByCourseList(courseIdList));
 
                 //ไม่ใช้ userscore ละค่าที่ได้ออกมามันมหาศาลเกินไป
 //                acc.setListStudentScore(UserScore.getUserScore(acc_id));

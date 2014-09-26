@@ -42,12 +42,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="home.jsp?tab=AllAnnouce">The Assignment</a>
+            <a class="navbar-brand" href="AllAnnounce">The Assignment</a>
         </div>
 
         <div class="collapse navbar-collapse" style="padding-left: 0;" id="collapse-menu">
             <ul class="nav navbar-nav">
-                <li id="home_menu" class="active"><a href="home.jsp?tab=AllAnnouce"><span class="glyphicon glyphicon-home"></span></a></li>
+                <li id="home_menu" class="active"><a href="AllAnnounce"><span class="glyphicon glyphicon-home"></span></a></li>
                 <li id="message_menu"><a href="fmessage"><span class="glyphicon glyphicon-envelope"></span>
                         <span class="badge <c:if test="${totalUnseen==0}">hide</c:if>" id="totalUnseen">${totalUnseen}</span>
                     </a></li>

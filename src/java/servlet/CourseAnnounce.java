@@ -5,9 +5,7 @@
  */
 package servlet;
 
-import Model.Account;
-import Model.AccountCourse;
-import Model.Assignment;
+import Model.Announcement;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -20,7 +18,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Orarmor
  */
-public class setCourseSession extends HttpServlet {
+public class CourseAnnounce extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,26 +31,11 @@ public class setCourseSession extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Long cId = Long.parseLong(request.getParameter("cId"));
         HttpSession ss = request.getSession();
-        Account a = (Account) ss.getAttribute("ac");
-        int leftover = 0;
-        if (a.getCourseList().get(cId) != null) {
-            List<Assignment> amList = ((AccountCourse) (a.getCourseList().get(cId))).getCourse().getAssignment();
-            String st = "";
-            for (Assignment assignment : amList) {
-//            System.out.println(assignment.getDue_date());
-                st = Assignment.remainingTimeforSend(assignment, a.getAcc_id());
-                if (st.equalsIgnoreCase("ontime") || st.equalsIgnoreCase("hurryup") || st.equalsIgnoreCase("late")) {
-                    leftover++;
-                } else {
-                    System.out.print(st + "/");
-                }
-            }
-        }
-        ss.setAttribute("leftoverInCourse", leftover);
-        ss.setAttribute("cId", cId);
-        response.sendRedirect("CourseAnnounce");
+        int cId = Integer.parseInt((Long) ss.getAttribute("cId") + "");
+        List<Announcement> cannouncement = Announcement.viewAnnByCourse(cId);
+        ss.setAttribute("cannouncement", cannouncement);
+        response.sendRedirect("course.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -84,8 +84,8 @@
         </thead>
         <tbody>
             <c:choose>
-                <c:when test="${ac.courseList.get(cId).course.announcement.size()!=0}">
-                    <c:forEach items="${ac.courseList.get(cId).course.announcement}" var="a">
+                <c:when test="${cannouncement.size()!=0}">
+                    <c:forEach items="${cannouncement}" var="a">
                         <tr>
                             <td>
                                 <div class="media">

@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
             ss.removeAttribute("cId");
             ss.setAttribute("ac", a);
             ss.setAttribute("accType", a.getAccount_type());
-            url = "home.jsp?tab=AllAnnouce";
+            url = "AllAnnounce";
             ss.setAttribute("objStatus", "updated");
             response.sendRedirect(url);
         } else {
