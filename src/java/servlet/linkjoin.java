@@ -8,8 +8,10 @@ package servlet;
 import Model.Account;
 import Model.AccountCourse;
 import Model.Course;
+import Model.Notification;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -45,9 +47,19 @@ public class linkjoin extends HttpServlet {
                 member.setRole("ST");
                 member.setStatus("waiting");
                 int result = AccountCourse.joinCourse(member, ac.getAcc_id());
-                System.out.println("result :"+result);
+                System.out.println("result :" + result);
                 if (result > 0) {
                     request.setAttribute("msg", "1");
+                    Notification n = new Notification();
+                    n.setAcc_id(ac.getAcc_id());
+                    n.setCourse_id(c.getCourse_id());
+                    n.setType("alert");
+                    //Assignment# 1 ( INT206 Software Development Process II ) <b9/10
+                    String content = "<h4><b>\"" + ac.getFirstname() + " " + ac.getLastname() + "\"</b> request to join in <b>" + c.getName() + "</b></h4>";
+                    n.setText(content);
+
+                    List<Integer> listac = AccountCourse.getTeacherIdCourse(c.getCourse_id(), ac.getAcc_id());
+                    Notification.announce(n, listac);
                 } else {
                     request.setAttribute("msg", "2");
                 }
@@ -55,7 +67,7 @@ public class linkjoin extends HttpServlet {
             }
         } else {
             request.setAttribute("msg", "You need to sign in before !");
-            ss.setAttribute("continuelink", "linkjoin?course_code="+code);
+            ss.setAttribute("continuelink", "linkjoin?course_code=" + code);
             getServletContext().getRequestDispatcher("/META-INF/page/tmplogin.jsp").forward(request, response);
         }
 

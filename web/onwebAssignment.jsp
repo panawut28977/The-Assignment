@@ -591,7 +591,7 @@
             TogetherJSConfig_autoStart = true;
             TogetherJSConfig_getUserAvatar = "http://localhost:8084/TheAssignment/${ac.profile_pic}";
             TogetherJSConfig_getUserName = '${ac.firstname}';
-            TogetherJSConfig_disableWebRTC = true;
+//            TogetherJSConfig_disableWebRTC = true;
             TogetherJSConfig_enableShortcut = false;
             TogetherJSConfig_suppressInvite = true;
             TogetherJSConfig_suppressJoinConfirmation = true;
