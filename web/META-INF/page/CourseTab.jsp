@@ -2,7 +2,7 @@
 <c:choose>
     <c:when test="${ac.courseList.get(cId).role eq 'ST'}">
         <ul class="nav nav-tabs">
-            <li <c:if test="${param.tab eq null}">class="active"</c:if>><a href="course.jsp">Announcement</a></li>
+            <li <c:if test="${param.tab eq null}">class="active"</c:if>><a href="CourseAnnounce">Announcement</a></li>
             <li <c:if test="${param.tab eq 'AllAssignment'}">class="active"</c:if>><a href="course.jsp?tab=AllAssignment">Assignment <span class="badge <c:if test="${leftoverInCourse == 0}">hide</c:if>">${leftoverInCourse}</span></a></li>
             <li <c:if test="${param.tab eq 'score'}">class="active"</c:if>><a href="userscore">Score</a></li>
             <li <c:if test="${param.tab eq 'member'}">class="active"</c:if>><a href="course.jsp?tab=member">Member</a></li>
@@ -11,7 +11,7 @@
     <c:otherwise>
         <c:set var="waitAcc" value="${ct_cf:getWaitForApproveMemberInCourse(cId)}"/>
         <ul class="nav nav-tabs">
-            <li <c:if test="${param.tab eq null}">class="active"</c:if>><a href="course.jsp">Announcement</a></li>
+            <li <c:if test="${param.tab eq null}">class="active"</c:if>><a href="CourseAnnounce">Announcement</a></li>
             <li <c:if test="${param.tab eq 'AllAssignment'}">class="active"</c:if>><a href="course.jsp?tab=AllAssignment">Assignment</a></li>
             <li <c:if test="${param.tab eq 'score'}">class="active"</c:if>><a href="userscore">Score</a></li>
             <li <c:if test="${param.tab eq 'member'}">class="active"</c:if>><a href="course.jsp?tab=member">Member</a></li>

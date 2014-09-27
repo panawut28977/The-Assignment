@@ -46,7 +46,8 @@ public class AllAnnounce extends HttpServlet {
         List<Announcement> announcement = Announcement.viewAnnByCourseList(courseIdList);
         System.out.println(acc.getAnnouncement());
         ss.setAttribute("announcement", announcement);
-        response.sendRedirect("home.jsp?tab=AllAnnouce");
+//        response.sendRedirect("home.jsp?tab=AllAnnouce");
+        getServletContext().getRequestDispatcher("/home.jsp?tab=AllAnnouce").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

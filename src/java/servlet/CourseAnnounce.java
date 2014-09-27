@@ -35,7 +35,8 @@ public class CourseAnnounce extends HttpServlet {
         int cId = Integer.parseInt((Long) ss.getAttribute("cId") + "");
         List<Announcement> cannouncement = Announcement.viewAnnByCourse(cId);
         ss.setAttribute("cannouncement", cannouncement);
-        response.sendRedirect("course.jsp");
+//        response.sendRedirect("course.jsp");
+        getServletContext().getRequestDispatcher("/course.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
