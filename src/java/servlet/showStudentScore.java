@@ -35,13 +35,13 @@ public class showStudentScore extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<UserScore> u = UserScore.getUserScore(2);
+//        List<UserScore> u = UserScore.getUserScore(2);
         //Account a = Account.getNameByID(2);
         
         
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(new Gson().toJson(u));
+//        response.getWriter().write(new Gson().toJson(u));
         //response.getWriter().write(new Gson().toJson(a));
         
         
