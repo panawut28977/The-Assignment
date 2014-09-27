@@ -158,7 +158,7 @@
                             </td>
                         </c:otherwise>
                     </c:choose>
-                    <td>${a.due_date}</td>
+                    <td> <span class="formatDate" data-date="${a.due_date}"><i class="fa fa-spinner fa-spin"></i></span></td>
                     <c:choose>
                         <c:when test="${ac.courseList.get(cId).role eq 'ST'}">
                             <td>

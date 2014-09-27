@@ -114,7 +114,7 @@
                         </c:otherwise>
                     </c:choose>
                     <td>
-                        <span onload="formatDate('${a.due_date}')"></span><c:if test="${a.due_date eq null}"> - </c:if>
+                        <span class="formatDate"  data-date="${a.due_date}"><i class="fa fa-spinner fa-spin"></i></span><c:if test="${a.due_date eq null}"> - </c:if>
                         </td>
                         <td>
                         <c:set value="${cf:remainingTimeforSend(a,ac.acc_id)}" var="status"/>

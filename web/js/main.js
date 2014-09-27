@@ -8,6 +8,9 @@
 $(function() {
 //    $("img[class!='qrcode']").addClass("img-circle");
     $(":file").filestyle();
+    $(".formatDate").each(function() {
+        $(this).text(formatDate($(this).attr("data-date")));
+    });
 });
 
 
@@ -25,6 +28,6 @@ function getFileName(fullPath) {
 
 function formatDate(date) {
     var dateFormat = $.datepicker.formatDate('MM dd, yy', new Date(date));
-    alert(dateFormat);
-    $(this).text(dateFormat);
+//    alert(dateFormat);
+    return dateFormat;
 }

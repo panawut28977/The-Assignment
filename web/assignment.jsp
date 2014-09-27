@@ -60,7 +60,7 @@ Author     : JenoVa
                     <div class="details">
                         <div>
                             <h3 class="">${am.name}</h3>
-                            <small class="text-muted">Created date : ${am.create_date} </small><br>   
+                            <small class="text-muted">Created date :  <span class="formatDate">${am.create_date}</span></small><br>   
                         </div>
                         <div class="col-md-5 well"> 
                             <c:choose>
@@ -93,7 +93,7 @@ Author     : JenoVa
                             <table class="table">
                                 <tr>
                                     <td><b>Due date</b></td>
-                                    <td>${am.due_date}
+                                    <td><span class="formatDate" data-date="${am.due_date}"></span>
                                         <c:if test="${ac.courseList.get(cId).role eq 'ST'}">
                                             <span class="text-danger pull-right">
                                                 <b>

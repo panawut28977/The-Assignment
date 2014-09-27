@@ -36,7 +36,7 @@
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">The Assignment</a>
             </div>
-            <p class="navbar-text navbar-right" style="padding-right: 10px">IT 54-24</p>
+            <p class="navbar-text navbar-right" style="padding-right: 10px">IT 54-27</p>
         </nav>
         <div class="container-fluid" style="margin-top: 10%">
             <div class="row">
