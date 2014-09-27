@@ -49,7 +49,7 @@ public class message extends HttpServlet {
 
         while (i.hasNext()) {
             Map.Entry mapEntry = (Map.Entry) i.next();
-            List<Account> tInCourse = AccountCourse.getTeacherCourse(Integer.parseInt(mapEntry.getKey() + ""),a.getAcc_id());
+            List<Account> tInCourse = AccountCourse.getTeacherCourse(Integer.parseInt(mapEntry.getKey() + ""), a.getAcc_id());
             for (Account account : tInCourse) {
                 if (!teacherAddedId.contains(account.getAcc_id())) {
                     teacherAddedId.add(account.getAcc_id());
@@ -60,13 +60,15 @@ public class message extends HttpServlet {
             }
 
             if (a.getAccount_type().equalsIgnoreCase("TH")) {
-                List<Account> sInCourse = AccountCourse.getStudentCourse(Integer.parseInt(mapEntry.getKey() + ""),a.getAcc_id());
-                for (Account account : sInCourse) {
-                    if (!studentAddedId.contains(account.getAcc_id())) {
-                        studentAddedId.add(account.getAcc_id());
-                        Message isAllSeen = new Message();
-                        isAllSeen.setIsAllSeen(Message.isAllSeen(a.getAcc_id(), account.getAcc_id()));
-                        yourStudent.put(isAllSeen, account);
+                if (((AccountCourse) (mapEntry.getValue())).getRole().equalsIgnoreCase("TH")) {
+                    List<Account> sInCourse = AccountCourse.getStudentCourse(Integer.parseInt(mapEntry.getKey() + ""), a.getAcc_id());
+                    for (Account account : sInCourse) {
+                        if (!studentAddedId.contains(account.getAcc_id())) {
+                            studentAddedId.add(account.getAcc_id());
+                            Message isAllSeen = new Message();
+                            isAllSeen.setIsAllSeen(Message.isAllSeen(a.getAcc_id(), account.getAcc_id()));
+                            yourStudent.put(isAllSeen, account);
+                        }
                     }
                 }
             }
@@ -77,7 +79,7 @@ public class message extends HttpServlet {
         ss.setAttribute("yourStudent", yourStudent);
         ss.setAttribute("youTeacher", yourTeacher);
 
-        if (((String)ss.getAttribute("havePvm")).equalsIgnoreCase("false")) {
+        if (((String) ss.getAttribute("havePvm")).equalsIgnoreCase("false")) {
             request.setAttribute("msg", "nopvmsg");
         }
         String url = "/message.jsp";

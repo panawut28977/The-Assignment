@@ -89,7 +89,7 @@ Author     : JenoVa
                                 </c:otherwise>
                             </c:choose>
                         </div>
-                        <div class="col-md-7">
+                        <div class="col-md-7" style="padding-bottom: 20px">
                             <table class="table">
                                 <tr>
                                     <td><b>Due date</b></td>
