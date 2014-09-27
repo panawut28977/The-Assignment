@@ -37,16 +37,9 @@ public class AllAnnounce extends HttpServlet {
             throws ServletException, IOException {
         HttpSession ss = request.getSession();
         Account acc = (Account) ss.getAttribute("ac");
-        Iterator iterator = acc.getCourseList().entrySet().iterator();
-        ArrayList<Long> courseIdList = new ArrayList<>();
-        while (iterator.hasNext()) {
-            Map.Entry mapEntry = (Map.Entry) iterator.next();
-            courseIdList.add((Long) mapEntry.getKey());
-        }
-        List<Announcement> announcement = Announcement.viewAnnByCourseList(courseIdList);
+        List<Announcement> announcement = Announcement.viewAnnByAccID(acc.getAcc_id());
         System.out.println(acc.getAnnouncement());
         ss.setAttribute("announcement", announcement);
-//        response.sendRedirect("home.jsp?tab=AllAnnouce");
         getServletContext().getRequestDispatcher("/home.jsp?tab=AllAnnouce").forward(request, response);
     }
 
