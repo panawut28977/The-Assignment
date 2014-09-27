@@ -203,6 +203,10 @@
         <servlet-class>servlet.showAnnounceStudent</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>getCourseName</servlet-name>
+        <servlet-class>servlet.getCourseName</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>showAnnounceTeacher</servlet-name>
         <servlet-class>servlet.showAnnounceTeacher</servlet-class>
     </servlet>
@@ -453,6 +457,10 @@
     <servlet-mapping>
         <servlet-name>showAnnounceStudent</servlet-name>
         <url-pattern>/showAnnounceStudent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlservlet-name>getCourseName</servlservlet-name>
+        <url-pattern>/getCourseName</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>showAnnounceTeacher</servlet-name>
