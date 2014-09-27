@@ -459,7 +459,7 @@
         <url-pattern>/showAnnounceStudent</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlservlet-name>getCourseName</servlservlet-name>
+        <servlet-name>getCourseName</servlet-name>
         <url-pattern>/getCourseName</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
