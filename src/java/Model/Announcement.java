@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Model;
 
 import java.sql.Connection;
@@ -22,6 +21,7 @@ import java.util.logging.Logger;
  * @author JenoVa
  */
 public class Announcement {
+
     private int an_id;
     private Account an_acc;
 //    private Course course;
@@ -77,10 +77,14 @@ public class Announcement {
     public void setAnnounce_date(Timestamp announce_date) {
         this.announce_date = announce_date;
     }
-    
+
     public static List<Announcement> viewAnnByAccID(int acc_id) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select *  from announcement where acc_id = ? order by announce_date desc";
+        String sql = "select a.*  from announcement a "
+                + "JOIN account_course ac "
+                + "On a.course_id = ac.course_id "
+                + "where ac.acc_id = ? AND status = 'approved' "
+                + "order by announce_date desc";
         PreparedStatement pstm;
         List<Announcement> ann = new ArrayList<Announcement>();
         Announcement a = null;
@@ -98,13 +102,13 @@ public class Announcement {
                 a.setTitle(rs.getString("title"));
                 ann.add(a);
             }
-             conn.close();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
         return ann;
     }
-    
+
     public static int add(Announcement a) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "insert into announcement(acc_id,course_id,title,content) values(?,?,?,?)";
@@ -114,16 +118,16 @@ public class Announcement {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, a.getAn_acc().getAcc_id());
             pstm.setInt(2, a.getCourse());
-            pstm.setString(3, a.getTitle()+"");
+            pstm.setString(3, a.getTitle() + "");
             pstm.setString(4, a.getContent());
             result = pstm.executeUpdate();
-             conn.close();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
     }
-    
+
     public static boolean remove(int an_id) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "delete from announcement where an_id  =? ";
@@ -131,15 +135,15 @@ public class Announcement {
         int result = 0;
         try {
             pstm = conn.prepareStatement(sql);
-            pstm.setInt(1,an_id);
+            pstm.setInt(1, an_id);
             result = pstm.executeUpdate();
-             conn.close();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result > 0;
     }
-    
+
     //update
     public static int update(Announcement a) {
         Connection conn = ConnectionBuilder.getConnection();
@@ -152,13 +156,13 @@ public class Announcement {
             pstm.setString(2, a.getContent());
             pstm.setInt(3, a.getAn_id());
             result = pstm.executeUpdate();
-             conn.close();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
     }
-    
+
     //viewAnnouncementByCourse
     public static List<Announcement> viewAnnByCourse(int course_id) {
         Connection conn = ConnectionBuilder.getConnection();
@@ -180,24 +184,24 @@ public class Announcement {
                 a.setTitle(rs.getString("title"));
                 ann.add(a);
             }
-             conn.close();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
         return ann;
     }
-    
+
     //viewAnnouncementByCourse
     public static List<Announcement> viewAnnByCourseList(ArrayList<Long> course_id) {
         Connection conn = ConnectionBuilder.getConnection();
         StringBuilder cIdList = new StringBuilder("(");
         for (Long id : course_id) {
-            cIdList.append(id+",");
+            cIdList.append(id + ",");
         }
-        cIdList.deleteCharAt(cIdList.length()-1);
+        cIdList.deleteCharAt(cIdList.length() - 1);
         cIdList.append(")");
         System.out.println(cIdList.toString());
-        String sql = "select *  from announcement where course_id in "+cIdList.toString()+" order by announce_date desc";
+        String sql = "select *  from announcement where course_id in " + cIdList.toString() + " order by announce_date desc";
         PreparedStatement pstm;
         List<Announcement> ann = new ArrayList<Announcement>();
         Announcement a = null;
@@ -214,7 +218,7 @@ public class Announcement {
                 a.setTitle(rs.getString("title"));
                 ann.add(a);
             }
-             conn.close();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -225,6 +229,5 @@ public class Announcement {
     public String toString() {
         return "Announcement{" + "an_id=" + an_id + ", an_acc=" + an_acc + ", course=" + course + ", title=" + title + ", content=" + content + ", announce_date=" + announce_date + '}';
     }
-    
-    
+
 }
