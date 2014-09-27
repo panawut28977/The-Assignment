@@ -4,8 +4,8 @@
         <meta name="viewport" content="initial-scale=1.0">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/jquery.mobile-1.4.2.css" />
-        <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/font-awesome.min.css"/>
+        <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/css/jquery.mobile-1.4.2.css" />
+        <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/css/font-awesome.min.css"/>
 
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
@@ -39,9 +39,8 @@
             <div data-position="fixed" data-tap-toggle="false" data-role="footer" data-tap-toggle="false" >
                 <div data-role="navbar">
                     <ul>
-                        <li><a href="http://jsp.chaninz.com/tasm/Mobile/index.html">Announce</a></li>
-                        <li><a href="http://jsp.chaninz.com/tasm/Mobile/Assignment.html" class="ui-btn-active">Assignment</a></li>
-                    </ul>
+                        <li><a href="http://jsp.chaninz.com/tasm/Mobile/index.html" rel="external" and data-ajax="false"><i class="fa fa-newspaper-o fa-2x"></i></a></li>
+                        <li><a href="http://jsp.chaninz.com/tasm/Mobile/AssignmentInCourse.html" rel="external" and data-ajax="false" class="ui-btn-active"><i class="fa fa-file-text fa-2x"></i></a></li></ul>
                 </div>
             </div>
 
@@ -73,7 +72,7 @@
                         '<tr><td><b>Status:</b></td>' +
                         '<td><h2 style="color:#F1C40F">' + '</h2></td></tr>' +
                         '<tr></tr><tr></tr>' +
-                        '<tr><td><b>Score:</b></td>' + v.fully_mark + '</b></td>' +
+                        '<tr><td><b>Score:</b></td><td><b>' + v.fully_mark + '</b></td>' +
                         '</tr></table></div>').insertBefore($('#add-test'));
             });
             var fName = sessionStorage.getItem('fName');
@@ -94,7 +93,11 @@
                     $(location).attr('href', 'http://jsp.chaninz.com/tasm/Mobile/AssignmentInCourse.html');
                 });
             }
-
+            $("#lcList").append('<li class="logOut"><a href="#" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Log Out <div style="padding-left:50px" class="fa fa-power-off fa-2x"></div> </a></li>');
+            $(".logOut").click(function(){
+               sessionStorage.clear();
+               $(location).attr('href', 'http://jsp.chaninz.com/tasm/Mobile/Home.html');
+            });
         });
 
     </script>

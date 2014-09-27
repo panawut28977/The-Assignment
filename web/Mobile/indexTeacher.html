@@ -4,7 +4,7 @@
         <meta name="viewport" content="initial-scale=1.0">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/jquery.mobile-1.4.2.css" />
+        <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/css/jquery.mobile-1.4.2.css" />
         <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/css/font-awesome.min.css"/>
 
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
@@ -17,25 +17,15 @@
                     <a href="http://jsp.chaninz.com/tasm/Mobile/indexTeacher.html" rel="external" and data-ajax="false"><span class="fa fa-home fa-2x" style="alignment-adjust:auto;padding-right:25px;padding-top:15px;padding-bottom:15px"></span></a>
                     <span class="fa fa-globe fa-2x"></span></center>
                 <a href="#nav-panel"><i class="fa fa-bars fa-2x"></i></a>
-                <div style="background-color:white ;padding:1px;width:auto;">
-                    <div style="margin-left:15px;color:#999">
-                        <h3 align="center">LNG103 Academic English 
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <div class="fa fa-gear fa-2x"></div></h3>
-                    </div>
-                </div>
+
                 <div style="padding: 5px;width: auto;background: #E2E2E2;">
                     <form class="ui-filterable">
-                    <input type="search" name="search" placeholder="Filter..."/>
+                        <input type="search" name="search" placeholder="Filter..."/>
                     </form>
                 </div>
             </div><!-- /header -->
 
-            <div data-role="navbar">
 
-                <a href="#" style="margin:0 0 0 0;background:#2F89CE;"><i class="fa fa-plus fa-2x" style="padding-right:10px"></i><b style="color:#FFF">Add Announce</b></a>
-
-            </div>
 
             <div id="add-test"></div>
 
@@ -47,19 +37,19 @@
                         <b style="color:white" id="lName"></b>
                     </li>
                     <li>
-                        <a href="#">Join Course &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="http://jsp.chaninz.com/tasm/Mobile/JoinCourseTeacher.html">Join Course &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <div class="fa fa-plus fa-2x"></div>
                         </a>
                     </li>
+
                 </ul>
             </div>
 
             <div data-position="fixed" data-tap-toggle="false" data-role="footer" data-tap-toggle="false" >
                 <div data-role="navbar">
                     <ul>
-                        <li><a href="http://jsp.chaninz.com/tasm/Mobile/indexTeacher.html" rel="external" and data-ajax="false" class="ui-btn-active">Announce</a></li>
-                        <li><a href="http://jsp.chaninz.com/tasm/Mobile/AssignmentTeacher.html" rel="external" and data-ajax="false">Assignment</a></li>
-                        <li><a href="TeacherScore.html" rel="external" and data-ajax="false">Score</a></li>
+                        <li><a href="http://jsp.chaninz.com/tasm/Mobile/indexTeacher.html" rel="external" and data-ajax="false" class="ui-btn-active"><i class="fa fa-newspaper-o fa-2x"></i></a></li>
+                        <li><a href="http://jsp.chaninz.com/tasm/Mobile/AssignmentInCourseTeacher.html" rel="external" and data-ajax="false" ><i class="fa fa-file-text fa-2x"></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -76,8 +66,9 @@
                     $(
                             '<div style="background-color:#' + (i % 2 == 0 ? 'FFFFFF' : 'F4F4F4') + ' ;padding:1px;width:auto;">' +
                             '<div style="margin-left:15px">' +
-                            '<h3>' + v.course + '</h3>' +
-                            '<p>' + v.title + '</p>' +
+                            '<h4>' + v.an_acc.firstname + ' ' + v.an_acc.lastname + ' : ' + findCourseName(v.course) + '</h4> ' +
+                            '<p>' + v.announce_date + '</p>' +
+//                            '<p>' +  v.an_acc.firstname + ' ' + v.an_acc.lastname + '</p>' +
                             '<p>' + v.content + '</p>' +
                             '</div>' +
                             '</div>').insertBefore($('#add-test'));
@@ -92,17 +83,38 @@
             $("#dPIC").attr("src", "../" + pic);
             $("#fName").text(fName);
             $("#lName").text(lName);
-             var key, count = 0;
+            var key, count = 0;
             for (key in cList) {
                 if (cList.hasOwnProperty(key)) {
-                        $("#lcList").append('<li class="cLink" data-id="'+ key +'"><a class="ui-btn ui-btn-icon-right ui-icon-carat-r">' + cList[key].course.name +'</a></li>').trigger('refresh');
+                    $("#lcList").append('<li class="cLink" cName="' + cList[key].course.name + '" data-id="' + key + '" role="' + cList[key].role + '"><a class="ui-btn ui-btn-icon-right ui-icon-carat-r">' + cList[key].course.name + '</a></li>').trigger('refresh');
                 }
                 $(".cLink").click(function() {
                     sessionStorage.setItem('cID', $(this).attr("data-id"));
+                    sessionStorage.setItem('role', $(this).attr("role"));
+                    sessionStorage.setItem('cName', $(this).attr("cName"));
                     $(location).attr('href', 'http://jsp.chaninz.com/tasm/Mobile/AssignmentInCourseTeacher.html');
                 });
             }
+            $("#lcList").append('<li class="logOut"><a href="#" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Log Out <div style="padding-left:50px" class="fa fa-power-off fa-2x"></div> </a></li>');
+            $(".logOut").click(function() {
+                sessionStorage.clear();
+                $(location).attr('href', 'http://jsp.chaninz.com/tasm/Mobile/Home.html');
+            });
         });
+
+        function findCourseName(course_id) {
+            var name = "";
+            $.ajax({
+                type: "POST",
+                url: "http://jsp.chaninz.com/tasm/getCourseName",
+                data: {"course_id": course_id},
+                async: false,
+                success: function(data) {
+                    name = data.name;
+                }
+            });
+            return name;
+        }
 
     </script>
 </html>

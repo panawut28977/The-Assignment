@@ -4,7 +4,7 @@
         <meta name="viewport" content="initial-scale=1.0">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/jquery.mobile-1.4.2.css" />
+        <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/css/jquery.mobile-1.4.2.css" />
         <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/css/font-awesome.min.css"/>
 
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
@@ -43,9 +43,8 @@
             <div data-position="fixed" data-tap-toggle="false" data-role="footer" data-tap-toggle="false" >
                 <div data-role="navbar">
                     <ul>
-                        <li><a href="http://jsp.chaninz.com/tasm/Mobile/index.html" rel="external" and data-ajax="false" class="ui-btn-active">Announce</a></li>
-                        <li><a href="http://jsp.chaninz.com/tasm/Mobile/Assignment.html" rel="external" and data-ajax="false">Assignment</a></li>
-                    </ul>
+                       <li><a href="http://jsp.chaninz.com/tasm/Mobile/indexTeacher.html" rel="external" and data-ajax="false" class="ui-btn-active"><i class="fa fa-newspaper-o fa-2x"></i></a></li>
+                        <li><a href="http://jsp.chaninz.com/tasm/Mobile/AssignmentInCourseTeacher.html" rel="external" and data-ajax="false" ><i class="fa fa-file-text fa-2x"></i></a></li></ul>
                 </div>
             </div>
 
@@ -64,8 +63,9 @@
                     $(
                             '<div style="background-color:#' + (i % 2 == 0 ? 'FFFFFF' : 'F4F4F4') + ' ;padding:1px;width:auto;">' +
                             '<div style="margin-left:15px">' +
-                            '<h3>' + v.course + '</h3>' +
-                            '<p>' + v.title + '</p>' +
+                            '<h4>'+ v.an_acc.firstname + ' ' + v.an_acc.lastname + ' : ' + findCourseName(v.course) + '</h4> ' +
+                            '<p>' + v.announce_date + '</p>' +
+//                            '<p>' +  v.an_acc.firstname + ' ' + v.an_acc.lastname + '</p>' +
                             '<p>' + v.content + '</p>' +
                             '</div>' +
                             '</div>').insertBefore($('#add-test'));
@@ -95,6 +95,11 @@
                 $(location).attr('href', 'http://jsp.chaninz.com/tasm/Mobile/AssignmentInCourse.html');
             });
             }
+            $("#lcList").append('<li class="logOut"><a href="#" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Log Out <div style="padding-left:50px" class="fa fa-power-off fa-2x"></div> </a></li>');
+            $(".logOut").click(function(){
+               sessionStorage.clear();
+               $(location).attr('href', 'http://jsp.chaninz.com/tasm/Mobile/Home.html');
+            });
 //            $("#sCourse").attr("href", cList[1].course_id);
 //            $("#cName").text(cList[1]);
 //                $(result).each(function(k,v){
@@ -107,6 +112,22 @@
 //                $("#courseID").attr("href", cList[i].couse_id);
 //            }
         });
+        
+        function findCourseName(course_id){
+            
+            var name ="";
+            $.ajax({
+                type: "POST",
+                    url: "http://jsp.chaninz.com/tasm/getCourseName",
+                    data: {"course_id": course_id},
+                    async: false,
+                    success: function(data) {
+                        name = data.name;
+                    }
+            });
+            return name;
+        }
+        
         
 //        function NAVBAR() {
 //            $(
@@ -126,5 +147,6 @@
 //                        });
 //                    ).insertBefore($('#add-test'));
 //        });
+
     </script>
 </html>

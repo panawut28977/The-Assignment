@@ -4,15 +4,15 @@
         <meta name="viewport" content="initial-scale=1.0">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <link rel="stylesheet" href="jquery.mobile-1.4.2.css" />
-        <link rel="stylesheet" href="css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/css/jquery.mobile-1.4.2.css" />
+        <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/css/font-awesome.min.css"/>
 
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
         <script type="text/javascript" charset="utf-8" src="http://jsp.chaninz.com/tasm/js/cordova.js"></script>
     </head> 
     <body>
-        <div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-fixed-page1" data-title="Panel fixed positioning" data-url="panel-fixed-page1">
+        <div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-fixed-page1" data-title="Panel fixed positioning">
             <div data-role="header" data-position="fixed">
                 <center>
                     <a href="index.html" rel="external" and data-ajax="false"><span class="fa fa-home fa-2x" style="alignment-adjust:auto;padding-right:25px;padding-top:15px;padding-bottom:15px"></span></a>
@@ -33,12 +33,12 @@
 
             <h3 align="center">QR Code</h3>
 
-            <button onclick="capturePhoto();">Capture Photo</button> <br>
+<!--            <button onclick="capturePhoto();">Capture Photo</button> <br>
             <button onclick="capturePhotoEdit();">Capture Editable Photo</button> <br>
             <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>
             <button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button><br>
             <img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
-            <img style="display:none;" id="largeImage" src="" />
+            <img style="display:none;" id="largeImage" src="" />-->
 
             <div data-role="panel" data-position-fixed="true" data-display="overlay"  id="nav-panel">
                 <ul data-role="listview" id="lcList">
@@ -58,9 +58,8 @@
             <div data-position="fixed" data-tap-toggle="false" data-role="footer" data-tap-toggle="false" >
                 <div data-role="navbar">
                     <ul>
-                        <li><a href="http://jsp.chaninz.com/tasm/Mobile/index.html" rel="external" and data-ajax="false" class="ui-btn-active">Announce</a></li>
-                        <li><a href="http://jsp.chaninz.com/tasm/Mobile/Assignment.html" rel="external" and data-ajax="false">Assignment</a></li>
-                    </ul>
+                        <li><a href="http://jsp.chaninz.com/tasm/Mobile/index.html" rel="external" and data-ajax="false"><i class="fa fa-newspaper-o fa-2x"></i></a></li>
+                        <li><a href="http://jsp.chaninz.com/tasm/Mobile/AssignmentInCourse.html" rel="external" and data-ajax="false"><i class="fa fa-file-text fa-2x"></i></a></li></ul>
                 </div>
             </div>
 
@@ -89,6 +88,11 @@
                     $(location).attr('href', 'http://jsp.chaninz.com/tasm/Mobile/AssignmentInCourse.html');
                 });
             }
+            $("#lcList").append('<li class="logOut"><a href="#" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Log Out <div style="padding-left:50px" class="fa fa-power-off fa-2x"></div> </a></li>');
+            $(".logOut").click(function(){
+               sessionStorage.clear();
+               $(location).attr('href', 'http://jsp.chaninz.com/tasm/Mobile/Home.html');
+            });
         });
 //        var pictureSource;   // picture source
 //        var destinationType; // sets the format of returned value 
