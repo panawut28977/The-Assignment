@@ -12,7 +12,7 @@ $(function() {
 
 
 function getFileName(fullPath) {
-    var filename ;
+    var filename;
     if (fullPath) {
         var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
         var filename = fullPath.substring(startIndex);
@@ -21,4 +21,10 @@ function getFileName(fullPath) {
         }
     }
     return filename;
+}
+
+function formatDate(date) {
+    var dateFormat = $.datepicker.formatDate('MM dd, yy', new Date(date));
+    alert(dateFormat);
+    $(this).text(dateFormat);
 }

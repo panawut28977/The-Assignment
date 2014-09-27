@@ -76,6 +76,7 @@ public class Util {
 
             str = month + " " + day + " at " + hour + ":" + minute + ampm;
         }
+        System.out.println(str);
 
         return str;
     }

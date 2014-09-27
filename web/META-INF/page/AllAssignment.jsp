@@ -58,7 +58,7 @@
                 right: 'month'
             },
             eventClick: function(calEvent, jsEvent, view) {
-                location.href = "assignment.jsp?tab=AllAssignment&&amId=" + calEvent.id+"&&cId="+calEvent.cId;
+                location.href = "assignment.jsp?tab=AllAssignment&&amId=" + calEvent.id + "&&cId=" + calEvent.cId;
             },
             events: jsonArr
         }).find("#loader").remove();
@@ -113,7 +113,9 @@
                             <td>${a.total_member} <a href="selectPeople?am_id=${a.am_id}&&cId=${a.course.course_id}">join group</a></td>
                         </c:otherwise>
                     </c:choose>
-                    <td>${a.due_date} <c:if test="${a.due_date eq null}"> - </c:if></td>
+                    <td>
+                        <span onload="formatDate('${a.due_date}')"></span><c:if test="${a.due_date eq null}"> - </c:if>
+                        </td>
                         <td>
                         <c:set value="${cf:remainingTimeforSend(a,ac.acc_id)}" var="status"/>
                         <c:choose>
