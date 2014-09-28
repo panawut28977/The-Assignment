@@ -90,3 +90,7 @@ margin: 20px 0;
 img:not([class='qrcode']){
  border-radius: 50% 50% 50% 50%;   
 }
+
+.usersetting{
+    clear: both;
+}

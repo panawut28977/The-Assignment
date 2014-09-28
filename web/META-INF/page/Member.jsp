@@ -19,7 +19,7 @@
                 <div class="media-body">
                     <div class="media-heading" ><h4>${st.firstname} ${st.lastname} <c:if test="${cf:getAccountRole(st.acc_id, cId) eq 'TH'}"> <span class="label label-primary pull-right" style="font-size: 12px">Teacher</span></c:if></h4></div>
                     <c:if test="${ac.courseList.get(cId).role eq 'TH'}">
-                        <span class="dropdown pull-right">
+                        <span class="dropdown pull-right usersetting">
                             <a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></a>
                             <ul class="dropdown-menu">
                                 <c:choose >
@@ -35,7 +35,7 @@
                         </span>
                     </c:if>
                     <br>
-                    <small class="pull-right text-muted">Join date : ${cf:getApprovedTime(st.acc_id, cId)}</small>
+                    <small class="pull-right text-muted">Join date : ${cf:getApprovedTime(st.acc_id, cId)} &nbsp;</small>
                 </div>
             </div>
             <c:set value="${count+1}" var="count"/>

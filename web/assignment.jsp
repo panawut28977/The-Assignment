@@ -124,7 +124,7 @@ Author     : JenoVa
                                     <tr>
                                         <td><b>Late sent</b></td>
                                         <td>
-                                            ${am.late_date}
+                                            <span class="formatDate" data-date="${am.late_date}">
                                         </td>
                                     </tr>    
                                 </c:if>

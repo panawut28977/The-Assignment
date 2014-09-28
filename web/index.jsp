@@ -15,7 +15,7 @@
         <%@include file="META-INF/page/include_js.jsp" %>
         <style>
             body{
-                background-image: url('img/Education-knowledge-PowerPoint-PPT-hd-87622487.jpg');
+                background-image: url('img/Teacher_Homework.jpg');
                 background-repeat: repeat-x;
                 background-size: 100%;
             }
