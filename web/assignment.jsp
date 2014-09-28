@@ -60,7 +60,7 @@ Author     : JenoVa
                     <div class="details">
                         <div>
                             <h3 class="">${am.name}</h3>
-                            <small class="text-muted">Created date :  <span class="formatDate">${am.create_date}</span></small><br>   
+                            <small class="text-muted">Created date :  ${am.create_date}</small><br>   
                         </div>
                         <div class="col-md-5 well"> 
                             <c:choose>

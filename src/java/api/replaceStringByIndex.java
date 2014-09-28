@@ -71,7 +71,7 @@ public class replaceStringByIndex extends HttpServlet {
         
         Util.sortQuestionIndex(curList);
         for (int i = curList.size()-1; i >=0; i--) {
-            result = Util.replaceStringByIndex(result, curList.get(i).getQ_start_index()-1,  curList.get(i).getQ_end_index()-1, reptext);
+            result = Util.replaceStringByIndex(result, curList.get(i).getQ_start_index(),  curList.get(i).getQ_end_index(), reptext);
         }
         out.write(result);
     }

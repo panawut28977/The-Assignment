@@ -177,12 +177,20 @@
                                                         <c:set var="stanswer" value="${ct_cf:getStAMQuestion(sa.st_am_id, q.q_id)}"/>
                                                         <!-- remove [    ] -->
                                                         <c:set var="clist" value="${fn:substring(q.q_choice_list, 1, q.q_choice_list.length()-1)}"/>
-                                                        <c:set var="anslist" value="${fn:substring(q.q_answer_list, 1, q.q_answer_list.length()-1)}"/>
+                                                        <c:set var="anslist" value=""/>
+                                                        <c:choose>
+                                                            <c:when test="${q.q_type eq 'tfQuestion'}">
+                                                                <c:set var="anslist" value="${q.q_answer_list}"/>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <c:set var="anslist" value="${fn:substring(q.q_answer_list, 1, q.q_answer_list.length()-1)}"/>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                         <c:set var="stans" value="${fn:substring(stanswer.get(0).answer, 1, stanswer.get(0).answer.length()-1)}"/>
 
                                                         <!--split -->
                                                         <c:set var="choicesp" value="${fn:split(clist, ', ')}" />
-                                                        <c:set var="anslistsp" value="${fn:split(anslist, ', ')}" />
+                                                        <c:set var="anslistsp" value="${fn:split(anslist, ',')}" />
                                                         <c:set var="stanssp" value="${fn:split(stans, ', ')}" />
                                                         <div>
                                                             <p>${q.q_no}.) ${q.q_text}</p>
@@ -225,6 +233,7 @@
                                                                     <!--set score per choice-->
                                                                     <c:set value="${q.q_score/anslength}" var="scoreperchoice"/>
                                                                     <!--set correct score -->
+
                                                                     <c:set value="0" var="correctscore"/>
                                                                     <c:forEach begin="0" end="${anslength-1}" var="i">
                                                                         <c:if test="${anslistsp[i] eq stanssp[i]}">

@@ -96,7 +96,8 @@ public class Util {
 
     public static String replaceStringByIndex(String original, int stIndex, int endIndex, String rep) {
         StringBuilder newText = new StringBuilder(original);
-        newText.replace(stIndex+1, endIndex+1, rep);
+//        newText.replace(stIndex+1, endIndex+1, rep);
+        newText.replace(stIndex, endIndex, rep);
         System.out.println(newText.toString());
         System.out.println("-------");
         return newText.toString();
