@@ -29,6 +29,7 @@ import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
+import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.Sort;
@@ -93,6 +94,7 @@ public class Checkcopy extends HttpServlet {
                 directory = FSDirectory.open(new File(studentAmPath + "\\" + a.getCourse().getCourse_id() + "\\" + sa.getAm_id()));
                 indexReader = DirectoryReader.open(directory);
                 IndexSearcher searcher = new IndexSearcher(indexReader);
+                BooleanQuery.setMaxClauseCount(20000);
                 QueryParser parser = new QueryParser(Version.LUCENE_47, "student_assignment", new ThaiAnalyzer(Version.LUCENE_47));
                 Query query = parser.parse(QueryParser.escape(keyword));
 
