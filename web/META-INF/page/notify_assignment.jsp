@@ -14,7 +14,7 @@
             <span class="glyphicon glyphicon-file" style="font-size: 64px"></span>
         </span>
         <div class="media-body">
-            <h4 class="media-heading">${ann_acc.firstname}  <small>(${cf:getCourseNameByID(n.course_id)})</small><small class="pull-right">${n.noti_date}</small></h4>
+            <h4 class="media-heading">${ann_acc.firstname}  <small>(${cf:getCourseNameByID(n.course_id)})</small><small class="pull-right">${cf:formatTime(n.noti_date)}</small></h4>
             <p>${n.text}</p>
             <a href="${n.link}">see more</a>
         </div>

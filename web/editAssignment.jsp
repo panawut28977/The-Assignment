@@ -439,7 +439,7 @@
                     <c:set value="${total_q+no_seq}" var="total_seq"/>
                 </c:when>
             </c:choose>--%>
-                        <input type="submit" class="btn btn-primary pull-right" style="margin-left: 20px;" value="Saved">
+                        <input type="submit" class="btn btn-primary pull-right" style="margin-left: 20px;" value="Save">
                     </div>
                 </form>
                 <script src="js/bootstrap-datetimepicker.min.js"></script>

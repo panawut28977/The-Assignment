@@ -147,10 +147,10 @@
                                                         <c:set var="clist" value="${fn:substring(q.q_choice_list, 1, q.q_choice_list.length()-1)}"/>
                                                         <c:set var="anslist" value="${fn:substring(q.q_answer_list, 1, q.q_answer_list.length()-1)}"/>
 
-                                                        <c:set var="choicesp" value="${fn:split(clist, ', ')}" />
+                                                        <c:set var="choicesp" value="${fn:split(clist, ',')}" />
                                                         <c:if test="${stanswer.size() !=0}">
                                                             <c:set var="stans" value="${fn:substring(stanswer.get(0).answer, 1, stanswer.get(0).answer.length()-1)}"/>
-                                                            <c:set var="stanssp" value="${fn:split(stans, ', ')}" />
+                                                            <c:set var="stanssp" value="${fn:split(stans, ',')}" />
                                                         </c:if>
                                                         <div>
                                                             <p>${q.q_no}.) ${q.q_text}</p>
