@@ -260,6 +260,7 @@ public class Notification {
                 n.setNoti_id(rs.getInt("noti_id"));
                 n.setText(rs.getString("text"));
                 n.setType(rs.getString("type"));
+                n.setReceive_list_id(rs.getInt("receive_list_id"));
                 notiList.add(n);
             }
             conn.close();
@@ -333,6 +334,23 @@ public class Notification {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
+    }
+    
+    public static boolean removeUserNotify(int acc_id, int receive_list_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "delete from receive_noti_id where acc_id=? and receive_list_id=?";
+        PreparedStatement pstm;
+        int result = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, acc_id);
+            pstm.setInt(2, receive_list_id);
+            result = pstm.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result > 0;
     }
 
     @Override

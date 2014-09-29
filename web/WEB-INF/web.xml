@@ -334,6 +334,10 @@
         <servlet-name>CourseAnnounce</servlet-name>
         <servlet-class>servlet.CourseAnnounce</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>clearNotify</servlet-name>
+        <servlet-class>servlet.clearNotify</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -461,6 +465,7 @@
     <servlet-mapping>
         <servlet-name>getCourseName</servlet-name>
         <url-pattern>/getCourseName</url-pattern>
+        <servlservlet-name>getCourseName</servlservlet-name>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>showAnnounceTeacher</servlet-name>
@@ -589,6 +594,10 @@
     <servlet-mapping>
         <servlet-name>CourseAnnounce</servlet-name>
         <url-pattern>/CourseAnnounce</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>clearNotify</servlet-name>
+        <url-pattern>/clearNotify</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

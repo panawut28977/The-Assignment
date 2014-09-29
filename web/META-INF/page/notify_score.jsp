@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="cf" uri="/WEB-INF/tlds/functions.tld" %>  
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<div><h3>${param.nt}<button class='btn btn-default pull-right'>Clear all</button></h3></div>
+<div><h3>${param.nt}<a class='btn btn-default pull-right' href="clearNotify">Clear all</a></h3></div>
 <c:forEach items="${noti}" var="n"> 
     <c:set value="${cf:getNameByID(n.acc_id)}" var="ann_acc"/>
     <div class="media">

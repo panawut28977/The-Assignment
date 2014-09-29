@@ -8,7 +8,6 @@ package servlet;
 import Model.Account;
 import Model.Notification;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +19,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Orarmor
  */
-public class notification extends HttpServlet {
+public class clearNotify extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,28 +33,14 @@ public class notification extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession ss = request.getSession();
-        String nt = request.getParameter("nt");
-        System.out.println("gsgds"+nt);
-        Account ac = (Account) ss.getAttribute("ac");
-        List<Notification> noti = null;
-        if (nt.equalsIgnoreCase("Announcement")) {
-            noti = Notification.getAnnounce(ac.getAcc_id());
-            Notification.seen(ac.getAcc_id(), "announce");
-        } else if (nt.equalsIgnoreCase("Assignment")) {
-            noti = Notification.getAssignment(ac.getAcc_id());
-            Notification.seen(ac.getAcc_id(), "assignment");
-        } else if (nt.equalsIgnoreCase("Alert")) {
-            noti = Notification.getAlert(ac.getAcc_id());
-            Notification.seen(ac.getAcc_id(), "alert");
-        } else if (nt.equalsIgnoreCase("Score")) {
-            noti = Notification.getScore(ac.getAcc_id());
-            Notification.seen(ac.getAcc_id(), "score");
+        Account ac = (Account)ss.getAttribute("ac");
+        List<Notification> noti = (List<Notification>) ss.getAttribute("noti");
+        System.out.println(noti);
+        for (Notification notification : noti) {
+            System.out.println(Notification.removeUserNotify(ac.getAcc_id(), notification.getReceive_list_id()));
         }
-
-        ss.setAttribute("nt", nt);
-        ss.setAttribute("noti", noti);
-        getServletContext().getRequestDispatcher("/notification.jsp").forward(request, response);
-
+        String nt = (String) ss.getAttribute("nt");
+        response.sendRedirect("notification?nt=" + nt);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
