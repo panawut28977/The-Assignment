@@ -26,7 +26,7 @@
         });
         var sData = aTable.fnGetData();
         if (sData.length == 0) {
-            var html = '<h1 class="text-muted" style="text-align: center">ยังไม่มีข่าวหรือประกาศครับ XD</h1>';
+            var html = '<h1 class="text-muted" style="text-align: center" id="noann">No announement.</h1>';
             $("#AllAnnounce_wrapper table tbody").html(html);
         }
         $("#addAnnouce").click(function() {
@@ -37,6 +37,9 @@
                     url: "AddAnnounce",
                     data: {title: $("#title").val(), content: content}
                 }).done(function(msg) {
+                    if($("#noann").length!=0){
+                        $("#noann").remove();
+                    }
                     var html = '<tr class="even"><td><div class="media" id="newAnnounce"><a class="pull-left" href="#"><img class="img-circle" width="64" src="' + pic + '"></a><div class="media-body"><h4 class="media-heading"><small class="text-muted">' + fullname + '</small><small class="pull-right">' + dateSt + '</small></h4><p>' + $("#content").val() + '</p></div></div></td></tr>';
                     $("#listAnnounce table tbody").prepend(html);
                     $("#newAnnounce").slideDown().removeAttr("id");

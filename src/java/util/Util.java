@@ -29,7 +29,7 @@ public class Util {
         String str = null;
         Timestamp timestamp = null;
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.ENGLISH);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S", Locale.ENGLISH);
 
         try {
             Date date = sdf.parse(old);
@@ -41,7 +41,6 @@ public class Util {
         Timestamp current = new Timestamp(System.currentTimeMillis());
         Timestamp past24 = new Timestamp(System.currentTimeMillis() - (1000 * 60 * 60 * 24));
         Calendar calendar = Calendar.getInstance();
-
         if (timestamp.after(past24) && timestamp.before(current)) {
             calendar.setTimeInMillis(current.getTime());
             int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
@@ -69,6 +68,7 @@ public class Util {
         } else {
             calendar.setTimeInMillis(timestamp.getTime());
             String month = new SimpleDateFormat("MMMM", Locale.ENGLISH).format(calendar.get(Calendar.MONTH));
+            System.out.println(Calendar.MONTH);
             int day = calendar.get(Calendar.DAY_OF_MONTH);
             int hour = calendar.get(Calendar.HOUR);
             String minute = addZero(calendar.get(Calendar.MINUTE));
@@ -76,7 +76,7 @@ public class Util {
 
             str = month + " " + day + " at " + hour + ":" + minute + ampm;
         }
-        System.out.println(str);
+//        System.out.println(str);
 
         return str;
     }
@@ -137,5 +137,9 @@ public class Util {
             }
         }
         System.out.println("after :" + curqList);
+    }
+    
+    public static void main(String[] args) {
+        System.out.println(formatTime("2014-09-27 16:21:26.0"));
     }
 }

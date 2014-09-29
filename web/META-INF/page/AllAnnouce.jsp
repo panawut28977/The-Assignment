@@ -15,7 +15,7 @@
 </script>
 <c:choose>
     <c:when test="${announcement.size()==0}">
-        <h1 class="text-muted" style="text-align: center">ยังไม่มีข่าวหรือประกาศครับ XD</h1>
+        <h1 class="text-muted" style="text-align: center">No announement.</h1>
     </c:when>
     <c:otherwise>
         <div class="table-responsive" style="min-height: 520px; margin-top: 30px">
