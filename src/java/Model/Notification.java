@@ -202,6 +202,7 @@ public class Notification {
                 n.setNoti_id(rs.getInt("noti_id"));
                 n.setText(rs.getString("text"));
                 n.setType(rs.getString("type"));
+                n.setReceive_list_id(rs.getInt("receive_list_id"));
                 notiList.add(n);
             }
             conn.close();
@@ -231,6 +232,7 @@ public class Notification {
                 n.setNoti_id(rs.getInt("noti_id"));
                 n.setText(rs.getString("text"));
                 n.setType(rs.getString("type"));
+                n.setReceive_list_id(rs.getInt("receive_list_id"));
                 notiList.add(n);
             }
             conn.close();
@@ -290,6 +292,7 @@ public class Notification {
                 n.setNoti_id(rs.getInt("noti_id"));
                 n.setText(rs.getString("text"));
                 n.setType(rs.getString("type"));
+                n.setReceive_list_id(rs.getInt("receive_list_id"));
                 notiList.add(n);
             }
             conn.close();
@@ -316,7 +319,7 @@ public class Notification {
         return result > 0;
     }
 
-    public static int seen(int acc_id,String type) {
+    public static int seen(int acc_id, String type) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "update notification n"
                 + " join receive_noti_id r on  n.receive_list_id =  r.receive_list_id "
@@ -335,7 +338,7 @@ public class Notification {
         }
         return result;
     }
-    
+
     public static boolean removeUserNotify(int acc_id, int receive_list_id) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "delete from receive_noti_id where acc_id=? and receive_list_id=?";
