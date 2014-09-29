@@ -61,7 +61,7 @@ public class updateScoreStAmOnWeb extends HttpServlet {
                 aq.setAcc_id(0);
                 aq.setG_id(sa.getG_id());
             } else {
-                aq.setAcc_id(aq.getAcc_id());
+                aq.setAcc_id(sa.getAcc_id());
                 aq.setG_id(0);
             }
             if (q_type.equalsIgnoreCase("multiple_choice") || q_type.equalsIgnoreCase("tfQuestion")) {
@@ -80,7 +80,7 @@ public class updateScoreStAmOnWeb extends HttpServlet {
                         aq.setAcc_id(0);
                         aq.setG_id(sa.getG_id());
                     } else {
-                        aq.setAcc_id(aq.getAcc_id());
+                        aq.setAcc_id(sa.getAcc_id());
                         aq.setG_id(0);
                     }
                     aq.setSt_am_id(sa.getSt_am_id());
@@ -106,7 +106,7 @@ public class updateScoreStAmOnWeb extends HttpServlet {
                         aq.setAcc_id(0);
                         aq.setG_id(sa.getG_id());
                     } else {
-                        aq.setAcc_id(aq.getAcc_id());
+                        aq.setAcc_id(sa.getAcc_id());
                         aq.setG_id(0);
                     }
                     aq.setSt_am_id(sa.getSt_am_id());

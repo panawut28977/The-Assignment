@@ -173,6 +173,7 @@ public class AnswerQuestion {
 
     //updateScore
     public static int updateScore(AnswerQuestion a) {
+        System.out.println(a);
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "update student_answer_question set score=? where st_ass_id=? and q_id=? and q_order=? and acc_id=? and g_id=?";
         PreparedStatement pstm;
@@ -180,13 +181,15 @@ public class AnswerQuestion {
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setDouble(1, a.getScore());
+            System.out.println("score:"+a.getScore());
             pstm.setInt(2, a.getSt_am_id());
             pstm.setInt(3, a.getQ_id());
-            System.out.println(a.getQ_order());
+//            System.out.println(a.getQ_order());
             pstm.setInt(4, a.getQ_order());
             pstm.setInt(5, a.getAcc_id());
             pstm.setInt(6, a.getG_id());
             result = pstm.executeUpdate();
+            System.out.println("result:"+result);
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
