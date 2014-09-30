@@ -465,7 +465,6 @@
     <servlet-mapping>
         <servlet-name>getCourseName</servlet-name>
         <url-pattern>/getCourseName</url-pattern>
-        <servlservlet-name>getCourseName</servlservlet-name>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>showAnnounceTeacher</servlet-name>
