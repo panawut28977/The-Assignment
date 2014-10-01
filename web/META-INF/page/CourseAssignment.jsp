@@ -82,10 +82,10 @@
                 right: 'month'
             },
             eventClick: function(calEvent, jsEvent, view) {
-                location.href = "assignment.jsp?tab=AllAssignment&&amId="+calEvent.id;
+                location.href = "assignment.jsp?tab=AllAssignment&&amId=" + calEvent.id;
             },
             events: jsonArr
-            
+
         }).find("#loader").remove();
 
     });
@@ -99,16 +99,20 @@
     span[class^=text]{
         font-weight: bold;
     }
+
+    #calendar{
+        display: none;
+    }
 </style>
+<div class="btn-group pull-right" style="margin: 20px 0">
+    <button type="button" class="btn btn-default active" id="view_am_list"><i class="glyphicon glyphicon-list"></i></button>
+    <button type="button" class="btn btn-default" id="view_am_calendar"><i class="glyphicon glyphicon-calendar"></i></button>
+</div>
 <c:if test="${ac.courseList.get(cId).role eq 'TH'}"> 
     <a class="btn btn-primary pull-right"  href="CreateAssignment.jsp?tab=AllAssignment" style="margin-top: 20px"><span class="glyphicon glyphicon-plus-sign"></span> Create Assignment</a>
     <br/><br/><br/>
 </c:if>
-    <div id='calendar' style="margin-bottom: 20px;margin-top: 30px">
-        <div class="text-center" id="loader"><i class="fa fa-spinner fa-5x fa-spin"></i></div>
-    </div>
-<hr/>
-<div class="table-responsive" style="min-height: 520px;">
+    <div class="table-responsive" style="min-height: 520px;" id="view_list">
     <table class="table table-striped" id="AllAssignemnt">
         <thead>
             <tr>
@@ -159,8 +163,8 @@
                         </c:otherwise>
                     </c:choose>
                     <td> <span class="formatDate" data-date="${a.due_date}"><i class="fa fa-spinner fa-spin"></i></span></td>
-                    <c:choose>
-                        <c:when test="${ac.courseList.get(cId).role eq 'ST'}">
+                            <c:choose>
+                                <c:when test="${ac.courseList.get(cId).role eq 'ST'}">
                             <td>
                                 <c:set value="${cf:remainingTimeforSend(a,ac.acc_id)}" var="status"/>
                                 <c:choose>
@@ -195,4 +199,7 @@
             </c:forEach>
         </tbody>
     </table>
+</div>
+<div id='calendar' style="margin-bottom: 20px;margin-top: 30px">
+    <div class="text-center" id="loader"><i class="fa fa-spinner fa-5x fa-spin"></i></div>
 </div>

@@ -11,6 +11,17 @@ $(function() {
     $(".formatDate").each(function() {
         $(this).text(formatDate($(this).attr("data-date")));
     });
+
+    $("#view_am_list").click(function() {
+        $("#view_list").show();
+        $("#calendar").hide();
+    });
+    $("#view_am_calendar").click(function() {
+        $("#view_am_list").removeClass("active");
+        $("#view_list").hide();
+        $('#calendar').show();
+        $('#calendar').fullCalendar('render');
+    });
 });
 
 
