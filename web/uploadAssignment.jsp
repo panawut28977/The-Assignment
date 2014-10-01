@@ -115,7 +115,7 @@
                                     </h4>
                                     <form role="form" class="form-inline" action="uploadAssignmentFile" method="post" enctype="multipart/form-data">
                                         <div class="col-md-6 col-md-offset-3">
-                                            <input type="file" class="form-control" name="file"/>    
+                                            <input type="file" class="form-control" name="file" required="yes"/>    
                                         </div>
                                         <br/><br/><br/>
                                         <input type="submit" value="Upload" class="form-control btn btn-primary"/>

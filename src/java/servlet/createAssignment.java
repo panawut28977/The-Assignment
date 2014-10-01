@@ -153,6 +153,9 @@ public class createAssignment extends HttpServlet {
                     String[] m_score = m.getParameterValues(seqno[i] + "m_score");
                     String[] match_text = m.getParameterValues(seqno[i] + "match_text");
                     String[] match_ans = m.getParameterValues(seqno[i] + "match_ans");
+                    System.out.println(Arrays.toString(match_text));
+                    System.out.println(Arrays.toString(match_ans));
+                    System.out.println(Arrays.toString(m_score));
                     MatchWord mw = null;
                     for (int j = 0; j < match_text.length; j++) {
                         mw = new MatchWord();
@@ -166,6 +169,7 @@ public class createAssignment extends HttpServlet {
                             mw.setQ_order(j + 1);
                             mw.setQ_title(qtext);
                             mw.setQ_text(match_text[j]);
+                            System.out.println(match_ans[j]);
                             mw.setQ_answer(match_ans[j]);
                             if (m_score[j] == null) {
                                 m_score[j] = "0";

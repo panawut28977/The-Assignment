@@ -215,14 +215,14 @@
                                                                 </c:if>
                                                             </c:forEach> 
                                                             <!-- no shuffle answer -->
-                                                            <c:set value="${fn:split(listans,', ')}" var="listansNoshuffle"/>
+                                                            <c:set value="${fn:split(listans,',')}" var="listansNoshuffle"/>
 
                                                             <!-- shuffle concantinate string -->
                                                             <c:set value="${ct_cf:shuffleString(listans)}" var="listans"/>
 
                                                             <!-- split new shffle string for display-->
-                                                            <c:set value="${fn:split(listchs,', ')}" var="listchs"/>
-                                                            <c:set value="${fn:split(listans,', ')}" var="listans"/>
+                                                            <c:set value="${fn:split(listchs,',')}" var="listchs"/>
+                                                            <c:set value="${fn:split(listans,',')}" var="listans"/>
                                                             <div class="row">
                                                                 <p>${q.q_no}.) ${q.q_title}</p>
                                                                 <div class="col-md-8">

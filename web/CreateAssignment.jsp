@@ -285,7 +285,7 @@
 
                                             $('#latePeriod input').val(d.getFullYear() + "-" + monthNames[d.getMonth()] + "-" + ('0' + d.getDate()).slice(-2));
                                             $('#dtp_input2').val(d.getFullYear() + "-" + ('0' + (d.getMonth() + 1)).slice(-2) + "-" + ('0' + d.getDate()).slice(-2));
-                                            
+
                                             $('#due_date input').change(function() {
                                                 $('#latePeriod').datetimepicker('setStartDate', $(this).val());
                                                 $('#latePeriod input').val($(this).val());
@@ -357,6 +357,7 @@
 //                                                $("#pv_title b u").text($(this).val());
 //                                            });
                                             $(document).on("change", "#total_pair", function() {
+                                                $(this).parent().parent().parent().find("#total_dummy").removeAttr("disabled").val(0);
                                                 var seq_of_choice = $(this).parent().parent().parent().find("[name='seqno']").val();
                                                 var matchWord_box = '<span class="label label-info"><i class="glyphicon glyphicon-info-sign"></i> If you want to add dummy answer, add text in answer box and put score to 0.</span><br/><br/>';
                                                 matchWord_box += '<div class="row"><div class="col-md-4"><b>Question Text</b></div><div class="col-md-4"><b>Answer</b></div><div class="col-md-2"><b>Score</b></div></div>';
@@ -364,6 +365,16 @@
                                                     matchWord_box += '<div class="row"><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_text"></div><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_ans"></div><div class="col-md-2"><input type="number" min="0" step="any" class="form-control" name="' + seq_of_choice + 'm_score" required="yes"></div></div>';
                                                 }
                                                 $(this).parent().parent().parent(".matchWord").find(".matchWord_q_list").html(matchWord_box);
+                                            });
+
+                                            $(document).on("change", "#total_dummy", function() {
+                                                var seq_of_choice = $(this).parent().parent().parent().find("[name='seqno']").val();
+                                                $(this).parent().parent().parent().find(".dummy_answer").remove();
+                                                var matchWord_dummy = '';
+                                                for (var i = 0; i < $(this).val(); i++) {
+                                                    matchWord_dummy += '<div class="row dummy_answer"><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_text" readonly="yes"></div><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_ans"></div><div class="col-md-2"><input type="number" min="0" step="any" class="form-control" name="' + seq_of_choice + 'm_score" required="yes"></div></div>';
+                                                }
+                                                $(this).parent().parent().parent(".matchWord").find(".matchWord_q_list").append(matchWord_dummy);
                                             });
                                         });
                                         function compareView() {
@@ -378,7 +389,7 @@
                                         function GetSelectedText(t) {
                                             var selText = "";
                                             if (window.getSelection) {  // all browsers, except IE before version 9
-                                                if (document.activeElement && (document.activeElement.tagName.toLowerCase() == "textarea")){
+                                                if (document.activeElement && (document.activeElement.tagName.toLowerCase() == "textarea")) {
                                                     var text = document.activeElement.value;
                                                     selText = text.substring(document.activeElement.selectionStart,
                                                             document.activeElement.selectionEnd);
@@ -394,7 +405,7 @@
                                                     selText = range.text;
                                                 }
                                             }
-                                            console.log("select text:"+selText);
+                                            console.log("select text:" + selText);
                                             if (selText !== "") {
                                                 var startIndex = document.activeElement.selectionStart;
                                                 var endIndex = document.activeElement.selectionEnd;
@@ -408,8 +419,8 @@
                                         }
 
                                         function checkConfilctIndex(t, newStartIndex, newEndIndex) {
-                                            console.log("newstart:"+newStartIndex);
-                                            console.log("newend:"+newEndIndex);
+                                            console.log("newstart:" + newStartIndex);
+                                            console.log("newend:" + newEndIndex);
                                             var startIndex = $(t).parent().parent().parent(".fillBlank").find(".ansList input[name$='startIndex']").map(function() {
                                                 return $(this).val();
                                             }).get();
@@ -490,7 +501,7 @@
                                                     + '              <div class="col-md-5">'
                                                     + '                  <select class="form-control" id="multiple_type" name="' + seqno + 'qcategory">'
                                                     + '                      <option value="one" selected="yes">One answer only</option>'
-                                                    + '                      <option value="multiple">Multiple choice allowed</option>'
+                                                    + '                      <option value="multiple">Multiple answer allowed</option>'
                                                     + '                  </select>'
                                                     + '              </div>'
                                                     + '          </div>'
@@ -562,9 +573,15 @@
                                                         + ' </div>'
 
                                                         + '     <div class="form-group">'
-                                                        + '         <label  class="col-md-3 control-label">How Many Pair?</label>'
+                                                        + '         <label  class="col-md-3 control-label">How many pair of question?</label>'
                                                         + '         <div class="col-md-2">'
                                                         + '             <input type="number" id="total_pair" min="1" class="form-control" >'
+                                                        + '         </div>'
+                                                        + '     </div>'
+                                                        + '     <div class="form-group">'
+                                                        + '         <label  class="col-md-3 control-label">How many dummy answer?</label>'
+                                                        + '         <div class="col-md-2">'
+                                                        + '             <input type="number" id="total_dummy" min="1" class="form-control" disabled="yes">'
                                                         + '         </div>'
                                                         + '     </div>'
                                                         + '     <div class="form-group">'

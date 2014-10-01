@@ -35,7 +35,7 @@ public class clearNotify extends HttpServlet {
         HttpSession ss = request.getSession();
         Account ac = (Account)ss.getAttribute("ac");
         List<Notification> noti = (List<Notification>) ss.getAttribute("noti");
-        System.out.println(noti);
+        System.out.println("asdfdsafsfsfas"+noti);
         for (Notification notification : noti) {
             System.out.println(Notification.removeUserNotify(ac.getAcc_id(), notification.getReceive_list_id()));
         }
