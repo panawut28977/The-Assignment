@@ -161,8 +161,8 @@ public class Course {
                 c.setCourse_link(rs.getString("course_link"));
                 c.setCreate_date(rs.getDate("create_date"));
                 //c.setAnnouncement(Announcement.viewAnnByCourse(course_id));
-                c.setAssignment(Assignment.getAmByCourseIDNoSetCourse(course_id));
-                c.setListStudent(AccountCourse.getMemberInCourse(course_id));
+//                c.setAssignment(Assignment.getAmByCourseIDNoSetCourse(course_id));
+//                c.setListStudent(AccountCourse.getMemberInCourse(course_id));
             }
             conn.close();
         } catch (SQLException ex) {

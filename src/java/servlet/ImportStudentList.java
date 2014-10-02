@@ -5,22 +5,23 @@
  */
 package servlet;
 
-import Model.Account;
-import Model.AccountCourse;
-import Model.Assignment;
+import Model.Course;
+import com.oreilly.servlet.MultipartRequest;
+import java.io.File;
 import java.io.IOException;
-import java.util.List;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import util.MyFileRenamePolicy;
 
 /**
  *
  * @author Orarmor
  */
-public class setCourseSession extends HttpServlet {
+public class ImportStudentList extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,26 +34,14 @@ public class setCourseSession extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Long cId = Long.parseLong(request.getParameter("cId"));
+        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
         HttpSession ss = request.getSession();
-        Account a = (Account) ss.getAttribute("ac");
-        int leftover = 0;
-        if (a.getCourseList().get(cId) != null) {
-            List<Assignment> amList = Assignment.getAmByCourseIDNoSetCourse(Integer.parseInt(cId+""));
-            String st = "";
-            for (Assignment assignment : amList) {
-//            System.out.println(assignment.getDue_date());
-                st = Assignment.remainingTimeforSend(assignment, a.getAcc_id());
-                if (st.equalsIgnoreCase("ontime") || st.equalsIgnoreCase("hurryup") || st.equalsIgnoreCase("late")) {
-                    leftover++;
-                } else {
-                    System.out.print(st + "/");
-                }
-            }
-        }
-        ss.setAttribute("leftoverInCourse", leftover);
-        ss.setAttribute("cId", cId);
-        response.sendRedirect("CourseAnnounce");
+        Integer cId = Integer.parseInt(((Long) ss.getAttribute("cId")) + "");
+        Course c = Course.getCourseByID(cId);
+        File f = new File(getServletContext().getRealPath("/") + "\\file\\student_assignment_file");
+        MyFileRenamePolicy mf = new MyFileRenamePolicy();
+        MultipartRequest m = new MultipartRequest(request, f.getPath(), (5 * 1024 * 1024), "UTF-8", mf);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

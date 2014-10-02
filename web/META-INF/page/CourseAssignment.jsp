@@ -13,7 +13,7 @@
         aTable.fnFilter('${param.st}');
         var color = '';
         var jsonArr = [];
-    <c:forEach items="${ac.courseList.get(cId).course.assignment}" var="a">
+    <c:forEach items="${requestScope.assignment}" var="a">
         <c:set value="${cf:remainingTimeforSend(a,ac.acc_id)}" var="status"/>
         <c:choose>
             <c:when test="${ac.courseList.get(cId).role eq 'TH'}">
@@ -133,7 +133,7 @@
             </tr>
         </thead>
         <tbody>
-            <c:forEach items="${ac.courseList.get(cId).course.assignment}" var="a">
+            <c:forEach items="${requestScope.assignment}" var="a">
                 <tr>
                     <td><a href="assignment.jsp?tab=AllAssignment&&amId=${a.am_id}">${a.name}</a></td>
                     <td>${ac.courseList.get(cId).course.name}</td>

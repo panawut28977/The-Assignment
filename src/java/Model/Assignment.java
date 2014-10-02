@@ -455,17 +455,17 @@ public class Assignment {
                 am.setDescription(rs.getString("description"));
                 am.setAss_type(rs.getString("ass_type"));
                 am.setTotal_member(rs.getInt("total_member"));
-                am.setAss_extension(rs.getString("ass_extension"));
+//                am.setAss_extension(rs.getString("ass_extension"));
                 am.setCreate_date(rs.getTimestamp("create_date"));
                 am.setDue_date(rs.getDate("due_date"));
                 am.setLate_date(rs.getDate("late_date"));
                 am.setFully_mark(rs.getDouble("fully_mark"));
                 //am.setComment(Comment.getCommentByAmID(am.getAm_id()));
-                if (am.getAss_type() == "file") {
-                    am.setPath_file(rs.getString("path_file"));
-                } else {
-                    am.setQuestionList(null);
-                }
+//                if (am.getAss_type() == "file") {
+//                    am.setPath_file(rs.getString("path_file"));
+//                } else {
+//                    am.setQuestionList(null);
+//                }
                 assList.add(am);
             }
             conn.close();

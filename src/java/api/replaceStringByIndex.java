@@ -35,6 +35,8 @@ public class replaceStringByIndex extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+         response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
         String qtext = request.getParameter("qtext");
         String[] startEndList = request.getParameterValues("startEndList[]");

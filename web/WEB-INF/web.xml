@@ -39,6 +39,8 @@
         <url-pattern>/notification</url-pattern>
         <url-pattern>/AllAnnounce</url-pattern>
         <url-pattern>/CourseAnnounce</url-pattern>
+        <url-pattern>/CourseMember</url-pattern>
+        <url-pattern>/CourseAssignment</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>
@@ -338,6 +340,18 @@
         <servlet-name>clearNotify</servlet-name>
         <servlet-class>servlet.clearNotify</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ImportStudentList</servlet-name>
+        <servlet-class>servlet.ImportStudentList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CourseMember</servlet-name>
+        <servlet-class>servlet.CourseMember</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CourseAssignment</servlet-name>
+        <servlet-class>servlet.CourseAssignment</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -597,6 +611,18 @@
     <servlet-mapping>
         <servlet-name>clearNotify</servlet-name>
         <url-pattern>/clearNotify</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ImportStudentList</servlet-name>
+        <url-pattern>/ImportStudentList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CourseMember</servlet-name>
+        <url-pattern>/CourseMember</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CourseAssignment</servlet-name>
+        <url-pattern>/CourseAssignment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

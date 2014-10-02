@@ -40,7 +40,7 @@
                 </tr>
             </thead>
             <tbody>
-                <c:forEach  items="${ac.courseList.get(cId).course.assignment}" var="a">
+                <c:forEach  items="${requestScope.courseAssignment}" var="a">
                     <tr>
                         <td>${a.name}</td>
                         <c:choose>

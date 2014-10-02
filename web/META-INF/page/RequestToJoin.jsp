@@ -11,18 +11,18 @@
         </div>
         <div id="uploadStList" style="clear: both;">
             <hr>
-            <form role="form">
+            <form role="form"   action="ImportStudentList"  method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label class="text-warning">Please upload your student list before(Excel file). Download <a href="file/student_list.xlsx">example file</a></label>
                     <input type="file" class="form-control">
                 </div>
-                <!--<input type="submit" value="upload" class="btn btn-primary">-->
-                <a href="course.jsp?tab=request&&upload=success" class="btn btn-primary">upload</a>
+                <input type="submit" value="upload" class="btn btn-primary">
+                <!--<a href="course.jsp?tab=request&&upload=success" class="btn btn-primary">upload</a>-->
             </form>
             <hr>
         </div>
         <c:forEach items="${waitAcc}" var="a">
-            <div class="row" style="margin-top: 20px"> 
+            <div class="row" style="margin-top: 20px;clear: both"> 
                 <div class="media col-md-8">
                     <a class="pull-left" href="#">
                         <img width="64" src="${a.profile_pic}">

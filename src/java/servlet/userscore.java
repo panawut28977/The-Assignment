@@ -53,7 +53,7 @@ public class userscore extends HttpServlet {
             //miss_score คะแนนที่พลาดเนื่องจากไม่ได้ส่ง
             int sent = 0, leftover = 0, miss_am = 0;
             double fully_score = 0, mark = 0, max_mark = 0, max_sent_mark = 0, miss_score = 0;
-            List<Assignment> courseAssignment = yourCourse.getCourse().getAssignment();
+            List<Assignment> courseAssignment =  Assignment.getAmByCourseIDNoSetCourse(Integer.parseInt(cId+""));
             Map<Integer, StAssignmentFile> stf = new HashMap<>();
             Map<Integer, StAssignmentOnWeb> stow = new HashMap<>();
             if (yourCourse.getRole().equalsIgnoreCase("ST")) {
@@ -137,10 +137,11 @@ public class userscore extends HttpServlet {
             ss.setAttribute("max_sent_mark", max_sent_mark);
             ss.setAttribute("miss_score", miss_score);
             ss.setAttribute("fully_score", fully_score);
+            request.setAttribute("courseAssignment", courseAssignment);
         } else {
-            List<Account> listStudent = yourCourse.getCourse().getListStudent();
+            List<Account> listStudent = AccountCourse.getMemberInCourse(Integer.parseInt(cId+""));
             List<Account> listStudentScore = new ArrayList<>();
-            List<Assignment> listAm = yourCourse.getCourse().getAssignment();
+            List<Assignment> listAm =  Assignment.getAmByCourseIDNoSetCourse(Integer.parseInt(cId+""));
             List<UserScore> usList = null;
             //loop ดึงนักเรียนทั้งหมดออกมาเพื่อ set ค่า userscore ให้กับทุกคนเพราะปกติแล้วมันจะเป้น null ไม่ได้ดึงมาให้
             UserScore u = null;

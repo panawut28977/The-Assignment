@@ -7,7 +7,6 @@ package servlet;
 
 import Model.Account;
 import Model.AccountCourse;
-import Model.Assignment;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -20,7 +19,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Orarmor
  */
-public class setCourseSession extends HttpServlet {
+public class CourseMember extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,26 +32,11 @@ public class setCourseSession extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Long cId = Long.parseLong(request.getParameter("cId"));
         HttpSession ss = request.getSession();
-        Account a = (Account) ss.getAttribute("ac");
-        int leftover = 0;
-        if (a.getCourseList().get(cId) != null) {
-            List<Assignment> amList = Assignment.getAmByCourseIDNoSetCourse(Integer.parseInt(cId+""));
-            String st = "";
-            for (Assignment assignment : amList) {
-//            System.out.println(assignment.getDue_date());
-                st = Assignment.remainingTimeforSend(assignment, a.getAcc_id());
-                if (st.equalsIgnoreCase("ontime") || st.equalsIgnoreCase("hurryup") || st.equalsIgnoreCase("late")) {
-                    leftover++;
-                } else {
-                    System.out.print(st + "/");
-                }
-            }
-        }
-        ss.setAttribute("leftoverInCourse", leftover);
-        ss.setAttribute("cId", cId);
-        response.sendRedirect("CourseAnnounce");
+        String cId = ss.getAttribute("cId") + "";
+        List<Account> ac = AccountCourse.getMemberInCourse(Integer.parseInt(cId));
+        request.setAttribute("listStudent", ac);
+        getServletContext().getRequestDispatcher("/course.jsp?tab=member").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
