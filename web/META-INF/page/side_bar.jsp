@@ -46,9 +46,12 @@
                 </c:choose>
             </span>
             <c:forEach items="${ac.getCourseList()}" var="c">
-                <a id="${c.key}" onclick="load_course(${c.key})" class="list-group-item usepointer <c:if test="${sessionScope.cId==c.key}">active</c:if>">${c.value.course.name} 
-                    <c:if test="${c.value.role eq 'TH'}"> <span class="label label-primary pull-right">Teacher</span></c:if>
-                    </a>
+                <a id="${c.key}" onclick="load_course(${c.key})" class="list-group-item usepointer <c:if test="${sessionScope.cId==c.key}">active</c:if>">
+                     <c:if test="${c.value.role eq 'TH'}"> 
+                        <span class="label label-primary">Teacher</span>
+                    </c:if>
+                    ${c.value.course.name}  (${c.value.course.term}/${c.value.course.year})
+                </a>
             </c:forEach>
             <!--            <a id="1" onclick="load_course(1)" class="list-group-item usepointer"><span class="badge">3</span>INT103 Office</a>
                         <a id="2" onclick="load_course(2)" class="list-group-item usepointer"><span class="badge">3</span>INT206 Software Development Process II</a>
@@ -94,6 +97,19 @@
                             <label>name</label>
                             <input type="text" class="form-control" name="name">
                         </div>
+                        <div class="col-md-12" style="margin-top: 20px">
+                            <label>Semister</label>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <input type="number" min="1" class="form-control" name="term" value="1">
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="number" min="1" class="form-control" name="term-year" readonly="yes" id="term-year">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -105,12 +121,14 @@
     </div>
 </div>
 <script>
-//    $(function() {
+    $(function() {
 //        var courseId = '${sessionScope.cId}';
 //        if (courseId != "" && courseId != null) {
 //            $("#" + courseId).addClass("active");
 //        }
-//    });
+        var d = new Date();
+        $("#term-year").val(d.getFullYear());
+    });
 
     function view_assignment_by_status(status) {
         location.href = "home.jsp?tab=AllAssignment&st=" + status;

@@ -38,8 +38,12 @@ public class CreateCourseSl extends HttpServlet {
         HttpSession ss = request.getSession();
         Account acc = (Account) ss.getAttribute("ac");
         String name = request.getParameter("name");
+        String term = request.getParameter("term");
+        String termYear = request.getParameter("term-year");
         Course c = new Course();
         c.setName(name);
+        c.setTerm(Integer.parseInt(term));
+        c.setYear(Integer.parseInt(termYear));
         c.setCourse_code(Course.generateCode());
         c.setCourse_link("dontknowlink/" + c.getCourse_code());
         int insert_id = Course.createCourse(c);

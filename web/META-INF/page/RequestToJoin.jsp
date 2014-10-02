@@ -5,13 +5,15 @@
         <%@include file="selectColumn.jsp" %>
     </c:when>
     <c:otherwise>
-        <button class="btn btn-primary" style="margin-top: 20px" id="autoApprove"><span class="glyphicon glyphicon-ok"></span> Auto Approve</button>
-        <button class="btn btn-default" style="margin-top: 20px" id="updateList">update list</button>
-        <div id="uploadStList">
+        <div class="pull-right" style="margin-bottom: 20px">
+            <button class="btn btn-primary" style="margin-top: 20px" id="autoApprove"><span class="glyphicon glyphicon-ok"></span> Auto Approve</button>
+            <button class="btn btn-default" style="margin-top: 20px" id="updateList">update list</button>
+        </div>
+        <div id="uploadStList" style="clear: both;">
             <hr>
             <form role="form">
                 <div class="form-group">
-                    <label class="text-warning">Please upload your student list before(Excel file). See <a href="">example file</a></label>
+                    <label class="text-warning">Please upload your student list before(Excel file). Download <a href="file/student_list.xlsx">example file</a></label>
                     <input type="file" class="form-control">
                 </div>
                 <!--<input type="submit" value="upload" class="btn btn-primary">-->
@@ -114,17 +116,17 @@
                         url: "approvesl",
                         data: {acc_id: $(this).attr("acc_id"), course_id: $(this).attr("cId")}
                     }).done(function(msg) {
-                        if(msg == 1){
-                            pos.slideUp("slow",function(){
+                        if (msg == 1) {
+                            pos.slideUp("slow", function() {
                                 pos.html('<div class="col-md-12"><div class="alert alert-success" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Approved !!</strong></div></div>');
                                 pos.slideDown("slow");
-                            });  
-                        }else{
+                            });
+                        } else {
                             alert("Error occur");
                         }
                     });
                 });
-                
+
                 $(".disapprove").click(function() {
                     var pos = $(this).parent().parent();
                     $.ajax({
@@ -132,12 +134,12 @@
                         url: "disapprovesl",
                         data: {acc_id: $(this).attr("acc_id"), course_id: $(this).attr("cId")}
                     }).done(function(msg) {
-                        if(msg == 1){
-                            pos.slideUp("slow",function(){
+                        if (msg == 1) {
+                            pos.slideUp("slow", function() {
                                 pos.html('<div class="col-md-12"><div class="alert alert-warning" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Dispproved !!</strong></div></div>');
                                 pos.slideDown("slow");
-                            });  
-                        }else{
+                            });
+                        } else {
                             alert("Error occur");
                         }
                     });

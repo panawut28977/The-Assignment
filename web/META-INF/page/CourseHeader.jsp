@@ -62,8 +62,8 @@
     <c:otherwise>
         <div class="well well-sm">
             <div class="row" style="font-size:24px; " >
-                <div id="coursename" class="col-md-11">
-                    ${ac.courseList.get(cId).course.name}
+                <div class="col-md-11">
+                    <span id="coursename">${ac.courseList.get(cId).course.name}</span>  (${ac.courseList.get(cId).course.term}/${ac.courseList.get(cId).course.year})
                 </div> 
                 <div class="dropdown pull-right col-md-1">
                     <a data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-cog"></span></a>

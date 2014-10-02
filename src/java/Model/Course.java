@@ -23,6 +23,8 @@ public class Course {
 
     private int course_id;
     private String name;
+    private int term;
+    private int year;
     private String course_link;
     private String course_code;
     private Date create_date;
@@ -51,6 +53,22 @@ public class Course {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getTerm() {
+        return term;
+    }
+
+    public void setTerm(int term) {
+        this.term = term;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
     }
 
     public String getCourse_link() {
@@ -121,7 +139,7 @@ public class Course {
         }
         return code;
     }
-    
+
     //ดึง course ตาม course_id
     public static Course getCourseByID(int course_id) {
         Connection conn = ConnectionBuilder.getConnection();
@@ -137,6 +155,8 @@ public class Course {
                 int courseId = rs.getInt("course_id");
                 c.setCourse_id(courseId);
                 c.setName(rs.getString("name"));
+                c.setTerm(rs.getInt("term"));
+                c.setYear(rs.getInt("year"));
                 c.setCourse_code(rs.getString("course_code"));
                 c.setCourse_link(rs.getString("course_link"));
                 c.setCreate_date(rs.getDate("create_date"));
@@ -166,6 +186,8 @@ public class Course {
                     int courseId = rs.getInt("course_id");
                     c.setCourse_id(courseId);
                     c.setName(rs.getString("name"));
+                    c.setTerm(rs.getInt("term"));
+                    c.setYear(rs.getInt("year"));
                     c.setCourse_code(rs.getString("course_code"));
                     c.setCourse_link(rs.getString("course_link"));
                     c.setCreate_date(rs.getDate("create_date"));
@@ -174,7 +196,7 @@ public class Course {
             } catch (SQLException ex) {
                 Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else{
+        } else {
             c = getCourseByID(course_id);
         }
         return c;
@@ -195,6 +217,8 @@ public class Course {
                 int courseId = rs.getInt("course_id");
                 c.setCourse_id(courseId);
                 c.setName(rs.getString("name"));
+                c.setTerm(rs.getInt("term"));
+                c.setYear(rs.getInt("year"));
                 c.setCourse_code(rs.getString("course_code"));
                 c.setCourse_link(rs.getString("course_link"));
                 c.setCreate_date(rs.getDate("create_date"));
@@ -212,14 +236,16 @@ public class Course {
     //สร้าง course
     public static int createCourse(Course c) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "insert into course(name,course_code,course_link) values(?,?,?)";
+        String sql = "insert into course(name,term,year,course_code,course_link) values(?,?,?,?,?)";
         PreparedStatement pstm;
         int result = 0;
         try {
             pstm = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pstm.setString(1, c.getName());
-            pstm.setString(2, c.getCourse_code());
-            pstm.setString(3, c.getCourse_link());
+            pstm.setInt(2, c.getTerm());
+            pstm.setInt(3, c.getYear());
+            pstm.setString(4, c.getCourse_code());
+            pstm.setString(5, c.getCourse_link());
             pstm.executeUpdate();
             ResultSet generatedKeys = pstm.getGeneratedKeys();
             if (generatedKeys.next()) {
@@ -305,8 +331,7 @@ public class Course {
         }
         return code;
     }
-    
-    
+
     public static String getCourseNameByID(int course_id) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select name from course where course_id = ? ";
