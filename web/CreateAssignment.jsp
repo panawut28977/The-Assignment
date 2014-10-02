@@ -735,7 +735,7 @@
                                                     var qtext = q.find("[name$='qtext']").val();
                                                     html = '<div>'
                                                             + '        <p>' + q_no + '.) ' + qtext + '</p>'
-                                                            + '                <input type="radio" disabled="yes" value="true"> True'
+                                                            + '                <input type="radio" disabled="yes" value="true"> True <br/>' 
                                                             + '                <input type="radio" disabled="yes" value="false"> False'
 //                                                  +'          <input type="hidden" name="2q_id" value="188">
 //                                                  +'          <input type="hidden" value="multiple_choice" name="2q_type">
@@ -749,12 +749,12 @@
                                                     if (cate == "one") {
                                                         console.log("if " + cate);
                                                         $.each(q.find("[name$='ctext']"), function() {
-                                                            choice += '<input type="radio"> ' + $(this).val() + "  ";
+                                                            choice += '<input type="radio"> ' + $(this).val() + "<br/>  ";
                                                         });
                                                     } else if (cate == "multiple") {
                                                         console.log("else " + cate);
                                                         $.each(q.find("[name$='ctext']"), function() {
-                                                            choice += '<input type="checkbox"> ' + $(this).val() + "  ";
+                                                            choice += '<input type="checkbox"> ' + $(this).val() + "<br/>  ";
                                                         });
                                                     }
                                                     html = '<div>'

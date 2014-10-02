@@ -204,7 +204,7 @@
                                                                                        checked="yes"
                                                                                    </c:if>
                                                                                </c:forEach>
-                                                                               > ${choice}
+                                                                               > ${choice}<br/>
                                                                     </c:forEach>
                                                                 </c:when>
                                                                 <c:when test="${q.q_category eq 'multiple'}">
@@ -216,12 +216,12 @@
                                                                                        checked="yes"
                                                                                    </c:if>
                                                                                </c:forEach>
-                                                                               > ${choice}
+                                                                               > ${choice} <br/>
                                                                     </c:forEach>
                                                                 </c:when>
                                                                 <c:when test="${q.q_category eq 'tf'}">
-                                                                    <input type="radio" name="${seqno}answer" value="true" disabled="yes" <c:if test="${stans eq 'true'}">checked="yes"</c:if>> True
-                                                                    <input type="radio" name="${seqno}answer" value="false" disabled="yes" <c:if test="${stans eq 'false'}">checked="yes"</c:if>> False
+                                                                    <input type="radio" name="${seqno}answer" value="true" disabled="yes" <c:if test="${stans eq 'true'}">checked="yes"</c:if>> True <br/>
+                                                                    <input type="radio" name="${seqno}answer" value="false" disabled="yes" <c:if test="${stans eq 'false'}">checked="yes"</c:if>> False <br/>
                                                                 </c:when>
                                                             </c:choose>
 
@@ -292,8 +292,8 @@
                                                             <!-- shuffle concantinate string -->
                                                             <c:set value="${ct_cf:shuffleString(listans)}" var="listans"/>
                                                             <!-- split new shffle string for display-->
-                                                            <c:set value="${fn:split(listchs,', ')}" var="listchs"/>
-                                                            <c:set value="${fn:split(listans,', ')}" var="listans"/>
+                                                            <c:set value="${fn:split(listchs,',')}" var="listchs"/>
+                                                            <c:set value="${fn:split(listans,',')}" var="listans"/>
                                                             <div class="matchWord">
                                                                 <p>${q.q_no}.) ${q.q_title}</p>
                                                                 <div class="col-md-8">

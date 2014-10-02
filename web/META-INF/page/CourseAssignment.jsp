@@ -104,15 +104,15 @@
         display: none;
     }
 </style>
-<div class="btn-group pull-right" style="margin: 20px 0">
-    <button type="button" class="btn btn-default active" id="view_am_list"><i class="glyphicon glyphicon-list"></i></button>
-    <button type="button" class="btn btn-default" id="view_am_calendar"><i class="glyphicon glyphicon-calendar"></i></button>
-</div>
 <c:if test="${ac.courseList.get(cId).role eq 'TH'}"> 
     <a class="btn btn-primary pull-right"  href="CreateAssignment.jsp?tab=AllAssignment" style="margin-top: 20px"><span class="glyphicon glyphicon-plus-sign"></span> Create Assignment</a>
     <br/><br/><br/>
 </c:if>
-    <div class="table-responsive" style="min-height: 520px;" id="view_list">
+<div class="btn-group pull-right" style="margin: 20px 0;clear: both">
+    <button type="button" class="btn btn-default active" id="view_am_list"><i class="glyphicon glyphicon-list"></i></button>
+    <button type="button" class="btn btn-default" id="view_am_calendar"><i class="glyphicon glyphicon-calendar"></i></button>
+</div>
+<div class="table-responsive" style="min-height: 520px;" id="view_list">
     <table class="table table-striped" id="AllAssignemnt">
         <thead>
             <tr>

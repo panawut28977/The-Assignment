@@ -163,7 +163,7 @@
                                                                                    <c:if test="${sans eq choice}">
                                                                                        checked="yes"
                                                                                    </c:if>
-                                                                               </c:forEach>> ${choice}
+                                                                               </c:forEach>> ${choice} <br/>
                                                                     </c:forEach>
                                                                 </c:when>
                                                                 <c:when test="${q.q_category eq 'multiple'}">
@@ -174,11 +174,11 @@
                                                                                    <c:if test="${sans eq choice}">
                                                                                        checked="yes"
                                                                                    </c:if>
-                                                                               </c:forEach>> ${choice}
+                                                                               </c:forEach>> ${choice} <br/>
                                                                     </c:forEach>
                                                                 </c:when>
                                                                 <c:when test="${q.q_category eq 'tf'}">
-                                                                    <input type="radio" name="${seqno}answer" value="true" <c:if test="${stans eq 'true'}">checked="yes"</c:if>> True
+                                                                    <input type="radio" name="${seqno}answer" value="true" <c:if test="${stans eq 'true'}">checked="yes"</c:if>> True <br/>
                                                                     <input type="radio" name="${seqno}answer" value="false" <c:if test="${stans eq 'false'}">checked="yes"</c:if>> False
                                                                 </c:when>
                                                             </c:choose>
