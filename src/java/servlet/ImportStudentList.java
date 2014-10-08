@@ -49,20 +49,18 @@ public class ImportStudentList extends HttpServlet {
         Map<Boolean, List<ExcelColumn>> exStudentList = DocumentFunction.readStudentXlsxFile(fileurl, cId);
 
 //        System.out.println(exStudentList); 
-        System.out.println(exStudentList.get(false));
-        System.out.println(exStudentList.get(true));
+        System.out.println("false:" + exStudentList.get(false));
+        System.out.println("true:" + exStudentList.get(true));
         int rowadded = 0;
         if (exStudentList.get(true) != null) {
-            boolean deleteStatus = ExcelColumn.deleteCourseStudentList(cId);
-            if (deleteStatus) {
-                List<ExcelColumn> strow = (List<ExcelColumn>) exStudentList.get(true);
-                rowadded = ExcelColumn.setStudentList(strow);
-            }
+            ExcelColumn.deleteCourseStudentList(cId);
+            List<ExcelColumn> strow = (List<ExcelColumn>) exStudentList.get(true);
+            rowadded = ExcelColumn.setStudentList(strow);
             request.setAttribute("rowadded", rowadded);
         } else if (exStudentList.get(false) != null) {
             request.setAttribute("msg", "Cannot update students list.");
         }
-        
+
         getServletContext().getRequestDispatcher("/course.jsp?tab=request").forward(request, response);
 
     }
