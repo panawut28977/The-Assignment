@@ -5,14 +5,15 @@
  */
 package util;
 
+import Model.ExcelColumn;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.util.PDFTextStripper;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -21,14 +22,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.extractor.WordExtractor;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Font;
-import org.apache.poi.ss.usermodel.IndexedColors;
-import org.apache.poi.ss.usermodel.PrintSetup;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
@@ -112,7 +106,7 @@ public class DocumentFunction {
 
             //Create Workbook instance holding reference to .xlsx file
             XSSFWorkbook workbook = new XSSFWorkbook(file);
-            for (int i = 0; i < workbook.getNumberOfSheets() - 1; i++) {
+            for (int i = 0; i < workbook.getNumberOfSheets(); i++) {
                 //Get first/desired sheet from the workbook
                 XSSFSheet sheet = workbook.getSheetAt(i);
 
@@ -150,6 +144,72 @@ public class DocumentFunction {
         return text.toString();
     }
 
+    public static Map<Boolean, List<ExcelColumn>> readStudentXlsxFile(String filename, int course_id) {
+//        StringBuilder text = new StringBuilder();
+        Map<Boolean, List<ExcelColumn>> stMap = new TreeMap<>();
+        List<ExcelColumn> exStudentList = new ArrayList<>();
+        ExcelColumn st = null;
+        try {
+            FileInputStream file = new FileInputStream(new File(filename));
+
+            //Create Workbook instance holding reference to .xlsx file
+            XSSFWorkbook workbook = new XSSFWorkbook(file);
+            boolean breakPoint = true;
+            for (int i = 0; i < workbook.getNumberOfSheets(); i++) {
+                //Get first/desired sheet from the workbook
+                XSSFSheet sheet = workbook.getSheetAt(i);
+
+                //Iterate through each rows one by one
+                Iterator<Row> rowIterator = sheet.iterator();
+                String email = null, firstname = null, lastname = null;
+                while (rowIterator.hasNext()) {
+                    Row row = rowIterator.next();
+                    int rownum = row.getRowNum();
+
+                    //For each row, iterate through all the columns
+                    Iterator<Cell> cellIterator = row.cellIterator();
+
+                    while (cellIterator.hasNext()) {
+                        Cell cell = cellIterator.next();
+
+                        if (cell.getColumnIndex() == 0) {
+                            email = cell.getStringCellValue();
+                        } else if (cell.getColumnIndex() == 1) {
+                            firstname = cell.getStringCellValue();
+                        } else if (cell.getColumnIndex() == 2) {
+                            lastname = cell.getStringCellValue();
+                        }
+                    }
+
+                    if (row.getRowNum() == 0) {
+                        if (email.equalsIgnoreCase("Email") && firstname.equalsIgnoreCase("Firstname") && lastname.equalsIgnoreCase("Lastname")) {
+                            continue;
+                        } else {
+                            stMap.put(false, exStudentList);
+                            breakPoint = false;
+                            break;
+                        }
+                    } else {
+                        st = new ExcelColumn();
+                        st.setCourse_id(course_id);
+                        st.setEmail(email);
+                        st.setFirstname(firstname);
+                        st.setLastname(lastname);
+                        exStudentList.add(st);
+                    }
+//                    System.out.println(email + "/" + firstname + "/" + lastname);
+                }
+            }
+            if (breakPoint) {
+                stMap.put(true, exStudentList);
+            }
+            file.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return stMap;
+    }
+
     public static String readXlsFile(String filename) {
         StringBuilder text = new StringBuilder();
         try {
@@ -159,7 +219,7 @@ public class DocumentFunction {
             HSSFWorkbook workbook = new HSSFWorkbook(file);
 
             //Get first/desired sheet from the workbook
-            for (int i = 0; i < workbook.getNumberOfSheets() - 1; i++) {
+            for (int i = 0; i < workbook.getNumberOfSheets(); i++) {
                 HSSFSheet sheet = workbook.getSheetAt(i);
 
                 //Iterate through each rows one by one
@@ -198,69 +258,67 @@ public class DocumentFunction {
 
 //    
 //
-//    public static void main(String[] args) {
+    public static void main(String[] args) {
 //
 //        //pdf        
 //        //System.out.println(readPdfFile("D:\\Dropbox\\IT#17\\GEN421 - สังคมบูรณาการ\\070257 - Energy , Environment.pdf"));
 //        //xlsx
-//        System.out.println(readXlsxFile("D:\\Dropbox\\IT#17\\INT381 - Software Project\\int381 quiz_pv\\net present value.xlsx"));
+//        System.out.println(readStudentXlsxFile("D:\\Orarmorarm\\The-Assignment\\build\\web\\file\\import_student_list\\student_list_1412310431.xlsx"));
 //        //xls
 //        //System.out.println(readXlsFile("D:\\Dropbox\\IT#17\\INT204 - Business Information Systems\\LAB\\INT204 LAB I\\Pivot_Example.xls"));
-//    }
-
-    public static void main(String[] args) throws Exception {
-        Workbook wb = new XSSFWorkbook();
-
-        Sheet sheet = wb.createSheet("scoresheet");
-        PrintSetup printSetup = sheet.getPrintSetup();
-        printSetup.setLandscape(true);
-        sheet.setFitToPage(true);
-        sheet.setHorizontallyCenter(true);
-
-        //title row
-        Row titleRow = sheet.createRow(0);
-//        titleRow.setHeightInPoints(45);
-        Cell titleCell = titleRow.createCell(0);
-        titleCell.setCellValue("Score sheet of "+"...."+" course");
-        sheet.addMergedRegion(CellRangeAddress.valueOf("$A$1:$D$1"));
-
-
-        //row with totals below
-        int rownum = 2;
-        Row sumRow = sheet.createRow(rownum);
-//        sumRow.setHeightInPoints(35);
-        Cell cell;
-        cell = sumRow.createCell(0);
-        cell.setCellValue("Name:");
-
-        for (int j = 1; j < 12; j++) {
-            cell = sumRow.createCell(j);
-            String ref = (char) ('A' + j) + "3:" + (char) ('A' + j) + "12";
-            cell.setCellFormula("SUM(" + ref + ")");
-        }
-//        rownum++;
-//        sumRow = sheet.createRow(rownum++);
-//        sumRow.setHeightInPoints(25);
-//        cell = sumRow.createCell(0);
-//        cell.setCellValue("Total Regular Hours");
-//        cell = sumRow.createCell(1);
-//        cell.setCellFormula("L13");
-//        sumRow = sheet.createRow(rownum++);
-//        sumRow.setHeightInPoints(25);
-//        cell = sumRow.createCell(0);
-//        cell.setCellValue("Total Overtime Hours");
-//        cell = sumRow.createCell(1);
-//        cell.setCellFormula("K13");
-
-        // Write the output to a file
-        String file = "C:\\Users\\Orarmor\\Desktop\\timesheet.xls";
-        if (wb instanceof XSSFWorkbook) {
-            file += "x";
-        }
-        FileOutputStream out = new FileOutputStream(file);
-        wb.write(out);
-        out.close();
     }
 
-
+//    public static void main(String[] args) throws Exception {
+//        Workbook wb = new XSSFWorkbook();
+//
+//        Sheet sheet = wb.createSheet("scoresheet");
+//        PrintSetup printSetup = sheet.getPrintSetup();
+//        printSetup.setLandscape(true);
+//        sheet.setFitToPage(true);
+//        sheet.setHorizontallyCenter(true);
+//
+//        //title row
+//        Row titleRow = sheet.createRow(0);
+////        titleRow.setHeightInPoints(45);
+//        Cell titleCell = titleRow.createCell(0);
+//        titleCell.setCellValue("Score sheet of "+"...."+" course");
+//        sheet.addMergedRegion(CellRangeAddress.valueOf("$A$1:$D$1"));
+//
+//
+//        //row with totals below
+//        int rownum = 2;
+//        Row sumRow = sheet.createRow(rownum);
+////        sumRow.setHeightInPoints(35);
+//        Cell cell;
+//        cell = sumRow.createCell(0);
+//        cell.setCellValue("Name:");
+//
+//        for (int j = 1; j < 12; j++) {
+//            cell = sumRow.createCell(j);
+//            String ref = (char) ('A' + j) + "3:" + (char) ('A' + j) + "12";
+//            cell.setCellFormula("SUM(" + ref + ")");
+//        }
+////        rownum++;
+////        sumRow = sheet.createRow(rownum++);
+////        sumRow.setHeightInPoints(25);
+////        cell = sumRow.createCell(0);
+////        cell.setCellValue("Total Regular Hours");
+////        cell = sumRow.createCell(1);
+////        cell.setCellFormula("L13");
+////        sumRow = sheet.createRow(rownum++);
+////        sumRow.setHeightInPoints(25);
+////        cell = sumRow.createCell(0);
+////        cell.setCellValue("Total Overtime Hours");
+////        cell = sumRow.createCell(1);
+////        cell.setCellFormula("K13");
+//
+//        // Write the output to a file
+//        String file = "C:\\Users\\Orarmor\\Desktop\\timesheet.xls";
+//        if (wb instanceof XSSFWorkbook) {
+//            file += "x";
+//        }
+//        FileOutputStream out = new FileOutputStream(file);
+//        wb.write(out);
+//        out.close();
+//    }
 }

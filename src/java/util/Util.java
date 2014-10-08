@@ -69,7 +69,7 @@ public class Util {
         } else {
             calendar.setTimeInMillis(timestamp.getTime());
             String month = new SimpleDateFormat("MMMM", Locale.ENGLISH).format(date);
-            System.out.println(month);
+//            System.out.println(month);
             int day = calendar.get(Calendar.DAY_OF_MONTH);
             int hour = calendar.get(Calendar.HOUR);
             String minute = addZero(calendar.get(Calendar.MINUTE));
@@ -77,7 +77,7 @@ public class Util {
 
             str = month + " " + day + " at " + hour + ":" + minute + ampm;
         }
-        System.out.println(str);
+//        System.out.println(str);
         return str;
     }
 

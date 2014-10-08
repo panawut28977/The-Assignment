@@ -498,7 +498,7 @@ public class AccountCourse {
         }
         return listAccount;
     }
-    
+
     public static List<Integer> getTeacherIdCourse(int course_id, int ownid) {
         List<Integer> listAccount = new ArrayList<>();
         Connection conn = ConnectionBuilder.getConnection();
@@ -518,7 +518,7 @@ public class AccountCourse {
         }
         return listAccount;
     }
-    
+
     public static List<Integer> getMemberIdCourse(int course_id, int ownid) {
         List<Integer> listAccount = new ArrayList<>();
         Connection conn = ConnectionBuilder.getConnection();
@@ -544,6 +544,28 @@ public class AccountCourse {
         boolean result = false;
         if (role.equalsIgnoreCase("TH")) {
             result = true;
+        }
+        return result;
+    }
+
+    public static int autoapprove(int course_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "UPDATE account_course ac "
+                + "join account a on ac.acc_id  = a.acc_id "
+                + "SET ac.status = 'approved' "
+                + "where ac.role like 'ST' and ac.status like 'waiting' and ac.course_id = ? and a.email in ("
+                + " select email from import_student_list imst where imst.course_id = ? "
+                + ")";
+        PreparedStatement pstm;
+        int result = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, course_id);
+            pstm.setInt(2, course_id);
+            result = pstm.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
     }

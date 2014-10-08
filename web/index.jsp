@@ -25,6 +25,7 @@
                 border:1px solid #808080 !important;
                 border-width: 3px;
             }
+            
             .well{
                 background-color: rgba(245, 245, 245,0.7);
             }

@@ -602,9 +602,9 @@ public class Assignment {
             Double remaining_day = (double) ((due_date.getTime() - lastsent.getTime()) / 1000 / 60 / 60 / 24);
 //            Double timeout = (double) ((a.getLate_date().getTime() - today.getTime()) / 1000 / 60 / 60 / 24);
             Double timeout = (double) ((a.getLate_date().getTime() - lastsent.getTime() ) / 1000 / 60 / 60 / 24);
-            System.out.println("--lated sent function---");
-            System.out.println(a.getAm_id());
-            System.out.println(lastsent + " / due " + a.getDue_date() + "/last " + a.getLate_date());
+//            System.out.println("--lated sent function---");
+//            System.out.println(a.getAm_id());
+//            System.out.println(lastsent + " / due " + a.getDue_date() + "/last " + a.getLate_date());
             if (remaining_day > 3) {
                 status = "ontime";
             } else if (remaining_day <= 3 && remaining_day >= 0) {
@@ -616,8 +616,8 @@ public class Assignment {
         } else {
             status = "miss";
         }
-        System.out.println(status);
-        System.out.println("-----");
+//        System.out.println(status);
+//        System.out.println("-----");
         return status;
     }
 
@@ -655,7 +655,7 @@ public class Assignment {
         boolean islock = false;
         Date today = new Date();
         Double timeout = (double) ((a.getLate_date().getTime() - today.getTime()) / 1000 / 60 / 60 / 24);
-        System.out.println(timeout);
+//        System.out.println(timeout);
         if (timeout < 0) {
             islock = true;
         }

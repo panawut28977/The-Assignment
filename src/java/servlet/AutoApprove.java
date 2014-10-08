@@ -5,18 +5,20 @@
  */
 package servlet;
 
+import Model.AccountCourse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Orarmor
  */
-public class HelloServlet extends HttpServlet {
+public class AutoApprove extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,23 +31,11 @@ public class HelloServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/event-stream");
-        response.setCharacterEncoding("UTF-8");
-
-        PrintWriter writer = response.getWriter();
-
-        for (int i = 0; i < 20; i++) {
-            writer.write("event:timen");
-            writer.write("data: " + System.currentTimeMillis() + "\n\n");
-            writer.flush();
-
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        writer.close();
+        HttpSession ss = request.getSession();
+        Integer cId = Integer.parseInt(((Long) ss.getAttribute("cId")) + "");
+        int updatedRow = AccountCourse.autoapprove(cId);
+        request.setAttribute("autApproveMsg", "Auto approve "+updatedRow+" people");
+        getServletContext().getRequestDispatcher("/course.jsp?tab=request").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -6,15 +6,18 @@
 package servlet;
 
 import Model.Course;
+import Model.ExcelColumn;
 import com.oreilly.servlet.MultipartRequest;
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import util.DocumentFunction;
 import util.MyFileRenamePolicy;
 
 /**
@@ -39,9 +42,29 @@ public class ImportStudentList extends HttpServlet {
         HttpSession ss = request.getSession();
         Integer cId = Integer.parseInt(((Long) ss.getAttribute("cId")) + "");
         Course c = Course.getCourseByID(cId);
-        File f = new File(getServletContext().getRealPath("/") + "\\file\\student_assignment_file");
+        File f = new File(getServletContext().getRealPath("/") + "\\file\\import_student_list");
         MyFileRenamePolicy mf = new MyFileRenamePolicy();
         MultipartRequest m = new MultipartRequest(request, f.getPath(), (5 * 1024 * 1024), "UTF-8", mf);
+        String fileurl = getServletContext().getRealPath("/") + "\\file\\import_student_list\\" + m.getFilesystemName("file");
+        Map<Boolean, List<ExcelColumn>> exStudentList = DocumentFunction.readStudentXlsxFile(fileurl, cId);
+
+//        System.out.println(exStudentList); 
+        System.out.println(exStudentList.get(false));
+        System.out.println(exStudentList.get(true));
+        int rowadded = 0;
+        if (exStudentList.get(true) != null) {
+            boolean deleteStatus = ExcelColumn.deleteCourseStudentList(cId);
+            if (deleteStatus) {
+                List<ExcelColumn> strow = (List<ExcelColumn>) exStudentList.get(true);
+                rowadded = ExcelColumn.setStudentList(strow);
+            }
+            request.setAttribute("rowadded", rowadded);
+        } else if (exStudentList.get(false) != null) {
+            request.setAttribute("msg", "Cannot update students list.");
+        }
+        
+        getServletContext().getRequestDispatcher("/course.jsp?tab=request").forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

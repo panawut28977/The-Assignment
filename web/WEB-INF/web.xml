@@ -273,10 +273,6 @@
         <servlet-class>servlet.smessage</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>HelloServlet</servlet-name>
-        <servlet-class>servlet.HelloServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>notify</servlet-name>
         <servlet-class>servlet.notify</servlet-class>
     </servlet>
@@ -351,6 +347,10 @@
     <servlet>
         <servlet-name>CourseAssignment</servlet-name>
         <servlet-class>servlet.CourseAssignment</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AutoApprove</servlet-name>
+        <servlet-class>servlet.AutoApprove</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -545,10 +545,6 @@
         <url-pattern>/smessage</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>HelloServlet</servlet-name>
-        <url-pattern>/HelloServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>notify</servlet-name>
         <url-pattern>/notify</url-pattern>
     </servlet-mapping>
@@ -623,6 +619,10 @@
     <servlet-mapping>
         <servlet-name>CourseAssignment</servlet-name>
         <url-pattern>/CourseAssignment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AutoApprove</servlet-name>
+        <url-pattern>/AutoApprove</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
