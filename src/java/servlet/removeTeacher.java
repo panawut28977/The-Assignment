@@ -44,10 +44,10 @@ public class removeTeacher extends HttpServlet {
         }
 
         if (result) {
-            response.sendRedirect("course.jsp?tab=member");
+            response.sendRedirect("CourseMember");
         }else{
             ss.setAttribute("changeRoleMsg", "false");
-            response.sendRedirect("course.jsp?tab=member");
+            response.sendRedirect("CourseMember");
         }
     }
 

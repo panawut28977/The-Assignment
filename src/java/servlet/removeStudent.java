@@ -42,7 +42,7 @@ public class removeStudent extends HttpServlet {
             System.out.println(Notification.removeCourseUserNoti(Integer.parseInt(acc_id), cId));
         }
 
-        response.sendRedirect("course.jsp?tab=member");
+        response.sendRedirect("CourseMember");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

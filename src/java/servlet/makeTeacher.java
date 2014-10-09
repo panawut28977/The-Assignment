@@ -53,7 +53,7 @@ public class makeTeacher extends HttpServlet {
             List<Integer> listac = new ArrayList<>();
             listac.add(Integer.parseInt(acc_id));
             Notification.announce(n, listac);
-            response.sendRedirect("course.jsp?tab=member");
+            response.sendRedirect("CourseMember");
         }
     }
 
