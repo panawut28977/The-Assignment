@@ -6,7 +6,7 @@
 package servlet;
 
 import Model.Course;
-import Model.ExcelColumn;
+import Model.ImportedStudent;
 import com.oreilly.servlet.MultipartRequest;
 import java.io.File;
 import java.io.IOException;
@@ -46,16 +46,16 @@ public class ImportStudentList extends HttpServlet {
         MyFileRenamePolicy mf = new MyFileRenamePolicy();
         MultipartRequest m = new MultipartRequest(request, f.getPath(), (5 * 1024 * 1024), "UTF-8", mf);
         String fileurl = getServletContext().getRealPath("/") + "\\file\\import_student_list\\" + m.getFilesystemName("file");
-        Map<Boolean, List<ExcelColumn>> exStudentList = DocumentFunction.readStudentXlsxFile(fileurl, cId);
+        Map<Boolean, List<ImportedStudent>> exStudentList = DocumentFunction.readStudentXlsxFile(fileurl, cId);
 
 //        System.out.println(exStudentList); 
 //        System.out.println("false:" + exStudentList.get(false));
 //        System.out.println("true:" + exStudentList.get(true));
         int rowadded = 0;
         if (exStudentList.get(true) != null) {
-            ExcelColumn.deleteCourseStudentList(cId);
-            List<ExcelColumn> strow = (List<ExcelColumn>) exStudentList.get(true);
-            rowadded = ExcelColumn.setStudentList(strow);
+            ImportedStudent.deleteCourseStudentList(cId);
+            List<ImportedStudent> strow = (List<ImportedStudent>) exStudentList.get(true);
+            rowadded = ImportedStudent.setStudentList(strow);
             request.setAttribute("rowadded", rowadded);
         } else if (exStudentList.get(false) != null) {
             request.setAttribute("msg", "Cannot update students list.");

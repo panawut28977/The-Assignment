@@ -5,7 +5,7 @@
  */
 package util;
 
-import Model.ExcelColumn;
+import Model.ImportedStudent;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -144,11 +144,11 @@ public class DocumentFunction {
         return text.toString();
     }
 
-    public static Map<Boolean, List<ExcelColumn>> readStudentXlsxFile(String filename, int course_id) {
+    public static Map<Boolean, List<ImportedStudent>> readStudentXlsxFile(String filename, int course_id) {
 //        StringBuilder text = new StringBuilder();
-        Map<Boolean, List<ExcelColumn>> stMap = new TreeMap<>();
-        List<ExcelColumn> exStudentList = new ArrayList<>();
-        ExcelColumn st = null;
+        Map<Boolean, List<ImportedStudent>> stMap = new TreeMap<>();
+        List<ImportedStudent> exStudentList = new ArrayList<>();
+        ImportedStudent st = null;
         try {
             FileInputStream file = new FileInputStream(new File(filename));
 
@@ -190,7 +190,7 @@ public class DocumentFunction {
                             break;
                         }
                     } else {
-                        st = new ExcelColumn();
+                        st = new ImportedStudent();
                         st.setCourse_id(course_id);
                         st.setEmail(email);
                         st.setFirstname(firstname);
