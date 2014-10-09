@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 /**
  *
  * @author JenoVa
+ * commit from github 2014-10-09 11.51
  */
 public class ExcelColumn {
     
