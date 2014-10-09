@@ -49,8 +49,8 @@ public class ImportStudentList extends HttpServlet {
         Map<Boolean, List<ExcelColumn>> exStudentList = DocumentFunction.readStudentXlsxFile(fileurl, cId);
 
 //        System.out.println(exStudentList); 
-        System.out.println("false:" + exStudentList.get(false));
-        System.out.println("true:" + exStudentList.get(true));
+//        System.out.println("false:" + exStudentList.get(false));
+//        System.out.println("true:" + exStudentList.get(true));
         int rowadded = 0;
         if (exStudentList.get(true) != null) {
             ExcelColumn.deleteCourseStudentList(cId);
