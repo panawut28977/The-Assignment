@@ -674,7 +674,7 @@
                                             $(this).parent().parent().parent(".multipleChoice").find(".c_list").html(html);
                                         });
                                         function addTitle() {
-                                            var titleBox = '<div class="row instruction"><hr><span class="moveselect pull-left text-muted"><span class="glyphicon glyphicon-align-justify"></span></span><input type="hidden" name="seqno" value="' + seqno + '"/><label class="col-md-3 control-label">Instruction </label><div class="col-md-8"><input type="text" class="form-control" placeholder="Instruction" name="' + seqno + 'instruction" required="yes" ></div><a onclick="remove_title(this)"  style="vertical-align: -webkit-baseline-middle"><span class="glyphicon glyphicon-trash"></span></a><input type="hidden" value="instruction" name="' + seqno + 'q_type"></div>';
+                                            var titleBox = '<div class="row instruction"><hr><span class="moveselect pull-left text-muted"><span class="glyphicon glyphicon-align-justify"></span></span><input type="hidden" name="seqno" value="' + seqno + '"/><label class="col-md-3 control-label">Instruction </label><div class="col-md-8"><textarea class="form-control" placeholder="Instruction" name="' + seqno + 'instruction" required="yes" ></textarea></div><a onclick="remove_title(this)"  style="vertical-align: -webkit-baseline-middle"><span class="glyphicon glyphicon-trash"></span></a><input type="hidden" value="instruction" name="' + seqno + 'q_type"></div>';
                                             $(".amQuestion").append(titleBox);
                                             seqno++;
                                         }
