@@ -56,7 +56,7 @@ public class ExcelColumn {
     
     public void setLastname(String lastname) {
         this.lastname = lastname;
-    }
+    } 
     
     public static int setStudentList(List<ExcelColumn> strow) {
         Connection conn = ConnectionBuilder.getConnection();
