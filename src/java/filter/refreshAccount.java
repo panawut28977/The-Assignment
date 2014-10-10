@@ -6,6 +6,7 @@
 package filter;
 
 import Model.Account;
+import Model.AccountCourse;
 import Model.Assignment;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -62,6 +63,13 @@ public class refreshAccount implements Filter {
         ss.setAttribute("ontime", ontime);
         ss.setAttribute("sent", sent);
         ss.setAttribute("miss", miss);
+         
+        if(a.getAccount_type().equalsIgnoreCase("TH")){
+            System.out.println("hasstudent:"+AccountCourse.hasStudentRole(a.getAcc_id()));
+            if(AccountCourse.hasStudentRole(a.getAcc_id())){
+                ss.setAttribute("dontShowDash", 1);
+            }
+        }
 
         if (!((ss.getAttribute("objStatus") + "").equalsIgnoreCase("updated"))) {
             a = Account.login(a.getEmail(), a.getPassword());

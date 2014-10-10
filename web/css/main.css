@@ -26,6 +26,7 @@ body{
 .userbox{
     background-color: #F8F8F8;
     padding-top: 20px;
+    padding-bottom: 20px; 
     border: 1px solid transparent;
     -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .5);
     box-shadow: 0 1px 1px rgba(0, 0, 0, .05);

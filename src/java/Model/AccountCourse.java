@@ -607,6 +607,32 @@ public class AccountCourse {
         }
         return listAccount;
     }
+    
+    public static boolean hasStudentRole(int acc_id) {
+        List<Account> listAccount = new ArrayList<>();
+        Connection conn = ConnectionBuilder.getConnection();
+        Account acc = null;
+        String sql = "SELECT Count(course_id) FROM account_course"
+                + " where status like 'approved'"
+                + " and role like 'ST' "
+                + " and acc_id = ?";
+        PreparedStatement pstm;
+        int result= 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, acc_id);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                result = rs.getInt(1);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result>0;
+    }
+    
+    
 
     @Override
     public String toString() {
