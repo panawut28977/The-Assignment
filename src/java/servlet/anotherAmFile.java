@@ -5,12 +5,15 @@
  */
 package servlet;
 
+import Model.StAmFileList;
 import Model.StAssignmentFile;
 import com.crocodoc.Crocodoc;
 import com.crocodoc.CrocodocException;
 import com.crocodoc.CrocodocSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -42,7 +45,9 @@ public class anotherAmFile extends HttpServlet {
         System.out.print("Creating... ");
         String sessionKey = null;
         try {
-            sessionKey = CrocodocSession.create(uuid);
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("isDownloadable", true);
+            sessionKey = CrocodocSession.create(uuid,params);
             System.out.println("success :)");
             System.out.println("  The session key is " + sessionKey + ".");
         } catch (CrocodocException e) {
@@ -57,7 +62,10 @@ public class anotherAmFile extends HttpServlet {
         //update session
         StAssignmentFile stF = (StAssignmentFile) ss.getAttribute("sa");
         stF = StAssignmentFile.getStAm(stF.getSt_am_id());
+        
+        StAmFileList curSafv = StAmFileList.getSafvByListIdSafv(Integer.parseInt(safv_id), stF.getList_id());
         ss.setAttribute("sa", stF);
+        ss.setAttribute("curSafv", curSafv);
         getServletContext().getRequestDispatcher("/CheckAssignment.jsp?tab=AllAssignment").forward(request, response);
     }
 

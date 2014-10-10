@@ -42,14 +42,14 @@ public class notify extends HttpServlet {
         HttpSession ss = request.getSession();
         Account ac = (Account) ss.getAttribute("ac");
 
-        System.out.println("notify");
+//        System.out.println("notify");
         //current notification
         Map<Integer, String> curNoti = (Map<Integer, String>) ss.getAttribute("notification");
         //get new notificastion
         Map<Integer, String> noti = Notification.getNotify(ac.getAcc_id());
-        System.out.println("noti :" + noti);
+//        System.out.println("noti :" + noti);
         if (curNoti == null) {
-            System.out.println("if");
+            System.out.println("notify");
             Iterator i = noti.entrySet().iterator();
             int cAnn = 0, cAlert = 0, cAm = 0, cScore = 0, total = 0;
             while (i.hasNext()) {
@@ -91,7 +91,6 @@ public class notify extends HttpServlet {
             ss.setAttribute("cTotal", total);
             ss.setAttribute("notification", noti);
         } else {
-            System.out.println("else");
             boolean newNoti = false;
             //check current and new notification
             int cNewAnn = 0, cNewAm = 0, cNewAlert = 0, cNewScore = 0;
@@ -116,7 +115,6 @@ public class notify extends HttpServlet {
                     //if สำหรับเช็คว่าสำกับ obj เดิมมั้ย
                 }
             }
-            System.out.println("newNoti: " + newNoti);
             if ((newNoti && noti.size() > curNoti.size()) || noti.size() < curNoti.size() ) {
                 Iterator i = noti.entrySet().iterator();
                 int cAnn = 0, cAlert = 0, cAm = 0, cScore = 0, total = 0;

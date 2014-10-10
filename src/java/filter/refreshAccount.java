@@ -42,7 +42,7 @@ public class refreshAccount implements Filter {
         Account a = (Account) ss.getAttribute("ac");
         List<Assignment> amList = a.getAssignment();
         String st = "";
-        Integer late = 0, hurry = 0, ontime = 0, sent = 0,miss=0;
+        Integer late = 0, hurry = 0, ontime = 0, sent = 0, miss = 0;
         for (Assignment assignment : amList) {
 //            System.out.println(assignment.getDue_date());
             st = Assignment.remainingTimeforSend(assignment, a.getAcc_id());
@@ -52,9 +52,9 @@ public class refreshAccount implements Filter {
                 ontime++;
             } else if (st.equalsIgnoreCase("hurryup")) {
                 hurry++;
-            } else if(st.equalsIgnoreCase("late")){
+            } else if (st.equalsIgnoreCase("late")) {
                 late++;
-            }else if(st.equalsIgnoreCase("miss")){
+            } else if (st.equalsIgnoreCase("miss")) {
                 miss++;
             }
         }
@@ -63,12 +63,14 @@ public class refreshAccount implements Filter {
         ss.setAttribute("ontime", ontime);
         ss.setAttribute("sent", sent);
         ss.setAttribute("miss", miss);
-         
-        if(a.getAccount_type().equalsIgnoreCase("TH")){
-            System.out.println("hasstudent:"+AccountCourse.hasStudentRole(a.getAcc_id()));
-            if(AccountCourse.hasStudentRole(a.getAcc_id())){
+
+        if (a.getAccount_type().equalsIgnoreCase("TH")) {
+            System.out.println("hasstudent:" + AccountCourse.hasStudentRole(a.getAcc_id()));
+            if (AccountCourse.hasStudentRole(a.getAcc_id())) {
                 ss.setAttribute("dontShowDash", 1);
             }
+        } else {
+            ss.setAttribute("dontShowDash", 1);
         }
 
         if (!((ss.getAttribute("objStatus") + "").equalsIgnoreCase("updated"))) {

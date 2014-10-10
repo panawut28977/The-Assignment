@@ -124,14 +124,14 @@
                                 <div class="form-group">
                                     <label for="fullymark" class="col-md-3 control-label">Fully score is</label>
                                     <div class="col-md-3">
-                                        <input type="number" name="fullymark" id="fullymark" class="form-control" required="">
+                                        <input type="number" name="fullymark" id="fullymark" class="form-control" required="yes">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="file" class="col-md-3 control-label">Select Assignment</label>
                                     <div class="col-md-9">
-                                        <input type="file" name="file" id="amfile" class="form-control">
-                                        <span class="text-danger">.doc .pdf .xls available</span>
+                                        <input type="file" name="file" id="amfile" onchange="checkFile(this)" class="form-control" required="yes">
+                                        <!--<span class="text-danger">.doc .pdf .xls available</span>-->
                                     </div>
                                 </div>
                             </div>
@@ -826,12 +826,20 @@
                                             });
 
                                         }
-                                        
-                                        function checkComma(t){
+
+                                        function checkComma(t) {
                                             var text = $(t).val();
-                                            if(text.indexOf(",")>0){
+                                            if (text.indexOf(",") > 0) {
                                                 alert("can not use comma in question.");
                                                 $(t).focus();
+                                            }
+                                        }
+
+                                        function checkFile(t) {
+                                            var ext = $(t).val().split('.').pop().toLowerCase();
+                                            if ($.inArray(ext, ['xls', 'xlsx', 'doc', 'docx', 'jpe', 'jpeg', 'ppt', 'pptx', 'png', 'pdf', 'zip', 'rar']) == -1) {
+                                                alert("Invalid file type");
+                                                $(t).val("");
                                             }
                                         }
         </script>

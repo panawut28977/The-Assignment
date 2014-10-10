@@ -56,7 +56,6 @@ public class notifyMessage extends HttpServlet {
             ss.setAttribute("totalUnseen", total);
             ss.setAttribute("notificationMsg", unseenList);
         } else {
-            System.out.println("else");
             int totalNewMsg = 0;
             boolean newNoti = false;
             //check current and new notification
@@ -68,7 +67,6 @@ public class notifyMessage extends HttpServlet {
                     }
                 }
             }
-            System.out.println("newNoti: " + newNoti);
             if (newNoti || (unseenList.size() < curUnseenList.size())) {
                 int total = unseenList.size();
                 writer.write("event:totalUnseen\n");

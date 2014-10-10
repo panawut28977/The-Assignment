@@ -6,22 +6,19 @@
 package servlet;
 
 import Model.Account;
-import Model.AccountCourse;
-import Model.AnswerQuestion;
 import Model.Assignment;
 import Model.Group_member;
-import Model.Notification;
 import Model.StAmFileList;
 import Model.StAssignmentFile;
 import Model.StAssignmentOnWeb;
 import com.crocodoc.Crocodoc;
-import com.crocodoc.CrocodocDocument;
-import static com.crocodoc.CrocodocExamples.apiToken;
 import com.crocodoc.CrocodocException;
 import com.crocodoc.CrocodocSession;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -62,7 +59,9 @@ public class checkAssignment extends HttpServlet {
             System.out.print("  Creating... ");
             String sessionKey = null;
             try {
-                sessionKey = CrocodocSession.create(safv.get(0).getUuid());
+                Map<String, Object> params = new HashMap<String, Object>();
+                params.put("isDownloadable", true);
+                sessionKey = CrocodocSession.create(safv.get(0).getUuid(),params);
                 System.out.println("success :)");
                 System.out.println("  The session key is " + sessionKey + ".");
             } catch (CrocodocException e) {
@@ -70,10 +69,10 @@ public class checkAssignment extends HttpServlet {
                 System.out.println("  Error Code: " + e.getCode());
                 System.out.println("  Error Message: " + e.getMessage());
             }
-            System.out.println(sessionKey);
+//            System.out.println(sessionKey);
             if (a.getTotal_member() > 1) {
                 g = Group_member.getMemberById(stF.getG_id());
-                System.out.println(g);
+//                System.out.println(g);
                 String accIdList[] = g.getAcc_id().split(",");
                 List<Account> gAm = new ArrayList<>();
                 for (String accId : accIdList) {
@@ -85,8 +84,12 @@ public class checkAssignment extends HttpServlet {
                 send_acc = Account.getAccountByID(stF.getAcc_id());
                 ss.setAttribute("send_acc", send_acc);
             }
+            
+            StAmFileList curSafv = StAmFileList.getSafvByListIdSafv(safv.get(0).getSafv_id(), stF.getList_id());
+            
             ss.setAttribute("sa", stF);
             ss.setAttribute("safv", safv);
+            ss.setAttribute("curSafv", curSafv);
             ss.setAttribute("sessionKey", sessionKey);
             ss.setAttribute("safv_id", safv.get(0).getSafv_id());
         } else {

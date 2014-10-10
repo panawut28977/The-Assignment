@@ -75,7 +75,7 @@
                             <a href="Checkcopy?tab=AllAssignment&&safv_id=${safv_id}" class="btn btn-primary pull-right" data-toggle="tooltip"  id="checkcopy" data-placement="bottom" title="If you want to know this person copied or not? click it!" type="button">
                                 <span class="glyphicon glyphicon-copyright-mark"></span> 
                                 Check copy
-                            </a>
+                            </a> 
                             <a class="btn pull-right"  data-toggle="modal" data-target="#allAmVersion"  id="allversion">
                                 See all versions
                             </a>
@@ -104,8 +104,20 @@
                                     </c:when>
                                 </c:choose>
                             </div>
-                            <iframe class="col-md-12" style="min-height: 600px;margin-top: 20px" src="https://crocodoc.com/view/${sessionKey}"/></iframe> 
-                            <div style="text-align: center;background-color: gainsboro;clear: both;padding: 5px 0;"><a target="_blank" style="text-align: center" href="https://crocodoc.com/view/${sessionKey}">see in new window.</a></div>
+                            <c:choose>
+                                <c:when test="${sessionKey ne null}">
+                                    <iframe class="col-md-12" style="min-height: 600px;margin-top: 20px" src="https://crocodoc.com/view/${sessionKey}"/></iframe> 
+                                    <div style="text-align: center;background-color: gainsboro;clear: both;padding: 5px 0;"><a target="_blank" style="text-align: center" href="https://crocodoc.com/view/${sessionKey}">see in new window.</a></div>
+                                </c:when>
+                                <c:otherwise>
+                                    <div style="text-align: center">
+                                        <a style="font-size: 70px" href="file/student_assignment_file/${curSafv.path_file}" class="usepointer"><span class="glyphicon glyphicon-download-alt"></span></a>
+                                        <h3 class="text-muted">
+                                            cannot showing assignment please download for cheking.
+                                        </h3>
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
                             <div class="row" style="padding-top: 20px;clear: both;">
                                 <form role="form" method="post" action="updateScoreStAmFile" class="form-horizontal">
                                     <div class="form-group">

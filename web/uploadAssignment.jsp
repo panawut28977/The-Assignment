@@ -113,9 +113,10 @@
                                                 </c:choose>
                                         </span>
                                     </h4>
-                                    <form role="form" class="form-inline" action="uploadAssignmentFile" method="post" enctype="multipart/form-data">
+                                    <form role="form" class="form-inline" onsubmit="return checkFile()" action="uploadAssignmentFile" method="post" enctype="multipart/form-data">
                                         <div class="col-md-6 col-md-offset-3">
-                                            <input type="file" class="form-control" name="file" required="yes"/>    
+                                            <input type="file" class="form-control" name="file" id="stamfile" required="yes"/>    
+                                            <input type="hidden" name="extFile" id="extFile"/>
                                         </div>
                                         <br/><br/><br/>
                                         <input type="submit" value="Upload" class="form-control btn btn-primary"/>
@@ -210,7 +211,17 @@
                 });
             });
             $('img').tooltip("hide");
-            
+            $("#stamfile").change(function() {
+                var ext = $("#stamfile").val().split('.').pop().toLowerCase();
+                $("#extFile").val(ext);
+            });
         });
+        function checkFile() {
+            var ext = $("#stamfile").val().split('.').pop().toLowerCase();
+            if ($.inArray(ext, ['xls', 'xlsx', 'doc', 'docx', 'jpe', 'jpeg', 'ppt', 'pptx', 'png', 'pdf', 'zip', 'rar']) == -1) {
+                alert("Invalid file type");
+                return false;
+            }
+        }
     </script>
 </html>
