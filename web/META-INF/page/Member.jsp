@@ -39,11 +39,32 @@
                 </div>
             </div>
             <c:set value="${count+1}" var="count"/>
-            <c:if test="${count==3}">
+            <c:if test="${count==3 or count == requestScope.listStudent.size()}">
             </div>
             <c:set value="0" var="count"/>
         </c:if>
     </c:forEach>
+    <hr/>
+    <div>
+        <h3 class="text-muted">Who not comming yet.</h3>
+    </div>    
+    <c:forEach items="${requestScope.whoNotJoin}" var="nj">
+        <c:if test="${count==0}">
+            <div  class="row">
+            </c:if>
+            <div class="media col-md-4">
+                <img width="64" src="${nj.profile_pic}" class="pull-left">
+                <div class="media-body">
+                    <div class="media-heading" ><h4 class="text-muted">${nj.firstname} ${nj.lastname}</h4></div>
+                </div>
+            </div>
+            <c:set value="${count+1}" var="count"/>
+            <c:if test="${count==3 or count == requestScope.listStudent.size()}">
+            </div>
+            <c:set value="0" var="count"/>
+        </c:if>
+    </c:forEach>
+
 </div>
 <style>
     .media:first-child{
@@ -67,16 +88,16 @@
                 location.href = "removeTeacher?acc_id=" + acc_id;
             }
         });
-        
-         $(".kick").click(function() {
+
+        $(".kick").click(function() {
             var acc_id = $(this).attr("data-id");
             if (confirm('You will student from your course?')) {
                 location.href = "removeStudent?acc_id=" + acc_id;
             }
         });
-        $("#leavecourse").click(function(){
-            if(confirm("You want to leave course sure?")){
-                location.href= "leaveCourse?acc_id=${ac.acc_id}";
+        $("#leavecourse").click(function() {
+            if (confirm("You want to leave course sure?")) {
+                location.href = "leaveCourse?acc_id=${ac.acc_id}";
             }
         });
     });

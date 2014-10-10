@@ -35,7 +35,14 @@ public class CourseMember extends HttpServlet {
         HttpSession ss = request.getSession();
         String cId = ss.getAttribute("cId") + "";
         List<Account> ac = AccountCourse.getMemberInCourse(Integer.parseInt(cId));
+        List<Account> whoNotJoin = AccountCourse.whoNotJoin(Integer.parseInt(cId));
         request.setAttribute("listStudent", ac);
+        request.setAttribute("whoNotJoin", whoNotJoin);
+        
+        //find who not join coure from imported studetnt lists.
+        
+        
+        
         getServletContext().getRequestDispatcher("/course.jsp?tab=member").forward(request, response);
     }
 

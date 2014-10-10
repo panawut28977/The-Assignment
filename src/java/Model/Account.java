@@ -330,7 +330,7 @@ public class Account {
                 acc.setFirstname(rs.getString("firstname"));
                 acc.setLastname(rs.getString("lastname"));
                 acc.setEmail(rs.getString("email"));
-                acc.setPassword(rs.getString("password"));
+//                acc.setPassword(rs.getString("password"));
                 acc.setAccount_type(rs.getString("account_type"));
                 acc.setProfile_pic(rs.getString("profile_pic"));
                 acc.setRegister_date(rs.getTimestamp("register_date"));

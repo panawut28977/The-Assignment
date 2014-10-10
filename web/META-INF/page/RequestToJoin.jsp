@@ -19,7 +19,7 @@
     </c:when>
     <c:otherwise>
         <div class="pull-right" style="margin-bottom: 20px">
-            <button class="btn btn-primary" style="margin-top: 20px" id="autoApprove"><span class="glyphicon glyphicon-ok"></span> Auto Approve</button>
+            <button class="btn btn-primary" style="margin-top: 20px" id="autoApprove">Auto Approve</button>
             <button class="btn btn-default" style="margin-top: 20px" id="updateList">upload list</button>
         </div>
         <div id="uploadStList" style="clear: both;">
@@ -43,7 +43,7 @@
                     <strong>${rowadded}</strong> rows added.
                 </div>
             </c:when>
-             <c:when test="${autApproveMsg ne null}">
+            <c:when test="${autApproveMsg ne null}">
                 <div class="alert alert-success alert-dismissible" role="alert" style="clear: both">
                     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     <strong>${autApproveMsg}</strong>.
@@ -60,21 +60,21 @@
             <h1 class="text-muted" style="text-align: center;clear: both">No request.</h1>
         </c:if>
         <c:forEach items="${waitAcc}" var="a">
-            <div class="row" style="margin-top: 20px;clear: both"> 
-                <div class="media col-md-8">
+            <div  style="margin: 20px 0;clear: both;overflow: auto"> 
+                <div class="media">
                     <a class="pull-left" href="#">
                         <img width="64" src="${a.profile_pic}">
                     </a>
                     <div class="media-body">
-                        <h4 class="media-heading" >${a.firstname} ${a.lastname}</h4>
-                        <br>
+                        <span class="pull-left" style="font-size: 18px;font-weight: 500">${a.firstname} ${a.lastname}</span>
+                        <span class="media pull-right">
+                            <button class="btn btn-primary approve" acc_id="${a.acc_id}" cId="${cId}"><span class="glyphicon glyphicon-ok"></span>  Approve now</button>
+                            <button class="btn btn-default disapprove" acc_id="${a.acc_id}" cId="${cId}">Not now</button>
+                        </span>
                         <!--<small class="text-muted">Request date:     </small>-->
                     </div>
                 </div>
-                <div class="media col-md-4 approve_box">
-                    <button class="btn btn-primary approve" acc_id="${a.acc_id}" cId="${cId}"><span class="glyphicon glyphicon-ok"></span>  Approve now</button>
-                    <button class="btn btn-default disapprove" acc_id="${a.acc_id}" cId="${cId}">Not now</button>
-                </div>
+
             </div>
         </c:forEach>
         <!--        <div class="row"> 
@@ -186,7 +186,7 @@
                     if (reqNo == 0) {
                         alert('No requset  for approve.');
                     } else {
-                       location.href = 'AutoApprove';     
+                        location.href = 'AutoApprove';
                     }
                 });
             });

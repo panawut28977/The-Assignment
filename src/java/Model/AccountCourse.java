@@ -570,6 +570,44 @@ public class AccountCourse {
         return result;
     }
 
+    public static List<Account> whoNotJoin(int course_id) {
+        List<Account> listAccount = new ArrayList<>();
+        Connection conn = ConnectionBuilder.getConnection();
+        Account acc = null;
+        String sql = "select a.* "
+                + "from import_student_list imst "
+                + "join account a on imst.email = a.email "
+                + "where imst.course_id = ? "
+                + "and imst.email not in ( select a.email "
+                + "                       from  account_course ac "
+                + "                       join account a "
+                + "                       on ac.acc_id = a.acc_id "
+                + "                       where ac.course_id=?  and ac.status = 'approved') ";
+        PreparedStatement pstm;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, course_id);
+            pstm.setInt(2, course_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                acc = new Account();
+                acc.setAcc_id(rs.getInt("acc_id"));
+                acc.setFirstname(rs.getString("firstname"));
+                acc.setLastname(rs.getString("lastname"));
+                acc.setEmail(rs.getString("email"));
+//                acc.setPassword(rs.getString("password"));
+                acc.setAccount_type(rs.getString("account_type"));
+                acc.setProfile_pic(rs.getString("profile_pic"));
+                acc.setRegister_date(rs.getTimestamp("register_date"));
+                listAccount.add(acc);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listAccount;
+    }
+
     @Override
     public String toString() {
         return "AccountCourse{" + "course=" + course + ", status=" + status + ", role=" + role + ", approved_date=" + approved_date + '}';
