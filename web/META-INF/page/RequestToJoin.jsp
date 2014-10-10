@@ -18,9 +18,12 @@
         <%@include file="selectColumn.jsp" %>
     </c:when>
     <c:otherwise>
-        <div class="pull-right" style="margin-bottom: 20px">
-            <button class="btn btn-primary" style="margin-top: 20px" id="autoApprove">Auto Approve</button>
-            <button class="btn btn-default" style="margin-top: 20px" id="updateList">upload list</button>
+        <div class="pull-right" style="margin: 20px 0">
+            <a class="btn"  data-toggle="modal" data-target="#viewStudentList"  id="viewlist">
+                See imported students list
+            </a>
+            <button class="btn btn-primary" id="autoApprove">Auto Approve</button>
+            <button class="btn btn-default" id="updateList">upload list</button>
         </div>
         <div id="uploadStList" style="clear: both;">
             <hr>
@@ -77,6 +80,37 @@
 
             </div>
         </c:forEach>
+        <div class="modal fade" id="viewStudentList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Imported students list</h4>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table" >
+                            <thead>
+                                <tr>
+                                    <td>Email</td>
+                                    <td>Firstname</td>
+                                    <td>Lastname</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${importList}" var="st">
+                                    <tr>
+                                        <td>${st.email}</td>
+                                        <td>${st.firstname}</td>
+                                        <td>${st.lastname}</td>
+                                    </tr>
+                                </c:forEach>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!--        <div class="row"> 
                     <div class="media col-md-8">
                         <a class="pull-left" href="#">

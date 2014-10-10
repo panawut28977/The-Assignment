@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package servlet;
 
 import Model.Account;
-import Model.AccountCourse;
+import Model.ImportedStudent;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Orarmor
  */
-public class CourseMember extends HttpServlet {
+public class GetImportedStudentList extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,12 +35,9 @@ public class CourseMember extends HttpServlet {
             throws ServletException, IOException {
         HttpSession ss = request.getSession();
         String cId = ss.getAttribute("cId") + "";
-        List<Account> ac = AccountCourse.getMemberInCourse(Integer.parseInt(cId));
-        List<Account> whoNotJoin = AccountCourse.whoNotJoin(Integer.parseInt(cId));
-        request.setAttribute("listStudent", ac);
-        request.setAttribute("whoNotJoin", whoNotJoin);
-        
-        getServletContext().getRequestDispatcher("/course.jsp?tab=member").forward(request, response);
+        List<ImportedStudent> importList = ImportedStudent.getStudentList(Integer.parseInt(cId));
+        ss.setAttribute("importList", importList);
+        response.sendRedirect("course.jsp?tab=request");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

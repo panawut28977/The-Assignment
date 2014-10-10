@@ -15,7 +15,7 @@
             <li <c:if test="${param.tab eq 'AllAssignment'}">class="active"</c:if>><a href="CourseAssignment">Assignment</a></li>
             <li <c:if test="${param.tab eq 'score'}">class="active"</c:if>><a href="userscore">Score</a></li>
             <li <c:if test="${param.tab eq 'member'}">class="active"</c:if>><a href="CourseMember">Member</a></li>
-            <li <c:if test="${param.tab eq 'request'}">class="active"</c:if>><a href="course.jsp?tab=request">Request to join <span class="badge <c:if test="${waitAcc.size()==0}">hide</c:if>">${waitAcc.size()}</span></a></li>
+            <li <c:if test="${param.tab eq 'request'}">class="active"</c:if>><a href="GetImportedStudentList">Request to join <span class="badge <c:if test="${waitAcc.size()==0}">hide</c:if>">${waitAcc.size()}</span></a></li>
         </ul> 
     </c:otherwise>
 </c:choose>

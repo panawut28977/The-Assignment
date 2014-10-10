@@ -6,11 +6,13 @@
         </div>
     </c:if>
     <c:set var="count" value="0"/>
+    <c:set var="coutall" value="0"/>
     <c:if test="${changeRoleMsg eq 'false'}">
         <c:set value="" var="changeRoleMsg" scope="session" />
         <h3 class="text-warning">Can't remove teacher. You are only one teacher in course.</h3>
     </c:if>
     <c:forEach items="${requestScope.listStudent}" var="st">
+        <c:set value="${coutall+1}" var="coutall"/>
         <c:if test="${count==0}">
             <div  class="row">
             </c:if>
@@ -39,15 +41,20 @@
                 </div>
             </div>
             <c:set value="${count+1}" var="count"/>
-            <c:if test="${count==3 or count == requestScope.listStudent.size()}">
+            <c:if test="${count==3 or coutall == requestScope.listStudent.size()}">
             </div>
             <c:set value="0" var="count"/>
         </c:if>
     </c:forEach>
-    <hr/>
+    <hr style="clear: both"/>
     <div>
         <h3 class="text-muted">Who not comming yet.</h3>
-    </div>    
+    </div>
+    <c:if test="${requestScope.whoNotJoin.size()==0}">
+        <div class="row">
+            <h3 class="text-muted" style="text-align: center;clear: both">No people who not comming in.</h3>
+        </div>
+    </c:if>
     <c:forEach items="${requestScope.whoNotJoin}" var="nj">
         <c:if test="${count==0}">
             <div  class="row">
