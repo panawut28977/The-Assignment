@@ -837,7 +837,7 @@
 
                                         function checkFile(t) {
                                             var ext = $(t).val().split('.').pop().toLowerCase();
-                                            if ($.inArray(ext, ['xls', 'xlsx', 'doc', 'docx', 'jpe', 'jpeg', 'ppt', 'pptx', 'png', 'pdf', 'zip', 'rar']) == -1) {
+                                            if ($.inArray(ext, ['xls', 'xlsx', 'doc', 'docx', 'jpg', 'jpeg', 'ppt', 'pptx', 'png', 'pdf', 'zip', 'rar']) == -1) {
                                                 alert("Invalid file type");
                                                 $(t).val("");
                                             }
