@@ -8,6 +8,7 @@ package servlet;
 import Model.Account;
 import Model.AccountCourse;
 import Model.Course;
+import Model.ImportedStudent;
 import Model.Notification;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -55,11 +56,17 @@ public class linkjoin extends HttpServlet {
                     n.setCourse_id(c.getCourse_id());
                     n.setType("alert");
                     //Assignment# 1 ( INT206 Software Development Process II ) <b9/10
-                    String content = "<h4><b>\"" + ac.getFirstname() + " " + ac.getLastname() + "\"</b> request to join in <b>" + c.getName() + "</b></h4>";
+                    String content = "<b>\"" + ac.getFirstname() + " " + ac.getLastname() + "\"</b> request to join in <b>" + c.getName() + "</b>   ";
                     n.setText(content);
 
                     List<Integer> listac = AccountCourse.getTeacherIdCourse(c.getCourse_id(), ac.getAcc_id());
                     Notification.announce(n, listac);
+
+                    //checking auto 
+                    if (ImportedStudent.isExistInStudentList(c.getCourse_id(), ac.getEmail())) {
+                        getServletContext().getRequestDispatcher("/approvesl?acc_id=" + ac.getAcc_id() + "&&course_id=" + c.getCourse_id()).include(request, response);
+                    }
+
                 } else {
                     request.setAttribute("msg", "2");
                 }

@@ -51,7 +51,7 @@ public class approvesl extends HttpServlet {
             n.setCourse_id(course_id);
             n.setType("alert");
             //Assignment# 1 ( INT206 Software Development Process II ) <b9/10
-            String content = "<h4>Your request to join <b>\""+Course.getCourseNameByID(course_id)+"\"</b> is approved</h4>";
+            String content = "Your request to join <b>\""+Course.getCourseNameByID(course_id)+"\"</b> is approved";
             n.setText(content);
 
             List<Integer> listac = new ArrayList<>();
