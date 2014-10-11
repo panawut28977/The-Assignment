@@ -23,13 +23,17 @@
                 See imported students list
             </a>
             <button class="btn btn-primary" id="autoApprove">Auto Approve</button>
-            <button class="btn btn-default" id="updateList">upload list</button>
+            <!--<button class="btn btn-default" id="updateList">upload list</button>-->
         </div>
         <div id="uploadStList" style="clear: both;">
             <hr>
             <form role="form"   onsubmit="return checkFile()" action="ImportStudentList"  method="post" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label class="text-warning">Please upload your student list before(Excel file). Download <a href="file/student_list.xlsx">example file</a></label>
+                    <label class="text-warning">
+                        - This function required student list. Please upload your student list before(Excel file). Download <a href="file/student_list.xlsx">template file</a>. 
+                        <br>- If you need to update student list you just upload again.
+                        <br>- This function will start  when student request to this course.
+                    </label>
                     <input type="file" class="form-control" id="listSt" name="file" required="yes">
                     <span class="text-danger" id="errmsg"><b></b></span>
                 </div>
@@ -104,7 +108,7 @@
                                         <td>${st.lastname}</td>
                                     </tr>
                                 </c:forEach>
-                                
+
                             </tbody>
                         </table>
                     </div>
@@ -178,51 +182,45 @@
         <script>
             $(function() {
                 $("#uploadStList").hide();
-                $("#updateList").click(function() {
+                $("#autoApprove").click(function() {
                     $("#uploadStList").slideToggle();
                 });
                 $(".approve").click(function() {
-                    var pos = $(this).parent().parent();
+                    var pos = $(this).parent().parent().parent();
                     $.ajax({
                         type: "POST",
                         url: "approvesl",
                         data: {acc_id: $(this).attr("acc_id"), course_id: $(this).attr("cId")}
                     }).done(function(msg) {
                         if (msg == 1) {
-                            pos.slideUp("slow", function() {
-                                pos.html('<div class="col-md-12"><div class="alert alert-success" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Approved !!</strong></div></div>');
-                                pos.slideDown("slow");
-                            });
+                            pos.html('<div class="col-md-12"><div class="alert alert-success" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Approved !!</strong></div></div>');
                         } else {
                             alert("Error occur");
                         }
                     });
                 });
                 $(".disapprove").click(function() {
-                    var pos = $(this).parent().parent();
+                    var pos = $(this).parent().parent().parent();
                     $.ajax({
                         type: "POST",
                         url: "disapprovesl",
                         data: {acc_id: $(this).attr("acc_id"), course_id: $(this).attr("cId")}
                     }).done(function(msg) {
                         if (msg == 1) {
-                            pos.slideUp("slow", function() {
-                                pos.html('<div class="col-md-12"><div class="alert alert-warning" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Dispproved !!</strong></div></div>');
-                                pos.slideDown("slow");
-                            });
+                            pos.html('<div class="col-md-12"><div class="alert alert-warning" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Dispproved !!</strong></div></div>');
                         } else {
                             alert("Error occur");
                         }
                     });
                 });
-                $("#autoApprove").click(function() {
-                    var reqNo = '${waitAcc.size()}';
-                    if (reqNo == 0) {
-                        alert('No requset  for approve.');
-                    } else {
-                        location.href = 'AutoApprove';
-                    }
-                });
+//                $("#autoApprove").click(function() {
+//                    var reqNo = '${waitAcc.size()}';
+//                    if (reqNo == 0) {
+//                        alert('No requset  for approve.');
+//                    } else {
+//                        location.href = 'AutoApprove';
+//                    }
+//                });
             });
             function checkFile() {
                 var ext = $("#listSt").val().split('.').pop().toLowerCase();

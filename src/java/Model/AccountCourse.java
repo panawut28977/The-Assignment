@@ -632,7 +632,6 @@ public class AccountCourse {
         return result>0;
     }
     
-    
 
     @Override
     public String toString() {

@@ -40,7 +40,6 @@ public class approvesl extends HttpServlet {
             throws ServletException, IOException {
         HttpSession ss = request.getSession();
         Account ac = (Account) ss.getAttribute("ac");
-        int cId = Integer.parseInt(ss.getAttribute("cId") + "");
         PrintWriter out = response.getWriter();
         int acc_id = Integer.parseInt(request.getParameter("acc_id"));
         int course_id = Integer.parseInt(request.getParameter("course_id"));
@@ -49,7 +48,7 @@ public class approvesl extends HttpServlet {
         if (result > 0) {
             Notification n = new Notification();
             n.setAcc_id(ac.getAcc_id());
-            n.setCourse_id(cId);
+            n.setCourse_id(course_id);
             n.setType("alert");
             //Assignment# 1 ( INT206 Software Development Process II ) <b9/10
             String content = "<h4>Your request to join <b>\""+Course.getCourseNameByID(course_id)+"\"</b> is approved</h4>";

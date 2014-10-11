@@ -8,6 +8,7 @@ package servlet;
 import Model.Account;
 import Model.AccountCourse;
 import Model.Course;
+import Model.ImportedStudent;
 import Model.Notification;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -54,12 +55,20 @@ public class joinCourseServlet extends HttpServlet {
                 n.setCourse_id(c.getCourse_id());
                 n.setType("alert");
                 //Assignment# 1 ( INT206 Software Development Process II ) <b9/10
-                String content = "<h4><b>\"" + ac.getFirstname() +" "+ ac.getLastname() + "\"</b> request to join in <b>"+c.getName()+"</b></h4>";
+                String content = "<h4><b>\"" + ac.getFirstname() + " " + ac.getLastname() + "\"</b> request to join in <b>" + c.getName() + "</b></h4>";
                 n.setText(content);
 
-                List<Integer> listac = AccountCourse.getTeacherIdCourse(c.getCourse_id(),ac.getAcc_id());
+                List<Integer> listac = AccountCourse.getTeacherIdCourse(c.getCourse_id(), ac.getAcc_id());
                 Notification.announce(n, listac);
 
+                //checking auto 
+                System.out.println("cid: " + c.getCourse_id());
+                System.out.println("mail: " + ac.getEmail());
+                System.out.println(ImportedStudent.isExistInStudentList(c.getCourse_id(), ac.getEmail()));
+                if (ImportedStudent.isExistInStudentList(c.getCourse_id(), ac.getEmail())) {
+                    System.out.println("if imported");
+                    getServletContext().getRequestDispatcher("/approvesl?acc_id=" + ac.getAcc_id() + "&&course_id=" + c.getCourse_id()).include(request, response);
+                }
             } else {
                 request.setAttribute("msg", "2");
             }
