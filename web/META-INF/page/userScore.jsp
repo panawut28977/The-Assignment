@@ -47,7 +47,7 @@
                             <c:when test="${stf.get(a.am_id) ne null and stf.get(a.am_id).lasted_send_date ne null}">
                                 <c:choose>
                                     <c:when test="${stf.get(a.am_id).checked_time eq null}">
-                                        <td>wait checked</td>
+                                        <td>wait check</td>
                                     </c:when>
                                     <c:otherwise>
                                         <td>

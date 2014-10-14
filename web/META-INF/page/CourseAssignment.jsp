@@ -108,6 +108,10 @@
         color: #999999;
         cursor: default;
     }
+    .disabled:hover{
+        color: #999999;
+        cursor: default;
+    }
 </style>
 <c:if test="${ac.courseList.get(cId).role eq 'TH'}"> 
     <c:choose>
