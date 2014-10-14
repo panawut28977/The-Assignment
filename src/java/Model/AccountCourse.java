@@ -331,6 +331,31 @@ public class AccountCourse {
         return listAccount;
     }
 
+    public static List<AccountCourse> getWaitingCourseByAccID(int acc_id) {
+        List<AccountCourse> courseList = new ArrayList<AccountCourse>();
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select * from account_course where acc_id=? AND status =  \"waiting\"";
+        PreparedStatement pstm;
+        AccountCourse acc = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, acc_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                acc = new AccountCourse();
+                acc.setRole(rs.getString("role"));
+                acc.setStatus(rs.getString("status"));
+                Course c = Course.getCourseByID(rs.getInt("course_id"));
+                acc.setCourse(c);
+                courseList.add(acc);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return courseList;
+    }
+
     public static boolean isExist(int acc_id, int course_id) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select acc_id from account_course where course_id=? and acc_id=?";
@@ -607,7 +632,7 @@ public class AccountCourse {
         }
         return listAccount;
     }
-    
+
     public static boolean hasStudentRole(int acc_id) {
         List<Account> listAccount = new ArrayList<>();
         Connection conn = ConnectionBuilder.getConnection();
@@ -617,7 +642,7 @@ public class AccountCourse {
                 + " and role like 'ST' "
                 + " and acc_id = ?";
         PreparedStatement pstm;
-        int result= 0;
+        int result = 0;
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, acc_id);
@@ -629,9 +654,8 @@ public class AccountCourse {
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return result>0;
+        return result > 0;
     }
-    
 
     @Override
     public String toString() {

@@ -41,6 +41,7 @@
         <url-pattern>/CourseAnnounce</url-pattern>
         <url-pattern>/CourseMember</url-pattern>
         <url-pattern>/CourseAssignment</url-pattern>
+        <url-pattern>/profile</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>
@@ -356,6 +357,18 @@
         <servlet-name>GetImportedStudentList</servlet-name>
         <servlet-class>servlet.GetImportedStudentList</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>profile</servlet-name>
+        <servlet-class>servlet.profile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ImageCrop</servlet-name>
+        <servlet-class>servlet.ImageCrop</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>uploadProfilePic</servlet-name>
+        <servlet-class>servlet.uploadProfilePic</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -631,6 +644,18 @@
     <servlet-mapping>
         <servlet-name>GetImportedStudentList</servlet-name>
         <url-pattern>/GetImportedStudentList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>profile</servlet-name>
+        <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ImageCrop</servlet-name>
+        <url-pattern>/ImageCrop</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>uploadProfilePic</servlet-name>
+        <url-pattern>/uploadProfilePic</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

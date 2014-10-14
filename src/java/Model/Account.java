@@ -196,8 +196,7 @@ public class Account {
 
                 //new logic
                 acc.setCourseList(AccountCourse.getCourseByAccIDMap(acc_id));
-                
-                
+
                 //เปลี่ยนเปน servlet allannounce แทนละ
 //                Iterator iterator = acc.getCourseList().entrySet().iterator();
 //                ArrayList<Long> courseIdList = new ArrayList<>();
@@ -206,7 +205,6 @@ public class Account {
 //                    courseIdList.add((Long) mapEntry.getKey());
 //                }
 //                acc.setAnnouncement(Announcement.viewAnnByCourseList(courseIdList));
-
                 //ไม่ใช้ userscore ละค่าที่ได้ออกมามันมหาศาลเกินไป
 //                acc.setListStudentScore(UserScore.getUserScore(acc_id));
             }
@@ -375,6 +373,23 @@ public class Account {
     public static boolean validate(String emailStr) {
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
         return matcher.find();
+    }
+
+    public static int updatePic(Account a) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "update Account set profile_pic=? where acc_id=?";
+        PreparedStatement pstm;
+        int result = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, a.getProfile_pic());
+            pstm.setInt(2, a.getAcc_id());
+            result = pstm.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
     }
 
     @Override

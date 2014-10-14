@@ -77,7 +77,7 @@
             <div class="row" style="text-align: center;" id="CourseDetail">
                 <div class="col-md-4"><h4>Course Code</h4><input type="text" readonly="yes" id="coursecode" value=""></div>
                 <div class="col-md-4"><h4>Course link</h4><input type="text" readonly="yes" id="courselink" value=""></div>
-                <div class="col-md-4 qrcode" ></div>
+                <div class="col-md-4 qrcode nocircle" ></div>
             </div>
             <div id="openCodeBox"><span id="openCodeBtn">See your course code <span class="glyphicon glyphicon-chevron-down"></span></span></div>
         </div>

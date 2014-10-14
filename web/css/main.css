@@ -88,10 +88,14 @@ margin: 20px 0;
     background-color: #D9534F;
 }
 
-img:not([class='qrcode']){
+img:not([class='nocircle']){
  border-radius: 50% 50% 50% 50%;   
 }
 
 .usersetting{
     clear: both;
+}
+
+.nocircle{
+    border-radius: 0;
 }

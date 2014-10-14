@@ -88,7 +88,7 @@
                                         <p class="text-left"><strong>${ac.firstname} ${ac.lastname}</strong></p>
                                         <p class="text-left small">${ac.email}</p>
                                         <p class="text-left">
-                                            <a href="profile.jsp" class="btn btn-primary btn-block btn-sm">View profile</a>
+                                            <a href="profile" class="btn btn-primary btn-block btn-sm">View profile</a>
                                         </p>
                                     </div>
                                 </div>
