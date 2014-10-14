@@ -100,7 +100,12 @@
             <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" >
                 <div class="panel panel-info">
                     <div class="panel-heading">
-                        <h3 class="panel-title">${ac.firstname} ${ac.lastname} <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button" ><i class="glyphicon glyphicon-edit"></i></a></h3>
+                        <h3 class="panel-title">
+                            <span class="fullname">
+                                <span class="firstname">${ac.firstname}</span><span class="lastname"> ${ac.lastname}</span>
+                                <a data-original-title="Edit this user" data-toggle="tooltip" type="button" id="editName" ><i class="glyphicon glyphicon-edit"></i></a>
+                            </span> 
+                        </h3>
                     </div>
                     <div class="panel-body">
                         <div class="row">
@@ -136,9 +141,23 @@
 
                                     </tbody>
                                 </table>
-                                <a href="#" id="changePic">Change profile picture</a><br/>
-                                <a href="#" class="s">Forgot your password?</a>
+                                <a href="#" id="changePic">Update profile picture</a><br/>
+                                <a href="#" id="newPass">Change your password</a>
                                 <!--<a href="#" class="btn btn-primary">Team Sales Performance</a>-->
+                                <c:choose>
+                                    <c:when test="${cp_msg eq 'successful'}">
+                                        <div class="alert alert-success" role="alert" style="margin-top: 20px">
+                                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            <b><i class="glyphicon glyphicon-ok"></i></b> Chage password successful.
+                                        </div>
+                                    </c:when>
+                                    <c:when test="${cropimg_msg eq 'successful'}">
+                                        <div class="alert alert-success" role="alert" style="margin-top: 20px">
+                                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            <b><i class="glyphicon glyphicon-ok"></i></b> Update profile picture successful.
+                                        </div>
+                                    </c:when>
+                                </c:choose>
                             </div>
                         </div>
                     </div>
@@ -206,7 +225,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Crop image</h4>
+                        <h4 class="modal-title" id="myModalLabel">Update image</h4>
                     </div>
                     <div class="modal-body" style="text-align: center;min-height: 500px">
                         <form action="ImageCrop" method="post" onsubmit="return checkCoords();" >
@@ -230,6 +249,51 @@
             </div>
         </div>
 
+        <div class="modal fade" id="changePass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Change password</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <form action="ChangePassword" method="post"  class="form-horizontal" onsubmit="return checkFrom();" >
+                                <div class="form-group">
+                                    <label for="current" class="col-md-4 control-label">Current</label>
+                                    <div class="col-md-7">
+                                        <input type="password" class="form-control" id="current" name="current" required="yes">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newpass" class="col-md-4 control-label">New</label>
+                                    <div class="col-md-7">
+                                        <input type="password" class="form-control" id="newpass" name="newpass" required="yes">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="retype" class="col-md-4 control-label">Re-type new</label>
+                                    <div class="col-md-7">
+                                        <input type="password" class="form-control" id="retype" name="retype" required="yes">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-7 col-md-offset-4" id="password_error_msg">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-7 col-md-offset-4">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                        <input type="submit" value="Save changes" class="btn btn-primary"/>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <script>
             var jcrop_api = null;
             $(function() {
@@ -239,6 +303,13 @@
                         backdrop: 'static'
                     });
                 });
+
+                $("#newPass").click(function() {
+                    $("#changePass").modal({
+                        backdrop: 'static'
+                    });
+                });
+
                 $("#uploadPic").click(function() {
                     $("#inputpic").click();
                 });
@@ -251,7 +322,23 @@
 
                 $('#croppic').on('hidden.bs.modal', function(e) {
                     $("#inputpic").val('');
-                })
+                });
+
+                $("#editName").click(function() {
+                    var fnameEl = $(".firstname");
+                    var lnameEl = $(".lastname");
+                    var fname = $.trim(fnameEl.text());
+                    var lname = $.trim(lnameEl.text());
+                    var html = '<form action="EditFullname" method="post" id="editFullname"><input type="text" value="' + fname + '" name="firstname" id="firstname"/>   <input type="text" value="' + lname + '" name="lastname" id="lastname"/></form>';
+                    $(".fullname").html(html);
+                });
+
+                $(document).on('keypress', "#firstname,#lastname", function(event) {
+                    if (event.which == 13) {
+                        event.preventDefault();
+                        $("#editFullname").submit();
+                    }
+                });
 
             });
             function view_assignment_by_status(status) {
@@ -345,6 +432,33 @@
                     boxWidth: width,
                     boxHeight: height
                 });
+            }
+
+            function checkFrom() {
+                var current = $("#current").val();
+                var newPass = $("#newpass").val();
+                var retype = $("#retype").val();
+                var checkRs = true;
+                $.ajax({
+                    type: 'post',
+                    url: 'CheckCurrentPassword',
+                    async: false,
+                    data: {current: current},
+                    success: function(msg) {
+                        if (msg == 1) {
+                            if (newPass != retype) {
+                                var html = '<span class="text-danger">Your password is mismatch.</span>';
+                                $("#password_error_msg").html(html);
+                                checkRs = false;
+                            }
+                        } else {
+                            var html = '<span class="text-danger">Your current password is wrong.</span>';
+                            $("#password_error_msg").html(html);
+                            checkRs = false;
+                        }
+                    }
+                });
+                return  checkRs;
             }
         </script>
         <!--        <a href="setSession.jsp?acct=th"><span>teacher mode</span></a>

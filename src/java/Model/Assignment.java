@@ -365,7 +365,7 @@ public class Assignment {
         }
         return am;
     }
-    
+
     public static Assignment getAmTimeByAmID(int am_id) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select due_date,late_date from assignment where ass_id=?";
@@ -602,7 +602,7 @@ public class Assignment {
         if (lastsent != null) {
             Double remaining_day = (double) ((due_date.getTime() - lastsent.getTime()) / 1000 / 60 / 60 / 24);
 //            Double timeout = (double) ((a.getLate_date().getTime() - today.getTime()) / 1000 / 60 / 60 / 24);
-            Double timeout = (double) ((a.getLate_date().getTime() - lastsent.getTime() ) / 1000 / 60 / 60 / 24);
+            Double timeout = (double) ((a.getLate_date().getTime() - lastsent.getTime()) / 1000 / 60 / 60 / 24);
 //            System.out.println("--lated sent function---");
 //            System.out.println(a.getAm_id());
 //            System.out.println(lastsent + " / due " + a.getDue_date() + "/last " + a.getLate_date());
@@ -661,6 +661,28 @@ public class Assignment {
             islock = true;
         }
         return islock;
+    }
+
+    public static int countSendAm(Assignment ass) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select count(*) from student_assignment_on_web where ass_id=? and lasted_send_date is not null";
+        if (ass.getAss_type().equalsIgnoreCase("file")) {
+            sql = "select count(*) from student_assignment_file where ass_id=? and lasted_send_date is not null";
+        }
+        PreparedStatement pstm;
+        int result = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, ass.getAm_id());
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                result = rs.getInt(1);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
     }
 
     @Override

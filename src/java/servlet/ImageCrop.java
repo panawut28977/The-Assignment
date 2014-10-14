@@ -67,6 +67,7 @@ public class ImageCrop extends HttpServlet {
         Account ac = (Account) ss.getAttribute("ac");
         ac.setProfile_pic("img/crop_image/" + request.getParameter("image"));
         int res = Account.updatePic(ac);
+        ss.setAttribute("cropimg_msg", "successful");
         response.sendRedirect("profile");
 //        ServletOutputStream wrt = response.getOutputStream();
 //        wrt.write(out.toByteArray());

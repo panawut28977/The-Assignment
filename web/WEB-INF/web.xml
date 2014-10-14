@@ -377,6 +377,18 @@
         <servlet-name>OpenCourse</servlet-name>
         <servlet-class>servlet.OpenCourse</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditFullname</servlet-name>
+        <servlet-class>servlet.EditFullname</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckCurrentPassword</servlet-name>
+        <servlet-class>servlet.CheckCurrentPassword</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangePassword</servlet-name>
+        <servlet-class>servlet.ChangePassword</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -672,6 +684,18 @@
     <servlet-mapping>
         <servlet-name>OpenCourse</servlet-name>
         <url-pattern>/OpenCourse</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditFullname</servlet-name>
+        <url-pattern>/EditFullname</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckCurrentPassword</servlet-name>
+        <url-pattern>/CheckCurrentPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePassword</servlet-name>
+        <url-pattern>/ChangePassword</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

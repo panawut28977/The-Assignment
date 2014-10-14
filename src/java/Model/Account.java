@@ -391,6 +391,24 @@ public class Account {
         }
         return result;
     }
+    
+     public static int updateName(Account a) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "update Account set firstname=?,lastname=? where acc_id=?";
+        PreparedStatement pstm;
+        int result = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, a.getFirstname());
+            pstm.setString(2, a.getLastname());
+            pstm.setInt(3, a.getAcc_id());
+            result = pstm.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
 
     @Override
     public String toString() {

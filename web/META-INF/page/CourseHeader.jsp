@@ -68,7 +68,7 @@
                 location.href = "CloseCourse";
             }
         });
-         $("#opencourse").click(function() {
+        $("#opencourse").click(function() {
             var text = 'Course will open and all function will enable.';
             if (confirm(text)) {
                 location.href = "OpenCourse";
@@ -78,7 +78,13 @@
 </script>
 <c:choose> 
     <c:when test="${ac.courseList.get(cId).role eq 'ST'}">
-        <div><h3>${ac.courseList.get(cId).course.name}</h3></div>
+        <div>
+            <h3>${ac.courseList.get(cId).course.name} 
+                <c:if test="${ac.courseList.get(cId).course.status eq 'close'}">
+                    <span class="label label-danger" id="closelabel">Close</span>
+                </c:if>
+            </h3>
+        </div>
     </c:when>
     <c:otherwise>
         <div class="well well-sm">
@@ -95,10 +101,10 @@
                         <li><a id="editcourse">Edit course name</a></li>
                             <c:choose>
                                 <c:when test="${ac.courseList.get(cId).course.status eq 'open'}">
-                                    <li><a id="closecourse">Close course</a></li>
+                                <li><a id="closecourse">Close course</a></li>
                                 </c:when>
                                 <c:when test="${ac.courseList.get(cId).course.status eq 'close'}">
-                                     <li><a id="opencourse">Open course</a></li>
+                                <li><a id="opencourse">Open course</a></li>
                                 </c:when>
                             </c:choose>
                         <li><a id="deletecourse">Delete this course</a></li>

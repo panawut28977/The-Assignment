@@ -88,6 +88,7 @@
 
         }).find("#loader").remove();
         $('#createAmCloseCourse').tooltip();
+       
     });
 
 </script>
@@ -226,7 +227,11 @@
                         <c:otherwise> 
                             <td style="text-align: center">
                                 <a href="GetSentAssignment?am_id=${a.am_id}">
-                                    <i class="glyphicon glyphicon-check"></i>
+                                    <i class="glyphicon glyphicon-check"></i> 
+                                    <c:set value="${cf:countSendAm(a)}" var="totalSentAm" />
+                                    <c:if test="${totalSentAm ne 0}">
+                                        ${totalSentAm}
+                                    </c:if>
                                 </a>
                             </td>
                         </c:otherwise>

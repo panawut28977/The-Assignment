@@ -140,4 +140,9 @@
         <function-class>Model.Course</function-class>
         <function-signature>String getCourseNameByID(int)</function-signature>
     </function> 
+       <function>
+        <name>countSendAm</name>
+        <function-class>Model.Assignment</function-class>
+        <function-signature>int countSendAm(Model.Assignment)</function-signature>
+    </function> 
 </taglib>
