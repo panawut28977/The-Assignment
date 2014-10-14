@@ -8,6 +8,10 @@
         font-weight: bold;
         text-align: center;
     }
+
+    .closelist div >span,.closelist div > a{
+        background: #F9F9F9;
+    }
 </style>
 <div class="col-md-3">
     <div class="row userbox">
@@ -50,12 +54,37 @@
                 </c:choose>
             </span>
             <c:forEach items="${ac.getCourseList()}" var="c">
-                <a id="${c.key}" onclick="load_course(${c.key})" class="list-group-item usepointer <c:if test="${sessionScope.cId==c.key}">active</c:if>">
-                    <c:if test="${c.value.role eq 'TH'}"> 
-                        <span class="label label-primary">Teacher</span>
-                    </c:if>
-                    ${c.value.course.name}  (${c.value.course.term}/${c.value.course.year})
-                </a>
+                <c:if test="${c.value.course.status eq 'open'}">
+                    <a id="${c.key}" onclick="load_course(${c.key})" class="list-group-item usepointer <c:if test="${sessionScope.cId==c.key}">active</c:if>">
+                        <c:if test="${c.value.role eq 'TH'}"> 
+                            <span class="label label-primary">Teacher</span>
+                        </c:if>
+                        ${c.value.course.name}  (${c.value.course.term}/${c.value.course.year})
+                    </a>                    
+                </c:if>
+            </c:forEach>
+            <!--            <a id="1" onclick="load_course(1)" class="list-group-item usepointer"><span class="badge">3</span>INT103 Office</a>
+                        <a id="2" onclick="load_course(2)" class="list-group-item usepointer"><span class="badge">3</span>INT206 Software Development Process II</a>
+                        <a id="3" onclick="load_course(3)" class="list-group-item usepointer"><span class="badge">2</span>LNG103 Academic English</a>
+                        <a id="4" onclick="load_course(4)" class="list-group-item usepointer"><span class="badge"></span>INT380 Operation Management</a>
+                        <a id="5" onclick="load_course(5)"  class="list-group-item usepointer"><span class="badge">1</span>MTH111 Calculus I</a>-->
+        </div> 
+    </div>
+
+    <div class="row closelist" style="margin-top: 30px">
+        <div  class="list-group">
+            <span disabled="yes" class="list-group-item">
+                Your course that has been <span class="label label-danger">close</span> 
+            </span>
+            <c:forEach items="${ac.getCourseList()}" var="c">
+                <c:if test="${c.value.course.status eq 'close'}">
+                    <a id="${c.key}" onclick="load_course(${c.key})" class="list-group-item usepointer <c:if test="${sessionScope.cId==c.key}">active</c:if>">
+                        <c:if test="${c.value.role eq 'TH'}"> 
+                            <span class="label label-default">Teacher</span>
+                        </c:if>
+                        ${c.value.course.name}  (${c.value.course.term}/${c.value.course.year})
+                    </a>                    
+                </c:if>
             </c:forEach>
             <!--            <a id="1" onclick="load_course(1)" class="list-group-item usepointer"><span class="badge">3</span>INT103 Office</a>
                         <a id="2" onclick="load_course(2)" class="list-group-item usepointer"><span class="badge">3</span>INT206 Software Development Process II</a>

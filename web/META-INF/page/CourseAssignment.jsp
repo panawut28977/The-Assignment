@@ -87,7 +87,7 @@
             events: jsonArr
 
         }).find("#loader").remove();
-
+        $('#createAmCloseCourse').tooltip();
     });
 
 </script>
@@ -103,9 +103,25 @@
     #calendar{
         display: none;
     }
+
+    .disabled{
+        color: #999999;
+        cursor: default;
+    }
 </style>
 <c:if test="${ac.courseList.get(cId).role eq 'TH'}"> 
-    <a class="btn btn-primary pull-right"  href="CreateAssignment.jsp?tab=AllAssignment" style="margin-top: 20px"><span class="glyphicon glyphicon-plus-sign"></span> Create Assignment</a>
+    <c:choose>
+        <c:when test="${ac.courseList.get(cId).course.status eq 'open'}">
+            <a class="btn btn-primary pull-right"  href="CreateAssignment.jsp?tab=AllAssignment" style="margin-top: 20px">
+                <span class="glyphicon glyphicon-plus-sign"></span> Create Assignment
+            </a>
+        </c:when>
+        <c:when test="${ac.courseList.get(cId).course.status eq 'close'}">
+            <button class="btn btn-default pull-right" id="createAmCloseCourse" data-toggle="tooltip" data-placement="top" title="your course is closed. Can not create assignment." style="margin-top: 20px">
+                <span class="glyphicon glyphicon-plus-sign"></span> Create Assignment
+            </button>
+        </c:when>
+    </c:choose>
     <br/><br/><br/>
 </c:if>
 <div class="btn-group pull-right" style="margin: 20px 0;clear: both">
@@ -185,16 +201,32 @@
                                     </c:when>
                                 </c:choose>
                             </td>
-                            <td>
-                                <a title="Send Assignment" href="sendAssignment?am_id=${a.am_id}">
-                                    <span class="glyphicon glyphicon-upload"></span>
-                                </a>
-                            </td>
+                            <c:choose>
+                                <c:when test="${ac.courseList.get(cId).course.status eq 'open'}">
+                                    <td>
+                                        <a title="Send Assignment" href="sendAssignment?am_id=${a.am_id}">
+                                            <span class="glyphicon glyphicon-upload"></span>
+                                        </a>
+                                    </td>
+                                </c:when>
+                                <c:when test="${ac.courseList.get(cId).course.status eq 'close'}">
+                                    <td>
+                                        <a title="Course is now closed" href="#" class="disabled">
+                                            <span class="glyphicon glyphicon-upload"></span>
+                                        </a>
+                                    </td>
+                                </c:when>
+                            </c:choose>
+
                         </c:when>
                         <c:otherwise> 
-                            <td style="text-align: center"><a href="GetSentAssignment?am_id=${a.am_id}"><i class="glyphicon glyphicon-check"></i></a></td>
-                                </c:otherwise>
-                            </c:choose>
+                            <td style="text-align: center">
+                                <a href="GetSentAssignment?am_id=${a.am_id}">
+                                    <i class="glyphicon glyphicon-check"></i>
+                                </a>
+                            </td>
+                        </c:otherwise>
+                    </c:choose>
                 </tr>
             </c:forEach>
         </tbody>

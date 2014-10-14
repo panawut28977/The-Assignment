@@ -373,6 +373,10 @@
         <servlet-name>CloseCourse</servlet-name>
         <servlet-class>servlet.CloseCourse</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>OpenCourse</servlet-name>
+        <servlet-class>servlet.OpenCourse</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -664,6 +668,10 @@
     <servlet-mapping>
         <servlet-name>CloseCourse</servlet-name>
         <url-pattern>/CloseCourse</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OpenCourse</servlet-name>
+        <url-pattern>/OpenCourse</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

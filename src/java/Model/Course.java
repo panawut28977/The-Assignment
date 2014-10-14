@@ -79,7 +79,7 @@ public class Course {
     public void setStatus(String status) {
         this.status = status;
     }
-    
+
     public String getCourse_link() {
         return course_link;
     }
@@ -166,6 +166,7 @@ public class Course {
                 c.setName(rs.getString("name"));
                 c.setTerm(rs.getInt("term"));
                 c.setYear(rs.getInt("year"));
+                c.setStatus(rs.getString("status"));
                 c.setCourse_code(rs.getString("course_code"));
                 c.setCourse_link(rs.getString("course_link"));
                 c.setCreate_date(rs.getDate("create_date"));
@@ -197,6 +198,7 @@ public class Course {
                     c.setName(rs.getString("name"));
                     c.setTerm(rs.getInt("term"));
                     c.setYear(rs.getInt("year"));
+                    c.setStatus(rs.getString("status"));
                     c.setCourse_code(rs.getString("course_code"));
                     c.setCourse_link(rs.getString("course_link"));
                     c.setCreate_date(rs.getDate("create_date"));
@@ -228,6 +230,7 @@ public class Course {
                 c.setName(rs.getString("name"));
                 c.setTerm(rs.getInt("term"));
                 c.setYear(rs.getInt("year"));
+                c.setStatus(rs.getString("status"));
                 c.setCourse_code(rs.getString("course_code"));
                 c.setCourse_link(rs.getString("course_link"));
                 c.setCreate_date(rs.getDate("create_date"));
@@ -359,10 +362,26 @@ public class Course {
         }
         return name;
     }
-    
+
     public static int closeCourse(int cId) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "update course set status=close where course_id=?";
+        String sql = "update course set status='close' where course_id=?";
+        PreparedStatement pstm;
+        int result = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, cId);
+            result = pstm.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+    
+    public static int openCourse(int cId) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "update course set status='open' where course_id=?";
         PreparedStatement pstm;
         int result = 0;
         try {
@@ -380,6 +399,5 @@ public class Course {
     public String toString() {
         return "Course{" + "course_id=" + course_id + ", name=" + name + ", term=" + term + ", year=" + year + ", status=" + status + ", course_link=" + course_link + ", course_code=" + course_code + ", create_date=" + create_date + ", listStudent=" + listStudent + ", announcement=" + announcement + ", assignment=" + assignment + '}';
     }
-    
-    
+
 }

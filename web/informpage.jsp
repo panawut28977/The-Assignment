@@ -80,6 +80,23 @@
                                 <h3>your course has been closed now. some function will be disable. <a href="CourseAnnounce">Go back to your course</a></h3>
                             </div>
                         </c:when>
+                        <c:when test="${msg eq '10'}">
+                            <div class="alert alert-success" role="alert">
+                                <h3>your course is open now. <a href="CourseAnnounce">Go back to your course</a></h3>
+                            </div>
+                        </c:when>
+                        <c:when test="${msg eq '11'}">
+                            <div class="alert alert-warning" role="alert">
+                                <h3>your request course is closed now. Please waiting before it open or put another course.</h3>
+                            </div>
+                            <form action="joinCourseServlet" method="post" role="form">
+                                <div class="form-group">
+                                    <label>Put course code</label>
+                                    <input type="text" name="course_code" class="form-control">
+                                </div>
+                                <input type="submit" class="btn btn-primary" value="join"/>
+                            </form>
+                        </c:when>
                     </c:choose>
                 </div>
             </div>

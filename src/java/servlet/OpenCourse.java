@@ -5,15 +5,9 @@
  */
 package servlet;
 
-import Model.Account;
-import Model.AccountCourse;
 import Model.Course;
-import Model.ImportedStudent;
-import Model.Notification;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +18,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Orarmor
  */
-public class joinCourseServlet extends HttpServlet {
+public class OpenCourse extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,44 +31,10 @@ public class joinCourseServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String code = request.getParameter("course_code");
         HttpSession ss = request.getSession();
-        Account ac = (Account) ss.getAttribute("ac");
-        Course c = Course.getCourseByCode(code);
-        String url = "";
-        if (!code.equals("")) {
-            if (c.getStatus().equalsIgnoreCase("open")) {
-                AccountCourse member = new AccountCourse();
-                member.setCourse(c);
-                member.setRole("ST");
-                member.setStatus("waiting");
-                int result = AccountCourse.joinCourse(member, ac.getAcc_id());
-                if (result > 0) {
-                    request.setAttribute("msg", "1");
-                    Notification n = new Notification();
-                    n.setAcc_id(ac.getAcc_id());
-                    n.setCourse_id(c.getCourse_id());
-                    n.setType("alert");
-                    //Assignment# 1 ( INT206 Software Development Process II ) <b9/10
-                    String content = "<b>\"" + ac.getFirstname() + " " + ac.getLastname() + "\"</b> request to join in <b>" + c.getName() + "</b>";
-                    n.setText(content);
-
-                    List<Integer> listac = AccountCourse.getTeacherIdCourse(c.getCourse_id(), ac.getAcc_id());
-                    Notification.announce(n, listac);
-
-                    //checking auto 
-                    if (ImportedStudent.isExistInStudentList(c.getCourse_id(), ac.getEmail())) {
-                        getServletContext().getRequestDispatcher("/approvesl?acc_id=" + ac.getAcc_id() + "&&course_id=" + c.getCourse_id()).include(request, response);
-                    }
-                } else {
-                    request.setAttribute("msg", "2");
-                }
-            }else{
-                System.out.println("1111111");
-                 request.setAttribute("msg", "11");
-            }
-            getServletContext().getRequestDispatcher("/informpage.jsp").forward(request, response);
-        }
+        int result = Course.openCourse(Integer.parseInt(ss.getAttribute("cId") + ""));
+        ss.setAttribute("msg", 10);
+        response.sendRedirect("informpage.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

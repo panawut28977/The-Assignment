@@ -35,7 +35,7 @@ public class CloseCourse extends HttpServlet {
         HttpSession ss = request.getSession();
         int result = Course.closeCourse(Integer.parseInt(ss.getAttribute("cId") + ""));
         ss.setAttribute("msg", 9);
-        response.sendRedirect("inforpage");
+        response.sendRedirect("informpage.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

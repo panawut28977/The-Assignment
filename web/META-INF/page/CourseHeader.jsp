@@ -1,4 +1,5 @@
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
     #openCodeBox{
         text-align: center;
@@ -12,26 +13,26 @@
     #openCodeBtn:hover{
         font-weight:  bold;
     }
-    
+
     #CourseDetail{
         display: none;
     }
-    
+
 </style>
 <script type="text/javascript" src="js/jquery.qrcode-0.8.0.min.js"></script>
 <script>
     $(function() {
 
         var coursecode = '${ac.courseList.get(cId).course.course_code}';
-        var courselink = 'http://localhost:8084/TheAssignment/linkjoin?course_code='+'${ac.courseList.get(cId).course.course_code}';
+        var courselink = 'http://localhost:8084/TheAssignment/linkjoin?course_code=' + '${ac.courseList.get(cId).course.course_code}';
         $("#coursecode").val(coursecode);
         $("#courselink").val(courselink);
         $(".qrcode").qrcode({
             size: 100,
             background: 'white',
-            text: 'http://localhost:8084/TheAssignment/linkjoin?course_code='+'${ac.courseList.get(cId).course.course_code}'
+            text: 'http://localhost:8084/TheAssignment/linkjoin?course_code=' + '${ac.courseList.get(cId).course.course_code}'
         });
-        
+
         $("#openCodeBtn").click(function() {
             $("#CourseDetail").slideToggle();
             var spanClass = $(this).find("span").attr("class");
@@ -53,10 +54,24 @@
                 location.href = "deleteCourse";
             }
         });
-        
+
         $("#closecourse").click(function() {
-            if (confirm('when you close this course teacher/student cannot create/send assignment, join course and  All Assignment  of this course will not show in assignment status ')) {
+            var text = 'Are you sure to close this course ?\n'
+                    + 'If you close, the following user can not use these functions :\n'
+                    + '- Teacher \n'
+                    + '      Can not create assignment \n'
+                    + '- Student \n'
+                    + '      Can not send any assignment \n'
+                    + '      Can not to join this course \n'
+                    + '      Assignment status number will disappear from student\'s dashboard (left side of the student screen)';
+            if (confirm(text)) {
                 location.href = "CloseCourse";
+            }
+        });
+         $("#opencourse").click(function() {
+            var text = 'Course will open and all function will enable.';
+            if (confirm(text)) {
+                location.href = "OpenCourse";
             }
         });
     });
@@ -70,12 +85,22 @@
             <div class="row" style="font-size:24px; " >
                 <div class="col-md-11">
                     <span id="coursename">${ac.courseList.get(cId).course.name}</span>  (${ac.courseList.get(cId).course.term}/${ac.courseList.get(cId).course.year})
+                    <c:if test="${ac.courseList.get(cId).course.status eq 'close'}">
+                        <span class="label label-danger" id="closelabel">Close</span>
+                    </c:if>
                 </div> 
                 <div class="dropdown pull-right col-md-1">
                     <a data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-cog"></span></a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                         <li><a id="editcourse">Edit course name</a></li>
-                        <li><a id="closecourse">Close course</a></li>
+                            <c:choose>
+                                <c:when test="${ac.courseList.get(cId).course.status eq 'open'}">
+                                    <li><a id="closecourse">Close course</a></li>
+                                </c:when>
+                                <c:when test="${ac.courseList.get(cId).course.status eq 'close'}">
+                                     <li><a id="opencourse">Open course</a></li>
+                                </c:when>
+                            </c:choose>
                         <li><a id="deletecourse">Delete this course</a></li>
                     </ul>
                 </div>

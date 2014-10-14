@@ -43,32 +43,36 @@ public class linkjoin extends HttpServlet {
         String url = "";
         if (ac != null) {
             if (!code.equals("")) {
-                AccountCourse member = new AccountCourse();
-                member.setCourse(c);
-                member.setRole("ST");
-                member.setStatus("waiting");
-                int result = AccountCourse.joinCourse(member, ac.getAcc_id());
-                System.out.println("result :" + result);
-                if (result > 0) {
-                    request.setAttribute("msg", "1");
-                    Notification n = new Notification();
-                    n.setAcc_id(ac.getAcc_id());
-                    n.setCourse_id(c.getCourse_id());
-                    n.setType("alert");
-                    //Assignment# 1 ( INT206 Software Development Process II ) <b9/10
-                    String content = "<b>\"" + ac.getFirstname() + " " + ac.getLastname() + "\"</b> request to join in <b>" + c.getName() + "</b>   ";
-                    n.setText(content);
+                if (c.getStatus().equalsIgnoreCase("open")) {
+                    AccountCourse member = new AccountCourse();
+                    member.setCourse(c);
+                    member.setRole("ST");
+                    member.setStatus("waiting");
+                    int result = AccountCourse.joinCourse(member, ac.getAcc_id());
+                    System.out.println("result :" + result);
+                    if (result > 0) {
+                        request.setAttribute("msg", "1");
+                        Notification n = new Notification();
+                        n.setAcc_id(ac.getAcc_id());
+                        n.setCourse_id(c.getCourse_id());
+                        n.setType("alert");
+                        //Assignment# 1 ( INT206 Software Development Process II ) <b9/10
+                        String content = "<b>\"" + ac.getFirstname() + " " + ac.getLastname() + "\"</b> request to join in <b>" + c.getName() + "</b>   ";
+                        n.setText(content);
 
-                    List<Integer> listac = AccountCourse.getTeacherIdCourse(c.getCourse_id(), ac.getAcc_id());
-                    Notification.announce(n, listac);
+                        List<Integer> listac = AccountCourse.getTeacherIdCourse(c.getCourse_id(), ac.getAcc_id());
+                        Notification.announce(n, listac);
 
-                    //checking auto 
-                    if (ImportedStudent.isExistInStudentList(c.getCourse_id(), ac.getEmail())) {
-                        getServletContext().getRequestDispatcher("/approvesl?acc_id=" + ac.getAcc_id() + "&&course_id=" + c.getCourse_id()).include(request, response);
+                        //checking auto 
+                        if (ImportedStudent.isExistInStudentList(c.getCourse_id(), ac.getEmail())) {
+                            getServletContext().getRequestDispatcher("/approvesl?acc_id=" + ac.getAcc_id() + "&&course_id=" + c.getCourse_id()).include(request, response);
+                        }
+
+                    } else {
+                        request.setAttribute("msg", "2");
                     }
-
                 } else {
-                    request.setAttribute("msg", "2");
+                    request.setAttribute("msg", "11");
                 }
                 getServletContext().getRequestDispatcher("/informpage.jsp").forward(request, response);
             }
