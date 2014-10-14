@@ -369,6 +369,10 @@
         <servlet-name>uploadProfilePic</servlet-name>
         <servlet-class>servlet.uploadProfilePic</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CloseCourse</servlet-name>
+        <servlet-class>servlet.CloseCourse</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -656,6 +660,10 @@
     <servlet-mapping>
         <servlet-name>uploadProfilePic</servlet-name>
         <url-pattern>/uploadProfilePic</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CloseCourse</servlet-name>
+        <url-pattern>/CloseCourse</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

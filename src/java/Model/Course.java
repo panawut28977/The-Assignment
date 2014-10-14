@@ -25,6 +25,7 @@ public class Course {
     private String name;
     private int term;
     private int year;
+    private String status;
     private String course_link;
     private String course_code;
     private Date create_date;
@@ -71,6 +72,14 @@ public class Course {
         this.year = year;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
     public String getCourse_link() {
         return course_link;
     }
@@ -350,13 +359,27 @@ public class Course {
         }
         return name;
     }
-
-    //getScoreSheet อาจไม่ต้องมีตอนทำฟังชั่นนี้ เดียวดึงเอาข้อมูลที่มีอยู่แล้วมาใช้
-    //exportScoreSheet รอทำจริงค่อยทำ
-    //getAllCourseMember ใช้ getListStudent เลย
-    @Override
-    public String toString() {
-        return "Course{" + "course_id=" + course_id + ", name=" + name + ", course_link=" + course_link + ", course_code=" + course_code + ", create_date=" + create_date + ", listStudent=" + listStudent + ", announcement=" + announcement + ", assignment=" + assignment + '}';
+    
+    public static int closeCourse(int cId) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "update course set status=close where course_id=?";
+        PreparedStatement pstm;
+        int result = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, cId);
+            result = pstm.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
     }
 
+    @Override
+    public String toString() {
+        return "Course{" + "course_id=" + course_id + ", name=" + name + ", term=" + term + ", year=" + year + ", status=" + status + ", course_link=" + course_link + ", course_code=" + course_code + ", create_date=" + create_date + ", listStudent=" + listStudent + ", announcement=" + announcement + ", assignment=" + assignment + '}';
+    }
+    
+    
 }

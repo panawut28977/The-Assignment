@@ -75,6 +75,11 @@
                                 <h3>you out of course.  <a href="home.jsp?tab=AllAnnouce">Go back to homepage</a></h3>
                             </div>
                         </c:when>
+                        <c:when test="${msg eq '9'}">
+                            <div class="alert alert-warning" role="alert">
+                                <h3>your course has been closed now. some function will be disable. <a href="CourseAnnounce">Go back to your course</a></h3>
+                            </div>
+                        </c:when>
                     </c:choose>
                 </div>
             </div>

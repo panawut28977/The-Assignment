@@ -40,10 +40,10 @@ public class ImageCrop extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession ss = request.getSession();
-        int t = Integer.parseInt(request.getParameter("t"));
-        int l = Integer.parseInt(request.getParameter("l"));
-        int w = Integer.parseInt(request.getParameter("w"));
-        int h = Integer.parseInt(request.getParameter("h"));
+        int t = (int)(Double.parseDouble(request.getParameter("t")));
+        int l = (int)(Double.parseDouble(request.getParameter("l")));
+        int w = (int)(Double.parseDouble(request.getParameter("w")));
+        int h = (int)(Double.parseDouble(request.getParameter("h")));
         int width = (int) (Double.parseDouble(request.getParameter("width")));
         int heitgh = (int) (Double.parseDouble(request.getParameter("height")));
         System.out.println("i:" + request.getParameter("image"));

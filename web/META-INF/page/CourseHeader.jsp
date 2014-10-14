@@ -53,6 +53,12 @@
                 location.href = "deleteCourse";
             }
         });
+        
+        $("#closecourse").click(function() {
+            if (confirm('when you close this course teacher/student cannot create/send assignment, join course and  All Assignment  of this course will not show in assignment status ')) {
+                location.href = "CloseCourse";
+            }
+        });
     });
 </script>
 <c:choose> 
@@ -69,6 +75,7 @@
                     <a data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-cog"></span></a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                         <li><a id="editcourse">Edit course name</a></li>
+                        <li><a id="closecourse">Close course</a></li>
                         <li><a id="deletecourse">Delete this course</a></li>
                     </ul>
                 </div>
