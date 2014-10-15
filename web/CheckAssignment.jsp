@@ -66,7 +66,7 @@
                     <%@include file="META-INF/page/CourseHeader.jsp" %>
                     <%@include file="META-INF/page/CourseTab.jsp"%>
                     <ol class="breadcrumb" style="margin-top: 15px" >
-                        <li><a href="course.jsp?tab=AllAssignment">Assignment</a></li>
+                        <li><a href="CourseAssignment">Assignment</a></li>
                         <li><a href="GetSentAssignment?am_id=${curAm.am_id}">${curAm.name}</a></li>
                         <li class="active"><a href="#">Check Assignment</a></li>
                     </ol>
@@ -199,20 +199,22 @@
                                                             </c:otherwise>
                                                         </c:choose>
                                                         <c:set var="stans" value="${fn:substring(stanswer.get(0).answer, 1, stanswer.get(0).answer.length()-1)}"/>
-
+                                                        ${anslist} ${stans}
                                                         <!--split -->
-                                                        <c:set var="choicesp" value="${fn:split(clist, ', ')}" />
+                                                        <c:set var="choicesp" value="${fn:split(clist, ',')}" />
                                                         <c:set var="anslistsp" value="${fn:split(anslist, ',')}" />
-                                                        <c:set var="stanssp" value="${fn:split(stans, ', ')}" />
+                                                        <c:set var="stanssp" value="${fn:split(stans, ',')}" />
                                                         <div>
                                                             <p>${q.q_no}.) ${q.q_text}</p>
                                                             <c:choose>
                                                                 <c:when test="${q.q_category eq 'one'}">
                                                                     <c:forEach items="${choicesp}" var="choice">
+                                                                        <c:set var="choicet" value="${fn:trim(choice)}"/>
                                                                         <input type="radio" name="${seqno}answer" value="${choice}" disabled="yes"
                                                                                <c:forEach items="${stanssp}" var="sans">
                                                                                    ${sans}
-                                                                                   <c:if test="${sans eq choice}">
+                                                                                   <c:set var="sanst" value="${fn:trim(sans)}"/>
+                                                                                   <c:if test="${sanst eq choicet}">
                                                                                        checked="yes"
                                                                                    </c:if>
                                                                                </c:forEach>
@@ -221,10 +223,12 @@
                                                                 </c:when>
                                                                 <c:when test="${q.q_category eq 'multiple'}">
                                                                     <c:forEach items="${choicesp}" var="choice">
+                                                                        <c:set var="choicet" value="${fn:trim(choice)}"/>
                                                                         <input type="checkbox" name="${seqno}answer" value="${choice}" disabled="yes"
                                                                                <c:forEach items="${stanssp}" var="sans">
                                                                                    ${sans}
-                                                                                   <c:if test="${sans eq choice}">
+                                                                                   <c:set var="sanst" value="${fn:trim(sans)}"/>
+                                                                                   <c:if test="${sanst eq choicet}">
                                                                                        checked="yes"
                                                                                    </c:if>
                                                                                </c:forEach>
@@ -300,7 +304,7 @@
                                                                 </c:if>
                                                             </c:forEach> 
                                                             <!-- no shuffle answer -->
-                                                            <c:set value="${fn:split(listans,', ')}" var="listansNoshuffle"/>
+                                                            <c:set value="${fn:split(listans,',')}" var="listansNoshuffle"/>
                                                             <!-- shuffle concantinate string -->
                                                             <c:set value="${ct_cf:shuffleString(listans)}" var="listans"/>
                                                             <!-- split new shffle string for display-->

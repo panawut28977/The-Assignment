@@ -46,7 +46,7 @@
                             <div><h3>INT202 Software Development Process II</h3></div>
                             <%@include file="META-INF/page/CourseTab.jsp"%>
                             <ol class="breadcrumb" style="margin-top: 15px" >
-                                <li><a href="course.jsp?tab=AllAssignment">Assignment</a></li>
+                                <li><a href="CourseAssignment">Assignment</a></li>
                                 <li class="active"><a href="#">Assignment# 1...</a></li>
                             </ol>
                         </c:otherwise>
@@ -54,7 +54,7 @@
                     <div><h3>${ac.courseList.get(cId).course.name}</h3></div>
                     <%@include file="META-INF/page/CourseTab.jsp"%>
                     <ol class="breadcrumb" style="margin-top: 15px" >
-                        <li><a href="course.jsp?tab=AllAssignment">Assignment</a></li>
+                        <li><a href="CourseAssignment">Assignment</a></li>
                         <li class="active"><a href="#">${curAm.name}</a></li>
                     </ol>
                     <div >

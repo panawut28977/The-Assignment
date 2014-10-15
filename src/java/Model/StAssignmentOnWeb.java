@@ -467,6 +467,55 @@ public class StAssignmentOnWeb {
         }
         return result > 0;
     }
+    
+     public static boolean isNotCheckingExist(int am_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select count(*) from student_assignment_on_web where ass_id = ?";
+        PreparedStatement pstm;
+        int result = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, am_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+               result = rs.getInt(1);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(StAssignmentFile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result>0;
+    }
+     
+     public static List<StAssignmentOnWeb> getNotCheckingStAmByAmId(int am_id) {
+        List<StAssignmentOnWeb> stfList = new ArrayList<>();
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select * from student_assignment_on_web where ass_id = ? and checked_time is null";
+        PreparedStatement pstm;
+        int result = 0;
+        StAssignmentOnWeb s = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, am_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                s = new StAssignmentOnWeb();
+                int st_ass_id = rs.getInt("st_ass_id");
+                s.setAm_id(rs.getInt("ass_id"));
+                s.setAcc_id(rs.getInt("acc_id"));
+                s.setG_id(rs.getInt("g_id"));
+                s.setSt_am_id(st_ass_id);
+                s.setScore(rs.getDouble("score"));
+                s.setLasted_send_date(rs.getDate("lasted_send_date"));
+                s.setChecked_time(rs.getTimestamp("checked_time"));
+                stfList.add(s);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(StAssignmentFile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return stfList;
+    }
 
     @Override
     public String toString() {

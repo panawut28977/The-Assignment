@@ -62,7 +62,7 @@
                     <%@include file="META-INF/page/CourseHeader.jsp" %>
                     <%@include file="META-INF/page/CourseTab.jsp"%>
                     <ol class="breadcrumb" style="margin-top: 15px" >
-                        <li><a href="course.jsp?tab=AllAssignment">Assignment</a></li>
+                        <li><a href="CourseAssignment">Assignment</a></li>
                         <li class="active"><a href="#">Create Assignment</a></li>
                     </ol>
                     <form id="myWizard" method="post" action="createAssignment" class="form-horizontal" enctype="multipart/form-data">
@@ -374,7 +374,7 @@
                                                 $(this).parent().parent().parent().find(".dummy_answer").remove();
                                                 var matchWord_dummy = '';
                                                 for (var i = 0; i < $(this).val(); i++) {
-                                                    matchWord_dummy += '<div class="row dummy_answer"><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_text" readonly="yes" onfocusout="checkComma(this)"></div><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_ans" onfocusout="checkComma(this)"></div><div class="col-md-2"><input type="number" min="0" step="any" class="form-control" name="' + seq_of_choice + 'm_score" required="yes"></div></div>';
+                                                    matchWord_dummy += '<div class="row dummy_answer"><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_text" readonly="yes" onfocusout="checkComma(this)"></div><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_ans" onfocusout="checkComma(this)"></div><div class="col-md-2"><input type="number" min="0" step="any" class="form-control" name="' + seq_of_choice + 'm_score" required="yes" value="0"></div></div>';
                                                 }
                                                 $(this).parent().parent().parent(".matchWord").find(".matchWord_q_list").append(matchWord_dummy);
                                             });

@@ -70,7 +70,7 @@
                             <div><h3>INT202 Software Development Process II</h3></div>
                             <%@include file="META-INF/page/CourseTab.jsp"%>
                             <ol class="breadcrumb" style="margin-top: 15px" >
-                                <li><a href="course.jsp?tab=AllAssignment">Assignment</a></li>
+                                <li><a href="CourseAssignment">Assignment</a></li>
                                 <li class="active"><a href="#">Assignment# 1...</a></li>
                             </ol>
                         </c:otherwise>
@@ -78,7 +78,7 @@
                     <div><h3>${ac.courseList.get(cId).course.name}</h3></div>
                     <%@include file="META-INF/page/CourseTab.jsp"%>
                     <ol class="breadcrumb" style="margin-top: 15px" >
-                        <li><a href="course.jsp?tab=AllAssignment">Assignment</a></li>
+                        <li><a href="CourseAssignment">Assignment</a></li>
                         <li class="active"><a href="#">${curAm.name}</a></li>
                     </ol>
                     <div >
@@ -157,24 +157,28 @@
                                                             <c:choose>
                                                                 <c:when test="${q.q_category eq 'one'}">
                                                                     <c:forEach items="${choicesp}" var="choice">
-                                                                        <input type="radio" name="${seqno}answer" value="${choice}" 
+                                                                         <c:set var="choicet" value="${fn:trim(choice)}"/>
+                                                                        <input type="radio" name="${seqno}answer" value="${choicet}" 
                                                                                <c:forEach items="${stanssp}" var="sans">
                                                                                    ${sans}
-                                                                                   <c:if test="${sans eq choice}">
+                                                                                   <c:set var="sanst" value="${fn:trim(sans)}"/>
+                                                                                   <c:if test="${sanst eq choicet}">
                                                                                        checked="yes"
                                                                                    </c:if>
-                                                                               </c:forEach>> ${choice} <br/>
+                                                                               </c:forEach>> ${choicet} <br/>
                                                                     </c:forEach>
                                                                 </c:when>
                                                                 <c:when test="${q.q_category eq 'multiple'}">
                                                                     <c:forEach items="${choicesp}" var="choice">
-                                                                        <input type="checkbox" name="${seqno}answer" value="${choice}" 
+                                                                         <c:set var="choicet" value="${fn:trim(choice)}"/>
+                                                                        <input type="checkbox" name="${seqno}answer" value="${choicet}" 
                                                                                <c:forEach items="${stanssp}" var="sans">
                                                                                    ${sans}
-                                                                                   <c:if test="${sans eq choice}">
+                                                                                   <c:set var="sanst" value="${fn:trim(sans)}"/>
+                                                                                   <c:if test="${sanst eq choicet}">
                                                                                        checked="yes"
                                                                                    </c:if>
-                                                                               </c:forEach>> ${choice} <br/>
+                                                                               </c:forEach>> ${choicet} <br/>
                                                                     </c:forEach>
                                                                 </c:when>
                                                                 <c:when test="${q.q_category eq 'tf'}">

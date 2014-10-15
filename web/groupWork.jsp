@@ -76,7 +76,7 @@
                             <%@include file="META-INF/page/CourseHeader.jsp"%>
                             <%@include file="META-INF/page/CourseTab.jsp"%>
                             <ol class="breadcrumb" style="margin-top: 15px" >
-                                <li><a href="course.jsp?tab=AllAssignment">Assignment</a></li>
+                                <li><a href="CourseAssignment">Assignment</a></li>
                                 <li class="active"><a href="#">Member</a></li>
                             </ol>
                         </c:otherwise>
@@ -84,7 +84,7 @@
                     <%@include file="META-INF/page/CourseHeader.jsp"%>
                     <%@include file="META-INF/page/CourseTab.jsp"%>
                     <ol class="breadcrumb" style="margin-top: 15px" >
-                        <li><a href="course.jsp?tab=AllAssignment">Assignment</a></li>
+                        <li><a href="CourseAssignment">Assignment</a></li>
                         <li class="active"><a href="#">Member</a></li>
                     </ol>
                     <c:choose>

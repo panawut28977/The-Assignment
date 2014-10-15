@@ -7,12 +7,16 @@ package servlet;
 
 import Model.Account;
 import Model.AccountCourse;
+import Model.AnswerQuestion;
 import Model.Assignment;
 import Model.Group_member;
+import Model.Question;
 import Model.StAssignmentFile;
 import Model.StAssignmentOnWeb;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -102,6 +106,78 @@ public class GetSentAssignment extends HttpServlet {
             request.setAttribute("sentList", sentList);
             request.setAttribute("leftList", leftList);
         } else {
+            //auto checking all assignment that is not checking
+            //search not checking assignment
+            Date now = new Date();
+            Date lateDate = a.getLate_date();
+            if (StAssignmentOnWeb.isNotCheckingExist(am_id) && now.getTime() > lateDate.getTime()) {
+                System.out.println("auto checking");
+                List<StAssignmentOnWeb> notchcksa = StAssignmentOnWeb.getNotCheckingStAmByAmId(am_id);
+                for (StAssignmentOnWeb stAssignmentOnWeb : notchcksa) {
+                    int used_id = 0;
+                    System.out.println("st_am_id: "+stAssignmentOnWeb.getSt_am_id());
+                    for (Question q : a.getQuestionList()) {
+                        double score = 0;
+                        ArrayList<AnswerQuestion> stanswer = AnswerQuestion.getStAMQuestion(stAssignmentOnWeb.getSt_am_id(), q.getQ_id());
+                        if (q.getQ_type().equalsIgnoreCase("multiple_choice") || q.getQ_type().equalsIgnoreCase("tfQuestion")) {
+                            String anslist = null;
+                            if (q.getQ_type().equalsIgnoreCase("tfQuestion")) {
+                                anslist = q.getQ_answer_list();
+                            } else {
+                                anslist = q.getQ_answer_list().substring(1, q.getQ_answer_list().length() - 1);
+                            }
+                            String stans = stanswer.get(0).getAnswer().substring(1, stanswer.get(0).getAnswer().length() - 1);
+
+                            String[] anslistsp = anslist.split(",");
+                            String[] stanssp = stans.split(",");
+                            double scoreperchoice = q.getQ_score()/ anslistsp.length;
+//                            System.out.println(scoreperchoice);
+                            for (int i = 0; i < anslistsp.length; i++) {
+                                System.out.println(anslistsp[i]+"/"+stanssp[i]);
+                                if (anslistsp[i].equalsIgnoreCase(stanssp[i])) {
+                                    score = scoreperchoice;
+                                }
+                            }
+                            System.out.println("q_no: " + q.getQ_no() + " score:" + score);
+                            //update score
+                            //....
+//                            if(q.getQ_category().equalsIgnoreCase("one")){
+//                                
+//                            }else if(q.getQ_category().equalsIgnoreCase("multiple")){
+//                                
+//                            }else if(q.getQ_category().equalsIgnoreCase("tf")){
+//                                
+//                            }
+                        } else if (q.getQ_type().equalsIgnoreCase("explain")) {
+                            //cannot checking
+                        } else if (q.getQ_type().equalsIgnoreCase("matchWord")) {
+                            if (q.getQ_id() != used_id) {
+                                String listans = "";
+                                for (int i = 0; i < a.getQuestionList().size() - 1; i++) {
+                                    Question tmp = a.getQuestionList().get(i);
+                                    if (q.getQ_id() == tmp.getQ_id()) {
+                                        listans += "," + tmp.getQ_answer();
+                                    }
+                                }
+                                String[] listansNoshuffle = listans.split(",");
+                                for (int j = 0; j < stanswer.size(); j++) {
+                                    if (!listansNoshuffle[j].equalsIgnoreCase("")) {
+                                        if (listansNoshuffle[j].equalsIgnoreCase(stanswer.get(j).getAnswer())) {
+                                            score = q.getQ_score();
+                                        }
+                                    }
+                                }
+                                System.out.println("q_no" + q.getQ_no() + "score:" + score);
+                            }
+                            used_id = q.getQ_id();
+                        } else if (q.getQ_type().equalsIgnoreCase("fillBlank")) {
+
+                        }
+                    }
+                    System.out.println("-----");
+                }
+            }
+
             List<StAssignmentOnWeb> sentList = new ArrayList<StAssignmentOnWeb>();
             List<StAssignmentOnWeb> leftList = new ArrayList<StAssignmentOnWeb>();
             List<StAssignmentOnWeb> saw = StAssignmentOnWeb.getStAmByAmId(am_id);

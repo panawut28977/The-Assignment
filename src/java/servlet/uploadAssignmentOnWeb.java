@@ -75,7 +75,13 @@ public class uploadAssignmentOnWeb extends HttpServlet {
                 aq.setQ_order(0);
                 aq.setAcc_id(q_id);
                 aq.setG_id(q_id);
-                aq.setAnswer(Arrays.toString(ans));
+                StringBuilder stans = new StringBuilder("[");
+                for (String string : ans) {
+                    stans.append(string+",");
+                }
+                stans.deleteCharAt(stans.length()-1);
+                stans.append("]");
+                aq.setAnswer(stans.toString());
                 ansList.add(aq);
             } else if (q_type.equalsIgnoreCase("matchWord")) {
                 String ans[] = request.getParameterValues(seqno[i] + "answer");
