@@ -45,7 +45,7 @@
             #newComment{
                 display: none;
             }
-            
+
             #togetherjs-share-button{
                 display: none;
             }
@@ -157,7 +157,7 @@
                                                             <c:choose>
                                                                 <c:when test="${q.q_category eq 'one'}">
                                                                     <c:forEach items="${choicesp}" var="choice">
-                                                                         <c:set var="choicet" value="${fn:trim(choice)}"/>
+                                                                        <c:set var="choicet" value="${fn:trim(choice)}"/>
                                                                         <input type="radio" name="${seqno}answer" value="${choicet}" 
                                                                                <c:forEach items="${stanssp}" var="sans">
                                                                                    ${sans}
@@ -170,7 +170,7 @@
                                                                 </c:when>
                                                                 <c:when test="${q.q_category eq 'multiple'}">
                                                                     <c:forEach items="${choicesp}" var="choice">
-                                                                         <c:set var="choicet" value="${fn:trim(choice)}"/>
+                                                                        <c:set var="choicet" value="${fn:trim(choice)}"/>
                                                                         <input type="checkbox" name="${seqno}answer" value="${choicet}" 
                                                                                <c:forEach items="${stanssp}" var="sans">
                                                                                    ${sans}
@@ -222,11 +222,11 @@
                                                             <c:set value="${fn:split(listans,',')}" var="listansNoshuffle"/>
 
                                                             <!-- shuffle concantinate string -->
-                                                            <c:set value="${ct_cf:shuffleString(listans)}" var="listans"/>
+                                                            <c:set value="${ct_cf:shuffleString(listans)}" var="listshuffleans"/>
 
                                                             <!-- split new shffle string for display-->
                                                             <c:set value="${fn:split(listchs,',')}" var="listchs"/>
-                                                            <c:set value="${fn:split(listans,',')}" var="listans"/>
+                                                            <c:set value="${fn:split(listshuffleans,',')}" var="listanswer"/>
                                                             <div class="row">
                                                                 <p>${q.q_no}.) ${q.q_title}</p>
                                                                 <div class="col-md-8">
@@ -234,8 +234,10 @@
                                                                     <c:set value="0" var="a"/>
                                                                     <c:forEach items="${listchs}" var="c">
                                                                         <select name="${seqno}answer">
-                                                                            <c:forEach items="${listans}" var="ansl">
-                                                                                <option value="${ansl}" <c:if test="${stanswer.size() ne 0 and stanswer.get(a).answer eq ansl}">selected="yes"</c:if>>${ansl}</option>
+                                                                            <c:forEach items="${listanswer}" var="ansl">
+                                                                                <c:set var="ansltrim" value="${fn:trim(ansl)}"/>
+                                                                                <c:set var="stanstrim" value="${fn:trim(stanswer.get(a).answer)}"/>
+                                                                                <option value="${ansltrim}" <c:if test="${stanswer.size() ne 0 and stanstrim eq ansltrim}">selected="yes"</c:if>>${ansltrim}</option>
                                                                             </c:forEach>
                                                                         </select>
                                                                         <span>${c}</span>
@@ -244,7 +246,7 @@
                                                                     </c:forEach>
                                                                 </div>
                                                                 <div class="col-md-2 col-md-offset-2">
-                                                                    <c:forEach items="${listans}" var="ansl">
+                                                                    <c:forEach items="${listanswer}" var="ansl">
                                                                         <span>${ansl}</span><br/><br/>
                                                                     </c:forEach>
                                                                 </div>
@@ -418,10 +420,10 @@
                                 </div>
                             </div>-->
         </div>
-                    <%
-                        String abPath = getServletContext().getRealPath("/");
-                        pageContext.setAttribute("abPath", abPath);
-                    %>
+        <%
+            String abPath = getServletContext().getRealPath("/");
+            pageContext.setAttribute("abPath", abPath);
+        %>
     </body>
     <script>
         $(function() {

@@ -31,6 +31,14 @@ Author     : JenoVa
             #newComment{
                 display: none;
             }
+            .disabled{
+                color: #999999;
+                cursor: default;
+            }
+            .disabled:hover{
+                color: #999999;
+                cursor: default;
+            }
         </style>
     </head>
     <body>
@@ -78,14 +86,33 @@ Author     : JenoVa
                                     </a>
                                 </c:when>
                                 <c:when test="${am.ass_type eq 'file'}">
-                                    <a href="file/assignment_file/${am.path_file}" style="text-align: center;text-decoration: none" class="center-block">
-                                        <span class="glyphicon glyphicon-file center-block" style="font-size: 150px;margin: 40px auto;"></span><h4>Download</h4>
-                                    </a>
+                                    <c:choose>
+                                        <c:when test="${ac.courseList.get(cId).course.status eq 'open'}">
+                                            <a href="file/assignment_file/${am.path_file}" style="text-align: center;text-decoration: none" class="center-block">
+                                                <span class="glyphicon glyphicon-file center-block" style="font-size: 150px;margin: 40px auto;"></span><h4>Download</h4>
+                                            </a>
+                                        </c:when>
+                                        <c:when test="${ac.courseList.get(cId).course.status eq 'close'}">
+                                            <a href="#" style="text-align: center;text-decoration: none" class="disabled center-block">
+                                                <span class="glyphicon glyphicon-file center-block" style="font-size: 150px;margin: 40px auto;"></span><h4>Download</h4>
+                                            </a>
+                                        </c:when>
+                                    </c:choose>
+
                                 </c:when>
                                 <c:otherwise>
-                                    <a href="sendAssignment?am_id=${am.am_id}&&cId=${ac.courseList.get(cId).course.course_id}" style="text-align: center;text-decoration: none" class="center-block">
-                                        <span class="glyphicon glyphicon-upload center-block" style="font-size: 150px;margin: 40px auto;"></span><h4>Let's do it.</h4>
-                                    </a>
+                                    <c:choose>
+                                        <c:when test="${ac.courseList.get(cId).course.status eq 'open'}">
+                                            <a href="sendAssignment?am_id=${am.am_id}&&cId=${ac.courseList.get(cId).course.course_id}" style="text-align: center;text-decoration: none" class="center-block">
+                                                <span class="glyphicon glyphicon-upload center-block" style="font-size: 150px;margin: 40px auto;"></span><h4>Let's do it.</h4>
+                                            </a>
+                                        </c:when>
+                                        <c:when test="${ac.courseList.get(cId).course.status eq 'close'}">
+                                            <a href="#" style="text-align: center;text-decoration: none" class="disabled center-block">
+                                                <span class="glyphicon glyphicon-upload center-block" style="font-size: 150px;margin: 40px auto;"></span><h4>Let's do it.</h4>
+                                            </a>
+                                        </c:when>
+                                    </c:choose>
                                 </c:otherwise>
                             </c:choose>
                         </div>

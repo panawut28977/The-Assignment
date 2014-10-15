@@ -173,12 +173,16 @@
                         <c:otherwise>
                             <td>${a.total_member} 
                                 <c:choose>
-                                    <c:when test="${ac.courseList.get(cId).role eq 'ST'}">
-                                        <a href="selectPeople?am_id=${a.am_id}">join group</a>
+                                    <c:when test="${ac.courseList.get(cId).course.status eq 'open'}">
+                                        <c:choose>
+                                            <c:when test="${ac.courseList.get(cId).role eq 'ST'}">
+                                                <a href="selectPeople?am_id=${a.am_id}">join group</a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a href="selectPeople?am_id=${a.am_id}">see group</a>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </c:when>
-                                    <c:otherwise>
-                                        <a href="selectPeople?am_id=${a.am_id}">see group</a>
-                                    </c:otherwise>
                                 </c:choose>
                             </td>
                         </c:otherwise>

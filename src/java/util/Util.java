@@ -113,6 +113,7 @@ public class Util {
         }
         Collections.shuffle(asToList);
         String finalString = asToList.toString().substring(1, asToList.toString().length() - 1);
+        System.out.println(finalString);
         return finalString;
     }
 

@@ -161,6 +161,11 @@
 //        }
         var d = new Date();
         $("#term-year").val(d.getFullYear());
+
+        var html = "<a class='list-group-item'>No close course</a>";
+        if ($(".closelist .list-group").find("a.list-group-item").length == 0) {
+            $(".closelist .list-group").append(html);
+        }
     });
 
     function view_assignment_by_status(status) {
