@@ -344,10 +344,12 @@
                                                     $('#uploadAmFile').show();
                                                     $('#CreateAmOnweb').hide();
                                                     $('#fullymark').attr("required", "yes");
+                                                     $('#amfile').attr("required", "yes");
                                                 } else {
                                                     $('#CreateAmOnweb').show();
                                                     $('#uploadAmFile').hide();
                                                     $('#fullymark').removeAttr("required");
+                                                     $('#amfile').removeAttr("required");
                                                 }
                                             });
                                             $("#description").change(function() {

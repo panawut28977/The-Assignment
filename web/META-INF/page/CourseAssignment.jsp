@@ -88,7 +88,7 @@
 
         }).find("#loader").remove();
         $('#createAmCloseCourse').tooltip();
-       
+
     });
 
 </script>
@@ -229,9 +229,14 @@
                                 <a href="GetSentAssignment?am_id=${a.am_id}">
                                     <i class="glyphicon glyphicon-check"></i> 
                                     <c:set value="${cf:countSendAm(a)}" var="totalSentAm" />
-                                    <c:if test="${totalSentAm ne 0}">
-                                        ${totalSentAm}
-                                    </c:if>
+                                    <c:choose>
+                                        <c:when test="${totalSentAm ne 0}">
+                                            ${totalSentAm}
+                                        </c:when>
+                                        <c:otherwise>
+                                            &nbsp;&nbsp;
+                                        </c:otherwise>
+                                    </c:choose>
                                 </a>
                             </td>
                         </c:otherwise>
