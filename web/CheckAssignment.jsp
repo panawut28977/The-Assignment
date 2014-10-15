@@ -199,7 +199,7 @@
                                                             </c:otherwise>
                                                         </c:choose>
                                                         <c:set var="stans" value="${fn:substring(stanswer.get(0).answer, 1, stanswer.get(0).answer.length()-1)}"/>
-                                                        ${anslist} ${stans}
+                                                        <!--${anslist} ${stans}-->
                                                         <!--split -->
                                                         <c:set var="choicesp" value="${fn:split(clist, ',')}" />
                                                         <c:set var="anslistsp" value="${fn:split(anslist, ',')}" />
@@ -246,16 +246,19 @@
                                                                 <c:when test="${autocheck eq 1}">
                                                                     <!-- set ans length -->        
                                                                     <c:set value="${fn:length(anslistsp)}" var="anslength"/>        
+                                                                    <c:set value="${fn:length(stanssp)}" var="stanslength"/>        
                                                                     <!--set score per choice-->
                                                                     <c:set value="${q.q_score/anslength}" var="scoreperchoice"/>
                                                                     <!--set correct score -->
 
                                                                     <c:set value="0" var="correctscore"/>
-                                                                    <c:forEach begin="0" end="${anslength-1}" var="i">
-                                                                        <c:if test="${anslistsp[i] eq stanssp[i]}">
-                                                                            <c:set var="correctscore" value="${correctscore+scoreperchoice}"/>
-                                                                        </c:if>
-                                                                    </c:forEach>
+                                                                    <c:if test="${stanslength==anslength}">
+                                                                        <c:forEach begin="0" end="${anslength-1}" var="i">
+                                                                            <c:if test="${anslistsp[i] eq stanssp[i]}">
+                                                                                <c:set var="correctscore" value="${correctscore+scoreperchoice}"/>
+                                                                            </c:if>
+                                                                        </c:forEach>                                                                        
+                                                                    </c:if>
                                                                     <input type="number" name="${seqno}score" value="${correctscore}" min="0" max="${q.q_score}" placeholder="score"/>
                                                                     <c:choose>
                                                                         <c:when test="${correctscore > 0}">
@@ -319,7 +322,8 @@
                                                                             <c:when test="${autocheck eq 1}">
                                                                                 <c:set value="0" var="correctscore"/>
                                                                                 <c:if test="${listansNoshuffle[a] ne ''}">
-                                                                                    <c:if test="${listansNoshuffle[a] eq stanswer.get(a).answer}">
+                                                                                    <c:set value="${fn:trim(stanswer.get(a).answer)}" var="stanswertrim"/>
+                                                                                    <c:if test="${listansNoshuffle[a] eq stanswertrim}">
                                                                                         <c:set value="${q.q_score}" var="correctscore"/>
                                                                                     </c:if>
                                                                                 </c:if>

@@ -115,7 +115,7 @@ public class GetSentAssignment extends HttpServlet {
                 List<StAssignmentOnWeb> notchcksa = StAssignmentOnWeb.getNotCheckingStAmByAmId(am_id);
                 for (StAssignmentOnWeb stAssignmentOnWeb : notchcksa) {
                     int used_id = 0;
-                    System.out.println("st_am_id: "+stAssignmentOnWeb.getSt_am_id());
+                    System.out.println("st_am_id: " + stAssignmentOnWeb.getSt_am_id());
                     for (Question q : a.getQuestionList()) {
                         double score = 0;
                         ArrayList<AnswerQuestion> stanswer = AnswerQuestion.getStAMQuestion(stAssignmentOnWeb.getSt_am_id(), q.getQ_id());
@@ -128,14 +128,29 @@ public class GetSentAssignment extends HttpServlet {
                             }
                             String stans = stanswer.get(0).getAnswer().substring(1, stanswer.get(0).getAnswer().length() - 1);
 
-                            String[] anslistsp = anslist.split(",");
-                            String[] stanssp = stans.split(",");
-                            double scoreperchoice = q.getQ_score()/ anslistsp.length;
-//                            System.out.println(scoreperchoice);
-                            for (int i = 0; i < anslistsp.length; i++) {
-                                System.out.println(anslistsp[i]+"/"+stanssp[i]);
-                                if (anslistsp[i].equalsIgnoreCase(stanssp[i])) {
-                                    score = scoreperchoice;
+                            String[] anslistsp = null;
+                            String[] stanssp = null;
+
+                            if (anslist.indexOf(",") != -1) {
+                                anslistsp = anslist.split(",");
+                            } else {
+                                anslistsp = new String[1];
+                                anslistsp[0] = anslist;
+                            }
+
+                            if (stans.indexOf(",") != -1) {
+                                stanssp = stans.split(",");
+                            } else {
+                                stanssp = new String[1];
+                                stanssp[0] = stans;
+                            }
+                            double scoreperchoice = q.getQ_score() / anslistsp.length;
+                            if (anslistsp.length == stanssp.length) {
+                                for (int i = 0; i < anslistsp.length; i++) {
+                                    System.out.println(anslistsp[i] + "/" + stanssp[i]);
+                                    if (anslistsp[i].equalsIgnoreCase(stanssp[i])) {
+                                        score = scoreperchoice;
+                                    }
                                 }
                             }
                             System.out.println("q_no: " + q.getQ_no() + " score:" + score);
