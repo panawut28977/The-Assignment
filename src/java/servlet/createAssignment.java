@@ -122,7 +122,15 @@ public class createAssignment extends HttpServlet {
                     mul.setQ_text(qtext);
                     mul.setQ_category(qcategory);
                     mul.setQ_choice_list(Arrays.toString(ctext));
-                    mul.setQ_answer_list(Arrays.toString(ans));
+
+                    StringBuilder stans = new StringBuilder("[");
+                    for (String string : ans) {
+                        stans.append(string + ",");
+                    }
+                    stans.deleteCharAt(stans.length() - 1);
+                    stans.append("]");
+                    
+                    mul.setQ_answer_list(stans.toString());
                     mul.setQ_score(Double.parseDouble(score));
                     fullymark += Double.parseDouble(score);
                     qlist.add(mul);

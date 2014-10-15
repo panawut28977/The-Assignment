@@ -669,9 +669,9 @@
                                             var seq_of_choice = $(this).parent().parent().parent().find("[name='seqno']").val();
                                             var html = '';
                                             if ($(this).val() == "one") {
-                                                html = '<div class="choice-group form-inline"><div><input type="radio" name="' + seq_of_choice + 'c"> <input type="text" class="form-control" name="' + seq_of_choice + 'ctext" onfocusout="checkComma(this)" required="yes"></div></div><br><a onclick="appendChoice(this)">Add other</a>';
+                                                html = '<div class="choice-group form-inline"><div><input type="radio" name="' + seq_of_choice + 'c"> <input type="text" class="form-control" name="' + seq_of_choice + 'ctext" onfocusout="checkComma(this)" onkeyup="addToC(this)" required="yes"></div></div><br><a onclick="appendChoice(this)">Add other</a>';
                                             } else {
-                                                html = '<div class="choice-group form-inline"><div><input type="checkbox" name="' + seq_of_choice + 'c"> <input type="text" class="form-control" name="' + seq_of_choice + 'ctext" onfocusout="checkComma(this)" required="yes"></div></div><br><a onclick="appendChoice(this)">Add other</a>';
+                                                html = '<div class="choice-group form-inline"><div><input type="checkbox" name="' + seq_of_choice + 'c"> <input type="text" class="form-control" name="' + seq_of_choice + 'ctext" onfocusout="checkComma(this)" onkeyup="addToC(this)" required="yes"></div></div><br><a onclick="appendChoice(this)">Add other</a>';
                                             }
                                             $(this).parent().parent().parent(".multipleChoice").find(".c_list").html(html);
                                         });
