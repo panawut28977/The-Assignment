@@ -324,7 +324,7 @@
                                                 }
                                             });
                                             $('#groupwork').click(function() {
-                                                $('#inputpepole').removeAttr("disabled");
+                                                $('#inputpepole').removeAttr("disabled").attr("required","yes");
                                             });
                                             $('#individual').click(function() {
                                                 $('#inputpepole').attr("disabled", "yes");

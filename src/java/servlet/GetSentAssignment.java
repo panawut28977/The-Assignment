@@ -116,15 +116,15 @@ public class GetSentAssignment extends HttpServlet {
             //auto checking all assignment that is not checking
             //search not checking assignment
             Date lateDate = a.getLate_date();
-            LocalDate d = LocalDate.now();
+            Date  d = new Date();
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
             Date now = null;
             try {
-                now = df.parse(d.toString());
+                now = df.parse(df.format(d));
             } catch (ParseException ex) {
                 Logger.getLogger(GetSentAssignment.class.getName()).log(Level.SEVERE, null, ex);
             }
-//            System.out.println("time:" + now.getTime() + "--" + lateDate.getTime());
+            System.out.println("time:" + now.getTime() + "--" + lateDate.getTime());
             if (StAssignmentOnWeb.isNotCheckingExist(am_id) && now.getTime() > lateDate.getTime()) {
                 System.out.println("auto checking");
                 List<StAssignmentOnWeb> notchcksa = StAssignmentOnWeb.getNotCheckingStAmByAmId(am_id);

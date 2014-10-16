@@ -35,7 +35,6 @@ public class notification extends HttpServlet {
             throws ServletException, IOException {
         HttpSession ss = request.getSession();
         String nt = request.getParameter("nt");
-        System.out.println("gsgds"+nt);
         Account ac = (Account) ss.getAttribute("ac");
         List<Notification> noti = null;
         if (nt.equalsIgnoreCase("Announcement")) {

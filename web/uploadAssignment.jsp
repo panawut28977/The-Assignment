@@ -115,7 +115,7 @@
                                     </h4>
                                     <form role="form" class="form-inline" onsubmit="return checkFile()" action="uploadAssignmentFile" method="post" enctype="multipart/form-data">
                                         <div class="col-md-6 col-md-offset-3">
-                                            <input type="file" class="form-control" name="file" id="stamfile" required="yes"/>    
+                                            <input type="file" class="form-control" name="file" id="stamfile" onchange="checkSize(this)" required="yes"/>    
                                             <input type="hidden" name="extFile" id="extFile"/>
                                         </div>
                                         <br/><br/><br/>
@@ -222,8 +222,10 @@
                 alert("Invalid file type");
                 return false;
             }
+        }
 
-            var amfile = $("#amfile");
+        function checkSize(t) {
+            var amfile = $(t);
             if (amfile[0].files[0].size > 5242880) { // 10 MB (this size is in bytes)
                 alert("This file is larger tha 5 MB");
                 $(t).val("");
