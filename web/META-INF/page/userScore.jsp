@@ -11,17 +11,22 @@
         text-align: center;
     }
 </style>
-<script src="module/chartjs/Chart.js" ></script>
+<!--<script src="module/chartjs/Chart.js" ></script>-->
+<script src="module/highChart/js/highcharts.js"></script>
+<script src="module/highChart/js/modules/exporting.js"></script>
 <c:choose> 
     <c:when test="${ac.courseList.get(cId).role eq 'ST'}">
         <div class="row" id="chart" style="margin-top: 20px" >
-            <div  class="col-md-6">
-                <canvas  id="sentLeftChart"></canvas>
-                <h4 >Sent / Miss / Leftover</h4>
-            </div>
-            <div  class="col-md-6">
-                <canvas id="scoreChart"></canvas>
-                <h4>Score (Max score is ${fully_score})</h4>
+            <!--            <div  class="col-md-6">
+                            <canvas  id="sentLeftChart"></canvas>
+                            <h4 >Sent / Miss / Leftover</h4>
+                        </div>
+                        <div  class="col-md-6">
+                            <canvas id="scoreChart"></canvas>
+                            <h4>Score (Max score is ${fully_score})</h4>
+                        </div>-->
+            <div class="col-md-12">
+                <div id="scoreChart" ></div>
             </div>
         </div>
         <!--        <div style="text-align: center;margin-top:20px ">
@@ -354,50 +359,113 @@
                 percentageInnerCutout: 0
             }]
 
-        var ctx = $("#sentLeftChart").get(0).getContext("2d");
-        var data = [
-            {
-                value: ${total_sent_am},
-                color: "#428bca",
-                label: "Sent"
-            },
-            {
-                value: ${miss_am},
-                color: "#999",
-                label: "Miss"
-            },
-            {
-                value: ${leftover_am},
-                color: "#ede8e8",
-                label: "Leftover"
-            }
-        ]
-        var dslChart = new Chart(ctx).Doughnut(data);
+//        var ctx = $("#sentLeftChart").get(0).getContext("2d");
+//        var data = [
+//            {
+//                value: ${total_sent_am},
+//                color: "#428bca",
+//                label: "Sent"
+//            },
+//            {
+//                value: ${miss_am},
+//                color: "#999",
+//                label: "Miss"
+//            },
+//            {
+//                value: ${leftover_am},
+//                color: "#ede8e8",
+//                label: "Leftover"
+//            }
+//        ]
+//        var dslChart = new Chart(ctx).Doughnut(data);
+//
+//        var ctx2 = $("#scoreChart").get(0).getContext("2d");
+//        var data = [
+//            {
+//                value: ${total_mark},
+//                color: "#40d47e",
+//                label: "Your total mark"
+//            },
+//            {
+//                value: ${max_sent_mark-total_mark},
+//                color: "#E74C3C",
+//                label: "Your miss Mark"
+//            },
+//            {
+//                value: ${miss_score},
+//                color: "#999",
+//                label: "Miss score "
+//            },
+//            {
+//                value: ${fully_score-max_mark},
+//                color: "#ede8e8",
+//                label: "Left score"
+//            }
+//        ]
+//        var dscChart = new Chart(ctx2).Doughnut(data);
 
-        var ctx2 = $("#scoreChart").get(0).getContext("2d");
-        var data = [
-            {
-                value: ${total_mark},
-                color: "#40d47e",
-                label: "Your total mark"
+        $('#scoreChart').highcharts({
+            colors: ['#EDE8E8', '#40d47e'],
+            chart: {
+                type: 'column'
             },
-            {
-                value: ${max_sent_mark-total_mark},
-                color: "#E74C3C",
-                label: "Your miss Mark"
+            title: {
+                text: 'your assignment score'
             },
-            {
-                value: ${miss_score},
-                color: "#999",
-                label: "Miss score "
+            xAxis: {
+                categories: ['am1', 'am2', 'am3', 'am4', 'am5']
             },
-            {
-                value: ${fully_score-max_mark},
-                color: "#ede8e8",
-                label: "Left score"
-            }
-        ]
-        var dscChart = new Chart(ctx2).Doughnut(data);
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Total assignment score'
+                },
+                stackLabels: {
+                    enabled: true,
+                    style: {
+                        fontWeight: 'bold',
+                        color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                    }
+                }
+            },
+            legend: {
+                align: 'right',
+                x: -70,
+                verticalAlign: 'top',
+                y: 20,
+                floating: true,
+                backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+                borderColor: '#CCC',
+                borderWidth: 1,
+                shadow: false
+            },
+            tooltip: {
+                formatter: function() {
+                    return '<b>' + this.x + '</b><br/>' +
+                            this.series.name + ': ' + this.y + '<br/>' +
+                            'Max score: ' + this.point.stackTotal;
+                }
+            },
+            plotOptions: {
+                column: {
+                    stacking: 'normal',
+                    dataLabels: {
+                        enabled: true,
+                        color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                        style: {
+                            textShadow: '0 0 3px black, 0 0 3px black'
+                        }
+                    }
+                }
+            },
+            series: [{
+                    name: 'Miss',
+                    data: [2, 2, 3, 2, 1]
+                }, {
+                    name: 'Your score',
+                    data: [5, 3, 4, 7, 2]
+                }]
+        });
 
         $("#AllStudentScore").dataTable();
 

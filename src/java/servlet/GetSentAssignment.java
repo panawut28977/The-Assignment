@@ -187,7 +187,7 @@ public class GetSentAssignment extends HttpServlet {
                             aq.setScore(score);
                             total_score += score;
                             ansList.add(aq);
-                            System.out.println(aq);
+//                            System.out.println(aq);
                         } else if (q.getQ_type().equalsIgnoreCase("explain")) {
                             //cannot checking
                         } else if (q.getQ_type().equalsIgnoreCase("matchWord")) {
@@ -223,7 +223,7 @@ public class GetSentAssignment extends HttpServlet {
                                     aq.setScore(score);
                                     total_score += score;
                                     ansList.add(aq);
-                                    System.out.println(aq);
+//                                    System.out.println(aq);
                                 }
                             }
                             used_id = q.getQ_id();
@@ -255,7 +255,7 @@ public class GetSentAssignment extends HttpServlet {
                                         aq.setScore(score);
                                         total_score += score;
                                         ansList.add(aq);
-                                        System.out.println(aq);
+//                                        System.out.println(aq);
                                     }
                                 }
 

@@ -183,11 +183,11 @@ public class notify extends HttpServlet {
         }
 
         writer.flush();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Thread.sleep(1000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         writer.close();
     }
 

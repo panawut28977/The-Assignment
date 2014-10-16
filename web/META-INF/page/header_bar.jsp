@@ -50,25 +50,25 @@
                 <li id="home_menu" class="active"><a href="AllAnnounce"><span class="glyphicon glyphicon-home"></span></a></li>
                 <li id="message_menu"><a href="fmessage"><span class="glyphicon glyphicon-envelope"></span>
                         <span class="badge <c:if test="${totalUnseen==0}">hide</c:if>" id="totalUnseen">${totalUnseen}</span>
-                    </a></li>
-                <li class="dropdown" id="notification_menu"> 
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span><span class="badge <c:if test="${cTotal==0}">hide</c:if>" id="cTotal">${cTotal}</span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="notification?nt=Announcement"><span class="badge pull-right <c:if test="${cAnn==0}">hide</c:if>" id="cAnn">${cAnn}</span> Announcement</a></li>
+                        </a></li>
+                    <li class="dropdown" id="notification_menu"> 
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span><span class="badge <c:if test="${cTotal==0}">hide</c:if>" id="cTotal">${cTotal}</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="notification?nt=Announcement"><span class="badge pull-right <c:if test="${cAnn==0}">hide</c:if>" id="cAnn">${cAnn}</span> Announcement</a></li>
                         <li><a href="notification?nt=Assignment"><span class="badge pull-right <c:if test="${cAm==0}">hide</c:if>" id="cAm">${cAm}</span> Assignment</a></li>
                         <li><a href="notification?nt=Alert"><span class="badge pull-right <c:if test="${cAlert==0}">hide</c:if>" id="cAlert">${cAlert}</span> Alert</a></li>
                         <li><a href="notification?nt=Score"><span class="badge pull-right <c:if test="${cScore==0}">hide</c:if>" id="cScore">${cScore}</span> Score</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <!--                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding-top: 10px;padding-bottom: 10px"><img class="img-circle" src="${ac.profile_pic}" width="30"/> ${ac.firstname} ${ac.lastname} <b class="caret"></b></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Your Profile<span class="glyphicon glyphicon-user pull-right"></span></a></li>
-                                        <li><a href="signout">Sign out <span class="glyphicon glyphicon-log-out pull-right"></span></a></li>
-                                    </ul>
-                                </li>-->
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <!--                <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding-top: 10px;padding-bottom: 10px"><img class="img-circle" src="${ac.profile_pic}" width="30"/> ${ac.firstname} ${ac.lastname} <b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">Your Profile<span class="glyphicon glyphicon-user pull-right"></span></a></li>
+                                            <li><a href="signout">Sign out <span class="glyphicon glyphicon-log-out pull-right"></span></a></li>
+                                        </ul>
+                                    </li>-->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" style="padding-top: 10px;padding-bottom: 10px;" data-toggle="dropdown">
                         <img class="img-circle" src="${ac.profile_pic}" width="30"/>
@@ -116,102 +116,103 @@
 <script src="module/bootstrap-notify/js/bootstrap-notify.js" type="text/javascript"/></script>
 <script>
     $(function() {
-        var eventSource = new EventSource("notify");
-        eventSource.addEventListener('cAnn', function(event) {
-            console.log(event.data);
-            if (event.data == 0) {
-                $("#cAnn").addClass("hide");
-            } else {
-                $("#cAnn").text(event.data).removeClass("hide");
-            }
-        }, false);
+        if (window.EventSource) {
+            var eventSource = new EventSource("notify");
+            eventSource.addEventListener('cAnn', function(event) {
+                console.log(event.data);
+                if (event.data == 0) {
+                    $("#cAnn").addClass("hide");
+                } else {
+                    $("#cAnn").text(event.data).removeClass("hide");
+                }
+            }, false);
 
-        eventSource.addEventListener('cAlert', function(event) {
-            console.log(event.data);
-            if (event.data == 0) {
-                $("#cAlert").addClass("hide");
-            } else {
-                $("#cAlert").text(event.data).removeClass("hide");
-            }
-        }, false);
+            eventSource.addEventListener('cAlert', function(event) {
+                console.log(event.data);
+                if (event.data == 0) {
+                    $("#cAlert").addClass("hide");
+                } else {
+                    $("#cAlert").text(event.data).removeClass("hide");
+                }
+            }, false);
 
-        eventSource.addEventListener('cScore', function(event) {
-            console.log(event.data);
-            if (event.data == 0) {
-                $("#cScore").addClass("hide");
-            } else {
-                $("#cScore").text(event.data).removeClass("hide");
-            }
-        }, false);
+            eventSource.addEventListener('cScore', function(event) {
+                console.log(event.data);
+                if (event.data == 0) {
+                    $("#cScore").addClass("hide");
+                } else {
+                    $("#cScore").text(event.data).removeClass("hide");
+                }
+            }, false);
 
-        eventSource.addEventListener('cAm', function(event) {
-            console.log(event.data);
-            if (event.data == 0) {
-                $("#cAm").addClass("hide");
-            } else {
-                $("#cAm").text(event.data).removeClass("hide");
-            }
-        }, false);
+            eventSource.addEventListener('cAm', function(event) {
+                console.log(event.data);
+                if (event.data == 0) {
+                    $("#cAm").addClass("hide");
+                } else {
+                    $("#cAm").text(event.data).removeClass("hide");
+                }
+            }, false);
 
-        eventSource.addEventListener('cTotal', function(event) {
-            console.log(event.data);
-            if (event.data == 0) {
-                $("#cTotal").addClass("hide");
-            } else {
-                $("#cTotal").text(event.data).removeClass("hide");
-            }
+            eventSource.addEventListener('cTotal', function(event) {
+                console.log(event.data);
+                if (event.data == 0) {
+                    $("#cTotal").addClass("hide");
+                } else {
+                    $("#cTotal").text(event.data).removeClass("hide");
+                }
 
-        }, false);
+            }, false);
 
-        eventSource.addEventListener('cNewAnn', function(event) {
-            console.log(event.data);
-            $('.bottom-left').notify({
-                message: {text: event.data + ' New Announcement '},
-                type: 'info'
-            }).show();
-        }, false);
+            eventSource.addEventListener('cNewAnn', function(event) {
+                console.log(event.data);
+                $('.bottom-left').notify({
+                    message: {text: event.data + ' New Announcement '},
+                    type: 'info'
+                }).show();
+            }, false);
 
-        eventSource.addEventListener('cNewAlert', function(event) {
-            console.log(event.data);
-            $('.bottom-left').notify({
-                message: {text: event.data + ' New Alert '},
-                type: 'info'
-            }).show();
-        }, false);
+            eventSource.addEventListener('cNewAlert', function(event) {
+                console.log(event.data);
+                $('.bottom-left').notify({
+                    message: {text: event.data + ' New Alert '},
+                    type: 'info'
+                }).show();
+            }, false);
 
-        eventSource.addEventListener('cNewScore', function(event) {
-            console.log(event.data);
-            $('.bottom-left').notify({
-                message: {text: event.data + " Assignment is checked"},
-                type: 'info'
-            }).show();
-        }, false);
+            eventSource.addEventListener('cNewScore', function(event) {
+                console.log(event.data);
+                $('.bottom-left').notify({
+                    message: {text: event.data + " Assignment is checked"},
+                    type: 'info'
+                }).show();
+            }, false);
 
-        eventSource.addEventListener('cNewAm', function(event) {
-            console.log(event.data);
-            $('.bottom-left').notify({
-                message: {text: "You have " + event.data + " alert about Assignment "},
-                type: 'info'
-            }).show();
-        }, false);
+            eventSource.addEventListener('cNewAm', function(event) {
+                console.log(event.data);
+                $('.bottom-left').notify({
+                    message: {text: "You have " + event.data + " alert about Assignment "},
+                    type: 'info'
+                }).show();
+            }, false);
 
-        var eventSource2 = new EventSource("notifyMessage");
-        eventSource2.addEventListener('totalUnseen', function(event) {
-            console.log(event.data);
-             if (event.data == 0) {
-                $("#totalUnseen").addClass("hide");
-            } else {
-                $("#totalUnseen").text(event.data).removeClass("hide");
-            }
-        }, false);
+            var eventSource2 = new EventSource("notifyMessage");
+            eventSource2.addEventListener('totalUnseen', function(event) {
+                console.log(event.data);
+                if (event.data == 0) {
+                    $("#totalUnseen").addClass("hide");
+                } else {
+                    $("#totalUnseen").text(event.data).removeClass("hide");
+                }
+            }, false);
 
-        eventSource2.addEventListener('totalNewMsg', function(event) {
-            console.log(event.data);
-            $('.bottom-left').notify({
-                message: {text: "You have " + event.data + " New Message "},
-                type: 'info'
-            }).show();
-        }, false);
-
+            eventSource2.addEventListener('totalNewMsg', function(event) {
+                console.log(event.data);
+                $('.bottom-left').notify({
+                    message: {text: "You have " + event.data + " New Message "},
+                    type: 'info'
+                }).show();
+            }, false);
+        }
     });
 </script>
