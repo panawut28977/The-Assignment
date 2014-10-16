@@ -344,12 +344,12 @@
                                                     $('#uploadAmFile').show();
                                                     $('#CreateAmOnweb').hide();
                                                     $('#fullymark').attr("required", "yes");
-                                                     $('#amfile').attr("required", "yes");
+                                                    $('#amfile').attr("required", "yes");
                                                 } else {
                                                     $('#CreateAmOnweb').show();
                                                     $('#uploadAmFile').hide();
                                                     $('#fullymark').removeAttr("required");
-                                                     $('#amfile').removeAttr("required");
+                                                    $('#amfile').removeAttr("required");
                                                 }
                                             });
                                             $("#description").change(function() {
@@ -364,7 +364,7 @@
                                                 var matchWord_box = '<span class="label label-info"><i class="glyphicon glyphicon-info-sign"></i> If you want to add dummy answer, add text in answer box and put score to 0.</span><br/><br/>';
                                                 matchWord_box += '<div class="row"><div class="col-md-4"><b>Question Text</b></div><div class="col-md-4"><b>Answer</b></div><div class="col-md-2"><b>Score</b></div></div>';
                                                 for (var i = 0; i < $(this).val(); i++) {
-                                                    matchWord_box += '<div class="row"><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_text" onfocusout="checkComma(this)"></div><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_ans" onfocusout="checkComma(this)"></div><div class="col-md-2"><input type="number" min="0" step="any" class="form-control" name="' + seq_of_choice + 'm_score" required="yes"></div></div>';
+                                                    matchWord_box += '<div class="row"><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_text" onfocusout="checkText(this)"></div><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_ans" onfocusout="checkText(this)"></div><div class="col-md-2"><input type="number" min="0" step="any" class="form-control" name="' + seq_of_choice + 'm_score" required="yes"></div></div>';
                                                 }
                                                 $(this).parent().parent().parent(".matchWord").find(".matchWord_q_list").html(matchWord_box);
                                             });
@@ -374,9 +374,20 @@
                                                 $(this).parent().parent().parent().find(".dummy_answer").remove();
                                                 var matchWord_dummy = '';
                                                 for (var i = 0; i < $(this).val(); i++) {
-                                                    matchWord_dummy += '<div class="row dummy_answer"><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_text" readonly="yes" onfocusout="checkComma(this)"></div><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_ans" onfocusout="checkComma(this)"></div><div class="col-md-2"><input type="number" min="0" step="any" class="form-control" name="' + seq_of_choice + 'm_score" required="yes" value="0" readonly="yes"></div></div>';
+                                                    matchWord_dummy += '<div class="row dummy_answer"><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_text" readonly="yes" onfocusout="checkText(this)"></div><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_ans" onfocusout="checkText(this)"></div><div class="col-md-2"><input type="number" min="0" step="any" class="form-control" name="' + seq_of_choice + 'm_score" required="yes" value="0" readonly="yes"></div></div>';
                                                 }
                                                 $(this).parent().parent().parent(".matchWord").find(".matchWord_q_list").append(matchWord_dummy);
+                                            });
+
+                                            $(document).on("change", "#multiple_type", function() {
+                                                var seq_of_choice = $(this).parent().parent().parent().find("[name='seqno']").val();
+                                                var html = '';
+                                                if ($(this).val() == "one") {
+                                                    html = '<div class="choice-group form-inline"><div><input type="radio" name="' + seq_of_choice + 'c"> <input type="text" class="form-control" name="' + seq_of_choice + 'ctext" onfocusout="checkText(this)" onkeyup="addToC(this)" required="yes"></div></div><br><a onclick="appendChoice(this)">Add other</a>';
+                                                } else {
+                                                    html = '<div class="choice-group form-inline"><div><input type="checkbox" name="' + seq_of_choice + 'c"> <input type="text" class="form-control" name="' + seq_of_choice + 'ctext" onfocusout="checkText(this)" onkeyup="addToC(this)" required="yes"></div></div><br><a onclick="appendChoice(this)">Add other</a>';
+                                                }
+                                                $(this).parent().parent().parent(".multipleChoice").find(".c_list").html(html);
                                             });
                                         });
                                         function compareView() {
@@ -511,7 +522,7 @@
                                                     + '              <label class="col-md-3 control-label">Choice <br><span class="text-danger">(Don\'t forget to select answer)</span></label>'
                                                     + '              <div class="col-md-8 c_list">'
                                                     + '                  <div class="choice-group form-inline">'
-                                                    + '                      <div><input type="radio" onClick="mark(this)" name="' + seqno + 'c" value=""> <input type="text" name="' + seqno + 'ctext" class="form-control" onkeyup="addToC(this)" onfocusout="checkComma(this)" required="yes"></div>'
+                                                    + '                      <div><input type="radio" onClick="mark(this)" name="' + seqno + 'c" value=""> <input type="text" name="' + seqno + 'ctext" class="form-control" onkeyup="addToC(this)" onfocusout="checkText(this)" required="yes"></div>'
                                                     + '                  </div>'
                                                     + '                  <br>'
                                                     + '                  <a onclick="appendChoice(this)">Add other</a>'
@@ -658,23 +669,13 @@
                                             var seq_of_choice = $(t).parent().parent().parent().find("[name='seqno']").val();
                                             var inputC = '';
                                             if (type == "one") {
-                                                inputC = '<div><br><input type="radio" name="' + seq_of_choice + 'c" onClick="mark(this)" value=""> <input type="text" name="' + seq_of_choice + 'ctext" class="form-control" onkeyup="addToC(this)" required="yes" onfocusout="checkComma(this)"> <a onclick="removeC(this)"><span class="glyphicon glyphicon-remove"></span></a></div>';
+                                                inputC = '<div><br><input type="radio" name="' + seq_of_choice + 'c" onClick="mark(this)" value=""> <input type="text" name="' + seq_of_choice + 'ctext" class="form-control" onkeyup="addToC(this)" required="yes" onfocusout="checkText(this)"> <a onclick="removeC(this)"><span class="glyphicon glyphicon-remove"></span></a></div>';
                                             } else {
-                                                inputC = '<div><br><input type="checkbox" name="' + seq_of_choice + 'c" onClick="mark(this)" value=""> <input type="text" name="' + seq_of_choice + 'ctext" class="form-control" onkeyup="addToC(this)" required="yes" onfocusout="checkComma(this)"> <a onclick="removeC(this)"><span class="glyphicon glyphicon-remove"></span></a></div>';
+                                                inputC = '<div><br><input type="checkbox" name="' + seq_of_choice + 'c" onClick="mark(this)" value=""> <input type="text" name="' + seq_of_choice + 'ctext" class="form-control" onkeyup="addToC(this)" required="yes" onfocusout="checkText(this)"> <a onclick="removeC(this)"><span class="glyphicon glyphicon-remove"></span></a></div>';
                                             }
                                             $(t).parent().find('.choice-group').append(inputC);
                                         }
 
-                                        $(document).on("change", "#multiple_type", function() {
-                                            var seq_of_choice = $(this).parent().parent().parent().find("[name='seqno']").val();
-                                            var html = '';
-                                            if ($(this).val() == "one") {
-                                                html = '<div class="choice-group form-inline"><div><input type="radio" name="' + seq_of_choice + 'c"> <input type="text" class="form-control" name="' + seq_of_choice + 'ctext" onfocusout="checkComma(this)" onkeyup="addToC(this)" required="yes"></div></div><br><a onclick="appendChoice(this)">Add other</a>';
-                                            } else {
-                                                html = '<div class="choice-group form-inline"><div><input type="checkbox" name="' + seq_of_choice + 'c"> <input type="text" class="form-control" name="' + seq_of_choice + 'ctext" onfocusout="checkComma(this)" onkeyup="addToC(this)" required="yes"></div></div><br><a onclick="appendChoice(this)">Add other</a>';
-                                            }
-                                            $(this).parent().parent().parent(".multipleChoice").find(".c_list").html(html);
-                                        });
                                         function addTitle() {
                                             var titleBox = '<div class="row instruction"><hr><span class="moveselect pull-left text-muted"><span class="glyphicon glyphicon-align-justify"></span></span><input type="hidden" name="seqno" value="' + seqno + '"/><label class="col-md-3 control-label">Instruction </label><div class="col-md-8"><textarea class="form-control" placeholder="Instruction" name="' + seqno + 'instruction" requiredd="yes" ></textarea></div><a onclick="remove_title(this)"  style="vertical-align: -webkit-baseline-middle"><span class="glyphicon glyphicon-trash"></span></a><input type="hidden" value="instruction" name="' + seqno + 'q_type"></div>';
                                             $(".amQuestion").append(titleBox);
@@ -829,12 +830,19 @@
 
                                         }
 
-                                        function checkComma(t) {
+                                        function checkText(t) {
                                             var text = $(t).val();
                                             if (text.indexOf(",") > 0) {
                                                 alert("can not use comma in question.");
                                                 $(t).focus();
                                             }
+                                            $.each($(t).parent().siblings("div").find("input[name$='ctext']"), function() {
+                                                console.log($(this).val());
+                                                if ($(this).val() == text && $(this).val()!='' && text != '' ) {
+                                                    alert("Your choice is duplicate.");
+                                                    $(t).focus();
+                                                }
+                                            });
                                         }
 
                                         function checkFile(t) {
