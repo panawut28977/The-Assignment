@@ -254,9 +254,11 @@
                                                                     <c:set value="0" var="correctscore"/>
                                                                     <c:if test="${stanslength==anslength}">
                                                                         <c:forEach begin="0" end="${anslength-1}" var="i">
-                                                                            <c:if test="${anslistsp[i] eq stanssp[i]}">
-                                                                                <c:set var="correctscore" value="${correctscore+scoreperchoice}"/>
-                                                                            </c:if>
+                                                                            <c:forEach begin="0" end="${stanslength-1}" var="j">
+                                                                                <c:if test="${anslistsp[i] eq stanssp[j]}">
+                                                                                    <c:set var="correctscore" value="${correctscore+scoreperchoice}"/>
+                                                                                </c:if>                                                                                
+                                                                            </c:forEach>
                                                                         </c:forEach>                                                                        
                                                                     </c:if>
                                                                     <input type="number" name="${seqno}score" value="${correctscore}" min="0" max="${q.q_score}" placeholder="score"/>

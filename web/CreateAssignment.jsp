@@ -838,7 +838,7 @@
                                             }
                                             $.each($(t).parent().siblings("div").find("input[name$='ctext']"), function() {
                                                 console.log($(this).val());
-                                                if ($(this).val() == text && $(this).val()!='' && text != '' ) {
+                                                if ($(this).val() == text && $(this).val() != '' && text != '') {
                                                     alert("Your choice is duplicate.");
                                                     $(t).focus();
                                                 }
@@ -849,6 +849,14 @@
                                             var ext = $(t).val().split('.').pop().toLowerCase();
                                             if ($.inArray(ext, ['xls', 'xlsx', 'doc', 'docx', 'jpg', 'jpeg', 'ppt', 'pptx', 'png', 'pdf', 'zip', 'rar']) == -1) {
                                                 alert("Invalid file type");
+                                                $(t).val("");
+                                            }
+
+                                            var amfile = $("#amfile");
+//                                            console.log(amfile);
+//                                            console.log(amfile[0].files[0].size);
+                                            if (amfile[0].files[0].size > 5242880) { // 10 MB (this size is in bytes)
+                                                alert("This file is larger tha 5 MB");
                                                 $(t).val("");
                                             }
                                         }

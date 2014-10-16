@@ -222,6 +222,12 @@
                 alert("Invalid file type");
                 return false;
             }
+
+            var amfile = $("#amfile");
+            if (amfile[0].files[0].size > 5242880) { // 10 MB (this size is in bytes)
+                alert("This file is larger tha 5 MB");
+                $(t).val("");
+            }
         }
     </script>
 </html>

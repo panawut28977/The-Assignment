@@ -236,7 +236,10 @@
                                                                         <select name="${seqno}answer">
                                                                             <c:forEach items="${listanswer}" var="ansl">
                                                                                 <c:set var="ansltrim" value="${fn:trim(ansl)}"/>
-                                                                                <c:set var="stanstrim" value="${fn:trim(stanswer.get(a).answer)}"/>
+                                                                                <c:set var="stanstrim" value=""/>
+                                                                                <c:if test="${stanswer.size()!=0}">
+                                                                                    <c:set var="stanstrim" value="${fn:trim(stanswer.get(a).answer)}"/>
+                                                                                </c:if>
                                                                                 <option value="${ansltrim}" <c:if test="${stanswer.size() ne 0 and stanstrim eq ansltrim}">selected="yes"</c:if>>${ansltrim}</option>
                                                                             </c:forEach>
                                                                         </select>

@@ -147,46 +147,42 @@ public class GetSentAssignment extends HttpServlet {
                             double scoreperchoice = q.getQ_score() / anslistsp.length;
                             if (anslistsp.length == stanssp.length) {
                                 for (int i = 0; i < anslistsp.length; i++) {
-                                    System.out.println(anslistsp[i] + "/" + stanssp[i]);
-                                    if (anslistsp[i].equalsIgnoreCase(stanssp[i])) {
-                                        score = scoreperchoice;
+                                    for (int j = 0; j < stanssp.length; j++) {
+                                        if (anslistsp[i].equalsIgnoreCase(stanssp[j])) {
+                                            score = scoreperchoice;
+                                        }
                                     }
                                 }
                             }
                             System.out.println("q_no: " + q.getQ_no() + " score:" + score);
-                            //update score
-                            //....
-//                            if(q.getQ_category().equalsIgnoreCase("one")){
-//                                
-//                            }else if(q.getQ_category().equalsIgnoreCase("multiple")){
-//                                
-//                            }else if(q.getQ_category().equalsIgnoreCase("tf")){
-//                                
-//                            }
                         } else if (q.getQ_type().equalsIgnoreCase("explain")) {
                             //cannot checking
                         } else if (q.getQ_type().equalsIgnoreCase("matchWord")) {
+//                            System.out.println("q_id:"+q.getQ_id());
                             if (q.getQ_id() != used_id) {
-                                String listans = "";
-                                for (int i = 0; i < a.getQuestionList().size() - 1; i++) {
+                                StringBuilder listans = new StringBuilder("");
+                                for (int i = 0; i < a.getQuestionList().size(); i++) {
                                     Question tmp = a.getQuestionList().get(i);
                                     if (q.getQ_id() == tmp.getQ_id()) {
-                                        listans += "," + tmp.getQ_answer();
+                                        listans.append(tmp.getQ_answer() + ",");
                                     }
                                 }
-                                String[] listansNoshuffle = listans.split(",");
+                                listans.deleteCharAt(listans.length() - 1);
+                                String[] listansNoshuffle = listans.toString().split(",");
                                 for (int j = 0; j < stanswer.size(); j++) {
-                                    if (!listansNoshuffle[j].equalsIgnoreCase("")) {
-                                        if (listansNoshuffle[j].equalsIgnoreCase(stanswer.get(j).getAnswer())) {
-                                            score = q.getQ_score();
-                                        }
+                                    System.out.println(listansNoshuffle[j] + "/" + stanswer.get(j).getAnswer());
+                                    if (listansNoshuffle[j].equalsIgnoreCase(stanswer.get(j).getAnswer())) {
+                                        score += q.getQ_score();
                                     }
                                 }
                                 System.out.println("q_no" + q.getQ_no() + "score:" + score);
                             }
                             used_id = q.getQ_id();
                         } else if (q.getQ_type().equalsIgnoreCase("fillBlank")) {
-
+                            if (q.getQ_id() != used_id) {
+                                
+                            }
+                            used_id = q.getQ_id();
                         }
                     }
                     System.out.println("-----");
