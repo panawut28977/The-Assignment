@@ -10,14 +10,21 @@ import Model.AccountCourse;
 import Model.AnswerQuestion;
 import Model.Assignment;
 import Model.Group_member;
+import Model.Notification;
 import Model.Question;
 import Model.StAssignmentFile;
 import Model.StAssignmentOnWeb;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -108,13 +115,24 @@ public class GetSentAssignment extends HttpServlet {
         } else {
             //auto checking all assignment that is not checking
             //search not checking assignment
-            Date now = new Date();
             Date lateDate = a.getLate_date();
+            LocalDate d = LocalDate.now();
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+            Date now = null;
+            try {
+                now = df.parse(d.toString());
+            } catch (ParseException ex) {
+                Logger.getLogger(GetSentAssignment.class.getName()).log(Level.SEVERE, null, ex);
+            }
+//            System.out.println("time:" + now.getTime() + "--" + lateDate.getTime());
             if (StAssignmentOnWeb.isNotCheckingExist(am_id) && now.getTime() > lateDate.getTime()) {
                 System.out.println("auto checking");
                 List<StAssignmentOnWeb> notchcksa = StAssignmentOnWeb.getNotCheckingStAmByAmId(am_id);
+                AnswerQuestion aq = null;
                 for (StAssignmentOnWeb stAssignmentOnWeb : notchcksa) {
                     int used_id = 0;
+                    double total_score = 0;
+                    List<AnswerQuestion> ansList = new ArrayList<>();
                     System.out.println("st_am_id: " + stAssignmentOnWeb.getSt_am_id());
                     for (Question q : a.getQuestionList()) {
                         double score = 0;
@@ -149,12 +167,27 @@ public class GetSentAssignment extends HttpServlet {
                                 for (int i = 0; i < anslistsp.length; i++) {
                                     for (int j = 0; j < stanssp.length; j++) {
                                         if (anslistsp[i].equalsIgnoreCase(stanssp[j])) {
-                                            score = scoreperchoice;
+                                            score += scoreperchoice;
                                         }
                                     }
                                 }
                             }
-                            System.out.println("q_no: " + q.getQ_no() + " score:" + score);
+
+                            aq = new AnswerQuestion();
+                            if (stAssignmentOnWeb.getG_id() > 0) {
+                                aq.setAcc_id(0);
+                                aq.setG_id(stAssignmentOnWeb.getG_id());
+                            } else {
+                                aq.setAcc_id(stAssignmentOnWeb.getAcc_id());
+                                aq.setG_id(0);
+                            }
+                            aq.setSt_am_id(stAssignmentOnWeb.getSt_am_id());
+                            aq.setQ_id(q.getQ_id());
+                            aq.setQ_order(0);
+                            aq.setScore(score);
+                            total_score += score;
+                            ansList.add(aq);
+                            System.out.println(aq);
                         } else if (q.getQ_type().equalsIgnoreCase("explain")) {
                             //cannot checking
                         } else if (q.getQ_type().equalsIgnoreCase("matchWord")) {
@@ -170,21 +203,95 @@ public class GetSentAssignment extends HttpServlet {
                                 listans.deleteCharAt(listans.length() - 1);
                                 String[] listansNoshuffle = listans.toString().split(",");
                                 for (int j = 0; j < stanswer.size(); j++) {
-                                    System.out.println(listansNoshuffle[j] + "/" + stanswer.get(j).getAnswer());
+                                    score = 0;
+//                                    System.out.println(listansNoshuffle[j] + "/" + stanswer.get(j).getAnswer());
                                     if (listansNoshuffle[j].equalsIgnoreCase(stanswer.get(j).getAnswer())) {
-                                        score += q.getQ_score();
+                                        score = q.getQ_score();
                                     }
+//                                    System.out.println("q_no" + q.getQ_no() + "score:" + score);
+                                    aq = new AnswerQuestion();
+                                    if (stAssignmentOnWeb.getG_id() > 0) {
+                                        aq.setAcc_id(0);
+                                        aq.setG_id(stAssignmentOnWeb.getG_id());
+                                    } else {
+                                        aq.setAcc_id(stAssignmentOnWeb.getAcc_id());
+                                        aq.setG_id(0);
+                                    }
+                                    aq.setSt_am_id(stAssignmentOnWeb.getSt_am_id());
+                                    aq.setQ_id(q.getQ_id());
+                                    aq.setQ_order(j + 1);
+                                    aq.setScore(score);
+                                    total_score += score;
+                                    ansList.add(aq);
+                                    System.out.println(aq);
                                 }
-                                System.out.println("q_no" + q.getQ_no() + "score:" + score);
                             }
                             used_id = q.getQ_id();
                         } else if (q.getQ_type().equalsIgnoreCase("fillBlank")) {
                             if (q.getQ_id() != used_id) {
-                                
+                                int countb = a.getQuestionList().size();
+                                int countStAns = stanswer.size();
+                                for (int i = countb - 1; i >= 0; i--) {
+                                    Question tmp = a.getQuestionList().get(i);
+                                    if (q.getQ_id() == tmp.getQ_id()) {
+                                        countStAns--;
+                                        score = 0;
+                                        if (tmp.getAnswer().equalsIgnoreCase(stanswer.get(countStAns).getAnswer())) {
+                                            score = tmp.getScore();
+                                        }
+//                                        System.out.println("q_no" + q.getQ_no() + "score:" + score);
+
+                                        aq = new AnswerQuestion();
+                                        if (stAssignmentOnWeb.getG_id() > 0) {
+                                            aq.setAcc_id(0);
+                                            aq.setG_id(stAssignmentOnWeb.getG_id());
+                                        } else {
+                                            aq.setAcc_id(stAssignmentOnWeb.getAcc_id());
+                                            aq.setG_id(0);
+                                        }
+                                        aq.setSt_am_id(stAssignmentOnWeb.getSt_am_id());
+                                        aq.setQ_id(q.getQ_id());
+                                        aq.setQ_order(countStAns + 1);
+                                        aq.setScore(score);
+                                        total_score += score;
+                                        ansList.add(aq);
+                                        System.out.println(aq);
+                                    }
+                                }
+
                             }
                             used_id = q.getQ_id();
                         }
                     }
+                    stAssignmentOnWeb.setScore(total_score);
+                    StAssignmentOnWeb.updateScore(stAssignmentOnWeb);
+                    for (AnswerQuestion ans : ansList) {
+                        AnswerQuestion.updateScore(ans);
+                    }
+                    request.setAttribute("autocheck_msg", "successful");
+                    request.setAttribute("total_auto_checked", notchcksa.size());
+
+                    Notification n = new Notification();
+                    n.setAcc_id(ac.getAcc_id());
+                    n.setCourse_id(Integer.parseInt(cId));
+                    n.setType("score");
+                    //Assignment# 1 ( INT206 Software Development Process II ) <b9/10
+                    String content = "<b>" + a.getName() + "</b> assignment have new score update " + total_score + "/" + a.getFully_mark();
+                    n.setText(content);
+
+                    List<Integer> listac = new ArrayList<>();
+                    if (a.getTotal_member() > 1) {
+                        Group_member g = Group_member.getMemberById(stAssignmentOnWeb.getG_id());
+                        String accIdList[] = g.getAcc_id().split(",");
+                        List<Account> gAm = new ArrayList<>();
+                        for (String gaccId : accIdList) {
+                            listac.add(Integer.parseInt(gaccId));
+                        }
+                    } else {
+                        listac.add(stAssignmentOnWeb.getAcc_id());
+                    }
+                    Notification.announce(n, listac);
+                    
                     System.out.println("-----");
                 }
             }

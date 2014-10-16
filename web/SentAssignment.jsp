@@ -57,7 +57,12 @@
                         <div class="col-md-4"><h4>${checked}/${total} <br>Checked</h4></div>
                     </div>
                     <hr style="clear:both">
-
+                    <c:if test="${autocheck_msg ne null}">
+                        <div class="alert alert-success" role="alert">
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            <strong>Auto checking  ${total_auto_checked} assignment successful!</strong> this function cannot checking explanation question please recheck assignment for sure.
+                        </div>                        
+                    </c:if>
                     <!-- div สำหรับแสดงการบ้านของคนที่ส่งแล้ว-->
                     <div class="sentAm">
                         <c:choose>
