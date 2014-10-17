@@ -186,7 +186,7 @@
                             <c:if test="${listStudentScore.get(0).listStudentScore.size() !=0}">
                                 <c:forEach items="${listStudentScore}" var="stacc">
                                     <tr>
-                                        <td>${stacc.firstname} ${stacc.lastname}</td>
+                                        <td style="text-align: left">${stacc.firstname} ${stacc.lastname}</td>
                                         <%--${stacc.listStudentScore}--%>
                                         <c:set value="${stacc.listStudentScore.size()}"  var="countback"/>
                                         <c:set value="0" var="total"/>
