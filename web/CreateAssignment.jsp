@@ -136,7 +136,7 @@
                                 </div>
                             </div>
                             <div class="col-md-10 col-md-offset-1" id="CreateAmOnweb">
-                                <input type="text" name="title_assignment_onweb" id="title_assignment_onweb" class="form-control" placeholder="Assignment Title" required="yes" >
+                                <input type="text" name="title_assignment_onweb" id="title_assignment_onweb" class="form-control" placeholder="Assignment Title" >
                                 <br>
                                 <p id="AmDescription"></p>
                                 <div class="amQuestion" id="sortable">
@@ -324,7 +324,7 @@
                                                 }
                                             });
                                             $('#groupwork').click(function() {
-                                                $('#inputpepole').removeAttr("disabled").attr("required","yes");
+                                                $('#inputpepole').removeAttr("disabled").attr("required", "yes");
                                             });
                                             $('#individual').click(function() {
                                                 $('#inputpepole').attr("disabled", "yes");
@@ -345,9 +345,11 @@
                                                     $('#CreateAmOnweb').hide();
                                                     $('#fullymark').attr("required", "yes");
                                                     $('#amfile').attr("required", "yes");
+                                                    $('#title_assignment_onweb').removeAttr("required");
                                                 } else {
                                                     $('#CreateAmOnweb').show();
                                                     $('#uploadAmFile').hide();
+                                                    $('#title_assignment_onweb').attr("required", "yes");
                                                     $('#fullymark').removeAttr("required");
                                                     $('#amfile').removeAttr("required");
                                                 }
@@ -383,9 +385,9 @@
                                                 var seq_of_choice = $(this).parent().parent().parent().find("[name='seqno']").val();
                                                 var html = '';
                                                 if ($(this).val() == "one") {
-                                                    html = '<div class="choice-group form-inline"><div><input type="radio" name="' + seq_of_choice + 'c"> <input type="text" class="form-control" name="' + seq_of_choice + 'ctext" onfocusout="checkText(this)" onkeyup="addToC(this)" required="yes"></div></div><br><a onclick="appendChoice(this)">Add other</a>';
+                                                    html = '<div class="choice-group form-inline"><div><input type="radio" name="' + seq_of_choice + 'c" required="yes" onClick="mark(this)"> <input type="text" class="form-control" name="' + seq_of_choice + 'ctext" onfocusout="checkText(this)" onkeyup="addToC(this)" required="yes"></div></div><br><a onclick="appendChoice(this)">Add other</a>';
                                                 } else {
-                                                    html = '<div class="choice-group form-inline"><div><input type="checkbox" name="' + seq_of_choice + 'c"> <input type="text" class="form-control" name="' + seq_of_choice + 'ctext" onfocusout="checkText(this)" onkeyup="addToC(this)" required="yes"></div></div><br><a onclick="appendChoice(this)">Add other</a>';
+                                                    html = '<div class="choice-group form-inline"><div><input type="checkbox" name="' + seq_of_choice + 'c" onClick="mark(this);checkRequire(this);" required="yes"> <input type="text" class="form-control" name="' + seq_of_choice + 'ctext" onfocusout="checkText(this)" onkeyup="addToC(this)" required="yes"></div></div><br><a onclick="appendChoice(this)">Add other</a>';
                                                 }
                                                 $(this).parent().parent().parent(".multipleChoice").find(".c_list").html(html);
                                             });
@@ -522,7 +524,7 @@
                                                     + '              <label class="col-md-3 control-label">Choice <br><span class="text-danger">(Don\'t forget to select answer)</span></label>'
                                                     + '              <div class="col-md-8 c_list">'
                                                     + '                  <div class="choice-group form-inline">'
-                                                    + '                      <div><input type="radio" onClick="mark(this)" name="' + seqno + 'c" value=""> <input type="text" name="' + seqno + 'ctext" class="form-control" onkeyup="addToC(this)" onfocusout="checkText(this)" required="yes"></div>'
+                                                    + '                      <div><input type="radio" onClick="mark(this)" name="' + seqno + 'c" value="" required="yes"> <input type="text" name="' + seqno + 'ctext" class="form-control" onkeyup="addToC(this)" onfocusout="checkText(this)" required="yes"></div>'
                                                     + '                  </div>'
                                                     + '                  <br>'
                                                     + '                  <a onclick="appendChoice(this)">Add other</a>'
@@ -555,8 +557,8 @@
                                                         + '    <div class="form-group">'
                                                         + '        <label class="col-md-3 control-label">Choice <br><span class="text-danger">(Don\'t forget to select answer)</span></label>'
                                                         + '        <div class="col-md-8">'
-                                                        + '            <input type="radio" name="' + seqno + 'c_ans" value="true" selected="yes"> True'
-                                                        + '            <input type="radio" name="' + seqno + 'c_ans" value="false"> False'
+                                                        + '            <input type="radio" name="' + seqno + 'c_ans" value="true" checked="yes" required="yes"> True'
+                                                        + '            <input type="radio" name="' + seqno + 'c_ans" value="false" required="yes"> False'
                                                         + '        </div>'
                                                         + '    </div>'
                                                         + '    <div class="form-group">'
@@ -671,7 +673,7 @@
                                             if (type == "one") {
                                                 inputC = '<div><br><input type="radio" name="' + seq_of_choice + 'c" onClick="mark(this)" value=""> <input type="text" name="' + seq_of_choice + 'ctext" class="form-control" onkeyup="addToC(this)" required="yes" onfocusout="checkText(this)"> <a onclick="removeC(this)"><span class="glyphicon glyphicon-remove"></span></a></div>';
                                             } else {
-                                                inputC = '<div><br><input type="checkbox" name="' + seq_of_choice + 'c" onClick="mark(this)" value=""> <input type="text" name="' + seq_of_choice + 'ctext" class="form-control" onkeyup="addToC(this)" required="yes" onfocusout="checkText(this)"> <a onclick="removeC(this)"><span class="glyphicon glyphicon-remove"></span></a></div>';
+                                                inputC = '<div><br><input type="checkbox" name="' + seq_of_choice + 'c" onClick="mark(this);checkRequire(this);" required="yes" value="" > <input type="text" name="' + seq_of_choice + 'ctext" class="form-control" onkeyup="addToC(this)" required="yes" onfocusout="checkText(this)"> <a onclick="removeC(this)"><span class="glyphicon glyphicon-remove"></span></a></div>';
                                             }
                                             $(t).parent().find('.choice-group').append(inputC);
                                         }
@@ -859,6 +861,20 @@
                                                 alert("This file is larger tha 5 MB");
                                                 $(t).val("");
                                             }
+                                        }
+
+                                        function checkRequire(t) {
+                                            var name = $(t).attr("name");
+                                            console.log(name);
+                                            var requiredCheckboxes = $(':checkbox[name="' + name + '"][required]');
+                                            console.log(requiredCheckboxes);
+                                            requiredCheckboxes.change(function() {
+                                                if (requiredCheckboxes.is(':checked')) {
+                                                    requiredCheckboxes.removeAttr('required');
+                                                }else {
+                                                    requiredCheckboxes.attr('required', 'required');
+                                                }
+                                            });
                                         }
         </script>
     </body>

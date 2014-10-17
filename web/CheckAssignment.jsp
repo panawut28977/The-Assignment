@@ -110,7 +110,7 @@
                                     <div style="text-align: center;background-color: gainsboro;clear: both;padding: 5px 0;"><a target="_blank" style="text-align: center" href="https://crocodoc.com/view/${sessionKey}">see in new window.</a></div>
                                 </c:when>
                                 <c:otherwise>
-                                    <div style="text-align: center">
+                                    <div style="text-align: center;clear: both">
                                         <a style="font-size: 70px" href="file/student_assignment_file/${curSafv.path_file}" class="usepointer"><span class="glyphicon glyphicon-download-alt"></span></a>
                                         <h3 class="text-muted">
                                             cannot showing assignment please download for cheking.

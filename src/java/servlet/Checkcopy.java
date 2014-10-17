@@ -85,91 +85,100 @@ public class Checkcopy extends HttpServlet {
             } else if (fileExtension.equalsIgnoreCase("pdf")) {
                 keyword = DocumentFunction.readPdfFile(studentAmPath + filename);
             }
-//            System.out.println(keyword);
-            System.out.println("----------------------search...");
-            Directory directory = null;
-            IndexReader indexReader;
-            ArrayList<String[]> indexsetList = null;
-            try {
-                directory = FSDirectory.open(new File(studentAmPath + "\\" + a.getCourse().getCourse_id() + "\\" + sa.getAm_id()));
-                indexReader = DirectoryReader.open(directory);
-                IndexSearcher searcher = new IndexSearcher(indexReader);
-                BooleanQuery.setMaxClauseCount(20000);
-                QueryParser parser = new QueryParser(Version.LUCENE_47, "student_assignment", new ThaiAnalyzer(Version.LUCENE_47));
-                Query query = parser.parse(QueryParser.escape(keyword));
 
-                int hitsPerPage = 10;
-                Sort sort = new Sort(new SortField[]{SortField.FIELD_SCORE, new SortField("student_assignment", SortField.Type.STRING)});
-                TopFieldCollector topField = TopFieldCollector.create(sort, hitsPerPage, true, true, true, false);
-                searcher.search(query, topField);
-                TopDocs docs = topField.topDocs();
-                SimpleHTMLFormatter htmlFormatter = new SimpleHTMLFormatter("<font color=red>", "</font>");
-                Highlighter highlighter = new Highlighter(htmlFormatter, new QueryScorer(query));
+            if (!keyword.equals("")) {
+                System.out.println("----------------------search...");
+                Directory directory = null;
+                IndexReader indexReader;
+                ArrayList<String[]> indexsetList = null;
+                try {
+                    directory = FSDirectory.open(new File(studentAmPath + "\\" + a.getCourse().getCourse_id() + "\\" + sa.getAm_id()));
+                    indexReader = DirectoryReader.open(directory);
+                    IndexSearcher searcher = new IndexSearcher(indexReader);
+                    BooleanQuery.setMaxClauseCount(20000);
+                    QueryParser parser = new QueryParser(Version.LUCENE_47, "student_assignment", new ThaiAnalyzer(Version.LUCENE_47));
+                    Query query = parser.parse(QueryParser.escape(keyword));
 
-                indexsetList = new ArrayList<>();
-                for (int i = 0; i < docs.totalHits; i++) {
-                    String[] indexset = new String[5];
-                    int id = docs.scoreDocs[i].doc;
-                    float score = docs.scoreDocs[i].score;
-                    Document doc = searcher.doc(id);
-                    String text = doc.get("student_assignment");
-                    String st_am_id = doc.get("st_am_id");
-                    String owner_safv_id = doc.get("safv_id");
+                    int hitsPerPage = 10;
+                    Sort sort = new Sort(new SortField[]{SortField.FIELD_SCORE, new SortField("student_assignment", SortField.Type.STRING)});
+                    TopFieldCollector topField = TopFieldCollector.create(sort, hitsPerPage, true, true, true, false);
+                    searcher.search(query, topField);
+                    TopDocs docs = topField.topDocs();
+                    SimpleHTMLFormatter htmlFormatter = new SimpleHTMLFormatter("<font color=red>", "</font>");
+                    Highlighter highlighter = new Highlighter(htmlFormatter, new QueryScorer(query));
+
+                    indexsetList = new ArrayList<>();
+                    for (int i = 0; i < docs.totalHits; i++) {
+                        String[] indexset = new String[5];
+                        int id = docs.scoreDocs[i].doc;
+                        float score = docs.scoreDocs[i].score;
+                        Document doc = searcher.doc(id);
+                        String text = doc.get("student_assignment");
+                        String st_am_id = doc.get("st_am_id");
+                        String owner_safv_id = doc.get("safv_id");
 //                    System.out.println(text);
 //                    System.out.println(st_am_id);
 //                    System.out.println(owner_safv_id);
 //                    System.out.println("-----------");
-                    TokenStream tokenStream = TokenSources.getAnyTokenStream(searcher.getIndexReader(), id, "student_assignment", new ThaiAnalyzer(Version.LUCENE_47));
+                        TokenStream tokenStream = TokenSources.getAnyTokenStream(searcher.getIndexReader(), id, "student_assignment", new ThaiAnalyzer(Version.LUCENE_47));
 
-                    String[] hltextArr = highlighter.getBestFragments(tokenStream, text, hitsPerPage);
-                    String hltext = "";
-                    for (String string : hltextArr) {
-                        hltext += string.toString() + "<br/>";
-                    }
-                    indexset[0] = st_am_id;
-                    indexset[1] = hltext;
-                    //getting owner of
-                    StAmFileList file = StAmFileList.getSafvBySafv(Integer.parseInt(owner_safv_id));
-                    StAssignmentFile stam = StAssignmentFile.getStAmBbyAmIDAndList(a.getAm_id(), file.getList_id());
-                    String html = "";
-                    //add เปนตัวแปรสำหรับเช็คว่าไม่ควรจะแอดค่าเช็คก็อปปี้ของตัวเอง
-                    boolean add = true;
-                    if (stam.getG_id() == 0) {
-                        //if no group that mean it's a individual work
-                        if (sa.getAcc_id() != stam.getAcc_id()) {
-                            Account owneracc = Account.getNameByID(stam.getAcc_id());
-                            html = "<img style=\"width:30px\" src=\"" + owneracc.getProfile_pic() + "\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"\" class=\"img-circle\" data-original-title=\"" + owneracc.getFirstname() + "\">";
-                        } else {
-                            add = false;
+                        String[] hltextArr = highlighter.getBestFragments(tokenStream, text, hitsPerPage);
+                        String hltext = "";
+                        for (String string : hltextArr) {
+                            hltext += string.toString() + "<br/>";
                         }
-                    } else {
-                        if (sa.getG_id() != stam.getG_id()) {
-                            List<Account> ownerlist = Account.getNameByGIDandAmID(stam.getG_id(), stam.getAm_id());
-                            html = "<a class=\"showGroup\" data-toggle=\"popover\" data-html=\"true\" data-content=\"" + Util.createPopoverGroup(ownerlist) + "\">Group no. " + Group_member.getGNOById(stam.getG_id()) + "</a>";
-                        } else {
-                            add = false;
+                        indexset[0] = st_am_id;
+                        indexset[1] = hltext;
+                        //getting owner of
+                        StAmFileList file = StAmFileList.getSafvBySafv(Integer.parseInt(owner_safv_id));
+                        if (file != null) {
+                            System.out.println((a.getAm_id() + " /" + file.getList_id()));
+                            StAssignmentFile stam = StAssignmentFile.getStAmBbyAmIDAndList(a.getAm_id(), file.getList_id());
+                            String html = "";
+                            //add เปนตัวแปรสำหรับเช็คว่าไม่ควรจะแอดค่าเช็คก็อปปี้ของตัวเอง
+                            boolean add = true;
+                            if (stam.getG_id() == 0) {
+                                //if no group that mean it's a individual work
+                                if (sa.getAcc_id() != stam.getAcc_id()) {
+                                    Account owneracc = Account.getNameByID(stam.getAcc_id());
+                                    html = "<img style=\"width:30px\" src=\"" + owneracc.getProfile_pic() + "\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"\" class=\"img-circle\" data-original-title=\"" + owneracc.getFirstname() + "\">";
+                                } else {
+                                    add = false;
+                                }
+                            } else {
+                                if (sa.getG_id() != stam.getG_id()) {
+                                    List<Account> ownerlist = Account.getNameByGIDandAmID(stam.getG_id(), stam.getAm_id());
+                                    html = "<a class=\"showGroup\" data-toggle=\"popover\" data-html=\"true\" data-content=\"" + Util.createPopoverGroup(ownerlist) + "\">Group no. " + Group_member.getGNOById(stam.getG_id()) + "</a>";
+                                } else {
+                                    add = false;
+                                }
+                            }
+                            indexset[2] = html;
+                            indexset[3] = score + "";
+                            indexset[4] = owner_safv_id;
+                            if (add) {
+                                indexsetList.add(indexset);
+                            }
                         }
                     }
-                    indexset[2] = html;
-                    indexset[3] = score + "";
-                    indexset[4] = owner_safv_id;
-                    if (add) {
-                        indexsetList.add(indexset);
-                    }
+                } catch (IOException ex) {
+                    Logger.getLogger(TestDriver.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ParseException ex) {
+                    Logger.getLogger(TestDriver.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InvalidTokenOffsetsException ex) {
+                    Logger.getLogger(TestDriver.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } catch (IOException ex) {
-                Logger.getLogger(TestDriver.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ParseException ex) {
-                Logger.getLogger(TestDriver.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InvalidTokenOffsetsException ex) {
-                Logger.getLogger(TestDriver.class.getName()).log(Level.SEVERE, null, ex);
-            }
 //            for (String[] strings : indexsetList) {
 //                System.out.println(strings[0] + " : "+ strings[2] +" : " + strings[1] );
 //            }
-            request.setAttribute("nowUUid", f.getUuid());
-            request.setAttribute("keyword", keyword);
-            request.setAttribute("indexsetList", indexsetList);
+                request.setAttribute("nowUUid", f.getUuid());
+                request.setAttribute("keyword", keyword);
+                request.setAttribute("indexsetList", indexsetList);
+            } else {
+                request.setAttribute("error_msg", "This assignment cannot use for check copy.");
+            }
+//            System.out.println(keyword);
+
             getServletContext().getRequestDispatcher("/Checkcopy.jsp?tab=AllAssignment").forward(request, response);
         }
     }

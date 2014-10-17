@@ -380,7 +380,7 @@
                     $("#image").val(newPicture);
                     var ext = $("#inputpic").val().split('.').pop().toLowerCase();
                     $("#f").val(ext);
-
+                    console.log(obj.width, obj.height);
                     resizeAspectRation(obj.width, obj.height);
                 });
                 return false;
@@ -410,6 +410,9 @@
                     $("#croppic img,.jcrop-tracker,.jcrop-holder img").css("width", width * ratio); // Scale width based on ratio
                     width = width * ratio;    // Reset width to match scaled image
                     height = height * ratio;    // Reset height to match scaled image
+                } else {
+                    $("#croppic img,.jcrop-tracker,.jcrop-holder img").css("height", height); // Set new height
+                    $("#croppic img,.jcrop-tracker,.jcrop-holder img").css("width", width); // Scale width based on ratio
                 }
                 $("#width").val(width);
                 $("#height").val(height);

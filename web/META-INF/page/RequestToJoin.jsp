@@ -56,12 +56,12 @@
                     <strong>${autApproveMsg}</strong>.
                 </div>
             </c:when>
-            <c:when test="${msg ne null}">
+           <%-- <c:when test="${msg ne null}">
                 <div class="alert alert-danger alert-dismissible" role="alert" style="clear: both">
                     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     ${msg}
                 </div>
-            </c:when>
+            </c:when>--%>
         </c:choose>
         <c:if test="${waitAcc.size() == 0}">
             <h1 class="text-muted" style="text-align: center;clear: both">No request.</h1>

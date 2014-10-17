@@ -30,79 +30,92 @@
                         <li><a href="checkAssignment?tab=AllAssignment&&st_am_id=${sa.st_am_id}">Check Assignment</a></li>
                         <li class="active"><a href="#">Check copy Assignment</a></li>
                     </ol>
-                    <h3>Your student assignment text. <small class="text-muted">(keyword for check with another student assignment)</small>
-                    </h3>
-                    <p>${keyword}</p>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th><b>Hilight copy text</b></th>
-                                <th><b>Like score</b></th>
-                                <th><b>Owner</b></th>
-                                <!--<th></th>-->
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach items="${indexsetList}" var="index">
-                                <tr class="checktext usepointer">
-                                    <td>${index[1]}</td><!-- 1 is hltext-->
-                                    <td>${index[3]}</td><!-- 3 is score -->
-                                    <td>${index[2]}</td><!-- 2 is owner html generate form servlet-->
-                                    <!--<td><a href="#" onclick="compareView()">compare view</a></td>-->
-                                </tr>
-                                <c:set value="${ct_cf:getSafvBySafv(index[4])}" var="detail"/>
-                                <c:set value="${ct_cf:getStAm(index[0])}" var="stinfo"/>
-                                <tr class="stDetails">
-                                    <td>
-                                        <b>Name :</b> ${detail.path_file}<br>
-                                        <b>Send date :</b> ${ct_cf:formatTime(detail.send_date)}<br>
-                                        <b  <c:if test="${stinfo.checked_time != null}">class="text-success"</c:if>>Check status :</b>
-                                        <c:choose>
-                                            <c:when test="${stinfo.checked_time == null}">
-                                                Not check
-                                            </c:when>
-                                            <c:otherwise>
-                                                <span class="glyphicon glyphicon-ok"></span> Checked
-                                            </c:otherwise>
-                                        </c:choose>
-
-                                    </td>
-                                    <td><b>Score : ${stinfo.score}</b></td>
-                                    <td><a href="compareCopySl?uuid1=${nowUUid}&&uuid2=${detail.uuid}" target="_blank">Compare view</a></td>
-                                </tr>
-                            </c:forEach>
-                            <!--                            <tr>
-                                                            <td>truth</td>
-                                                            <td>1.10</td>
-                                                            <td><a href="#" onclick="compareView()">compare view</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>natus error</td>
-                                                            <td>1.10</td>
-                                                            <td><a href="#" onclick="compareView()">compare view</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>great explorer</td>
-                                                            <td>0.5</td>
-                                                            <td><a href="#" onclick="compareView()">compare view</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>the actual</td>
-                                                            <td>0.5</td>
-                                                            <td><a href="#" onclick="compareView()">compare view</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>oluptatem accusantium</td>
-                                                            <td>0.5</td>
-                                                            <td><a href="#" onclick="compareView()">compare view</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>denouncing ple</td>
-                                                            <td>0.44</td>
-                                                            <td><a href="#" onclick="compareView()">compare view</a></td>
-                                                        </tr> -->
-                        </tbody>
-                    </table> 
+                    <c:choose>
+                        <c:when test="${error_msg ne null}">
+                            <h3 class="text-muted text-center">${error_msg}</h3>
+                        </c:when>
+                        <c:otherwise>
+                            <h3>Your student assignment text. <small class="text-muted">(keyword for check with another student assignment)</small>
+                            </h3>
+                            <p>${keyword}</p>
+                            <c:choose>
+                                <c:when test="${indexsetList.size()>0}">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th><b>Hilight copy text</b></th>
+                                                <th><b>Like score</b></th>
+                                                <th><b>Owner</b></th>
+                                                <!--<th></th>-->
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach items="${indexsetList}" var="index">
+                                                <tr class="checktext usepointer">
+                                                    <td>${index[1]}</td><!-- 1 is hltext-->
+                                                    <td>${index[3]}</td><!-- 3 is score -->
+                                                    <td>${index[2]}</td><!-- 2 is owner html generate form servlet-->
+                                                    <!--<td><a href="#" onclick="compareView()">compare view</a></td>-->
+                                                </tr>
+                                                <c:set value="${ct_cf:getSafvBySafv(index[4])}" var="detail"/>
+                                                <c:set value="${ct_cf:getStAm(index[0])}" var="stinfo"/>
+                                                <tr class="stDetails">
+                                                    <td>
+                                                        <b>Name :</b> ${detail.path_file}<br>
+                                                        <b>Send date :</b> ${ct_cf:formatTime(detail.send_date)}<br>
+                                                        <b  <c:if test="${stinfo.checked_time != null}">class="text-success"</c:if>>Check status :</b>
+                                                        <c:choose>
+                                                            <c:when test="${stinfo.checked_time == null}">
+                                                                Not check
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <span class="glyphicon glyphicon-ok"></span> Checked
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </td>
+                                                    <td><b>Score : ${stinfo.score}</b></td>
+                                                    <td><a href="compareCopySl?uuid1=${nowUUid}&&uuid2=${detail.uuid}" target="_blank">Compare view</a></td>
+                                                </tr>
+                                            </c:forEach>
+                                            <!--                            <tr>
+                                                                            <td>truth</td>
+                                                                            <td>1.10</td>
+                                                                            <td><a href="#" onclick="compareView()">compare view</a></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>natus error</td>
+                                                                            <td>1.10</td>
+                                                                            <td><a href="#" onclick="compareView()">compare view</a></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>great explorer</td>
+                                                                            <td>0.5</td>
+                                                                            <td><a href="#" onclick="compareView()">compare view</a></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>the actual</td>
+                                                                            <td>0.5</td>
+                                                                            <td><a href="#" onclick="compareView()">compare view</a></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>oluptatem accusantium</td>
+                                                                            <td>0.5</td>
+                                                                            <td><a href="#" onclick="compareView()">compare view</a></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>denouncing ple</td>
+                                                                            <td>0.44</td>
+                                                                            <td><a href="#" onclick="compareView()">compare view</a></td>
+                                                                        </tr> -->
+                                        </tbody>
+                                    </table>
+                                </c:when>
+                                <c:otherwise>
+                                    <h3 class="text-muted text-center">No copy assignment</h3>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:otherwise>
+                    </c:choose>
                     <!--                    <div id="compareBox">
                                             <div class="col-md-6 ">
                                                 <h4>rrrr fff work</h4>
@@ -117,22 +130,21 @@
             </div>
         </div>
         <script>
-            $(document).ready(function() {
+                $(document).ready(function() {
                 var aTable = $('#SentAssignment').dataTable();
-                $('.stDetails').hide();
+                        $('.stDetails').hide();
                 $('#checkcopy').tooltip("hide");
-                $('#compareBox').hide();
+                    $('#compareBox').hide();
                 $('img').tooltip("hide");
-                $(".showGroup").popover(
-                        {placement: 'top'}
-                );
-                $(".checktext").click(function() {
-                    if (!$(this).next('.stDetails').is(":visible")) {
-                        $(this).next('.stDetails').show();
-                    } else {
+                        $(".showGroup").popover(
+                    {placement: 'top'}
+                        );                 $(".checktext").click(function() {
+            if (!$(this).next('.stDetails').is(":visible")) {
+                $(this).next('.stDetails').show();
+                } else {
                         $(this).next('.stDetails').hide();
-                    }
-                });
+            }
+        });
             });
             function compareView() {
                 $('#compareBox').show();
