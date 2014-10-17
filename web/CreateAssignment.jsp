@@ -71,13 +71,13 @@
                                 <div class="form-group">
                                     <label for="name" class="col-md-3 control-label">Name</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" id="name" name="amName" requiredd="yes" >
+                                        <input type="text" class="form-control" id="name" name="amName" required="yes" >
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="description" class="col-md-3 control-label">Description</label>
                                     <div class="col-md-9" >
-                                        <textarea  rows="3"  id="description" name="description" class="form-control"></textarea>
+                                        <textarea  rows="3"  id="description" name="description" class="form-control" required="yes" ></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -136,7 +136,7 @@
                                 </div>
                             </div>
                             <div class="col-md-10 col-md-offset-1" id="CreateAmOnweb">
-                                <input type="text" name="title_assignment_onweb" id="title_assignment_onweb" class="form-control" placeholder="Assignment Title" >
+                                <input type="text" name="title_assignment_onweb" id="title_assignment_onweb" class="form-control" placeholder="Assignment Title" required="yes" >
                                 <br>
                                 <p id="AmDescription"></p>
                                 <div class="amQuestion" id="sortable">
@@ -677,7 +677,7 @@
                                         }
 
                                         function addTitle() {
-                                            var titleBox = '<div class="row instruction"><hr><span class="moveselect pull-left text-muted"><span class="glyphicon glyphicon-align-justify"></span></span><input type="hidden" name="seqno" value="' + seqno + '"/><label class="col-md-3 control-label">Instruction </label><div class="col-md-8"><textarea class="form-control" placeholder="Instruction" name="' + seqno + 'instruction" requiredd="yes" ></textarea></div><a onclick="remove_title(this)"  style="vertical-align: -webkit-baseline-middle"><span class="glyphicon glyphicon-trash"></span></a><input type="hidden" value="instruction" name="' + seqno + 'q_type"></div>';
+                                            var titleBox = '<div class="row instruction"><hr><span class="moveselect pull-left text-muted"><span class="glyphicon glyphicon-align-justify"></span></span><input type="hidden" name="seqno" value="' + seqno + '"/><label class="col-md-3 control-label">Instruction </label><div class="col-md-8"><textarea class="form-control" placeholder="Instruction" name="' + seqno + 'instruction" required="yes" ></textarea></div><a onclick="remove_title(this)"  style="vertical-align: -webkit-baseline-middle"><span class="glyphicon glyphicon-trash"></span></a><input type="hidden" value="instruction" name="' + seqno + 'q_type"></div>';
                                             $(".amQuestion").append(titleBox);
                                             seqno++;
                                         }

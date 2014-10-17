@@ -12,8 +12,8 @@
     }
 </style>
 <!--<script src="module/chartjs/Chart.js" ></script>-->
-<script src="module/highChart/js/highcharts.js"></script>
-<script src="module/highChart/js/modules/exporting.js"></script>
+<script src="module/highStock/js/highstock.js"></script>
+<script src="module/highStock/js/modules/exporting.js"></script>
 <c:choose> 
     <c:when test="${ac.courseList.get(cId).role eq 'ST'}">
         <div class="row" id="chart" style="margin-top: 20px" >
@@ -27,6 +27,9 @@
                         </div>-->
             <div class="col-md-12">
                 <div id="scoreChart" ></div>
+            </div>
+            <div class="col-md-12">
+                <h4 class="pull-right"><b>Total leftover: ${leftover_am}</b>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-primary">Sent: ${total_sent_am}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-muted">Miss: ${miss_am}</span></h4>
             </div>
         </div>
         <!--        <div style="text-align: center;margin-top:20px ">
@@ -352,7 +355,6 @@
             /* Disable initial sort */
             "aaSorting": []
         });
-
         var option = [{
                 responsive: true,
                 maintainAspectRatio: true,
@@ -403,7 +405,36 @@
 //            }
 //        ]
 //        var dscChart = new Chart(ctx2).Doughnut(data);
-
+        var xAxisArr = [];
+        var missArr = [];
+        var scoreArr = [];
+        var totalAm = ${requestScope.courseAssignment.size()};
+    <c:forEach  items="${requestScope.courseAssignment}" var="a">
+        <c:choose>
+            <c:when test="${stf.get(a.am_id) ne null and stf.get(a.am_id).lasted_send_date ne null}">
+        xAxisArr.push('${a.name}');
+        missArr.push(${a.fully_mark-stf.get(a.am_id).score});
+        scoreArr.push(${stf.get(a.am_id).score});
+            </c:when>
+            <c:when test="${stow.get(a.am_id) ne null and stow.get(a.am_id).lasted_send_date ne null}">
+        xAxisArr.push('${a.name}');
+        missArr.push(${a.fully_mark-stow.get(a.am_id).score});
+        scoreArr.push(${stow.get(a.am_id).score});
+            </c:when>
+            <c:otherwise>
+        xAxisArr.push('${a.name}');
+        missArr.push(${a.fully_mark});
+        scoreArr.push(0);
+            </c:otherwise>
+        </c:choose>
+    </c:forEach>
+        xAxisArr.reverse();
+        missArr.reverse();
+        scoreArr.reverse();
+        var totalchart = totalAm - 8;
+        if (totalchart < 0) {
+            totalchart = 0
+        }
         $('#scoreChart').highcharts({
             colors: ['#EDE8E8', '#40d47e'],
             chart: {
@@ -413,7 +444,11 @@
                 text: 'your assignment score'
             },
             xAxis: {
-                categories: ['am1', 'am2', 'am3', 'am4', 'am5']
+                categories: xAxisArr,
+                min: totalchart
+            },
+            scrollbar: {
+                enabled: true
             },
             yAxis: {
                 min: 0,
@@ -455,19 +490,22 @@
                         style: {
                             textShadow: '0 0 3px black, 0 0 3px black'
                         }
+                    },
+                    states: {
+                        hover: {
+                            color: '#5F8BCA'
+                        }
                     }
                 }
             },
             series: [{
                     name: 'Miss',
-                    data: [2, 2, 3, 2, 1]
+                    data: missArr
                 }, {
                     name: 'Your score',
-                    data: [5, 3, 4, 7, 2]
+                    data: scoreArr
                 }]
         });
-
         $("#AllStudentScore").dataTable();
-
     });
 </script>
