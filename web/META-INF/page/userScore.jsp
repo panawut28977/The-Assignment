@@ -38,7 +38,7 @@
                     <div class="col-md-4"><h4>${leftover_am} <br> Leftovers</h4></div>
                 </div>-->
         <hr style="clear:both">
-        <table class="table"  id="AllUserScore">
+        <table class="table table-striped "  id="AllUserScore">
             <thead>
                 <tr>
                     <td><b>Assignment</b></td>
