@@ -15,6 +15,7 @@
         <link href="css/bootstrap-datetimepicker.min.css"  rel="stylesheet">
         <link href="module/easyWizard/css/jquery.snippet.min.css"  rel="stylesheet">
         <link href="module/easyWizard/css/styles.css"  rel="stylesheet">
+        <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
         <style>
             .step{
                 min-height: 370px;
@@ -65,7 +66,7 @@
                         <li><a href="CourseAssignment">Assignment</a></li>
                         <li class="active"><a href="#">Create Assignment</a></li>
                     </ol>
-                    <form id="myWizard" method="post" action="createAssignment" class="form-horizontal" enctype="multipart/form-data">
+                    <form id="myWizard" method="post" action="createAssignment" class="form-horizontal" enctype="multipart/form-data" onsubmit="return checkingForm();">
                         <section class="step" data-step-title="Enter Information">
                             <div class="col-md-8 col-md-offset-2">
                                 <div class="form-group">
@@ -204,11 +205,17 @@
         </div>
         <script src="js/bootstrap-datetimepicker.min.js"></script>
         <script src="module/easyWizard/lib/jquery.easyWizard.js"></script>
-        <!--<script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>-->
-
         <script src="js/jquery-ui.js"></script>
         <script>
                                         $(document).ready(function() {
+                                            tinymce.init({
+                                                plugins: [
+                                                    "advlist autolink lists link image charmap print preview anchor",
+                                                    "searchreplace visualblocks code fullscreen",
+                                                    "insertdatetime media table contextmenu paste"
+                                                ],
+                                                toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+                                            });
                                             $('#myWizard').easyWizard({
                                                 buttonsClass: 'btn btn-default',
                                                 submitButtonClass: 'btn btn-primary',
@@ -311,17 +318,6 @@
                                                 forceParse: 0,
                                                 startDate: new Date(),
                                                 minView: 2
-                                            });
-                                            $("#myWizard").submit(function() {
-                                                var type = $("#AmType").val();
-                                                if (type == "file") {
-                                                    if ($("#uploadAmFile input").val() == "") {
-                                                        alert("please select your assignment file");
-                                                        $(".prev").trigger("click");
-                                                        $("#uploadAmFile input").focus();
-                                                        return false;
-                                                    }
-                                                }
                                             });
                                             $('#groupwork').click(function() {
                                                 $('#inputpepole').removeAttr("disabled").attr("required", "yes");
@@ -643,13 +639,13 @@
                                                         + '    <div class="form-group">'
                                                         + '        <label class="col-md-3 control-label">Question</label>'
                                                         + '        <div class="col-md-9">'
-                                                        + '            <textarea class="form-control explain_q_text" name="' + seqno + 'qtext" required="yes"></textarea>'
+                                                        + '            <textarea class="form-control explain_q_text" name="' + seqno + 'qtext" id="' + seqno + 'textarea"></textarea>'
                                                         + '        </div>'
                                                         + '    </div>'
                                                         + '    <div class="form-group">'
                                                         + '        <label  class="col-md-3 control-label">Answer</label>'
                                                         + '        <div class="col-md-9">'
-                                                        + '            <textarea class="form-control" name="' + seqno + 'qanswer"></textarea>'
+                                                        + '            <textarea class="form-control" name="' + seqno + 'qanswer" ></textarea>'
                                                         + '        </div>'
                                                         + '    </div>'
                                                         + '    <div class="form-group">'
@@ -660,10 +656,24 @@
                                                         + '    </div>'
                                                         + '    <input type="hidden" value="explain" name="' + seqno + 'q_type">'
                                                         + '</div>';
+
+                                            }
+                                            $(".amQuestion").append(question);
+                                            if (amCurrentType == 'ep') {
+                                                //init tineMCE
+                                                tinymce.execCommand('mceAddEditor', false, seqno + 'textarea');
+
+                                                tinymce.init({
+                                                    plugins: [
+                                                        "advlist autolink lists link image charmap print preview anchor",
+                                                        "searchreplace visualblocks code fullscreen",
+                                                        "insertdatetime media table contextmenu paste"
+                                                    ],
+                                                    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+                                                });
                                             }
                                             total_q++;
                                             seqno++;
-                                            $(".amQuestion").append(question);
                                         }
 
                                         function appendChoice(t) {
@@ -821,12 +831,17 @@
                                                     });
 
                                                 } else if (type == 'explain') {
-                                                    var qtext = q.find("[name$='qtext']").val();
+//                                                    var qtext = q.find("[id$='textarea_ifr']").contents().find("html").html();
+//                                                    console.log(qtext.contents().find("html").html());
                                                     html = '<div>'
-                                                            + '           <p>' + q_no + '.) ' + qtext + '</p>'
+                                                            + '           <p>' + q_no + '.)</p>'
+                                                            + '           <div class="' + q_no + 'qtext mce-content-body "></div>'
                                                             + '           <textarea class="form-control" name="2answer"></textarea>'
                                                             + '       </div>';
                                                     $("#preview").append(html);
+                                                    var qtext = q.find("[id$='textarea_ifr']").contents().find("html").html();
+                                                    $("." + q_no + "qtext").append(qtext);
+                                                    $("." + q_no + "qtext").find("link").remove();
                                                 }
                                             });
 
@@ -871,10 +886,34 @@
                                             requiredCheckboxes.change(function() {
                                                 if (requiredCheckboxes.is(':checked')) {
                                                     requiredCheckboxes.removeAttr('required');
-                                                }else {
+                                                } else {
                                                     requiredCheckboxes.attr('required', 'required');
                                                 }
                                             });
+                                        }
+
+                                        function checkingForm() {
+                                            var type = $("#AmType").val();
+                                            if (type == "file") {
+                                                if ($("#uploadAmFile input").val() == "") {
+                                                    alert("please select your assignment file");
+                                                    $(".prev").trigger("click");
+                                                    $("#uploadAmFile input").focus();
+                                                    return false;
+                                                } else {
+                                                    return true;
+                                                }
+                                            } else {
+                                                var res = true;
+                                                $(".amQuestion").find(".explain iframe[id$='textarea_ifr']").each(function() {
+                                                    var contents = $(this).contents().find("body").html();
+                                                    if (contents == '<p><br data-mce-bogus="1"></p>') {
+                                                        alert("Some of explanatin question are empty please recheck again.");
+                                                        res =  false;
+                                                    } 
+                                                });
+                                                 return res;
+                                            }
                                         }
         </script>
     </body>
