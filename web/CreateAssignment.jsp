@@ -15,7 +15,7 @@
         <link href="css/bootstrap-datetimepicker.min.css"  rel="stylesheet">
         <link href="module/easyWizard/css/jquery.snippet.min.css"  rel="stylesheet">
         <link href="module/easyWizard/css/styles.css"  rel="stylesheet">
-        <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+        <script src="module/tinymce/tinymce.min.js"></script>
         <style>
             .step{
                 min-height: 370px;
