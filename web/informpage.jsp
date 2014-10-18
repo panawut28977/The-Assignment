@@ -97,6 +97,11 @@
                                 <input type="submit" class="btn btn-primary" value="join"/>
                             </form>
                         </c:when>
+                        <c:when test="${msg eq '12'}">
+                            <div class="alert alert-warning" role="alert">
+                                <h3> You are not teacher in that course. </h3>
+                            </div>
+                        </c:when>
                     </c:choose>
                 </div>
             </div>

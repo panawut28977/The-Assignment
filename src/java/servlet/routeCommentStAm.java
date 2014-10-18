@@ -6,6 +6,7 @@
 package servlet;
 
 import Model.Account;
+import Model.AccountCourse;
 import Model.Assignment;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,9 +41,16 @@ public class routeCommentStAm extends HttpServlet {
         Account ac = (Account) ss.getAttribute("ac");
         ss.setAttribute("cId", cId);
         if (ac.getAccount_type().equalsIgnoreCase("TH")) {
-            Assignment a = Assignment.getAmByAmID(am_id);
-            ss.setAttribute("curAm", a);
-            response.sendRedirect("checkAssignment?tab=AllAssignment&&st_am_id=" + st_am_id + "&&cId=" + cId);
+            String accCourse = AccountCourse.getAccountRole(ac.getAcc_id(), Integer.parseInt(cId));
+            if (accCourse.equalsIgnoreCase("TH")) {
+                Assignment a = Assignment.getAmByAmID(am_id);
+                ss.setAttribute("curAm", a);
+                response.sendRedirect("checkAssignment?tab=AllAssignment&&st_am_id=" + st_am_id + "&&cId=" + cId);
+            } else {
+                request.setAttribute("msg", 12);
+                request.getRequestDispatcher("/informpage.jsp").forward(request, response);
+            }
+
         } else {
             response.sendRedirect("sendAssignment?am_id=" + am_id + "&&cId=" + cId);
         }

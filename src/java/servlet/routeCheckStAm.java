@@ -6,9 +6,9 @@
 package servlet;
 
 import Model.Account;
+import Model.AccountCourse;
 import Model.Assignment;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -37,9 +37,16 @@ public class routeCheckStAm extends HttpServlet {
         String am_id = request.getParameter("am_id");
         HttpSession ss = request.getSession();
         ss.setAttribute("cId", cId);
+        Account ac = (Account) ss.getAttribute("ac");
         Assignment a = Assignment.getAmByAmID(am_id);
         ss.setAttribute("curAm", a);
-        response.sendRedirect("checkAssignment?tab=AllAssignment&&st_am_id=" + st_am_id + "&&cId=" + cId);
+        String accCourse = AccountCourse.getAccountRole(ac.getAcc_id(), Integer.parseInt(cId));
+        if (accCourse.equalsIgnoreCase("TH")) {
+            response.sendRedirect("checkAssignment?tab=AllAssignment&&st_am_id=" + st_am_id + "&&cId=" + cId);
+        } else {
+            request.setAttribute("msg", 12);
+            request.getRequestDispatcher("/informpage.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
