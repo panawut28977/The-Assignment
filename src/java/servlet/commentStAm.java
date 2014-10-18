@@ -123,7 +123,7 @@ public class commentStAm extends HttpServlet {
                     }
                     System.out.println("listac:" + listac);
                 }
-                
+
             } else {
                 if (ac.getAccount_type().equalsIgnoreCase("TH")) {
                     //ถ้าเป็นอาจารย์ที่คอมเม้นงานไฟล์เดี่ยวนักเรียน notify ไปที่ตัวนักเรียน
@@ -142,9 +142,10 @@ public class commentStAm extends HttpServlet {
         n.setAcc_id(ac.getAcc_id());
         n.setCourse_id(cId);
         n.setType("assignment");
-        String content = "<p><b>" + ac.getFirstname() + " " + ac.getLastname() + "</b>  tell you something in your <b>" + am.getName() + "</b> work.</p>\n";
+//        String content = "<p><b>" + ac.getFirstname() + " " + ac.getLastname() + "</b>  tell you something in your <b>" + am.getName() + "</b> work.</p>\n";
+        String content = "<span class=\"text-muted\"> <span class=\"glyphicon glyphicon-comment\"></span> commented in assignment of student. </span>";
         n.setText(content);
-        n.setLink("routeCommentStAm?am_id=" + am.getAm_id() + "&&cId=" + cId+"&&st_am_id=" + st_am_id);
+        n.setLink("routeCommentStAm?am_id=" + am.getAm_id() + "&&cId=" + cId + "&&st_am_id=" + st_am_id);
 //        if (ac.getAccount_type().equalsIgnoreCase("TH")) {
 //            n.setLink("sendAssignment?am_id=" + am.getAm_id() + "&&cId=" + cId);
 //        } else {

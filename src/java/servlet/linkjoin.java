@@ -59,7 +59,7 @@ public class linkjoin extends HttpServlet {
                         n.setType("alert");
                         //Assignment# 1 ( INT206 Software Development Process II ) <b9/10
 //                        String content = "<b>\"" + ac.getFirstname() + " " + ac.getLastname() + "\"</b> request to join in <b>" + c.getName() + "</b>   ";
-                        String content = "<span class=\"text-muted\"> request to join in </span>";
+                        String content = "<span class=\"text-muted\"> <span class=\"glyphicon glyphicon-log-in\"></span> request to join in </span>";
                         n.setText(content);
 
                         String nexturl = "course.jsp?tab=request";

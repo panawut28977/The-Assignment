@@ -13,7 +13,7 @@
                         <img src="${ann_acc.profile_pic}" width="40"/>
                     </div>
                     <div class="timeline-label">
-                        <h2>${ann_acc.firstname} <span class="text-muted">announces  in</span> <a href="setCourseSession?cId=${n.course_id}"><span class="label label-default">${cf:getCourseNameByID(n.course_id)}</span></a><small class="pull-right">${cf:formatTime(n.noti_date)}</small></h2>
+                        <h2>${ann_acc.firstname} <span class="text-muted"><span class="glyphicon glyphicon-bullhorn"></span> announces  in</span> <a href="setCourseSession?cId=${n.course_id}"><span class="label label-default">${cf:getCourseNameByID(n.course_id)}</span></a><small class="pull-right">${cf:formatTime(n.noti_date)}</small></h2>
                         <!--<p>${n.text}</p>-->
                     </div>
                 </div>

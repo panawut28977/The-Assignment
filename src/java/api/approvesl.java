@@ -52,7 +52,7 @@ public class approvesl extends HttpServlet {
             n.setType("alert");
             //Assignment# 1 ( INT206 Software Development Process II ) <b9/10
 //            String content = "Your request to join <b>\""+Course.getCourseNameByID(course_id)+"\"</b> is approved";
-            String content = "<span class=\"text-muted\"> your request to join is approved </span>";
+            String content = "<span class=\"text-muted\"> <span class=\"glyphicon glyphicon-ok-sign\"></span> your request to join is approved </span>";
             n.setText(content);
             n.setLink("setCourseSession?cId="+course_id);
             List<Integer> listac = new ArrayList<>();

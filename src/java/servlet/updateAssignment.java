@@ -89,7 +89,7 @@ public class updateAssignment extends HttpServlet {
         n.setAcc_id(ac.getAcc_id());
         n.setCourse_id(cId);
         n.setType("assignment");
-        String content = "<span class=\"text-muted\">updated \"" + a.getName() + "\" assignment information in </span>";
+        String content = "<span class=\"text-muted\"> <span class=\"glyphicon glyphicon-refresh\"></span> updated \"" + a.getName() + "\" assignment information in </span>";
         n.setText(content);
         n.setLink("assignment.jsp?ct=allAm&&tab=AllAssignment&&amId=" + am_id + "&&cId=" + cId + "");
 

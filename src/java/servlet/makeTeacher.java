@@ -46,7 +46,7 @@ public class makeTeacher extends HttpServlet {
             n.setAcc_id(ac.getAcc_id());
             n.setCourse_id(cId);
             n.setType("alert");
-            String content = "<span class=\"text-muted\"> made you be a teacher in </span>";
+            String content = "<span class=\"text-muted\"> made you be a <span class=\"label label-primary\">Teacher</span> in </span>";
             n.setText(content);
             n.setLink("setCourseSession?cId=" + c.getCourse_id());
 

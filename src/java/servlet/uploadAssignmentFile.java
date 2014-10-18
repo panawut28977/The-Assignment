@@ -141,7 +141,9 @@ public class uploadAssignmentFile extends HttpServlet {
         n.setAcc_id(ac.getAcc_id());
         n.setCourse_id(cId);
         n.setType("assignment");
-        String content = "<p><b>" + ac.getFirstname() + " " + ac.getLastname() + "</b>  has sent or updated <b>" + a.getName() + "</b> assignment (" + c.getName() + ").</p>\n";
+//        String content = "<p><b>" + ac.getFirstname() + " " + ac.getLastname() + "</b>  has sent or updated <b>" + a.getName() + "</b> assignment (" + c.getName() + ").</p>\n";
+//        n.setText(content);
+        String content = "<span class=\"text-muted\"> <span class=\"glyphicon glyphicon-send\"></span> sent or update his/her \"" + a.getName() + "\" assignment in </span>";
         n.setText(content);
         n.setLink("routeCheckStAm?st_am_id=" + saf.getSt_am_id() + "&&cId=" + cId + "&&am_id=" + a.getAm_id());
         List<Integer> listac = AccountCourse.getTeacherIdCourse(cId, ac.getAcc_id());

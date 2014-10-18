@@ -47,7 +47,7 @@ public class uploadAssignmentOnWeb extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         List<AnswerQuestion> ansList = new ArrayList<>();
         HttpSession ss = request.getSession();
-        int cId = Integer.parseInt(((Long) ss.getAttribute("cId"))+"");
+        int cId = Integer.parseInt(((Long) ss.getAttribute("cId")) + "");
         Course c = Course.getCourseByID(cId);
         Account ac = (Account) ss.getAttribute("ac");
         Assignment a = (Assignment) ss.getAttribute("curAm");
@@ -77,9 +77,9 @@ public class uploadAssignmentOnWeb extends HttpServlet {
                 aq.setG_id(q_id);
                 StringBuilder stans = new StringBuilder("[");
                 for (String string : ans) {
-                    stans.append(string+",");
+                    stans.append(string + ",");
                 }
-                stans.deleteCharAt(stans.length()-1);
+                stans.deleteCharAt(stans.length() - 1);
                 stans.append("]");
                 aq.setAnswer(stans.toString());
                 ansList.add(aq);
@@ -137,9 +137,11 @@ public class uploadAssignmentOnWeb extends HttpServlet {
         n.setAcc_id(ac.getAcc_id());
         n.setCourse_id(cId);
         n.setType("assignment");
-        String content = "<p><b>" + ac.getFirstname() + " " + ac.getLastname() + "</b>  has sent or updated <b>" + a.getName() + "</b> assignment ("+c.getName()+").</p>\n";
+//        String content = "<p><b>" + ac.getFirstname() + " " + ac.getLastname() + "</b>  has sent or updated <b>" + a.getName() + "</b> assignment ("+c.getName()+").</p>\n";
+//        n.setText(content);
+        String content = "<span class=\"text-muted\"> <span class=\"glyphicon glyphicon-send\"></span> sent or update his/her \"" + a.getName() + "\" assignment in </span>";
         n.setText(content);
-        n.setLink("routeCheckStAm?st_am_id=" + sa.getSt_am_id() + "&&cId=" + cId+"&&am_id="+a.getAm_id());
+        n.setLink("routeCheckStAm?st_am_id=" + sa.getSt_am_id() + "&&cId=" + cId + "&&am_id=" + a.getAm_id());
         List<Integer> listac = AccountCourse.getTeacherIdCourse(cId, ac.getAcc_id());
         Notification.announce(n, listac);
 
