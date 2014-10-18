@@ -44,21 +44,22 @@ public class approvesl extends HttpServlet {
         int acc_id = Integer.parseInt(request.getParameter("acc_id"));
         int course_id = Integer.parseInt(request.getParameter("course_id"));
         int result = AccountCourse.approve(acc_id, course_id) == true ? 1 : 0;
-        System.out.println("result:"+result);
+        System.out.println("result:" + result);
         if (result > 0) {
             Notification n = new Notification();
             n.setAcc_id(ac.getAcc_id());
             n.setCourse_id(course_id);
             n.setType("alert");
             //Assignment# 1 ( INT206 Software Development Process II ) <b9/10
-            String content = "Your request to join <b>\""+Course.getCourseNameByID(course_id)+"\"</b> is approved";
+//            String content = "Your request to join <b>\""+Course.getCourseNameByID(course_id)+"\"</b> is approved";
+            String content = "<span class=\"text-muted\"> your request to join is approved </span>";
             n.setText(content);
-
+            n.setLink("setCourseSession?cId="+course_id);
             List<Integer> listac = new ArrayList<>();
             listac.add(acc_id);
             Notification.announce(n, listac);
         }
-        out.write(result+"");
+        out.write(result + "");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

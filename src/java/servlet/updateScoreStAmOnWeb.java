@@ -125,14 +125,16 @@ public class updateScoreStAmOnWeb extends HttpServlet {
         for (AnswerQuestion ans : ansList) {
             AnswerQuestion.updateScore(ans);
         }
-
         Notification n = new Notification();
         n.setAcc_id(ac.getAcc_id());
         n.setCourse_id(cId);
         n.setType("score");
         //Assignment# 1 ( INT206 Software Development Process II ) <b9/10
-        String content = "<b>"+a.getName() +"</b> assignment have new score update " + total_score + "/" + a.getFully_mark();
+//        Your score is publish in assignmentName(cName).
+        String content = "<span class=\"text-muted\"><span class=\"glyphicon glyphicon-stats\" style=\"font-size: 12px\"></span> Your score is publish in \"" + a.getName() + "\" </span>";
+//        String content = "<b>"+a.getName() +"</b> assignment have new score update " + total_score + "/" + a.getFully_mark();
         n.setText(content);
+        n.setLink("sendAssignment?am_id="+a.getAm_id());
 
         List<Integer> listac = new ArrayList<>();
         if (a.getTotal_member() > 1) {

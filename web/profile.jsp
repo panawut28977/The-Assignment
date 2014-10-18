@@ -132,7 +132,16 @@
                                         </tr>
                                         <tr>
                                             <td>Type:</td>
-                                            <td>${ac.account_type}</td>
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${ac.account_type eq 'ST'}">
+                                                        Student
+                                                    </c:when>
+                                                    <c:when test="${ac.account_type eq 'TH'}">
+                                                        Teacher
+                                                    </c:when>
+                                                </c:choose>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Register date:</td>

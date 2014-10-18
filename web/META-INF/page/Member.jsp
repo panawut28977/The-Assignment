@@ -37,7 +37,7 @@
                         </span>
                     </c:if>
                     <br>
-                    <small class="pull-right text-muted">Join date : ${cf:getApprovedTime(st.acc_id, cId)} &nbsp;</small>
+                    <small class="pull-right text-muted">Joined date : ${cf:getApprovedTime(st.acc_id, cId)} &nbsp;</small>
                 </div>
             </div>
             <c:set value="${count+1}" var="count"/>
@@ -48,11 +48,11 @@
     </c:forEach>
     <hr style="clear: both"/>
     <div>
-        <h3 class="text-muted">Who not comming yet.</h3>
+        <h3 class="text-muted">Who not coming yet.</h3>
     </div>
     <c:if test="${requestScope.whoNotJoin.size()==0}">
         <div class="row">
-            <h3 class="text-muted" style="text-align: center;clear: both">No people who not comming in.</h3>
+            <h3 class="text-muted" style="text-align: center;clear: both">No people who not coming in.</h3>
         </div>
     </c:if>
     <c:forEach items="${requestScope.whoNotJoin}" var="nj">

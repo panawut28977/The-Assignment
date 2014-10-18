@@ -116,7 +116,7 @@ public class GetSentAssignment extends HttpServlet {
             //auto checking all assignment that is not checking
             //search not checking assignment
             Date lateDate = a.getLate_date();
-            Date  d = new Date();
+            Date d = new Date();
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
             Date now = null;
             try {
@@ -276,9 +276,11 @@ public class GetSentAssignment extends HttpServlet {
                     n.setCourse_id(Integer.parseInt(cId));
                     n.setType("score");
                     //Assignment# 1 ( INT206 Software Development Process II ) <b9/10
-                    String content = "<b>" + a.getName() + "</b> assignment have new score update " + total_score + "/" + a.getFully_mark();
-                    n.setText(content);
+//                    String content = "<b>" + a.getName() + "</b> assignment have new score update " + total_score + "/" + a.getFully_mark();
+                    String content = "<span class=\"text-muted\"><span class=\"glyphicon glyphicon-stats\" style=\"font-size: 12px\"></span> Your score is publish in \"" + a.getName() + "\" </span>";
 
+                    n.setText(content);
+                    n.setLink("sendAssignment?am_id=" + a.getAm_id());
                     List<Integer> listac = new ArrayList<>();
                     if (a.getTotal_member() > 1) {
                         Group_member g = Group_member.getMemberById(stAssignmentOnWeb.getG_id());
@@ -291,7 +293,7 @@ public class GetSentAssignment extends HttpServlet {
                         listac.add(stAssignmentOnWeb.getAcc_id());
                     }
                     Notification.announce(n, listac);
-                    
+
                     System.out.println("-----");
                 }
             }

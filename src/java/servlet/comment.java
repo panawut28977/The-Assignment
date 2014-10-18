@@ -50,7 +50,8 @@ public class comment extends HttpServlet {
         n.setAcc_id(ac.getAcc_id());
         n.setCourse_id(cId);
         n.setType("assignment");
-        String content = "<p><b>" + ac.getFirstname()+ " " + ac.getLastname()+ "</b>  comment in <b>" + am.getName()+ "</b> assignment.</p>\n";
+        String content = "<span class=\"text-muted\">commented in \"" + am.getName()+ "\" assignment.</span>";
+//        String content = "<p><b>" + ac.getFirstname()+ " " + ac.getLastname()+ "</b>  comment in <b>" + am.getName()+ "</b> assignment.</p>\n";
         n.setText(content);
         n.setLink("assignment.jsp?ct=allAm&&tab=AllAssignment&&amId="+am.getAm_id()+"&&cId="+cId+"");
 

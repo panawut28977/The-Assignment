@@ -54,8 +54,11 @@ public class updateScoreStAmFile extends HttpServlet {
             n.setCourse_id(cId);
             n.setType("score");
             //Assignment# 1 ( INT206 Software Development Process II ) <b9/10
-            String content = "<b>"+ a.getName() +"</b> assignment have new score update " + score + "/" + a.getFully_mark() ;
+//            String content = "<b>"+ a.getName() +"</b> assignment have new score update " + score + "/" + a.getFully_mark() ;
+            String content = "<span class=\"text-muted\"><span class=\"glyphicon glyphicon-stats\" style=\"font-size: 12px\"></span> Your score is publish in \"" + a.getName() + "\" </span>";
+
             n.setText(content);
+            n.setLink("sendAssignment?am_id="+a.getAm_id());
 
             List<Integer> listac = new ArrayList<>();
             if (a.getTotal_member() > 1) {

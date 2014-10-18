@@ -127,11 +127,11 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <label>name</label>
+                            <label>Course name</label>
                             <input type="text" class="form-control" name="name">
                         </div>
                         <div class="col-md-12" style="margin-top: 20px">
-                            <label>Semister</label>
+                            <label>Semester</label>
                         </div>
                         <div class="col-md-12">
                             <div class="row">

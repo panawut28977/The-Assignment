@@ -8,7 +8,10 @@
     $(document).ready(function() {
         var aTable = $('#AllAssignemnt').dataTable({
             /* Disable initial sort */
-            "aaSorting": []
+            "aaSorting": [],
+            "oLanguage": {
+                "sInfo": "Showing _START_ to _END_ of _TOTAL_ assignments"
+            }
         });
         aTable.fnFilter('${param.st}');
         var color = '';
@@ -114,25 +117,33 @@
         cursor: default;
     }
 </style>
-<c:if test="${ac.courseList.get(cId).role eq 'TH'}"> 
-    <c:choose>
-        <c:when test="${ac.courseList.get(cId).course.status eq 'open'}">
-            <a class="btn btn-primary pull-right"  href="CreateAssignment.jsp?tab=AllAssignment" style="margin-top: 20px">
-                <span class="glyphicon glyphicon-plus-sign"></span> Create Assignment
-            </a>
-        </c:when>
-        <c:when test="${ac.courseList.get(cId).course.status eq 'close'}">
-            <button class="btn btn-default pull-right" id="createAmCloseCourse" data-toggle="tooltip" data-placement="top" title="your course is closed. Can not create assignment." style="margin-top: 20px">
-                <span class="glyphicon glyphicon-plus-sign"></span> Create Assignment
-            </button>
-        </c:when>
-    </c:choose>
-    <br/><br/><br/>
-</c:if>
-<div class="btn-group pull-right" style="margin: 20px 0;clear: both">
-    <button type="button" class="btn btn-default active" id="view_am_list"><i class="glyphicon glyphicon-list"></i></button>
-    <button type="button" class="btn btn-default" id="view_am_calendar"><i class="glyphicon glyphicon-calendar"></i></button>
-</div>
+<c:choose>
+    <c:when test="${ac.courseList.get(cId).role eq 'TH'}">
+        <div class="btn-group pull-left" style="margin: 20px 0;clear: both">
+            <button type="button" class="btn btn-default active" id="view_am_list"><i class="glyphicon glyphicon-list"></i></button>
+            <button type="button" class="btn btn-default" id="view_am_calendar"><i class="glyphicon glyphicon-calendar"></i></button>
+        </div>
+        <c:choose>
+            <c:when test="${ac.courseList.get(cId).course.status eq 'open'}">
+                <a class="btn btn-primary pull-right"  href="CreateAssignment.jsp?tab=AllAssignment" style="margin-top: 20px">
+                    <span class="glyphicon glyphicon-plus-sign"></span> Create Assignment
+                </a>
+            </c:when>
+            <c:when test="${ac.courseList.get(cId).course.status eq 'close'}">
+                <button class="btn btn-default pull-right" id="createAmCloseCourse" data-toggle="tooltip" data-placement="top" title="your course is closed. Can not create assignment." style="margin-top: 20px">
+                    <span class="glyphicon glyphicon-plus-sign"></span> Create Assignment
+                </button>
+            </c:when>
+        </c:choose>
+        <br/><br/><br/>
+    </c:when>
+    <c:otherwise>
+        <div class="btn-group pull-left" style="margin: 20px 0;clear: both">
+            <button type="button" class="btn btn-default active" id="view_am_list"><i class="glyphicon glyphicon-list"></i></button>
+            <button type="button" class="btn btn-default" id="view_am_calendar"><i class="glyphicon glyphicon-calendar"></i></button>
+        </div>
+    </c:otherwise>
+</c:choose>
 <div class="table-responsive" style="min-height: 520px;" id="view_list">
     <table class="table table-striped" id="AllAssignemnt">
         <thead>

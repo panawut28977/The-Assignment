@@ -38,7 +38,7 @@ public class setCourseSession extends HttpServlet {
         Account a = (Account) ss.getAttribute("ac");
         int leftover = 0;
         if (a.getCourseList().get(cId) != null) {
-            List<Assignment> amList = Assignment.getAmByCourseIDNoSetCourse(Integer.parseInt(cId+""));
+            List<Assignment> amList = Assignment.getAmByCourseIDNoSetCourse(Integer.parseInt(cId + ""));
             String st = "";
             for (Assignment assignment : amList) {
 //            System.out.println(assignment.getDue_date());
@@ -52,7 +52,13 @@ public class setCourseSession extends HttpServlet {
         }
         ss.setAttribute("leftoverInCourse", leftover);
         ss.setAttribute("cId", cId);
-        response.sendRedirect("CourseAnnounce");
+
+        String nexturl = request.getParameter("nexturl");
+        if (nexturl == null) {
+            response.sendRedirect("CourseAnnounce");
+        } else {
+            response.sendRedirect(nexturl);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

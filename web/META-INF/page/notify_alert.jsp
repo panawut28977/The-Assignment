@@ -17,8 +17,12 @@
                         <img src="${ann_acc.profile_pic}" width="40"/>
                     </div>
                     <div class="timeline-label">
-                        <h2>${ann_acc.firstname} <span><small>(${cf:getCourseNameByID(n.course_id)})</small></span><small class="pull-right">${cf:formatTime(n.noti_date)}</small></h2>
-                        <p>${n.text}</p>
+                        <h2>${ann_acc.firstname} ${n.text} 
+                            <a href="${n.link}">
+                                <span class="label label-default">${cf:getCourseNameByID(n.course_id)}</span>
+                            </a>
+                            <small class="pull-right">${cf:formatTime(n.noti_date)}</small></h2>
+                    <!--<p>${n.text}</p>-->
                     </div>
                 </div>
             </article>

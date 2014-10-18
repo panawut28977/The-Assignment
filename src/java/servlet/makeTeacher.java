@@ -46,8 +46,9 @@ public class makeTeacher extends HttpServlet {
             n.setAcc_id(ac.getAcc_id());
             n.setCourse_id(cId);
             n.setType("alert");
-            String content = "Now you are <b>Teacher</b> of <b>" + c.getName() + "</b> course";
+            String content = "<span class=\"text-muted\"> made you be a teacher in </span>";
             n.setText(content);
+            n.setLink("setCourseSession?cId=" + c.getCourse_id());
 
             //select people you want to notify
             List<Integer> listac = new ArrayList<>();

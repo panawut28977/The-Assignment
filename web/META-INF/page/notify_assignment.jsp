@@ -16,25 +16,28 @@
             <article class="timeline-entry">
                 <div class="timeline-entry-inner">
                     <div class="timeline-icon bg-success">
-                       <span class="glyphicon glyphicon-file" style="font-size: 36px"></span>
+                        <img src="${ann_acc.profile_pic}" width="40"/>
                     </div>
+                    <!--                    <div class="timeline-icon bg-success">
+                                            <span class="glyphicon glyphicon-file" style="font-size: 36px"></span>
+                                        </div>-->
                     <div class="timeline-label">
-                        <h2>${ann_acc.firstname} <span><small>(${cf:getCourseNameByID(n.course_id)})</small></span><small class="pull-right">${cf:formatTime(n.noti_date)}</small></h2>
-                        <p>${n.text}</p>
-                        <a href="${n.link}">see more</a>
+                        <h2>${ann_acc.firstname} ${n.text} <a href="${n.link}"><span class="label label-default">${cf:getCourseNameByID(n.course_id)}</span></a> <small class="pull-right">${cf:formatTime(n.noti_date)}</small></h2>
+                        <!--<p>${n.text}</p>-->
+                        <!--<a href="${n.link}">see more</a>-->
                     </div>
                 </div>
             </article>
-<!--            <div class="media">
-                <span class="pull-left" href="#">
-                    <span class="glyphicon glyphicon-file" style="font-size: 64px"></span>
-                </span>
-                <div class="media-body">
-                    <h4 class="media-heading">${ann_acc.firstname}  <small>(${cf:getCourseNameByID(n.course_id)})</small><small class="pull-right">${cf:formatTime(n.noti_date)}</small></h4>
-                    <p>${n.text}</p>
-                    <a href="${n.link}">see more</a>
-                </div>
-            </div>-->
+            <!--            <div class="media">
+                            <span class="pull-left" href="#">
+                                <span class="glyphicon glyphicon-file" style="font-size: 64px"></span>
+                            </span>
+                            <div class="media-body">
+                                <h4 class="media-heading">${ann_acc.firstname}  <small>(${cf:getCourseNameByID(n.course_id)})</small><small class="pull-right">${cf:formatTime(n.noti_date)}</small></h4>
+                                <p>${n.text}</p>
+                                <a href="${n.link}">see more</a>
+                            </div>
+                        </div>-->
         </c:forEach>
     </div>
 </div>

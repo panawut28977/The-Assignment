@@ -62,8 +62,13 @@
             },
             events: jsonArr
         }).find("#loader").remove();
-
     });
+    function setCourse(course_id, am_id) {
+        var nexturl = "assignment.jsp?tab=AllAssignment&&amId=" + am_id;
+        var queryStringText = encodeURIComponent(nexturl);
+        var url = "setCourseSession?cId=" + course_id + "&&nexturl=" + queryStringText;
+        location.href = url;
+    }
 
 </script>
 <style>
@@ -74,7 +79,7 @@
     span[class^=text]{
         font-weight: bold;
     }
-    
+
     #calendar{
         display: none;
     }
@@ -99,7 +104,7 @@
         <tbody>
             <c:forEach items="${ac.assignment}" var="a">
                 <tr>
-                    <td><a href="assignment.jsp?ct=allAm&&tab=AllAssignment&&amId=${a.am_id}&&cId=${a.course.course_id}">${a.name}</a></td>
+                    <td><a onclick="setCourse(${a.course.course_id},${a.am_id})" class="usepointer">${a.name}</a></td>
                     <td>${a.course.name}</td>
                     <c:choose>
                         <c:when test="${a.ass_type eq 'file'}">

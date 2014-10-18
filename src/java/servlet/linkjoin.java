@@ -12,6 +12,7 @@ import Model.ImportedStudent;
 import Model.Notification;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -57,9 +58,14 @@ public class linkjoin extends HttpServlet {
                         n.setCourse_id(c.getCourse_id());
                         n.setType("alert");
                         //Assignment# 1 ( INT206 Software Development Process II ) <b9/10
-                        String content = "<b>\"" + ac.getFirstname() + " " + ac.getLastname() + "\"</b> request to join in <b>" + c.getName() + "</b>   ";
+//                        String content = "<b>\"" + ac.getFirstname() + " " + ac.getLastname() + "\"</b> request to join in <b>" + c.getName() + "</b>   ";
+                        String content = "<span class=\"text-muted\"> request to join in </span>";
                         n.setText(content);
 
+                        String nexturl = "course.jsp?tab=request";
+                        String queryStringText = URLEncoder.encode(nexturl, "UTF-8");
+                        String link = "setCourseSession?cId=" + c.getCourse_id() + "&&nexturl=" + queryStringText;
+                        n.setLink(link);
                         List<Integer> listac = AccountCourse.getTeacherIdCourse(c.getCourse_id(), ac.getAcc_id());
                         Notification.announce(n, listac);
 

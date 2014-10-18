@@ -20,7 +20,7 @@
     <c:otherwise>
         <div class="pull-right" style="margin: 20px 0">
             <a class="btn"  data-toggle="modal" data-target="#viewStudentList"  id="viewlist">
-                See imported students list
+                See list of imported students
             </a>
             <button class="btn btn-primary" id="autoApprove">Auto Approve</button>
             <!--<button class="btn btn-default" id="updateList">upload list</button>-->
@@ -76,7 +76,7 @@
                         <span class="pull-left" style="font-size: 18px;font-weight: 500">${a.firstname} ${a.lastname}</span>
                         <span class="media pull-right">
                             <button class="btn btn-primary approve" acc_id="${a.acc_id}" cId="${cId}"><span class="glyphicon glyphicon-ok"></span>  Approve now</button>
-                            <button class="btn btn-default disapprove" acc_id="${a.acc_id}" cId="${cId}">Not now</button>
+                            <button class="btn btn-default disapprove" acc_id="${a.acc_id}" cId="${cId}">Decline</button>
                         </span>
                         <!--<small class="text-muted">Request date:     </small>-->
                     </div>
@@ -89,7 +89,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Imported students list</h4>
+                        <h4 class="modal-title" id="myModalLabel">List of imported students</h4>
                     </div>
                     <div class="modal-body">
                         <table class="table" >
@@ -128,7 +128,7 @@
                     </div>
                     <div class="media col-md-4 approve_box">
                         <button class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span>  Approve</button>
-                        <button class="btn btn-default">Not now</button>
+                        <button class="btn btn-default">Decline</button>
                     </div>
                 </div>
                 <div class="row">
@@ -144,7 +144,7 @@
                     </div>
                     <div class="media col-md-4 approve_box">
                         <button class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> Approve</button>
-                        <button class="btn btn-default">Not now</button>
+                        <button class="btn btn-default">Decline</button>
                     </div>
                 </div>
                 <div class="row">
@@ -160,7 +160,7 @@
                     </div>
                     <div class="media col-md-4 approve_box">
                         <button class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span>  Approve</button>
-                        <button class="btn btn-default">Not now</button>
+                        <button class="btn btn-default">Decline</button>
                     </div>
                 </div>
                 <div class="row">
@@ -176,7 +176,7 @@
                     </div>
                     <div class="media col-md-4 approve_box">
                         <button class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span>  Approve</button>
-                        <button class="btn btn-default">Not now</button>
+                        <button class="btn btn-default">Decline</button>
                     </div>
                 </div>-->
         <script>
