@@ -6,10 +6,10 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>]v'
 <!DOCTYPE html>
 <html>
-    <head>
+    <head>  
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="META-INF/page/include_css.jsp" %>
         <%@include file="META-INF/page/include_js.jsp" %>
@@ -37,7 +37,7 @@
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">The Assignment</a>
             </div>
-            <p class="navbar-text navbar-right" style="padding-right: 10px">IT 54-27</p>
+            <p class="navbar-text navbar-right" style="padding-right: 10px">IT 54-24</p>
         </nav>
         <div class="container-fluid" style="margin-top: 10%">
             <div class="row">
