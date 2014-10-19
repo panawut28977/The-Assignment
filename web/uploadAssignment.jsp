@@ -119,7 +119,7 @@
                                             <input type="hidden" name="extFile" id="extFile"/>
                                         </div>
                                         <br/><br/><br/>
-                                        <input type="submit" value="Upload" class="form-control btn btn-primary"/>
+                                        <input type="submit" value="Upload" id="uploadFile" class="form-control btn btn-primary"/>
                                     </form>
                                     <br/>
                                 </c:when>
@@ -222,6 +222,9 @@
                 alert("Invalid file type");
                 return false;
             }
+            var btn = $("#uploadFile");
+            btn.addClass("disabled");
+            btn.val("uploading..");
         }
 
         function checkSize(t) {
