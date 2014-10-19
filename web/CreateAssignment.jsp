@@ -255,6 +255,8 @@
                                                     }
                                                 }
                                             });
+
+                                          
 //                                            tinymce.init({selector: '.explain .explain_q_text'});
                                             $("#sortable").sortable({
                                                 revert: true,
@@ -916,10 +918,16 @@
                                                     $("#uploadAmFile input").focus();
                                                     return false;
                                                 } else {
+                                                    var btn = $(".submit");
+                                                    btn.addClass("disabled");
+                                                    btn.text("Creating..");
                                                     return true;
                                                 }
                                             } else {
                                                 var res = true;
+                                                var btn = $(".submit");
+                                                btn.addClass("disabled");
+                                                btn.text("Creating..");
                                                 $(".amQuestion").find(".explain iframe[id$='textarea_ifr']").each(function() {
                                                     var contents = $(this).contents().find("body").html();
                                                     if (contents == '<p><br data-mce-bogus="1"></p>') {
@@ -927,6 +935,7 @@
                                                         res = false;
                                                     }
                                                 });
+
                                                 return res;
                                             }
                                         }
