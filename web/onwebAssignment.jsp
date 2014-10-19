@@ -49,6 +49,10 @@
             #togetherjs-share-button{
                 display: none;
             }
+
+            #questionList .assignmentBox img{
+                border-radius: initial;  
+            }
         </style>
     </head>
     <body>
@@ -456,7 +460,15 @@
                     $("#text").val("");
                 });
             });
-
+            $("#questionList .assignmentBox img").each(function() {
+                var maxwidth = $("#questionList .assignmentBox").width();
+                var width = $(this).width();
+//                var height = $(this).height();
+//                console.log(width + "/" + maxwidth);
+                if (width > maxwidth) {
+                    $(this).width(maxwidth);
+                }
+            });
 //            var am_member = '${curAm.total_member}';
 //            if (am_member > 1) {
 //                // Connect URL

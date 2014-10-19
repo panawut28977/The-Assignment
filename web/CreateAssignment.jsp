@@ -49,6 +49,10 @@
                 font-weight: bold;
                 width: 200px;
             }
+
+            #preview img{
+                border-radius: initial;   
+            }
         </style>
 
         <%@include file="META-INF/page/include_js.jsp" %>

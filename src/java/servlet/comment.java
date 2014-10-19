@@ -53,7 +53,7 @@ public class comment extends HttpServlet {
         String content = "<span class=\"text-muted\"> <span class=\"glyphicon glyphicon-comment\"></span> commented in \"" + am.getName()+ "\" assignment.</span>";
 //        String content = "<p><b>" + ac.getFirstname()+ " " + ac.getLastname()+ "</b>  comment in <b>" + am.getName()+ "</b> assignment.</p>\n";
         n.setText(content);
-        n.setLink("assignment.jsp?ct=allAm&&tab=AllAssignment&&amId="+am.getAm_id()+"&&cId="+cId+"");
+        n.setLink("assignment.jsp?tab=AllAssignment&&amId="+am.getAm_id()+"&&cId="+cId+"");
 
         List<Integer> listac = AccountCourse.getMemberIdCourse(cId, ac.getAcc_id());
         Notification.announce(n, listac);
