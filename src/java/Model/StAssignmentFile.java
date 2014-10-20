@@ -375,7 +375,7 @@ public class StAssignmentFile {
 
     public static int setAm(StAssignmentFile StAssFile) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql2 = "insert into Student_assignment_file(ass_id,acc_id,g_id,list_id,score) values(?,?,?,?,?)";
+        String sql2 = "insert into student_assignment_file(ass_id,acc_id,g_id,list_id,score) values(?,?,?,?,?)";
         PreparedStatement pstm;
         int result = 0;
         try {
