@@ -42,10 +42,10 @@ public class ImportStudentList extends HttpServlet {
         HttpSession ss = request.getSession();
         Integer cId = Integer.parseInt(((Long) ss.getAttribute("cId")) + "");
         Course c = Course.getCourseByID(cId);
-        File f = new File(getServletContext().getRealPath("/") + "\\file\\import_student_list");
+        File f = new File(getServletContext().getRealPath("/") + "/file/import_student_list");
         MyFileRenamePolicy mf = new MyFileRenamePolicy();
         MultipartRequest m = new MultipartRequest(request, f.getPath(), (5 * 1024 * 1024), "UTF-8", mf);
-        String fileurl = getServletContext().getRealPath("/") + "\\file\\import_student_list\\" + m.getFilesystemName("file");
+        String fileurl = getServletContext().getRealPath("/") + "/file/import_student_list/" + m.getFilesystemName("file");
         Map<Boolean, List<ImportedStudent>> exStudentList = DocumentFunction.readStudentXlsxFile(fileurl, cId);
 
 //        System.out.println(exStudentList); 

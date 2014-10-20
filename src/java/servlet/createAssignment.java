@@ -58,7 +58,7 @@ public class createAssignment extends HttpServlet {
 //        System.out.println("check dir " +f.exists());
         MultipartRequest m = new MultipartRequest(request, f.getPath(), "UTF-8");
         Integer cId = (int) ((long) ss.getAttribute("cId"));
-        String name = m.getParameter("amName");
+        String name = m.getParameter("amName"); 
         String description = m.getParameter("description");
         String ass_type = m.getParameter("AmType");
         Date due_date = null;
