@@ -54,7 +54,7 @@ public class createAssignment extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         HttpSession ss = request.getSession();
         Account ac = (Account) ss.getAttribute("ac");
-        File f = new File(getServletContext().getRealPath("/") + "\\file\\assignment_file");
+        File f = new File(getServletContext().getRealPath("/") + "/file/assignment_file");
 //        System.out.println("check dir " +f.exists());
         MultipartRequest m = new MultipartRequest(request, f.getPath(), "UTF-8");
         Integer cId = (int) ((long) ss.getAttribute("cId"));
