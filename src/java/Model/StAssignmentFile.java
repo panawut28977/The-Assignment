@@ -358,7 +358,7 @@ public class StAssignmentFile {
     public static int getLastedListId() {
         Connection conn = ConnectionBuilder.getConnection();
         int list_id = 1;
-        String sql1 = "select max(list_id) from Student_assignment_file";
+        String sql1 = "select max(list_id) from student_assignment_file";
         PreparedStatement pstm;
         try {
             pstm = conn.prepareStatement(sql1);
