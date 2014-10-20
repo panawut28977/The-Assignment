@@ -248,7 +248,7 @@ public class createAssignment extends HttpServlet {
         n.setType("assignment");
         String content = "<span class=\"text-muted\">created <span class=\"glyphicon glyphicon-file\"></span> new assignment in </span>";
         n.setText(content);
-        n.setLink("assignment.jsp?ct=allAm&&tab=AllAssignment&&amId=" + key + "&&cId=" + cId + "");
+        n.setLink("assignment.jsp?tab=AllAssignment&&amId=" + key + "&&cId=" + cId + "");
 
         List<Integer> listac = AccountCourse.getStudentIdCourse(cId, ac.getAcc_id());
         Notification.announce(n, listac);

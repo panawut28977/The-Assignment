@@ -91,7 +91,7 @@ public class updateAssignment extends HttpServlet {
         n.setType("assignment");
         String content = "<span class=\"text-muted\"> <span class=\"glyphicon glyphicon-refresh\"></span> updated \"" + a.getName() + "\" assignment information in </span>";
         n.setText(content);
-        n.setLink("assignment.jsp?ct=allAm&&tab=AllAssignment&&amId=" + am_id + "&&cId=" + cId + "");
+        n.setLink("assignment.jsp?tab=AllAssignment&&amId=" + am_id + "&&cId=" + cId + "");
 
         //select people you want to notify
         List<Integer> listac = AccountCourse.getStudentIdCourse(cId, ac.getAcc_id());

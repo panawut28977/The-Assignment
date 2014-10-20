@@ -15,7 +15,7 @@
         <%@include file="META-INF/page/include_js.jsp" %>
         <style>
             body{
-                background-image: url('img/Teacher_Homework.jpg');
+                background-image: url('img/ta_background.jpg');
                 background-repeat: repeat-x;
                 background-size: 100%;
             }
@@ -41,7 +41,10 @@
         </nav>
         <div class="container-fluid" style="margin-top: 10%">
             <div class="row">
-                <div class="col-md-7"></div> 
+                <div class="col-md-6 col-md-offset-1" style="color: white">
+                    <p style="font-size: 60px;font-weight: bold;text-shadow: 2px 5px 8px #72485a;">The Assignment</p> 
+                    <p style="font-size: 36px;text-shadow: 2px 5px 8px #72485a;">Let us be a part of your education.</p>
+                </div> 
                 <%@include file="META-INF/page/login.jsp" %>
             </div>
         </div>

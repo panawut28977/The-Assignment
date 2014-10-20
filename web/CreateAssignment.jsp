@@ -49,6 +49,10 @@
                 font-weight: bold;
                 width: 200px;
             }
+
+            #preview img{
+                border-radius: initial;   
+            }
         </style>
 
         <%@include file="META-INF/page/include_js.jsp" %>
@@ -251,6 +255,8 @@
                                                     }
                                                 }
                                             });
+
+                                          
 //                                            tinymce.init({selector: '.explain .explain_q_text'});
                                             $("#sortable").sortable({
                                                 revert: true,
@@ -261,15 +267,26 @@
                                                     var old_seq = 0;
                                                     var old_name = 0;
                                                     var new_name = 0;
+                                                    tinyMCE.remove();
                                                     $("#sortable >div").each(function() {
+
                                                         old_seq = $(this).find("input[name='seqno']").val();
                                                         $(this).find("input[name='seqno']").val(new_seq);
                                                         $(this).find("[name^='" + old_seq + "']").each(function() {
                                                             old_name = $(this).attr("name");
                                                             new_name = old_name.replace(old_seq, new_seq);
-                                                            console.log(new_name);
+//                                                            console.log(new_name);
                                                             $(this).attr("name", new_name);
                                                         });
+
+                                                        var qtype = $("input[name='" + new_seq + "q_type'").val();
+                                                        if (qtype == 'explain') {
+                                                            console.log(old_seq + "textarea //" + new_seq + "textarea");
+//                                                            tinymce.execCommand('mceRemoveEditor', true, old_seq + 'textarea');
+                                                            $(this).find("textarea#" + old_seq + 'textarea').removeAttr("id").attr("id", new_seq + "textarea");
+                                                            tinymce.execCommand('mceAddEditor', true, new_seq + 'textarea');
+                                                        }
+
                                                         new_seq++;
                                                     });
                                                     $("#sortable .q_no").each(function() {
@@ -901,18 +918,25 @@
                                                     $("#uploadAmFile input").focus();
                                                     return false;
                                                 } else {
+                                                    var btn = $(".submit");
+                                                    btn.addClass("disabled");
+                                                    btn.text("Creating..");
                                                     return true;
                                                 }
                                             } else {
                                                 var res = true;
+                                                var btn = $(".submit");
+                                                btn.addClass("disabled");
+                                                btn.text("Creating..");
                                                 $(".amQuestion").find(".explain iframe[id$='textarea_ifr']").each(function() {
                                                     var contents = $(this).contents().find("body").html();
                                                     if (contents == '<p><br data-mce-bogus="1"></p>') {
                                                         alert("Some of explanatin question are empty please recheck again.");
-                                                        res =  false;
-                                                    } 
+                                                        res = false;
+                                                    }
                                                 });
-                                                 return res;
+
+                                                return res;
                                             }
                                         }
         </script>

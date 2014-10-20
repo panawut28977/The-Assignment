@@ -50,96 +50,101 @@ public class sendAssignment extends HttpServlet {
         //check group
         Group_member g = null;
 //        System.out.println("ss" + Group_member.isInGroup(ac.getAcc_id(), am_id));
-        if (a.getTotal_member() == 1 && a.getAss_type().equalsIgnoreCase("file")) {
-            StAssignmentFile stF = StAssignmentFile.getStAmBbyAmIDAndAccId(am_id, ac.getAcc_id());
-            if (stF == null) {
-                stF = new StAssignmentFile();
-                stF.setAcc_id(ac.getAcc_id());
-                stF.setAm_id(am_id);
-                stF.setG_id(0);
-                stF.setList_id(StAssignmentFile.getLastedListId() + 1);
-                int st_am_id = StAssignmentFile.setAm(stF);
-                stF.setSt_am_id(st_am_id);
-                ss.setAttribute("sa", stF);
-            } else {
-                ss.setAttribute("sa", stF);
-            }
-            List<StAmFileList> safl = StAmFileList.getStAmAllVersion(stF.getList_id());
-            //loo calculete files size
-            for (StAmFileList stAmFileList : safl) {
-                File file = new File(getServletContext().getRealPath("/") + "\\file\\student_assignment_file\\" + stAmFileList.getPath_file());
-                long filesize = file.length();
-//                System.out.println(filesize);
-                long filesizeInKB = filesize / 1024;
-//                System.out.println(filesizeInKB);
-                stAmFileList.setFile_size(filesizeInKB);
-            }
-            request.setAttribute("safl", safl);
-            url = "/uploadAssignment.jsp?tab=AllAssignment";
-            getServletContext().getRequestDispatcher(url).forward(request, response);
-        } else if (a.getTotal_member() == 1 && a.getAss_type().equalsIgnoreCase("web")) {
-            StAssignmentOnWeb stw = StAssignmentOnWeb.getStAmByAmIDAndAccId(am_id, ac.getAcc_id());
-            if (stw == null) {
-                stw = new StAssignmentOnWeb();
-                stw.setAcc_id(ac.getAcc_id());
-                stw.setAm_id(am_id);
-                stw.setG_id(0);
-                int st_am_id = StAssignmentOnWeb.setAm(stw);
-                stw.setSt_am_id(st_am_id);
-                ss.setAttribute("sa", stw);
-            } else {
-                ss.setAttribute("sa", stw);
-            }
-            url = "/onwebAssignment.jsp?tab=AllAssignment";
-            getServletContext().getRequestDispatcher(url).forward(request, response);
-        } else if (Group_member.isInGroup(ac.getAcc_id(), am_id) < 1) {
-            response.sendRedirect("selectPeople?am_id=" + am_id + "&&cId=" + cId);
-        } else {
-            g = Group_member.getGroupByMember(ac.getAcc_id(), am_id);
-            String accIdList[] = g.getAcc_id().split(",");
-            List<Account> gAm = new ArrayList<>();
-            for (String accId : accIdList) {
-                gAm.add(Account.getNameByID(Integer.parseInt(accId)));
-            }
-            ss.setAttribute("gAm", gAm);
-            ss.setAttribute("g", g);
-            if (a.getAss_type().equalsIgnoreCase("file")) {
-                //get student assignment file
-                StAssignmentFile sa = StAssignmentFile.getStAmBbyAmIDAndGID(am_id, g.getG_id());
-                ss.setAttribute("sa", sa);
-                url = "/uploadAssignment.jsp?tab=AllAssignment";
-
-                //get all student that you sent 
-                List<StAmFileList> safl = StAmFileList.getStAmAllVersion(sa.getList_id());
-
+        if (a != null) {
+            if (a.getTotal_member() == 1 && a.getAss_type().equalsIgnoreCase("file")) {
+                StAssignmentFile stF = StAssignmentFile.getStAmBbyAmIDAndAccId(am_id, ac.getAcc_id());
+                if (stF == null) {
+                    stF = new StAssignmentFile();
+                    stF.setAcc_id(ac.getAcc_id());
+                    stF.setAm_id(am_id);
+                    stF.setG_id(0);
+                    stF.setList_id(StAssignmentFile.getLastedListId() + 1);
+                    int st_am_id = StAssignmentFile.setAm(stF);
+                    stF.setSt_am_id(st_am_id);
+                    ss.setAttribute("sa", stF);
+                } else {
+                    ss.setAttribute("sa", stF);
+                }
+                List<StAmFileList> safl = StAmFileList.getStAmAllVersion(stF.getList_id());
                 //loo calculete files size
                 for (StAmFileList stAmFileList : safl) {
                     File file = new File(getServletContext().getRealPath("/") + "\\file\\student_assignment_file\\" + stAmFileList.getPath_file());
                     long filesize = file.length();
+//                System.out.println(filesize);
                     long filesizeInKB = filesize / 1024;
+//                System.out.println(filesizeInKB);
                     stAmFileList.setFile_size(filesizeInKB);
                 }
                 request.setAttribute("safl", safl);
+                url = "/uploadAssignment.jsp?tab=AllAssignment";
                 getServletContext().getRequestDispatcher(url).forward(request, response);
-            } else {
-                //get student assignment onweb
-                StAssignmentOnWeb stw = StAssignmentOnWeb.getStAmbyAmIDAndGID(am_id, g.getG_id());
+            } else if (a.getTotal_member() == 1 && a.getAss_type().equalsIgnoreCase("web")) {
+                StAssignmentOnWeb stw = StAssignmentOnWeb.getStAmByAmIDAndAccId(am_id, ac.getAcc_id());
                 if (stw == null) {
                     stw = new StAssignmentOnWeb();
                     stw.setAcc_id(ac.getAcc_id());
                     stw.setAm_id(am_id);
-                    stw.setG_id(g.getG_id());
-                    //set new stam info
+                    stw.setG_id(0);
                     int st_am_id = StAssignmentOnWeb.setAm(stw);
-                    //get stam again
-                    stw = StAssignmentOnWeb.getStAmbyAmIDAndGID(am_id, g.getG_id());
+                    stw.setSt_am_id(st_am_id);
                     ss.setAttribute("sa", stw);
                 } else {
                     ss.setAttribute("sa", stw);
                 }
                 url = "/onwebAssignment.jsp?tab=AllAssignment";
                 getServletContext().getRequestDispatcher(url).forward(request, response);
+            } else if (Group_member.isInGroup(ac.getAcc_id(), am_id) < 1) {
+                response.sendRedirect("selectPeople?am_id=" + am_id + "&&cId=" + cId);
+            } else {
+                g = Group_member.getGroupByMember(ac.getAcc_id(), am_id);
+                String accIdList[] = g.getAcc_id().split(",");
+                List<Account> gAm = new ArrayList<>();
+                for (String accId : accIdList) {
+                    gAm.add(Account.getNameByID(Integer.parseInt(accId)));
+                }
+                ss.setAttribute("gAm", gAm);
+                ss.setAttribute("g", g);
+                if (a.getAss_type().equalsIgnoreCase("file")) {
+                    //get student assignment file
+                    StAssignmentFile sa = StAssignmentFile.getStAmBbyAmIDAndGID(am_id, g.getG_id());
+                    ss.setAttribute("sa", sa);
+                    url = "/uploadAssignment.jsp?tab=AllAssignment";
+
+                    //get all student that you sent 
+                    List<StAmFileList> safl = StAmFileList.getStAmAllVersion(sa.getList_id());
+
+                    //loo calculete files size
+                    for (StAmFileList stAmFileList : safl) {
+                        File file = new File(getServletContext().getRealPath("/") + "\\file\\student_assignment_file\\" + stAmFileList.getPath_file());
+                        long filesize = file.length();
+                        long filesizeInKB = filesize / 1024;
+                        stAmFileList.setFile_size(filesizeInKB);
+                    }
+                    request.setAttribute("safl", safl);
+                    getServletContext().getRequestDispatcher(url).forward(request, response);
+                } else {
+                    //get student assignment onweb
+                    StAssignmentOnWeb stw = StAssignmentOnWeb.getStAmbyAmIDAndGID(am_id, g.getG_id());
+                    if (stw == null) {
+                        stw = new StAssignmentOnWeb();
+                        stw.setAcc_id(ac.getAcc_id());
+                        stw.setAm_id(am_id);
+                        stw.setG_id(g.getG_id());
+                        //set new stam info
+                        int st_am_id = StAssignmentOnWeb.setAm(stw);
+                        //get stam again
+                        stw = StAssignmentOnWeb.getStAmbyAmIDAndGID(am_id, g.getG_id());
+                        ss.setAttribute("sa", stw);
+                    } else {
+                        ss.setAttribute("sa", stw);
+                    }
+                    url = "/onwebAssignment.jsp?tab=AllAssignment";
+                    getServletContext().getRequestDispatcher(url).forward(request, response);
+                }
             }
+        } else {
+            request.setAttribute("msg", 13);
+            request.getRequestDispatcher("/informpage.jsp").forward(request, response);
         }
     }
 
