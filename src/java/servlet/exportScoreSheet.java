@@ -154,7 +154,7 @@ public class exportScoreSheet extends HttpServlet {
 
         // Write the output to a file
         String filename = "scoresheet_"+c.getName()+".xlsx";
-        String file = getServletContext().getRealPath("/") + "\\file\\scoresheet\\" + filename;
+        String file = getServletContext().getRealPath("/") + "/file/scoresheet/" + filename;
 //        String file = "C:\\Users\\Orarmor\\Desktop\\scoresheet.xlsx";
         FileOutputStream out = new FileOutputStream(file);
         wb.write(out);

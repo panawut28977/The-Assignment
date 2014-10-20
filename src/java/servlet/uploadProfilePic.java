@@ -40,10 +40,10 @@ public class uploadProfilePic extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        File f = new File(getServletContext().getRealPath("/") + "\\img\\full_images");
+        File f = new File(getServletContext().getRealPath("/") + "/img/full_images");
         MyFileRenamePolicy mf = new MyFileRenamePolicy();
         MultipartRequest m = new MultipartRequest(request, f.getPath(), (5 * 1024 * 1024), "UTF-8", mf);
-        String imagePath = getServletContext().getRealPath("/")+"\\img\\full_images\\" + m.getFilesystemName("inputpic");
+        String imagePath = getServletContext().getRealPath("/")+"/img/full_images/" + m.getFilesystemName("inputpic");
         BufferedImage bimg = ImageIO.read(new File(imagePath));
         int width = bimg.getWidth();
         int height = bimg.getHeight();

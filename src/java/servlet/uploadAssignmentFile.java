@@ -69,7 +69,7 @@ public class uploadAssignmentFile extends HttpServlet {
         Account ac = (Account) ss.getAttribute("ac");
         Assignment a = (Assignment) ss.getAttribute("curAm");
         StAssignmentFile saf = (StAssignmentFile) ss.getAttribute("sa");
-        File f = new File(getServletContext().getRealPath("/") + "\\file\\student_assignment_file");
+        File f = new File(getServletContext().getRealPath("/") + "/file/student_assignment_file");
         MyFileRenamePolicy mf = new MyFileRenamePolicy();
         MultipartRequest m = new MultipartRequest(request, f.getPath(), (5 * 1024 * 1024), "UTF-8", mf);
 
@@ -85,7 +85,7 @@ public class uploadAssignmentFile extends HttpServlet {
         if (Arrays.asList(allowedExt).contains(ext)) {
             String apiToken = "mGye5pCBUTgkhI7Zl0QL3oPJ";
             Crocodoc.setApiToken(apiToken);
-            String fileurl = getServletContext().getRealPath("/") + "\\file\\student_assignment_file\\" + m.getFilesystemName("file");
+            String fileurl = getServletContext().getRealPath("/") + "/file/student_assignment_file/" + m.getFilesystemName("file");
             System.out.print("  Uploading... ");
             String uuid = null;
             File file = new File(fileurl);
@@ -126,7 +126,7 @@ public class uploadAssignmentFile extends HttpServlet {
             ss.setAttribute("sa", saf);
 
             //setting index
-            lucenceFunction.settingIndexer(getServletContext().getRealPath("/") + "\\file\\student_assignment_file\\", safl.getPath_file(), Long.parseLong(cId + ""), saf.getAm_id(), saf.getSt_am_id(), safv_id);
+            lucenceFunction.settingIndexer(getServletContext().getRealPath("/") + "/file/student_assignment_file/", safl.getPath_file(), Long.parseLong(cId + ""), saf.getAm_id(), saf.getSt_am_id(), safv_id);
             //end setting
         } else {
             safl.setUuid("0");

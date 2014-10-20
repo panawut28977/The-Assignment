@@ -68,7 +68,7 @@ public class sendAssignment extends HttpServlet {
                 List<StAmFileList> safl = StAmFileList.getStAmAllVersion(stF.getList_id());
                 //loo calculete files size
                 for (StAmFileList stAmFileList : safl) {
-                    File file = new File(getServletContext().getRealPath("/") + "\\file\\student_assignment_file\\" + stAmFileList.getPath_file());
+                    File file = new File(getServletContext().getRealPath("/") + "/file/student_assignment_file/" + stAmFileList.getPath_file());
                     long filesize = file.length();
 //                System.out.println(filesize);
                     long filesizeInKB = filesize / 1024;
@@ -115,7 +115,7 @@ public class sendAssignment extends HttpServlet {
 
                     //loo calculete files size
                     for (StAmFileList stAmFileList : safl) {
-                        File file = new File(getServletContext().getRealPath("/") + "\\file\\student_assignment_file\\" + stAmFileList.getPath_file());
+                        File file = new File(getServletContext().getRealPath("/") + "/file/student_assignment_file/" + stAmFileList.getPath_file());
                         long filesize = file.length();
                         long filesizeInKB = filesize / 1024;
                         stAmFileList.setFile_size(filesizeInKB);

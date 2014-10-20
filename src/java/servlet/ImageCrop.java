@@ -48,7 +48,7 @@ public class ImageCrop extends HttpServlet {
         int heitgh = (int) (Double.parseDouble(request.getParameter("height")));
         System.out.println("i:" + request.getParameter("image"));
         System.out.println("j:" + request.getParameter("f"));
-        String imagePath = getServletContext().getRealPath("/") + "\\img\\full_images\\" + request.getParameter("image");
+        String imagePath = getServletContext().getRealPath("/") + "/img/full_images/" + request.getParameter("image");
         System.out.println("path" + imagePath);
 
         BufferedImage outImage = null;
@@ -63,7 +63,7 @@ public class ImageCrop extends HttpServlet {
         ImageIO.write(cropped, request.getParameter("f"), out);
 
         ImageIO.write(cropped, request.getParameter("f"),
-                new File(getServletContext().getRealPath("/") + "\\img\\crop_image\\" + request.getParameter("image"))); // save the file with crop dimensions
+                new File(getServletContext().getRealPath("/") + "/img/crop_image/" + request.getParameter("image"))); // save the file with crop dimensions
         Account ac = (Account) ss.getAttribute("ac");
         ac.setProfile_pic("img/crop_image/" + request.getParameter("image"));
         int res = Account.updatePic(ac);
