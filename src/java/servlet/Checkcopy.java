@@ -67,7 +67,7 @@ public class Checkcopy extends HttpServlet {
         HttpSession ss = request.getSession();
         Assignment a = (Assignment) ss.getAttribute("curAm");
         int safv_id = Integer.parseInt(request.getParameter("safv_id"));
-        String studentAmPath = getServletContext().getRealPath("/") + "\\file\\student_assignment_file\\";
+        String studentAmPath = getServletContext().getRealPath("/") + "/file/student_assignment_file/";
         if (a.getAss_type().equalsIgnoreCase("file")) {
             StAssignmentFile sa = (StAssignmentFile) ss.getAttribute("sa");
             StAmFileList f = StAmFileList.getSafvByListIdSafv(safv_id, sa.getList_id());
