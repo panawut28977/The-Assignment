@@ -45,7 +45,7 @@ public class CreateCourseSl extends HttpServlet {
         c.setTerm(Integer.parseInt(term));
         c.setYear(Integer.parseInt(termYear));
         c.setCourse_code(Course.generateCode());
-        c.setCourse_link("dontknowlink/" + c.getCourse_code());
+        c.setCourse_link("http://10.4.43.216:8080/TheAssignment/linkjoin?course_code=" + c.getCourse_code());
         int insert_id = Course.createCourse(c);
         Course course = new Course(insert_id);
         AccountCourse accCourse = new AccountCourse();

@@ -377,7 +377,7 @@ public class Account {
 
     public static int updatePic(Account a) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "update Account set profile_pic=? where acc_id=?";
+        String sql = "update account set profile_pic=? where acc_id=?";
         PreparedStatement pstm;
         int result = 0;
         try {
@@ -394,7 +394,7 @@ public class Account {
     
      public static int updateName(Account a) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "update Account set firstname=?,lastname=? where acc_id=?";
+        String sql = "update account set firstname=?,lastname=? where acc_id=?";
         PreparedStatement pstm;
         int result = 0;
         try {

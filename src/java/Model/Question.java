@@ -274,7 +274,7 @@ public abstract class Question {
     public static List<Integer> getListQId(int am_id) {
         List<Integer> idList = new ArrayList<Integer>();
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select q_id from Question where ass_id = ?";
+        String sql = "select q_id from question where ass_id = ?";
         PreparedStatement pstm = null;
         try {
             pstm = conn.prepareStatement(sql);
