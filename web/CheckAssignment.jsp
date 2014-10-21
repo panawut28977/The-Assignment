@@ -54,6 +54,10 @@
             #questionList h5{
                 margin-top: 20px;
             }
+            
+            #questionList .assignmentBox img{
+                border-radius: initial;  
+            }
 
         </style>
     </head>

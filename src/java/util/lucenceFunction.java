@@ -30,7 +30,7 @@ public class lucenceFunction {
         IndexWriter writer = null;
         try {
             String studentAmPath = indexPath;
-            directory = FSDirectory.open(new File(studentAmPath + course_id + "\\" + am_id));
+            directory = FSDirectory.open(new File(studentAmPath + course_id + "/" + am_id));
             IndexWriterConfig iw = new IndexWriterConfig(Version.LUCENE_47, new ThaiAnalyzer(Version.LUCENE_47));
             writer = new IndexWriter(directory, iw.setRAMBufferSizeMB(iw.getRAMBufferSizeMB()));
             String filename = filname;

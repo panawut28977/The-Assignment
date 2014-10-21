@@ -436,12 +436,12 @@ public class StAssignmentOnWeb {
 
     public static int updateScore(StAssignmentOnWeb a) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "update student_assignment_on_web set score=?,checked_time=current_time where st_ass_id=?";
+        String sql = "update student_assignment_on_web set score=?,checked_time=current_timestamp where st_ass_id=?";
         PreparedStatement pstm;
         int result = 0;
         try {
             pstm = conn.prepareStatement(sql);
-            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+//            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             pstm.setDouble(1, a.getScore());
             pstm.setInt(2, a.getSt_am_id());
             result = pstm.executeUpdate();

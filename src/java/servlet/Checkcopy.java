@@ -92,7 +92,7 @@ public class Checkcopy extends HttpServlet {
                 IndexReader indexReader;
                 ArrayList<String[]> indexsetList = null;
                 try {
-                    directory = FSDirectory.open(new File(studentAmPath + "\\" + a.getCourse().getCourse_id() + "\\" + sa.getAm_id()));
+                    directory = FSDirectory.open(new File(studentAmPath + "//" + a.getCourse().getCourse_id() + "//" + sa.getAm_id()));
                     indexReader = DirectoryReader.open(directory);
                     IndexSearcher searcher = new IndexSearcher(indexReader);
                     BooleanQuery.setMaxClauseCount(20000);

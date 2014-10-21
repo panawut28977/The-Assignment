@@ -24,13 +24,13 @@
     $(function() {
 
         var coursecode = '${ac.courseList.get(cId).course.course_code}';
-        var courselink = 'http://localhost:8084/TheAssignment/linkjoin?course_code=' + '${ac.courseList.get(cId).course.course_code}';
+        var courselink = 'http://10.4.43.216:8080/TheAssignment/linkjoin?course_code=' + '${ac.courseList.get(cId).course.course_code}';
         $("#coursecode").val(coursecode);
         $("#courselink").val(courselink);
         $(".qrcode").qrcode({
             size: 100,
             background: 'white',
-            text: 'http://localhost:8084/TheAssignment/linkjoin?course_code=' + '${ac.courseList.get(cId).course.course_code}'
+            text: 'http://10.4.43.216:8080/TheAssignment/linkjoin?course_code=' + '${ac.courseList.get(cId).course.course_code}'
         });
 
         $("#openCodeBtn").click(function() {
