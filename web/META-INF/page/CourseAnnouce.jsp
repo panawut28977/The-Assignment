@@ -37,7 +37,8 @@
                     url: "AddAnnounce",
                     data: {title: $("#title").val(), content: content}
                 }).done(function(msg) {
-                    if($("#noann").length!=0){
+                    aTable.fnDestroy();
+                    if ($("#noann").length != 0) {
                         $("#noann").remove();
                     }
                     var html = '<tr class="even"><td><div class="media" id="newAnnounce"><a class="pull-left" href="#"><img class="img-circle" width="64" src="' + pic + '"></a><div class="media-body"><h4 class="media-heading"><small class="text-muted">' + fullname + '</small><small class="pull-right">' + dateSt + '</small></h4><p>' + $("#content").val() + '</p></div></div></td></tr>';
@@ -45,10 +46,17 @@
                     $("#newAnnounce").slideDown().removeAttr("id");
                     $("#title").val("");
                     $("#content").val("");
-                    //aTable.fnDraw();
+                    aTable = $('#AllAnnounce').dataTable({
+                        /* Disable initial sort */
+                        "aaSorting": [],
+                        "bLengthChange": false,
+                        "bFilter": true,
+                        "bInfo": false,
+                        "bSort": false
+                    });
                 });
             }
-            else{
+            else {
                 alert("Please write something in text box!");
                 $("#content").focus();
             }
