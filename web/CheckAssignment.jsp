@@ -55,7 +55,7 @@
                 margin-top: 20px;
             }
             
-            #questionList .assignmentBox img{
+           .assignmentBox img{
                 border-radius: initial;  
             }
 
