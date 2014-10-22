@@ -256,7 +256,7 @@
                                                 }
                                             });
 
-                                          
+
 //                                            tinymce.init({selector: '.explain .explain_q_text'});
                                             $("#sortable").sortable({
                                                 revert: true,
@@ -377,11 +377,13 @@
                                                 $(this).parent().parent().parent().find("#total_dummy").removeAttr("disabled").val(0);
                                                 var seq_of_choice = $(this).parent().parent().parent().find("[name='seqno']").val();
                                                 var matchWord_box = '<span class="label label-info"><i class="glyphicon glyphicon-info-sign"></i> If you want to add dummy answer, add text in answer box and put score to 0.</span><br/><br/>';
-                                                matchWord_box += '<div class="row"><div class="col-md-4"><b>Question Text</b></div><div class="col-md-4"><b>Answer</b></div><div class="col-md-2"><b>Score</b></div></div>';
+                                                matchWord_box += '<div class="row header"><div class="col-md-4"><b>Question Text</b></div><div class="col-md-4"><b>Answer</b></div><div class="col-md-2"><b>Score</b></div></div>';
                                                 for (var i = 0; i < $(this).val(); i++) {
-                                                    matchWord_box += '<div class="row"><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_text" onfocusout="checkText(this)"  required="yes"></div><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_ans" onfocusout="checkText(this)"  required="yes"></div><div class="col-md-2"><input type="number" min="0" step="any" class="form-control" name="' + seq_of_choice + 'm_score" required="yes"></div></div>';
+                                                    matchWord_box += '<div class="row answer"><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_text" onfocusout="checkText(this)"  required="yes"></div><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_ans" onfocusout="checkText(this)"  required="yes"></div><div class="col-md-2"><input type="number" min="0" step="any" class="form-control" name="' + seq_of_choice + 'm_score" required="yes"></div> <a onclick="removeC(this)"><span class="glyphicon glyphicon-remove"></span></a></div>';
                                                 }
-                                                $(this).parent().parent().parent(".matchWord").find(".matchWord_q_list").html(matchWord_box);
+                                                var element = $(this).parent().parent().parent(".matchWord").find(".matchWord_q_list");
+                                                element.find(".answer,.header,.label,.text-danger,br").remove();
+                                                element.prepend(matchWord_box);
                                             });
 
                                             $(document).on("change", "#total_dummy", function() {
@@ -389,7 +391,7 @@
                                                 $(this).parent().parent().parent().find(".dummy_answer").remove();
                                                 var matchWord_dummy = '';
                                                 for (var i = 0; i < $(this).val(); i++) {
-                                                    matchWord_dummy += '<div class="row dummy_answer"><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_text" readonly="yes" onfocusout="checkText(this)"></div><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_ans" onfocusout="checkText(this)"></div><div class="col-md-2"><input type="number" min="0" step="any" class="form-control" name="' + seq_of_choice + 'm_score" required="yes" value="0" readonly="yes"></div></div>';
+                                                    matchWord_dummy += '<div class="row dummy_answer"><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_text" readonly="yes" onfocusout="checkText(this)"></div><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_ans" onfocusout="checkText(this)"></div><div class="col-md-2"><input type="number" min="0" step="any" class="form-control" name="' + seq_of_choice + 'm_score" required="yes" value="0" readonly="yes"></div> <a onclick="removeC(this)"style="vertical-align: -webkit-baseline-middle"><span class="glyphicon glyphicon-remove"></span></a></div>';
                                                 }
                                                 $(this).parent().parent().parent(".matchWord").find(".matchWord_q_list").append(matchWord_dummy);
                                             });

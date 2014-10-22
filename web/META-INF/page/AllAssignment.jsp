@@ -84,7 +84,7 @@
         display: none;
     }
 </style>
-<div class="btn-group pull-right" style="margin: 20px 0">
+<div class="btn-group pull-left" style="margin: 20px 0">
     <button type="button" class="btn btn-default active" id="view_am_list"><i class="glyphicon glyphicon-list"></i></button>
     <button type="button" class="btn btn-default" id="view_am_calendar"><i class="glyphicon glyphicon-calendar"></i></button>
 </div>
