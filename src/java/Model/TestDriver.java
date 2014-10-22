@@ -5,32 +5,10 @@
  */
 package Model;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.th.ThaiAnalyzer;
-import org.apache.lucene.document.Document;
-import org.apache.lucene.index.DirectoryReader;
-import org.apache.lucene.index.IndexReader;
-import org.apache.lucene.queryparser.classic.ParseException;
-import org.apache.lucene.queryparser.classic.QueryParser;
-import org.apache.lucene.search.IndexSearcher;
-import org.apache.lucene.search.Query;
-import org.apache.lucene.search.Sort;
-import org.apache.lucene.search.SortField;
-import org.apache.lucene.search.TopDocs;
-import org.apache.lucene.search.TopFieldCollector;
-import org.apache.lucene.search.highlight.Highlighter;
-import org.apache.lucene.search.highlight.InvalidTokenOffsetsException;
-import org.apache.lucene.search.highlight.QueryScorer;
-import org.apache.lucene.search.highlight.SimpleHTMLFormatter;
-import org.apache.lucene.search.highlight.TextFragment;
-import org.apache.lucene.search.highlight.TokenSources;
-import org.apache.lucene.store.Directory;
-import org.apache.lucene.store.FSDirectory;
-import org.apache.lucene.util.Version;
 
 /**
  *
@@ -378,7 +356,6 @@ public class TestDriver {
 //            Logger.getLogger(TestDriver.class
 //                    .getName()).log(Level.SEVERE, null, ex);
 //        }
-
 //        IndexReader indexReader;
 //        try {
 //            directory = FSDirectory.open(new File("D:\\Orarmorarm\\The-Assignment\\build\\web\\file\\student_assignment_file\\305\\32"));
@@ -446,8 +423,16 @@ public class TestDriver {
 //        } catch (InvalidTokenOffsetsException ex) {
 //            Logger.getLogger(TestDriver.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-        
 //        System.out.println(StAssignmentFile.getStAmBbyAmIDAndAccId(132, 2, true));
-        System.out.println(StAssignmentOnWeb.getStAmByAmIDAndAccId(127, 2, true));
+//        System.out.println(StAssignmentOnWeb.getStAmByAmIDAndAccId(127, 2, true));
+        String encodedBytes;
+        try {
+            encodedBytes = Base64.getEncoder().encodeToString("JavaTips.net".getBytes("utf-8"));
+            System.out.println("encodedBytes " + encodedBytes);
+            byte[] decodedBytes = Base64.getDecoder().decode(encodedBytes);
+            System.out.println("decodedBytes " + new String(decodedBytes));
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(TestDriver.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

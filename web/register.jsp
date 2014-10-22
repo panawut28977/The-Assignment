@@ -15,7 +15,7 @@
         <%@include file="META-INF/page/include_js.jsp" %>
         <style>
             body{
-                background-image: url('img/Education-knowledge-PowerPoint-PPT-hd-87622487.jpg');
+                background-image: url('img/ta_background.jpg');
                 background-repeat: repeat-x;
                 background-size: 100%;
             }
@@ -40,18 +40,21 @@
         </nav>
         <div class="container-fluid" style="margin-top: 5%">
             <div class="row">
-                <div class="col-md-7"></div> 
+                <div class="col-md-6 col-md-offset-1" style="color: white">
+                    <p style="font-size: 60px;font-weight: bold;text-shadow: 2px 5px 8px #72485a;">The Assignment</p> 
+                    <p style="font-size: 36px;text-shadow: 2px 5px 8px #72485a;">Let us be a part of your education.</p>
+                </div> 
                 <div class="col-md-4">
                     <div class="well well-lg">
                         <form role="form" action="Register" method="post">
                             <h3><b> <c:choose>
-                                <c:when test="${param.rg eq 'ST'}">
-                                    I'm Student
-                                </c:when>
-                                <c:otherwise> 
-                                    I'm Teacher
-                                </c:otherwise>
-                            </c:choose></b></h3><hr>
+                                        <c:when test="${param.rg eq 'ST'}">
+                                            I'm Student
+                                        </c:when>
+                                        <c:otherwise> 
+                                            I'm Teacher
+                                        </c:otherwise>
+                                    </c:choose></b></h3><hr>
                             <span class="text-danger">${msg}</span>
                             <div class="form-group">
                                 <label>First Name<span class="text-danger">*</span></label>
@@ -90,7 +93,7 @@
 <script>
     $(function() {
         $("#email").on("change", function() {
-            
+
             var value = $(this).val();
             if (value.length == 0) {
                 addCheckingStatus('false');

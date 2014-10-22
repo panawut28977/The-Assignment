@@ -5,12 +5,14 @@
  */
 package Model;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -167,6 +169,14 @@ public class Account {
     }
 
     public static Account login(String email, String pass) {
+        String encodedBytes = "";
+        try {
+            encodedBytes = Base64.getEncoder().encodeToString(pass.getBytes("utf-8"));
+            System.out.println("encodedBytes " + encodedBytes);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(TestDriver.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        pass = encodedBytes;
         Account acc = new Account();
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select * from account where email = ? and password = ?";
@@ -182,7 +192,11 @@ public class Account {
                 acc.setFirstname(rs.getString("firstname"));
                 acc.setLastname(rs.getString("lastname"));
                 acc.setEmail(rs.getString("email"));
-                acc.setPassword(rs.getString("password"));
+
+                byte[] decodedBytes = null;
+                decodedBytes = Base64.getDecoder().decode(rs.getString("password"));
+//                System.out.println("decodedBytes " + new String(decodedBytes));
+                acc.setPassword(new String(decodedBytes));
                 acc.setAccount_type(rs.getString("account_type"));
                 acc.setProfile_pic(rs.getString("profile_pic"));
                 acc.setRegister_date(rs.getTimestamp("register_date"));
@@ -277,13 +291,20 @@ public class Account {
     }
 
     public static boolean changePassword(Account a) {
+        String encodedBytes = "";
+        try {
+            encodedBytes = Base64.getEncoder().encodeToString(a.getPassword().getBytes("utf-8"));
+            System.out.println("encodedBytes " + encodedBytes);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(TestDriver.class.getName()).log(Level.SEVERE, null, ex);
+        }
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "update account set password=? where acc_id=?";
         PreparedStatement pstm;
         int result = 0;
         try {
             pstm = conn.prepareStatement(sql);
-            pstm.setString(1, a.getPassword());
+            pstm.setString(1, encodedBytes);
             pstm.setInt(2, a.getAcc_id());
             result = pstm.executeUpdate();
             conn.close();
@@ -391,8 +412,8 @@ public class Account {
         }
         return result;
     }
-    
-     public static int updateName(Account a) {
+
+    public static int updateName(Account a) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "update account set firstname=?,lastname=? where acc_id=?";
         PreparedStatement pstm;

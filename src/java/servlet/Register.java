@@ -6,8 +6,13 @@
 package servlet;
 
 import Model.Account;
+import Model.TestDriver;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.Base64;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -40,7 +45,14 @@ public class Register extends HttpServlet {
         a.setEmail(email);
         a.setFirstname(firstname);
         a.setLastname(lastname);
-        a.setPassword(password);
+        String encodedBytes="";
+        try {
+            encodedBytes = Base64.getEncoder().encodeToString(password.getBytes("utf-8"));
+            System.out.println("encodedBytes " + encodedBytes);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(TestDriver.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        a.setPassword(encodedBytes);
         a.setProfile_pic("img/avatar.jpg");
         int result = Account.register(a);
         String url = "";
