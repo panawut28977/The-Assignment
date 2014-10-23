@@ -9,7 +9,6 @@ package servlet;
 import Model.Announcement;
 import com.google.gson.Gson;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -34,7 +33,8 @@ public class showAnnounceTeacher extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        List<Announcement> ac = Announcement.viewAnnByAccID(id);
+        List<Announcement> ac = Announcement.viewAnnByAccIDMobile(id);
+//        Map<Course,Announcement> ac = Announcement.viewAnnByAccIDMap(id);
         
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

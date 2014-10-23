@@ -1,0 +1,164 @@
+<!DOCTYPE html> 
+<html><head> 
+        <title>My Page</title> 
+        <meta name="viewport" content="initial-scale=1.0">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/css/jquery.mobile-1.4.2.css" />
+        <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/css/font-awesome.min.css"/>
+
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="http://jsp.chaninz.com/tasm/js/cordova.js"></script>
+    </head> 
+    <body>
+        <div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-fixed-page1" data-title="Panel fixed positioning">
+            <div data-role="header" data-position="fixed">
+                <center>
+                    <a href="index.html" rel="external" and data-ajax="false"><span class="fa fa-home fa-2x" style="alignment-adjust:auto;padding-right:25px;padding-top:15px;padding-bottom:15px"></span></a>
+                    <span class="fa fa-globe fa-2x"></span></center>
+                <a href="#nav-panel"><i class="fa fa-bars fa-2x"></i></a>
+                <div style="padding: 5px;width: auto;background: #E2E2E2;">
+                    <input type="search" name="search" placeholder="Search..."/>
+                </div>
+            </div><!-- /header -->
+            <br/>
+            <!--            <center>-->
+            <div style="padding: 10px;width: 450px;background: #EEEEF6;margin: auto">   
+                <center><h3>Course Detail</h3></center>
+
+                <b>Course Name:</b><span id="cName"></span><br/>
+                <b>Term: </b><span id="term"></span><br/>
+                <b>Year: </b><span id="year"></span><br/>
+                <b>Create Date: </b><span id="cDate"></span>
+                <ul data-role="listview" id="THList">
+                    
+                </ul>
+
+                <input type="submit" id="jCourse" style="background-color:#00F" value="Join!"/>
+            </div>
+            <h2><div id="msg"></div></h2>
+            <!--            </center>-->
+
+            <h3 align="center">QR Code</h3>
+
+            <!--            <button onclick="capturePhoto();">Capture Photo</button> <br>
+                        <button onclick="capturePhotoEdit();">Capture Editable Photo</button> <br>
+                        <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>
+                        <button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button><br>
+                        <img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
+                        <img style="display:none;" id="largeImage" src="" />-->
+
+            <div data-role="panel" data-position-fixed="true" data-display="overlay"  id="nav-panel">
+                <ul data-role="listview" id="lcList">
+                    <li style="background-color:#00F">
+                        <img src="" id ="dPIC" width="100" height="100" style="alignment-adjust:top"/>&nbsp;
+                        <b style="color:white" id="fName"></b><br/>
+                        <b style="color:white" id="lName"></b>
+                    </li>
+                    <li>
+                        <a href="http://jsp.chaninz.com/tasm/Mobile/JoinCourse.html" rel="external" and data-ajax="false">Join Course &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <div class="fa fa-plus fa-2x"></div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div data-position="fixed" data-tap-toggle="false" data-role="footer" data-tap-toggle="false" >
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="http://jsp.chaninz.com/tasm/Mobile/index.html" rel="external" and data-ajax="false"><i class="fa fa-newspaper-o fa-2x"></i></a></li>
+                        <li><a href="http://jsp.chaninz.com/tasm/Mobile/AssignmentInCourse.html" rel="external" and data-ajax="false"><i class="fa fa-file-text fa-2x"></i></a></li></ul>
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </body>
+    <script type="text/javascript">
+        $(function () {
+//            var code = sessionStorage.getItem('code');
+//            $.getJSON('http://jsp.chaninz.com/tasm/showCourseInfo?code=' + code, function (result) {
+//                var i = 1;
+//                $(result).each(function (k, v) {
+//                    $(
+//                            '<div style="background-color:#' + (i % 2 == 0 ? 'FFFFFF' : 'F4F4F4') + ' ;padding:1px;width:auto;">' +
+//                            '<div style="margin-left:15px">' +
+//                            '<h4>' + v.an_acc.firstname + ' ' + v.an_acc.lastname + ' : ' + findCourseName(v.course) + '</h4> ' +
+//                            '<p>' + v.announce_date + '</p>' +
+////                            '<p>' +  v.an_acc.firstname + ' ' + v.an_acc.lastname + '</p>' +
+//                            '<p>' + v.content + '</p>' +
+//                            '</div>' +
+//                            '</div>').insertBefore($('#add-test'));
+//                    i += 1;
+//                });
+//            });
+            var fName = sessionStorage.getItem('fName');
+            var lName = sessionStorage.getItem('lName');
+            var pic = sessionStorage.getItem('pic');
+            var cList = JSON.parse(sessionStorage.getItem('cList'));
+            $("#dPIC").attr("src", "../" + pic);
+            $("#fName").text(fName);
+            $("#lName").text(lName);
+            var key, count = 0;
+            for (key in cList) {
+                if (cList.hasOwnProperty(key)) {
+                    $("#lcList").append('<li class="cLink" data-id="' + key + '"><a class="ui-btn ui-btn-icon-right ui-icon-carat-r">' + cList[key].course.name + '</a></li>').trigger('refresh');
+                }
+                $(".cLink").click(function () {
+                    sessionStorage.setItem('cID', $(this).attr("data-id"));
+                    $(location).attr('href', 'http://jsp.chaninz.com/tasm/Mobile/AssignmentInCourse.html');
+                });
+            }
+            $("#lcList").append('<li class="logOut"><a href="#" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Log Out <div style="padding-left:50px" class="fa fa-power-off fa-2x"></div> </a></li>');
+            $(".logOut").click(function () {
+                sessionStorage.clear();
+                $(location).attr('href', 'http://jsp.chaninz.com/tasm/Mobile/Home.html');
+            });
+        });
+
+        $(document).ready(function () {
+            $('#jCourse').click(function () {
+                var accID = sessionStorage.getItem('accID');
+                var code = sessionStorage.getItem('code');
+                $.ajax({
+                    type: "POST",
+                    url: "http://jsp.chaninz.com/tasm/joinCourseMobile",
+                    data: {"accID": accID, "code": code},
+                    success: function (data) {
+                        alert(data);
+                    }
+                });
+            });
+        });
+
+        $(document).ready(function () {
+            $.ajax(
+                    {
+                        type: 'GET',
+                        url: 'http://jsp.chaninz.com/tasm/showCourseInfo',
+                        data: "code=" + sessionStorage.getItem('code'),
+                        success: function (data) {
+                            $("#cName").text(data.name);
+                            $("#term").text(data.term);
+                            $("#year").text(data.year);
+                            $("#cDate").text(data.create_date);
+                            sessionStorage.setItem('THList', JSON.stringify(data.listStudent));
+                        }
+                    }
+            );
+            var key, count = 0;
+            for (key in THList) {
+                if (THList.hasOwnProperty(key)) {
+                    if(THList.account_type == "TH"){
+                        $("#THList").append('<li><b>Teacher: </b>' + THList[key].firstname + ' ' + THList[key].lastname + '</li>').trigger('refresh');
+                        alert('OK');
+                    }
+                    
+                }
+            }
+        });
+    </script>
+</html>

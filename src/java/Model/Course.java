@@ -40,6 +40,10 @@ public class Course {
         this.course_id = course_id;
     }
 
+    public Course(String name) {
+        this.name = name;
+    }
+
     public int getCourse_id() {
         return course_id;
     }
@@ -378,7 +382,7 @@ public class Course {
         }
         return result;
     }
-    
+
     public static int openCourse(int cId) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "update course set status='open' where course_id=?";
