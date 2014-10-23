@@ -53,6 +53,9 @@
                     </c:otherwise>
                 </c:choose>
             </span>
+            <c:if test="${ac.getCourseList().size()==0}">
+                <a class="list-group-item usepointer">No course</a>
+            </c:if>
             <c:forEach items="${ac.getCourseList()}" var="c">
                 <c:if test="${c.value.course.status eq 'open'}">
                     <a id="${c.key}" onclick="load_course(${c.key})" class="list-group-item usepointer <c:if test="${sessionScope.cId==c.key}">active</c:if>">
@@ -124,7 +127,6 @@
             </div>
             <form method="post" action="CreateCourseSl">
                 <div class="modal-body">
-
                     <div class="row">
                         <div class="col-md-12">
                             <label>Course name</label>

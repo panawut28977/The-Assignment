@@ -87,6 +87,7 @@
                 </div>
             </div>
         </div>
+        <%@include file="META-INF/page/footer.jsp" %>
     </body>
 </html>
 

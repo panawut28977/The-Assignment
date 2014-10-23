@@ -19,13 +19,13 @@
                 background-repeat: repeat-x;
                 background-size: 100%;
             }
- 
+
             hr{
                 clear: both;
                 border:1px solid #808080 !important;
                 border-width: 3px;
             }
-            
+
             .well{
                 background-color: rgba(245, 245, 245,0.7);
             }
@@ -37,7 +37,7 @@
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">The Assignment</a>
             </div>
-            <p class="navbar-text navbar-right" style="padding-right: 10px">IT 54-24</p>
+            <!--<p class="navbar-text navbar-right" style="padding-right: 10px"><b>Final project: IT 54-27</b></p>-->
         </nav>
         <div class="container-fluid" style="margin-top: 10%">
             <div class="row">
@@ -48,5 +48,6 @@
                 <%@include file="META-INF/page/login.jsp" %>
             </div>
         </div>
+       <%@include file="META-INF/page/footer.jsp" %>
     </body>
 </html>
