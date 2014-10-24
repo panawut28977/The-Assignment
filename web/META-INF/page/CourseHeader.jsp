@@ -25,15 +25,29 @@
     $(function() {
         // zeroClipboard main
         var client = new ZeroClipboard($("#copylink"), {
-            moviePath: "http://davidwalsh.name/demo/ZeroClipboard.swf",
-            debug: false
+            moviePath: "module/zeroclipboard/ZeroClipboard.swf",
+            debug: true
         });
 
         client.on("load", function(client) {
             // alert( "movie is loaded" );
             client.on("complete", function(client, args) {
                 // `this` is the element that was clicked
-                client.setText( "Set text copied.");
+                client.setText($('#courselink').text();
+                alert("Copied text to clipboard");
+            });
+        });
+        
+         var client2 = new ZeroClipboard($("#copycode"), {
+            moviePath: "module/zeroclipboard/ZeroClipboard.swf",
+            debug: true
+        });
+
+        client2.on("load", function(client) {
+            // alert( "movie is loaded" );
+            client2.on("complete", function(client, args) {
+                // `this` is the element that was clicked
+                client.setText($('#coursecode').text());
                 alert("Copied text to clipboard");
             });
         });
