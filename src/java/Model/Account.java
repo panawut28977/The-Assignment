@@ -5,23 +5,22 @@
  */
 package Model;
 
-import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import Model.TrippleDes;
+import servlet.Register;
 
 /**
  *
@@ -169,14 +168,21 @@ public class Account {
     }
 
     public static Account login(String email, String pass) {
-        String encodedBytes = "";
+//        String encodedBytes = "";
+//        try {
+//            encodedBytes = Base64.getEncoder().encodeToString(pass.getBytes("utf-8"));
+//            System.out.println("encodedBytes " + encodedBytes);
+//        } catch (UnsupportedEncodingException ex) {
+//            Logger.getLogger(TestDriver.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        TrippleDes td;
         try {
-            encodedBytes = Base64.getEncoder().encodeToString(pass.getBytes("utf-8"));
-            System.out.println("encodedBytes " + encodedBytes);
-        } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(TestDriver.class.getName()).log(Level.SEVERE, null, ex);
+            td = new TrippleDes();
+            pass = td.encrypt(pass);
+        } catch (Exception ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
-        pass = encodedBytes;
+//        pass = encodedBytes;
         Account acc = new Account();
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select * from account where email = ? and password = ?";
@@ -193,10 +199,12 @@ public class Account {
                 acc.setLastname(rs.getString("lastname"));
                 acc.setEmail(rs.getString("email"));
 
-                byte[] decodedBytes = null;
-                decodedBytes = Base64.getDecoder().decode(rs.getString("password"));
+//                byte[] decodedBytes = null;
+//                decodedBytes = Base64.getDecoder().decode(rs.getString("password"));
+                TrippleDes td2 = new TrippleDes();
+                String decrypted = td2.decrypt(rs.getString("password"));
 //                System.out.println("decodedBytes " + new String(decodedBytes));
-                acc.setPassword(new String(decodedBytes));
+                acc.setPassword(decrypted);
                 acc.setAccount_type(rs.getString("account_type"));
                 acc.setProfile_pic(rs.getString("profile_pic"));
                 acc.setRegister_date(rs.getTimestamp("register_date"));
@@ -224,6 +232,8 @@ public class Account {
             }
             conn.close();
         } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
         return acc;
@@ -291,12 +301,19 @@ public class Account {
     }
 
     public static boolean changePassword(Account a) {
+//        String encodedBytes = "";
+//        try {
+//            encodedBytes = Base64.getEncoder().encodeToString(a.getPassword().getBytes("utf-8"));
+//            System.out.println("encodedBytes " + encodedBytes);
+//        } catch (UnsupportedEncodingException ex) {
+//            Logger.getLogger(TestDriver.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         String encodedBytes = "";
         try {
-            encodedBytes = Base64.getEncoder().encodeToString(a.getPassword().getBytes("utf-8"));
-            System.out.println("encodedBytes " + encodedBytes);
-        } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(TestDriver.class.getName()).log(Level.SEVERE, null, ex);
+            TrippleDes td = new TrippleDes();
+            encodedBytes = td.encrypt(a.getPassword());
+        } catch (Exception ex) {
+            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
         }
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "update account set password=? where acc_id=?";

@@ -6,17 +6,14 @@
 package servlet;
 
 import Model.Account;
-import Model.TestDriver;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import Model.TrippleDes;
 
 /**
  *
@@ -45,26 +42,32 @@ public class Register extends HttpServlet {
         a.setEmail(email);
         a.setFirstname(firstname);
         a.setLastname(lastname);
-        String encodedBytes="";
+//        String encodedBytes="";
+//        try {
+//            encodedBytes = Base64.getEncoder().encodeToString(password.getBytes("utf-8"));
+//            System.out.println("encodedBytes " + encodedBytes);
+//        } catch (UnsupportedEncodingException ex) {
+//            Logger.getLogger(TestDriver.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        TrippleDes td;
         try {
-            encodedBytes = Base64.getEncoder().encodeToString(password.getBytes("utf-8"));
-            System.out.println("encodedBytes " + encodedBytes);
-        } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(TestDriver.class.getName()).log(Level.SEVERE, null, ex);
+            td = new TrippleDes();
+            a.setPassword(td.encrypt(password));
+        } catch (Exception ex) {
+            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
         }
-        a.setPassword(encodedBytes);
         a.setProfile_pic("img/avatar.jpg");
         int result = Account.register(a);
         String url = "";
         String msg = "";
-        if(result>0){
+        if (result > 0) {
             url = "/META-INF/page/registerStatus.jsp";
-        }else{
-            url = "/register.jsp?rg="+accType;
+        } else {
+            url = "/register.jsp?rg=" + accType;
             request.setAttribute("msg", "มีบางอย่างผิดพลาด กรุณาตรวจสอบข้อมูลอีกครั้ง");
         }
         getServletContext().getRequestDispatcher(url).forward(request, response);
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
