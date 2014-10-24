@@ -183,6 +183,7 @@ public class Account {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
 //        pass = encodedBytes;
+        System.out.println(pass);
         Account acc = new Account();
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select * from account where email = ? and password = ?";

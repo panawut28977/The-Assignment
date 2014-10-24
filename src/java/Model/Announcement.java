@@ -127,6 +127,7 @@ public class Announcement {
     
     public static Map<Course,Announcement> viewAnnByAccIDMap(int acc_id) {
         Connection conn = ConnectionBuilder.getConnection();
+        
         String sql = "select a.*  from announcement a "
                 + "JOIN account_course ac "
                 + "On a.course_id = ac.course_id "

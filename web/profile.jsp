@@ -380,8 +380,8 @@
                     processData: false,
                     contentType: false
                 }).done(function(data) {
-//                    console.log(data);
                     var obj = JSON.parse(data);
+                    console.log(obj);
                     // do it after upload successful
                     var newPicture = obj.newPicture;
                     $("#uploadPic").hide();
@@ -401,7 +401,8 @@
                 var maxWidth = 500; // Max width for the image
                 var maxHeight = 500; // Max height for the image
                 var ratio = 0; // Used for aspect ratio
-                var width = w;    // Current image width                         var height = h;  // Current image height
+                var width = w;    // Current image width                         
+                var height = h;  // Current image height
 
                 // Check if the current width is larger than the max
                 if (width > maxWidth) {
