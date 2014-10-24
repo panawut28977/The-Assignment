@@ -20,9 +20,25 @@
 
 </style>
 <script type="text/javascript" src="js/jquery.qrcode-0.8.0.min.js"></script>
-<script type="text/javascript" src="module/jquery.clipboard-master/jquery.clipboard.js"></script>
+<script type="text/javascript" src="module/zeroclipboard/ZeroClipboard.js"></script>
 <script>
     $(function() {
+        // zeroClipboard main
+        var client = new ZeroClipboard($("#copylink"), {
+            moviePath: "http://davidwalsh.name/demo/ZeroClipboard.swf",
+            debug: false
+        });
+
+        client.on("load", function(client) {
+            // alert( "movie is loaded" );
+            client.on("complete", function(client, args) {
+                // `this` is the element that was clicked
+                client.setText( "Set text copied.");
+                alert("Copied text to clipboard");
+            });
+        });
+
+
 
         var coursecode = '${ac.courseList.get(cId).course.course_code}';
         var courselink = 'http://10.4.43.216:8080/TheAssignment/linkjoin?course_code=' + '${ac.courseList.get(cId).course.course_code}';
@@ -76,36 +92,36 @@
             }
         });
 
-        var copylink = $('#copylink');
-
-        // Disables other default handlers on click (avoid issues)
-        copylink.on('click', function(e) {
-            e.preventDefault();
-        });
-
-        var copycode = $('#copycode');
-
-        // Disables other default handlers on click (avoid issues)
-        copycode.on('click', function(e) {
-            e.preventDefault();
-        });
-
-
-        copylink.clipboard({
-            path: 'jquery.clipboard.swf',
-            copy: function() {
-                alert('Text copied. Try to paste it now!');
-                return $('#courselink').text();
-            }
-        });
-
-        copycode.clipboard({
-            path: 'jquery.clipboard.swf',
-            copy: function() {
-                alert('Text copied. Try to paste it now!');
-                return $('#coursecode').text();
-            }
-        });
+//        var copylink = $('#copylink');
+//
+//        // Disables other default handlers on click (avoid issues)
+//        copylink.on('click', function(e) {
+//            e.preventDefault();
+//        });
+//
+//        var copycode = $('#copycode');
+//
+//        // Disables other default handlers on click (avoid issues)
+//        copycode.on('click', function(e) {
+//            e.preventDefault();
+//        });
+//
+//
+//        copylink.clipboard({
+//            path: 'module/jquery.clipboard-master/jquery.clipboard.swf',
+//            copy: function() {
+//                alert('Text copied. Try to paste it now!');
+//                return $('#courselink').text();
+//            }
+//        });
+//
+//        copycode.clipboard({
+//            path: 'module/jquery.clipboard-master/jquery.clipboard.swf',
+//            copy: function() {
+//                alert('Text copied. Try to paste it now!');
+//                return $('#coursecode').text();
+//            }
+//        });
 
     });
 </script>

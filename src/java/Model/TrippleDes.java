@@ -59,7 +59,7 @@ public class TrippleDes {
 
         String target = "Dwnr97niaIc=";
         String encrypted = td.encrypt(target);
-        String decrypted = td.decrypt(target);
+        String decrypted = td.decrypt("Dwnr97niaIc=");
         
         System.out.println("String To Encrypt: " + target);
         System.out.println("Encrypted String:" + encrypted);
