@@ -20,6 +20,7 @@
 
 </style>
 <script type="text/javascript" src="js/jquery.qrcode-0.8.0.min.js"></script>
+<script type="text/javascript" src="module/jquery.clipboard-master/jquery.clipboard.js"></script>
 <script>
     $(function() {
 
@@ -74,6 +75,38 @@
                 location.href = "OpenCourse";
             }
         });
+
+        var copylink = $('#copylink');
+
+        // Disables other default handlers on click (avoid issues)
+        copylink.on('click', function(e) {
+            e.preventDefault();
+        });
+
+        var copycode = $('#copycode');
+
+        // Disables other default handlers on click (avoid issues)
+        copycode.on('click', function(e) {
+            e.preventDefault();
+        });
+
+
+        copylink.clipboard({
+            path: 'jquery.clipboard.swf',
+            copy: function() {
+                alert('Text copied. Try to paste it now!');
+                return $('#courselink').text();
+            }
+        });
+
+        copycode.clipboard({
+            path: 'jquery.clipboard.swf',
+            copy: function() {
+                alert('Text copied. Try to paste it now!');
+                return $('#coursecode').text();
+            }
+        });
+
     });
 </script>
 <c:choose> 
@@ -113,9 +146,26 @@
             </div>
             <hr>
             <div class="row" style="text-align: center;" id="CourseDetail">
-                <div class="col-md-4"><h4>Course Code</h4><input type="text" readonly="yes" id="coursecode" value=""></div>
-                <div class="col-md-4"><h4>Course link</h4><input type="text" readonly="yes" id="courselink" value=""></div>
-                <div class="col-md-4 qrcode nocircle" ></div>
+                <div class="col-md-3 col-md-offset-1">
+                    <h4>Course Code</h4>
+                    <div class="input-group">
+                        <input type="text" readonly="yes" class="form-control" id="coursecode" value="">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" id="copycode"><i class="fa fa-files-o"></i></button>
+                        </span>
+                    </div>
+
+                </div>
+                <div class="col-md-4">
+                    <h4>Course link</h4>
+                    <div class="input-group">
+                        <input type="text" readonly="yes" class="form-control" id="courselink" value="">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" id="copylink"><i class="fa fa-files-o"></i></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-3 qrcode nocircle" ></div>
             </div>
             <div id="openCodeBox"><span id="openCodeBtn">See your course code <span class="glyphicon glyphicon-chevron-down"></span></span></div>
         </div>
