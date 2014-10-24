@@ -178,33 +178,36 @@
                 </div>
             </div>
             <div class="col-md-7">
-                <div class="panel panel-default statusbox">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Assignment status</h3>
-                    </div>
-                    <div class="panel-body">
-                        <div >
-                            <div onclick="view_assignment_by_status('on time')" class="col-md-4" style="background-color: #40d47e;cursor: pointer;">
-                                <span>${ontime}</span><br><span>On time</span>
+                <c:choose>
+                    <c:when test="${dontShowDash == 1}">
+                        <div class="panel panel-default statusbox">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Assignment status</h3>
                             </div>
-                            <div onclick="view_assignment_by_status('Hurry up')" class="col-md-4" style="background-color: #f1c40f;cursor: pointer;">
-                                <span>${hurry}</span><br><span>Hurry up</span>
+                            <div class="panel-body">
+                                <div >
+                                    <div onclick="view_assignment_by_status('on time')" class="col-md-4" style="background-color: #40d47e;cursor: pointer;">
+                                        <span>${ontime}</span><br><span>On time</span>
+                                    </div>
+                                    <div onclick="view_assignment_by_status('Hurry up')" class="col-md-4" style="background-color: #f1c40f;cursor: pointer;">
+                                        <span>${hurry}</span><br><span>Hurry up</span>
+                                    </div>
+                                    <div onclick="view_assignment_by_status('Late')" class="col-md-4" style="background-color: #e74c3c;cursor: pointer;">
+                                        <span>${late}</span><br><span>Late</span>
+                                    </div>                    
+                                </div>
+                                <div>
+                                    <div onclick="view_assignment_by_status('sent')" class="col-md-6" style="background-color: #5F8BCA;cursor: pointer;">
+                                        <span>${sent}</span><br><span>Sent</span>
+                                    </div>
+                                    <div onclick="view_assignment_by_status('miss')" class="col-md-6" style="background-color: #999;cursor: pointer;">
+                                        <span>${miss}</span><br><span>Miss</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div onclick="view_assignment_by_status('Late')" class="col-md-4" style="background-color: #e74c3c;cursor: pointer;">
-                                <span>${late}</span><br><span>Late</span>
-                            </div>                    
                         </div>
-                        <div>
-                            <div onclick="view_assignment_by_status('sent')" class="col-md-6" style="background-color: #5F8BCA;cursor: pointer;">
-                                <span>${sent}</span><br><span>Sent</span>
-                            </div>
-                            <div onclick="view_assignment_by_status('miss')" class="col-md-6" style="background-color: #999;cursor: pointer;">
-                                <span>${miss}</span><br><span>Miss</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                    </c:when>
+                </c:choose>
                 <div class="panel panel-warning">
                     <div class="panel-heading">
                         <h3 class="panel-title">Course you are wait for approve</h3>
@@ -315,8 +318,7 @@
 
                 $("#newPass").click(function() {
                     $("#changePass").modal({
-                        backdrop: 'static'
-                    });
+                        backdrop: 'static'});
                 });
 
                 $("#uploadPic").click(function() {
@@ -399,12 +401,11 @@
                 var maxWidth = 500; // Max width for the image
                 var maxHeight = 500; // Max height for the image
                 var ratio = 0; // Used for aspect ratio
-                var width = w;    // Current image width
-                var height = h;  // Current image height
+                var width = w;    // Current image width                         var height = h;  // Current image height
 
                 // Check if the current width is larger than the max
                 if (width > maxWidth) {
-//                    alert("if width");
+                    //                    alert("if width");
                     ratio = maxWidth / width; // get ratio for scaling image
                     console.log(ratio);
                     $("#croppic img,.jcrop-tracker,.jcrop-holder img").css("width", maxWidth); // Set new width
@@ -412,7 +413,7 @@
                     height = height * ratio; // Reset height to match scaled image
                     width = width * ratio; // Reset width to match scaled image
                 } else if (height > maxHeight) {
-//                    alert("if height");
+                    //                    alert("if height");
                     ratio = maxHeight / height; // get ratio for scaling image
                     console.log(ratio);
                     $("#croppic img,.jcrop-tracker,.jcrop-holder img").css("height", maxHeight); // Set new height
