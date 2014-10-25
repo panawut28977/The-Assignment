@@ -24,32 +24,33 @@
 <script>
     $(function() {
         // zeroClipboard main
-        var client = new ZeroClipboard($("#copylink"), {
+        var clip = new ZeroClipboard($("#copylink"), {
             moviePath: "module/zeroclipboard/ZeroClipboard.swf",
-            debug: true
         });
 
-        client.on("load", function(client) {
-            // alert( "movie is loaded" );
-            client.on("complete", function(client, args) {
-                // `this` is the element that was clicked
-                client.setText($('#courselink').text();
-                alert("Copied text to clipboard");
-            });
-        });
-        
-         var client2 = new ZeroClipboard($("#copycode"), {
-            moviePath: "module/zeroclipboard/ZeroClipboard.swf",
-            debug: true
+        //this event happens upon initiating the copy 
+        clip.on('dataRequested', function(client, args) {
+            clip.setText("whatever text you want");
         });
 
-        client2.on("load", function(client) {
-            // alert( "movie is loaded" );
-            client2.on("complete", function(client, args) {
-                // `this` is the element that was clicked
-                client.setText($('#coursecode').text());
-                alert("Copied text to clipboard");
-            });
+        //this event happens upon the copy finishing
+        clip.on('complete', function(client, args) {
+            alert("Copied text to clipboard: " + args.text);
+        });
+
+
+        var clip2 = new ZeroClipboard($("#copycode"), {
+            moviePath: "module/zeroclipboard/ZeroClipboard.swf",
+        });
+
+        //this event happens upon initiating the copy 
+        clip2.on('dataRequested', function(client, args) {
+            clip.setText("whatever text you want");
+        });
+
+        //this event happens upon the copy finishing
+        clip2.on('complete', function(client, args) {
+            alert("Copied text to clipboard: " + args.text);
         });
 
 
@@ -105,37 +106,6 @@
                 location.href = "OpenCourse";
             }
         });
-
-//        var copylink = $('#copylink');
-//
-//        // Disables other default handlers on click (avoid issues)
-//        copylink.on('click', function(e) {
-//            e.preventDefault();
-//        });
-//
-//        var copycode = $('#copycode');
-//
-//        // Disables other default handlers on click (avoid issues)
-//        copycode.on('click', function(e) {
-//            e.preventDefault();
-//        });
-//
-//
-//        copylink.clipboard({
-//            path: 'module/jquery.clipboard-master/jquery.clipboard.swf',
-//            copy: function() {
-//                alert('Text copied. Try to paste it now!');
-//                return $('#courselink').text();
-//            }
-//        });
-//
-//        copycode.clipboard({
-//            path: 'module/jquery.clipboard-master/jquery.clipboard.swf',
-//            copy: function() {
-//                alert('Text copied. Try to paste it now!');
-//                return $('#coursecode').text();
-//            }
-//        });
 
     });
 </script>

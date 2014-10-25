@@ -146,11 +146,13 @@
                                 </c:otherwise>
                             </c:choose>
                         </div>
-                        <form >
-                            <textarea class="form-control" id="messagetext"  placeholder="Tell your teacher here."></textarea>
-                            <br>
-                            <input type="button"  id="sendMessage"  class="btn btn-primary pull-right" value="Send">
-                        </form>
+                        <c:if test="${msg ne 'nopvmsg'}">
+                            <form>
+                                <textarea class="form-control" id="messagetext"  placeholder="Tell your teacher here."></textarea>
+                                <br>
+                                <input type="button"  id="sendMessage"  class="btn btn-primary pull-right" value="Send">
+                            </form>
+                        </c:if>
                     </div>
                     <div class="col-md-4" style="margin-top: 36px;">
                         <div class="panel panel-default">
