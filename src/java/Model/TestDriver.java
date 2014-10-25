@@ -425,14 +425,7 @@ public class TestDriver {
 //        }
 //        System.out.println(StAssignmentFile.getStAmBbyAmIDAndAccId(132, 2, true));
 //        System.out.println(StAssignmentOnWeb.getStAmByAmIDAndAccId(127, 2, true));
-        String encodedBytes;
-        try {
-            encodedBytes = Base64.getEncoder().encodeToString("JavaTips.net".getBytes("utf-8"));
-            System.out.println("encodedBytes " + encodedBytes);
-            byte[] decodedBytes = Base64.getDecoder().decode(encodedBytes);
-            System.out.println("decodedBytes " + new String(decodedBytes));
-        } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(TestDriver.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        SessionIdentifierGenerator rdid = new SessionIdentifierGenerator();
+        System.out.println(rdid.nextSessionId());
     }
 }

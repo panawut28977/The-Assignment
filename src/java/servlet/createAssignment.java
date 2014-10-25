@@ -32,6 +32,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import util.MyFileRenamePolicy;
 
 /**
  *
@@ -56,9 +57,10 @@ public class createAssignment extends HttpServlet {
         Account ac = (Account) ss.getAttribute("ac");
         File f = new File(getServletContext().getRealPath("/") + "/file/assignment_file");
 //        System.out.println("check dir " +f.exists());
-        MultipartRequest m = new MultipartRequest(request, f.getPath(), "UTF-8");
+        MyFileRenamePolicy mf = new MyFileRenamePolicy();
+        MultipartRequest m = new MultipartRequest(request, f.getPath(),(5 * 1024 * 1024),"UTF-8", mf);
         Integer cId = (int) ((long) ss.getAttribute("cId"));
-        String name = m.getParameter("amName"); 
+        String name = m.getParameter("amName");
         String description = m.getParameter("description");
         String ass_type = m.getParameter("AmType");
         Date due_date = null;
@@ -129,7 +131,7 @@ public class createAssignment extends HttpServlet {
                     }
                     stans.deleteCharAt(stans.length() - 1);
                     stans.append("]");
-                    
+
                     mul.setQ_answer_list(stans.toString());
                     mul.setQ_score(Double.parseDouble(score));
                     fullymark += Double.parseDouble(score);

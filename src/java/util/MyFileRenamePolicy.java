@@ -5,6 +5,7 @@
  */
 package util;
 
+import Model.SessionIdentifierGenerator;
 import java.io.File;
 import java.util.Date;
 
@@ -31,7 +32,8 @@ public class MyFileRenamePolicy implements FileRenamePolicy {
         }
 
         //add the timestamp
-        fname = fname +"_"+("" + (new Date().getTime() / 1000));
+        SessionIdentifierGenerator rdid = new SessionIdentifierGenerator();
+        fname = rdid.nextSessionId() +"_"+("" + (new Date().getTime() / 1000));
 
         //piece together the filename
         fname = parentDir + System.getProperty("file.separator") + fname + fileExt;

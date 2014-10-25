@@ -77,6 +77,7 @@ public class uploadAssignmentFile extends HttpServlet {
         StAmFileList safl = new StAmFileList();
         safl.setList_id(saf.getList_id());
         safl.setPath_file(m.getFilesystemName("file"));
+        System.out.println("file name"+m.getFilesystemName("file"));
         safl.setSend_acc_id(ac.getAcc_id());
 //        String[] allowedExt = {"xls", "xlsx","doc","docx","jpe","jpeg","ppt","pptx","png","pdf","zip","rar"};
         String[] allowedExt = {"xls", "xlsx", "doc", "docx", "pdf"};

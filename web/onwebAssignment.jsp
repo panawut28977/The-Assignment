@@ -610,7 +610,7 @@
 //            alert(roomname);
             TogetherJSConfig_findRoom = {prefix: roomname, max: parseInt(am_member)};
             TogetherJSConfig_autoStart = true;
-            TogetherJSConfig_getUserAvatar = "http://10.4.43.216:8080/TheAssignment/${ac.profile_pic}";
+            TogetherJSConfig_getUserAvatar = "http://10.4.43.216:8080/${ac.profile_pic}";
             TogetherJSConfig_getUserName = '${ac.firstname}';
 //            TogetherJSConfig_disableWebRTC = true;
             TogetherJSConfig_enableShortcut = false;
