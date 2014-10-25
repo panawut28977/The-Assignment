@@ -34,7 +34,7 @@ public class showAssignment extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        List<Assignment> as = Assignment.getAmByAccID2(id);
+        List<Assignment> as = Assignment.getAmByAccID(id);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(new Gson().toJson(as));

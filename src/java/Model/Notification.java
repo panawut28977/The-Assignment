@@ -356,6 +356,36 @@ public class Notification {
         return result > 0;
     }
 
+    public static List<Notification> getAllNotification(int receive_id) {
+        String e = null;
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select * from notification n join receive_noti_id r on n.receive_list_id = r.receive_list_id where r.acc_id=? order by n.noti_id desc";
+        List<Notification> notiList = new ArrayList<>();
+        PreparedStatement pstm;
+        Notification n = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, receive_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                n = new Notification();
+                n.setAcc_id(rs.getInt("acc_id"));
+                n.setCourse_id(rs.getInt("course_id"));
+                n.setLink(rs.getString("link"));
+                n.setNoti_date(rs.getTimestamp("noti_date"));
+                n.setNoti_id(rs.getInt("noti_id"));
+                n.setText(rs.getString("text"));
+                n.setType(rs.getString("type"));
+                n.setReceive_list_id(rs.getInt("receive_list_id"));
+                notiList.add(n);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return notiList;
+    }
+
     @Override
     public String toString() {
         return "Notification{" + "noti_id=" + noti_id + ", acc_id=" + acc_id + ", course_id=" + course_id + ", type=" + type + ", text=" + text + ", link=" + link + ", noti_date=" + noti_date + ", receive_list_id=" + receive_list_id + '}';

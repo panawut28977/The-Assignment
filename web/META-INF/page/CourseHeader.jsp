@@ -23,46 +23,14 @@
 <script type="text/javascript" src="module/zeroclipboard/ZeroClipboard.js"></script>
 <script>
     $(function() {
-        // zeroClipboard main
-        var clip = new ZeroClipboard($("#copylink"), {
-            moviePath: "module/zeroclipboard/ZeroClipboard.swf",
-        });
-
-        //this event happens upon initiating the copy 
-        clip.on('dataRequested', function(client, args) {
-            clip.setText("whatever text you want");
-        });
-
-        //this event happens upon the copy finishing
-        clip.on('complete', function(client, args) {
-            alert("Copied text to clipboard: " + args.text);
-        });
-
-
-        var clip2 = new ZeroClipboard($("#copycode"), {
-            moviePath: "module/zeroclipboard/ZeroClipboard.swf",
-        });
-
-        //this event happens upon initiating the copy 
-        clip2.on('dataRequested', function(client, args) {
-            clip.setText("whatever text you want");
-        });
-
-        //this event happens upon the copy finishing
-        clip2.on('complete', function(client, args) {
-            alert("Copied text to clipboard: " + args.text);
-        });
-
-
-
         var coursecode = '${ac.courseList.get(cId).course.course_code}';
-        var courselink = 'http://10.4.43.216:8080/TheAssignment/linkjoin?course_code=' + '${ac.courseList.get(cId).course.course_code}';
+        var courselink = 'http://10.4.43.216:8080/linkjoin?course_code=' + '${ac.courseList.get(cId).course.course_code}';
         $("#coursecode").val(coursecode);
         $("#courselink").val(courselink);
         $(".qrcode").qrcode({
             size: 100,
             background: 'white',
-            text: 'http://10.4.43.216:8080/TheAssignment/linkjoin?course_code=' + '${ac.courseList.get(cId).course.course_code}'
+            text: 'http://10.4.43.216:8080/linkjoin?course_code=' + '${ac.courseList.get(cId).course.course_code}'
         });
 
         $("#openCodeBtn").click(function() {
@@ -106,6 +74,39 @@
                 location.href = "OpenCourse";
             }
         });
+
+
+        ///copy to clipboard
+        var client = new ZeroClipboard($("#copycode"));
+        var text = $("#coursecode").val();
+        client.on("ready", function(readyEvent) {
+//            alert( "ZeroClipboard SWF is ready!" );
+            client.on('copy', function(event) {
+                event.clipboardData.setData('text/plain', text);
+            });
+
+            client.on("aftercopy", function(event) {
+                // `this` === `client`
+                // `event.target` === the element that was clicked
+                alert("Copied text to clipboard: " + text);
+            });
+        });
+
+        var client2 = new ZeroClipboard($("#copylink"));
+        var text2 = $("#courselink").val();
+        client2.on("ready", function(readyEvent) {
+//            alert( "ZeroClipboard SWF is ready!" );
+            client2.on('copy', function(event) {
+                event.clipboardData.setData('text/plain', text2);
+            });
+
+            client2.on("aftercopy", function(event) {
+                // `this` === `client`
+                // `event.target` === the element that was clicked
+                alert("Copied text to clipboard: " + text2);
+            });
+        });
+
 
     });
 </script>

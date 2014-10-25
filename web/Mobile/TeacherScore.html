@@ -1,136 +1,86 @@
 <!DOCTYPE html> 
 <html><head> 
-        <title>My Page</title> 
-        <meta name="viewport" content="initial-scale=1.0">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/css/jquery.mobile-1.4.2.css" />
-        <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/css/font-awesome.min.css"/>
-
-        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-        <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
-    </head> 
-    <body>
-        <div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-fixed-page1" data-title="Panel fixed positioning">
-            <div data-role="header" data-position="fixed">
-                <center>
-                    <a href="http://jsp.chaninz.com/tasm/Mobile/indexTeacher.html" rel="external" and data-ajax="false"><span class="fa fa-home fa-2x" style="alignment-adjust:auto;padding-right:25px;padding-top:15px;padding-bottom:15px"></span></a>
-                    <span class="fa fa-globe fa-2x"></span></center>
-                <a href="#nav-panel"><i class="fa fa-bars fa-2x"></i></a>
-                <div style="background-color:white ;padding:1px;width:auto;">
-                    <div style="margin-left:15px;color:#999">
-                        <h3 align="center">LNG103 Academic English 
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <div class="fa fa-gear fa-2x"></div></h3>
-                    </div>
-                </div>
-                <div style="padding: 5px;width: auto;background: #E2E2E2;">
-                    <input type="search" name="search" placeholder="Filter..."/>
-                </div>
-            </div><!-- /header -->
-
-            <div data-role="collapsible" data-collapsed="true" style="padding-left:20px;padding-right:20px">
-                <h4>
-                    Nitiwit Wungwiwatna
-                    <i class="fa fa-arrow-right" style="padding-right:15px"></i>
-                    <span style="padding-left:20px"></span>
-                </h4>
-                <h4>
-                    <span style="padding-left:20px">Assignment# 1</span>
-                    <span style="padding-left:100px"> 30 </span>
-                </h4>
+  <title>My Page</title> 
+  <meta name="viewport" content="initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="stylesheet" href="jquery.mobile-1.4.2.css" />
+  <link rel="stylesheet" href="css/font-awesome.min.css"/>
+  
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+</head> 
+<body>
+<div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-fixed-page1" data-title="Panel fixed positioning" data-url="panel-fixed-page1">
+    <div data-role="header" data-position="fixed">
+        <center>
+        <span class="fa fa-home fa-2x" style="alignment-adjust:auto;padding-right:25px;padding-top:15px;padding-bottom:15px"></span>
+        <span class="fa fa-globe fa-2x"></span></center>
+        <a href="#nav-panel"><i class="fa fa-bars fa-2x"></i></a>
+        <div style="background-color:white ;padding:1px;width:auto;">
+        	<div style="margin-left:15px;color:#999">
+            	<h3 align="center">LNG103 Academic English 
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="fa fa-gear fa-2x"></div></h3>
             </div>
-
-            <div id="add-test"></div>
-
-            <div data-role="panel" data-position-fixed="true" data-display="overlay"  id="nav-panel">
-                <ul data-role="listview" id="lcList">
-                    <li style="background-color:#00F">
-                        <img src="" id ="dPIC" width="100" height="100" style="alignment-adjust:top"/>&nbsp;
-                        <b style="color:white" id="fName"></b><br/>
-                        <b style="color:white" id="lName"></b>
-                    </li>
-                    <li>
-                        <a href="http://jsp.chaninz.com/tasm/Mobile/JoinCourseTeacher.html">Join Course &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <div class="fa fa-plus fa-2x"></div>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <div data-position="fixed" data-tap-toggle="false" data-role="footer" data-tap-toggle="false" >
-                <div data-role="navbar">
-                    <ul>
-                        <li><a href="http://jsp.chaninz.com/tasm/Mobile/indexTeacher.html" rel="external" and data-ajax="false"><i class="fa fa-newspaper-o fa-2x"></i></a></li>
-                        <li><a href="http://jsp.chaninz.com/tasm/Mobile/AssignmentInCourseTeacher.html" rel="external" and data-ajax="false"><i class="fa fa-file-text fa-2x"></i></a></li>
-                        <li id="scorebtn"><a href="http://jsp.chaninz.com/tasm/Mobile/TeacherScore.html" rel="external" and data-ajax="false" class="ui-btn-active"><i class="fa fa-bar-chart fa-2x"></i></a></li>
-                       
-                    </ul>
-                </div>
-            </div>
-
         </div>
+        <div style="padding: 5px;width: auto;background: #E2E2E2;">
+				<input type="search" name="search" placeholder="Filter..."/>
+            </div>
+    </div><!-- /header -->
+    
+    	<div data-role="collapsible" data-collapsed="true" style="padding-left:20px;padding-right:20px">
+        	<h4><i class="fa fa-arrow-right" style="padding-right:15px"></i>Nitiwit <span style="padding-left:20px">Wungwiwatna</span></h4>
+			<div><h4><span style="padding-left:20px">Assignment 1 </span><span style="padding-left:100px">7/10</span></h4></div> 
+            <div><h4><span style="padding-left:20px">Assignment 2 </span><span style="padding-left:100px">4/10</span></h4></div>
+            <div><h4><span style="padding-left:20px">Assignment 3 </span><span style="padding-left:100px">6/10</span></h4></div>
+            <div><h4><span style="padding-left:20px">Assignment 4 </span><span style="padding-left:100px">9/10</span></h4></div>
+            <div><h4><span style="padding-left:20px">Assignment 5 </span><span style="padding-left:100px">10/10</span></h4></div>     
+		</div>
+        <div data-role="collapsible" data-collapsed="true" style="padding-left:20px;padding-right:20px">
+        	<h4><i class="fa fa-arrow-right" style="padding-right:15px"></i>Thanakit <span style="padding-left:20px">Mahamutjinda</span></h4>
+			<div><h4><span style="padding-left:20px">Assignment 1 </span><span style="padding-left:100px">7/10</span></h4></div>
+            <div><h4><span style="padding-left:20px">Assignment 3 </span><span style="padding-left:100px">6/10</span></h4></div>
+            <div><h4><span style="padding-left:20px">Assignment 4 </span><span style="padding-left:100px">9/10</span></h4></div>      
+		</div>
+        <div data-role="collapsible" data-collapsed="true" style="padding-left:20px;padding-right:20px">
+        	<h4><i class="fa fa-arrow-right" style="padding-right:15px"></i>Panawut<span style="padding-left:20px">Wungwiwatna</span></h4>
+			<div><h4><span style="padding-left:20px">Assignment 1 </span><span style="padding-left:100px">7/10</span></h4></div>
+            <div><h4><span style="padding-left:20px">Assignment 3 </span><span style="padding-left:100px">6/10</span></h4></div>
+            <div><h4><span style="padding-left:20px">Assignment 4 </span><span style="padding-left:100px">9/10</span></h4></div>
+            <div><h4><span style="padding-left:20px">Assignment 3 </span><span style="padding-left:100px">6/10</span></h4></div>
+            <div><h4><span style="padding-left:20px">Assignment 4 </span><span style="padding-left:100px">9/10</span></h4></div>
+            <div><h4><span style="padding-left:20px">Assignment 3 </span><span style="padding-left:100px">6/10</span></h4></div>
+            <div><h4><span style="padding-left:20px">Assignment 4 </span><span style="padding-left:100px">9/10</span></h4></div>      
+		</div>
+        <div data-role="collapsible" data-collapsed="true" style="padding-left:20px;padding-right:20px">
+        	<h4><i class="fa fa-arrow-right" style="padding-right:15px"></i>Nitiwit</h4>
+			<div><h4><span style="padding-left:20px">Assignment 1 </span><span style="padding-left:100px">7/10</span></h4></div>
+            <div><h4><span style="padding-left:20px">Assignment 3 </span><span style="padding-left:100px">6/10</span></h4></div>      
+		</div>
+        
+            <!--Panel-->
+    <div data-role="panel" data-position-fixed="true" data-display="overlay"  id="nav-panel">
+        <ul data-role="listview">
+            <li style="background-color:#00F"><img src="60223.jpg" width="100" height="100" style="alignment-adjust:top"/>&nbsp; <b style="color:white">Panawut <br/>Ittitananun</b></li>
+            <li><a href="#">Join Course &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div class="fa fa-plus fa-2x"></div></a></li>
+            <li><a href="#">MTH111</a></li>
+            <li><a href="#">INT103</a></li>
+      	</ul>
+    </div>
+    <!-- /panel -->
+    
+    <div data-position="fixed" data-tap-toggle="false" data-role="footer" data-tap-toggle="false" >
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#">Announce</a></li>
+					<li><a href="#" >Assignment</a></li>
+                    <li><a href="#" class="ui-btn-active">Score</a></li>
+				</ul>
+			</div>
+	</div>
+    
+</div>
 
-    </body>
-    <script type="text/javascript">
-        $.getJSON('http://jsp.chaninz.com/tasm/showStudentScore', function(result) {
-            $(result).each(function(k, v) {
-                $(
-                    '<div data-role="collapsible" data-collapsed="true" style="padding-left:20px;padding-right:20px">' +
-                    '<h4>' + v.firstname + " " + v.lastname +
-                    '<i class="fa fa-arrow-right" style="padding-right:15px"></i>' +
-                    '<span style="padding-left:20px"></span>' +
-                    '</h4>' +
-                    '<h4>' +
-                    '<span style="padding-left:20px">' + v.am_id + '</span>' +
-                    '<span style="padding-left:100px">' + v.score +  '</span>' +
-                    '</h4>' +
-                    '</div>').insertBefore($('#add-test'));
-//                        '<div data-role="collapsible" data-collapsed="true" style="padding-left:20px;padding-right:20px" class="ui-collapsible ui-collapsible-inset ui-corner-all ui-collapsible-themed-content">' +
-//                        '<h4 class="ui-collapsible-heading">' +
-//                        '<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-left ui-btn-inherit ui-icon-minus">' + v.firstname + " " + v.lastname +
-//                        '<i class="fa fa-arrow-right" style="padding-right:15px"></i>' +
-//                        '<span style="padding-left:20px"></span>' +
-//                        '<span class="ui-collapsible-heading-status"> click to collapse contents</span></a></h4><div class="ui-collapsible-content ui-body-inherit" aria-hidden="false">' +
-//                        '<h4>' +
-//                        '<span style="padding-left:20px">' + v.am_id + '</span>' +
-//                        '<span style="padding-left:100px">' + v.score + '</span>' +
-//                        '</h4></div></div>').insertBefore($('#add-test'));
-              
-//                        '<div data-role="collapsible" data-collapsed="true" style="padding-left:20px;padding-right:20px" class="ui-collapsible ui-collapsible-inset ui-corner-all ui-collapsible-themed-content ui-collapsible-collapsed">' +
-//                        '<h4 class="ui-collapsible-heading ui-collapsible-heading-collapsed">' + 
-//                        '<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-icon-plus ui-btn-icon-left ui-btn-inherit">' +v.firstname + " " + v.lastname +    
-//                        '<i class="fa fa-arrow-right" style="padding-right:15px"></i></a></h4>' +
-//                        '<span style="padding-left:20px">' + v.am_id + '</span>' +
-//                        '<h4><span style="padding-left:20px">' +
-//                        '</span><span style="padding-left:100px">' + v.score + '</span></h4></div>'
-//                        ).insertBefore($('#add-test'));
-            });
-            $('div[data-role=collapsible]').collapsible();
-            var fName = sessionStorage.getItem('fName');
-            var lName = sessionStorage.getItem('lName');
-            var pic = sessionStorage.getItem('pic');
-            var cList = JSON.parse(sessionStorage.getItem('cList'));
-            console.dir(cList);
-            $("#dPIC").attr("src", "../" + pic);
-            $("#fName").text(fName);
-            $("#lName").text(lName);
-            var key, count = 0;
-            for (key in cList) {
-                if (cList.hasOwnProperty(key)) {
-                    $("#lcList").append('<li class="cLink" data-id="' + key + '"><a class="ui-btn ui-btn-icon-right ui-icon-carat-r">' + cList[key].course.name + '</a></li>').trigger('refresh');
-                }
-                $(".cLink").click(function() {
-                    sessionStorage.setItem('cID', $(this).attr("data-id"));
-                    $(location).attr('href', 'http://jsp.chaninz.com/tasm/Mobile/AssignmentInCourse.html');
-                });
-            }
-            $("#lcList").append('<li class="logOut"><a href="#" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Log Out <div style="padding-left:50px" class="fa fa-power-off fa-2x"></div> </a></li>');
-            $(".logOut").click(function(){
-               sessionStorage.clear();
-               $(location).attr('href', 'http://jsp.chaninz.com/tasm/Mobile/Home.html');
-            });
-        });
-
-    </script>
+</body>
 </html>
