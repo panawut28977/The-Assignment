@@ -223,12 +223,13 @@ public class Course {
         String sql = "select * from course where course_code like ? ";
         PreparedStatement pstm;
         int result = 0;
-        Course c = new Course();
+        Course c = null;
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, code);
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {
+                c  = new Course();
                 int courseId = rs.getInt("course_id");
                 c.setCourse_id(courseId);
                 c.setName(rs.getString("name"));

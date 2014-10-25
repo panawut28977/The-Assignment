@@ -47,7 +47,12 @@ public class selectPeople extends HttpServlet {
         } else {
             cId = Integer.parseInt(ss.getAttribute("cId") + "");
         }
-
+        
+        if (Group_member.isInGroup(ac.getAcc_id(), a.getAm_id()) >= 1) {
+            request.setAttribute("msg", "joined");
+        }
+        
+        
         List<Group_member> gList = Group_member.getAllGroup(a.getAm_id());
         StringBuilder temp = new StringBuilder(" ");
         for (Group_member group_member : gList) {
@@ -74,9 +79,6 @@ public class selectPeople extends HttpServlet {
         request.setAttribute("gList", gList);
         ss.setAttribute("am_id", a.getAm_id());
         String url = "";
-        if (Group_member.isInGroup(ac.getAcc_id(), a.getAm_id()) >= 1) {
-            request.setAttribute("msg", "joined");
-        }
 
         url = "/groupWork.jsp?tab=AllAssignment";
         getServletContext().getRequestDispatcher(url).forward(request, response);

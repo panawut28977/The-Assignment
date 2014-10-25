@@ -41,7 +41,8 @@ public class joinCourseServlet extends HttpServlet {
         Account ac = (Account) ss.getAttribute("ac");
         Course c = Course.getCourseByCode(code);
         String url = "";
-        if (!code.equals("")) {
+        System.out.println(c);
+        if (!code.equals("") && c != null) {
             if (c.getStatus().equalsIgnoreCase("open")) {
                 AccountCourse member = new AccountCourse();
                 member.setCourse(c);
@@ -58,9 +59,9 @@ public class joinCourseServlet extends HttpServlet {
 //                    String content = "<b>\"" + ac.getFirstname() + " " + ac.getLastname() + "\"</b> request to join in <b>" + c.getName() + "</b>";
                     String content = "<span class=\"text-muted\"> <span class=\"glyphicon glyphicon-log-in\"></span> request to join in </span>";
                     n.setText(content);
-                    
-                    String nexturl  = "course.jsp?tab=request";
-                    String queryStringText = URLEncoder.encode(nexturl,"UTF-8");
+
+                    String nexturl = "course.jsp?tab=request";
+                    String queryStringText = URLEncoder.encode(nexturl, "UTF-8");
                     String link = "setCourseSession?cId=" + c.getCourse_id() + "&&nexturl=" + queryStringText;
                     n.setLink(link);
                     List<Integer> listac = AccountCourse.getTeacherIdCourse(c.getCourse_id(), ac.getAcc_id());
@@ -76,6 +77,9 @@ public class joinCourseServlet extends HttpServlet {
             } else {
                 request.setAttribute("msg", "11");
             }
+            getServletContext().getRequestDispatcher("/informpage.jsp").forward(request, response);
+        } else {
+            request.setAttribute("msg", "2");
             getServletContext().getRequestDispatcher("/informpage.jsp").forward(request, response);
         }
     }

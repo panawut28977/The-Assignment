@@ -38,26 +38,28 @@ public class addMember extends HttpServlet {
         Account ac = (Account) ss.getAttribute("ac");
         String am_id = "" + ss.getAttribute("am_id");
         String acc_id = request.getParameter("acc_id");
-        Group_member g = new Group_member();
-        g.setAcc_id(acc_id);
-        g.setAm_id(Integer.parseInt(am_id));
-        g.setG_no(Group_member.getlastedGNo(Integer.parseInt(am_id)) + 1);
-        int g_id = Group_member.addMember(g);
         Assignment a = Assignment.getAmByAmID(am_id);
         String url = "";
-        if (a.getAss_type().equalsIgnoreCase("file")) {
-            StAssignmentFile stF = new StAssignmentFile();
-            stF.setAcc_id(ac.getAcc_id());
-            stF.setAm_id(Integer.parseInt(am_id));
-            stF.setG_id(g_id);
-            stF.setList_id(StAssignmentFile.getLastedListId() + 1);
-            StAssignmentFile.setAm(stF);
-        } else {
-            StAssignmentOnWeb stw = new StAssignmentOnWeb();
-            stw.setAcc_id(ac.getAcc_id());
-            stw.setAm_id(Integer.parseInt(am_id));
-            stw.setG_id(g_id);
-            StAssignmentOnWeb.setAm(stw);
+        if (Group_member.isInGroup(ac.getAcc_id(), a.getAm_id()) < 1) {
+            Group_member g = new Group_member();
+            g.setAcc_id(acc_id);
+            g.setAm_id(Integer.parseInt(am_id));
+            g.setG_no(Group_member.getlastedGNo(Integer.parseInt(am_id)) + 1);
+            int g_id = Group_member.addMember(g);
+            if (a.getAss_type().equalsIgnoreCase("file")) {
+                StAssignmentFile stF = new StAssignmentFile();
+                stF.setAcc_id(ac.getAcc_id());
+                stF.setAm_id(Integer.parseInt(am_id));
+                stF.setG_id(g_id);
+                stF.setList_id(StAssignmentFile.getLastedListId() + 1);
+                StAssignmentFile.setAm(stF);
+            } else {
+                StAssignmentOnWeb stw = new StAssignmentOnWeb();
+                stw.setAcc_id(ac.getAcc_id());
+                stw.setAm_id(Integer.parseInt(am_id));
+                stw.setG_id(g_id);
+                StAssignmentOnWeb.setAm(stw);
+            }
         }
         url = "sendAssignment?am_id=" + am_id;
         response.sendRedirect(url);

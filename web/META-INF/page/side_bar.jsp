@@ -106,7 +106,7 @@
                     <h4 class="modal-title" id="myModalLabel">Put course code</h4>
                 </div>
                 <div class="modal-body">
-                    <input type="text" name="course_code" class="form-control">
+                    <input type="text" name="course_code" required="yes" class="form-control">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

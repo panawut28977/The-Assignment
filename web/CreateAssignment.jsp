@@ -210,8 +210,10 @@
         <script src="js/bootstrap-datetimepicker.min.js"></script>
         <script src="module/easyWizard/lib/jquery.easyWizard.js"></script>
         <script src="js/jquery-ui.js"></script>
+        <script src="module/autosize-master/jquery.autosize.min.js"></script>
         <script>
                                         $(document).ready(function() {
+                                            $(".fillInBlankBox").autosize();
                                             tinymce.init({
                                                 plugins: [
                                                     "advlist autolink lists link image charmap print preview anchor",
@@ -406,6 +408,12 @@
                                                 }
                                                 $(this).parent().parent().parent(".multipleChoice").find(".c_list").html(html);
                                             });
+
+                                            $(document).on("change", ".fillInBlankBox", function() {
+                                                $(this).trigger('autosize.resize');
+                                            });
+
+
                                         });
                                         function compareView() {
                                             $('#compareBox').show();
@@ -690,6 +698,8 @@
                                                     ],
                                                     toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
                                                 });
+                                            }else if(amCurrentType == 'fill'){
+                                                $(".fillInBlankBox").autosize();
                                             }
                                             total_q++;
                                             seqno++;
