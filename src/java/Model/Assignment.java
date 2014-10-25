@@ -25,7 +25,7 @@ import static org.apache.coyote.http11.Constants.a;
  * @author JenoVa
  */
 public class Assignment {
-
+    
     private int am_id;
     private Course course;
     private String name;
@@ -42,124 +42,135 @@ public class Assignment {
     private List<Comment> comment;
     private List<Question> questionList;
 
+    //mobile attr
+    private String status;
+    
     public int getAm_id() {
         return am_id;
     }
-
+    
     public void setAm_id(int am_id) {
         this.am_id = am_id;
     }
-
+    
     public Course getCourse() {
         return course;
     }
-
+    
     public void setCourse(Course course) {
         this.course = course;
     }
-
+    
     public String getName() {
         return name;
     }
-
+    
     public void setName(String name) {
         this.name = name;
     }
-
+    
     public String getDescription() {
         return description;
     }
-
+    
     public void setDescription(String description) {
         this.description = description;
     }
-
+    
     public String getAss_type() {
         return ass_type;
     }
-
+    
     public void setAss_type(String ass_type) {
         this.ass_type = ass_type;
     }
-
+    
     public int getTotal_member() {
         return total_member;
     }
-
+    
     public void setTotal_member(int total_member) {
         this.total_member = total_member;
     }
-
+    
     public Date getDue_date() {
         return due_date;
     }
-
+    
     public void setDue_date(Date due_date) {
         this.due_date = due_date;
     }
-
+    
     public Date getLate_date() {
         return late_date;
     }
-
+    
     public void setLate_date(Date late_date) {
         this.late_date = late_date;
     }
-
+    
     public String getAss_extension() {
         return ass_extension;
     }
-
+    
     public void setAss_extension(String ass_extension) {
         this.ass_extension = ass_extension;
     }
-
+    
     public Timestamp getCreate_date() {
         return create_date;
     }
-
+    
     public void setCreate_date(Timestamp create_date) {
         this.create_date = create_date;
     }
-
+    
     public String getPath_file() {
         return path_file;
     }
-
+    
     public void setPath_file(String path_file) {
         this.path_file = path_file;
     }
-
+    
     public String getTitle_assignment_onweb() {
         return title_assignment_onweb;
     }
-
+    
     public void setTitle_assignment_onweb(String title_assignment_onweb) {
         this.title_assignment_onweb = title_assignment_onweb;
     }
-
+    
     public double getFully_mark() {
         return fully_mark;
     }
-
+    
     public void setFully_mark(double fully_mark) {
         this.fully_mark = fully_mark;
     }
-
+    
     public List<Comment> getComment() {
         return comment;
     }
-
+    
     public void setComment(List<Comment> comment) {
         this.comment = comment;
     }
-
+    
     public List<Question> getQuestionList() {
         return questionList;
     }
-
+    
     public void setQuestionList(List<Question> questionList) {
         this.questionList = questionList;
+    }
+    
+    public String getStatus() {
+        return status;
+    }
+    
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     //viewAssignmentSchedule(int acc_id) อาจไม่ต้องมีเพราะดึง Am ออกมามันก็มีค่าวันที่ติดมาอยู่แล้ว
@@ -265,7 +276,7 @@ public class Assignment {
         }
         return AmList;
     }
-
+    
     public static List<Assignment> getAmByCourseIDNoSetCourse(int course_id) {
         return getAmByCourseID(course_id, false);
     }
@@ -365,7 +376,7 @@ public class Assignment {
         }
         return am;
     }
-
+    
     public static Assignment getAmTimeByAmID(int am_id) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select due_date,late_date from assignment where ass_id=?";
@@ -386,7 +397,7 @@ public class Assignment {
         }
         return am;
     }
-
+    
     public static Assignment getAmByAmID(String am_id) {
         return getAmByAmID(Integer.parseInt(am_id));
     }
@@ -461,6 +472,51 @@ public class Assignment {
                 am.setDue_date(rs.getDate("due_date"));
                 am.setLate_date(rs.getDate("late_date"));
                 am.setFully_mark(rs.getDouble("fully_mark"));
+                //am.setComment(Comment.getCommentByAmID(am.getAm_id()));
+//                if (am.getAss_type() == "file") {
+//                    am.setPath_file(rs.getString("path_file"));
+//                } else {
+//                    am.setQuestionList(null);
+//                }
+                assList.add(am);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return assList;
+    }
+    
+    public static List<Assignment> getAmByAccIDMobile(int acc_id) {
+        List<Assignment> assList = new ArrayList<Assignment>();
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select ass.ass_id,ass.course_id,ass.name,ass.description,ass.ass_type,ass.total_member,ass.due_date,ass.ass_extension,ass.path_file,ass.create_date,ass.fully_mark,ass.late_date from account a "
+                + "join account_course ac on a.acc_id = ac.acc_id "
+                + "join course c on ac.course_id = c.course_id "
+                + "join assignment ass on ac.course_id = ass.course_id "
+                + "where a.acc_id = ? AND ac.status =  \"approved\" AND ac.role = 'ST' AND c.status = 'open' order by ass.create_date desc";
+        PreparedStatement pstm;
+        Assignment am = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, acc_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                am = new Assignment();
+                am.setAm_id(rs.getInt("ass_id"));
+                am.setCourse(Course.getCourseByID(rs.getInt("course_id"), true));
+                am.setName(rs.getString("name"));
+                am.setDescription(rs.getString("description"));
+                am.setAss_type(rs.getString("ass_type"));
+                am.setTotal_member(rs.getInt("total_member"));
+//                am.setAss_extension(rs.getString("ass_extension"));
+                am.setCreate_date(rs.getTimestamp("create_date"));
+                am.setDue_date(rs.getDate("due_date"));
+                am.setLate_date(rs.getDate("late_date"));
+                am.setFully_mark(rs.getDouble("fully_mark"));
+                
+                String status = remainingTimeforSend(am, acc_id);
+                am.setStatus(status);
                 //am.setComment(Comment.getCommentByAmID(am.getAm_id()));
 //                if (am.getAss_type() == "file") {
 //                    am.setPath_file(rs.getString("path_file"));
@@ -594,7 +650,7 @@ public class Assignment {
         }
         return status;
     }
-
+    
     public static String lastedSentStatus(Date lastsent, Assignment a) {
         String status = "";
         Date due_date = a.getDue_date();
@@ -621,7 +677,7 @@ public class Assignment {
 //        System.out.println("-----");
         return status;
     }
-
+    
     public static String calculateTime(Assignment a) {
         String status = "";
         Date due_date = a.getDue_date();
@@ -651,7 +707,7 @@ public class Assignment {
         }
         return status;
     }
-
+    
     public static boolean isLock(Assignment a) {
         boolean islock = false;
         Date today = new Date();
@@ -662,7 +718,7 @@ public class Assignment {
         }
         return islock;
     }
-
+    
     public static int countSendAm(Assignment ass) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select count(*) from student_assignment_on_web where ass_id=? and lasted_send_date is not null";
@@ -684,9 +740,10 @@ public class Assignment {
         }
         return result;
     }
-
+    
     @Override
     public String toString() {
-        return "Assignment{" + "am_id=" + am_id + ", course=" + course + ", name=" + name + ", description=" + description + ", ass_type=" + ass_type + ", total_member=" + total_member + ", due_date=" + due_date + ", ass_extension=" + ass_extension + ", create_date=" + create_date + ", path_file=" + path_file + ", title_assignment_onweb=" + title_assignment_onweb + ", fully_mark=" + fully_mark + ", comment=" + comment + ", questionList=" + questionList + '}';
+        return "Assignment{" + "am_id=" + am_id + ", course=" + course + ", name=" + name + ", description=" + description + ", ass_type=" + ass_type + ", total_member=" + total_member + ", due_date=" + due_date + ", late_date=" + late_date + ", ass_extension=" + ass_extension + ", create_date=" + create_date + ", path_file=" + path_file + ", title_assignment_onweb=" + title_assignment_onweb + ", fully_mark=" + fully_mark + ", comment=" + comment + ", questionList=" + questionList + ", status=" + status + '}';
     }
+    
 }
