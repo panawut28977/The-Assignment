@@ -39,6 +39,8 @@ public class uploadProfilePic extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
         File f = new File(getServletContext().getRealPath("/") + "/img/full_images");
         MyFileRenamePolicy mf = new MyFileRenamePolicy();
