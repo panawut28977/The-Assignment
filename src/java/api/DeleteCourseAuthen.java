@@ -6,6 +6,7 @@
 package api;
 
 import Model.Account;
+import Model.AccountCourse;
 import Model.TrippleDes;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,6 +39,7 @@ public class DeleteCourseAuthen extends HttpServlet {
         PrintWriter out = response.getWriter();
         String checkpass = request.getParameter("pass");
         Account ac = (Account) ss.getAttribute("ac");
+        int cId = Integer.parseInt(ss.getAttribute("cId")+"");
 //        TrippleDes td;
 //        try {
 //            td = new TrippleDes();
@@ -46,7 +48,7 @@ public class DeleteCourseAuthen extends HttpServlet {
 //            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
 //        }
         
-        if (ac.getPassword().equals(checkpass)) {
+        if (ac.getAccount_type().equalsIgnoreCase("TH") && AccountCourse.checkOwner(ac.getAcc_id(), cId) && ac.getPassword().equals(checkpass)) {
             out.write("success");
         } else {
             out.write("failed");
