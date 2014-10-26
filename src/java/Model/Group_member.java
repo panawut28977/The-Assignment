@@ -110,7 +110,6 @@ public class Group_member {
 //        }
 //        return result > 0;
 //    }
-    
     //getMemberById(int g_id)
     public static Group_member getMemberById(int g_id) {
         Connection conn = ConnectionBuilder.getConnection();
@@ -156,7 +155,7 @@ public class Group_member {
         }
         return g_no;
     }
-    
+
     //getMemberByAmId(int am_id)
     //isFullMember(int am_id) change to remainingMember(int am_id,int g_no,Assignment a)
     public static int remainingMember(int acc_id, Assignment a) {
@@ -164,7 +163,14 @@ public class Group_member {
         int remaining = 0;
         PreparedStatement pstm;
         String sql = "";
-        sql = "select acc_id as member_in_group from group_member where ass_id = ? and acc_id like '%" + acc_id + "%'";
+        sql = "select acc_id as member_in_group from group_member where ass_id = ? and "
+                + "( "
+                + "acc_id like '%," + acc_id + ",%' or "
+                + "acc_id like '" + acc_id + ",%' or "
+                + "acc_id like '%," + acc_id + "' or "
+                + "acc_id like '" + acc_id + "' "
+                + " )";
+        System.out.println(sql);
         int result = 0;
         try {
             pstm = conn.prepareStatement(sql);
@@ -206,8 +212,15 @@ public class Group_member {
         Connection conn = ConnectionBuilder.getConnection();
         PreparedStatement pstm;
         String sql = "";
-        sql = "select count(g_id) from group_member where acc_id like '%" + acc_id + "%' and ass_id = ?";
+        sql = "select count(g_id) from group_member where ass_id = ? and "
+                + "( "
+                + "acc_id like '%," + acc_id + ",%' or "
+                + "acc_id like '" + acc_id + ",%' or "
+                + "acc_id like '%," + acc_id + "' or "
+                + "acc_id like '" + acc_id + "' "
+                + " )";
         int result = 0;
+        System.out.println(sql);
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, am_id);
@@ -252,7 +265,14 @@ public class Group_member {
         Connection conn = ConnectionBuilder.getConnection();
         PreparedStatement pstm;
         String sql = "";
-        sql = "select * from group_member where ass_id = ? and acc_id like '%" + acc_id + "%'";
+        sql = "select * from group_member where ass_id = ? and "
+                + "( "
+                + "acc_id like '%," + acc_id + ",%' or "
+                + "acc_id like '" + acc_id + ",%' or "
+                + "acc_id like '%," + acc_id + "' or "
+                + "acc_id like '" + acc_id + "' "
+                + " )";
+        System.out.println(sql);
         Group_member g = new Group_member();
         try {
             pstm = conn.prepareStatement(sql);

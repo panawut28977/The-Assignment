@@ -48,7 +48,7 @@ public class selectPeople extends HttpServlet {
             cId = Integer.parseInt(ss.getAttribute("cId") + "");
         }
         
-        if (Group_member.isInGroup(ac.getAcc_id(), a.getAm_id()) >= 1) {
+        if (Group_member.isInGroup(ac.getAcc_id(), a.getAm_id()) == 1) {
             request.setAttribute("msg", "joined");
         }
         
