@@ -29,6 +29,7 @@ public class Course {
     private String course_link;
     private String course_code;
     private Date create_date;
+    private String delete_status;
     private List<Account> listStudent;
     private List<Announcement> announcement;
     private List<Assignment> assignment;

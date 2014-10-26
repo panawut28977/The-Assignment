@@ -427,5 +427,5 @@ public class TestDriver {
 //        System.out.println(StAssignmentOnWeb.getStAmByAmIDAndAccId(127, 2, true));
         SessionIdentifierGenerator rdid = new SessionIdentifierGenerator();
         System.out.println(rdid.nextSessionId());
-    }
+    } 
 }

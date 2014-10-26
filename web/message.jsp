@@ -60,14 +60,18 @@
         <title>Message</title>
     </head>
     <body>
+        <c:set value="${cf:getNameByID(to_acc_id)}" var="dest_id" />
         <%@include file="META-INF/page/header_bar.jsp"%>
         <div class="container">
             <div class="row">
                 <%@include file="META-INF/page/side_bar.jsp"%>
                 <div class="col-md-9" style="padding-bottom: 20px">
                     <div class="col-md-8">
-                        <h4><i class="glyphicon glyphicon-envelope"></i> Private Message</h4>
-                        <div class="well" style="height: 600px;overflow-y: scroll" id="messageBox" >
+                        <h4 style="padding-bottom: 20px">
+                            <span class="pull-left"><img src="${dest_id.profile_pic}" width="24"/>  ${dest_id.firstname}</span>
+                            <span class="pull-right text-muted"><i class="glyphicon glyphicon-envelope"></i> Private Message</span>
+                        </h4>
+                        <div class="well" style="height: 600px;overflow-y: scroll;clear: both;margin-top: 20px;" id="messageBox" >
                             <c:choose>
                                 <c:when test="${msg eq 'nopvmsg'}">
                                     <div class="alert alert-info" role="alert">
@@ -155,63 +159,6 @@
                         </c:if>
                     </div>
                     <div class="col-md-4" style="margin-top: 36px;">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Message to your teacher</h3>
-                            </div>
-                            <div class="panel-body" id="teacherSelectionBox">
-                                <c:if test="${youTeacher.size()==0}">
-                                    <br/>
-                                    <p class="text-center text-muted"><b>You don't have a Teacher</b></p>
-                                </c:if>
-                                <c:forEach items="${youTeacher}" var="t">
-                                    <div class="media <c:if test="${t.key.isAllSeen eq false}">seen</c:if>" style="padding: 10px" data-id="${t.value.acc_id}" onclick="getMessage(this)">
-                                            <a class="pull-left" href="#">
-                                                <img width="32" src="${t.value.profile_pic}">
-                                        </a>
-                                        <div class="media-body">
-                                            <h5 class="media-heading">${t.value.firstname} ${t.value.lastname} <c:if test="${t.key.isAllSeen eq false}"><span class="label label-info">new</span></c:if></h5>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                </c:forEach>
-                                <!--                                <div class="media">
-                                                                    <a class="pull-left" href="#">
-                                                                        <img width="32" src="img/avatar.jpg">
-                                                                    </a>
-                                                                    <div class="media-body">
-                                                                        <h5 class="media-heading">AJ.Kittiphan Puapholthep</h5>
-                                                                    </div>
-                                                                </div>
-                                                                <hr>
-                                                                <div class="media">
-                                                                    <a class="pull-left" href="#">
-                                                                        <img width="32" src="img/avatar.jpg">
-                                                                    </a>
-                                                                    <div class="media-body">
-                                                                        <h5 class="media-heading">AJ.Unhawa Ninrutsirikun</h5>
-                                                                    </div> 
-                                                                </div>
-                                                                <hr>
-                                                                <div class="media">
-                                                                    <a class="pull-left" href="#">
-                                                                        <img width="32" src="img/avatar.jpg">
-                                                                    </a>
-                                                                    <div class="media-body">
-                                                                        <h5 class="media-heading">AJ.Ekapong Jungcharoensukying</h5>
-                                                                    </div>
-                                                                </div>
-                                                                <hr>
-                                                                <div class="media">
-                                                                    <a class="pull-left" href="#">
-                                                                        <img width="32" src="img/avatar.jpg">
-                                                                    </a>
-                                                                    <div class="media-body">
-                                                                        <h5 class="media-heading">AJ.Kittipong Warasup</h5>
-                                                                    </div>
-                                                                </div>-->
-                            </div>
-                        </div>
                         <c:if test="${ac.account_type eq 'TH'}">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -236,6 +183,60 @@
                                 </div>
                             </div>
                         </c:if>
+                        <c:choose>
+                            <c:when test="${ac.account_type eq 'ST'}">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Message to your teacher</h3>
+                                    </div>
+                                    <div class="panel-body" id="teacherSelectionBox">
+                                        <c:if test="${youTeacher.size()==0}">
+                                            <br/>
+                                            <p class="text-center text-muted"><b>You don't have a Teacher</b></p>
+                                        </c:if>
+                                        <c:forEach items="${youTeacher}" var="t">
+                                            <div class="media <c:if test="${t.key.isAllSeen eq false}">seen</c:if>" style="padding: 10px" data-id="${t.value.acc_id}" onclick="getMessage(this)">
+                                                    <a class="pull-left" href="#">
+                                                        <img width="32" src="${t.value.profile_pic}">
+                                                </a>
+                                                <div class="media-body">
+                                                    <h5 class="media-heading">${t.value.firstname} ${t.value.lastname} <c:if test="${t.key.isAllSeen eq false}"><span class="label label-info">new</span></c:if></h5>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                        </c:forEach>
+                                    </div>
+                                </div>
+                            </c:when>
+                            <c:when test="${ac.account_type eq 'TH'}">
+                                <c:if test="${dontShowDash == 1}">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">Message to your teacher</h3>
+                                        </div>
+                                        <div class="panel-body" id="teacherSelectionBox">
+                                            <c:if test="${youTeacher.size()==0}">
+                                                <br/>
+                                                <p class="text-center text-muted"><b>You don't have a Teacher</b></p>
+                                            </c:if>
+                                            <c:forEach items="${youTeacher}" var="t">
+                                                <div class="media <c:if test="${t.key.isAllSeen eq false}">seen</c:if>" style="padding: 10px" data-id="${t.value.acc_id}" onclick="getMessage(this)">
+                                                        <a class="pull-left" href="#">
+                                                            <img width="32" src="${t.value.profile_pic}">
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <h5 class="media-heading">${t.value.firstname} ${t.value.lastname} <c:if test="${t.key.isAllSeen eq false}"><span class="label label-info">new</span></c:if></h5>
+                                                        </div>
+                                                    </div>
+                                                    <hr>
+                                            </c:forEach>
+                                        </div>
+                                    </div>
+                                </c:if>
+                            </c:when>
+                        </c:choose>
+
+
                     </div>
                 </div>
             </div>
@@ -263,7 +264,7 @@
                                         '        <h6><b>${ac.firstname} ${ac.lastname}</b> </h6>' +
                                         '        ' + text + '<br>' +
                                         '        <small class="pull-right text-muted">' + dateSt + '</small>' +
-                                        '    </div>"';
+                                        '    </div>';
                                 $("#messageBox").append(html);
                                 $('#messageBox').animate({
                                     scrollTop: $("#messageBox").offset().top + $("#messageBox")[0].scrollHeight
