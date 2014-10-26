@@ -207,11 +207,11 @@ public class AccountCourse {
             if (rs.next()) {
                 role = rs.getString(1);
             }
-            conn.close();
+            conn.close(); 
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return role.equalsIgnoreCase("Teacher") ? true : false;
+        return role.equalsIgnoreCase("TH") ? true : false;
     }
 
     public static List<AccountCourse> getCourseByAccID(int acc_id) {

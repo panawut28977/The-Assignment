@@ -42,6 +42,7 @@
         <url-pattern>/CourseMember</url-pattern>
         <url-pattern>/CourseAssignment</url-pattern>
         <url-pattern>/profile</url-pattern>
+        <url-pattern>/setCourseSession</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>
@@ -393,6 +394,10 @@
         <servlet-name>TestServlet</servlet-name>
         <servlet-class>servlet.TestServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteCourseAuthen</servlet-name>
+        <servlet-class>api.DeleteCourseAuthen</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -704,6 +709,10 @@
     <servlet-mapping>
         <servlet-name>TestServlet</servlet-name>
         <url-pattern>/TestServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCourseAuthen</servlet-name>
+        <url-pattern>/DeleteCourseAuthen</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -361,12 +361,14 @@
                                                     $('#fullymark').attr("required", "yes");
                                                     $('#amfile').attr("required", "yes");
                                                     $('#title_assignment_onweb').removeAttr("required");
+                                                    $("#CreateAmOnweb input").removeAttr("required");
                                                 } else {
                                                     $('#CreateAmOnweb').show();
                                                     $('#uploadAmFile').hide();
                                                     $('#title_assignment_onweb').attr("required", "yes");
                                                     $('#fullymark').removeAttr("required");
                                                     $('#amfile').removeAttr("required");
+                                                    $("#CreateAmOnweb input").attr("required", "yes");
                                                 }
                                             });
                                             $("#description").change(function() {
@@ -698,7 +700,7 @@
                                                     ],
                                                     toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
                                                 });
-                                            }else if(amCurrentType == 'fill'){
+                                            } else if (amCurrentType == 'fill') {
                                                 $(".fillInBlankBox").autosize();
                                             }
                                             total_q++;

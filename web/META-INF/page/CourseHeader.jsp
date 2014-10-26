@@ -24,7 +24,7 @@
 <script>
     $(function() {
         var coursecode = '${ac.courseList.get(cId).course.course_code}';
-        var courselink = 'http://10.4.43.216:8080/linkjoin?course_code=' + '${ac.courseList.get(cId).course.course_code}';
+        var courselink = 'http://assignment.sit.kmutt.ac.th:8080/linkjoin?course_code=' + '${ac.courseList.get(cId).course.course_code}';
         $("#coursecode").val(coursecode);
         $("#courselink").val(courselink);
         $(".qrcode").qrcode({
@@ -50,8 +50,20 @@
         });
 
         $("#deletecourse").click(function() {
-            if (confirm('All data relate this course will be delete, are you sure?')) {
-                location.href = "deleteCourse";
+            var pass = prompt('Enter your password \n All data relate this course will be delete, are you sure?');
+            if (pass != null) {
+                $.ajax({
+                    type: 'post',
+                    url: 'DeleteCourseAuthen',
+                    data: {pass: pass},
+                    success: function(data) {
+                        if (data == "success") {
+                            location.href = "deleteCourse";
+                        } else {
+                            alert("Your password is wrong!");
+                        }
+                    }
+                });
             }
         });
 
@@ -120,7 +132,7 @@
             </h3>
         </div>
     </c:when>
-    <c:otherwise>
+    <c:when  test="${ac.courseList.get(cId).role eq 'TH'}">
         <div class="well well-sm">
             <div class="row" style="font-size:24px; " >
                 <div class="col-md-11">
@@ -170,5 +182,5 @@
             </div>
             <div id="openCodeBox"><span id="openCodeBtn">See your course code <span class="glyphicon glyphicon-chevron-down"></span></span></div>
         </div>
-    </c:otherwise>
+    </c:when>
 </c:choose>

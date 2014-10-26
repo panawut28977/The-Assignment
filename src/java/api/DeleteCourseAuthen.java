@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlet;
+package api;
 
 import Model.Account;
-import Model.AccountCourse;
-import Model.Course;
+import Model.TrippleDes;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Orarmor
  */
-public class deleteCourse extends HttpServlet {
+public class DeleteCourseAuthen extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,14 +35,21 @@ public class deleteCourse extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession ss = request.getSession();
+        PrintWriter out = response.getWriter();
+        String checkpass = request.getParameter("pass");
         Account ac = (Account) ss.getAttribute("ac");
-        int cId = Integer.parseInt(ss.getAttribute("cId") + "");
-        if (ac.getAccount_type().equalsIgnoreCase("TH") && AccountCourse.checkOwner(ac.getAcc_id(), cId)) {
-            System.out.println(Course.deleteCourse(Integer.parseInt(ss.getAttribute("cId") + "")));
-            response.sendRedirect("home.jsp?tab=AllAnnouce");
+//        TrippleDes td;
+//        try {
+//            td = new TrippleDes();
+//            checkpass = td.encrypt(checkpass);
+//        } catch (Exception ex) {
+//            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        
+        if (ac.getPassword().equals(checkpass)) {
+            out.write("success");
         } else {
-            request.setAttribute("msg", 12);
-            getServletContext().getRequestDispatcher("/informpage.jsp").forward(request, response);
+            out.write("failed");
         }
     }
 
