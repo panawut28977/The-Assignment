@@ -308,10 +308,10 @@
                                                                         <c:set var="q_end_index" value="${curqList.get(curq).q_end_index}"/>
                                                                         <c:choose>
                                                                             <c:when test="${stanswer.size() ne 0}">
-                                                                                <c:set var="reptext" value="<input type='text' name='${seqno}answer' value='${stanswer.get(countStAns).answer}'/>"/>
+                                                                                <c:set var="reptext" value="<input type=\"text\" name=\"${seqno}answer\" required=\"yes\" value=\"${stanswer.get(countStAns).answer}\"/>"/>
                                                                             </c:when>
                                                                             <c:otherwise>
-                                                                                <c:set var="reptext" value="<input type='text' name='${seqno}answer' value=''/>"/>
+                                                                                <c:set var="reptext" value="<input type=\"text\" name=\"${seqno}answer\" required=\"yes\" value=\"\"/>"/>
                                                                             </c:otherwise>
                                                                         </c:choose>
                                                                         <c:set value="${ct_cf:replaceStringByIndex(q_text, q_start_index, q_end_index,reptext)}" var="q_text"/>

@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package servlet;
 
 import Model.Account;
-import Model.ImportedStudent;
+import Model.AccountCourse;
 import java.io.IOException;
-import java.util.List;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +19,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Orarmor
  */
-public class GetImportedStudentList extends HttpServlet {
+public class RequesToJoin extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,10 +33,15 @@ public class GetImportedStudentList extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession ss = request.getSession();
-        String cId = ss.getAttribute("cId") + "";
-        List<ImportedStudent> importList = ImportedStudent.getStudentList(Integer.parseInt(cId));
-        ss.setAttribute("importList", importList);
-        response.sendRedirect("RequesToJoin");
+        Account ac = (Account) ss.getAttribute("ac");
+        Long cId = (Long)ss.getAttribute("cId");
+        AccountCourse curCourse = (AccountCourse)ac.getCourseList().get(cId);
+        if (ac.getAccount_type().equalsIgnoreCase("ST") || curCourse.getRole().equalsIgnoreCase("ST")) {
+            request.setAttribute("msg", 12);
+            getServletContext().getRequestDispatcher("/informpage.jsp").forward(request, response);
+        } else {
+            getServletContext().getRequestDispatcher("/course.jsp?tab=request").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

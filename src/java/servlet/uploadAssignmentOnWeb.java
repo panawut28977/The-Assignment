@@ -52,7 +52,7 @@ public class uploadAssignmentOnWeb extends HttpServlet {
         Account ac = (Account) ss.getAttribute("ac");
         Assignment a = (Assignment) ss.getAttribute("curAm");
         Group_member g = null;
-        if (a.getTotal_member() > 1) {
+        if (a.getTotal_member() >= 1) {
             g = (Group_member) ss.getAttribute("g");
         }
         StAssignmentOnWeb reqsa = (StAssignmentOnWeb) ss.getAttribute("sa");
@@ -110,6 +110,7 @@ public class uploadAssignmentOnWeb extends HttpServlet {
                     aq.setQ_order(x + 1);
                     aq.setAnswer(ans[x]);
                     ansList.add(aq);
+                    System.out.println(aq);
                 }
             } else if (q_type.equalsIgnoreCase("instruction")) {
                 System.out.println("Do nothing.");
@@ -117,13 +118,16 @@ public class uploadAssignmentOnWeb extends HttpServlet {
         }
 
         if (sa.getLasted_send_date() != null) {
+            System.out.println("updated student answer");
             for (AnswerQuestion ans : ansList) {
                 AnswerQuestion.updateAns(ans);
             }
         } else {
             if (a.getTotal_member() > 1) {
+                System.out.println("send new assignment group");
                 AnswerQuestion.setAnswerList(ansList, 0, g.getG_id());
             } else {
+                System.out.println("send new assignment individual");
                 AnswerQuestion.setAnswerList(ansList, ac.getAcc_id(), 0);
             }
         }

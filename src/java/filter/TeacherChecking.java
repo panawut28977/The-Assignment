@@ -11,12 +11,14 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -24,7 +26,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Orarmor
  */
-public class CheckTeacher implements Filter {
+public class TeacherChecking implements Filter {
 
     private FilterConfig filterConfig = null;
 
@@ -37,18 +39,21 @@ public class CheckTeacher implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpSession ss = req.getSession();
-        Account a = (Account) ss.getAttribute("ac");
-//        String accCourse = AccountCourse.getAccountRole(a.getAcc_id(), course_id);
-//        if (!accCourse.equalsIgnoreCase("TH")) {
-//            req.setAttribute("msg", 12);
-//            req.getRequestDispatcher("/inform.jsp").forward(request, response);
-//        } else {
-//            chain.doFilter(request, response);
-//        }
+        System.out.println("Teacher checking");
+        Account ac = (Account) ss.getAttribute("ac");
+        Long cId = Long.parseLong(ss.getAttribute("cId") + "");
+        AccountCourse curCourse = (AccountCourse) ac.getCourseList().get(cId);
+        if (ac.getAccount_type().equalsIgnoreCase("ST") || curCourse.getRole().equalsIgnoreCase("ST")) {
+            request.setAttribute("msg", 12);
+            req.getRequestDispatcher("/informpage.jsp").forward(request, response);
+        } else {
+            chain.doFilter(request, response);
+        }
     }
 
     @Override
     public void destroy() {
 
     }
+
 }

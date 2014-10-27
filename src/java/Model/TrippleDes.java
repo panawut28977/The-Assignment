@@ -57,9 +57,9 @@ public class TrippleDes {
     public static void main(String args[]) throws Exception {
         TrippleDes td = new TrippleDes();
 
-        String target = "Dwnr97niaIc=";
+        String target = "aa";
         String encrypted = td.encrypt(target);
-        String decrypted = td.decrypt("เทส");
+        String decrypted = td.decrypt("aa");
         
         System.out.println("String To Encrypt: " + target);
         System.out.println("Encrypted String:" + encrypted);

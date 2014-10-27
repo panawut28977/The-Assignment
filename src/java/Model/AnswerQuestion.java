@@ -150,20 +150,31 @@ public class AnswerQuestion {
     }
 
     //setAmQuestionList
-    public static int setAnswerList(List<AnswerQuestion> ansList, int acc_id, int g_id) {
+    public static int[] setAnswerList(List<AnswerQuestion> ansList, int acc_id, int g_id) {
         Connection conn = ConnectionBuilder.getConnection();
         String data = "";
-        for (AnswerQuestion answerQuestion : ansList) {
-            data += "(" + answerQuestion.getSt_am_id() + "," + answerQuestion.getQ_id() + "," + answerQuestion.getQ_order() + "," + acc_id + "," + g_id + ",'" + answerQuestion.getAnswer() + "'," + answerQuestion.getScore() + "),";
-        }
-        data = data.substring(0, data.length() - 1);
-        String sql = "insert into student_answer_question(st_ass_id,q_id,q_order,acc_id,g_id,answer,score) values" + data;
+//        for (AnswerQuestion answerQuestion : ansList) {
+//            data += "(" + answerQuestion.getSt_am_id() + "," + answerQuestion.getQ_id() + "," + answerQuestion.getQ_order() + "," + acc_id + "," + g_id + ",'" + answerQuestion.getAnswer() + "'," + answerQuestion.getScore() + "),";
+//        }
+//        data = data.substring(0, data.length() - 1);
+//        String sql = "insert into student_answer_question(st_ass_id,q_id,q_order,acc_id,g_id,answer,score) values" + data;
+        String sql = "insert into student_answer_question(st_ass_id,q_id,q_order,acc_id,g_id,answer,score) values(?,?,?,?,?,?,?)";
         System.out.println(sql);
         PreparedStatement pstm;
-        int result = 0;
+        int result[] = null;
         try {
             pstm = conn.prepareStatement(sql);
-            result = pstm.executeUpdate();
+            for (AnswerQuestion answerQuestion : ansList) {
+                pstm.setInt(1, answerQuestion.getSt_am_id());
+                pstm.setInt(2, answerQuestion.getQ_id());
+                pstm.setInt(3, answerQuestion.getQ_order());
+                pstm.setInt(4, answerQuestion.getAcc_id());
+                pstm.setInt(5, answerQuestion.getG_id());
+                pstm.setString(6, answerQuestion.getAnswer());
+                pstm.setDouble(7, answerQuestion.getScore());
+                pstm.addBatch();
+            }
+            result = pstm.executeBatch();
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);

@@ -52,6 +52,8 @@ public class GetSentAssignment extends HttpServlet {
         Account ac = (Account) ss.getAttribute("ac");
         int am_id = Integer.parseInt(request.getParameter("am_id"));
         String cId = ss.getAttribute("cId") + "";
+        
+        
         String url = "/SentAssignment.jsp?tab=AllAssignment";
         //set am
         Assignment a = Assignment.getAmByAmID(am_id);

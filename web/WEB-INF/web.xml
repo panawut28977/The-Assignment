@@ -16,6 +16,10 @@
         <filter-name>authenCourseSession</filter-name>
         <filter-class>filter.authenCourseSession</filter-class>
     </filter>
+    <filter>
+        <filter-name>TeacherChecking</filter-name>
+        <filter-class>filter.TeacherChecking</filter-class>
+    </filter>
     <filter-mapping>
         <filter-name>authenFilter</filter-name>
         <url-pattern>/home.jsp</url-pattern>
@@ -78,6 +82,15 @@
         <url-pattern>/Checkcopy</url-pattern>
         <url-pattern>/Checkcopy.jsp</url-pattern>
         <url-pattern>/anotherAmFile</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>TeacherChecking</filter-name>
+        <url-pattern>/GetSentAssignment</url-pattern>
+        <url-pattern>/checkAssignment</url-pattern>
+        <url-pattern>/Checkcopy</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>
@@ -398,6 +411,10 @@
         <servlet-name>DeleteCourseAuthen</servlet-name>
         <servlet-class>api.DeleteCourseAuthen</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RequesToJoin</servlet-name>
+        <servlet-class>servlet.RequesToJoin</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -713,6 +730,10 @@
     <servlet-mapping>
         <servlet-name>DeleteCourseAuthen</servlet-name>
         <url-pattern>/DeleteCourseAuthen</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RequesToJoin</servlet-name>
+        <url-pattern>/RequesToJoin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

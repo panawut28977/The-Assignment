@@ -16,6 +16,9 @@
         <%@include file="META-INF/page/include_css.jsp" %>
         <%@include file="META-INF/page/include_js.jsp" %>
         <title>Inform</title>
+        <c:if test="${param.msg ne null}">
+            <c:set var="msg" value="${param.msg}"/>
+        </c:if>
     </head>
     <body>
         <!-- 

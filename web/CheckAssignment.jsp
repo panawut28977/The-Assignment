@@ -54,8 +54,8 @@
             #questionList h5{
                 margin-top: 20px;
             }
-            
-           .assignmentBox img{
+
+            .assignmentBox img{
                 border-radius: initial;  
             }
 
@@ -406,12 +406,19 @@
                                                                         <c:set var="q_end_index" value="${curqList.get(curq).q_end_index}"/>
                                                                         <!--${q_start_index}/ ${q_end_index}-->
 
+                                                                        <!-- trim answer -->
+                                                                        <c:set var="curanswer" value="${fn:trim(curqList.get(curq).answer)}"/>
+                                                                        <c:set var="curstanswer" value="${fn:trim(stanswer.get(countStAns).answer)}"/>
+
                                                                         <!-- auto checking -->
                                                                         <c:choose>
                                                                             <c:when test="${autocheck eq 1}">
                                                                                 <c:set value="0" var="correctscore"/>
-                                                                                <c:if test="${curAm.questionList.get(countb).answer eq stanswer.get(countStAns).answer}">
-                                                                                    <c:set value="${curAm.questionList.get(countb).score}" var="correctscore"/>
+
+                                                                                <!--aa${curanswer}aa / aa${curstanswer}aa-->
+
+                                                                                <c:if test="${curanswer.equalsIgnoreCase(curstanswer)}">
+                                                                                    <c:set value="${curqList.get(curq).score}" var="correctscore"/>
                                                                                 </c:if>
                                                                                 <c:set var="checkicon" value=""/>
                                                                                 <c:choose>
@@ -422,10 +429,10 @@
                                                                                         <c:set var="checkicon" value='<span class="text-danger"><i class="glyphicon glyphicon-remove-circle"></i></span> '/>
                                                                                     </c:otherwise>
                                                                                 </c:choose> 
-                                                                                <c:set var="reptext" value="<input type='text' name='${seqno}answer' value='${stanswer.get(countStAns).answer}' disabled='yes'/><input type='number' name='${seqno}score' value='${correctscore}' min='0' max='${curAm.questionList.get(countb).score}' placeholder='score'/> ${checkicon}"/>
+                                                                                <c:set var="reptext" value="<input type=\"text\" name=\"${seqno}answer\" value=\"${curstanswer}\" disabled=\"yes\"/><input type=\"number\" name=\"${seqno}score\" value=\"${correctscore}\" min=\"0\" max=\"${curqList.get(curq).score}\" placeholder=\"score\"/> ${checkicon}"/>
                                                                             </c:when>
                                                                             <c:otherwise>
-                                                                                <c:set var="reptext" value="<input type='text' name='${seqno}answer' value='${stanswer.get(countStAns).answer}' disabled='yes'/><input type='number' name='${seqno}score' value='${stanswer.get(countStAns).score}' min='0' max='${curAm.questionList.get(countb).score}' placeholder='score'/>"/>
+                                                                                <c:set var="reptext" value="<input type=\"text\" name=\"${seqno}answer\" value=\"${curstanswer}\" disabled=\"yes\"/><input type=\"number\" name=\"${seqno}score\" value=\"${stanswer.get(countStAns).score}\" min=\"0\" max=\"${curqList.get(curq).score}\" placeholder=\"score\"/>"/>
                                                                             </c:otherwise>
                                                                         </c:choose>
                                                                         <!-- / auto checking -->
