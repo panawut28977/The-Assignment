@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,6 +29,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import util.Util;
 
 /**
  *
@@ -52,8 +52,7 @@ public class GetSentAssignment extends HttpServlet {
         Account ac = (Account) ss.getAttribute("ac");
         int am_id = Integer.parseInt(request.getParameter("am_id"));
         String cId = ss.getAttribute("cId") + "";
-        
-        
+
         String url = "/SentAssignment.jsp?tab=AllAssignment";
         //set am
         Assignment a = Assignment.getAmByAmID(am_id);
@@ -231,36 +230,45 @@ public class GetSentAssignment extends HttpServlet {
                             used_id = q.getQ_id();
                         } else if (q.getQ_type().equalsIgnoreCase("fillBlank")) {
                             if (q.getQ_id() != used_id) {
+                                ArrayList<Question> curqList = new ArrayList<>();
+
                                 int countb = a.getQuestionList().size();
-                                int countStAns = stanswer.size();
                                 for (int i = countb - 1; i >= 0; i--) {
                                     Question tmp = a.getQuestionList().get(i);
                                     if (q.getQ_id() == tmp.getQ_id()) {
-                                        countStAns--;
-                                        score = 0;
-                                        if (tmp.getAnswer().equalsIgnoreCase(stanswer.get(countStAns).getAnswer())) {
-                                            score = tmp.getScore();
-                                        }
-//                                        System.out.println("q_no" + q.getQ_no() + "score:" + score);
-
-                                        aq = new AnswerQuestion();
-                                        if (stAssignmentOnWeb.getG_id() > 0) {
-                                            aq.setAcc_id(0);
-                                            aq.setG_id(stAssignmentOnWeb.getG_id());
-                                        } else {
-                                            aq.setAcc_id(stAssignmentOnWeb.getAcc_id());
-                                            aq.setG_id(0);
-                                        }
-                                        aq.setSt_am_id(stAssignmentOnWeb.getSt_am_id());
-                                        aq.setQ_id(q.getQ_id());
-                                        aq.setQ_order(countStAns + 1);
-                                        aq.setScore(score);
-                                        total_score += score;
-                                        ansList.add(aq);
-//                                        System.out.println(aq);
+                                        curqList.add(a.getQuestionList().get(i));
                                     }
                                 }
+                                Util.sortQuestionIndex(curqList);
+//                                int countStAns = stanswer.size();
+                                for (int i = curqList.size() - 1; i >= 0; i--) {
+                                    Question tmp = curqList.get(i);
+                                    AnswerQuestion stans = stanswer.get(i);
+                                    score = 0;
+//                                    System.out.println(tmp.getAnswer() + " / " + stans.getAnswer());
+                                    String tmpans = tmp.getAnswer().trim();
+                                    String ans = stans.getAnswer().trim();
+                                    if (tmpans.equalsIgnoreCase(ans)) {
+                                        score = tmp.getScore();
+                                    }
+//                                        System.out.println("q_no" + q.getQ_no() + "score:" + score);
 
+                                    aq = new AnswerQuestion();
+                                    if (stAssignmentOnWeb.getG_id() > 0) {
+                                        aq.setAcc_id(0);
+                                        aq.setG_id(stAssignmentOnWeb.getG_id());
+                                    } else {
+                                        aq.setAcc_id(stAssignmentOnWeb.getAcc_id());
+                                        aq.setG_id(0);
+                                    }
+                                    aq.setSt_am_id(stAssignmentOnWeb.getSt_am_id());
+                                    aq.setQ_id(q.getQ_id());
+                                    aq.setQ_order(i + 1);
+                                    aq.setScore(score);
+                                    total_score += score;
+                                    ansList.add(aq);
+                                    System.out.println(aq);
+                                }
                             }
                             used_id = q.getQ_id();
                         }
@@ -295,7 +303,6 @@ public class GetSentAssignment extends HttpServlet {
                         listac.add(stAssignmentOnWeb.getAcc_id());
                     }
                     Notification.announce(n, listac);
-
                     System.out.println("-----");
                 }
             }
@@ -338,6 +345,7 @@ public class GetSentAssignment extends HttpServlet {
             request.setAttribute("sentList", sentList);
             request.setAttribute("leftList", leftList);
         }
+
         request.setAttribute("leftAccId", leftAccId);
         request.setAttribute("sent", sent);
         request.setAttribute("left", left);

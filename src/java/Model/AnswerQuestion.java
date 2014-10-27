@@ -92,8 +92,6 @@ public class AnswerQuestion {
     public void setG_id(int g_id) {
         this.g_id = g_id;
     }
-    
-    
 
     //getStAMQuestion
     public static List<AnswerQuestion> getStAMQuestion(int st_am_id) {
@@ -121,8 +119,8 @@ public class AnswerQuestion {
         }
         return ans;
     }
-    
-    public static ArrayList<AnswerQuestion> getStAMQuestion(int st_am_id,int q_id) {
+
+    public static ArrayList<AnswerQuestion> getStAMQuestion(int st_am_id, int q_id) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select *  from student_answer_question where st_ass_id = ? and q_id = ?";
         PreparedStatement pstm;
@@ -168,8 +166,8 @@ public class AnswerQuestion {
                 pstm.setInt(1, answerQuestion.getSt_am_id());
                 pstm.setInt(2, answerQuestion.getQ_id());
                 pstm.setInt(3, answerQuestion.getQ_order());
-                pstm.setInt(4, answerQuestion.getAcc_id());
-                pstm.setInt(5, answerQuestion.getG_id());
+                pstm.setInt(4, acc_id);
+                pstm.setInt(5, g_id);
                 pstm.setString(6, answerQuestion.getAnswer());
                 pstm.setDouble(7, answerQuestion.getScore());
                 pstm.addBatch();
@@ -184,7 +182,6 @@ public class AnswerQuestion {
 
     //updateScore
     public static int updateScore(AnswerQuestion a) {
-        System.out.println(a);
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "update student_answer_question set score=? where st_ass_id=? and q_id=? and q_order=? and acc_id=? and g_id=?";
         PreparedStatement pstm;
@@ -192,7 +189,7 @@ public class AnswerQuestion {
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setDouble(1, a.getScore());
-            System.out.println("score:"+a.getScore());
+//            System.out.println("score:"+a.getScore());
             pstm.setInt(2, a.getSt_am_id());
             pstm.setInt(3, a.getQ_id());
 //            System.out.println(a.getQ_order());
@@ -200,14 +197,14 @@ public class AnswerQuestion {
             pstm.setInt(5, a.getAcc_id());
             pstm.setInt(6, a.getG_id());
             result = pstm.executeUpdate();
-            System.out.println("result:"+result);
+//            System.out.println("result:"+result);
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
     }
-    
+
     public static int updateAns(AnswerQuestion a) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "update student_answer_question set answer=? where st_ass_id=? and q_id=? and q_order=?";
@@ -235,12 +232,10 @@ public class AnswerQuestion {
 //        int result = 0;
 //        return result;
 //    }
-
     //hilightKeyword
     @Override
     public String toString() {
         return "AnswerQuestion{" + "st_am_id=" + st_am_id + ", q_id=" + q_id + ", q_order=" + q_order + ", acc_id=" + acc_id + ", g_id=" + g_id + ", answer=" + answer + ", score=" + score + ", hilightKeyword=" + hilightKeyword + '}';
     }
-    
 
 }
