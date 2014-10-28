@@ -152,7 +152,7 @@
                         </div>
                         <c:if test="${msg ne 'nopvmsg'}">
                             <form>
-                                <textarea class="form-control" id="messagetext"  placeholder="Tell your teacher here."></textarea>
+                                <textarea class="form-control" id="messagetext"  placeholder="Tell your teacher here." required="yes"></textarea>
                                 <br>
                                 <input type="button"  id="sendMessage"  class="btn btn-primary pull-right" value="Send">
                             </form>
@@ -250,31 +250,36 @@
                 }, 0);
                 $("#sendMessage").click(function() {
                     var text = $("#messagetext").val();
-                    var send_acc_id = '${ac.acc_id}';
-                    var to_acc_id = '${to_acc_id}';
-                    var d = new Date();
-                    var dateSt = d.getFullYear() + "-" + ('0' + (d.getMonth() + 1)).slice(-2) + "-" + ('0' + d.getDate()).slice(-2) + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getMilliseconds();
-                    $.ajax({
-                        type: 'POST',
-                        url: "smessage",
-                        data: {text: text, send_acc_id: send_acc_id, to_acc_id: to_acc_id},
-                        success: function(data) {
-                            if (data == "success") {
-                                var html = '<div class="pull-right col-md-5 st-message">' +
-                                        '        <h6><b>${ac.firstname} ${ac.lastname}</b> </h6>' +
-                                        '        ' + text + '<br>' +
-                                        '        <small class="pull-right text-muted">' + dateSt + '</small>' +
-                                        '    </div>';
-                                $("#messageBox").append(html);
-                                $('#messageBox').animate({
-                                    scrollTop: $("#messageBox").offset().top + $("#messageBox")[0].scrollHeight
-                                }, 500);
-                                $("#messagetext").val('');
-                            } else {
-                                alert("failed");
+                    if (text.length == 0) {
+                        alert("Please enter some text.");
+                    } else {
+                        var send_acc_id = '${ac.acc_id}';
+                        var to_acc_id = '${to_acc_id}';
+                        var d = new Date();
+                        var dateSt = d.getFullYear() + "-" + ('0' + (d.getMonth() + 1)).slice(-2) + "-" + ('0' + d.getDate()).slice(-2) + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getMilliseconds();
+                        $.ajax({
+                            type: 'POST',
+                            url: "smessage",
+                            data: {text: text, send_acc_id: send_acc_id, to_acc_id: to_acc_id},
+                            success: function(data) {
+                                if (data == "success") {
+                                    var html = '<div class="pull-right col-md-5 st-message">' +
+                                            '        <h6><b>${ac.firstname} ${ac.lastname}</b> </h6>' +
+                                            '        ' + text + '<br>' +
+                                            '        <small class="pull-right text-muted">' + dateSt + '</small>' +
+                                            '    </div>';
+                                    $("#messageBox").append(html);
+                                    $('#messageBox').animate({
+                                        scrollTop: $("#messageBox").offset().top + $("#messageBox")[0].scrollHeight
+                                    }, 500);
+                                    $("#messagetext").val('');
+                                } else {
+                                    alert("failed");
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
+
                 });
             });
             function getMessage(t) {

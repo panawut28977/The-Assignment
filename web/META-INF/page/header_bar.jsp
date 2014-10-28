@@ -36,13 +36,10 @@
 <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header ">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse-menu">
-                <span class="sr-only">Open menu</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="AllAnnounce">The Assignment</a>
+            <a class="navbar-brand" href="AllAnnounce" style="padding-top: 10px;">
+                <img src="img/Assignment-Logo_edit.png" width="40"/>
+                The Assignment
+            </a>
         </div>
 
         <div class="collapse navbar-collapse" style="padding-left: 0;" id="collapse-menu">

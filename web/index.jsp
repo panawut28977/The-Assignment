@@ -38,14 +38,19 @@
     <body>
         <nav class="navbar navbar-default" role="navigation">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">The Assignment</a>
+                <a class="navbar-brand" href="#" style="padding-top: 10px;">
+                      <img src="img/Assignment-Logo_edit.png" width="40" />
+                      The Assignment
+                </a>
             </div>
             <!--<p class="navbar-text navbar-right" style="padding-right: 10px"><b>Final project: IT 54-27</b></p>-->
         </nav>
         <div class="container-fluid" style="margin-top: 10%">
             <div class="row">
                 <div class="col-md-6 col-md-offset-1" style="color: white">
-                    <p style="font-size: 60px;font-weight: bold;text-shadow: 2px 5px 8px #72485a;">The Assignment</p> 
+                    <p style="font-size: 60px;font-weight: bold;text-shadow: 2px 5px 8px #72485a;">
+                        <img src="img/Assignment-Logo_edit-2-shadow.png" width="150"/> The Assignment
+                    </p> 
                     <p style="font-size: 36px;text-shadow: 2px 5px 8px #72485a;">Let us be a part of your education.</p>
                 </div> 
                 <%@include file="META-INF/page/login.jsp" %>
