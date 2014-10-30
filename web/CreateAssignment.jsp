@@ -416,6 +416,15 @@
                                             });
 
 
+                                            // on unload page
+                                            window.onbeforeunload = function() {
+                                                if ($("#myWizard input").filter(function() {
+                                                    return $.trim($(this).val()).length > 0
+                                                }).length > 0) {
+                                                    return "You have not created your assignment. Do you want to leave without created?";
+                                                }
+                                            }
+
                                         });
                                         function compareView() {
                                             $('#compareBox').show();
