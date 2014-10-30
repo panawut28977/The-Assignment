@@ -1,31 +1,67 @@
+
 <!DOCTYPE html> 
 <html> 
-<head> 
-  <title>My Page</title> 
-  <meta name="viewport" content="initial-scale=1.0">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <link rel="stylesheet" href="jquery.mobile-1.4.2.css" />
-  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-  <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
-</head> 
-<body> 
+    <head> 
+        <title>My Page</title> 
+        <meta name="viewport" content="initial-scale=1.0">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <!--        <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/css/jquery.mobile-1.4.2.css" />
+                <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/css/font-awesome.min.css"/>-->
+        <link rel="stylesheet" href="css/jquery.mobile-1.4.2.css"/>
+        <link rel="stylesheet" href="css/font-awesome.min.css"/>
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+    </head> 
+    <body> 
 
-<div data-role="page" class="jqm-demos ui-responsive-panel">
-<br/><br/><br/><br/>
-	<center><img src="60223.jpg" width="150" height="150">
-    <br/><h1 align="center">The Assignment</h1><br/>
-    <div style="padding: 15px;width: 350px;background: #EEEEF6;border:#999 thin solid">
-	<div class="ui-dialog" style="width:300px">
-    	<input type="email" name="email" placeholder="E-mail"/>
- 		<input type="password" name="password" placeholder="Password"/>
-        <a href="Index.html"><input type="button" style="background-color:#385DB3" value="Sign in"/></a>
-        <a href="#">Forget your password?</a>
-            </div>
-            </div>
-    
-</center>
-</div><!-- /page -->
+        <div data-role="page" class="jqm-demos ui-responsive-panel">
+            <br/><br/><br/><br/>
+            <center><img src="../img/Assignment-Logo_edit-2-shadow.png" width="330" height="250">
+                <br/><h1 align="center">The Assignment</h1><br/>
+                <div style="padding: 15px;width: 350px;background: #EEEEF6;border:#999 thin solid">
+                    <div class="ui-dialog" style="width:300px">
+                        <input type="email" id="email" placeholder="E-mail"/>
+                        <input type="password" id="password" placeholder="Password"/>
+                        <input type="submit" style="background-color:#385DB3" value="Sign in" id="login"/></a>
+                        <a href="#">Forget your password?</a>
+                    </div>
+                </div>
 
-</body>
+            </center>
+        </div><!-- /page -->
+
+    </body>
+    <script>
+        $(document).ready(function () {
+            $('#login').click(function () {
+                var email = $('#email').val();
+                var password = $('#password').val();
+                $.ajax({
+                    type: "POST",
+//                    url: "http://jsp.chaninz.com/tasm/LoginMobile",
+                    url: "http://localhost:8084/TheAssignment/LoginMobile",
+                    data: {"email": email, "password": password},
+                    success: function (data) {
+                        if (data != null) {
+                            sessionStorage.setItem('accID', data.acc_id);
+                            sessionStorage.setItem('fName', data.firstname);
+                            sessionStorage.setItem('lName', data.lastname);
+                            sessionStorage.setItem('pic', data.profile_pic);
+                            sessionStorage.setItem('cList', JSON.stringify(data.CourseList));
+                            if (data.account_type == 'ST') {
+//                                $(location).attr('href', 'http://jsp.chaninz.com/tasm/Mobile/index.html');
+                                $(location).attr('href', 'index.html');
+                            } else if (data.account_type == 'TH') {
+//                                $(location).attr('href', 'http://jsp.chaninz.com/tasm/Mobile/indexTeacher.html');
+                                $(location).attr('href', 'indexTeacher.html');
+                            }
+                        } else {
+                            alert('Please try again...');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 </html>

@@ -4,8 +4,8 @@
         <meta name="viewport" content="initial-scale=1.0">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/css/jquery.mobile-1.4.2.css" />
-        <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="css/jquery.mobile-1.4.2.css" />
+        <link rel="stylesheet" href="css/font-awesome.min.css"/>
 
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
@@ -15,7 +15,7 @@
         <div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-fixed-page1" data-title="Panel fixed positioning">
             <div data-role="header" data-position="fixed">
                 <center>
-                    <a href="index.html" rel="external" and data-ajax="false"><span class="fa fa-home fa-2x" style="alignment-adjust:auto;padding-right:25px;padding-top:15px;padding-bottom:15px"></span></a>
+                    <a href="indexTeacher.html" rel="external" and data-ajax="false"><span class="fa fa-home fa-2x" style="alignment-adjust:auto;padding-right:25px;padding-top:15px;padding-bottom:15px"></span></a>
                     <span class="fa fa-globe fa-2x"></span></center>
                 <a href="#nav-panel"><i class="fa fa-bars fa-2x"></i></a>
                 <div style="padding: 5px;width: auto;background: #E2E2E2;">
@@ -49,7 +49,7 @@
                         <b style="color:white" id="lName"></b>
                     </li>
                     <li>
-                        <a href="http://jsp.chaninz.com/tasm/Mobile/JoinCourseTeacher.html" rel="external" and data-ajax="false">Join Course &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="JoinCourseTeacher.html" rel="external" and data-ajax="false">Join Course &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <div class="fa fa-plus fa-2x"></div>
                         </a>
                     </li>
@@ -59,8 +59,8 @@
             <div data-position="fixed" data-tap-toggle="false" data-role="footer" data-tap-toggle="false" >
                 <div data-role="navbar">
                     <ul>
-                        <li><a href="http://jsp.chaninz.com/tasm/Mobile/indexTeacher.html" rel="external" and data-ajax="false"><i class="fa fa-newspaper-o fa-2x"></i></a></li>
-                        <li><a href="http://jsp.chaninz.com/tasm/Mobile/AssignmentTeacher.html" rel="external" and data-ajax="false"><i class="fa fa-file-text fa-2x"></i></a></li></ul>
+                        <li><a href="indexTeacher.html" rel="external" and data-ajax="false"><i class="fa fa-newspaper-o fa-2x"></i></a></li>
+                        <li><a href="AssignmentTeacher.html" rel="external" and data-ajax="false"><i class="fa fa-file-text fa-2x"></i></a></li></ul>
                 </div>
             </div>
 
@@ -86,13 +86,13 @@
                 }
                 $(".cLink").click(function() {
                     sessionStorage.setItem('cID', $(this).attr("data-id"));
-                    $(location).attr('href', 'http://jsp.chaninz.com/tasm/Mobile/AssignmentInCourse.html');
+                    $(location).attr('href', 'AssignmentInCourseTeacher.html');
                 });
             }
             $("#lcList").append('<li class="logOut"><a href="#" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Log Out <div style="padding-left:50px" class="fa fa-power-off fa-2x"></div> </a></li>');
             $(".logOut").click(function() {
                 sessionStorage.clear();
-                $(location).attr('href', 'http://jsp.chaninz.com/tasm/Mobile/Home.html');
+                $(location).attr('href', 'Home.html');
             });
             
             $('#jCourse').click(function () {
@@ -104,7 +104,7 @@
 //                    alert($('#code').val());
                     $.ajax({
                         type: "POST",
-                        url: "http://jsp.chaninz.com/tasm/checkCode",
+                        url: "http://localhost:8084/TheAssignment/checkCode",
                         data: {code: $('#code').val()},
                         success: function (data) {
                             console.log(data);
@@ -120,7 +120,7 @@
             if(CourseCode == '0')
                 alert("Invalid Course Code");
             else
-                location.href = "http://jsp.chaninz.com/tasm/Mobile/JoinCourseDetail.html";
+                location.href = "JoinCourseDetailTeacher.html";
         }
     </script>
 </html>

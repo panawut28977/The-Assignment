@@ -12,10 +12,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,10 +29,8 @@ public class Announcement {
     private String title;
     private String content;
     private Timestamp announce_date;
-    
-    //mobile attr
     private String course_name;
-    
+
     public int getAn_id() {
         return an_id;
     }
@@ -83,7 +78,7 @@ public class Announcement {
     public void setAnnounce_date(Timestamp announce_date) {
         this.announce_date = announce_date;
     }
-
+    
     public String getCourse_name() {
         return course_name;
     }
@@ -92,8 +87,6 @@ public class Announcement {
         this.course_name = course_name;
     }
 
-    
-    
     public static List<Announcement> viewAnnByAccID(int acc_id) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select a.*  from announcement a "
@@ -117,39 +110,6 @@ public class Announcement {
                 a.setContent(rs.getString("content"));
                 a.setTitle(rs.getString("title"));
                 ann.add(a);
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return ann;
-    }
-    
-    public static Map<Course,Announcement> viewAnnByAccIDMap(int acc_id) {
-        Connection conn = ConnectionBuilder.getConnection();
-        
-        String sql = "select a.*  from announcement a "
-                + "JOIN account_course ac "
-                + "On a.course_id = ac.course_id "
-                + "where ac.acc_id = ? AND status = 'approved' "
-                + "order by announce_date desc";
-        PreparedStatement pstm;
-        Map<Course,Announcement> ann = new HashMap<Course,Announcement>();
-        Announcement a = null;
-        try {
-            pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, acc_id);
-            ResultSet rs = pstm.executeQuery();
-            while (rs.next()) {
-                a = new Announcement();
-                a.setAn_acc(Account.getAccountByID(rs.getInt("acc_id")));
-                a.setCourse(rs.getInt("course_id"));
-                a.setAn_id(rs.getInt("an_id"));
-                a.setAnnounce_date(rs.getTimestamp("announce_date"));
-                a.setContent(rs.getString("content"));
-                a.setTitle(rs.getString("title"));
-                Course c = new Course(Course.getCourseNameByID(a.getCourse()));
-                ann.put(c, a);
             }
             conn.close();
         } catch (SQLException ex) {

@@ -34,7 +34,7 @@ public class showAnnounceTeacher extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        List<Announcement> ac = Announcement.viewAnnByAccID(id);
+        List<Announcement> ac = Announcement.viewAnnByAccIDMobile(id);
         
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
