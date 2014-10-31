@@ -32,6 +32,10 @@ public class Notification {
     private String link;
     private Timestamp noti_date;
     private int receive_list_id;
+    
+    //attr mobile
+    private String course_name;
+    private String datefm;
 
     public int getNoti_id() {
         return noti_id;
@@ -97,6 +101,22 @@ public class Notification {
         this.receive_list_id = receive_list_id;
     }
 
+    public String getCourse_name() {
+        return course_name;
+    }
+
+    public void setCourse_name(String course_name) {
+        this.course_name = course_name;
+    }
+
+    public String getDatefm() {
+        return datefm;
+    }
+
+    public void setDatefm(String datefm) {
+        this.datefm = datefm;
+    }
+
     public static int announce(Notification n, List<Integer> acc_id) {
         Connection conn = ConnectionBuilder.getConnection();
         int last_id = getLastReceive_list_id() + 1;
@@ -131,34 +151,25 @@ public class Notification {
         return result;
     }
 
-    public static Map<Integer, String> getNotify(int receive_id) {
+    public static int getTotalNotify(int receive_id) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select n.noti_id,n.type from notification n join receive_noti_id r on n.receive_list_id = r.receive_list_id where r.acc_id=? and r.seen_date is null";
-        Map<Integer, String> notiMap = new HashMap<>();
+        String sql = "select count(n.noti_id) from notification n join receive_noti_id r on n.receive_list_id = r.receive_list_id where r.acc_id=? and r.seen_date is null";
         PreparedStatement pstm;
-        Notification n = null;
+        int total = 0;
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, receive_id);
             ResultSet rs = pstm.executeQuery();
-            while (rs.next()) {
-//                n= new Notification();
-//                n.setAcc_id(rs.getInt("acc_id"));
-//                n.setLink(rs.getString("link"));
-//                n.setNoti_date(rs.getDate("noti_date"));
-//                n.setNoti_id(rs.getInt("noti_id"));
-//                n.setText(rs.getString("text"));
-//                n.setType(rs.getString("type"));
-//                n.setReceive_list_id(rs.getInt("receive_list_id"));
-//                notiList.add(n);
-                notiMap.put(rs.getInt("noti_id"), rs.getString("type"));
+            if (rs.next()) {
+                total= rs.getInt(1);
             }
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return notiMap;
+        return total;
     }
+    
 
     public static int getLastReceive_list_id() {
         String e = null;
@@ -371,8 +382,10 @@ public class Notification {
                 n = new Notification();
                 n.setAcc_id(rs.getInt("acc_id"));
                 n.setCourse_id(rs.getInt("course_id"));
+                n.setCourse_name(Course.getCourseNameByID(n.getCourse_id()));
                 n.setLink(rs.getString("link"));
                 n.setNoti_date(rs.getTimestamp("noti_date"));
+                n.setDatefm(util.Util.formatTime(n.getNoti_date()+""));
                 n.setNoti_id(rs.getInt("noti_id"));
                 n.setText(rs.getString("text"));
                 n.setType(rs.getString("type"));

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html> 
 <html><head> 
         <title>My Page</title> 
@@ -6,14 +5,15 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <!--        <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/css/jquery.mobile-1.4.2.css" />-->
-        <link rel="stylesheet" href="css/jquery.mobile-1.4.2.css"/>
         <link rel="stylesheet" href="css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="css/jquery.mobile-1.4.2.css" />
         <!--        <link rel="stylesheet" href="css/notiCSS.css"/>-->
         <!--        <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/css/font-awesome.min.css"/>
                 <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/css/notiCSS.css"/>-->
 
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+        <script src="js/main.js"></script>
         <style>
             .ui-popup-container, .ui-popup {
                 height: 98%;
@@ -22,6 +22,10 @@
                 top:0;
                 left:0;
             }
+
+            center a{
+                text-decoration: none;
+            }
         </style>
     </head> 
     <body>
@@ -29,138 +33,139 @@
             <div data-role="header" data-position="fixed">
                 <center>
                     <a href="index.html" rel="external" and data-ajax="false">
-                        <span class="fa fa-home fa-2x" style="alignment-adjust:auto;padding-right:25px;padding-top:15px;padding-bottom:15px"></span>
+                        <span class="fa fa-home fa-2x" style="alignment-adjust:auto;padding-left:25px;padding-top:15px;padding-bottom:15px"></span>
+                    </a> <!--                    <span id="notificationLink" class="fa fa-globe fa-2x"></span>-->
+                    <a href="#sql" id="opendialog" data-rel="popup" data-transition="pop" style="padding-left:20px" >
+                        <i class="fa fa-globe fa-2x"></i> 
+                        <span style="font-size:25px" id="noti"></span>
                     </a>
-                    <!--                    <span id="notificationLink" class="fa fa-globe fa-2x"></span>-->
-                    <a href="#sql" id="opendialog" data-rel="popup" data-transition="pop"><i class="fa fa-globe fa-2x"></i></a>
                 </center>
 
                 <!--                <div id="notificationContainer" style="margin: auto">
-                                    <div id="notificationTitle">Notifications</div>
-                                    <div id="notificationsBody" class="notifications">
-                                        <div style="margin: auto;border: 1px">You have new Assignment</div>
-                                        <div style="margin: auto;border: 1px">You have new Assignment</div>
-                                        <div style="margin: auto;border: 1px">You have new Assignment</div>
-                                        <div style="margin: auto;border: 1px">You have new Assignment</div>
-                                    </div>
-                                    <div id="notificationFooter"><a href="#">See All</a></div>
-                                </div>-->
+                                <div id="notificationTitle">Notifications</div>
+                                <div id="notificationsBody" class="notifications">
+                                    <div style="margin: auto;border: 1px">You have new Assignment</div>
+                                    <div style="margin: auto;border: 1px">You have new Assignment</div>
+                                    <div style="margin: auto;border: 1px">You have new Assignment</div>
+                                    <div style="margin: auto;border: 1px">You have new Assignment</div>
+                                </div>
+                                <div id="notificationFooter"><a href="#">See All</a></div>
+                            </div>-->
 
                 <div data-role="popup" id="sql" data-dismissible="false" style="max-width:100%;overflow-y:auto">
-                    <div data-role="header" data-theme="a">
-                        <h1>Notifications <a data-rel="back" class="fa fa-arrow-circle-o-left fa-2x" style="position: fixed;top: 0.3em;right: 2em"></a></h1>
-
+                    <div data-role="header" data-theme="a" >
+                        <h1>Notifications <a data-rel="back" class="fa fa-remove fa-2x" style="position: fixed;top: 0.3em;right: 2em"></a></h1>
                     </div>
                     <div role="main" class="ui-content" style="border-bottom: solid #DDDDDD;background-color: #F4F6F9">
                         <div class="ui-grid-a" style="padding:1px;width:auto;">
 
-                                <div class="ui-block-a ui-bar" style="width: 20%"><img src="Alliance.png" width="70px" height="80px"/></div>
-                                <br/><div class="ui-block-b" style="width: 80%"><span style="font-size: larger">Your request to join <b>"Web Programming(JSP)"</b> is approved</span></div>
+                            <div class="ui-block-a ui-bar" style="width: 20%"><img src="Alliance.png" width="70px" height="80px"/></div>
+                            <br/><div class="ui-block-b" style="width: 80%"><span style="font-size: larger">Your request to join <b>"Web Programming(JSP)"</b> is approved</span></div>
                         </div>
                     </div>
                     <div role="main" class="ui-content" style="border-bottom: solid #DDDDDD;background-color: #f0f0f0">
                         <div class="ui-grid-a" style="padding:1px;width:auto;">
 
-                                <div class="ui-block-a ui-bar" style="width: 20%"><img src="Alliance.png" width="70px" height="80px"/></div>
-                                <br/><div class="ui-block-b" style="width: 80%"><span style="font-size: larger">Your request to join <b>"Web Programming(JSP)"</b> is approved</span></div>
+                            <div class="ui-block-a ui-bar" style="width: 20%"><img src="Alliance.png" width="70px" height="80px"/></div>
+                            <br/><div class="ui-block-b" style="width: 80%"><span style="font-size: larger">Your request to join <b>"Web Programming(JSP)"</b> is approved</span></div>
                         </div>
                     </div>
                     <div role="main" class="ui-content" style="border-bottom: solid #DDDDDD;background-color: #F4F6F9">
                         <div class="ui-grid-a" style="padding:1px;width:auto;">
 
-                                <div class="ui-block-a ui-bar" style="width: 20%"><img src="Alliance.png" width="70px" height="80px"/></div>
-                                <br/><div class="ui-block-b" style="width: 80%"><span style="font-size: larger">Your request to join <b>"Web Programming(JSP)"</b> is approved</span></div>
+                            <div class="ui-block-a ui-bar" style="width: 20%"><img src="Alliance.png" width="70px" height="80px"/></div>
+                            <br/><div class="ui-block-b" style="width: 80%"><span style="font-size: larger">Your request to join <b>"Web Programming(JSP)"</b> is approved</span></div>
                         </div>
                     </div>
                     <div role="main" class="ui-content" style="border-bottom: solid #DDDDDD;background-color: #F4F6F9">
                         <div class="ui-grid-a" style="padding:1px;width:auto;">
 
-                                <div class="ui-block-a ui-bar" style="width: 20%"><img src="Alliance.png" width="70px" height="80px"/></div>
-                                <br/><div class="ui-block-b" style="width: 80%"><span style="font-size: larger">Your request to join <b>"Web Programming(JSP)"</b> is approved</span></div>
+                            <div class="ui-block-a ui-bar" style="width: 20%"><img src="Alliance.png" width="70px" height="80px"/></div>
+                            <br/><div class="ui-block-b" style="width: 80%"><span style="font-size: larger">Your request to join <b>"Web Programming(JSP)"</b> is approved</span></div>
                         </div>
                     </div>
                     <div role="main" class="ui-content" style="border-bottom: solid #DDDDDD;background-color: #F4F6F9">
                         <div class="ui-grid-a" style="padding:1px;width:auto;">
 
-                                <div class="ui-block-a ui-bar" style="width: 20%"><img src="Alliance.png" width="70px" height="80px"/></div>
-                                <br/><div class="ui-block-b" style="width: 80%"><span style="font-size: larger">Your request to join <b>"Web Programming(JSP)"</b> is approved</span></div>
+                            <div class="ui-block-a ui-bar" style="width: 20%"><img src="Alliance.png" width="70px" height="80px"/></div>
+                            <br/><div class="ui-block-b" style="width: 80%"><span style="font-size: larger">Your request to join <b>"Web Programming(JSP)"</b> is approved</span></div>
                         </div>
                     </div>
                     <div role="main" class="ui-content" style="border-bottom: solid #DDDDDD;background-color: #F4F6F9">
                         <div class="ui-grid-a" style="padding:1px;width:auto;">
 
-                                <div class="ui-block-a ui-bar" style="width: 20%"><img src="Alliance.png" width="70px" height="80px"/></div>
-                                <br/><div class="ui-block-b" style="width: 80%"><span style="font-size: larger">Your request to join <b>"Web Programming(JSP)"</b> is approved</span></div>
+                            <div class="ui-block-a ui-bar" style="width: 20%"><img src="Alliance.png" width="70px" height="80px"/></div>
+                            <br/><div class="ui-block-b" style="width: 80%"><span style="font-size: larger">Your request to join <b>"Web Programming(JSP)"</b> is approved</span></div>
                         </div>
                     </div>
                     <div role="main" class="ui-content" style="border-bottom: solid #DDDDDD;background-color: #F4F6F9">
                         <div class="ui-grid-a" style="padding:1px;width:auto;">
 
-                                <div class="ui-block-a ui-bar" style="width: 20%"><img src="Alliance.png" width="70px" height="80px"/></div>
-                                <br/><div class="ui-block-b" style="width: 80%"><span style="font-size: larger">Your request to join <b>"Web Programming(JSP)"</b> is approved</span></div>
+                            <div class="ui-block-a ui-bar" style="width: 20%"><img src="Alliance.png" width="70px" height="80px"/></div>
+                            <br/><div class="ui-block-b" style="width: 80%"><span style="font-size: larger">Your request to join <b>"Web Programming(JSP)"</b> is approved</span></div>
                         </div>
                     </div>
                     <div role="main" class="ui-content" style="border-bottom: solid #DDDDDD;background-color: #F4F6F9">
                         <div class="ui-grid-a" style="padding:1px;width:auto;">
 
-                                <div class="ui-block-a ui-bar" style="width: 20%"><img src="Alliance.png" width="70px" height="80px"/></div>
-                                <br/><div class="ui-block-b" style="width: 80%"><span style="font-size: larger">Your request to join <b>"Web Programming(JSP)"</b> is approved</span></div>
+                            <div class="ui-block-a ui-bar" style="width: 20%"><img src="Alliance.png" width="70px" height="80px"/></div>
+                            <br/><div class="ui-block-b" style="width: 80%"><span style="font-size: larger">Your request to join <b>"Web Programming(JSP)"</b> is approved</span></div>
                         </div>
                     </div>
                     <div role="main" class="ui-content" style="border-bottom: solid #DDDDDD;background-color: #F4F6F9">
                         <div class="ui-grid-a" style="padding:1px;width:auto;">
 
-                                <div class="ui-block-a ui-bar" style="width: 20%"><img src="Alliance.png" width="70px" height="80px"/></div>
-                                <br/><div class="ui-block-b" style="width: 80%"><span style="font-size: larger">Your request to join <b>"Web Programming(JSP)"</b> is approved</span></div>
+                            <div class="ui-block-a ui-bar" style="width: 20%"><img src="Alliance.png" width="70px" height="80px"/></div>
+                            <br/><div class="ui-block-b" style="width: 80%"><span style="font-size: larger">Your request to join <b>"Web Programming(JSP)"</b> is approved</span></div>
                         </div>
                     </div>
                     <div role="main" class="ui-content" style="border-bottom: solid #DDDDDD;background-color: #F4F6F9">
                         <div class="ui-grid-a" style="padding:1px;width:auto;">
 
-                                <div class="ui-block-a ui-bar" style="width: 20%"><img src="Alliance.png" width="70px" height="80px"/></div>
-                                <br/><div class="ui-block-b" style="width: 80%"><span style="font-size: larger">Your request to join <b>"Web Programming(JSP)"</b> is approved</span></div>
+                            <div class="ui-block-a ui-bar" style="width: 20%"><img src="Alliance.png" width="70px" height="80px"/></div>
+                            <br/><div class="ui-block-b" style="width: 80%"><span style="font-size: larger">Your request to join <b>"Web Programming(JSP)"</b> is approved</span></div>
                         </div>
                     </div>
                     <div role="main" class="ui-content" style="border-bottom: solid #DDDDDD;background-color: #F4F6F9">
                         <div class="ui-grid-a" style="padding:1px;width:auto;">
 
-                                <div class="ui-block-a ui-bar" style="width: 20%"><img src="Alliance.png" width="70px" height="80px"/></div>
-                                <br/><div class="ui-block-b" style="width: 80%"><span style="font-size: larger">Your request to join <b>"Web Programming(JSP)"</b> is approved</span></div>
+                            <div class="ui-block-a ui-bar" style="width: 20%"><img src="Alliance.png" width="70px" height="80px"/></div>
+                            <br/><div class="ui-block-b" style="width: 80%"><span style="font-size: larger">Your request to join <b>"Web Programming(JSP)"</b> is approved</span></div>
                         </div>
                     </div>
                     <div role="main" class="ui-content" style="border-bottom: solid #DDDDDD;background-color: #F4F6F9">
                         <div class="ui-grid-a" style="padding:1px;width:auto;">
 
-                                <div class="ui-block-a ui-bar" style="width: 20%"><img src="Alliance.png" width="70px" height="80px"/></div>
-                                <br/><div class="ui-block-b" style="width: 80%"><span style="font-size: larger">Your request to join <b>"Web Programming(JSP)"</b> is approved</span></div>
+                            <div class="ui-block-a ui-bar" style="width: 20%"><img src="Alliance.png" width="70px" height="80px"/></div>
+                            <br/><div class="ui-block-b" style="width: 80%"><span style="font-size: larger">Your request to join <b>"Web Programming(JSP)"</b> is approved</span></div>
                         </div>
                     </div>
                     <div role="main" class="ui-content" style="border-bottom: solid #DDDDDD;background-color: #F4F6F9">
                         <div class="ui-grid-a" style="padding:1px;width:auto;">
 
-                                <div class="ui-block-a ui-bar" style="width: 20%"><img src="Alliance.png" width="70px" height="80px"/></div>
-                                <br/><div class="ui-block-b" style="width: 80%"><span style="font-size: larger">Your request to join <b>"Web Programming(JSP)"</b> is approved</span></div>
+                            <div class="ui-block-a ui-bar" style="width: 20%"><img src="Alliance.png" width="70px" height="80px"/></div>
+                            <br/><div class="ui-block-b" style="width: 80%"><span style="font-size: larger">Your request to join <b>"Web Programming(JSP)"</b> is approved</span></div>
                         </div>
                     </div>
                     <div role="main" class="ui-content" style="border-bottom: solid #DDDDDD;background-color: #F4F6F9">
                         <div class="ui-grid-a" style="padding:1px;width:auto;">
 
-                                <div class="ui-block-a ui-bar" style="width: 20%"><img src="Alliance.png" width="70px" height="80px"/></div>
-                                <br/><div class="ui-block-b" style="width: 80%"><span style="font-size: larger">Your request to join <b>"Web Programming(JSP)"</b> is approved</span></div>
+                            <div class="ui-block-a ui-bar" style="width: 20%"><img src="Alliance.png" width="70px" height="80px"/></div>
+                            <br/><div class="ui-block-b" style="width: 80%"><span style="font-size: larger">Your request to join <b>"Web Programming(JSP)"</b> is approved</span></div>
                         </div>
                     </div>
                     <div role="main" class="ui-content" style="border-bottom: solid #DDDDDD;background-color: #F4F6F9">
                         <div class="ui-grid-a" style="padding:1px;width:auto;">
 
-                                <div class="ui-block-a ui-bar" style="width: 20%"><img src="Alliance.png" width="70px" height="80px"/></div>
-                                <br/><div class="ui-block-b" style="width: 80%"><span style="font-size: larger">Your request to join <b>"Web Programming(JSP)"</b> is approved</span></div>
+                            <div class="ui-block-a ui-bar" style="width: 20%"><img src="Alliance.png" width="70px" height="80px"/></div>
+                            <br/><div class="ui-block-b" style="width: 80%"><span style="font-size: larger">Your request to join <b>"Web Programming(JSP)"</b> is approved</span></div>
                         </div>
                     </div>
                     <div role="main" class="ui-content" style="border-bottom: solid #DDDDDD;background-color: #F4F6F9">
                         <div class="ui-grid-a" style="padding:1px;width:auto;">
 
-                                <div class="ui-block-a ui-bar" style="width: 20%"><img src="Alliance.png" width="70px" height="80px"/></div>
-                                <br/><div class="ui-block-b" style="width: 80%"><span style="font-size: larger">Your request to join <b>"Web Programming(JSP)"</b> is approved</span></div>
+                            <div class="ui-block-a ui-bar" style="width: 20%"><img src="Alliance.png" width="70px" height="80px"/></div>
+                            <br/><div class="ui-block-b" style="width: 80%"><span style="font-size: larger">Your request to join <b>"Web Programming(JSP)"</b> is approved</span></div>
                         </div>
                     </div>
 
@@ -275,6 +280,15 @@
                     y: 0
                 });
             });
+            
+//               var eventSource = new EventSource("http://jsp.chaninz.com/tasm/getNotificationMobile");
+//            eventSource.addEventListener('notificationsBody', function(event) {
+//            console.log(event.data);
+//            if (event.data == 0) {
+//                $("#notificationsBody").addClass("hide");
+//            } else {
+//                $("#notificationsBody").text(event.data).removeClass("hide");
+//            }
 
 //            var eventSource = new EventSource("http://jsp.chaninz.com/tasm/getNotificationMobile");
 //            eventSource.addEventListener('notificationsBody', function(event) {
@@ -330,6 +344,6 @@
 //            });
 //
 //        });
-
+        
     </script>
 </html>

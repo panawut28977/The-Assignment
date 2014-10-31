@@ -21,7 +21,8 @@
                             <a href="${n.link}">
                                 <span class="label label-default">${cf:getCourseNameByID(n.course_id)}</span>
                             </a>
-                            <small class="pull-right">${cf:formatTime(n.noti_date)}</small></h2>
+                            <small class="pull-right">${cf:formatTime(n.noti_date)}</small>
+                        </h2>
                     <!--<p>${n.text}</p>-->
                     </div>
                 </div>
