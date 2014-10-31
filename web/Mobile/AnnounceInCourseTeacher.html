@@ -1,0 +1,186 @@
+<!DOCTYPE html> 
+<html><head> 
+        <title>My Page</title> 
+        <meta name="viewport" content="initial-scale=1.0">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <!--        <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/css/jquery.mobile-1.4.2.css" />
+                <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/css/font-awesome.min.css"/>-->
+        <link rel="stylesheet" href="css/jquery.mobile-1.4.2.css"/>
+        <link rel="stylesheet" href="css/font-awesome.min.css"/>
+
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+    </head> 
+    <body>
+        <div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-fixed-page1" data-title="Panel fixed positioning">
+            <div data-role="header" data-position="fixed">
+                <center>
+                    <!--                    <a href="http://jsp.chaninz.com/tasm/Mobile/index.html" rel="external" and data-ajax="false">-->
+                    <a href="index.html" rel="external" and data-ajax="false">
+                        <span class="fa fa-home fa-2x" style="alignment-adjust:auto;padding-right:25px;padding-top:15px;padding-bottom:15px"></span></a>
+                    <span class="fa fa-globe fa-2x"></span></center>
+                <a href="#nav-panel"><i class="fa fa-bars fa-2x"></i></a>
+                <div style="padding: 5px;width: auto;background: #E2E2E2;">
+                    <input type="search" name="search" id="filter" placeholder="Filter..."/>
+                </div>
+            </div><!-- /header -->
+
+            <div style="background-color:white ;padding:1px;width:auto;">
+                <div style="margin-left:15px;color:#999">
+                    <h3 align="center" id="courseName">
+                        <!--                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <div class="fa fa-gear fa-2x"></div></h3>-->
+                </div>
+            </div>
+
+            <div id="add-test"></div>
+
+
+            <div data-role="panel" data-position-fixed="true" data-display="overlay"  id="nav-panel">
+                <ul data-role="listview" id="lcList">
+                    <li style="background-color:#00F">
+                        <img src="" id ="dPIC" width="100" height="100" style="alignment-adjust:top"/>&nbsp;
+                        <b style="color:white" id="fName"></b><br/>
+                        <b style="color:white" id="lName"></b>
+                    </li>
+                    <li>
+                        <!--                        <a href="http://jsp.chaninz.com/tasm/Mobile/JoinCourse.html" rel="external" and data-ajax="false">Join Course &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+                        <a href="JoinCourseTeacher.html" rel="external" and data-ajax="false">Join Course &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    
+                            <div class="fa fa-plus fa-2x"></div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div data-position="fixed" data-tap-toggle="false" data-role="footer" data-tap-toggle="false" >
+                <div data-role="navbar" id="navbar2">
+                    <ul id="bottomMenu">
+                        <li><a href="indexTeacher.html" rel="external" and data-ajax="false"><i class="fa fa-newspaper-o fa-2x"></i></a></li>
+                        <li><a href="AssignmentInCourseTeacher.html" rel="external" and data-ajax="false" class="ui-btn-active"><i class="fa fa-file-text fa-2x"></i></a></li>
+
+                    </ul>
+                </div>
+                <div data-role="navbar" id="navbar3">
+                    <ul id="bottomMenu">
+                        <li><a href="indexTeacher.html" rel="external" and data-ajax="false"><i class="fa fa-newspaper-o fa-2x"></i></a></li>
+                        <li><a href="AssignmentTeacher.html" rel="external" and data-ajax="false" class="ui-btn-active"><i class="fa fa-file-text fa-2x"></i></a></li>
+                        <li id="scorebtn"><a href="TeacherScore.html" rel="external" and data-ajax="false"><i class="fa fa-bar-chart fa-2x"></i></a></li>
+                        <li><a href="#sql" id="opendialog" data-rel="popup" data-transition="pop"><i class="fa fa-pencil-square fa-2x"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div data-role="popup" id="sql" data-dismissible="false" style="max-width:100%">
+                <div data-role="header" data-theme="a">
+                    <h1>Want to say? </h1>
+
+                </div>
+                <div role="main" class="ui-content">
+                    <textarea style="height: 400px !important;" id="content" placeholder="Type it in here."></textarea><br/>
+                    <center>
+                        <a href="#" id="addIt" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b"  data-transition="flow">Announce IT!</a>
+                        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-rel="back">Cancel</a>
+                    </center>
+                </div>
+            </div>
+
+        </div>
+
+    </body>
+    <script type="text/javascript">
+        var cID = sessionStorage.getItem('cID');
+        var accID = sessionStorage.getItem('accID');
+//        $.getJSON('http://jsp.chaninz.com/tasm/showAssignmentInCourse?id=' + id, function (result) {
+        $.getJSON('http://localhost:8084/TheAssignment/showAnnouncementInCourseMobile?cID=' + cID, function (result) {
+            var i = 1;
+            $(result).each(function (k, v) {
+                $(
+                            '<div class="am" style="background-color:#' + (i % 2 == 0 ? 'FFFFFF' : 'F4F4F4') + ' ;padding:1px;width:auto;">' +
+                            '<div style="margin-left:15px">' +
+                            '<h4>' + v.an_acc.firstname + ' ' + v.an_acc.lastname + ' : ' + v.course_name + '</h4> ' +
+                            '<p>' + v.announce_date + '</p>' +
+//                            '<p>' +  v.an_acc.firstname + ' ' + v.an_acc.lastname + '</p>' +
+                            '<p>' + v.content + '</p>' +
+                            '</div>' +
+                            '</div>').insertBefore($('#add-test'));
+                    i += 1;
+            });
+            
+            if (sessionStorage.getItem('role') == 'TH') {
+                $('#navbar2').hide();
+                $('#navbar3').show();
+                $('#AnnButton').show();
+            } else {
+                $('#navbar3').hide();
+                $('#navbar2').show();
+                $('#AnnButton').hide();
+            }
+
+
+            if (sessionStorage.getItem('role') == 'TH') {
+                var html = '  <li id="scorebtn"><a href="TeacherScore.html" rel="external" and data-ajax="false">Score</a></li>';
+                $('#bottomMenu').append(html);
+                $('#navbar1').navbar("destroy");
+                $('#navbar1').navbar();
+            } else {
+                $('#scorebtn').remove();
+                $('#navbar1').navbar("destroy");
+                $('#navbar1').navbar();
+            }
+
+            var fName = sessionStorage.getItem('fName');
+            var lName = sessionStorage.getItem('lName');
+            var pic = sessionStorage.getItem('pic');
+            var cList = JSON.parse(sessionStorage.getItem('cList'));
+            console.dir(cList);
+            $("#dPIC").attr("src", "../" + pic);
+            $("#fName").text(fName);
+            $("#lName").text(lName);
+            var key, count = 0;
+            for (key in cList) {
+                if (cList.hasOwnProperty(key)) {
+//                    $("#sCourse").attr(cList[key].course.course_id);
+//                    $("#cName").text(cList[key].course.name);
+//                     alert(key + " -> " + cList[key].course.name);
+                    $("#lcList").append('<li class="cLink" data-id="' + key + '"><a class="ui-btn ui-btn-icon-right ui-icon-carat-r">' + cList[key].course.name + '</a></li>').trigger('refresh');
+                }
+                $(".cLink").click(function() {
+                    sessionStorage.setItem('cID', $(this).attr("data-id"));
+                    $(location).attr('href', 'AnnounceInCourseTeacher.html');
+                });
+            }
+            $("#lcList").append('<li class="logOut"><a href="#" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Log Out <div style="padding-left:50px" class="fa fa-power-off fa-2x"></div> </a></li>');
+            $(".logOut").click(function() {
+                sessionStorage.clear();
+                $(location).attr('href', 'Home.html');
+            });
+            
+            $("#bottomMenu").navbar("refresh");
+            //filter
+            $("#filter").keyup(function() {
+                $(".am").show();
+                var keyword = $(this).val();
+                $(".am").each(function() {
+                    var text = $(this).text();
+                    if (text.indexOf(keyword) == -1) {
+                        $(this).hide();
+                    }
+                });
+            });
+
+            $(document).on("pagecreate", function() {
+                $("#sql").popup({
+                    beforeposition: function() {
+                        $(this).css({
+                            width: window.innerWidth,
+                            height: window.innerHeight - 14
+                        });
+                    },
+                    x: 0,
+                    y: 0
+                });
+            });
+        
+    </script>
+</html>

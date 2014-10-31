@@ -149,6 +149,34 @@ public class Announcement {
         }
         return ann;
     }
+    
+    public static List<Announcement> viewAnnByCourseMobile(int course_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select *  from announcement where course_id = ? order by announce_date desc";
+        PreparedStatement pstm;
+        List<Announcement> ann = new ArrayList<Announcement>();
+        Announcement a = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, course_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                a = new Announcement();
+                a.setAn_acc(Account.getAccountByID(rs.getInt("acc_id")));
+                a.setCourse(rs.getInt("course_id"));
+                a.setAn_id(rs.getInt("an_id"));
+                a.setAnnounce_date(rs.getTimestamp("announce_date"));
+                a.setContent(rs.getString("content"));
+                a.setTitle(rs.getString("title"));
+                a.setCourse_name(Course.getCourseNameByID(a.getCourse()));
+                ann.add(a);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ann;
+    }
 
     public static int add(Announcement a) {
         Connection conn = ConnectionBuilder.getConnection();

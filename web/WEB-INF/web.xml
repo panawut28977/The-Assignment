@@ -435,6 +435,10 @@
         <servlet-name>EmailService</servlet-name>
         <servlet-class>Model.EmailService</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>showAnnounceInCourseMobile</servlet-name>
+        <servlet-class>servlet.showAnnounceInCourseMobile</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -774,6 +778,10 @@
     <servlet-mapping>
         <servlet-name>EmailService</servlet-name>
         <url-pattern>/EmailService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>showAnnounceInCourseMobile</servlet-name>
+        <url-pattern>/showAnnounceInCourseMobile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
