@@ -54,7 +54,9 @@ public class ForgotPassword extends HttpServlet {
             request.setAttribute("msg", "Email for reset your password has been sent.");
             getServletContext().getRequestDispatcher("/META-INF/page/message.jsp").forward(request, response);
         } else {
-            System.out.println("Your email is not exist.");
+            request.setAttribute("type", "5");
+            System.out.println("Your email iss not exist.");
+            getServletContext().getRequestDispatcher("/META-INF/page/message.jsp").forward(request, response);
         }
     }
 

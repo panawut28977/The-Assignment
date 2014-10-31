@@ -64,6 +64,9 @@
                                 <c:when test="${type eq 4}">
                             <div class="alert alert-warning"><h1 class="text-center">You has been reset password <br/> Click <a href="index.jsp">here</a> to login</h1></div><br/>
                                 </c:when>
+                                <c:when test="${type eq 5}">
+                            <div class="alert alert-warning"><h1 class="text-center">Your email is not exist. <br/> Click <a href="index.jsp">here</a> to go back</h1></div><br/>
+                                </c:when>
                             </c:choose>
                     <!--                    <div class="well well-lg" style="height: 240px">
                                             <h3><b>Sign in to The Assignment</b></h3>
