@@ -415,6 +415,26 @@
         <servlet-name>RequesToJoin</servlet-name>
         <servlet-class>servlet.RequesToJoin</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>addAnnounceMobile</servlet-name>
+        <servlet-class>servlet.addAnnounceMobile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ForgotPassword</servlet-name>
+        <servlet-class>servlet.ForgotPassword</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ResetPassword</servlet-name>
+        <servlet-class>servlet.ResetPassword</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewResetPassword</servlet-name>
+        <servlet-class>servlet.ViewResetPassword</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EmailService</servlet-name>
+        <servlet-class>Model.EmailService</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -734,6 +754,26 @@
     <servlet-mapping>
         <servlet-name>RequesToJoin</servlet-name>
         <url-pattern>/RequesToJoin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addAnnounceMobile</servlet-name>
+        <url-pattern>/addAnnounceMobile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForgotPassword</servlet-name>
+        <url-pattern>/ForgotPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetPassword</servlet-name>
+        <url-pattern>/ResetPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewResetPassword</servlet-name>
+        <url-pattern>/ViewResetPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmailService</servlet-name>
+        <url-pattern>/EmailService</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

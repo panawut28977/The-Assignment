@@ -4,15 +4,24 @@
         <meta name="viewport" content="initial-scale=1.0">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<!--        <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/css/jquery.mobile-1.4.2.css" />-->
+        <!--        <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/css/jquery.mobile-1.4.2.css" />-->
         <link rel="stylesheet" href="css/jquery.mobile-1.4.2.css"/>
         <link rel="stylesheet" href="css/font-awesome.min.css"/>
         <link rel="stylesheet" href="css/notiCSS.css"/>
-<!--        <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/css/font-awesome.min.css"/>
-        <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/css/notiCSS.css"/>-->
+        <!--        <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/css/font-awesome.min.css"/>
+                <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/css/notiCSS.css"/>-->
 
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+        <style>
+            .ui-popup-container, .ui-popup {
+                height: 98%;
+                width: 100%;
+                position: absolute;
+                top:0;
+                left:0;
+            }
+        </style>
     </head> 
     <body>
         <div data-role="page" class="jqm-demos ui-responsive-panel"  data-title="Panel fixed positioning" >
@@ -21,9 +30,25 @@
                     <a href="index.html" rel="external" and data-ajax="false">
                         <span class="fa fa-home fa-2x" style="alignment-adjust:auto;padding-right:25px;padding-top:15px;padding-bottom:15px"></span>
                     </a>
-                    <span id="notificationLink" class="fa fa-globe fa-2x"></span></center>
-                    
-                <div id="notificationContainer" style="margin: auto">
+                    <a id="sql" class="fa fa-globe fa-2x"></a></center>
+
+                
+
+                <a href="#nav-panel"><i class="fa fa-bars fa-2x"></i></a>
+                <div style="padding: 5px;width: auto;background: #E2E2E2;">
+                    <input type="search" name="search" id="filter" placeholder="Filter..."/>
+
+                </div>
+            </div><!-- /header -->
+
+            <div id="add-test"></div>
+            
+            <div data-role="popup" id="sql" data-dismissible="false" style="max-width:100%">
+                <div data-role="header" data-theme="a">
+                    <h1>Notifications</h1>
+                </div>
+                <div role="main" class="ui-content">
+                    <div id="notificationContainer" style="margin: auto">
                     <div id="notificationTitle">Notifications</div>
                     <div id="notificationsBody" class="notifications">
                         <div style="margin: auto;border: 1px">You have new Assignment</div>
@@ -33,15 +58,8 @@
                     </div>
                     <div id="notificationFooter"><a href="#">See All</a></div>
                 </div>
-                
-                <a href="#nav-panel"><i class="fa fa-bars fa-2x"></i></a>
-                <div style="padding: 5px;width: auto;background: #E2E2E2;">
-                    <input type="search" name="search" id="filter" placeholder="Filter..."/>
-
                 </div>
-            </div><!-- /header -->
-
-            <div id="add-test"></div>
+            </div>
 
             <div data-role="panel" data-position-fixed="true" data-display="overlay"  id="nav-panel">
                 <ul data-role="listview" id="lcList">
@@ -73,11 +91,11 @@
 
 
     <script type="text/javascript">
-        $(function () {
+        $(function() {
             var id = sessionStorage.getItem('accID');
-            $.getJSON('http://localhost:8084/TheAssignment/showAnnounceStudent?id=' + id, function (result) {
+            $.getJSON('http://localhost:8084/TheAssignment/showAnnounceStudent?id=' + id, function(result) {
                 var i = 1;
-                $(result).each(function (k, v) {
+                $(result).each(function(k, v) {
                     $(
                             '<div class="am" style="background-color:#' + (i % 2 == 0 ? 'FFFFFF' : 'F4F4F4') + ' ;padding:1px;width:auto;">' +
                             '<div style="margin-left:15px">' +
@@ -108,29 +126,29 @@
 //                     alert(key + " -> " + cList[key].course.name);
                     $("#lcList").append('<li class="cLink" data-id="' + key + '"><a class="ui-btn ui-btn-icon-right ui-icon-carat-r">' + cList[key].course.name + '</a></li>').trigger('refresh');
                 }
-                $(".cLink").click(function () {
+                $(".cLink").click(function() {
                     sessionStorage.setItem('cID', $(this).attr("data-id"));
                     $(location).attr('href', 'AssignmentInCourse.html');
                 });
             }
             $("#lcList").append('<li class="logOut"><a href="#" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Log Out <div style="padding-left:50px" class="fa fa-power-off fa-2x"></div> </a></li>');
-            $(".logOut").click(function () {
+            $(".logOut").click(function() {
                 sessionStorage.clear();
                 $(location).attr('href', 'Home.html');
             });
-            
+
             //filter
-            $("#filter").keyup(function(){
-               $(".am").show();
-               var keyword = $(this).val();
-               $(".am").each(function(){
-                   var text = $(this).text();
-                   if(text.indexOf(keyword) == -1){
-                       $(this).hide();
-                   }
-               });
+            $("#filter").keyup(function() {
+                $(".am").show();
+                var keyword = $(this).val();
+                $(".am").each(function() {
+                    var text = $(this).text();
+                    if (text.indexOf(keyword) == -1) {
+                        $(this).hide();
+                    }
+                });
             });
-            
+
 //            var eventSource = new EventSource("http://jsp.chaninz.com/tasm/getNotificationMobile");
 //            eventSource.addEventListener('notificationsBody', function(event) {
 //            console.log(event.data);
@@ -148,7 +166,7 @@
 //            }).show();
 //          }, false);
 //           }, false);
-            
+
         });
 
 //        function findCourseName(course_id) {
@@ -185,6 +203,39 @@
 //            });
 
 //        });
+        $(document).ready(function()
+        {
+            $("#notificationLink").click(function()
+            {
+                $("#notificationContainer").fadeToggle(300);
+                $("#notification_count").fadeOut("slow");
+                return false;
+            });
 
+//Document Click
+            $(document).click(function()
+            {
+                $("#notificationContainer").hide();
+            });
+//Popup Click
+            $("#notificationContainer").click(function()
+            {
+                return false
+            });
+
+        });
+        
+        $(document).on("pagecreate", function() {
+            $("#sql").popup({
+                beforeposition: function() {
+                    $(this).css({
+                        width: window.innerWidth,
+                        height: window.innerHeight - 14
+                    });
+                },
+                x: 0,
+                y: 0
+            });
+        });
     </script>
 </html>

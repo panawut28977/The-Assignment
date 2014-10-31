@@ -34,7 +34,7 @@
     <body>
         <nav class="navbar navbar-default" role="navigation">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">The Assignment</a>
+                <a class="navbar-brand" href="index.jsp"><img src="img/Assignment-Logo_edit.png" width="40"/> The Assignment</a>
             </div>
             <!--<p class="navbar-text navbar-right" style="padding-right: 10px">IT 54-24</p>-->
         </nav>

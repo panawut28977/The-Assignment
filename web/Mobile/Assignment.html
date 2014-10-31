@@ -73,7 +73,7 @@
                         '<p>' + v.course.name + '</p>' +
                         '<b>Due Date: ' + v.due_date + '</b>' +
                         '</div></td><td align="right" style="padding-left:70px"><br/><br/>' +
-                        '<h2 id="whatColor" style="color:#' + whatisYourColor(findAssignmentStatus(v.am_id)) + '">' + findAssignmentStatus(v.am_id) + '</h2></td>' +
+                        '<h2 id="whatColor" style="color:#' + whatisYourColor(v.status) + '">' + v.status + '</h2></td>' +
                         '</tr></table></div>').insertBefore($('#add-test'));
 
                 i += 1;
@@ -144,21 +144,21 @@
             return paint;
         }
 
-        function findAssignmentStatus(assID) {
-            var accID = sessionStorage.getItem('accID');
-            var status = "";
-            $.ajax({
-                type: "POST",
-//                url: "http://jsp.chaninz.com/tasm/showAssignmentStatusMobile",
-                url: "http://localhost:8084/TheAssignment/showAssignmentStatusMobile",
-                data: {"accID": accID, "assID": assID},
-                async: false,
-                success: function (data) {
-                    status = data;
-                }
-            });
-            return status;
-        }
+//        function findAssignmentStatus(assID) {
+//            var accID = sessionStorage.getItem('accID');
+//            var status = "";
+//            $.ajax({
+//                type: "POST",
+////                url: "http://jsp.chaninz.com/tasm/showAssignmentStatusMobile",
+//                url: "http://localhost:8084/TheAssignment/showAssignmentStatusMobile",
+//                data: {"accID": accID, "assID": assID},
+//                async: false,
+//                success: function (data) {
+//                    status = data;
+//                }
+//            });
+//            return status;
+//        }
 
 //        function setToServlet(id) {
 //            $.ajax({

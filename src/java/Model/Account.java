@@ -378,6 +378,34 @@ public class Account {
         }
         return acc;
     }
+    
+    public static Account getAccountByEmail(String email) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select * from account where email  = ? ";
+        PreparedStatement pstm;
+        int result = 0;
+        Account acc = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, email);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                acc = new Account();
+                acc.setAcc_id(rs.getInt("acc_id"));
+                acc.setFirstname(rs.getString("firstname"));
+                acc.setLastname(rs.getString("lastname"));
+                acc.setEmail(rs.getString("email"));
+//                acc.setPassword(rs.getString("password"));
+                acc.setAccount_type(rs.getString("account_type"));
+                acc.setProfile_pic(rs.getString("profile_pic"));
+                acc.setRegister_date(rs.getTimestamp("register_date"));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return acc;
+    }
 
     public static List<Account> getNameByGIDandAmID(int g_id, int am_id) {
         Connection conn = ConnectionBuilder.getConnection();
