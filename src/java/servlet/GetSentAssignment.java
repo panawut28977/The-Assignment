@@ -145,7 +145,10 @@ public class GetSentAssignment extends HttpServlet {
                             } else {
                                 anslist = q.getQ_answer_list().substring(1, q.getQ_answer_list().length() - 1);
                             }
-                            String stans = stanswer.get(0).getAnswer().substring(1, stanswer.get(0).getAnswer().length() - 1);
+                            String stans = "";
+                            if(stanswer.size()!=0){
+                                stans= stanswer.get(0).getAnswer().substring(1, stanswer.get(0).getAnswer().length() - 1);
+                            }
 
                             String[] anslistsp = null;
                             String[] stanssp = null;
