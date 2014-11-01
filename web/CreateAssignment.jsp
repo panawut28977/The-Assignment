@@ -212,6 +212,7 @@
         <script src="js/jquery-ui.js"></script>
         <script src="module/autosize-master/jquery.autosize.min.js"></script>
         <script>
+                                        var pass = false;
                                         $(document).ready(function() {
                                             $(".fillInBlankBox").autosize();
                                             tinymce.init({
@@ -415,13 +416,19 @@
                                                 $(this).trigger('autosize.resize');
                                             });
 
+                                            $("button[type='submit']").click(function() {
+                                                pass = true;
+                                            });
 
                                             // on unload page
                                             window.onbeforeunload = function() {
-                                                if ($("#myWizard input").filter(function() {
-                                                    return $.trim($(this).val()).length > 0
-                                                }).length > 0) {
-                                                    return "You have not created your assignment. Do you want to leave without created?";
+                                                console.log(pass);
+                                                if (!pass) {
+                                                    if ($("#myWizard input").filter(function() {
+                                                        return $.trim($(this).val()).length > 0
+                                                    }).length > 0) {
+                                                        return "You have not created your assignment. Do you want to leave without created?";
+                                                    }
                                                 }
                                             }
 
@@ -933,6 +940,7 @@
                                         }
 
                                         function checkingForm() {
+                                            $(window).unbind('beforeunload');
                                             var type = $("#AmType").val();
                                             if (type == "file") {
                                                 if ($("#uploadAmFile input").val() == "") {

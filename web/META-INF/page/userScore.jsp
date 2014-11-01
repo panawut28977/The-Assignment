@@ -50,11 +50,11 @@
             <tbody>
                 <c:forEach  items="${requestScope.courseAssignment}" var="a">
                     <tr>
-                        <td>${a.name}</td>
+                        <td>${a.name} ${stf.get(a.am_id).lasted_send_date}</td>
                         <c:choose>
-                            <c:when test="${stf.get(a.am_id) ne null and stf.get(a.am_id).lasted_send_date ne null}">
+                            <c:when test="${stf.get(a.am_id) != null and stf.get(a.am_id).lasted_send_date != null}">
                                 <c:choose>
-                                    <c:when test="${stf.get(a.am_id).checked_time eq null}">
+                                    <c:when test="${stf.get(a.am_id).checked_time == null}">
                                         <td>wait check</td>
                                     </c:when>
                                     <c:otherwise>
@@ -67,25 +67,25 @@
                                 <td><b>
                                         <c:set value="${cf:lastedSentStatus(stf.get(a.am_id).lasted_send_date, a)}" var="status"/>
                                         <c:choose>
-                                            <c:when test="${status eq 'late'}">
+                                            <c:when test="${status.equalsIgnoreCase('late')}">
                                                 <span class="text-danger">Late</span>
                                             </c:when>
-                                            <c:when test="${status eq 'ontime'}">
+                                            <c:when test="${status.equalsIgnoreCase('ontime')}">
                                                 <span class="text-success">On time</span>
                                             </c:when>
-                                            <c:when test="${status eq 'hurryup'}">
+                                            <c:when test="${status.equalsIgnoreCase('hurryup')}">
                                                 <span class="text-warning">Hurry up!</span>
                                             </c:when>
-                                            <c:when test="${status eq 'miss'}">
+                                            <c:when test="${status.equalsIgnoreCase('miss')}">
                                                 <span class="text-muted">Miss</span>
                                             </c:when>
                                         </c:choose>
                                     </b>
                                 </td>
                             </c:when>
-                            <c:when test="${stow.get(a.am_id) ne null and stow.get(a.am_id).lasted_send_date ne null}">
+                            <c:when test="${stow.get(a.am_id) != null and stow.get(a.am_id).lasted_send_date != null}">
                                 <c:choose>
-                                    <c:when test="${stow.get(a.am_id).checked_time eq null}">
+                                    <c:when test="${stow.get(a.am_id).checked_time == null}">
                                         <td>wait check</td>
                                     </c:when>
                                     <c:otherwise>
@@ -97,16 +97,16 @@
                                 <td><b>
                                         <c:set value="${cf:lastedSentStatus(stow.get(a.am_id).lasted_send_date, a)}" var="status"/>
                                         <c:choose>
-                                            <c:when test="${status eq 'late'}">
+                                            <c:when test="${status.equalsIgnoreCase('late')}">
                                                 <span class="text-danger">Late</span>
                                             </c:when>
-                                            <c:when test="${status eq 'ontime'}">
+                                            <c:when test="${status.equalsIgnoreCase('ontime')}">
                                                 <span class="text-success">On time</span>
                                             </c:when>
-                                            <c:when test="${status eq 'hurryup'}">
+                                            <c:when test="${status.equalsIgnoreCase('hurryup')}">
                                                 <span class="text-warning">Hurry up!</span>
                                             </c:when>
-                                            <c:when test="${status eq 'miss'}">
+                                            <c:when test="${status.equalsIgnoreCase('miss')}">
                                                 <span class="text-muted">Miss</span>
                                             </c:when>
                                         </c:choose></b>
@@ -117,7 +117,7 @@
                                 <td><b>
                                         <c:set value="${cf:remainingTimeforSend(a,ac.acc_id)}" var="status"/>
                                         <c:choose>
-                                            <c:when test="${status eq 'miss'}">
+                                            <c:when test="${status.equalsIgnoreCase('miss')}">
                                                 <span class="text-muted">Miss</span>
                                             </c:when>
                                             <c:otherwise> - </c:otherwise>
@@ -154,7 +154,7 @@
         <div style="overflow-y:scroll;margin-top: 75px;clear: both"  >
             <table class="table table-striped" ID="AllStudentScore">
                 <c:choose>
-                    <c:when test="${listStudentScore.size() eq 0 || listStudentScore.size() eq null }">
+                    <c:when test="${listStudentScore.size() == 0 || listStudentScore.size() == null }">
                         <h1 class="text-muted" style="text-align: center">Empty student in your course.</h1>
                     </c:when>
                     <c:otherwise>
@@ -195,23 +195,23 @@
                                             <c:set value="${stacc.listStudentScore.get(countback)}" var="sc"/>
                                             <td>
                                                 <c:choose>
-                                                    <c:when test="${sc.ass_type eq 'web'}">
+                                                    <c:when test="${sc.ass_type.equalsIgnoreCase('web')}">
                                                         <c:set var="a" value="${cf:getAmTimeByAmID(sc.stof.am_id)}" target="Model.Assignment"/>
                                                         <c:set value="${cf:lastedSentStatus(sc.stof.lasted_send_date, a)}" var="status"/>
                                                         <c:choose>
-                                                            <c:when test="${status eq 'late'}">
+                                                            <c:when test="${status.equalsIgnoreCase('late')}">
                                                                 <span class="text-danger"><b>${sc.stof.score}</b></span>
                                                                     </c:when>
-                                                                    <c:when test="${status eq 'ontime'}">
+                                                                    <c:when test="${status.equalsIgnoreCase('ontime')}">
                                                                 <span class="text-success"><b>${sc.stof.score}</b></span>
                                                                     </c:when>
-                                                                    <c:when test="${status eq 'hurryup'}">
+                                                                    <c:when test="${status.equalsIgnoreCase('hurryup')}">
                                                                 <span class="text-warning"><b>${sc.stof.score}</b></span>
                                                                     </c:when>
                                                                     <c:otherwise>
                                                                         <c:set value="${cf:calculateTime(a)}" var="status"/>
                                                                         <c:choose>
-                                                                            <c:when test="${status eq 'miss'}">
+                                                                            <c:when test="${status.equalsIgnoreCase('miss')}">
                                                                         <span class="text-muted">${sc.stof.score}</span>
                                                                     </c:when>
                                                                     <c:otherwise> - </c:otherwise>
@@ -220,23 +220,23 @@
                                                         </c:choose>
                                                         <c:set value="${total+sc.stof.score}" var="total"/>
                                                     </c:when>
-                                                    <c:when test="${sc.ass_type eq 'file'}">
+                                                    <c:when test="${sc.ass_type.equalsIgnoreCase('file')}">
                                                         <c:set var="a" value="${cf:getAmTimeByAmID(sc.stf.am_id)}" target="Model.Assignment"/>
                                                         <c:set value="${cf:lastedSentStatus(sc.stf.lasted_send_date, a)}" var="status"/>
                                                         <c:choose>
-                                                            <c:when test="${status eq 'late'}">
+                                                            <c:when test="${status.equalsIgnoreCase('late')}">
                                                                 <span class="text-danger"><b> ${sc.stf.score}</b></span>
                                                             </c:when>
-                                                            <c:when test="${status eq 'ontime'}">
+                                                            <c:when test="${status.equalsIgnoreCase('ontime')}">
                                                                 <span class="text-success"><b> ${sc.stf.score}</b></span>
                                                             </c:when>
-                                                            <c:when test="${status eq 'hurryup'}">
+                                                            <c:when test="${status.equalsIgnoreCase('hurryup')}">
                                                                 <span class="text-warning"><b> ${sc.stf.score}</b></span>
                                                             </c:when>
                                                             <c:otherwise>
                                                                 <c:set value="${cf:calculateTime(a)}" var="status"/>
                                                                 <c:choose>
-                                                                    <c:when test="${status eq 'miss'}">
+                                                                    <c:when test="${status.equalsIgnoreCase('miss')}">
                                                                         <span class="text-muted"> ${sc.stf.score}</span>
                                                                     </c:when>
                                                                     <c:otherwise> - </c:otherwise>

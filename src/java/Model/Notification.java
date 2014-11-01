@@ -150,6 +150,35 @@ public class Notification {
         }
         return result;
     }
+    
+     public static Map<Integer, String> getNotify(int receive_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select n.noti_id,n.type from notification n join receive_noti_id r on n.receive_list_id = r.receive_list_id where r.acc_id=? and r.seen_date is null";
+        Map<Integer, String> notiMap = new HashMap<>();
+        PreparedStatement pstm;
+        Notification n = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, receive_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+//                n= new Notification();
+//                n.setAcc_id(rs.getInt("acc_id"));
+//                n.setLink(rs.getString("link"));
+//                n.setNoti_date(rs.getDate("noti_date"));
+//                n.setNoti_id(rs.getInt("noti_id"));
+//                n.setText(rs.getString("text"));
+//                n.setType(rs.getString("type"));
+//                n.setReceive_list_id(rs.getInt("receive_list_id"));
+//                notiList.add(n);
+                notiMap.put(rs.getInt("noti_id"), rs.getString("type"));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return notiMap;
+    }
 
     public static int getTotalNotify(int receive_id) {
         Connection conn = ConnectionBuilder.getConnection();

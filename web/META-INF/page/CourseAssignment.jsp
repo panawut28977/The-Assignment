@@ -204,19 +204,19 @@
                             <td>
                                 <c:set value="${cf:remainingTimeforSend(a,ac.acc_id)}" var="status"/>
                                 <c:choose>
-                                    <c:when test="${status eq 'late'}">
+                                    <c:when test="${status.equalsIgnoreCase('late')}">
                                         <span class="text-danger">Late</span>
                                     </c:when>
-                                    <c:when test="${status eq 'ontime'}">
+                                    <c:when test="${status.equalsIgnoreCase('ontime')}">
                                         <span class="text-success">On time</span>
                                     </c:when>
-                                    <c:when test="${status eq 'hurryup'}">
+                                    <c:when test="${status.equalsIgnoreCase('hurryup')}">
                                         <span class="text-warning">Hurry up!</span>
                                     </c:when>
-                                    <c:when test="${status eq 'sent'}">
+                                    <c:when test="${status.equalsIgnoreCase('sent')}">
                                         <span class="text-primary">Sent <span class="glyphicon glyphicon-check"></span></span>
                                         </c:when>
-                                        <c:when test="${status eq 'miss'}">
+                                        <c:when test="${status.equalsIgnoreCase('miss')}">
                                         <span class="text-muted">Miss</span>
                                     </c:when>
                                 </c:choose>

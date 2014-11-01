@@ -45,7 +45,7 @@ public class NewNotiMobile extends HttpServlet {
         int current_total = 0;
         if (request.getParameter("ct").equalsIgnoreCase("null")) {
             int noti = Notification.getTotalNotify(ac.getAcc_id());
-            System.out.println("if:"+noti);
+//            System.out.println("if:"+noti);
             writer.write("event:totalNewNoti\n");
             writer.write("data:" + noti + "\n\n");
         } else {

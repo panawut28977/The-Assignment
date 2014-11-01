@@ -57,7 +57,7 @@
                         <div class="col-md-4"><h4>${checked}/${total} <br>Checked</h4></div>
                     </div>
                     <hr style="clear:both">
-                    <c:if test="${autocheck_msg ne null}">
+                    <c:if test="${autocheck_msg != null}">
                         <div class="alert alert-success" role="alert">
                             <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                             <strong>Auto checking  ${total_auto_checked} assignment successful!</strong> this function cannot checking explanation question please recheck assignment for sure.
@@ -84,7 +84,7 @@
                                                     <!-- ถ้ามีกลุ่มให้แสดงค่าชื่อเป็นชื่อกลุ่มกับเลขกลุ่ม -->
                                                     <!--ถ้าไม่ใช่ให้แสดงชื่อเลย -->
                                                     <c:choose>
-                                                        <c:when test="${sentSa.g_id ne 0}">
+                                                        <c:when test="${sentSa.g_id != 0}">
                                                             <c:set value="${cf:getNameByGIDandAmID(sentSa.g_id,sentSa.am_id)}" var="stGroup"/>
                                                             <c:set value="${cf:createPopoverGroup(stGroup)}" var="dataContent"/>
                                                             <a class="showGroup" data-toggle="popover" data-html="true" data-content="${dataContent}">Group no. ${ct_cf:getGNOById(sentSa.g_id)}</a>
@@ -99,19 +99,19 @@
                                                 <td>
                                                     <c:set value="${cf:lastedSentStatus(sentSa.lasted_send_date, curAm)}" var="status"/>
                                                     <c:choose>
-                                                        <c:when test="${status eq 'late'}">
+                                                        <c:when test="${status.equalsIgnoreCase('late')}">
                                                             <span class="text-danger">Late</span>
                                                         </c:when>
-                                                        <c:when test="${status eq 'ontime'}">
+                                                        <c:when test="${status.equalsIgnoreCase('ontime')}">
                                                             <span class="text-success">On time</span>
                                                         </c:when>
-                                                        <c:when test="${status eq 'hurryup'}">
+                                                        <c:when test="${status.equalsIgnoreCase('hurryup')}">
                                                             <span class="text-warning">Hurry up!</span>
                                                         </c:when>
-                                                        <c:when test="${status eq 'sent'}">
+                                                        <c:when test="${status.equalsIgnoreCase('sent')}">
                                                             <span class="text-primary">Sent <span class="glyphicon glyphicon-check"></span></span>
                                                             </c:when>
-                                                            <c:when test="${status eq 'miss'}">
+                                                            <c:when test="${status.equalsIgnoreCase('miss')}">
                                                             <span class="text-muted">Miss</span>
                                                         </c:when>
                                                     </c:choose> 
