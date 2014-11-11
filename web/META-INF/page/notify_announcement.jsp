@@ -6,14 +6,13 @@
 <div style="margin-top: 20px">
     <div class="timeline-centered">
         <c:forEach items="${noti}" var="n"> 
-            <c:set value="${cf:getNameByID(n.acc_id)}" var="ann_acc"/>
             <article class="timeline-entry">
                 <div class="timeline-entry-inner">
                     <div class="timeline-icon bg-success">
-                        <img src="${ann_acc.profile_pic}" width="40"/>
+                        <img src="${n.profile_pic}" width="40"/>
                     </div>
                     <div class="timeline-label">
-                        <h2>${ann_acc.firstname} <span class="text-muted"><span class="glyphicon glyphicon-bullhorn"></span> announces  in</span> <a href="setCourseSession?cId=${n.course_id}"><span class="label label-default">${cf:getCourseNameByID(n.course_id)}</span></a><small class="pull-right">${cf:formatTime(n.noti_date)}</small></h2>
+                        <h2>${n.noti_name} <span class="text-muted"><span class="glyphicon glyphicon-bullhorn"></span> announces  in</span> <a href="setCourseSession?cId=${n.course_id}"><span class="label label-default">${n.course_name}</span></a><small class="pull-right">${cf:formatTime(n.noti_date)}</small></h2>
                         <!--<p>${n.text}</p>-->
                     </div>
                 </div>

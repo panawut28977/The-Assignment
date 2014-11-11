@@ -443,6 +443,10 @@
         <servlet-name>NewNotiMobile</servlet-name>
         <servlet-class>servlet.NewNotiMobile</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>getNotificationMobile</servlet-name>
+        <servlet-class>servlet.getNotificationMobile</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -790,6 +794,10 @@
     <servlet-mapping>
         <servlet-name>NewNotiMobile</servlet-name>
         <url-pattern>/NewNotiMobile</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>getNotificationMobile</servlet-name>
+        <url-pattern>/getNotificationMobile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -148,9 +148,18 @@
         </table> 
     </c:when>
     <c:otherwise>
-        <div>
-            <a class="btn btn-primary pull-right" style="margin-top: 20px" href="exportScoreSheet"><span class="glyphicon glyphicon-export"></span> Export Scoresheet</a>
-        </div>
+        <c:choose>
+            <c:when test="${listStudentScore.size() == 0 || listStudentScore.size() == null }">
+               <div>
+                    <a class="btn btn-default disabled pull-right" style="margin-top: 20px"><span class="glyphicon glyphicon-export"></span> Export Scoresheet</a>
+                </div>
+            </c:when>
+            <c:otherwise>
+                <div>
+                    <a class="btn btn-primary pull-right" style="margin-top: 20px" href="exportScoreSheet"><span class="glyphicon glyphicon-export"></span> Export Scoresheet</a>
+                </div>
+            </c:otherwise>
+        </c:choose>
         <div style="overflow-y:scroll;margin-top: 75px;clear: both"  >
             <table class="table table-striped" ID="AllStudentScore">
                 <c:choose>
@@ -408,7 +417,7 @@
         var xAxisArr = [];
         var missArr = [];
         var scoreArr = [];
-        var totalAm = ${requestScope.courseAssignment.size()};
+        var totalAm = '${requestScope.courseAssignment.size()}';
     <c:forEach  items="${requestScope.courseAssignment}" var="a">
         <c:choose>
             <c:when test="${stf.get(a.am_id) ne null and stf.get(a.am_id).lasted_send_date ne null}">
@@ -507,5 +516,6 @@
                 }]
         });
         $("#AllStudentScore").dataTable();
+        $('#exportbtn').tooltip();
     });
 </script>

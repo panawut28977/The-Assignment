@@ -27,7 +27,6 @@
 <script>
     $(function() {
         $("#email").on("change", function() {
-            alert("sfsadf");
             var value = $(this).val();
             if (value.length == 0) {
                 addCheckingStatus('true');

@@ -11,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,10 +31,13 @@ public class Notification {
     private String link;
     private Timestamp noti_date;
     private int receive_list_id;
-    
+
     //attr mobile
+    private String noti_name;
     private String course_name;
     private String datefm;
+    private String profile_pic;
+    private String seen_date;
 
     public int getNoti_id() {
         return noti_id;
@@ -117,6 +119,30 @@ public class Notification {
         this.datefm = datefm;
     }
 
+    public String getNoti_name() {
+        return noti_name;
+    }
+
+    public void setNoti_name(String noti_name) {
+        this.noti_name = noti_name;
+    }
+
+    public String getProfile_pic() {
+        return profile_pic;
+    }
+
+    public void setProfile_pic(String profile_pic) {
+        this.profile_pic = profile_pic;
+    }
+
+    public String getSeen_date() {
+        return seen_date;
+    }
+
+    public void setSeen_date(String seen_date) {
+        this.seen_date = seen_date;
+    }
+
     public static int announce(Notification n, List<Integer> acc_id) {
         Connection conn = ConnectionBuilder.getConnection();
         int last_id = getLastReceive_list_id() + 1;
@@ -150,8 +176,8 @@ public class Notification {
         }
         return result;
     }
-    
-     public static Map<Integer, String> getNotify(int receive_id) {
+
+    public static Map<Integer, String> getNotify(int receive_id) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select n.noti_id,n.type from notification n join receive_noti_id r on n.receive_list_id = r.receive_list_id where r.acc_id=? and r.seen_date is null";
         Map<Integer, String> notiMap = new HashMap<>();
@@ -190,7 +216,7 @@ public class Notification {
             pstm.setInt(1, receive_id);
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {
-                total= rs.getInt(1);
+                total = rs.getInt(1);
             }
             conn.close();
         } catch (SQLException ex) {
@@ -198,7 +224,6 @@ public class Notification {
         }
         return total;
     }
-    
 
     public static int getLastReceive_list_id() {
         String e = null;
@@ -225,7 +250,10 @@ public class Notification {
     public static List<Notification> getAnnounce(int receive_id) {
         String e = null;
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select * from notification n join receive_noti_id r on n.receive_list_id = r.receive_list_id where n.type like 'announce' and  r.acc_id=? order by n.noti_id desc";
+        String sql = "select n.*,r.*,a.firstname,a.lastname,a.profile_pic,c.name from notification n "
+                + "join receive_noti_id r on n.receive_list_id = r.receive_list_id "
+                + "join account a on n.acc_id = a.acc_id "
+                + "join course c on n.course_id = c.course_id where n.type like 'announce' and  r.acc_id=? order by n.noti_id desc";
         List<Notification> notiList = new ArrayList<>();
         PreparedStatement pstm;
         Notification n = null;
@@ -237,6 +265,9 @@ public class Notification {
                 n = new Notification();
                 n.setAcc_id(rs.getInt("acc_id"));
                 n.setCourse_id(rs.getInt("course_id"));
+                n.setNoti_name(rs.getString("firstname") + " " + rs.getString("lastname"));
+                n.setCourse_name(rs.getString("name"));
+                n.setProfile_pic(rs.getString("profile_pic"));
                 n.setLink(rs.getString("link"));
                 n.setNoti_date(rs.getTimestamp("noti_date"));
                 n.setNoti_id(rs.getInt("noti_id"));
@@ -255,7 +286,11 @@ public class Notification {
     public static List<Notification> getAssignment(int receive_id) {
         String e = null;
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select * from notification n join receive_noti_id r on n.receive_list_id = r.receive_list_id where n.type like 'assignment'  and r.acc_id=? order by n.noti_id desc";
+        String sql = "select n.*,r.*,a.firstname,a.lastname,a.profile_pic,c.name from notification n "
+                + "join receive_noti_id r on n.receive_list_id = r.receive_list_id "
+                + "join account a on n.acc_id = a.acc_id "
+                + "join course c on n.course_id = c.course_id "
+                + "where n.type like 'assignment'  and r.acc_id=? order by n.noti_id desc";
         List<Notification> notiList = new ArrayList<>();
         PreparedStatement pstm;
         Notification n = null;
@@ -267,6 +302,9 @@ public class Notification {
                 n = new Notification();
                 n.setAcc_id(rs.getInt("acc_id"));
                 n.setCourse_id(rs.getInt("course_id"));
+                n.setNoti_name(rs.getString("firstname") + " " + rs.getString("lastname"));
+                n.setCourse_name(rs.getString("name"));
+                n.setProfile_pic(rs.getString("profile_pic"));
                 n.setLink(rs.getString("link"));
                 n.setNoti_date(rs.getTimestamp("noti_date"));
                 n.setNoti_id(rs.getInt("noti_id"));
@@ -285,7 +323,10 @@ public class Notification {
     public static List<Notification> getAlert(int receive_id) {
         String e = null;
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select * from notification n join receive_noti_id r on n.receive_list_id = r.receive_list_id where n.type like 'alert' and r.acc_id=? order by n.noti_id desc";
+        String sql = "select n.*,r.*,a.firstname,a.lastname,a.profile_pic,c.name from notification n join receive_noti_id r on n.receive_list_id = r.receive_list_id "
+                + "join account a on n.acc_id = a.acc_id "
+                + "join course c on n.course_id = c.course_id "
+                + "where n.type like 'alert' and r.acc_id=? order by n.noti_id desc";
         List<Notification> notiList = new ArrayList<>();
         PreparedStatement pstm;
         Notification n = null;
@@ -297,6 +338,9 @@ public class Notification {
                 n = new Notification();
                 n.setAcc_id(rs.getInt("acc_id"));
                 n.setCourse_id(rs.getInt("course_id"));
+                n.setNoti_name(rs.getString("firstname") + " " + rs.getString("lastname"));
+                n.setCourse_name(rs.getString("name"));
+                n.setProfile_pic(rs.getString("profile_pic"));
                 n.setLink(rs.getString("link"));
                 n.setNoti_date(rs.getTimestamp("noti_date"));
                 n.setNoti_id(rs.getInt("noti_id"));
@@ -315,7 +359,10 @@ public class Notification {
     public static List<Notification> getScore(int receive_id) {
         String e = null;
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select * from notification n join receive_noti_id r on n.receive_list_id = r.receive_list_id where n.type like 'score' and r.acc_id=? order by n.noti_id desc";
+        String sql = "select n.*,r.*,a.firstname,a.lastname,a.profile_pic,c.name from notification n join receive_noti_id r on n.receive_list_id = r.receive_list_id "
+                + "join account a on n.acc_id = a.acc_id "
+                + "join course c on n.course_id = c.course_id "
+                + "where n.type like 'score' and r.acc_id=? order by n.noti_id desc";
         List<Notification> notiList = new ArrayList<>();
         PreparedStatement pstm;
         Notification n = null;
@@ -327,6 +374,9 @@ public class Notification {
                 n = new Notification();
                 n.setAcc_id(rs.getInt("acc_id"));
                 n.setCourse_id(rs.getInt("course_id"));
+                n.setNoti_name(rs.getString("firstname") + " " + rs.getString("lastname"));
+                n.setCourse_name(rs.getString("name"));
+                n.setProfile_pic(rs.getString("profile_pic"));
                 n.setLink(rs.getString("link"));
                 n.setNoti_date(rs.getTimestamp("noti_date"));
                 n.setNoti_id(rs.getInt("noti_id"));
@@ -414,11 +464,17 @@ public class Notification {
                 n.setCourse_name(Course.getCourseNameByID(n.getCourse_id()));
                 n.setLink(rs.getString("link"));
                 n.setNoti_date(rs.getTimestamp("noti_date"));
-                n.setDatefm(util.Util.formatTime(n.getNoti_date()+""));
+                n.setDatefm(util.Util.formatTime(n.getNoti_date() + ""));
                 n.setNoti_id(rs.getInt("noti_id"));
                 n.setText(rs.getString("text"));
                 n.setType(rs.getString("type"));
                 n.setReceive_list_id(rs.getInt("receive_list_id"));
+                n.setNoti_name(Account.getNameByID(n.getAcc_id()).getFirstname());
+                n.setProfile_pic(Account.getNameByID(n.getAcc_id()).getProfile_pic());
+                n.setSeen_date(getSeenDate(n.getReceive_list_id(), receive_id));
+//                System.out.println(n.getReceive_list_id());
+//                System.out.println(n.getAcc_id());
+//                System.out.println(n.getSeen_date());
                 notiList.add(n);
             }
             conn.close();
@@ -428,9 +484,31 @@ public class Notification {
         return notiList;
     }
 
+    public static String getSeenDate(int list_id, int acc_id) {
+        System.out.println("get seen date:" + list_id + "/" + acc_id);
+        String t = null;
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select seen_date from receive_noti_id where receive_list_id = ? and acc_id = ?";
+        PreparedStatement pstm;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, list_id);
+            pstm.setInt(2, acc_id);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                t = rs.getString("seen_date");
+                System.out.println(t);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return t;
+    }
+
     @Override
     public String toString() {
-        return "Notification{" + "noti_id=" + noti_id + ", acc_id=" + acc_id + ", course_id=" + course_id + ", type=" + type + ", text=" + text + ", link=" + link + ", noti_date=" + noti_date + ", receive_list_id=" + receive_list_id + '}';
+        return "Notification{" + "noti_id=" + noti_id + ", acc_id=" + acc_id + ", course_id=" + course_id + ", type=" + type + ", text=" + text + ", link=" + link + ", noti_date=" + noti_date + ", receive_list_id=" + receive_list_id + ", noti_name=" + noti_name + ", course_name=" + course_name + ", datefm=" + datefm + ", profile_pic=" + profile_pic + ", seen_date=" + seen_date + '}';
     }
 
 }

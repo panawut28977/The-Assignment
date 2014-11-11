@@ -42,7 +42,7 @@ public class getNotificationMobile extends HttpServlet {
 //        noti = Notification.getAssignment(ac.getAcc_id());
 //        noti = Notification.getAlert(ac.getAcc_id());
 //        noti = Notification.getScore(ac.getAcc_id());
-
+        System.out.println(noti);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(new Gson().toJson(noti));
