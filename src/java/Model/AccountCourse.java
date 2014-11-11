@@ -269,15 +269,17 @@ public class AccountCourse {
     public static Map<AccountCourse, Account> getMemberInCourseWithRole(int course_id) {
         Map<AccountCourse, Account> listAccount = new HashMap<>();
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select * from account where acc_id in (select acc_id from account_course where course_id=? AND status =  \"approved\")";
+        String sql = "select * from account a join account_course m on a.acc_id = m.acc_id where course_id=? and a.acc_id in (select acc_id from account_course where course_id=? AND status =  \"approved\")";
         PreparedStatement pstm;
+        Account acc = null;
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, course_id);
+            pstm.setInt(2, course_id);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
 //                Account acc = Account.getAccountByID(rs.getInt("acc_id"));
-                Account acc = new Account();
+                acc = new Account();
                 acc.setAcc_id(rs.getInt("acc_id"));
                 acc.setFirstname(rs.getString("firstname"));
                 acc.setLastname(rs.getString("lastname"));
