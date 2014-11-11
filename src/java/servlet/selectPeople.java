@@ -9,6 +9,7 @@ import Model.Account;
 import Model.AccountCourse;
 import Model.Assignment;
 import Model.Group_member;
+import Model.WorkAndGroup;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,12 +48,11 @@ public class selectPeople extends HttpServlet {
         } else {
             cId = Integer.parseInt(ss.getAttribute("cId") + "");
         }
-        
+
         if (Group_member.isInGroup(ac.getAcc_id(), a.getAm_id()) == 1) {
             request.setAttribute("msg", "joined");
         }
-        
-        
+
         List<Group_member> gList = Group_member.getAllGroup(a.getAm_id());
         StringBuilder temp = new StringBuilder(" ");
         for (Group_member group_member : gList) {
@@ -74,9 +74,13 @@ public class selectPeople extends HttpServlet {
                 }
             }
         }
+
+        List<WorkAndGroup> wag = WorkAndGroup.memberToWorkGroup(gList, a);
+        System.out.println(wag);
         request.setAttribute("noGMember", noGMember);
         request.setAttribute("am", a);
         request.setAttribute("gList", gList);
+        request.setAttribute("wag", wag);
         ss.setAttribute("am_id", a.getAm_id());
         String url = "";
 

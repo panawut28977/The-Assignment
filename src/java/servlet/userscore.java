@@ -155,6 +155,7 @@ public class userscore extends HttpServlet {
                     for (Assignment assignment : listAm) {
                         u = new UserScore();
                         u.setFullname(accName);
+                        u.setAm(assignment);
                         u.setAm_id(assignment.getAm_id());
                         u.setAm_name(assignment.getName());
                         u.setFull_mark(assignment.getFully_mark());

@@ -311,7 +311,7 @@ public class Assignment {
                 } else {
                     am.setQuestionList(null);
                 }              
-                
+//                System.out.println(am);
                 AmList.add(am);
             }
             conn.close();
@@ -791,6 +791,7 @@ public class Assignment {
 
     @Override
     public String toString() {
-        return "Assignment{" + "am_id=" + am_id + ", course=" + course + ", name=" + name + ", description=" + description + ", ass_type=" + ass_type + ", total_member=" + total_member + ", due_date=" + due_date + ", ass_extension=" + ass_extension + ", create_date=" + create_date + ", path_file=" + path_file + ", title_assignment_onweb=" + title_assignment_onweb + ", fully_mark=" + fully_mark + ", comment=" + comment + ", questionList=" + questionList + '}';
+        return "Assignment{" + "am_id=" + am_id + ", course=" + course + ", name=" + name + ", description=" + description + ", ass_type=" + ass_type + ", total_member=" + total_member + ", due_date=" + due_date + ", late_date=" + late_date + ", ass_extension=" + ass_extension + ", create_date=" + create_date + ", path_file=" + path_file + ", title_assignment_onweb=" + title_assignment_onweb + ", fully_mark=" + fully_mark + ", comment=" + comment + ", questionList=" + questionList + ", status=" + status + '}';
     }
+
 }

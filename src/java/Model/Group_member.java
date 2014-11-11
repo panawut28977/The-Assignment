@@ -291,6 +291,22 @@ public class Group_member {
         }
         return g;
     }
+    
+     public static boolean removeGroup(int g_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "delete from group_member where g_id=?";
+        PreparedStatement pstm;
+        int result = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, g_id);
+            result = pstm.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result > 0;
+    }
 
     @Override
     public String toString() {

@@ -110,6 +110,11 @@
                                 <h3> This assignment is deleted. </h3>
                             </div>
                         </c:when>
+                         <c:when test="${msg eq '14'}">
+                            <div class="alert alert-warning" role="alert">
+                                <h3> This group or student assignment has been deleted. </h3>
+                            </div>
+                        </c:when>
                     </c:choose>
                 </div>
             </div>

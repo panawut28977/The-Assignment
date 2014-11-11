@@ -185,9 +185,6 @@
                                 </tr>
                                 <tr>
                                     ${head_column}
-                                    <!--                    <th>(10) <abbr title="งานที่ 1 เขียนโค้ดจาว่าซะ">Assignment# 1</abbr></th>
-                                                        <th>(10) <abbr title="งานที่ 2 เตรียมโปรเจคเว้ยย">Assignment# 2</abbr></th>
-                                                        <th>(5) <abbr title="งานที่ 3 งานนี้งานดีต้องทำ">Assignment# 3</abbr></th>-->
                                 </tr>
                             </c:if>
                         </thead>
@@ -196,7 +193,6 @@
                                 <c:forEach items="${listStudentScore}" var="stacc">
                                     <tr>
                                         <td style="text-align: left">${stacc.firstname} ${stacc.lastname}</td>
-                                        <%--${stacc.listStudentScore}--%>
                                         <c:set value="${stacc.listStudentScore.size()}"  var="countback"/>
                                         <c:set value="0" var="total"/>
                                         <c:forEach begin="0" end="${stacc.listStudentScore.size()-1}" var="sccount">
@@ -205,8 +201,7 @@
                                             <td>
                                                 <c:choose>
                                                     <c:when test="${sc.ass_type.equalsIgnoreCase('web')}">
-                                                        <c:set var="a" value="${cf:getAmTimeByAmID(sc.stof.am_id)}" target="Model.Assignment"/>
-                                                        <c:set value="${cf:lastedSentStatus(sc.stof.lasted_send_date, a)}" var="status"/>
+                                                        <c:set value="${cf:lastedSentStatus(sc.stof.lasted_send_date, sc.am)}" var="status"/>
                                                         <c:choose>
                                                             <c:when test="${status.equalsIgnoreCase('late')}">
                                                                 <span class="text-danger"><b>${sc.stof.score}</b></span>
@@ -218,7 +213,7 @@
                                                                 <span class="text-warning"><b>${sc.stof.score}</b></span>
                                                                     </c:when>
                                                                     <c:otherwise>
-                                                                        <c:set value="${cf:calculateTime(a)}" var="status"/>
+                                                                        <c:set value="${cf:calculateTime(sc.am)}" var="status"/>
                                                                         <c:choose>
                                                                             <c:when test="${status.equalsIgnoreCase('miss')}">
                                                                         <span class="text-muted">${sc.stof.score}</span>
@@ -230,8 +225,7 @@
                                                         <c:set value="${total+sc.stof.score}" var="total"/>
                                                     </c:when>
                                                     <c:when test="${sc.ass_type.equalsIgnoreCase('file')}">
-                                                        <c:set var="a" value="${cf:getAmTimeByAmID(sc.stf.am_id)}" target="Model.Assignment"/>
-                                                        <c:set value="${cf:lastedSentStatus(sc.stf.lasted_send_date, a)}" var="status"/>
+                                                        <c:set value="${cf:lastedSentStatus(sc.stf.lasted_send_date, sc.am)}" var="status"/>
                                                         <c:choose>
                                                             <c:when test="${status.equalsIgnoreCase('late')}">
                                                                 <span class="text-danger"><b> ${sc.stf.score}</b></span>
@@ -243,7 +237,7 @@
                                                                 <span class="text-warning"><b> ${sc.stf.score}</b></span>
                                                             </c:when>
                                                             <c:otherwise>
-                                                                <c:set value="${cf:calculateTime(a)}" var="status"/>
+                                                                <c:set value="${cf:calculateTime(sc.am)}" var="status"/>
                                                                 <c:choose>
                                                                     <c:when test="${status.equalsIgnoreCase('miss')}">
                                                                         <span class="text-muted"> ${sc.stf.score}</span>

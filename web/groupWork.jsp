@@ -55,6 +55,20 @@
             .listOfGroupWork tbody tr td:first-child{
                 width: 60px;
             }
+
+            .remove-group{
+                font-size: 24px;
+                vertical-align: inherit !important;
+            }
+
+            .nogroup img{
+                margin: 10px 0 ;
+            }
+
+            .checked-group{
+                font-size: 16px;
+                vertical-align: inherit !important;
+            }
         </style>
     </head>
     <body>
@@ -63,24 +77,6 @@
             <div class="row">
                 <%@include file="META-INF/page/side_bar.jsp"%>
                 <div class="col-md-9" style="padding-bottom: 20px">
-                    <%--<c:choose>
-                        <c:when test="${param.ct eq 'allAm'}">
-                            <div><h3>All Course</h3></div>
-                            <%@include file="META-INF/page/allCourseTab.jsp"%>
-                            <ol class="breadcrumb" style="margin-top: 15px" >
-                                <li><a href="home.jsp?tab=AllAssignment">Assignment</a></li>
-                                <li class="active"><a href="#">Member</a></li>
-                            </ol>
-                        </c:when>
-                        <c:otherwise>
-                            <%@include file="META-INF/page/CourseHeader.jsp"%>
-                            <%@include file="META-INF/page/CourseTab.jsp"%>
-                            <ol class="breadcrumb" style="margin-top: 15px" >
-                                <li><a href="CourseAssignment">Assignment</a></li>
-                                <li class="active"><a href="#">Member</a></li>
-                            </ol>
-                        </c:otherwise>
-                    </c:choose>--%>
                     <%@include file="META-INF/page/CourseHeader.jsp"%>
                     <%@include file="META-INF/page/CourseTab.jsp"%>
                     <ol class="breadcrumb" style="margin-top: 15px" >
@@ -94,92 +90,45 @@
                                     <h3> You are in group.</h3>
                                 </div>
                             </c:if>
+                            <c:if test="${RemoveSuccess eq 'success'}">
+                                <div class="bg-success" style="margin-bottom: 10px;padding: 10px">
+                                    <h3> Remove group sucessful.</h3>
+                                </div>
+                            </c:if>
                             <div class="col-md-7 bg-success" style="padding-top: 10px;padding-bottom: 10px;">
                                 <h4><b>People who joined group</b></h4>
                                 <div class="table-responsive">
                                     <table class="table listOfGroupWork" >
                                         <tbody>
-                                            <c:forEach items="${gList}" var="g">
+                                            <c:forEach items="${wag}" var="g">
                                                 <tr>
-                                                    <td><b>${g.g_no}</b></td>
+                                                    <td><b>${g.detail.g_no}</b></td>
                                                     <td>
-                                                        <c:forEach var="splt" items="${fn:split(g.acc_id, ',')}">
-                                                            <c:set value="${cf:getNameByID(splt)}" var="m" /> 
+                                                        <c:forEach items="${g.group}" var="m">
                                                             <img style="width:50px" src="${m.profile_pic}" data-toggle="tooltip" data-placement="top" title="${m.firstname}">
                                                         </c:forEach>
                                                     </td>
+                                                    <c:choose>
+                                                        <c:when test="${ac.courseList.get(cId).role eq 'TH' && g.checked_date == null}">
+                                                            <td class="remove-group"><a href="RemoveGroupAm?am_id=${param.am_id}&&gid=${g.detail.g_id}" class="pull-right"><i class="glyphicon glyphicon-remove"></i></a></td>
+                                                                </c:when>
+                                                                <c:when test="${ac.courseList.get(cId).role eq 'TH'}">
+                                                                <td class="checked-group"><span class="pull-right"><i class="glyphicon glyphicon-check"></i> Checked</span></td>
+                                                        </c:when>
+                                                    </c:choose>
+
                                                 </tr>
                                             </c:forEach>
-                                            <!--                                            <tr>
-                                                                                            <td><b>1</b></td>
-                                                                                            <td>
-                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Christopher Clive">
-                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Cherokee Graham">
-                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Panawut Ittitananun!">
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td><b>2</b></td>
-                                                                                            <td>
-                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Panawut Ittitananun!">
-                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Lon Zach">
-                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Shaunte Sowa">
-                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Harry Haig">
-                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Joanne Cockburn">
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td><b>3</b></td>
-                                                                                            <td>
-                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Christopher Clive">
-                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Cherokee Graham">
-                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Panawut Ittitananun!">
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td><b>4</b></td>
-                                                                                            <td>
-                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Christopher Clive">
-                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Cherokee Graham">
-                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Panawut Ittitananun!">
-                                            
-                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Cherokee Graham">
-                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Panawut Ittitananun!">
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td><b>5</b></td>
-                                                                                            <td>
-                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Christopher Clive">
-                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Cherokee Graham">
-                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Panawut Ittitananun!">
-                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Cherokee Graham">
-                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Panawut Ittitananun!">
-                                            
-                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Cherokee Graham">
-                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Panawut Ittitananun!">
-                                            
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td><b>6</b></td>
-                                                                                            <td>
-                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Christopher Clive">
-                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Cherokee Graham">
-                                                                                                <img style="width:50px" src="img/avatar.jpg" data-toggle="tooltip"  id="checkcopy" data-placement="top" title="Panawut Ittitananun!">
-                                                                                            </td>
-                                                                                        </tr>-->
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-                            <div class="col-md-5" >
+                            <div class="col-md-5 nogroup" >
                                 <div class="col-md-11 col-md-offset-1 bg-danger" style="padding-top: 10px;padding-bottom: 10px;">
                                     <h4><b>People who have not group.</b></h4>
                                     <c:forEach items="${noGMember}" var="noGm">
                                         <img style="width:50px" src="${noGm.profile_pic}" data-toggle="tooltip"  data-placement="top" title="${noGm.firstname} ${noGm.lastname}">&nbsp;
                                     </c:forEach>
-
                                 </div>
                             </div>
                         </c:when>
@@ -312,5 +261,6 @@
                 $('img').tooltip("hide");
             });
         </script>
+        <c:set var="RemoveSuccess" value="" scope="session"/>
     </body>
 </html>

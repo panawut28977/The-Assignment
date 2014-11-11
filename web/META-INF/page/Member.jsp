@@ -19,13 +19,14 @@
             <div class="media col-md-4">
                 <img width="64" src="${st.profile_pic}" class="pull-left">
                 <div class="media-body">
-                    <div class="media-heading" ><h4>${st.firstname} ${st.lastname} <c:if test="${cf:getAccountRole(st.acc_id, cId) eq 'TH'}"> <span class="label label-primary pull-right" style="font-size: 12px">Teacher</span></c:if></h4></div>
+                    <c:set var="role" value="${cf:getAccountRole(st.acc_id, cId)}"/>
+                    <div class="media-heading" ><h4>${st.firstname} ${st.lastname} <c:if test="${role eq 'TH'}"> <span class="label label-primary pull-right" style="font-size: 12px">Teacher</span></c:if></h4></div>
                     <c:if test="${ac.courseList.get(cId).role eq 'TH'}">
                         <span class="dropdown pull-right usersetting">
                             <a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></a>
                             <ul class="dropdown-menu">
                                 <c:choose >
-                                    <c:when test="${cf:getAccountRole(st.acc_id, cId) eq 'TH'}">
+                                    <c:when test="${role eq 'TH'}">
                                         <li><a class="removeTH" data-id="${st.acc_id}">Remove as Teacher</a></li>
                                         </c:when>
                                         <c:when test="${st.account_type eq 'TH'}">

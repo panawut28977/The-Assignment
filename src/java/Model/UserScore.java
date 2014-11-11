@@ -21,6 +21,7 @@ import java.util.logging.Logger;
  */
 public class UserScore {
     private String fullname;
+    private Assignment am;
     private int am_id;
     private String am_name;
     private double full_mark;
@@ -36,6 +37,14 @@ public class UserScore {
         this.fullname = fullname;
     }
 
+    public Assignment getAm() {
+        return am;
+    }
+
+    public void setAm(Assignment am) {
+        this.am = am;
+    }
+    
     public double getFull_mark() {
         return full_mark;
     }
@@ -110,10 +119,9 @@ public class UserScore {
 //        }
 //        return uScoreList;
 //    }
-
     @Override
     public String toString() {
-        return "UserScore{" + "fullname=" + fullname + ", am_id=" + am_id + ", am_name=" + am_name + ", full_mark=" + full_mark + ", ass_type=" + ass_type + ", stf=" + stf + ", stof=" + stof + '}';
+        return "UserScore{" + "fullname=" + fullname + ", am=" + am + ", am_id=" + am_id + ", am_name=" + am_name + ", full_mark=" + full_mark + ", ass_type=" + ass_type + ", stf=" + stf + ", stof=" + stof + '}';
     }
 
 }

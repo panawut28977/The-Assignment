@@ -468,6 +468,22 @@ public class StAssignmentOnWeb {
         return result > 0;
     }
     
+     public static boolean deleteByG_id(int g_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "delete from student_assignment_on_web where g_id = ?";
+        PreparedStatement pstm;
+        int result = 0;
+        try { 
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, g_id);
+            result = pstm.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result > 0;
+    }
+    
      public static boolean isNotCheckingExist(int am_id) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select count(*) from student_assignment_on_web where ass_id = ?";

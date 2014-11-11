@@ -207,7 +207,7 @@ public class AccountCourse {
             if (rs.next()) {
                 role = rs.getString(1);
             }
-            conn.close(); 
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -269,14 +269,23 @@ public class AccountCourse {
     public static Map<AccountCourse, Account> getMemberInCourseWithRole(int course_id) {
         Map<AccountCourse, Account> listAccount = new HashMap<>();
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select * from account_course where course_id=? AND status =  \"approved\"";
+        String sql = "select * from account where acc_id in (select acc_id from account_course where course_id=? AND status =  \"approved\")";
         PreparedStatement pstm;
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, course_id);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                Account acc = Account.getAccountByID(rs.getInt("acc_id"));
+//                Account acc = Account.getAccountByID(rs.getInt("acc_id"));
+                Account acc = new Account();
+                acc.setAcc_id(rs.getInt("acc_id"));
+                acc.setFirstname(rs.getString("firstname"));
+                acc.setLastname(rs.getString("lastname"));
+                acc.setEmail(rs.getString("email"));
+                acc.setAccount_type(rs.getString("account_type"));
+                acc.setProfile_pic(rs.getString("profile_pic"));
+                acc.setRegister_date(rs.getTimestamp("register_date"));
+
                 AccountCourse acCourse = new AccountCourse();
                 acCourse.setRole(rs.getString("role"));
                 listAccount.put(acCourse, acc);
@@ -291,7 +300,7 @@ public class AccountCourse {
     public static List<Account> getMemberInCourse(int course_id) {
         List<Account> listAccount = new ArrayList<>();
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select * from account_course where course_id=? AND status =  \"approved\"";
+        String sql = "select * from account where acc_id in (select acc_id from account_course where course_id=? AND status =  \"approved\")";
         PreparedStatement pstm;
         Account acc = null;
         try {
@@ -299,7 +308,15 @@ public class AccountCourse {
             pstm.setInt(1, course_id);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                acc = Account.getAccountByID(rs.getInt("acc_id"));
+//                acc = Account.getAccountByID(rs.getInt("acc_id"));
+                acc = new Account();
+                acc.setAcc_id(rs.getInt("acc_id"));
+                acc.setFirstname(rs.getString("firstname"));
+                acc.setLastname(rs.getString("lastname"));
+                acc.setEmail(rs.getString("email"));
+                acc.setAccount_type(rs.getString("account_type"));
+                acc.setProfile_pic(rs.getString("profile_pic"));
+                acc.setRegister_date(rs.getTimestamp("register_date"));
                 listAccount.add(acc);
             }
             conn.close();
@@ -313,7 +330,7 @@ public class AccountCourse {
     public static List<Account> getWaitForApproveMemberInCourse(int course_id) {
         List<Account> listAccount = new ArrayList<>();
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select * from account_course where course_id=? AND status =  \"waiting\"";
+        String sql = "select * from account where acc_id in (select acc_id from account_course where course_id=? AND status =  \"waiting\")";
         PreparedStatement pstm;
         Account acc = null;
         try {
@@ -321,7 +338,15 @@ public class AccountCourse {
             pstm.setInt(1, course_id);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                acc = Account.getAccountByID(rs.getInt("acc_id"));
+//                acc = Account.getAccountByID(rs.getInt("acc_id"));
+                acc = new Account();
+                acc.setAcc_id(rs.getInt("acc_id"));
+                acc.setFirstname(rs.getString("firstname"));
+                acc.setLastname(rs.getString("lastname"));
+                acc.setEmail(rs.getString("email"));
+                acc.setAccount_type(rs.getString("account_type"));
+                acc.setProfile_pic(rs.getString("profile_pic"));
+                acc.setRegister_date(rs.getTimestamp("register_date"));
                 listAccount.add(acc);
             }
             conn.close();

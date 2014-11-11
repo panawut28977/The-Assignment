@@ -109,6 +109,7 @@ public class Announcement {
                 a.setAnnounce_date(rs.getTimestamp("announce_date"));
                 a.setContent(rs.getString("content"));
                 a.setTitle(rs.getString("title"));
+                a.setCourse_name(Course.getCourseNameByID(a.getCourse()));
                 ann.add(a);
             }
             conn.close();

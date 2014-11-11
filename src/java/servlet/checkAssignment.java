@@ -73,15 +73,25 @@ public class checkAssignment extends HttpServlet {
                     }
 //            System.out.println(sessionKey);
                     if (a.getTotal_member() > 1) {
-                        g = Group_member.getMemberById(stF.getG_id());
+                        if (stF == null) {
+                            request.setAttribute("msg", "14");
+                            url = "/informpage.jsp";
+                        } else {
+                            g = Group_member.getMemberById(stF.getG_id());
 //                System.out.println(g);
-                        String accIdList[] = g.getAcc_id().split(",");
-                        List<Account> gAm = new ArrayList<>();
-                        for (String accId : accIdList) {
-                            gAm.add(Account.getNameByID(Integer.parseInt(accId)));
+                            if (g == null) {
+                                request.setAttribute("msg", "14");
+                                url = "/informpage.jsp";
+                            } else {
+                                String accIdList[] = g.getAcc_id().split(",");
+                                List<Account> gAm = new ArrayList<>();
+                                for (String accId : accIdList) {
+                                    gAm.add(Account.getNameByID(Integer.parseInt(accId)));
+                                }
+                                ss.setAttribute("gAm", gAm);
+                                ss.setAttribute("g", g);
+                            }
                         }
-                        ss.setAttribute("gAm", gAm);
-                        ss.setAttribute("g", g);
                     } else {
                         send_acc = Account.getAccountByID(stF.getAcc_id());
                         ss.setAttribute("send_acc", send_acc);
@@ -102,15 +112,26 @@ public class checkAssignment extends HttpServlet {
                 ss.setAttribute("sa", stw);
 
                 if (a.getTotal_member() > 1) {
-                    g = Group_member.getMemberById(stw.getG_id());
-                    System.out.println(g);
-                    String accIdList[] = g.getAcc_id().split(",");
-                    List<Account> gAm = new ArrayList<>();
-                    for (String accId : accIdList) {
-                        gAm.add(Account.getNameByID(Integer.parseInt(accId)));
+                    if (stw == null) {
+                        request.setAttribute("msg", "14");
+                        url = "/informpage.jsp";
+                    } else {
+                        g = Group_member.getMemberById(stw.getG_id());
+                        System.out.println(g);
+                        if (g == null) {
+                            request.setAttribute("msg", "14");
+                            url = "/informpage.jsp";
+                        } else {
+                            String accIdList[] = g.getAcc_id().split(",");
+                            List<Account> gAm = new ArrayList<>();
+                            for (String accId : accIdList) {
+                                gAm.add(Account.getNameByID(Integer.parseInt(accId)));
+                            }
+                            ss.setAttribute("gAm", gAm);
+                            ss.setAttribute("g", g);
+                        }
                     }
-                    ss.setAttribute("gAm", gAm);
-                    ss.setAttribute("g", g);
+
                 } else {
                     send_acc = Account.getAccountByID(stw.getAcc_id());
                     ss.setAttribute("send_acc", send_acc);
