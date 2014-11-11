@@ -58,7 +58,7 @@ public class selectPeople extends HttpServlet {
         for (Group_member group_member : gList) {
             temp.append("," + group_member.getAcc_id());
         }
-        temp.deleteCharAt(0);
+        temp.deleteCharAt(1);
         String accList[] = temp.toString().split(",");
 
         Map<AccountCourse, Account> allMember = AccountCourse.getMemberInCourseWithRole(cId);
@@ -74,9 +74,8 @@ public class selectPeople extends HttpServlet {
                 }
             }
         }
-
-        List<WorkAndGroup> wag = WorkAndGroup.memberToWorkGroup(gList, a);
-        System.out.println(wag);
+        Map<Integer,Account> allAccount = Account.getNameByListID(temp.toString());
+        List<WorkAndGroup> wag = WorkAndGroup.memberToWorkGroup(gList, a,allAccount);
         request.setAttribute("noGMember", noGMember);
         request.setAttribute("am", a);
         request.setAttribute("gList", gList);

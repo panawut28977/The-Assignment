@@ -20,6 +20,7 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import Model.TrippleDes;
+import java.util.TreeMap;
 import servlet.Register;
 
 /**
@@ -351,6 +352,29 @@ public class Account {
         }
         return ac;
     }
+    
+    public static Map<Integer,Account> getNameByListID(String listId) {
+        Connection conn = ConnectionBuilder.getConnection();
+        Map<Integer,Account> allAccData = new TreeMap<>();
+        listId= listId.trim();
+        String sql = "select acc_id,concat(`firstname`,' ',`lastname`) as fullname,profile_pic from account where acc_id in ("+listId+") ";
+        PreparedStatement pstm;
+        Account ac =null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                ac = new Account();
+                ac.setAcc_id(rs.getInt(1));
+                ac.setFirstname(rs.getString(2));
+                ac.setProfile_pic(rs.getString(3));
+                allAccData.put(ac.getAcc_id(), ac);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return allAccData;
+    }
 
     public static Account getAccountByID(int acc_id) {
         Connection conn = ConnectionBuilder.getConnection();
@@ -367,7 +391,6 @@ public class Account {
                 acc.setFirstname(rs.getString("firstname"));
                 acc.setLastname(rs.getString("lastname"));
                 acc.setEmail(rs.getString("email"));
-//                acc.setPassword(rs.getString("password"));
                 acc.setAccount_type(rs.getString("account_type"));
                 acc.setProfile_pic(rs.getString("profile_pic"));
                 acc.setRegister_date(rs.getTimestamp("register_date"));

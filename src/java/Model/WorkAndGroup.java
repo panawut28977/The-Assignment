@@ -8,6 +8,7 @@ package Model;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -52,19 +53,18 @@ public class WorkAndGroup {
         this.group = group;
     }
 
-    public static List<WorkAndGroup> memberToWorkGroup(List<Group_member> mlist, Assignment am) {
+    public static List<WorkAndGroup> memberToWorkGroup(List<Group_member> mlist, Assignment am,Map<Integer,Account> allAccdata) {
         List<WorkAndGroup> wag = new ArrayList<>();
         WorkAndGroup w = null;
         for (Group_member group_member : mlist) {
             w = new WorkAndGroup();
-            
             w.setDetail(group_member);
             
             //set group account
             List<Account> la = new ArrayList<>();
             String accList[] = group_member.getAcc_id().split(",");
             for (String acc : accList) {
-                la.add(Account.getNameByID(Integer.parseInt(acc)));
+                la.add(allAccdata.get(Integer.parseInt(acc)));
             }
             w.setGroup(la);
 
@@ -81,8 +81,6 @@ public class WorkAndGroup {
                 }
             } else if (am.getAss_type().equalsIgnoreCase("web")) {
                 if (am.getTotal_member() > 1) {
-                    System.out.println(am.getAm_id());
-                    System.out.println(group_member.getG_id());
                     StAssignmentOnWeb stow = StAssignmentOnWeb.getStAmbyAmIDAndGID(am.getAm_id(), group_member.getG_id());
                     w.setAm_score(stow.getScore());
                     w.setChecked_date(stow.getChecked_time());
