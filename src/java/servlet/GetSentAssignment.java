@@ -129,6 +129,7 @@ public class GetSentAssignment extends HttpServlet {
             if (StAssignmentOnWeb.isNotCheckingExist(am_id) && now.getTime() > lateDate.getTime()) {
                 System.out.println("auto checking");
                 List<StAssignmentOnWeb> notchcksa = StAssignmentOnWeb.getNotCheckingStAmByAmId(am_id);
+                System.out.println(notchcksa);
                 AnswerQuestion aq = null;
                 for (StAssignmentOnWeb stAssignmentOnWeb : notchcksa) {
                     int used_id = 0;

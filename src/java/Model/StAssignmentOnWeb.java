@@ -506,7 +506,7 @@ public class StAssignmentOnWeb {
      public static List<StAssignmentOnWeb> getNotCheckingStAmByAmId(int am_id) {
         List<StAssignmentOnWeb> stfList = new ArrayList<>();
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select * from student_assignment_on_web where ass_id = ? and checked_time is null";
+        String sql = "select * from student_assignment_on_web where ass_id = ? and checked_time is null and lasted_send_date is not null";
         PreparedStatement pstm;
         int result = 0;
         StAssignmentOnWeb s = null;

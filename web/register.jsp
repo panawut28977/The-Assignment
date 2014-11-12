@@ -94,7 +94,6 @@
 <script>
     $(function() {
         $("#email").on("change", function() {
-
             var value = $(this).val();
             if (value.length == 0) {
                 addCheckingStatus('false');

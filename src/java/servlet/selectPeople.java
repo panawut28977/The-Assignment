@@ -80,13 +80,13 @@ public class selectPeople extends HttpServlet {
         //1 connections
         Map<Integer, Account> allAccount = Account.getNameByListID(temp.toString());
         //>10 connections
-        //List<WorkAndGroup> wag = WorkAndGroup.memberToWorkGroup(gList, a, allAccount);
+        List<WorkAndGroup> wag = WorkAndGroup.memberToWorkGroup(gList, a, allAccount);
         request.setAttribute("noGMember", noGMember);
         request.setAttribute("am", a);
         request.setAttribute("gList", gList);
-        //request.setAttribute("wag", wag);
+        request.setAttribute("wag", wag);
         ss.setAttribute("am_id", a.getAm_id());
-        String url = "";
+        String url = ""; 
  
         url = "/groupWork.jsp?tab=AllAssignment";
         getServletContext().getRequestDispatcher(url).forward(request, response);
