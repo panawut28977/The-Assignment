@@ -58,7 +58,8 @@ public class selectPeople extends HttpServlet {
         for (Group_member group_member : gList) {
             temp.append("," + group_member.getAcc_id());
         }
-        temp.deleteCharAt(1);
+        temp.deleteCharAt(0);
+        temp.deleteCharAt(0);
         String accList[] = temp.toString().split(",");
 
         Map<AccountCourse, Account> allMember = AccountCourse.getMemberInCourseWithRole(cId);

@@ -239,7 +239,7 @@ public class Group_member {
         Connection conn = ConnectionBuilder.getConnection();
         PreparedStatement pstm;
         String sql = "";
-        sql = "select * from group_member where ass_id = ?";
+        sql = "select * from group_member where ass_id = ? order by g_no";
         List<Group_member> gList = new ArrayList<>();
         try {
             pstm = conn.prepareStatement(sql);
