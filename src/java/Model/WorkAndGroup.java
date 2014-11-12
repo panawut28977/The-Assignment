@@ -69,27 +69,27 @@ public class WorkAndGroup {
             w.setGroup(la);
 
             //check am score
-//            if (am.getAss_type().equalsIgnoreCase("file")) {
-//                if (am.getTotal_member() > 1) {
-//                    StAssignmentFile stf = StAssignmentFile.getStAmBbyAmIDAndGID(am.getAm_id(), group_member.getG_id());
-//                    w.setAm_score(stf.getScore());
-//                    w.setChecked_date(stf.getChecked_time());
-//                } else {
-//                    StAssignmentFile stf = StAssignmentFile.getStAmBbyAmIDAndAccId(am.getAm_id(), la.get(0).getAcc_id());
-//                    w.setAm_score(stf.getScore());
-//                    w.setChecked_date(stf.getChecked_time());
-//                }
-//            } else if (am.getAss_type().equalsIgnoreCase("web")) {
-//                if (am.getTotal_member() > 1) {
-//                    StAssignmentOnWeb stow = StAssignmentOnWeb.getStAmbyAmIDAndGID(am.getAm_id(), group_member.getG_id());
-//                    w.setAm_score(stow.getScore());
-//                    w.setChecked_date(stow.getChecked_time());
-//                } else {
-//                    StAssignmentOnWeb stow = StAssignmentOnWeb.getStAmByAmIDAndAccId(am.getAm_id(), la.get(0).getAcc_id());
-//                    w.setAm_score(stow.getScore());
-//                    w.setChecked_date(stow.getChecked_time());
-//                }
-//            }
+            if (am.getAss_type().equalsIgnoreCase("file")) {
+                if (am.getTotal_member() > 1) {
+                    StAssignmentFile stf = StAssignmentFile.getStAmBbyAmIDAndGID(am.getAm_id(), group_member.getG_id());
+                    w.setAm_score(stf.getScore());
+                    w.setChecked_date(stf.getChecked_time());
+                } else {
+                    StAssignmentFile stf = StAssignmentFile.getStAmBbyAmIDAndAccId(am.getAm_id(), la.get(0).getAcc_id());
+                    w.setAm_score(stf.getScore());
+                    w.setChecked_date(stf.getChecked_time());
+                }
+            } else if (am.getAss_type().equalsIgnoreCase("web")) {
+                if (am.getTotal_member() > 1) {
+                    StAssignmentOnWeb stow = StAssignmentOnWeb.getStAmbyAmIDAndGID(am.getAm_id(), group_member.getG_id());
+                    w.setAm_score(stow.getScore());
+                    w.setChecked_date(stow.getChecked_time());
+                } else {
+                    StAssignmentOnWeb stow = StAssignmentOnWeb.getStAmByAmIDAndAccId(am.getAm_id(), la.get(0).getAcc_id());
+                    w.setAm_score(stow.getScore());
+                    w.setChecked_date(stow.getChecked_time());
+                }
+            }
 
             wag.add(w);
 

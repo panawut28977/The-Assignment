@@ -40,6 +40,7 @@ public class selectPeople extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession ss = request.getSession();
+        //5 connections
         Assignment a = Assignment.getAmByAmID(request.getParameter("am_id"));
         Account ac = (Account) ss.getAttribute("ac");
         int cId = 0;
@@ -53,6 +54,7 @@ public class selectPeople extends HttpServlet {
             request.setAttribute("msg", "joined");
         }
 
+        //1 connections
         List<Group_member> gList = Group_member.getAllGroup(a.getAm_id());
         StringBuilder temp = new StringBuilder(" ");
         for (Group_member group_member : gList) {
@@ -61,7 +63,7 @@ public class selectPeople extends HttpServlet {
         temp.deleteCharAt(0);
         temp.deleteCharAt(0);
         String accList[] = temp.toString().split(",");
-
+//1 connections
         Map<AccountCourse, Account> allMember = AccountCourse.getMemberInCourseWithRole(cId);
         Iterator loopa = allMember.entrySet().iterator();
         List<Account> noGMember = new ArrayList<>();
@@ -75,15 +77,17 @@ public class selectPeople extends HttpServlet {
                 }
             }
         }
-        Map<Integer,Account> allAccount = Account.getNameByListID(temp.toString());
-        List<WorkAndGroup> wag = WorkAndGroup.memberToWorkGroup(gList, a,allAccount);
+        //1 connections
+        Map<Integer, Account> allAccount = Account.getNameByListID(temp.toString());
+        //>10 connections
+        //List<WorkAndGroup> wag = WorkAndGroup.memberToWorkGroup(gList, a, allAccount);
         request.setAttribute("noGMember", noGMember);
         request.setAttribute("am", a);
         request.setAttribute("gList", gList);
-        request.setAttribute("wag", wag);
+        //request.setAttribute("wag", wag);
         ss.setAttribute("am_id", a.getAm_id());
         String url = "";
-
+ 
         url = "/groupWork.jsp?tab=AllAssignment";
         getServletContext().getRequestDispatcher(url).forward(request, response);
     }

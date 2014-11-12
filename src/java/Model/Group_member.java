@@ -239,7 +239,7 @@ public class Group_member {
         Connection conn = ConnectionBuilder.getConnection();
         PreparedStatement pstm;
         String sql = "";
-        sql = "select * from group_member where ass_id = ? order by g_no";
+        sql = "select g_id,acc_id,g_no,ass_id from group_member where ass_id = ? order by g_no";
         List<Group_member> gList = new ArrayList<>();
         try {
             pstm = conn.prepareStatement(sql);
@@ -265,7 +265,7 @@ public class Group_member {
         Connection conn = ConnectionBuilder.getConnection();
         PreparedStatement pstm;
         String sql = "";
-        sql = "select * from group_member where ass_id = ? and "
+        sql = "select g_id,acc_id,g_no,ass_id from group_member where ass_id = ? and "
                 + "( "
                 + "acc_id like '%," + acc_id + ",%' or "
                 + "acc_id like '" + acc_id + ",%' or "
