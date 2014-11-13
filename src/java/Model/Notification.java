@@ -449,7 +449,11 @@ public class Notification {
     public static List<Notification> getAllNotification(int receive_id) {
         String e = null;
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select * from notification n join receive_noti_id r on n.receive_list_id = r.receive_list_id where r.acc_id=? order by n.noti_id desc";
+        String sql = "select *,c.name as course_name,user.firstname,user.profile_pic from notification n "
+                + "join receive_noti_id r on n.receive_list_id = r.receive_list_id "
+                + "join course c  on n.course_id = c.course_id "
+                + "join account user on n.acc_id = user.acc_id "
+                + "where r.acc_id=? order by n.noti_id desc";
         List<Notification> notiList = new ArrayList<>();
         PreparedStatement pstm;
         Notification n = null;
@@ -461,7 +465,7 @@ public class Notification {
                 n = new Notification();
                 n.setAcc_id(rs.getInt("acc_id"));
                 n.setCourse_id(rs.getInt("course_id"));
-                n.setCourse_name(Course.getCourseNameByID(n.getCourse_id()));
+                n.setCourse_name(rs.getString("course_name"));
                 n.setLink(rs.getString("link"));
                 n.setNoti_date(rs.getTimestamp("noti_date"));
                 n.setDatefm(util.Util.formatTime(n.getNoti_date() + ""));
@@ -469,12 +473,9 @@ public class Notification {
                 n.setText(rs.getString("text"));
                 n.setType(rs.getString("type"));
                 n.setReceive_list_id(rs.getInt("receive_list_id"));
-                n.setNoti_name(Account.getNameByID(n.getAcc_id()).getFirstname());
-                n.setProfile_pic(Account.getNameByID(n.getAcc_id()).getProfile_pic());
-                n.setSeen_date(getSeenDate(n.getReceive_list_id(), receive_id));
-//                System.out.println(n.getReceive_list_id());
-//                System.out.println(n.getAcc_id());
-//                System.out.println(n.getSeen_date());
+                n.setNoti_name(rs.getString("firstname"));
+                n.setProfile_pic(rs.getString("profile_pic"));
+                n.setSeen_date(rs.getString("seen_date"));
                 notiList.add(n);
             }
             conn.close();

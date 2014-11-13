@@ -93,7 +93,7 @@
         var cID = sessionStorage.getItem('cID');
         var accID = sessionStorage.getItem('accID');
 //        $.getJSON('http://jsp.chaninz.com/tasm/showAssignmentInCourse?id=' + id, function (result) {
-        $.getJSON('http://localhost:8084/TheAssignment/showAssignmentInCourse?cID=' + cID + '&accID=' + accID, function (result) {
+        $.getJSON('http://assignment.sit.kmutt.ac.th/showAssignmentInCourse?cID=' + cID + '&accID=' + accID, function (result) {
             var i = 1;
             $(result).each(function (k, v) {
                 $(
@@ -109,7 +109,7 @@
                 i += 1;
             });
             var id = sessionStorage.getItem('accID');
-            $.getJSON('http://localhost:8084/TheAssignment/getNotificationMobile?id=' + id, function(result) {
+            $.getJSON('http://assignment.sit.kmutt.ac.th/getNotificationMobile?id=' + id, function(result) {
                 $(result).each(function(k, v) {
                     $('<div role="main" class="notiLink" noti-id="'+ v.noti_id + '" course-name="'+ v.course_name + '" data-id="' + v.type + '" course-id="' + v.course_id + '" class="ui-content" style="border-bottom: solid #DDDDDD;background-color:' + (v.seen_date == null ? '#EDEFF5' : '#FFFFFF') + '">' +
                             '<div class="ui-grid-a" style="padding:1px;width:auto;"><div class="ui-block-a ui-bar" style="width: 20%">' +
@@ -188,7 +188,7 @@
                     alert(notiID + " " + accID);
                     $.ajax({
                         type: "POST",
-                        url: "http://localhost:8084/TheAssignment/setSeenDateMobile",
+                        url: "http://assignment.sit.kmutt.ac.th/setSeenDateMobile",
                         data: {"notiID": notiID, "accID": accID},
                         success: function (data) {
                         }
@@ -201,7 +201,7 @@
                     
                     $.ajax({
                         type: "POST",
-                        url: "http://localhost:8084/TheAssignment/setSeenDateMobile",
+                        url: "http://assignment.sit.kmutt.ac.th/setSeenDateMobile",
                         data: {"notiID": notiID, "accID": accID},
                         success: function (data) {
                         }
@@ -240,7 +240,7 @@
 //            $.ajax({
 //                type: "POST",
 ////                url: "http://jsp.chaninz.com/tasm/showAssignmentStatusMobile",
-//                url: "http://localhost:8084/TheAssignment/TheAssignment/showAssignmentStatusMobile",
+//                url: "http://assignment.sit.kmutt.ac.th/TheAssignment/showAssignmentStatusMobile",
 //                data: {"accID": accID, "assID": assID},
 //                async: false,
 //                success: function (data) {

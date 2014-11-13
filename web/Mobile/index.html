@@ -81,7 +81,7 @@
     <script type="text/javascript">
         $(function() {
             var id = sessionStorage.getItem('accID');
-            $.getJSON('http://localhost:8084/TheAssignment/showAnnounceStudent?id=' + id, function(result) {
+            $.getJSON('http://assignment.sit.kmutt.ac.th/showAnnounceStudent?id=' + id, function(result) {
                 var i = 1;
                 $(result).each(function(k, v) {
                     $(
@@ -97,7 +97,7 @@
             });
 
             var id = sessionStorage.getItem('accID');
-            $.getJSON('http://localhost:8084/TheAssignment/getNotificationMobile?id=' + id, function(result) {
+            $.getJSON('http://assignment.sit.kmutt.ac.th/getNotificationMobile?id=' + id, function(result) {
                 $(result).each(function(k, v) {
                     $('<div role="main" class="notiLink" noti-id="'+ v.noti_id + '" course-name="'+ v.course_name + '" data-id="' + v.type + '" course-id="' + v.course_id + '" class="ui-content" style="border-bottom: solid #DDDDDD;background-color:' + (v.seen_date == null ? '#EDEFF5' : '#FFFFFF') + '">' +
                             '<div class="ui-grid-a" style="padding:1px;width:auto;"><div class="ui-block-a ui-bar" style="width: 20%">' +
@@ -167,7 +167,7 @@
                     alert(notiID + " " + accID);
                     $.ajax({
                         type: "POST",
-                        url: "http://localhost:8084/TheAssignment/setSeenDateMobile",
+                        url: "http://assignment.sit.kmutt.ac.th/setSeenDateMobile",
                         data: {"notiID": notiID, "accID": accID},
                         success: function (data) {
                         }
@@ -180,7 +180,7 @@
                     
                     $.ajax({
                         type: "POST",
-                        url: "http://localhost:8084/TheAssignment/setSeenDateMobile",
+                        url: "http://assignment.sit.kmutt.ac.th/setSeenDateMobile",
                         data: {"notiID": notiID, "accID": accID},
                         success: function (data) {
                         }

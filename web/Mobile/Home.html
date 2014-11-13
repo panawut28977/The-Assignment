@@ -48,7 +48,7 @@
                 var password = $('#password').val();
                 $.ajax({
                     type: "POST",
-                    url: "http://localhost:8084/TheAssignment/LoginMobile",
+                    url: "http://assignment.sit.kmutt.ac.th/LoginMobile",
                     data: {"email": email, "password": password},
                     success: function(data) {
                         if (data != null) {
@@ -72,7 +72,7 @@
                 var email = $('#email').val();
                 $.ajax({
                     type: "POST",
-                    url: "http://localhost:8084/TheAssignment/ForgotPasswordMobile",
+                    url: "http://assignment.sit.kmutt.ac.th/ForgotPasswordMobile",
                     data: {"email": email},
                     success: function(data) {
                        alert("Please check inbox of your email");

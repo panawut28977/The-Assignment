@@ -102,7 +102,7 @@
     <script type="text/javascript">
         $(function () {
             var id = sessionStorage.getItem('accID');
-            $.getJSON('http://localhost:8084/TheAssignment/getNotificationMobile?id=' + id, function(result) {
+            $.getJSON('http://assignment.sit.kmutt.ac.th/getNotificationMobile?id=' + id, function(result) {
                 $(result).each(function(k, v) {
                     $('<div role="main" class="notiLink" noti-id="'+ v.noti_id + '" course-name="'+ v.course_name + '" data-id="' + v.type + '" course-id="' + v.course_id + '" class="ui-content" style="border-bottom: solid #DDDDDD;background-color:' + (v.seen_date == null ? '#EDEFF5' : '#FFFFFF') + '">' +
                             '<div class="ui-grid-a" style="padding:1px;width:auto;"><div class="ui-block-a ui-bar" style="width: 20%">' +
@@ -157,7 +157,7 @@
                     alert(notiID + " " + accID);
                     $.ajax({
                         type: "POST",
-                        url: "http://localhost:8084/TheAssignment/setSeenDateMobile",
+                        url: "http://assignment.sit.kmutt.ac.th/setSeenDateMobile",
                         data: {"notiID": notiID, "accID": accID},
                         success: function (data) {
                         }
@@ -170,7 +170,7 @@
                     
                     $.ajax({
                         type: "POST",
-                        url: "http://localhost:8084/TheAssignment/setSeenDateMobile",
+                        url: "http://assignment.sit.kmutt.ac.th/setSeenDateMobile",
                         data: {"notiID": notiID, "accID": accID},
                         success: function (data) {
                         }
@@ -187,7 +187,7 @@
                 var code = sessionStorage.getItem('code');
                 $.ajax({
                     type: "POST",
-                    url: "http://localhost:8084/TheAssignment/joinCourseMobile",
+                    url: "http://assignment.sit.kmutt.ac.th/joinCourseMobile",
                     data: {"accID": accID, "code": code},
                     success: function (data) {
                         alert(data);
@@ -200,7 +200,7 @@
             $.ajax(
                     {
                         type: 'GET',
-                        url: 'http://localhost:8084/TheAssignment/showCourseInfo',
+                        url: 'http://assignment.sit.kmutt.ac.th/showCourseInfo',
                         data: "code=" + sessionStorage.getItem('code'),
                         success: function (data) {
                             $("#cName").text(data.name);
