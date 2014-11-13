@@ -78,7 +78,7 @@ public class Announcement {
     public void setAnnounce_date(Timestamp announce_date) {
         this.announce_date = announce_date;
     }
-    
+
     public String getCourse_name() {
         return course_name;
     }
@@ -118,30 +118,44 @@ public class Announcement {
         }
         return ann;
     }
-    
+
     public static List<Announcement> viewAnnByAccIDMobile(int acc_id) {
         Connection conn = ConnectionBuilder.getConnection();
-        String sql = "select a.*  from announcement a "
+        String sql = "select a.*,user.*,c.name as course_name  from announcement a "
                 + "JOIN account_course ac "
                 + "On a.course_id = ac.course_id "
-                + "where ac.acc_id = ? AND status = 'approved' "
+                + "Join account user on a.acc_id = user.acc_id "
+                + "Join course c on a.course_id = c.course_id "
+                + "where ac.acc_id = ? AND ac.status = 'approved' "
                 + "order by announce_date desc";
         PreparedStatement pstm;
         List<Announcement> ann = new ArrayList<Announcement>();
         Announcement a = null;
+        Account acc = null;
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, acc_id);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
                 a = new Announcement();
-                a.setAn_acc(Account.getAccountByID(rs.getInt("acc_id")));
+
+                acc = new Account();
+                acc.setAcc_id(rs.getInt("acc_id"));
+                acc.setFirstname(rs.getString("firstname"));
+                acc.setLastname(rs.getString("lastname"));
+                acc.setEmail(rs.getString("email"));
+                acc.setAccount_type(rs.getString("account_type"));
+                acc.setProfile_pic(rs.getString("profile_pic"));
+                acc.setRegister_date(rs.getTimestamp("register_date"));
+                a.setAn_acc(acc);
+//                a.setAn_acc(Account.getAccountByID(rs.getInt("acc_id")));
+
                 a.setCourse(rs.getInt("course_id"));
                 a.setAn_id(rs.getInt("an_id"));
                 a.setAnnounce_date(rs.getTimestamp("announce_date"));
                 a.setContent(rs.getString("content"));
                 a.setTitle(rs.getString("title"));
-                a.setCourse_name(Course.getCourseNameByID(a.getCourse()));
+                a.setCourse_name(rs.getString("course_name"));
                 ann.add(a);
             }
             conn.close();
@@ -150,7 +164,7 @@ public class Announcement {
         }
         return ann;
     }
-    
+
     public static List<Announcement> viewAnnByCourseMobile(int course_id) {
         Connection conn = ConnectionBuilder.getConnection();
         String sql = "select *  from announcement where course_id = ? order by announce_date desc";

@@ -4,22 +4,46 @@
         <meta name="viewport" content="initial-scale=1.0">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <!--        <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/css/jquery.mobile-1.4.2.css" />
-                <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/css/font-awesome.min.css"/>-->
+        <link rel="stylesheet" href="css/jquery.mobile-1.4.2.css"/>
         <link rel="stylesheet" href="css/font-awesome.min.css"/>
-        <link rel="stylesheet" href="css/jquery.mobile-1.4.2.css" />
 
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+        <script type="text/javascript" src="http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog2.min.js"></script>
+        <script src="js/main.js"></script>
+        <style>
+            .ui-popup-container, .ui-popup {
+                height: 98%;
+                width: 100%;
+                position: absolute;
+                top:0;
+                left:0;
+            }
+
+            center a{
+                text-decoration: none;
+            }
+        </style>
     </head> 
     <body>
         <div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-fixed-page1" data-title="Panel fixed positioning">
             <div data-role="header" data-position="fixed">
                 <center>
-                    <!--                    <a href="http://jsp.chaninz.com/tasm/Mobile/index.html" rel="external" and data-ajax="false">-->
                     <a href="indexTeacher.html" rel="external" and data-ajax="false">
-                        <span class="fa fa-home fa-2x" style="alignment-adjust:auto;padding-right:25px;padding-top:15px;padding-bottom:15px"></span></a>
-                    <span class="fa fa-globe fa-2x"></span></center>
+                        <span class="fa fa-home fa-2x" style="alignment-adjust:auto;padding-left:25px;padding-top:15px;padding-bottom:15px"></span>
+                    </a>
+                    <a href="#sql" id="notification" data-rel="popup" data-transition="pop" style="padding-left:20px" >
+                        <i class="fa fa-globe fa-2x"></i> 
+                        <span style="font-size:25px" id="noti"></span>
+                    </a>
+                </center>
+
+                <div data-role="popup" id="sql" style="max-width:100%;overflow-y:auto">
+                    <div data-role="header" data-theme="a" >
+                        <h1>Notifications <a data-rel="back" class="fa fa-remove fa-2x" style="position: fixed;top: 0.3em;right: 2em"></a></h1>
+                    </div>
+                    <span id="noti-add-here"></span>
+                </div>
                 <a href="#nav-panel"><i class="fa fa-bars fa-2x"></i></a>
                 <div style="padding: 5px;width: auto;background: #E2E2E2;">
                     <input type="search" name="search" id="filter" placeholder="Filter..."/>
@@ -29,8 +53,6 @@
             <div style="background-color:white ;padding:1px;width:auto;">
                 <div style="margin-left:15px;color:#999">
                     <h3 align="center" id="courseName">
-                        <!--                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <div class="fa fa-gear fa-2x"></div></h3>-->
                 </div>
             </div>
 
@@ -45,7 +67,6 @@
                         <b style="color:white" id="lName"></b>
                     </li>
                     <li>
-                        <!--                        <a href="http://jsp.chaninz.com/tasm/Mobile/JoinCourse.html" rel="external" and data-ajax="false">Join Course &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
                         <a href="JoinCourseTeacher.html" rel="external" and data-ajax="false">Join Course &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    
                             <div class="fa fa-plus fa-2x"></div>
                         </a>
@@ -56,22 +77,22 @@
             <div data-position="fixed" data-tap-toggle="false" data-role="footer" data-tap-toggle="false" >
                 <div data-role="navbar" id="navbar2">
                     <ul id="bottomMenu">
-                        <li><a href="AnnounceInCourseTeacher.html" rel="external" and data-ajax="false" class="ui-btn-active"><i class="fa fa-newspaper-o fa-2x"></i></a></li>
+                        <li><a href="indexTeacher.html" rel="external" and data-ajax="false" class="ui-btn-active"><i class="fa fa-newspaper-o fa-2x"></i></a></li>
                         <li><a href="AssignmentInCourseTeacher.html" rel="external" and data-ajax="false" ><i class="fa fa-file-text fa-2x"></i></a></li>
 
                     </ul>
                 </div>
                 <div data-role="navbar" id="navbar3">
                     <ul id="bottomMenu">
-                        <li><a href="indexTeacher.html" rel="external" and data-ajax="false"><i class="fa fa-newspaper-o fa-2x"></i></a></li>
-                        <li><a href="AssignmentTeacher.html" rel="external" and data-ajax="false" class="ui-btn-active"><i class="fa fa-file-text fa-2x"></i></a></li>
-                        <li id="scorebtn"><a href="TeacherScore.html" rel="external" and data-ajax="false"><i class="fa fa-bar-chart fa-2x"></i></a></li>
-                        <li><a href="#sql" id="opendialog" data-rel="popup" data-transition="pop"><i class="fa fa-pencil-square fa-2x"></i></a></li>
+                        <li><a href="indexTeacher.html" rel="external" and data-ajax="false" class="ui-btn-active"><i class="fa fa-newspaper-o fa-2x"></i></a></li>
+                        <li><a href="AssignmentInCourseTeacher.html" rel="external" and data-ajax="false"><i class="fa fa-file-text fa-2x"></i></a></li>
+                        <!--                        <li id="scorebtn"><a href="TeacherScore.html" rel="external" and data-ajax="false"><i class="fa fa-bar-chart fa-2x"></i></a></li>-->
+                        <li><a href="#sql2" id="announceIt" data-rel="popup" data-transition="pop"><i class="fa fa-pencil-square fa-2x"></i></a></li>
                     </ul>
                 </div>
             </div>
-            
-            <div data-role="popup" id="sql" data-dismissible="false" style="max-width:100%">
+
+            <div data-role="popup" id="sql2" data-dismissible="false" style="max-width:100%">
                 <div data-role="header" data-theme="a">
                     <h1>Want to say? </h1>
 
@@ -89,13 +110,13 @@
 
     </body>
     <script type="text/javascript">
-        var cID = sessionStorage.getItem('cID');
-        var accID = sessionStorage.getItem('accID');
-//        $.getJSON('http://jsp.chaninz.com/tasm/showAssignmentInCourse?id=' + id, function (result) {
-        $.getJSON('http://localhost:8084/TheAssignment/showAnnounceInCourseMobile?cID=' + cID, function (result) {
-            var i = 1;
-            $(result).each(function (k, v) {
-                $(
+        $(document).ready(function() {
+            var cID = sessionStorage.getItem('cID');
+            var accID = sessionStorage.getItem('accID');
+            $.getJSON('http://localhost:8084/TheAssignment/showAnnounceInCourseMobile?cID=' + cID, function(result) {
+                var i = 1;
+                $(result).each(function(k, v) {
+                    $(
                             '<div class="am" style="background-color:#' + (i % 2 == 0 ? 'FFFFFF' : 'F4F4F4') + ' ;padding:1px;width:auto;">' +
                             '<div style="margin-left:15px">' +
                             '<h4>' + v.an_acc.firstname + ' ' + v.an_acc.lastname + ' : ' + v.course_name + '</h4> ' +
@@ -105,8 +126,21 @@
                             '</div>' +
                             '</div>').insertBefore($('#add-test'));
                     i += 1;
+                });
             });
-            
+
+            var id = sessionStorage.getItem('accID');
+            $.getJSON('http://localhost:8084/TheAssignment/getNotificationMobile?id=' + id, function(result) {
+                $(result).each(function(k, v) {
+                    $('<div role="main" class="notiLink" noti-id="' + v.noti_id + '" course-name="' + v.course_name + '" data-id="' + v.type + '" course-id="' + v.course_id + '" class="ui-content" style="border-bottom: solid #DDDDDD;background-color:' + (v.seen_date == null ? '#EDEFF5' : '#FFFFFF') + '">' +
+                            '<div class="ui-grid-a" style="padding:1px;width:auto;"><div class="ui-block-a ui-bar" style="width: 20%">' +
+                            '<img src="' + v.profile_pic + '" width="70px" height="80px"/></div><br/>' +
+                            '<div class="ui-block-b" style="width: 80%">' +
+                            (v.type == "alert" || v.type == "score" ? '<span style="font-size: larger">' + v.text + '<b>(' + v.course_name + ')</b></span>' : '<span style="font-size: larger"><b>' + v.noti_name + "</b> " + v.text + '<b>(' + v.course_name + ')</b></span>') +
+                            '</div></div></div>').insertBefore($('#noti-add-here'));
+                });
+            });
+
             if (sessionStorage.getItem('role') == 'TH') {
                 $('#navbar2').hide();
                 $('#navbar3').show();
@@ -134,21 +168,19 @@
             var pic = sessionStorage.getItem('pic');
             var cList = JSON.parse(sessionStorage.getItem('cList'));
             var cName = sessionStorage.getItem('cName');
-            console.dir(cList);
             $("#courseName").text(cName);
+            console.dir(cList);
             $("#dPIC").attr("src", "../" + pic);
             $("#fName").text(fName);
             $("#lName").text(lName);
             var key, count = 0;
             for (key in cList) {
                 if (cList.hasOwnProperty(key)) {
-//                    $("#sCourse").attr(cList[key].course.course_id);
-//                    $("#cName").text(cList[key].course.name);
-//                     alert(key + " -> " + cList[key].course.name);
-                    $("#lcList").append('<li class="cLink" data-id="' + key + '"><a class="ui-btn ui-btn-icon-right ui-icon-carat-r">' + cList[key].course.name + '</a></li>').trigger('refresh');
+                    $("#lcList").append('<li class="cLink" role="' + cList[key].role + '"data-id="' + key + '"><a class="ui-btn ui-btn-icon-right ui-icon-carat-r">' + cList[key].course.name + '</a></li>').trigger('refresh');
                 }
                 $(".cLink").click(function() {
                     sessionStorage.setItem('cID', $(this).attr("data-id"));
+                    sessionStorage.setItem('role', $(this).attr("role"));
                     $(location).attr('href', 'AnnounceInCourseTeacher.html');
                 });
             }
@@ -157,8 +189,54 @@
                 sessionStorage.clear();
                 $(location).attr('href', 'Home.html');
             });
-            
-            $("#bottomMenu").navbar("refresh");
+            $(document).on("click", "#addIt", function() {
+//                $('#addIt').click(function() {
+                var accID = sessionStorage.getItem('accID');
+                var content = $("#content").val();
+                var cID = sessionStorage.getItem('cID');
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8084/TheAssignment/addAnnounceMobile",
+                    data: {"accID": accID, "content": content, "cID": cID},
+                    success: function(data) {
+
+                        $(location).attr('href', 'indexTeacher.html');
+                    }
+                });
+            });
+
+            $(document).on("click", ".notiLink", function() {
+                var accID = sessionStorage.getItem('accID');
+                var notiID = $(this).attr("noti-id");
+                if ($(this).attr("data-id") == "alert" || $(this).attr("data-id") == "announce") {
+                    sessionStorage.setItem('cName', $(this).attr("course-name"));
+                    sessionStorage.setItem('cID', $(this).attr("course-id"));
+                    $.ajax({
+                        type: "POST",
+                        url: "http://localhost:8084/TheAssignment/setSeenDateMobile",
+                        data: {"notiID": notiID, "accID": accID},
+                        success: function(data) {
+                        }
+                    });
+
+                    $(location).attr('href', 'AnnounceInCourseTeacher.html');
+                } else if ($(this).attr("data-id") == "score" || $(this).attr("data-id") == "assignment") {
+                    sessionStorage.setItem('cName', $(this).attr("course-name"));
+                    sessionStorage.setItem('cID', $(this).attr("course-id"));
+
+                    $.ajax({
+                        type: "POST",
+                        url: "http://localhost:8084/TheAssignment/setSeenDateMobile",
+                        data: {"notiID": notiID, "accID": accID},
+                        success: function(data) {
+                        }
+                    });
+
+                    $(location).attr('href', 'AssignmentInCourseTeacher.html');
+                }
+            });
+
+
             //filter
             $("#filter").keyup(function() {
                 $(".am").show();
@@ -182,7 +260,18 @@
                     x: 0,
                     y: 0
                 });
-            });   
+                $("#sql2").popup({
+                    beforeposition: function() {
+                        $(this).css({
+                            width: window.innerWidth,
+                            height: window.innerHeight - 14
+                        });
+                    },
+                    x: 0,
+                    y: 0
+                });
             });
+            $("#bottomMenu").navbar("refresh");
+        });
     </script>
 </html>

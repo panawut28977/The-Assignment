@@ -6,10 +6,8 @@
         <meta name="viewport" content="initial-scale=1.0">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <!--        <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/css/jquery.mobile-1.4.2.css" />
-                <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/css/font-awesome.min.css"/>-->
+        <link rel="stylesheet" href="css/jquery.mobile-1.4.2.css"/>
         <link rel="stylesheet" href="css/font-awesome.min.css"/>
-        <link rel="stylesheet" href="css/jquery.mobile-1.4.2.css" />
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
     </head> 
@@ -24,7 +22,18 @@
                         <input type="email" id="email" placeholder="E-mail"/>
                         <input type="password" id="password" placeholder="Password"/>
                         <input type="submit" style="background-color:#385DB3" value="Sign in" id="login"/></a>
-                        <a href="#">Forget your password?</a>
+                        <a href="#popupDialog" data-rel="popup" data-position-to="window" data-transition="pop">Forget your password ?</a>
+                        <div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="a" data-dismissible="false" style="max-width:400px;">
+                            <div data-role="header" data-theme="a">
+                                <h1>Recovery Zone <a data-rel="back" class="fa fa-remove fa-2x" style="margin-left: 10px"></a></h1>
+                            </div>
+                            <div role="main" class="ui-content">
+                                <h3 class="ui-title">Please enter your registered email. </h3>
+                                <input type="text" id="email" placeholder="Enter your email here"/>
+                                <p>After continue, please go to your email inbox to check mail from us.</p>
+                                <center><input class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" type="submit" id="sendMail" value="Continue"/></center>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -33,16 +42,15 @@
 
     </body>
     <script>
-        $(document).ready(function () {
-            $('#login').click(function () {
+        $(document).ready(function() {
+            $('#login').click(function() {
                 var email = $('#email').val();
                 var password = $('#password').val();
                 $.ajax({
                     type: "POST",
-//                    url: "http://jsp.chaninz.com/tasm/LoginMobile",
                     url: "http://localhost:8084/TheAssignment/LoginMobile",
                     data: {"email": email, "password": password},
-                    success: function (data) {
+                    success: function(data) {
                         if (data != null) {
                             sessionStorage.setItem('accID', data.acc_id);
                             sessionStorage.setItem('fName', data.firstname);
@@ -50,10 +58,8 @@
                             sessionStorage.setItem('pic', data.profile_pic);
                             sessionStorage.setItem('cList', JSON.stringify(data.CourseList));
                             if (data.account_type == 'ST') {
-//                                $(location).attr('href', 'http://jsp.chaninz.com/tasm/Mobile/index.html');
                                 $(location).attr('href', 'index.html');
                             } else if (data.account_type == 'TH') {
-//                                $(location).attr('href', 'http://jsp.chaninz.com/tasm/Mobile/indexTeacher.html');
                                 $(location).attr('href', 'indexTeacher.html');
                             }
                         } else {
@@ -62,6 +68,19 @@
                     }
                 });
             });
+            $('#sendMail').click(function() {
+                var email = $('#email').val();
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8084/TheAssignment/ForgotPasswordMobile",
+                    data: {"email": email},
+                    success: function(data) {
+                       alert("Please check inbox of your email");
+                       $(location).attr('href',"Home.html");
+                    }
+                });
+            });
+
         });
     </script>
 </html>

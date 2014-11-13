@@ -447,6 +447,46 @@ public class Assignment {
         }
         return am;
     }
+    
+     public static Assignment getAmByAmIDMobile(int am_id,int acc_id) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select * from assignment where ass_id=?";
+        PreparedStatement pstm;
+        Assignment am = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, am_id);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                am = new Assignment();
+                am.setAm_id(rs.getInt("ass_id"));
+                am.setCourse(Course.getCourseByID(rs.getInt("course_id")));
+                am.setName(rs.getString("name"));
+                am.setDescription(rs.getString("description"));
+                am.setAss_type(rs.getString("ass_type"));
+                am.setTotal_member(rs.getInt("total_member"));
+                am.setAss_extension(rs.getString("ass_extension"));
+                am.setCreate_date(rs.getTimestamp("create_date"));
+                am.setDue_date(rs.getDate("due_date"));
+                am.setLate_date(rs.getDate("late_date"));
+                am.setComment(Comment.getCommentByAmID(am_id));
+                am.setFully_mark(rs.getDouble("fully_mark"));
+                if (am.getAss_type().equalsIgnoreCase("file")) {
+                    am.setPath_file(rs.getString("path_file"));
+                } else {
+                    am.setTitle_assignment_onweb(rs.getString("title_assignment_onweb"));
+                    am.setQuestionList(Question.getListQuestion(Question.getListQId(am.getAm_id())));
+                }
+                
+                String status = remainingTimeforSend(am, acc_id);
+                am.setStatus(status);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return am;
+    }
 
     //getAmByAmID(int am_id) 
     public static Assignment getAmInfoByAmID(int am_id) {

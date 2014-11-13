@@ -6,24 +6,56 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <!--        <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/css/jquery.mobile-1.4.2.css" />
         <link rel="stylesheet" href="http://jsp.chaninz.com/tasm/Mobile/css/font-awesome.min.css"/>-->
+        <link rel="stylesheet" href="css/jquery.mobile-1.4.2.css"/>
         <link rel="stylesheet" href="css/font-awesome.min.css"/>
-        <link rel="stylesheet" href="css/jquery.mobile-1.4.2.css" />
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+        <script src="js/main.js"></script>
+        <style>
+            .ui-popup-container, .ui-popup {
+                height: 98%;
+                width: 100%;
+                position: absolute;
+                top:0;
+                left:0;
+            }
+
+            center a{
+                text-decoration: none;
+            }
+        </style>
     </head> 
     <body>
         <div data-role="page" class="jqm-demos ui-responsive-panel"  data-title="Panel fixed positioning" >
             <div data-role="header" data-position="fixed">
                 <center>
-                    <!--                    <a href="http://jsp.chaninz.com/tasm/Mobile/index.html" rel="external" and data-ajax="false">-->
                     <a href="index.html" rel="external" and data-ajax="false">
-                        <span class="fa fa-home fa-2x" style="alignment-adjust:auto;padding-right:25px;padding-top:15px;padding-bottom:15px"></span></a>
-                    <span class="fa fa-globe fa-2x"></span>
+                        <span class="fa fa-home fa-2x" style="alignment-adjust:auto;padding-left:25px;padding-top:15px;padding-bottom:15px"></span>
+                    </a>
+                    <a href="#sql" id="opendialog" data-rel="popup" data-transition="pop" style="padding-left:20px" >
+                        <i class="fa fa-globe fa-2x"></i> 
+                        <span style="font-size:25px" id="noti"></span>
+                    </a>
                 </center>
+                
+                <div data-role="popup" id="sql" style="max-width:100%;overflow-y:auto">
+                    <div data-role="header" data-theme="a" >
+                        <h1>Notifications <a data-rel="back" class="fa fa-remove fa-2x" style="position: fixed;top: 0.3em;right: 2em"></a></h1>
+                    </div>
+                    <span id="noti-add-here"></span>
+                </div>
+                
                 <a href="#nav-panel"><i class="fa fa-bars fa-2x"></i></a>
             </div><!-- /header -->
 
             <div id="add-test"></div>
+            
+            <div role="main" class="ui-content">
+                    <textarea style="height: 150px !important;" id="text" placeholder="Type it in here."></textarea><br/>
+                    <center>
+                        <a href="#" id="comment" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b"  data-transition="flow">Comment</a>
+                    </center>
+            </div>
 
             <div data-role="panel" data-position-fixed="true" data-display="overlay"  id="nav-panel">
                 <ul data-role="listview" id="lcList">
@@ -46,8 +78,8 @@
                     <ul>
                         <!--                        <li><a href="http://jsp.chaninz.com/tasm/Mobile/index.html" rel="external" and data-ajax="false"><i class="fa fa-newspaper-o fa-2x"></i></a></li>
                                                 <li><a href="http://jsp.chaninz.com/tasm/Mobile/AssignmentInCourse.html" rel="external" and data-ajax="false" class="ui-btn-active"><i class="fa fa-file-text fa-2x"></i></a></li></ul>-->
-                        <li><a href="AnnounceInCourse.html" rel="external" and data-ajax="false"><i class="fa fa-newspaper-o fa-2x"></i></a></li>
-                        <li><a href="AssignmentInCourse.html" rel="external" and data-ajax="false" class="ui-btn-active"><i class="fa fa-file-text fa-2x"></i></a></li></ul>
+                        <li><a href="index.html" rel="external" and data-ajax="false"><i class="fa fa-newspaper-o fa-2x"></i></a></li>
+                        <li><a href="Assignment.html" rel="external" and data-ajax="false" class="ui-btn-active"><i class="fa fa-file-text fa-2x"></i></a></li></ul>
                 </div>
             </div>
 
@@ -55,9 +87,9 @@
 
     </body>
     <script type="text/javascript">
-        var id = sessionStorage.getItem('aID');
-//        $.getJSON('http://jsp.chaninz.com/tasm/showAssignmentDetail?id=' + id, function (result) {
-        $.getJSON('http://localhost:8084/TheAssignment/showAssignmentDetail?id=' + id, function (result) {
+        var assID = sessionStorage.getItem('assID');
+        var accID = sessionStorage.getItem('accID');
+        $.getJSON('http://localhost:8084/TheAssignment/showAssignmentDetail?assID=' + assID + '&accID=' + accID, function (result) {
             $(result).each(function (k, v) {
                 $(
                         '<div style="background-color:#F4F4F4 ;padding:1px;width:auto;">' +
@@ -80,8 +112,32 @@
                         '<tr><td><b>Status:</b></td>' +
                         '<td><h2 id="whatColor" style="">' + findAssignmentStatus() + '</h2></td></tr>' +
                         '<tr></tr><tr></tr>' +
-                        '<tr><td><b>Score:</b></td><td><b>' + v.fully_mark + '</b></td>' +
-                        '</tr></table></div>').insertBefore($('#add-test'));
+                        '<tr><td><b>Score:</b></td><td><b>' + v.score + " / " + v.fully_mark + '</b></td>' +
+                        '</tr></table><br/><hr/>' +
+                        '<center><h1>Comment</h1></center>' +
+                        '</div>').insertBefore($('#add-test'));
+            });
+            $.getJSON('http://localhost:8084/TheAssignment/showAssignmentCommentMobile?assID=' + assID , function (result) {
+                var i = 1;
+                $(result).each(function (k, v) {
+                    $(
+                        '<div style="border-bottom: solid #DDDDDD;background-color:#' + (i % 2 == 0 ? 'FFFFFF' : 'F4F4F4') + '">' +
+                        '<div class="ui-grid-a" style="padding:1px;width:auto;">' +
+                        '<div class="ui-block-a ui-bar" style="width: 20%"><img src="' + v.acc.profile_pic +  '" width="70px" height="80px"/></div>' +
+                        '<br/><div class="ui-block-b" style="width: 80%"><b><span style="font-size: larger">'+ v.acc.firstname + " " + v.acc.lastname + '</span></b><span style="font-size: smaller"> (' +   v.comment_date + ') :<br/>' + v.text + '</span></div>' +
+                        '</div></div>').insertBefore($('#add-test'));
+                });
+            });
+            var id = sessionStorage.getItem('accID');
+            $.getJSON('http://localhost:8084/TheAssignment/getNotificationMobile?id=' + id, function(result) {
+                $(result).each(function(k, v) {
+                    $('<div role="main" class="notiLink" noti-id="'+ v.noti_id + '" course-name="'+ v.course_name + '" data-id="' + v.type + '" course-id="' + v.course_id + '" class="ui-content" style="border-bottom: solid #DDDDDD;background-color:' + (v.seen_date == null ? '#EDEFF5' : '#FFFFFF') + '">' +
+                            '<div class="ui-grid-a" style="padding:1px;width:auto;"><div class="ui-block-a ui-bar" style="width: 20%">' +
+                            '<img src="' + v.profile_pic + '" width="70px" height="80px"/></div><br/>' +
+                            '<div class="ui-block-b" style="width: 80%">' +
+                            (v.type == "alert" || v.type == "score" ? '<span style="font-size: larger">' + v.text + '<b>(' + v.course_name + ')</b></span>' : '<span style="font-size: larger"><b>' + v.noti_name + "</b> " + v.text + '<b>(' + v.course_name + ')</b></span>') +
+                            '</div></div></div>').insertBefore($('#noti-add-here'));
+                });
             });
             var fName = sessionStorage.getItem('fName');
             var lName = sessionStorage.getItem('lName');
@@ -124,7 +180,53 @@
 //                $(location).attr('href', 'http://jsp.chaninz.com/tasm/Mobile/Home.html');
                 $(location).attr('href', 'Home.html');
             });
+            
+            $(document).on("pagecreate", function() {
+                $("#sql").popup({
+                    beforeposition: function() {
+                        $(this).css({
+                            width: window.innerWidth,
+                            height: window.innerHeight - 14
+                        });
+                    },
+                    x: 0,
+                    y: 0
+                });
+            });
+            
+            $(document).on("click",".notiLink",function() {
+                var accID = sessionStorage.getItem('accID');
+                var notiID = $(this).attr("noti-id");
+                if ($(this).attr("data-id") == "alert" || $(this).attr("data-id") == "announce") {
+                    sessionStorage.setItem('cName', $(this).attr("course-name"));
+                    sessionStorage.setItem('cID', $(this).attr("course-id"));
+                    $.ajax({
+                        type: "POST",
+                        url: "http://localhost:8084/TheAssignment/setSeenDateMobile",
+                        data: {"notiID": notiID, "accID": accID},
+                        success: function (data) {
+                        }
+                    });
+                    
+                    $(location).attr('href', 'AnnounceInCourse.html');
+                } else if ($(this).attr("data-id") == "score" || $(this).attr("data-id") == "assignment") {
+                    sessionStorage.setItem('cName', $(this).attr("course-name"));
+                    sessionStorage.setItem('cID', $(this).attr("course-id"));
+                    
+                    $.ajax({
+                        type: "POST",
+                        url: "http://localhost:8084/TheAssignment/setSeenDateMobile",
+                        data: {"notiID": notiID, "accID": accID},
+                        success: function (data) {
+                        }
+                    });
+                    
+                    $(location).attr('href', 'AssignmentInCourse.html');
+                }
+            });
         });
+        
+        
 
         function findAssignmentStatus() {
             var assID = sessionStorage.getItem('aID');
@@ -132,41 +234,31 @@
             var status = "";
             $.ajax({
                 type: "POST",
-//                url: "http://jsp.chaninz.com/tasm/showAssignmentStatusMobile",
                 url: "http://localhost:8084/TheAssignment/showAssignmentStatusMobile",
                 data: {"accID": accID, "assID": assID},
                 async: false,
-                success: function (data) {
+                success: function(data) {
                     status = data;
                 }
             });
             return status;
         }
-
-
-//        function whatIsYourColor() {
-//            var status = findAssignmentStatus();
-//            var paintIt = "";
-//
-//            $.ajax({
-//                sync: false,
-//                success: function() {
-//                    if (status == "On time") {
-//                        paintIt = "40D47E";
-//                    } else if (status == "Hurry up") {
-//                        paintIt = "F1C40F";
-//                    } else if (status == "Late") {
-//                        paintIt = "E74C3C";
-//                    } else if (status == "Sent") {
-//                        paintIt = "5F8BCA";
-//                    } else if (status == "Miss") {
-//                        paintIt = "999999";
-//                    }
-//                }
-//            });          
-//            return paintIt;
-//            alert(paintIt);
-//        }
+        
+        $(document).ready(function() {
+            $('#comment').click(function() {
+                var accID = sessionStorage.getItem('accID');
+                var assID = sessionStorage.getItem('assID');
+                var text = $("#text").val();
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8084/TheAssignment/addCommentMobile",
+                    data: {"accID": accID, "assID": assID, "text": text},
+                    success: function(data) {
+                        $(location).attr('href',"AssignmentDetail.html");
+                    }
+                });
+            });
+        });
 
     </script>
 </html>

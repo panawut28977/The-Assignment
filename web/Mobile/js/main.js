@@ -8,7 +8,7 @@ $(function() {
         var id = sessionStorage.getItem('accID');
         var total = sessionStorage.getItem('curTotal');
 //        console.log("id:" + id);
-        var eventSource = new EventSource("http://localhost:8084/TheAssignment/NewNotiMobile?ac=" + id + "&&ct=" + total);
+        var eventSource = new EventSource("http://localhost:8084/TheAssignment/TheAssignment/NewNotiMobile?ac=" + id + "&&ct=" + total);
         eventSource.addEventListener('totalNewNoti', function(event) {
 //            console.log(event.data);
             var num = event.data+"";
