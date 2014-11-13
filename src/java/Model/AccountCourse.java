@@ -683,6 +683,25 @@ public class AccountCourse {
         }
         return result > 0;
     }
+    
+    public static int checkCode(String course_code) {
+        Connection conn = ConnectionBuilder.getConnection();
+        String sql = "select course_id from course where course_code = ?";
+        PreparedStatement pstm;
+        int id = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, course_code);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                id = rs.getInt("course_id");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+    }
 
     @Override
     public String toString() {
