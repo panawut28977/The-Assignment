@@ -463,6 +463,10 @@
         <servlet-name>showCourseInfo</servlet-name>
         <servlet-class>servlet.showCourseInfo</servlet-class>
     </servlet>
+     <servlet>
+        <servlet-name>ForgotPasswordMobile</servlet-name>
+        <servlet-class>servlet.ForgotPasswordMobile</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -830,6 +834,10 @@
      <servlet-mapping>
         <servlet-name>showCourseInfo</servlet-name>
         <url-pattern>/showCourseInfo</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>ForgotPasswordMobile</servlet-name>
+        <url-pattern>/ForgotPasswordMobile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

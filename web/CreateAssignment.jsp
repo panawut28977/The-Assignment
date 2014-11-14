@@ -144,9 +144,7 @@
                                 <input type="text" name="title_assignment_onweb" id="title_assignment_onweb" class="form-control" placeholder="Assignment Title" >
                                 <br>
                                 <p id="AmDescription"></p>
-                                <div class="amQuestion" id="sortable">
-
-                                </div>
+                                <div class="amQuestion" id="sortable"></div>
                                 <div class="btn-group dropup center-block" >
                                     <hr>
                                     <button type="button" class="btn btn-default" onclick="addQuestion()" id="addq" ><span class="glyphicon glyphicon-plus-sign"></span> Add Question</button>
@@ -254,6 +252,23 @@
                                                             var fullpath = $('#amfile').val();
                                                             var name = getFileName(fullpath);
                                                             $("#preview").html("<h3><span class='glyphicon glyphicon-file'></span><b>File name : </b>" + name + "</h3>");
+                                                        }
+                                                    } else if (currentStepObj.selector == '.step[data-step="2"]') {
+                                                        amtype = $("#AmType").val();
+                                                        if (amtype == "file") {
+                                                            $('#uploadAmFile').show();
+                                                            $('#CreateAmOnweb').hide();
+                                                            $('#fullymark').attr("required", "yes");
+                                                            $('#amfile').attr("required", "yes");
+                                                            $('#title_assignment_onweb').removeAttr("required");
+                                                            $("#CreateAmOnweb input").removeAttr("required");
+                                                        } else {
+                                                            $('#CreateAmOnweb').show();
+                                                            $('#uploadAmFile').hide();
+                                                            $('#title_assignment_onweb').attr("required", "yes");
+                                                            $('#fullymark').removeAttr("required");
+                                                            $('#amfile').removeAttr("required");
+                                                            $("#CreateAmOnweb input").attr("required", "yes");
                                                         }
                                                     }
                                                 }
@@ -957,16 +972,36 @@
                                             } else {
                                                 var res = true;
                                                 var btn = $(".submit");
-                                                btn.addClass("disabled");
-                                                btn.text("Creating..");
-                                                $(".amQuestion").find(".explain iframe[id$='textarea_ifr']").each(function() {
-                                                    var contents = $(this).contents().find("body").html();
-                                                    if (contents == '<p><br data-mce-bogus="1"></p>') {
-                                                        alert("Some of explanatin question are empty please recheck again.");
-                                                        res = false;
-                                                    }
-                                                });
 
+                                                if ($(".amQuestion").html().length == 0 || total_q ==1) {
+                                                    alert("Please select at least one question.");
+                                                    $('#myWizard').easyWizard('goToStep', 2);
+                                                    res = false;
+                                                } else {
+                                                    $(".amQuestion").find(".explain iframe[id$='textarea_ifr']").each(function() {
+                                                        var contents = $(this).contents().find("body").html();
+                                                        if (contents == '<p><br data-mce-bogus="1"></p>') {
+                                                            alert("Some of explanatin question are empty please recheck again.");
+                                                            $('#myWizard').easyWizard('goToStep', 2);
+                                                            res = false;
+                                                        }
+                                                    });
+                                                    
+                                                     $(".amQuestion").find(".fillBlank").each(function() {
+                                                        var answer = $(this).find(".ansList > div");
+                                                        console.log(answer);
+                                                        if (answer.length==0) {
+                                                            alert("Please select correct answers of fill in the blank question.");
+                                                            $('#myWizard').easyWizard('goToStep', 2);
+                                                            res = false;
+                                                        }
+                                                    });
+                                                }
+                                                if (res) {
+                                                    btn.addClass("disabled");
+                                                    btn.text("Creating..");
+                                                }
+//                                                return false;
                                                 return res;
                                             }
                                         }
