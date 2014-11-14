@@ -646,7 +646,7 @@
                                                         + '     <div class="form-group">'
                                                         + '         <label  class="col-md-3 control-label">How many pair of question?</label>'
                                                         + '         <div class="col-md-2">'
-                                                        + '             <input type="number" id="total_pair" min="1" class="form-control" >'
+                                                        + '             <input type="number" id="total_pair" min="1" class="form-control" required="yes" >'
                                                         + '         </div>'
                                                         + '     </div>'
                                                         + '     <div class="form-group">'
