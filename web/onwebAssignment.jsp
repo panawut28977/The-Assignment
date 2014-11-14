@@ -175,7 +175,7 @@
                                                                 <c:when test="${q.q_category eq 'multiple'}">
                                                                     <c:forEach items="${choicesp}" var="choice">
                                                                         <c:set var="choicet" value="${fn:trim(choice)}"/>
-                                                                        <input type="checkbox" required="yes" name="${seqno}answer" value="${choicet}" 
+                                                                        <input type="checkbox"  name="${seqno}answer" value="${choicet}" 
                                                                                <c:forEach items="${stanssp}" var="sans">
                                                                                    ${sans}
                                                                                    <c:set var="sanst" value="${fn:trim(sans)}"/>
