@@ -471,6 +471,15 @@
         <servlet-name>showAssignmentStatusMobile</servlet-name>
         <servlet-class>servlet.showAssignmentStatusMobile</servlet-class>
     </servlet>
+      <servlet>
+        <servlet-name>addCommentMobile</servlet-name>
+        <servlet-class>servlet.addCommentMobile</servlet-class>
+    </servlet>
+      <servlet>
+        <servlet-name>showAssignmentCommentMobile</servlet-name>
+        <servlet-class>servlet.showAssignmentCommentMobile</servlet-class>
+    </servlet>
+    
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -846,6 +855,14 @@
      <servlet-mapping>
         <servlet-name>showAssignmentStatusMobile</servlet-name>
         <url-pattern>/showAssignmentStatusMobile</url-pattern>
+    </servlet-mapping>
+      <servlet-mapping>
+        <servlet-name>addCommentMobile</servlet-name>
+        <url-pattern>/addCommentMobile</url-pattern>
+    </servlet-mapping>
+      <servlet-mapping>
+        <servlet-name>showAssignmentCommentMobile</servlet-name>
+        <url-pattern>/showAssignmentCommentMobile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
