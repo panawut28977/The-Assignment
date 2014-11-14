@@ -162,7 +162,7 @@
                                                                 <c:when test="${q.q_category eq 'one'}">
                                                                     <c:forEach items="${choicesp}" var="choice">
                                                                         <c:set var="choicet" value="${fn:trim(choice)}"/>
-                                                                        <input type="radio" name="${seqno}answer" value="${choicet}" 
+                                                                        <input type="radio" required="yes" name="${seqno}answer" value="${choicet}" 
                                                                                <c:forEach items="${stanssp}" var="sans">
                                                                                    ${sans}
                                                                                    <c:set var="sanst" value="${fn:trim(sans)}"/>
@@ -175,7 +175,7 @@
                                                                 <c:when test="${q.q_category eq 'multiple'}">
                                                                     <c:forEach items="${choicesp}" var="choice">
                                                                         <c:set var="choicet" value="${fn:trim(choice)}"/>
-                                                                        <input type="checkbox" name="${seqno}answer" value="${choicet}" 
+                                                                        <input type="checkbox" required="yes" name="${seqno}answer" value="${choicet}" 
                                                                                <c:forEach items="${stanssp}" var="sans">
                                                                                    ${sans}
                                                                                    <c:set var="sanst" value="${fn:trim(sans)}"/>
@@ -186,8 +186,8 @@
                                                                     </c:forEach>
                                                                 </c:when>
                                                                 <c:when test="${q.q_category eq 'tf'}">
-                                                                    <input type="radio" name="${seqno}answer" value="true" <c:if test="${stans eq 'true'}">checked="yes"</c:if>> True <br/>
-                                                                    <input type="radio" name="${seqno}answer" value="false" <c:if test="${stans eq 'false'}">checked="yes"</c:if>> False
+                                                                    <input type="radio" name="${seqno}answer" required="yes" value="true" <c:if test="${stans eq 'true'}">checked="yes"</c:if>> True <br/>
+                                                                    <input type="radio" name="${seqno}answer" required="yes" value="false" <c:if test="${stans eq 'false'}">checked="yes"</c:if>> False
                                                                 </c:when>
                                                             </c:choose>
                                                             <input type="hidden" name="${seqno}q_id" value="${q.q_id}"/>
