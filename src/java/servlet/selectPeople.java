@@ -57,11 +57,15 @@ public class selectPeople extends HttpServlet {
         //1 connections
         List<Group_member> gList = Group_member.getAllGroup(a.getAm_id());
         StringBuilder temp = new StringBuilder(" ");
+        System.out.println("glist: " + gList);
+
         for (Group_member group_member : gList) {
             temp.append("," + group_member.getAcc_id());
         }
-        temp.deleteCharAt(0);
-        temp.deleteCharAt(0);
+        if (gList.size() != 0) {
+            temp.deleteCharAt(0);
+            temp.deleteCharAt(0);
+        }
         String accList[] = temp.toString().split(",");
 //1 connections
         Map<AccountCourse, Account> allMember = AccountCourse.getMemberInCourseWithRole(cId);
@@ -86,8 +90,8 @@ public class selectPeople extends HttpServlet {
         request.setAttribute("gList", gList);
         request.setAttribute("wag", wag);
         ss.setAttribute("am_id", a.getAm_id());
-        String url = ""; 
- 
+        String url = "";
+
         url = "/groupWork.jsp?tab=AllAssignment";
         getServletContext().getRequestDispatcher(url).forward(request, response);
     }

@@ -467,6 +467,10 @@
         <servlet-name>ForgotPasswordMobile</servlet-name>
         <servlet-class>servlet.ForgotPasswordMobile</servlet-class>
     </servlet>
+      <servlet>
+        <servlet-name>showAssignmentStatusMobile</servlet-name>
+        <servlet-class>servlet.showAssignmentStatusMobile</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -839,9 +843,13 @@
         <servlet-name>ForgotPasswordMobile</servlet-name>
         <url-pattern>/ForgotPasswordMobile</url-pattern>
     </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>showAssignmentStatusMobile</servlet-name>
+        <url-pattern>/showAssignmentStatusMobile</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            240
         </session-timeout>
     </session-config>
 </web-app>
