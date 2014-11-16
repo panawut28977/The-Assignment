@@ -351,15 +351,16 @@
                                                                         <br/><br/>
                                                                     </c:forEach>
                                                                 </div>
-                                                                <div class="col-md-2 col-md-offset-2">
+                                                                <%--<div class="col-md-2 col-md-offset-2">
                                                                     <c:forEach items="${listans}" var="ansl">
                                                                         <span>${ansl}</span><br/><br/>
                                                                     </c:forEach>
-                                                                </div>
+                                                                </div>--%>
                                                                 <input type="hidden" name="${seqno}q_id" value="${q.q_id}"/>
                                                                 <input type="hidden" value="matchWord"  name="${seqno}q_type">
                                                                 <input type="hidden" name="seqno" value="${seqno}">
                                                             </div>
+                                                            <div class="clearboth"></div>
                                                             <c:set value="${q.q_id}" var="used_id" />
                                                             <c:set value="${seqno+1}" var="seqno" />
                                                         </c:if>
@@ -409,15 +410,19 @@
                                                                         <!-- trim answer -->
                                                                         <c:set var="curanswer" value="${fn:trim(curqList.get(curq).answer)}"/>
                                                                         <c:set var="curstanswer" value="${fn:trim(stanswer.get(countStAns).answer)}"/>
-
                                                                         <!-- auto checking -->
                                                                         <c:choose>
                                                                             <c:when test="${autocheck eq 1}">
                                                                                 <c:set value="0" var="correctscore"/>
 
                                                                                 <!--aa${curanswer}aa / aa${curstanswer}aa-->
-
-                                                                                <c:if test="${curanswer.equalsIgnoreCase(curstanswer)}">
+                                                                                <%--<%
+                                                                                    String ans = (String) pageContext.getAttribute("curanswer");
+                                                                                    String stans = (String) pageContext.getAttribute("curstanswer");
+                                                                                    out.print("</br>"+ans+"/"+stans);
+                                                                                    out.print(" "+ans.equalsIgnoreCase(stans));
+                                                                                %>--%>
+                                                                                <c:if test="${curstanswer.equalsIgnoreCase(curanswer)}">
                                                                                     <c:set value="${curqList.get(curq).score}" var="correctscore"/>
                                                                                 </c:if>
                                                                                 <c:set var="checkicon" value=""/>

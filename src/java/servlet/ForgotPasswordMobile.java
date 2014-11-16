@@ -1,14 +1,15 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package servlet;
 
 import Model.Account;
 import Model.EmailService;
 import Model.ForgotSession;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -46,13 +47,20 @@ public class ForgotPasswordMobile extends HttpServlet {
             String title = "The Assignment : Forgot your The Assignment password ?";
             String content = "The Assignment received a request to reset the password for your account. To reset your password, click on the link below or copy and paste the URL into your browser.\n"
                     + "\n"
-                    + resetlink                                                                          
+                    + resetlink
                     + "\n\n"
                     + "Please do not reply to this message; is was send from unmonitored email address.This message is a service email related to your use of The Assignment.\n"
                     + "\n"
                     + "Best regards,\n"
                     + "The Assignment Team.\n\n ";
             EmailService.getInstance().send(resetEmail, title, content);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(new Gson().toJson("Please check your email inbox"));
+        } else {
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(new Gson().toJson("Your email is not exist"));
         }
     }
 

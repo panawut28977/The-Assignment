@@ -90,7 +90,7 @@
                                     <div class="col-md-9">
                                         <input type="radio" name="total_member" value="1" id="individual" checked="yes" > Individual
                                         <br>
-                                        <input type="radio" name="total_member" id="groupwork" value=""> Group of <input type="number" min="2" id="inputpepole" disabled="yes"> People
+                                        <input type="radio" name="total_member" id="groupwork" value="2"> Group of <input type="number" min="2" id="inputpepole" disabled="yes"> People
                                     </div>
                                 </div>
                                 <div class="form-group" id="due_date" style="margin-bottom: 0">
@@ -268,7 +268,7 @@
                                                             $('#title_assignment_onweb').attr("required", "yes");
                                                             $('#fullymark').removeAttr("required");
                                                             $('#amfile').removeAttr("required");
-                                                            $("#CreateAmOnweb input").attr("required", "yes");
+//                                                            $("#CreateAmOnweb input").attr("required", "yes");
                                                         }
                                                     }
                                                 }
@@ -393,27 +393,71 @@
 //                                            $("#title_assignment_onweb").change(function() {
 //                                                $("#pv_title b u").text($(this).val());
 //                                            });
+                                            var old_total_pair = 0;
+                                            $(document).on("focus", "#total_pair", function() {
+                                                old_total_pair = $(this).val();
+                                            });
+
+                                            var old_total_dummy = 0;
+                                            $(document).on("focus", "#total_dummy", function() {
+                                                old_total_dummy = $(this).val();
+                                            });
+
                                             $(document).on("change", "#total_pair", function() {
-                                                $(this).parent().parent().parent().find("#total_dummy").removeAttr("disabled").val(0);
-                                                var seq_of_choice = $(this).parent().parent().parent().find("[name='seqno']").val();
-                                                var matchWord_box = '<span class="label label-info"><i class="glyphicon glyphicon-info-sign"></i> If you want to add dummy answer, add text in answer box and put score to 0.</span><br/><br/>';
-                                                matchWord_box += '<div class="row header"><div class="col-md-4"><b>Question Text</b></div><div class="col-md-4"><b>Answer</b></div><div class="col-md-2"><b>Score</b></div></div>';
-                                                for (var i = 0; i < $(this).val(); i++) {
-                                                    matchWord_box += '<div class="row answer"><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_text" onfocusout="checkText(this)"  required="yes"></div><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_ans" onfocusout="checkText(this)"  required="yes"></div><div class="col-md-2"><input type="number" min="0" step="any" class="form-control" name="' + seq_of_choice + 'm_score" required="yes"></div> <a onclick="removeC(this)"><span class="glyphicon glyphicon-remove"></span></a></div>';
+                                                var cur_ans = $(this).parent().parent().parent().find(".row.answer").length;
+                                                if (cur_ans > 0) {
+                                                    if (confirm("Are you want to change number of question? It will discard all you current question")) {
+                                                        $(this).parent().parent().parent().find("#total_dummy").removeAttr("disabled").val(0);
+                                                        var seq_of_choice = $(this).parent().parent().parent().find("[name='seqno']").val();
+                                                        var matchWord_box = '<span class="label label-info"><i class="glyphicon glyphicon-info-sign"></i> If you want to add dummy answer, add text in answer box and put score to 0.</span><br/><br/>';
+                                                        matchWord_box += '<div class="row header"><div class="col-md-4"><b>Question Text</b></div><div class="col-md-4"><b>Answer</b></div><div class="col-md-2"><b>Score</b></div></div>';
+                                                        for (var i = 0; i < $(this).val(); i++) {
+                                                            matchWord_box += '<div class="row answer"><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_text" onfocusout="checkDuplicateQtext(this)"  required="yes"></div><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_ans" onfocusout="checkDuplicateAns(this)"  required="yes"></div><div class="col-md-2"><input type="number" min="0" step="any" class="form-control" name="' + seq_of_choice + 'm_score" required="yes"></div> <a onclick="removeC(this)"><span class="glyphicon glyphicon-remove"></span></a></div>';
+                                                        }
+                                                        var element = $(this).parent().parent().parent(".matchWord").find(".matchWord_q_list");
+                                                        element.find(".answer,.header,.label,.text-danger,br").remove();
+                                                        element.prepend(matchWord_box);
+                                                    } else {
+                                                        $(this).val(old_total_pair);
+                                                    }
+                                                } else {
+                                                    $(this).parent().parent().parent().find("#total_dummy").removeAttr("disabled").val(0);
+                                                    var seq_of_choice = $(this).parent().parent().parent().find("[name='seqno']").val();
+                                                    var matchWord_box = '<span class="label label-info"><i class="glyphicon glyphicon-info-sign"></i> If you want to add dummy answer, add text in answer box and put score to 0.</span><br/><br/>';
+                                                    matchWord_box += '<div class="row header"><div class="col-md-4"><b>Question Text</b></div><div class="col-md-4"><b>Answer</b></div><div class="col-md-2"><b>Score</b></div></div>';
+                                                    for (var i = 0; i < $(this).val(); i++) {
+                                                        matchWord_box += '<div class="row answer"><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_text" onfocusout="checkDuplicateQtext(this)"  required="yes"></div><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_ans" onfocusout="checkDuplicateAns(this)"  required="yes"></div><div class="col-md-2"><input type="number" min="0" step="any" class="form-control" name="' + seq_of_choice + 'm_score" required="yes"></div> <a onclick="removeC(this)"><span class="glyphicon glyphicon-remove"></span></a></div>';
+                                                    }
+                                                    var element = $(this).parent().parent().parent(".matchWord").find(".matchWord_q_list");
+                                                    element.find(".answer,.header,.label,.text-danger,br").remove();
+                                                    element.prepend(matchWord_box);
                                                 }
-                                                var element = $(this).parent().parent().parent(".matchWord").find(".matchWord_q_list");
-                                                element.find(".answer,.header,.label,.text-danger,br").remove();
-                                                element.prepend(matchWord_box);
                                             });
 
                                             $(document).on("change", "#total_dummy", function() {
-                                                var seq_of_choice = $(this).parent().parent().parent().find("[name='seqno']").val();
-                                                $(this).parent().parent().parent().find(".dummy_answer").remove();
-                                                var matchWord_dummy = '';
-                                                for (var i = 0; i < $(this).val(); i++) {
-                                                    matchWord_dummy += '<div class="row dummy_answer"><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_text" readonly="yes" onfocusout="checkText(this)"></div><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_ans" required="yes" onfocusout="checkText(this)"></div><div class="col-md-2"><input type="number" min="0" step="any" class="form-control" name="' + seq_of_choice + 'm_score" required="yes" value="0" readonly="yes"></div> <a onclick="removeC(this)"style="vertical-align: -webkit-baseline-middle"><span class="glyphicon glyphicon-remove"></span></a></div>';
+                                                var cur_ans = $(this).parent().parent().parent().find(".row.dummy_answer").length;
+                                                if (cur_ans > 0) {
+                                                    if (confirm("Are you want to change number of dummy answer? It will discard all you current dummy answer")) {
+                                                        var seq_of_choice = $(this).parent().parent().parent().find("[name='seqno']").val();
+                                                        $(this).parent().parent().parent().find(".dummy_answer").remove();
+                                                        var matchWord_dummy = '';
+                                                        for (var i = 0; i < $(this).val(); i++) {
+                                                            matchWord_dummy += '<div class="row dummy_answer"><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_text" readonly="yes" onfocusout="checkDuplicateQtext(this)"></div><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_ans" required="yes" onfocusout="checkDuplicateAns(this)"></div><div class="col-md-2"><input type="number" min="0" step="any" class="form-control" name="' + seq_of_choice + 'm_score" required="yes" value="0" readonly="yes"></div> <a onclick="removeC(this)"style="vertical-align: -webkit-baseline-middle"><span class="glyphicon glyphicon-remove"></span></a></div>';
+                                                        }
+                                                        $(this).parent().parent().parent(".matchWord").find(".matchWord_q_list").append(matchWord_dummy);
+                                                    } else {
+                                                        $(this).val(old_total_dummy);
+                                                    }
+                                                } else {
+                                                    var seq_of_choice = $(this).parent().parent().parent().find("[name='seqno']").val();
+                                                    $(this).parent().parent().parent().find(".dummy_answer").remove();
+                                                    var matchWord_dummy = '';
+                                                    for (var i = 0; i < $(this).val(); i++) {
+                                                        matchWord_dummy += '<div class="row dummy_answer"><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_text" readonly="yes" onfocusout="checkDuplicateQtext(this)"></div><div class="col-md-4"><input type="text" class="form-control" name="' + seq_of_choice + 'match_ans" required="yes" onfocusout="checkDuplicateAns(this)"></div><div class="col-md-2"><input type="number" min="0" step="any" class="form-control" name="' + seq_of_choice + 'm_score" required="yes" value="0" readonly="yes"></div> <a onclick="removeC(this)"style="vertical-align: -webkit-baseline-middle"><span class="glyphicon glyphicon-remove"></span></a></div>';
+                                                    }
+                                                    $(this).parent().parent().parent(".matchWord").find(".matchWord_q_list").append(matchWord_dummy);
                                                 }
-                                                $(this).parent().parent().parent(".matchWord").find(".matchWord_q_list").append(matchWord_dummy);
+
                                             });
 
                                             $(document).on("change", "#multiple_type", function() {
@@ -454,7 +498,23 @@
                                         }
 
                                         function removeC(t) {
-                                            $(t).parent().remove();
+                                            var qestionbox = $(t).parent().parent(".matchWord_q_list").parent().parent();
+                                            var type = qestionbox.attr("class");
+                                            if (type == "matchWord") {
+                                                var cate = $(t).parent().attr("class");
+                                                if (cate == "row dummy_answer") {
+                                                    var num = qestionbox.find("#total_dummy").val();
+                                                    num--;
+                                                    qestionbox.find("#total_dummy").val(num);
+                                                } else if (cate == "row answer") {
+                                                    var num = qestionbox.find("#total_pair").val();
+                                                    num--;
+                                                    qestionbox.find("#total_pair").val(num);
+                                                }
+                                                $(t).parent().remove();
+                                            }else{
+                                                 $(t).parent().remove();
+                                            }
                                         }
 
                                         function GetSelectedText(t) {
@@ -743,9 +803,9 @@
                                             var seq_of_choice = $(t).parent().parent().parent().find("[name='seqno']").val();
                                             var inputC = '';
                                             if (type == "one") {
-                                                inputC = '<div><br><input type="radio" name="' + seq_of_choice + 'c" onClick="mark(this)" value=""> <input type="text" name="' + seq_of_choice + 'ctext" class="form-control" onkeyup="addToC(this)" required="yes" onfocusout="checkText(this)"> <a onclick="removeC(this)"><span class="glyphicon glyphicon-remove"></span></a></div>';
+                                                inputC = '<div><br><input type="radio" name="' + seq_of_choice + 'c" onClick="mark(this)" required="yes" value=""> <input type="text" name="' + seq_of_choice + 'ctext" class="form-control" onkeyup="addToC(this)" required="yes" onfocusout="checkText(this)"> <a onclick="removeC(this)"><span class="glyphicon glyphicon-remove"></span></a></div>';
                                             } else {
-                                                inputC = '<div><br><input type="checkbox" name="' + seq_of_choice + 'c" onClick="mark(this);checkRequire(this);" required="yes" value="" > <input type="text" name="' + seq_of_choice + 'ctext" class="form-control" onkeyup="addToC(this)" required="yes" onfocusout="checkText(this)"> <a onclick="removeC(this)"><span class="glyphicon glyphicon-remove"></span></a></div>';
+                                                inputC = '<div><br><input type="checkbox" name="' + seq_of_choice + 'c" onClick="mark(this);checkRequire(this);"  value="" > <input type="text" name="' + seq_of_choice + 'ctext" class="form-control" onkeyup="addToC(this)" required="yes" onfocusout="checkText(this)"> <a onclick="removeC(this)"><span class="glyphicon glyphicon-remove"></span></a></div>';
                                             }
                                             $(t).parent().find('.choice-group').append(inputC);
                                         }
@@ -865,9 +925,9 @@
                                                             + qlist
                                                             + '</div>'
                                                             + '<div class="col-md-2 col-md-offset-2">'
-                                                            + qanswer
+                                                            //+ qanswer
                                                             + '</div>'
-                                                            + '</div>';
+                                                            + '</div><div class="clearboth"></div>';
                                                     $("#preview").append(html);
                                                 } else if (type == 'fillBlank') {
                                                     var qtext = q.find("[name$='qtext']").val();
@@ -924,6 +984,26 @@
                                             });
                                         }
 
+                                        function checkDuplicateQtext(t) {
+                                            var curtext = $(t).val();
+                                            $.each($(t).parent().parent().siblings("div").find("input[name$='match_text']"), function() {
+                                                if ($(this).val() == curtext && $(this).val() != '' && curtext != '') {
+                                                    alert("Your question is duplicate.");
+                                                    $(t).focus();
+                                                }
+                                            });
+                                        }
+
+                                        function checkDuplicateAns(t) {
+                                            var curtext = $(t).val();
+                                            $.each($(t).parent().parent().siblings("div").find("input[name$='match_ans']"), function() {
+                                                if ($(this).val() == curtext && $(this).val() != '' && curtext != '') {
+                                                    alert("Your answer is duplicate.");
+                                                    $(t).focus();
+                                                }
+                                            });
+                                        }
+
                                         function checkFile(t) {
                                             var ext = $(t).val().split('.').pop().toLowerCase();
                                             if ($.inArray(ext, ['xls', 'xlsx', 'doc', 'docx', 'jpg', 'jpeg', 'ppt', 'pptx', 'png', 'pdf', 'zip', 'rar']) == -1) {
@@ -942,16 +1022,21 @@
 
                                         function checkRequire(t) {
                                             var name = $(t).attr("name");
-                                            console.log(name);
-                                            var requiredCheckboxes = $(':checkbox[name="' + name + '"][required]');
+//                                            console.log(name);
+                                            var requiredCheckboxes = $(':checkbox[name="' + name + '"]');
                                             console.log(requiredCheckboxes);
-                                            requiredCheckboxes.change(function() {
-                                                if (requiredCheckboxes.is(':checked')) {
-                                                    requiredCheckboxes.removeAttr('required');
-                                                } else {
-                                                    requiredCheckboxes.attr('required', 'required');
+
+                                            var haveCheck = 0;
+                                            $.each(requiredCheckboxes, function() {
+                                                if ($(this).is(":checked")) {
+                                                    haveCheck++;
                                                 }
                                             });
+                                            if (haveCheck > 0) {
+                                                requiredCheckboxes.removeAttr('required');
+                                            } else {
+                                                requiredCheckboxes.attr('required', 'required');
+                                            }
                                         }
 
                                         function checkingForm() {
@@ -973,7 +1058,7 @@
                                                 var res = true;
                                                 var btn = $(".submit");
 
-                                                if ($(".amQuestion").html().length == 0 || total_q ==1) {
+                                                if ($(".amQuestion").html().length == 0 || total_q == 1) {
                                                     alert("Please select at least one question.");
                                                     $('#myWizard').easyWizard('goToStep', 2);
                                                     res = false;
@@ -986,11 +1071,11 @@
                                                             res = false;
                                                         }
                                                     });
-                                                    
-                                                     $(".amQuestion").find(".fillBlank").each(function() {
+
+                                                    $(".amQuestion").find(".fillBlank").each(function() {
                                                         var answer = $(this).find(".ansList > div");
                                                         console.log(answer);
-                                                        if (answer.length==0) {
+                                                        if (answer.length == 0) {
                                                             alert("Please select correct answers of fill in the blank question.");
                                                             $('#myWizard').easyWizard('goToStep', 2);
                                                             res = false;

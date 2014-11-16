@@ -175,7 +175,7 @@
                                                                 <c:when test="${q.q_category eq 'multiple'}">
                                                                     <c:forEach items="${choicesp}" var="choice">
                                                                         <c:set var="choicet" value="${fn:trim(choice)}"/>
-                                                                        <input type="checkbox"  name="${seqno}answer" value="${choicet}" 
+                                                                        <input type="checkbox"  name="${seqno}answer" onclick="checkRequire(this)" required="yes" value="${choicet}" 
                                                                                <c:forEach items="${stanssp}" var="sans">
                                                                                    ${sans}
                                                                                    <c:set var="sanst" value="${fn:trim(sans)}"/>
@@ -252,11 +252,12 @@
                                                                         <c:set value="${a+1}" var="a"/>
                                                                     </c:forEach>
                                                                 </div>
-                                                                <div class="col-md-2 col-md-offset-2">
+                                                                <%--<div class="col-md-2 col-md-offset-2">
                                                                     <c:forEach items="${listanswer}" var="ansl">
                                                                         <span>${ansl}</span><br/><br/>
                                                                     </c:forEach>
-                                                                </div>
+</div>--%>
+                                                                <div class="clearboth"></div>
                                                                 <input type="hidden" name="${seqno}q_id" value="${q.q_id}"/>
                                                                 <input type="hidden" value="matchWord"  name="${seqno}q_type">
                                                                 <input type="hidden" name="seqno" value="${seqno}">
@@ -469,6 +470,7 @@
                     $(this).width(maxwidth);
                 }
             });
+            
 //            var am_member = '${curAm.total_member}';
 //            if (am_member > 1) {
 //                // Connect URL
@@ -602,6 +604,24 @@
 //                });
 //            }
         });
+         function checkRequire(t) {
+                                            var name = $(t).attr("name");
+//                                            console.log(name);
+                                            var requiredCheckboxes = $(':checkbox[name="' + name + '"]');
+                                            console.log(requiredCheckboxes);
+
+                                            var haveCheck = 0;
+                                            $.each(requiredCheckboxes, function() {
+                                                if ($(this).is(":checked")) {
+                                                    haveCheck++;
+                                                }
+                                            });
+                                            if (haveCheck > 0) {
+                                                requiredCheckboxes.removeAttr('required');
+                                            } else {
+                                                requiredCheckboxes.attr('required', 'required');
+                                            }
+                                        }
     </script>
     <script>
         var am_member = '${curAm.total_member}';

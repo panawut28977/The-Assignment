@@ -34,8 +34,8 @@ public class editAssignment extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String am_id = request.getParameter("am_id");
-        Assignment a = Assignment.getAmByAmID(am_id);
-        request.setAttribute("a", a);
+        Assignment am = Assignment.getAmByAmID(am_id);
+        request.setAttribute("am", am);
         String url ="/editAssignment.jsp";
         getServletContext().getRequestDispatcher(url).forward(request, response);
     }
