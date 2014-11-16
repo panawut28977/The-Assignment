@@ -47,6 +47,7 @@
         <url-pattern>/CourseAssignment</url-pattern>
         <url-pattern>/profile</url-pattern>
         <url-pattern>/setCourseSession</url-pattern>
+        <url-pattern>/editAssignment</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>
@@ -451,35 +452,34 @@
         <servlet-name>RemoveGroupAm</servlet-name>
         <servlet-class>servlet.RemoveGroupAm</servlet-class>
     </servlet>
-     <servlet>
+    <servlet>
         <servlet-name>joinCourseMobile</servlet-name>
         <servlet-class>servlet.joinCourseMobile</servlet-class>
     </servlet>
-     <servlet>
+    <servlet>
         <servlet-name>checkCode</servlet-name>
         <servlet-class>servlet.checkCode</servlet-class>
     </servlet>
-     <servlet>
+    <servlet>
         <servlet-name>showCourseInfo</servlet-name>
         <servlet-class>servlet.showCourseInfo</servlet-class>
     </servlet>
-     <servlet>
+    <servlet>
         <servlet-name>ForgotPasswordMobile</servlet-name>
         <servlet-class>servlet.ForgotPasswordMobile</servlet-class>
     </servlet>
-      <servlet>
+    <servlet>
         <servlet-name>showAssignmentStatusMobile</servlet-name>
         <servlet-class>servlet.showAssignmentStatusMobile</servlet-class>
     </servlet>
-      <servlet>
+    <servlet>
         <servlet-name>addCommentMobile</servlet-name>
         <servlet-class>servlet.addCommentMobile</servlet-class>
     </servlet>
-      <servlet>
+    <servlet>
         <servlet-name>showAssignmentCommentMobile</servlet-name>
         <servlet-class>servlet.showAssignmentCommentMobile</servlet-class>
     </servlet>
-    
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -836,37 +836,35 @@
         <servlet-name>RemoveGroupAm</servlet-name>
         <url-pattern>/RemoveGroupAm</url-pattern>
     </servlet-mapping>
-     <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>checkCode</servlet-name>
         <url-pattern>/checkCode</url-pattern>
     </servlet-mapping>
-     <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>joinCourseMobile</servlet-name>
         <url-pattern>/joinCourseMobile</url-pattern>
     </servlet-mapping>
-     <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>showCourseInfo</servlet-name>
         <url-pattern>/showCourseInfo</url-pattern>
     </servlet-mapping>
-     <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ForgotPasswordMobile</servlet-name>
         <url-pattern>/ForgotPasswordMobile</url-pattern>
     </servlet-mapping>
-     <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>showAssignmentStatusMobile</servlet-name>
         <url-pattern>/showAssignmentStatusMobile</url-pattern>
     </servlet-mapping>
-      <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>addCommentMobile</servlet-name>
         <url-pattern>/addCommentMobile</url-pattern>
     </servlet-mapping>
-      <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>showAssignmentCommentMobile</servlet-name>
         <url-pattern>/showAssignmentCommentMobile</url-pattern>
     </servlet-mapping>
     <session-config>
-        <session-timeout>
-            240
-        </session-timeout>
+        <session-timeout>240</session-timeout>
     </session-config>
 </web-app>
