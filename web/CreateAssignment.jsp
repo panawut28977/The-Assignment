@@ -421,7 +421,7 @@
                                                         $(this).val(old_total_pair);
                                                     }
                                                 } else {
-                                                    $(this).parent().parent().parent().find("#total_dummy").removeAttr("disabled").val(0);
+                                                    $(this).parent().parent().parent().find("#total_dummy").removeAttr("disabled");
                                                     var seq_of_choice = $(this).parent().parent().parent().find("[name='seqno']").val();
                                                     var matchWord_box = '<span class="label label-info"><i class="glyphicon glyphicon-info-sign"></i> If you want to add dummy answer, add text in answer box and put score to 0.</span><br/><br/>';
                                                     matchWord_box += '<div class="row header"><div class="col-md-4"><b>Question Text</b></div><div class="col-md-4"><b>Answer</b></div><div class="col-md-2"><b>Score</b></div></div>';
