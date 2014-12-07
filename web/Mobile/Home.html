@@ -29,7 +29,7 @@
                             </div>
                             <div role="main" class="ui-content">
                                 <h3 class="ui-title">Please enter your registered email. </h3>
-                                <input type="text" id="email" placeholder="Enter your email here"/>
+                                <input type="text" id="fEmail" placeholder="Enter your email here"/>
                                 <p>After continue, please go to your email inbox to check mail from us.</p>
                                 <center><input class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" type="submit" id="sendMail" value="Continue"/></center>
                             </div>
@@ -48,7 +48,7 @@
                 var password = $('#password').val();
                 $.ajax({
                     type: "POST",
-                    url: "http://assignment.sit.kmutt.ac.th/LoginMobile",
+                    url: "http://localhost:8084/TheAssignment/LoginMobile",
                     data: {"email": email, "password": password},
                     success: function(data) {
                         if (data != null) {
@@ -68,14 +68,15 @@
                     }
                 });
             });
-            $('#sendMail').click(function() {
-                var email = $('#email').val();
+            $(document).on("click", "#sendMail", function() {
+                var email = $('#fEmail').val();
                 $.ajax({
                     type: "POST",
-                    url: "http://assignment.sit.kmutt.ac.th/ForgotPasswordMobile",
+                    url: "http://localhost:8084/TheAssignment/ForgotPasswordMobile",
                     data: {"email": email},
                     success: function(data) {
-                       alert("Please check inbox of your email");
+                       alert(email);
+                       alert(data);
                        $(location).attr('href',"Home.html");
                     }
                 });

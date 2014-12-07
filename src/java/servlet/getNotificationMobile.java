@@ -35,8 +35,10 @@ public class getNotificationMobile extends HttpServlet {
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         Account ac = Account.getAccountByID(id);
+
         List<Notification> noti = null;
         noti = Notification.getAllNotification(ac.getAcc_id());
+
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(new Gson().toJson(noti));

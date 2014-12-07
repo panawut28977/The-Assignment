@@ -89,7 +89,7 @@
     <script type="text/javascript">
         var assID = sessionStorage.getItem('assID');
         var accID = sessionStorage.getItem('accID');
-        $.getJSON('http://assignment.sit.kmutt.ac.th/showAssignmentDetail?assID=' + assID + '&accID=' + accID, function (result) {
+        $.getJSON('http://localhost:8084/TheAssignment/showAssignmentDetail?assID=' + assID + '&accID=' + accID, function (result) {
             $(result).each(function (k, v) {
                 $(
                         '<div style="background-color:#F4F4F4 ;padding:1px;width:auto;">' +
@@ -106,6 +106,9 @@
                         '<h4>Description:</h4>' +
                         '<p>' + v.description + '</p>' +
                         '<table><tr>' +
+                        '<td><b>Assignment Type:</b></td>' +
+                        '<td><b>' + v.ass_type + '</b></td></tr>' +
+                        '<tr></tr><tr></tr>' +
                         '<td><b>Due Date:</b></td>' +
                         '<td><b>' + v.due_date + '</b></td></tr>' +
                         '<tr></tr><tr></tr>' +
@@ -117,7 +120,7 @@
                         '<center><h1>Comment</h1></center>' +
                         '</div>').insertBefore($('#add-test'));
             });
-            $.getJSON('http://assignment.sit.kmutt.ac.th/showAssignmentCommentMobile?assID=' + assID , function (result) {
+            $.getJSON('http://localhost:8084/TheAssignment/showAssignmentCommentMobile?assID=' + assID , function (result) {
                 var i = 1;
                 $(result).each(function (k, v) {
                     $(
@@ -129,11 +132,11 @@
                 });
             });
             var id = sessionStorage.getItem('accID');
-            $.getJSON('http://assignment.sit.kmutt.ac.th/getNotificationMobile?id=' + id, function(result) {
+            $.getJSON('http://localhost:8084/TheAssignment/getNotificationMobile?id=' + id, function(result) {
                 $(result).each(function(k, v) {
                     $('<div role="main" class="notiLink" noti-id="'+ v.noti_id + '" course-name="'+ v.course_name + '" data-id="' + v.type + '" course-id="' + v.course_id + '" class="ui-content" style="border-bottom: solid #DDDDDD;background-color:' + (v.seen_date == null ? '#EDEFF5' : '#FFFFFF') + '">' +
                             '<div class="ui-grid-a" style="padding:1px;width:auto;"><div class="ui-block-a ui-bar" style="width: 20%">' +
-                            '<img src="' + v.profile_pic + '" width="70px" height="80px"/></div><br/>' +
+                            '<img src="../' + v.profile_pic + '" width="70px" height="80px"/></div><br/>' +
                             '<div class="ui-block-b" style="width: 80%">' +
                             (v.type == "alert" || v.type == "score" ? '<span style="font-size: larger">' + v.text + '<b>(' + v.course_name + ')</b></span>' : '<span style="font-size: larger"><b>' + v.noti_name + "</b> " + v.text + '<b>(' + v.course_name + ')</b></span>') +
                             '</div></div></div>').insertBefore($('#noti-add-here'));
@@ -202,7 +205,7 @@
                     sessionStorage.setItem('cID', $(this).attr("course-id"));
                     $.ajax({
                         type: "POST",
-                        url: "http://assignment.sit.kmutt.ac.th/setSeenDateMobile",
+                        url: "http://localhost:8084/TheAssignment/setSeenDateMobile",
                         data: {"notiID": notiID, "accID": accID},
                         success: function (data) {
                         }
@@ -215,7 +218,7 @@
                     
                     $.ajax({
                         type: "POST",
-                        url: "http://assignment.sit.kmutt.ac.th/setSeenDateMobile",
+                        url: "http://localhost:8084/TheAssignment//setSeenDateMobile",
                         data: {"notiID": notiID, "accID": accID},
                         success: function (data) {
                         }
@@ -234,7 +237,7 @@
             var status = "";
             $.ajax({
                 type: "POST",
-                url: "http://assignment.sit.kmutt.ac.th/showAssignmentStatusMobile",
+                url: "http://localhost:8084/TheAssignment/showAssignmentStatusMobile",
                 data: {"accID": accID, "assID": assID},
                 async: false,
                 success: function(data) {
@@ -251,7 +254,7 @@
                 var text = $("#text").val();
                 $.ajax({
                     type: "POST",
-                    url: "http://assignment.sit.kmutt.ac.th/addCommentMobile",
+                    url: "http://localhost:8084/TheAssignment/addCommentMobile",
                     data: {"accID": accID, "assID": assID, "text": text},
                     success: function(data) {
                         $(location).attr('href',"AssignmentDetail.html");

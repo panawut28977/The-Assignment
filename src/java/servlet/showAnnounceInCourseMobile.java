@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Orarmor
+ * @author Shinomiya
  */
 public class showAnnounceInCourseMobile extends HttpServlet {
 

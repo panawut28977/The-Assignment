@@ -6,7 +6,6 @@
 
 package servlet;
 
-import Model.Account;
 import Model.Notification;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Shinomiya
  */
-public class NewNotiMobile extends HttpServlet {
+public class setSeenDateMobile extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,30 +31,11 @@ public class NewNotiMobile extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/event-stream");
-        response.setCharacterEncoding("UTF-8");
-        PrintWriter writer = response.getWriter();
-        int acc_id = Integer.parseInt(request.getParameter("ac"));
-//        System.out.println(acc_id);
-        Account ac = Account.getAccountByID(acc_id);
-        //current notification
-        int current_total = 0;
-        if (request.getParameter("ct").equalsIgnoreCase("null")) {
-            int noti = Notification.getTotalNotify(ac.getAcc_id());
-//            System.out.println("if:"+noti);
-            writer.write("event:totalNewNoti\n");
-            writer.write("data:" + noti + "\n\n");
-        } else {
-            current_total = Integer.parseInt(request.getParameter("ct"));
-            int noti = Notification.getTotalNotify(ac.getAcc_id());
-            //get new notificastion
-            if (noti != current_total) {
-                System.out.println("else:"+noti);
-                writer.write("event:totalNewNoti\n");
-                writer.write("data:" + noti + "\n\n");
-            }
+            int notiID = Integer.parseInt(request.getParameter("notiID"));
+            int accID = Integer.parseInt(request.getParameter("accID"));
+            
+            int n = Notification.seenMobile(accID, notiID);
 
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

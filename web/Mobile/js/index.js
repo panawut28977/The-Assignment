@@ -17,19 +17,19 @@
  * under the License.
  */
 var app = {
-    // Application Constructor
-//    initialize: function() {
-//        this.bindEvents();
-//    },
+//     Application Constructor
+    initialize: function() {
+        this.bindEvents();
+    },
     // Bind Event Listeners
     //
     // Bind any events that are required on startup. Common events are:
     // `load`, `deviceready`, `offline`, and `online`.
-//    bindEvents: function() {
-//        document.addEventListener('deviceready', this.onDeviceReady, false);
-//        document.getElementById('scan').addEventListener('click', this.scan, false);
-//        document.getElementById('encode').addEventListener('click', this.encode, false);
-//    },
+    bindEvents: function() {
+        document.addEventListener('deviceready', this.onDeviceReady, false);
+        document.getElementById('scan').addEventListener('click', this.scan, false);
+        document.getElementById('encode').addEventListener('click', this.encode, false);
+    },
 
     // deviceready Event Handler
     //

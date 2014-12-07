@@ -92,19 +92,19 @@
         </div>
 
     </body>
-    <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="barcodescanner.js"></script>
+    <script type="text/javascript" src="js/cordova.js"></script>
+    <script type="text/javascript" src="js/barcodescanner.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script src="js/main.js"></script>
     <script type="text/javascript">
-        app.initialize();
+        
         $(function() {
             var id = sessionStorage.getItem('accID');
-            $.getJSON('http://assignment.sit.kmutt.ac.th/getNotificationMobile?id=' + id, function(result) {
+            $.getJSON('http://localhost:8084/TheAssignment/getNotificationMobile?id=' + id, function(result) {
                 $(result).each(function(k, v) {
                     $('<div role="main" class="notiLink" noti-id="' + v.noti_id + '" course-name="' + v.course_name + '" data-id="' + v.type + '" course-id="' + v.course_id + '" class="ui-content" style="border-bottom: solid #DDDDDD;background-color:' + (v.seen_date == null ? '#EDEFF5' : '#FFFFFF') + '">' +
                             '<div class="ui-grid-a" style="padding:1px;width:auto;"><div class="ui-block-a ui-bar" style="width: 20%">' +
-                            '<img src="' + v.profile_pic + '" width="70px" height="80px"/></div><br/>' +
+                            '<img src="../' + v.profile_pic + '" width="70px" height="80px"/></div><br/>' +
                             '<div class="ui-block-b" style="width: 80%">' +
                             (v.type == "alert" || v.type == "score" ? '<span style="font-size: larger">' + v.text + '<b>(' + v.course_name + ')</b></span>' : '<span style="font-size: larger"><b>' + v.noti_name + "</b> " + v.text + '<b>(' + v.course_name + ')</b></span>') +
                             '</div></div></div>').insertBefore($('#noti-add-here'));
@@ -146,7 +146,7 @@
                     $.ajax({
                         type: "POST",
 //                        url: "http://jsp.chaninz.com/tasm/checkCode",
-                        url: "http://assignment.sit.kmutt.ac.th/checkCode",
+                        url: "http://localhost:8084/TheAssignment/checkCode",
                         data: {code: $('#code').val()},
                         success: function(data) {
                             console.log(data);
@@ -178,7 +178,7 @@
                     alert(notiID + " " + accID);
                     $.ajax({
                         type: "POST",
-                        url: "http://assignment.sit.kmutt.ac.th/setSeenDateMobile",
+                        url: "http://localhost:8084/TheAssignment/setSeenDateMobile",
                         data: {"notiID": notiID, "accID": accID},
                         success: function(data) {
                         }
@@ -191,7 +191,7 @@
 
                     $.ajax({
                         type: "POST",
-                        url: "http://assignment.sit.kmutt.ac.th/setSeenDateMobile",
+                        url: "http://localhost:8084/TheAssignment/setSeenDateMobile",
                         data: {"notiID": notiID, "accID": accID},
                         success: function(data) {
                         }
@@ -200,6 +200,7 @@
                     $(location).attr('href', 'AssignmentInCourse.html');
                 }
             });
+            app.initialize();
         });
 
         function check2nd(CourseCode) {
